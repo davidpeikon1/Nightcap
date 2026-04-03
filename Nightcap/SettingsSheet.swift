@@ -11,6 +11,8 @@ struct SettingsSheet: View {
     @State private var notifStatus: UNAuthorizationStatus = .notDetermined
     @State private var showResetConfirm = false
     @State private var showResetOnboarding = false
+    @State private var morningTime: Date = NotificationManager.shared.morningHour.asTime
+    @State private var eveningTime: Date = NotificationManager.shared.eveningHour.asTime
 
     var body: some View {
         NavigationStack {
@@ -32,6 +34,14 @@ struct SettingsSheet: View {
                     // MARK: Notifications
                     Section {
                         notificationRow
+                        if notifStatus == .authorized && notificationsOn {
+                            timePicker("Morning", selection: $morningTime) { h in
+                                NotificationManager.shared.updateMorningHour(h)
+                            }
+                            timePicker("Evening", selection: $eveningTime) { h in
+                                NotificationManager.shared.updateEveningHour(h)
+                            }
+                        }
                     } header: {
                         sectionHeader("Reminders")
                     }
@@ -179,6 +189,24 @@ struct SettingsSheet: View {
                 .font(.system(size: 13, weight: .medium))
                 .foregroundStyle(Color("NCAccent"))
             }
+        }
+    }
+
+    private func timePicker(
+        _ label: String,
+        selection: Binding<Date>,
+        onChange: @escaping (Int) -> Void
+    ) -> some View {
+        HStack {
+            Text(label)
+                .font(.system(size: 15))
+                .foregroundStyle(Color("NCTextPrimary"))
+            Spacer()
+            DatePicker("", selection: selection, displayedComponents: .hourAndMinute)
+                .labelsHidden()
+                .onChange(of: selection.wrappedValue) { _, date in
+                    onChange(Calendar.current.component(.hour, from: date))
+                }
         }
     }
 

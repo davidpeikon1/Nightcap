@@ -1,10 +1,43 @@
 import Foundation
 import UserNotifications
 
+extension Int {
+    /// Converts an hour integer (0–23) to a Date for use with DatePicker.
+    var asTime: Date {
+        Calendar.current.date(
+            bySettingHour: self, minute: 0, second: 0, of: Date()
+        ) ?? Date()
+    }
+}
+
 class NotificationManager {
 
     static let shared = NotificationManager()
     private init() {}
+
+    // MARK: - Persisted time preferences
+
+    private let defaults = UserDefaults.standard
+
+    var morningHour: Int {
+        get { defaults.object(forKey: "notif.morningHour") != nil ? defaults.integer(forKey: "notif.morningHour") : 7 }
+        set { defaults.set(newValue, forKey: "notif.morningHour") }
+    }
+
+    var eveningHour: Int {
+        get { defaults.object(forKey: "notif.eveningHour") != nil ? defaults.integer(forKey: "notif.eveningHour") : 21 }
+        set { defaults.set(newValue, forKey: "notif.eveningHour") }
+    }
+
+    func updateMorningHour(_ hour: Int) {
+        morningHour = hour
+        scheduleDailyNotifications()
+    }
+
+    func updateEveningHour(_ hour: Int) {
+        eveningHour = hour
+        scheduleDailyNotifications()
+    }
 
     // MARK: - Permission
 
@@ -28,7 +61,10 @@ class NotificationManager {
     // MARK: - Scheduling
 
     func scheduleDailyNotifications() {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        // Only remove and re-add daily notifications (not milestones).
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: ["nightcap.morning", "nightcap.evening"]
+        )
         scheduleEvening()
         scheduleMorning()
     }
@@ -40,7 +76,7 @@ class NotificationManager {
         content.sound = .default
 
         var components = DateComponents()
-        components.hour   = 21
+        components.hour   = eveningHour
         components.minute = 0
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
@@ -59,7 +95,7 @@ class NotificationManager {
         content.sound = .default
 
         var components = DateComponents()
-        components.hour   = 7
+        components.hour   = morningHour
         components.minute = 0
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
@@ -109,7 +145,6 @@ class NotificationManager {
 
                 let content = UNMutableNotificationContent()
                 content.title = "\(badge.label)."
-                // Keep body concise for lock screen; use first sentence of celebration text.
                 let body = badge.celebrationText
                     .components(separatedBy: "\n")
                     .first?
