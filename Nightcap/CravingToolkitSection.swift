@@ -78,8 +78,7 @@ struct CravingToolkitSection: View {
                 }
                 .padding(20)
                 .background(Color("NCSurface"))
-                .cornerRadius(isExpanded ? 0 : 16)
-                .cornerRadius(16, corners: [.topLeft, .topRight])
+                .cornerRadius(16, corners: isExpanded ? [.topLeft, .topRight] : .allCorners)
             }
 
             if isExpanded {
@@ -112,7 +111,6 @@ struct CravingToolkitSection: View {
                     }
                     .padding(20)
                     .background(Color("NCSurface"))
-                    .cornerRadius(0)
                     .cornerRadius(16, corners: [.bottomLeft, .bottomRight])
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
