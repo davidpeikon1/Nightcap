@@ -98,19 +98,13 @@ struct FastHistoryView: View {
     // MARK: - Stats Row
 
     private var statsRow: some View {
-        HStack(spacing: 12) {
-            statCard(
-                value: formatHoursCompact(store.longestFastEver),
-                label: "Longest fast"
-            )
-            statCard(
-                value: "\(store.streakDays)",
-                label: "Day streak"
-            )
-            statCard(
-                value: "\(store.resetEvents.count)",
-                label: "Total resets"
-            )
+        let longestText = store.longestFastEver > 0
+            ? formatHoursCompact(store.longestFastEver)
+            : "—"
+        return HStack(spacing: 12) {
+            statCard(value: longestText,                    label: "Longest fast")
+            statCard(value: "\(store.streakDays)",          label: "Day streak")
+            statCard(value: "\(store.resetEvents.count)",   label: "Total resets")
         }
     }
 
