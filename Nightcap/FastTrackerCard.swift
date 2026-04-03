@@ -355,7 +355,11 @@ struct EditStartTimeSheet: View {
             .padding(24)
         }
         .onAppear {
-            selectedDate = store.lastSugarDate ?? Date()
+            // Pre-populate with the existing start time if editing, or default
+            // to this morning (start of today) for a first-time setup so the
+            // user has to consciously scroll forward rather than accidentally
+            // saving "right now" as their last sugar time.
+            selectedDate = store.lastSugarDate ?? Calendar.current.startOfDay(for: Date())
         }
     }
 }
