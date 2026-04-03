@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import UIKit
 import WidgetKit
+import UserNotifications
 
 // MARK: - Supporting Types
 
@@ -313,6 +314,12 @@ class FastingStore: ObservableObject {
         [Keys.lastSugarDate, Keys.streakDays, Keys.lastStreakCheck,
          Keys.earnedBadges, Keys.cravingLogs, Keys.resetEvents, Keys.lastKnownPhase
         ].forEach { defaults.removeObject(forKey: $0) }
+        // Cancel all pending milestone notifications so they don't fire after a reset.
+        let ids = BadgeID.allCases.flatMap {
+            ["nightcap.milestone.\($0.rawValue)", "nightcap.milestone.future.\($0.rawValue)"]
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func logCraving(_ trigger: CravingTrigger) {
