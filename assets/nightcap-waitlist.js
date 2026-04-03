@@ -339,6 +339,9 @@
     // Animate comparison chart
     setTimeout(function () { animateComparisonChart(dailySugar); }, 1200);
 
+    // Populate share card
+    populateShareCard(quizData);
+
     // Animated counter for sugar grams
     animateCounter('results-sugar-grams', 0, dailySugar, 1500);
 
@@ -526,6 +529,49 @@
     var offset = circumference * (1 - percent);
 
     ring.style.strokeDashoffset = offset;
+  }
+
+  // ---------- Share Card ----------
+  function populateShareCard(quizData) {
+    var el = document.getElementById('share-card-sugar');
+    if (el) el.textContent = (quizData.estimated_daily_sugar || 0) + 'g';
+
+    var weeklyEl = document.getElementById('share-card-weekly');
+    if (weeklyEl) weeklyEl.textContent = (quizData.estimated_weekly_sugar || 0) + 'g';
+
+    var yearlyEl = document.getElementById('share-card-yearly');
+    if (yearlyEl) yearlyEl.textContent = (quizData.estimated_yearly_sugar_lbs || 0) + ' lbs';
+
+    // Save button — uses html2canvas if available, else prompts screenshot
+    var saveBtn = document.getElementById('save-share-card');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        var cardInner = document.getElementById('share-card-inner');
+        if (!cardInner) return;
+
+        // Try html2canvas (if loaded externally)
+        if (window.html2canvas) {
+          window.html2canvas(cardInner, {
+            backgroundColor: '#0a0a12',
+            scale: 2,
+          }).then(function (canvas) {
+            var link = document.createElement('a');
+            link.download = 'nightcap-sugar-results.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            track('share_card_saved', { method: 'html2canvas' });
+          });
+        } else {
+          // Fallback: prompt user to screenshot
+          cardInner.style.outline = '2px solid rgba(124, 58, 237, 0.5)';
+          showToast('Long-press or screenshot this card to save!', 'success');
+          setTimeout(function () {
+            cardInner.style.outline = 'none';
+          }, 3000);
+          track('share_card_saved', { method: 'screenshot_prompt' });
+        }
+      });
+    }
   }
 
   // ---------- Comparison Chart Animation ----------

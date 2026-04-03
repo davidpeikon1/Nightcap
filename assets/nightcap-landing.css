@@ -1855,6 +1855,123 @@ body {
   color: var(--nc-accent);
 }
 
+/* ---------- Share Card ---------- */
+.nc-share-card {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.nc-share-card__inner {
+  background: linear-gradient(145deg, #1a0a2e 0%, #0d0d1a 50%, #0a1a15 100%);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  border-radius: var(--nc-radius-lg);
+  padding: 2rem 2rem 1.5rem;
+  max-width: 360px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.nc-share-card__inner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(124, 58, 237, 0.12), transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(6, 214, 160, 0.08), transparent 50%);
+  pointer-events: none;
+}
+
+.nc-share-card__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.nc-share-card__logo {
+  font-family: var(--nc-font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--nc-text);
+}
+
+.nc-share-card__badge {
+  font-size: 0.65rem;
+  padding: 3px 10px;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  border-radius: 100px;
+  color: var(--nc-primary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.nc-share-card__body {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.nc-share-card__big-number {
+  font-family: var(--nc-font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--nc-warning), #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.nc-share-card__label {
+  font-size: 0.85rem;
+  color: var(--nc-text-muted);
+  margin-top: 4px;
+}
+
+.nc-share-card__divider {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--nc-primary), var(--nc-accent));
+  margin: 1.25rem auto;
+  border-radius: 2px;
+}
+
+.nc-share-card__stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.nc-share-card__stat-val {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--nc-text);
+}
+
+.nc-share-card__stat-lbl {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--nc-text-dim);
+}
+
+.nc-share-card__footer {
+  position: relative;
+  font-size: 0.7rem;
+  color: var(--nc-text-dim);
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.nc-share-card__save {
+  margin-top: 1rem;
+}
+
 /* ---------- Comparison Chart ---------- */
 .nc-compare {
   margin: 2.5rem 0;
