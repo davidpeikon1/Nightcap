@@ -621,9 +621,12 @@ struct WeeklyInsight {
     let insightCopy: String
 
     var longestFastFormatted: String {
-        let d = Int(longestFast) / 86400
-        let h = (Int(longestFast) % 86400) / 3600
+        let total = Int(longestFast)
+        let d = total / 86400
+        let h = (total % 86400) / 3600
+        let m = (total % 3600) / 60
         if d > 0 { return "\(d)d \(h)h" }
-        return "\(h)h"
+        if h > 0 { return "\(h)h \(m)m" }
+        return "\(m)m"
     }
 }

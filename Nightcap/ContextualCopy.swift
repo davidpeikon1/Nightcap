@@ -57,11 +57,15 @@ struct ContextualCopy {
         .fourteenTo30Days: [
             "Two weeks. Your liver has recalibrated. Your insulin sensitivity has improved. Something real has changed.",
             "You're past the point where most people turn back. This is the territory where it becomes a different kind of life.",
+            "At this stage, cravings are mostly memory, not biology. The biology has already shifted.",
+            "Most people never find out what their body actually feels like without chronic sugar. You're finding out.",
         ],
 
         .thirtyPlusDays: [
             "A month. Your dopamine system has had time to genuinely recover. What you feel right now is closer to your actual baseline than anything you've felt in years.",
             "You're not trying to quit sugar anymore. You don't eat it.",
+            "The neural pathway for the old habit has weakened through disuse. It doesn't disappear — it just loses priority.",
+            "This is identity now, not discipline. The hardest work happened weeks ago.",
         ],
     ]
 }

@@ -273,6 +273,18 @@ struct SettingsSheet: View {
             lines.append("")
         }
 
+        // All-time stats
+        let totalSecs = store.totalSugarFreeTime
+        if totalSecs > 0 {
+            let td = Int(totalSecs) / 86400
+            let th = (Int(totalSecs) % 86400) / 3600
+            let totalStr = td > 0 ? "\(td)d \(th)h" : "\(th)h"
+            lines.append("ALL-TIME STATS")
+            lines.append("Total clean time: \(totalStr)")
+            lines.append("Total fasts: \(store.resetEvents.count + (store.isTracking ? 1 : 0))")
+            lines.append("")
+        }
+
         // Badges
         if !store.earnedBadges.isEmpty {
             lines.append("EARNED BADGES")

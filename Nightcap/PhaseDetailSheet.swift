@@ -183,11 +183,11 @@ struct PhaseDetailSheet: View {
 
     private var phaseColor: Color {
         switch phase {
-        case .justStarted:  return .gray
-        case .firstDay:     return .orange
+        case .justStarted:  return Color("NCTextTertiary")
+        case .firstDay:     return Color("NCWarning")
         case .withdrawal:   return Color(red: 0.9, green: 0.3, blue: 0.3)
-        case .breakthrough: return .yellow
-        case .rewiring:     return .teal
+        case .breakthrough: return Color(red: 0.85, green: 0.65, blue: 0.1)
+        case .rewiring:     return Color(red: 0.2, green: 0.7, blue: 0.65)
         case .freedom:      return Color("NCSuccess")
         }
     }
