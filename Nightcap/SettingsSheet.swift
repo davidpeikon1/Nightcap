@@ -258,6 +258,9 @@ struct SettingsSheet: View {
         var lines: [String] = []
         lines.append("NIGHTCAP DATA EXPORT")
         lines.append("Exported: \(df.string(from: Date()))")
+        if let goal = appState.userGoal {
+            lines.append("Goal: \(goal.rawValue)")
+        }
         lines.append("")
 
         // Current fast

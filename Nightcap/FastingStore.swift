@@ -588,7 +588,8 @@ class FastingStore: ObservableObject {
         }
 
         if eveningResets.count == resets && resets > 1 {
-            return "Both resets happened after 8pm. Your strongest window is the hour after dinner — and your most vulnerable one. The craving toolkit is there for exactly that moment."
+            let allOrBoth = resets == 2 ? "Both" : "All \(resets)"
+            return "\(allOrBoth) resets happened after 8pm. Your strongest window is the hour after dinner — and your most vulnerable one. The craving toolkit is there for exactly that moment."
         }
 
         if let trigger = topTrigger, trigger == .stress {
