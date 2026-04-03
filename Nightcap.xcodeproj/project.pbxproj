@@ -20,6 +20,9 @@
 		AA00000100000000000000BA /* CravingToolkitSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BB; };
 		AA00000100000000000000CA /* ProgressSection.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA00000100000000000000CB; };
 		AA00000100000000000000DA /* WeeklyInsightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000DB; };
+		AA00000100000000000000EA /* BodyScienceCard.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA00000100000000000000EB; };
+		AA00000100000000000000FA /* SettingsSheet.swift in Sources */     = {isa = PBXBuildFile; fileRef = AA00000100000000000000FB; };
+		AA000001000000000000010A /* FastHistoryView.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA000001000000000000010B; };
 		BB000001000000000000001A /* Assets.xcassets in Resources */       = {isa = PBXBuildFile; fileRef = BB000001000000000000001B; };
 		BB000001000000000000002A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000002B; };
 /* End PBXBuildFile section */
@@ -38,6 +41,9 @@
 		AA00000100000000000000BB /* CravingToolkitSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingToolkitSection.swift; sourceTree = "<group>"; };
 		AA00000100000000000000CB /* ProgressSection.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSection.swift; sourceTree = "<group>"; };
 		AA00000100000000000000DB /* WeeklyInsightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyInsightCard.swift; sourceTree = "<group>"; };
+		AA00000100000000000000EB /* BodyScienceCard.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyScienceCard.swift; sourceTree = "<group>"; };
+		AA00000100000000000000FB /* SettingsSheet.swift */    = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
+		AA000001000000000000010B /* FastHistoryView.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastHistoryView.swift; sourceTree = "<group>"; };
 		BB000001000000000000001B /* Assets.xcassets */         = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB000001000000000000002B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CC000001000000000000001B /* Nightcap.app */            = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightcap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +84,9 @@
 				AA00000100000000000000BB /* CravingToolkitSection.swift */,
 				AA00000100000000000000CB /* ProgressSection.swift */,
 				AA00000100000000000000DB /* WeeklyInsightCard.swift */,
+				AA00000100000000000000EB /* BodyScienceCard.swift */,
+				AA00000100000000000000FB /* SettingsSheet.swift */,
+				AA000001000000000000010B /* FastHistoryView.swift */,
 				BB000001000000000000001B /* Assets.xcassets */,
 				EE000001000000000000004A /* Preview Content */,
 			);
@@ -183,6 +192,9 @@
 				AA00000100000000000000BA /* CravingToolkitSection.swift in Sources */,
 				AA00000100000000000000CA /* ProgressSection.swift in Sources */,
 				AA00000100000000000000DA /* WeeklyInsightCard.swift in Sources */,
+				AA00000100000000000000EA /* BodyScienceCard.swift in Sources */,
+				AA00000100000000000000FA /* SettingsSheet.swift in Sources */,
+				AA000001000000000000010A /* FastHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

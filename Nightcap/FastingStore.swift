@@ -235,12 +235,16 @@ class FastingStore: ObservableObject {
     @Published var newlyUnlockedBadge: BadgeID? = nil
     @Published var cravingLogs: [CravingLog] = []
     @Published var resetEvents: [ResetEvent] = []
+    /// Set for ~4 s whenever the fast crosses into a new phase; drives the phase-unlock toast.
+    @Published var phaseJustUnlocked: FastingPhase? = nil
 
     // MARK: Private
 
     private var timer: AnyCancellable?
     private let defaults = UserDefaults.standard
     private var lastStreakCheckDate: Date = .distantPast
+    /// Tracks the last phase we saw so we can fire the toast on transitions.
+    private var lastKnownPhase: FastingPhase = .justStarted
 
     private enum Keys {
         static let lastSugarDate    = "lastSugarDate"
@@ -249,6 +253,7 @@ class FastingStore: ObservableObject {
         static let earnedBadges     = "earnedBadges"
         static let cravingLogs      = "cravingLogs"
         static let resetEvents      = "resetEvents"
+        static let lastKnownPhase   = "lastKnownPhase"
     }
 
     // MARK: Init
@@ -260,6 +265,10 @@ class FastingStore: ObservableObject {
         self.earnedBadges      = loadBadges()
         self.cravingLogs       = loadDecodable(forKey: Keys.cravingLogs) ?? []
         self.resetEvents       = loadDecodable(forKey: Keys.resetEvents) ?? []
+        // Restore last known phase so we don't fire a toast on cold launch.
+        if let raw = defaults.string(forKey: Keys.lastKnownPhase) {
+            self.lastKnownPhase = FastingPhase(rawValue: raw) ?? .justStarted
+        }
 
         updateElapsed()
         startTimer()
@@ -277,9 +286,27 @@ class FastingStore: ObservableObject {
         defaults.set(0, forKey: Keys.streakDays)
         lastStreakCheckDate = .distantPast
         defaults.set(Date.distantPast, forKey: Keys.lastStreakCheck)
+        // Reset phase tracking so the first transition fires correctly again.
+        lastKnownPhase = .justStarted
+        defaults.removeObject(forKey: Keys.lastKnownPhase)
 
         lastSugarDate = date
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+    }
+
+    func resetAllData() {
+        lastSugarDate = nil
+        streakDays    = 0
+        earnedBadges  = []
+        cravingLogs   = []
+        resetEvents   = []
+        newlyUnlockedBadge = nil
+        phaseJustUnlocked  = nil
+        lastKnownPhase     = .justStarted
+        lastStreakCheckDate = .distantPast
+        [Keys.lastSugarDate, Keys.streakDays, Keys.lastStreakCheck,
+         Keys.earnedBadges, Keys.cravingLogs, Keys.resetEvents, Keys.lastKnownPhase
+        ].forEach { defaults.removeObject(forKey: $0) }
     }
 
     func logCraving(_ trigger: CravingTrigger) {
@@ -308,6 +335,22 @@ class FastingStore: ObservableObject {
         guard let d = lastSugarDate else { elapsedSeconds = 0; return }
         elapsedSeconds = max(0, Date().timeIntervalSince(d))
         checkBadges()
+        checkPhaseChange()
+    }
+
+    private func checkPhaseChange() {
+        let current = fastingPhase
+        guard current != lastKnownPhase else { return }
+        // Only announce forward transitions (skip .justStarted, which is the reset state).
+        if current != .justStarted {
+            phaseJustUnlocked = current
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { [weak self] in
+                guard let self, self.phaseJustUnlocked == current else { return }
+                self.phaseJustUnlocked = nil
+            }
+        }
+        lastKnownPhase = current
+        defaults.set(current.rawValue, forKey: Keys.lastKnownPhase)
     }
 
     private func updateStreak() {
@@ -403,6 +446,38 @@ class FastingStore: ObservableObject {
         if h >= 24 { return "\(h / 24)d \(h % 24)h away" }
         if h > 0 { return "\(h)h \(m)m away" }
         return "\(m)m away"
+    }
+
+    // MARK: History helpers
+
+    var longestFastEver: TimeInterval {
+        let historical = resetEvents.map(\.fastDuration).max() ?? 0
+        return max(historical, elapsedSeconds)
+    }
+
+    /// Up to last 30 fasts (current fast first), suitable for a bar chart.
+    struct HistoryEntry: Identifiable {
+        let id = UUID()
+        let index: Int          // 0 = oldest in chart
+        let hours: Double
+        let date: Date
+    }
+
+    var historyChartData: [HistoryEntry] {
+        var entries: [(date: Date, hours: Double)] = []
+        // Add past resets (most recent first in resetEvents)
+        for e in resetEvents.prefix(29) {
+            entries.append((e.date, e.fastDuration / 3600))
+        }
+        // Add current fast as the most recent bar
+        if isTracking {
+            entries.insert((Date(), elapsedSeconds / 3600), at: 0)
+        }
+        // Reverse so oldest is leftmost
+        let reversed = entries.reversed().enumerated().map { i, e in
+            HistoryEntry(index: i, hours: e.hours, date: e.date)
+        }
+        return Array(reversed)
     }
 
     // MARK: Weekly Insight Data

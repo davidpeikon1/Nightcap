@@ -19,6 +19,12 @@ class NotificationManager {
         }
     }
 
+    func checkAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async { completion(settings.authorizationStatus) }
+        }
+    }
+
     // MARK: - Scheduling
 
     func scheduleDailyNotifications() {

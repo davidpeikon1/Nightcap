@@ -5,6 +5,7 @@ import SwiftUI
 struct ProgressSection: View {
     @EnvironmentObject var store: FastingStore
     @State private var selectedBadge: BadgeID? = nil
+    @State private var showHistory = false
 
     private var orderedBadges: [BadgeID] {
         BadgeID.allCases
@@ -12,11 +13,24 @@ struct ProgressSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("YOUR PROGRESS")
-                .font(.system(size: 11, weight: .medium))
-                .tracking(2)
-                .foregroundStyle(Color("NCTextSecondary"))
-                .padding(.horizontal, 0)
+            HStack {
+                Text("YOUR PROGRESS")
+                    .font(.system(size: 11, weight: .medium))
+                    .tracking(2)
+                    .foregroundStyle(Color("NCTextSecondary"))
+                Spacer()
+                Button {
+                    showHistory = true
+                } label: {
+                    HStack(spacing: 4) {
+                        Text("History")
+                            .font(.system(size: 12))
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 10, weight: .light))
+                    }
+                    .foregroundStyle(Color("NCTextSecondary"))
+                }
+            }
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
@@ -34,6 +48,11 @@ struct ProgressSection: View {
 
             // Phase progress bar
             phaseProgressView
+        }
+        .sheet(isPresented: $showHistory) {
+            FastHistoryView()
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
         }
         .sheet(item: $selectedBadge) { badge in
             BadgeDetailView(badge: badge)

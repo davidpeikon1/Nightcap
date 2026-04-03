@@ -1,0 +1,229 @@
+import SwiftUI
+import UserNotifications
+
+struct SettingsSheet: View {
+    @EnvironmentObject var store: FastingStore
+    @EnvironmentObject var appState: AppState
+    @Environment(\.dismiss) var dismiss
+
+    @State private var selectedGoal: UserGoal?
+    @State private var notificationsOn: Bool = false
+    @State private var notifStatus: UNAuthorizationStatus = .notDetermined
+    @State private var showResetConfirm = false
+    @State private var showResetOnboarding = false
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Color("NCBackground").ignoresSafeArea()
+
+                List {
+                    // MARK: Goal
+                    Section {
+                        ForEach(UserGoal.allCases) { goal in
+                            goalRow(goal)
+                        }
+                    } header: {
+                        sectionHeader("Your goal")
+                    }
+                    .listRowBackground(Color("NCSurface"))
+                    .listRowSeparatorTint(Color("NCTextTertiary").opacity(0.3))
+
+                    // MARK: Notifications
+                    Section {
+                        notificationRow
+                    } header: {
+                        sectionHeader("Reminders")
+                    }
+                    .listRowBackground(Color("NCSurface"))
+                    .listRowSeparatorTint(Color("NCTextTertiary").opacity(0.3))
+
+                    // MARK: App info
+                    Section {
+                        infoRow("Version", value: appVersion)
+                        infoRow("Build", value: buildNumber)
+                    } header: {
+                        sectionHeader("About")
+                    }
+                    .listRowBackground(Color("NCSurface"))
+                    .listRowSeparatorTint(Color("NCTextTertiary").opacity(0.3))
+
+                    // MARK: Danger zone
+                    Section {
+                        Button {
+                            showResetOnboarding = true
+                        } label: {
+                            Text("Re-run onboarding")
+                                .font(.system(size: 15))
+                                .foregroundStyle(Color("NCTextSecondary"))
+                        }
+
+                        Button(role: .destructive) {
+                            showResetConfirm = true
+                        } label: {
+                            Text("Clear all data")
+                                .font(.system(size: 15))
+                        }
+                    } header: {
+                        sectionHeader("Data")
+                    }
+                    .listRowBackground(Color("NCSurface"))
+                }
+                .listStyle(.insetGrouped)
+                .scrollContentBackground(.hidden)
+            }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                        .foregroundStyle(Color("NCAccent"))
+                        .fontWeight(.medium)
+                }
+            }
+        }
+        .onAppear {
+            selectedGoal = appState.userGoal
+            checkNotificationStatus()
+        }
+        .confirmationDialog(
+            "Clear all data?",
+            isPresented: $showResetConfirm,
+            titleVisibility: .visible
+        ) {
+            Button("Clear everything", role: .destructive) {
+                store.resetAllData()
+                dismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will delete your fast history, badges, and craving logs. It cannot be undone.")
+        }
+        .confirmationDialog(
+            "Re-run onboarding?",
+            isPresented: $showResetOnboarding,
+            titleVisibility: .visible
+        ) {
+            Button("Re-run onboarding") {
+                appState.advance(to: .hook)
+                dismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        }
+    }
+
+    // MARK: - Row builders
+
+    private func goalRow(_ goal: UserGoal) -> some View {
+        let isSelected = selectedGoal == goal
+        return Button {
+            withAnimation(.spring(duration: 0.2)) {
+                selectedGoal = goal
+                appState.setGoal(goal)
+            }
+        } label: {
+            HStack {
+                Text(goal.rawValue)
+                    .font(.system(size: 15))
+                    .foregroundStyle(Color("NCTextPrimary"))
+                Spacer()
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(Color("NCSuccess"))
+                }
+            }
+        }
+    }
+
+    private var notificationRow: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Daily check-ins")
+                    .font(.system(size: 15))
+                    .foregroundStyle(Color("NCTextPrimary"))
+                Text("7am reframe · 9pm craving check-in")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
+
+            Spacer()
+
+            switch notifStatus {
+            case .authorized:
+                Toggle("", isOn: $notificationsOn)
+                    .tint(Color("NCAccent"))
+                    .labelsHidden()
+                    .onChange(of: notificationsOn) { _, on in
+                        if on {
+                            NotificationManager.shared.scheduleDailyNotifications()
+                        } else {
+                            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                        }
+                    }
+            case .denied:
+                Button("Open Settings") {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                .font(.system(size: 13))
+                .foregroundStyle(Color("NCWarning"))
+            default:
+                Button("Enable") {
+                    NotificationManager.shared.requestPermission { granted in
+                        notificationsOn = granted
+                        checkNotificationStatus()
+                    }
+                }
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(Color("NCAccent"))
+            }
+        }
+    }
+
+    private func infoRow(_ label: String, value: String) -> some View {
+        HStack {
+            Text(label)
+                .font(.system(size: 15))
+                .foregroundStyle(Color("NCTextPrimary"))
+            Spacer()
+            Text(value)
+                .font(.system(size: 15))
+                .foregroundStyle(Color("NCTextSecondary"))
+        }
+    }
+
+    private func sectionHeader(_ title: String) -> some View {
+        Text(title)
+            .font(.system(size: 11, weight: .medium))
+            .tracking(1.5)
+            .foregroundStyle(Color("NCTextSecondary"))
+            .textCase(nil)
+    }
+
+    // MARK: - Helpers
+
+    private func checkNotificationStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                notifStatus = settings.authorizationStatus
+                if settings.authorizationStatus == .authorized {
+                    UNUserNotificationCenter.current().getPendingNotificationRequests { reqs in
+                        DispatchQueue.main.async {
+                            notificationsOn = !reqs.isEmpty
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+    }
+
+    private var buildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+    }
+}
