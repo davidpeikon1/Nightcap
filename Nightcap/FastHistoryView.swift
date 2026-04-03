@@ -19,6 +19,9 @@ struct FastHistoryView: View {
                             chartCard
                         }
                         statsRow
+                        if store.isTracking || !store.resetEvents.isEmpty {
+                            activityGrid
+                        }
                         if store.resetEvents.isEmpty && !store.isTracking {
                             emptyState
                         } else {
@@ -138,6 +141,8 @@ struct FastHistoryView: View {
         .padding(.vertical, 16)
         .background(Color("NCSurface"))
         .cornerRadius(12)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(label): \(value)")
     }
 
     // MARK: - Reset List
@@ -154,7 +159,7 @@ struct FastHistoryView: View {
             }
 
             if !store.resetEvents.isEmpty {
-                Text("PAST FASTS")
+                Text(store.resetEvents.count == 1 ? "PAST FAST" : "PAST FASTS")
                     .font(.system(size: 11, weight: .medium))
                     .tracking(2)
                     .foregroundStyle(Color("NCTextSecondary"))
@@ -263,6 +268,86 @@ struct FastHistoryView: View {
                     .padding(.leading, 36)
             }
         }
+    }
+
+    // MARK: - Activity Grid (28-day heatmap)
+
+    private enum DayStatus { case clean, reset, notTracking }
+
+    private var activityGrid: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("LAST 4 WEEKS")
+                    .font(.system(size: 11, weight: .medium))
+                    .tracking(2)
+                    .foregroundStyle(Color("NCTextSecondary"))
+                Spacer()
+                HStack(spacing: 10) {
+                    legendDot(color: Color("NCSuccess").opacity(0.7), label: "clean")
+                    legendDot(color: Color("NCWarning").opacity(0.5), label: "reset")
+                }
+            }
+
+            let days = last28Days()
+            LazyVGrid(
+                columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 7),
+                spacing: 4
+            ) {
+                ForEach(days, id: \.self) { date in
+                    let status = statusForDay(date)
+                    let isToday = Calendar.current.isDateInToday(date)
+
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(
+                            status == .clean ? Color("NCSuccess").opacity(0.65) :
+                            status == .reset ? Color("NCWarning").opacity(0.5)  :
+                                               Color("NCTextTertiary").opacity(0.12)
+                        )
+                        .frame(height: 20)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 3)
+                                .stroke(Color("NCSuccess"), lineWidth: 1.5)
+                                .opacity(isToday ? 1 : 0)
+                        )
+                        .accessibilityLabel(accessibilityDayLabel(date: date, status: status))
+                }
+            }
+        }
+        .padding(20)
+        .background(Color("NCSurface"))
+        .cornerRadius(16)
+    }
+
+    private func last28Days() -> [Date] {
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: Date())
+        return (0..<28).reversed().compactMap { i in
+            cal.date(byAdding: .day, value: -i, to: today)
+        }
+    }
+
+    private func statusForDay(_ date: Date) -> DayStatus {
+        let cal = Calendar.current
+        let day = cal.startOfDay(for: date)
+        let hadReset = store.resetEvents.contains { cal.startOfDay(for: $0.date) == day }
+        if hadReset { return .reset }
+        guard let lastSugar = store.lastSugarDate,
+              cal.startOfDay(for: lastSugar) <= day else {
+            return .notTracking
+        }
+        return .clean
+    }
+
+    private func accessibilityDayLabel(date: Date, status: DayStatus) -> String {
+        let df = DateFormatter()
+        df.dateStyle = .medium; df.timeStyle = .none
+        let label: String
+        switch status {
+        case .clean:       label = "clean"
+        case .reset:       label = "reset"
+        case .notTracking: label = "not tracked"
+        }
+        return "\(df.string(from: date)): \(label)"
     }
 
     // MARK: - Empty State
