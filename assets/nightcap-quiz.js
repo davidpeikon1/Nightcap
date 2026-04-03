@@ -58,21 +58,27 @@
   // ---------- Start Quiz ----------
   if (startBtn) {
     startBtn.addEventListener('click', function () {
-      heroSection.style.display = 'none';
-      quizSection.classList.add('active');
-      updateProgress();
-
-      // Track event
-      trackEvent('quiz_started');
-
-      // Focus first option for keyboard users
-      var firstOption = quizSection.querySelector('.nc-quiz__step.active .nc-quiz__option');
-      if (firstOption) {
-        setTimeout(function () { firstOption.focus(); }, 100);
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      startQuizFromAnywhere();
     });
+  }
+
+  function startQuizFromAnywhere() {
+    // Hide all pre-quiz sections
+    var sections = ['hero', 'why', 'how-it-works', 'ingredients'];
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    // Hide sticky CTA during quiz
+    var sticky = document.getElementById('sticky-cta');
+    if (sticky) sticky.classList.remove('visible');
+    // Show quiz
+    quizSection.classList.add('active');
+    updateProgress();
+    trackEvent('quiz_started');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var firstOption = quizSection.querySelector('.nc-quiz__step.active .nc-quiz__option');
+    if (firstOption) setTimeout(function () { firstOption.focus(); }, 100);
   }
 
   // ---------- Option Selection (click) ----------
@@ -221,18 +227,50 @@
       motivation: quizData.motivation,
     });
 
-    // Transition to signup
+    // Hide quiz, show calculating transition
     quizSection.classList.remove('active');
     quizSection.style.display = 'none';
-    signupSection.classList.add('active');
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Auto-focus name input
-    var nameInput = document.getElementById('signup-name');
-    if (nameInput) {
-      setTimeout(function () { nameInput.focus(); }, 300);
+    var calcScreen = document.getElementById('calculating-screen');
+    if (calcScreen) {
+      calcScreen.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      runCalculatingAnimation(function () {
+        calcScreen.classList.remove('active');
+        signupSection.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        var nameInput = document.getElementById('signup-name');
+        if (nameInput) setTimeout(function () { nameInput.focus(); }, 300);
+      });
+    } else {
+      // Fallback: skip animation
+      signupSection.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      var nameInput = document.getElementById('signup-name');
+      if (nameInput) setTimeout(function () { nameInput.focus(); }, 300);
     }
+  }
+
+  function runCalculatingAnimation(callback) {
+    var steps = document.querySelectorAll('.nc-calculating__step');
+    var delay = 0;
+    steps.forEach(function (step, i) {
+      setTimeout(function () {
+        // Mark previous as done
+        if (i > 0) steps[i - 1].classList.remove('active');
+        if (i > 0) steps[i - 1].classList.add('done');
+        step.classList.add('active');
+      }, delay);
+      delay += 1000;
+    });
+    // After all steps, mark last done and callback
+    setTimeout(function () {
+      if (steps.length > 0) {
+        steps[steps.length - 1].classList.remove('active');
+        steps[steps.length - 1].classList.add('done');
+      }
+    }, delay);
+    setTimeout(callback, delay + 600);
   }
 
   // ---------- Sugar Calculation ----------
@@ -261,7 +299,47 @@
     window.dispatchEvent(new CustomEvent('nightcap:' + name, { detail: data || {} }));
   }
 
+  // ---------- Secondary Quiz Buttons ----------
+  // "Find Out Your Number" button in Why section
+  var whyQuizBtn = document.getElementById('why-quiz-btn');
+  if (whyQuizBtn) {
+    whyQuizBtn.addEventListener('click', startQuizFromAnywhere);
+  }
+
+  // Sticky CTA button
+  var stickyQuizBtn = document.getElementById('sticky-quiz-btn');
+  if (stickyQuizBtn) {
+    stickyQuizBtn.addEventListener('click', startQuizFromAnywhere);
+  }
+
+  // ---------- Sticky CTA on Scroll ----------
+  var stickyCta = document.getElementById('sticky-cta');
+  if (stickyCta && heroSection) {
+    var stickyShown = false;
+    window.addEventListener('scroll', function () {
+      var heroBottom = heroSection.getBoundingClientRect().bottom;
+      var quizActive = quizSection.classList.contains('active');
+      var signupActive = signupSection && signupSection.classList.contains('active');
+      var resultsActive = document.getElementById('quiz-results') &&
+                          document.getElementById('quiz-results').classList.contains('active');
+
+      // Show sticky only when scrolled past hero AND not in quiz/signup/results
+      if (heroBottom < 0 && !quizActive && !signupActive && !resultsActive) {
+        if (!stickyShown) {
+          stickyCta.classList.add('visible');
+          stickyShown = true;
+        }
+      } else {
+        if (stickyShown) {
+          stickyCta.classList.remove('visible');
+          stickyShown = false;
+        }
+      }
+    }, { passive: true });
+  }
+
   // Expose
   window.__nightcapQuizData = quizData;
   window.__nightcapTrack = trackEvent;
+  window.__nightcapStartQuiz = startQuizFromAnywhere;
 })();

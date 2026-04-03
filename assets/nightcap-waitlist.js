@@ -336,6 +336,9 @@
     // Animate ring with delay
     setTimeout(function () { animateRing(dailySugar); }, 600);
 
+    // Animate comparison chart
+    setTimeout(function () { animateComparisonChart(dailySugar); }, 1200);
+
     // Animated counter for sugar grams
     animateCounter('results-sugar-grams', 0, dailySugar, 1500);
 
@@ -523,6 +526,31 @@
     var offset = circumference * (1 - percent);
 
     ring.style.strokeDashoffset = offset;
+  }
+
+  // ---------- Comparison Chart Animation ----------
+  function animateComparisonChart(userGrams) {
+    var maxGrams = 120; // scale max
+    var avgGrams = 77; // average American daily sugar from drinks
+
+    var youBar = document.getElementById('compare-bar-you');
+    var avgBar = document.querySelector('.nc-compare__bar--avg');
+    var ncBar = document.querySelector('.nc-compare__bar--nc');
+    var youValue = document.getElementById('compare-value-you');
+
+    if (!youBar) return;
+
+    // Set value text
+    if (youValue) youValue.textContent = userGrams + 'g';
+
+    // Animate bars
+    var youPercent = Math.min((userGrams / maxGrams) * 100, 100);
+    var avgPercent = Math.min((avgGrams / maxGrams) * 100, 100);
+    var ncPercent = 3; // Minimal bar for 0g (visual indicator)
+
+    youBar.style.width = Math.max(youPercent, 3) + '%';
+    if (avgBar) avgBar.style.width = avgPercent + '%';
+    if (ncBar) ncBar.style.width = ncPercent + '%';
   }
 
   // ---------- Confetti ----------

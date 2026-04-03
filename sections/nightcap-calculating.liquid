@@ -1,0 +1,26 @@
+<section class="nc-calculating" id="calculating-screen" aria-live="polite">
+  <div class="nc-calculating__container">
+    <div class="nc-calculating__ring">
+      <svg viewBox="0 0 80 80" class="nc-calculating__svg">
+        <defs>
+          <linearGradient id="calc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#06d6a0"/>
+          </linearGradient>
+        </defs>
+        <circle cx="40" cy="40" r="34" class="nc-calculating__track"/>
+        <circle cx="40" cy="40" r="34" class="nc-calculating__spinner"/>
+      </svg>
+    </div>
+    <h2 class="nc-calculating__title" id="calculating-text">Analyzing your sugar intake...</h2>
+    <div class="nc-calculating__steps">
+      <p class="nc-calculating__step" data-calc-step="1">Calculating daily sugar from drinks...</p>
+      <p class="nc-calculating__step" data-calc-step="2">Estimating yearly impact...</p>
+      <p class="nc-calculating__step" data-calc-step="3">Building your personalized report...</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Calculating Transition", "settings": [] }
+{% endschema %}

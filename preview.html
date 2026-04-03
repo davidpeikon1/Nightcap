@@ -22,6 +22,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127769;</text></svg>">
+
   <link rel="stylesheet" href="assets/nightcap-landing.css">
 
   <!-- JSON-LD Structured Data -->
@@ -103,6 +106,124 @@
         <span class="nc-hero__waitlist-count">
           <strong id="waitlist-count">2,847</strong> people on the waitlist
         </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY SECTION ===== -->
+  <section class="nc-why" id="why" aria-labelledby="why-title">
+    <div class="nc-why__container">
+      <div class="nc-badge">The Problem</div>
+      <h2 class="nc-why__title" id="why-title">The average American drinks <span class="nc-why__highlight">77 lbs</span> of sugar per year</h2>
+      <p class="nc-why__subtitle">Most of it comes from beverages. Evening drinks are the worst offenders — soda, juice, alcohol, sweetened coffee. They wreck your sleep, spike your blood sugar, and leave you feeling worse the next day.</p>
+
+      <div class="nc-why__stats">
+        <div class="nc-why__stat">
+          <span class="nc-why__stat-number">39g</span>
+          <span class="nc-why__stat-label">Sugar in one can of soda</span>
+        </div>
+        <div class="nc-why__stat">
+          <span class="nc-why__stat-number">2x</span>
+          <span class="nc-why__stat-label">More sugar than the daily recommended limit</span>
+        </div>
+        <div class="nc-why__stat">
+          <span class="nc-why__stat-number">73%</span>
+          <span class="nc-why__stat-label">Of people underestimate their sugar intake</span>
+        </div>
+      </div>
+
+      <button class="nc-btn nc-btn--primary" id="why-quiz-btn" aria-label="Take the quiz to find out your sugar intake">
+        Find Out Your Number
+        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="nc-how" id="how-it-works" aria-labelledby="how-title">
+    <div class="nc-how__container">
+      <h2 class="nc-how__title" id="how-title">How It Works</h2>
+      <div class="nc-how__steps">
+        <div class="nc-how__step">
+          <div class="nc-how__step-number">1</div>
+          <div class="nc-how__step-icon" aria-hidden="true">&#129504;</div>
+          <h3 class="nc-how__step-title">Take the Quiz</h3>
+          <p class="nc-how__step-desc">60 seconds. Find out how much sugar you're really consuming from drinks.</p>
+        </div>
+        <div class="nc-how__connector" aria-hidden="true"></div>
+        <div class="nc-how__step">
+          <div class="nc-how__step-number">2</div>
+          <div class="nc-how__step-icon" aria-hidden="true">&#128233;</div>
+          <h3 class="nc-how__step-title">Join the Waitlist</h3>
+          <p class="nc-how__step-desc">Get your personalized sugar report and early access to Nightcap.</p>
+        </div>
+        <div class="nc-how__connector" aria-hidden="true"></div>
+        <div class="nc-how__step">
+          <div class="nc-how__step-number">3</div>
+          <div class="nc-how__step-icon" aria-hidden="true">&#127769;</div>
+          <h3 class="nc-how__step-title">Make the Switch</h3>
+          <p class="nc-how__step-desc">Replace sugary evening drinks with Nightcap. Sleep better. Feel better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INGREDIENTS ===== -->
+  <section class="nc-ingredients" id="ingredients" aria-labelledby="ingredients-title">
+    <div class="nc-ingredients__container">
+      <div class="nc-badge">What's Inside</div>
+      <h2 class="nc-ingredients__title" id="ingredients-title">Ingredients That Actually Do Something</h2>
+      <p class="nc-ingredients__subtitle">No filler. No artificial anything. Every ingredient is here for a reason.</p>
+
+      <div class="nc-ingredients__grid">
+        <div class="nc-ingredients__card">
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#129497;</div>
+          <h3 class="nc-ingredients__card-title">Magnesium Glycinate</h3>
+          <p class="nc-ingredients__card-desc">Relaxes muscles and calms the nervous system. 80% of people are deficient.</p>
+          <span class="nc-ingredients__card-tag">Relaxation</span>
+        </div>
+        <div class="nc-ingredients__card">
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#127861;</div>
+          <h3 class="nc-ingredients__card-title">L-Theanine</h3>
+          <p class="nc-ingredients__card-desc">Found in green tea. Promotes alpha brain waves — alert calm without drowsiness.</p>
+          <span class="nc-ingredients__card-tag">Focus &amp; Calm</span>
+        </div>
+        <div class="nc-ingredients__card">
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#127804;</div>
+          <h3 class="nc-ingredients__card-title">Chamomile Extract</h3>
+          <p class="nc-ingredients__card-desc">Clinically shown to reduce anxiety and improve sleep quality by 30%.</p>
+          <span class="nc-ingredients__card-tag">Sleep</span>
+        </div>
+        <div class="nc-ingredients__card">
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#127807;</div>
+          <h3 class="nc-ingredients__card-title">Ashwagandha KSM-66</h3>
+          <p class="nc-ingredients__card-desc">Gold-standard adaptogen. Reduces cortisol by up to 30% in clinical trials.</p>
+          <span class="nc-ingredients__card-tag">Stress Relief</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CALCULATING TRANSITION ===== -->
+  <section class="nc-calculating" id="calculating-screen" aria-live="polite">
+    <div class="nc-calculating__container">
+      <div class="nc-calculating__ring">
+        <svg viewBox="0 0 80 80" class="nc-calculating__svg">
+          <defs>
+            <linearGradient id="calc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7c3aed"/>
+              <stop offset="100%" stop-color="#06d6a0"/>
+            </linearGradient>
+          </defs>
+          <circle cx="40" cy="40" r="34" class="nc-calculating__track"/>
+          <circle cx="40" cy="40" r="34" class="nc-calculating__spinner"/>
+        </svg>
+      </div>
+      <h2 class="nc-calculating__title" id="calculating-text">Analyzing your sugar intake...</h2>
+      <div class="nc-calculating__steps">
+        <p class="nc-calculating__step" data-calc-step="1">Calculating daily sugar from drinks...</p>
+        <p class="nc-calculating__step" data-calc-step="2">Estimating yearly impact...</p>
+        <p class="nc-calculating__step" data-calc-step="3">Building your personalized report...</p>
       </div>
     </div>
   </section>
@@ -387,6 +508,38 @@
           </div>
         </div>
 
+        <!-- Comparison Chart -->
+        <div class="nc-compare" id="results-compare">
+          <h3 class="nc-compare__title">How You Compare</h3>
+          <div class="nc-compare__bars">
+            <div class="nc-compare__row">
+              <span class="nc-compare__label">You</span>
+              <div class="nc-compare__bar-track">
+                <div class="nc-compare__bar nc-compare__bar--you" id="compare-bar-you" style="width: 0%">
+                  <span class="nc-compare__bar-value" id="compare-value-you">0g</span>
+                </div>
+              </div>
+            </div>
+            <div class="nc-compare__row">
+              <span class="nc-compare__label">Average American</span>
+              <div class="nc-compare__bar-track">
+                <div class="nc-compare__bar nc-compare__bar--avg" style="width: 0%">
+                  <span class="nc-compare__bar-value">77g</span>
+                </div>
+              </div>
+            </div>
+            <div class="nc-compare__row">
+              <span class="nc-compare__label">Nightcap Drinker</span>
+              <div class="nc-compare__bar-track">
+                <div class="nc-compare__bar nc-compare__bar--nc" style="width: 0%">
+                  <span class="nc-compare__bar-value">0g</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="nc-compare__footnote">Daily sugar from beverages (grams)</p>
+        </div>
+
         <!-- Insight -->
         <div class="nc-results__insight" id="results-insight">
           <div class="nc-results__insight-icon" aria-hidden="true">&#128161;</div>
@@ -470,6 +623,14 @@
       </p>
     </div>
   </footer>
+
+  <!-- Sticky CTA (appears on scroll past hero) -->
+  <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
+    <div class="nc-sticky-cta__inner">
+      <span class="nc-sticky-cta__text"><strong>Nightcap</strong> &mdash; Join <span id="sticky-count">2,847</span> on the waitlist</span>
+      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
+    </div>
+  </div>
 
   <!-- Toast Container -->
   <div id="toast-container" class="nc-toast-container" aria-live="polite"></div>
