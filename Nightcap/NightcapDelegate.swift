@@ -1,4 +1,5 @@
 import UIKit
+import UserNotifications
 
 // MARK: - Notification names for shortcut → SwiftUI bridge
 
@@ -15,6 +16,9 @@ class NightcapDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        // Receive notification tap events so we can deep-link from tapped notifications.
+        UNUserNotificationCenter.current().delegate = self
+
         registerShortcutItems(for: application)
 
         // App launched directly from a shortcut (was not running).
@@ -65,5 +69,27 @@ class NightcapDelegate: NSObject, UIApplicationDelegate {
         default:
             break
         }
+    }
+}
+
+// MARK: - UNUserNotificationCenterDelegate
+
+extension NightcapDelegate: UNUserNotificationCenterDelegate {
+
+    /// Called when the user taps a delivered notification.
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        let id = response.notification.request.identifier
+        // Evening check-in → open craving toolkit.
+        // Delay so SwiftUI views are mounted before receiving the notification.
+        if id == "nightcap.evening" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationCenter.default.post(name: .nightcapOpenCravingToolkit, object: nil)
+            }
+        }
+        completionHandler()
     }
 }
