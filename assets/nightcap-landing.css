@@ -1209,6 +1209,23 @@ body {
   opacity: 0.6;
 }
 
+/* ---------- Scroll Reveal ---------- */
+.nc-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.nc-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nc-reveal--delay-1 { transition-delay: 0.1s; }
+.nc-reveal--delay-2 { transition-delay: 0.2s; }
+.nc-reveal--delay-3 { transition-delay: 0.3s; }
+.nc-reveal--delay-4 { transition-delay: 0.4s; }
+
 /* ---------- Why Section ---------- */
 .nc-why {
   padding: 80px 24px;
@@ -1517,7 +1534,7 @@ body {
 }
 
 .nc-calculating__step.done::before {
-  content: '&#10003; ';
+  content: '\2713  ';
   color: var(--nc-accent);
 }
 

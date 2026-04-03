@@ -111,7 +111,7 @@
   </section>
 
   <!-- ===== WHY SECTION ===== -->
-  <section class="nc-why" id="why" aria-labelledby="why-title">
+  <section class="nc-why nc-reveal" id="why" aria-labelledby="why-title">
     <div class="nc-why__container">
       <div class="nc-badge">The Problem</div>
       <h2 class="nc-why__title" id="why-title">The average American drinks <span class="nc-why__highlight">77 lbs</span> of sugar per year</h2>
@@ -140,7 +140,7 @@
   </section>
 
   <!-- ===== HOW IT WORKS ===== -->
-  <section class="nc-how" id="how-it-works" aria-labelledby="how-title">
+  <section class="nc-how nc-reveal" id="how-it-works" aria-labelledby="how-title">
     <div class="nc-how__container">
       <h2 class="nc-how__title" id="how-title">How It Works</h2>
       <div class="nc-how__steps">
@@ -169,32 +169,32 @@
   </section>
 
   <!-- ===== INGREDIENTS ===== -->
-  <section class="nc-ingredients" id="ingredients" aria-labelledby="ingredients-title">
+  <section class="nc-ingredients nc-reveal" id="ingredients" aria-labelledby="ingredients-title">
     <div class="nc-ingredients__container">
       <div class="nc-badge">What's Inside</div>
       <h2 class="nc-ingredients__title" id="ingredients-title">Ingredients That Actually Do Something</h2>
       <p class="nc-ingredients__subtitle">No filler. No artificial anything. Every ingredient is here for a reason.</p>
 
       <div class="nc-ingredients__grid">
-        <div class="nc-ingredients__card">
+        <div class="nc-ingredients__card nc-reveal nc-reveal--delay-1">
           <div class="nc-ingredients__card-icon" aria-hidden="true">&#129497;</div>
           <h3 class="nc-ingredients__card-title">Magnesium Glycinate</h3>
           <p class="nc-ingredients__card-desc">Relaxes muscles and calms the nervous system. 80% of people are deficient.</p>
           <span class="nc-ingredients__card-tag">Relaxation</span>
         </div>
-        <div class="nc-ingredients__card">
+        <div class="nc-ingredients__card nc-reveal nc-reveal--delay-2">
           <div class="nc-ingredients__card-icon" aria-hidden="true">&#127861;</div>
           <h3 class="nc-ingredients__card-title">L-Theanine</h3>
           <p class="nc-ingredients__card-desc">Found in green tea. Promotes alpha brain waves — alert calm without drowsiness.</p>
           <span class="nc-ingredients__card-tag">Focus &amp; Calm</span>
         </div>
-        <div class="nc-ingredients__card">
+        <div class="nc-ingredients__card nc-reveal nc-reveal--delay-3">
           <div class="nc-ingredients__card-icon" aria-hidden="true">&#127804;</div>
           <h3 class="nc-ingredients__card-title">Chamomile Extract</h3>
           <p class="nc-ingredients__card-desc">Clinically shown to reduce anxiety and improve sleep quality by 30%.</p>
           <span class="nc-ingredients__card-tag">Sleep</span>
         </div>
-        <div class="nc-ingredients__card">
+        <div class="nc-ingredients__card nc-reveal nc-reveal--delay-4">
           <div class="nc-ingredients__card-icon" aria-hidden="true">&#127807;</div>
           <h3 class="nc-ingredients__card-title">Ashwagandha KSM-66</h3>
           <p class="nc-ingredients__card-desc">Gold-standard adaptogen. Reduces cortisol by up to 30% in clinical trials.</p>
@@ -637,5 +637,25 @@
 
   <script src="assets/nightcap-quiz.js"></script>
   <script src="assets/nightcap-waitlist.js"></script>
+
+  <!-- Scroll Reveal Observer -->
+  <script>
+  (function () {
+    var reveals = document.querySelectorAll('.nc-reveal');
+    if (!reveals.length || !('IntersectionObserver' in window)) {
+      reveals.forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function (el) { observer.observe(el); });
+  })();
+  </script>
 </body>
 </html>

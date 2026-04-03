@@ -203,7 +203,7 @@
     // Loading state
     if (btnText) btnText.style.display = 'none';
     if (btnLoading) btnLoading.style.display = 'inline-flex';
-    submitBtn.disabled = true;
+    if (submitBtn) submitBtn.disabled = true;
 
     var quizData = window.__nightcapQuizData || {};
     var phoneDigits = phone ? phone.replace(/\D/g, '') : null;
@@ -258,7 +258,7 @@
       .finally(function () {
         if (btnText) btnText.style.display = 'inline';
         if (btnLoading) btnLoading.style.display = 'none';
-        submitBtn.disabled = false;
+        if (submitBtn) submitBtn.disabled = false;
       });
   }
 
