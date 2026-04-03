@@ -146,7 +146,7 @@ struct FastTrackerCard: View {
             case .daysHoursMinutes(let d, let h, let m):
                 HStack(alignment: .lastTextBaseline, spacing: 16) {
                     unitBlock(value: d, unit: "d")
-                    unitBlock(value: h, unit: "h")
+                    if h > 0 { unitBlock(value: h, unit: "h") }
                     unitBlock(value: m, unit: "m")
                 }
 

@@ -9,8 +9,10 @@ struct WeeklyInsightCard: View {
     /// True if the user dismissed the card during the current ISO week.
     private static func loadDismissed() -> Bool {
         guard let savedWeek = UserDefaults.standard.object(forKey: dismissKey) as? Int else { return false }
-        let currentWeek = Calendar.current.component(.weekOfYear, from: Date())
-        return savedWeek == currentWeek
+        let cal  = Calendar.current
+        let year = cal.component(.yearForWeekOfYear, from: Date())
+        let week = cal.component(.weekOfYear, from: Date())
+        return savedWeek == year * 100 + week
     }
 
     var body: some View {
@@ -57,8 +59,10 @@ struct WeeklyInsightCard: View {
             Button {
                 withAnimation { isDismissed = true }
                 // Persist so the card stays dismissed for the rest of the current week.
-                let week = Calendar.current.component(.weekOfYear, from: Date())
-                UserDefaults.standard.set(week, forKey: Self.dismissKey)
+                let cal  = Calendar.current
+                let year = cal.component(.yearForWeekOfYear, from: Date())
+                let week = cal.component(.weekOfYear, from: Date())
+                UserDefaults.standard.set(year * 100 + week, forKey: Self.dismissKey)
             } label: {
                 Text("Dismiss")
                     .font(.system(size: 13))

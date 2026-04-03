@@ -172,8 +172,11 @@ struct ProgressSection: View {
         let remainingText: String = {
             let h = Int(remaining) / 3600
             let m = (Int(remaining) % 3600) / 60
-            if h >= 24 { return "\(h / 24)d \(h % 24)h" }
-            if h > 0   { return "\(h)h \(m)m" }
+            if h >= 24 {
+                let d = h / 24; let rh = h % 24
+                return rh > 0 ? "\(d)d \(rh)h" : "\(d)d"
+            }
+            if h > 0 { return m > 0 ? "\(h)h \(m)m" : "\(h)h" }
             return "\(m)m"
         }()
 
@@ -454,8 +457,11 @@ struct LockedBadgeSheet: View {
         let m = (secs % 3600) / 60
         let d = h / 24
         if remaining < 60  { return "almost there" }
-        if d >= 1 { return "\(d)d \(h % 24)h away" }
-        if h > 0  { return "\(h)h \(m)m away" }
+        if d >= 1 {
+            let rh = h % 24
+            return rh > 0 ? "\(d)d \(rh)h away" : "\(d)d away"
+        }
+        if h > 0  { return m > 0 ? "\(h)h \(m)m away" : "\(h)h away" }
         return "\(m)m away"
     }
 
