@@ -11,6 +11,8 @@ struct SettingsSheet: View {
     @State private var notifStatus: UNAuthorizationStatus = .notDetermined
     @State private var showResetConfirm = false
     @State private var showResetOnboarding = false
+    @State private var showExportSheet = false
+    @State private var exportText: String = ""
     @State private var morningTime: Date = NotificationManager.shared.morningHour.asTime
     @State private var eveningTime: Date = NotificationManager.shared.eveningHour.asTime
 
@@ -60,6 +62,15 @@ struct SettingsSheet: View {
 
                     // MARK: Danger zone
                     Section {
+                        Button {
+                            exportText = buildExport()
+                            showExportSheet = true
+                        } label: {
+                            Text("Export my data")
+                                .font(.system(size: 15))
+                                .foregroundStyle(Color("NCTextSecondary"))
+                        }
+
                         Button {
                             showResetOnboarding = true
                         } label: {
@@ -119,6 +130,10 @@ struct SettingsSheet: View {
                 dismiss()
             }
             Button("Cancel", role: .cancel) {}
+        }
+        .sheet(isPresented: $showExportSheet) {
+            ShareSheet(items: [exportText])
+                .presentationDetents([.medium, .large])
         }
     }
 
@@ -234,6 +249,64 @@ struct SettingsSheet: View {
     }
 
     // MARK: - Helpers
+
+    private func buildExport() -> String {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        df.timeStyle = .short
+
+        var lines: [String] = []
+        lines.append("NIGHTCAP DATA EXPORT")
+        lines.append("Exported: \(df.string(from: Date()))")
+        lines.append("")
+
+        // Current fast
+        if let start = store.lastSugarDate {
+            lines.append("CURRENT FAST")
+            lines.append("Started: \(df.string(from: start))")
+            lines.append("Elapsed: \(store.formattedElapsed)")
+            lines.append("Phase: \(store.fastingPhase.rawValue)")
+            lines.append("Streak: \(store.streakDays) day\(store.streakDays == 1 ? "" : "s")")
+            lines.append("")
+        }
+
+        // Badges
+        if !store.earnedBadges.isEmpty {
+            lines.append("EARNED BADGES")
+            for badge in BadgeID.allCases where store.earnedBadges.contains(badge) {
+                lines.append("- \(badge.label)")
+            }
+            lines.append("")
+        }
+
+        // Reset history
+        if !store.resetEvents.isEmpty {
+            lines.append("RESET HISTORY")
+            let df2 = DateFormatter()
+            df2.dateStyle = .short
+            df2.timeStyle = .none
+            for event in store.resetEvents {
+                let h = Int(event.fastDuration) / 3600
+                let d = h / 24
+                let duration = d > 0 ? "\(d)d \(h % 24)h fast" : "\(h)h fast"
+                var line = "\(df2.string(from: event.date)): \(duration)"
+                if let note = event.note, !note.isEmpty { line += "  (\(note))" }
+                lines.append(line)
+            }
+            lines.append("")
+        }
+
+        // Craving log
+        if !store.cravingLogs.isEmpty {
+            lines.append("CRAVING LOG")
+            for log in store.cravingLogs {
+                lines.append("\(df.string(from: log.date)): \(log.trigger.rawValue)")
+            }
+            lines.append("")
+        }
+
+        return lines.joined(separator: "\n")
+    }
 
     private func checkNotificationStatus() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
