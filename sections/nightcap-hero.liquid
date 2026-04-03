@@ -1,0 +1,55 @@
+<section class="nc-hero" id="hero">
+  <div class="nc-hero__bg">
+    <div class="nc-hero__gradient"></div>
+    <div class="nc-hero__stars"></div>
+  </div>
+  <div class="nc-hero__content">
+    <div class="nc-badge">Coming Soon</div>
+    <h1 class="nc-hero__title">
+      <span class="nc-hero__title-line">Wind Down</span>
+      <span class="nc-hero__title-line nc-hero__title-line--accent">Without the Sugar Crash</span>
+    </h1>
+    <p class="nc-hero__subtitle">
+      Nightcap is a new kind of evening beverage — crafted to help you relax,
+      recover, and sleep better. Zero sugar. Real ingredients. No compromises.
+    </p>
+    <div class="nc-hero__cta-group">
+      <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
+        Take the Sugar Quiz
+        <span class="nc-btn__arrow">→</span>
+      </button>
+      <p class="nc-hero__cta-note">Find out how much hidden sugar you're really consuming</p>
+    </div>
+    <div class="nc-hero__social-proof">
+      <div class="nc-hero__avatars">
+        <div class="nc-avatar">D</div>
+        <div class="nc-avatar">M</div>
+        <div class="nc-avatar">S</div>
+        <div class="nc-avatar">+</div>
+      </div>
+      <span class="nc-hero__waitlist-count">
+        <strong id="waitlist-count">2,847</strong> people on the waitlist
+      </span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nightcap Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Wind Down Without the Sugar Crash"
+    },
+    {
+      "type": "textarea",
+      "id": "subheadline",
+      "label": "Sub-headline",
+      "default": "Nightcap is a new kind of evening beverage — crafted to help you relax, recover, and sleep better."
+    }
+  ]
+}
+{% endschema %}

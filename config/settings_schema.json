@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Nightcap Waitlist Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Waitlist & Quiz Configuration"
+      },
+      {
+        "type": "text",
+        "id": "waitlist_api_endpoint",
+        "label": "Waitlist API Endpoint",
+        "default": "/apps/nightcap-waitlist/subscribe",
+        "info": "The endpoint that receives waitlist signups"
+      },
+      {
+        "type": "text",
+        "id": "sms_api_endpoint",
+        "label": "SMS API Endpoint",
+        "default": "/apps/nightcap-waitlist/sms",
+        "info": "The endpoint for sending personalized SMS with app download link"
+      },
+      {
+        "type": "text",
+        "id": "app_download_url",
+        "label": "App Download URL",
+        "default": "https://nightcap.app/download",
+        "info": "The URL for the Nightcap app download"
+      },
+      {
+        "type": "color",
+        "id": "brand_primary",
+        "label": "Primary Brand Color",
+        "default": "#1a0a2e"
+      },
+      {
+        "type": "color",
+        "id": "brand_accent",
+        "label": "Accent Color",
+        "default": "#7c3aed"
+      }
+    ]
+  }
+]

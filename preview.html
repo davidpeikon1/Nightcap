@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nightcap — Join the Waitlist</title>
+  <meta name="description" content="Nightcap — The better way to wind down. Take the sugar quiz and join the waitlist for our coming-soon beverage.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nightcap — How Much Sugar Are You Really Drinking?">
+  <meta property="og:description" content="Take the 60-second sugar quiz and join the waitlist for the healthiest evening beverage ever made.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/nightcap-landing.css">
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <section class="nc-hero" id="hero">
+    <div class="nc-hero__bg">
+      <div class="nc-hero__gradient"></div>
+      <div class="nc-hero__stars"></div>
+    </div>
+    <div class="nc-hero__content">
+      <div class="nc-badge">Coming Soon</div>
+      <h1 class="nc-hero__title">
+        <span class="nc-hero__title-line">Wind Down</span>
+        <span class="nc-hero__title-line nc-hero__title-line--accent">Without the Sugar Crash</span>
+      </h1>
+      <p class="nc-hero__subtitle">
+        Nightcap is a new kind of evening beverage — crafted to help you relax,
+        recover, and sleep better. Zero sugar. Real ingredients. No compromises.
+      </p>
+      <div class="nc-hero__cta-group">
+        <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
+          Take the Sugar Quiz
+          <span class="nc-btn__arrow">→</span>
+        </button>
+        <p class="nc-hero__cta-note">Find out how much hidden sugar you're really consuming</p>
+      </div>
+      <div class="nc-hero__social-proof">
+        <div class="nc-hero__avatars">
+          <div class="nc-avatar">D</div>
+          <div class="nc-avatar">M</div>
+          <div class="nc-avatar">S</div>
+          <div class="nc-avatar">+</div>
+        </div>
+        <span class="nc-hero__waitlist-count">
+          <strong id="waitlist-count">2,847</strong> people on the waitlist
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="nc-quiz" id="sugar-quiz" style="display: none;">
+    <div class="nc-quiz__container">
+      <div class="nc-quiz__progress">
+        <div class="nc-quiz__progress-bar" id="quiz-progress-bar" style="width: 0%"></div>
+      </div>
+      <span class="nc-quiz__progress-text" id="quiz-progress-text">Question 1 of 5</span>
+
+      <form id="sugar-quiz-form" class="nc-quiz__form" novalidate>
+        <!-- Q1 -->
+        <div class="nc-quiz__step active" data-step="1">
+          <div class="nc-quiz__step-icon">🌙</div>
+          <h2 class="nc-quiz__question">What's your go-to evening drink?</h2>
+          <p class="nc-quiz__helper">Pick the one you reach for most nights</p>
+          <div class="nc-quiz__options" data-field="evening_drink">
+            <button type="button" class="nc-quiz__option" data-value="soda">
+              <span class="nc-quiz__option-icon">🥤</span>
+              <span class="nc-quiz__option-label">Soda or soft drink</span>
+              <span class="nc-quiz__option-sugar">~39g sugar</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="juice">
+              <span class="nc-quiz__option-icon">🧃</span>
+              <span class="nc-quiz__option-label">Juice or smoothie</span>
+              <span class="nc-quiz__option-sugar">~28g sugar</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="wine_beer">
+              <span class="nc-quiz__option-icon">🍷</span>
+              <span class="nc-quiz__option-label">Wine or beer</span>
+              <span class="nc-quiz__option-sugar">~4-14g sugar</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="tea_coffee">
+              <span class="nc-quiz__option-icon">☕</span>
+              <span class="nc-quiz__option-label">Tea or coffee (sweetened)</span>
+              <span class="nc-quiz__option-sugar">~12g sugar</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="water">
+              <span class="nc-quiz__option-icon">💧</span>
+              <span class="nc-quiz__option-label">Water or sparkling water</span>
+              <span class="nc-quiz__option-sugar">0g sugar</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="energy_sports">
+              <span class="nc-quiz__option-icon">⚡</span>
+              <span class="nc-quiz__option-label">Energy or sports drink</span>
+              <span class="nc-quiz__option-sugar">~34g sugar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="nc-quiz__step" data-step="2">
+          <div class="nc-quiz__step-icon">📊</div>
+          <h2 class="nc-quiz__question">How many sugary drinks do you have per day?</h2>
+          <p class="nc-quiz__helper">Include everything — coffee, soda, juice, cocktails</p>
+          <div class="nc-quiz__options" data-field="daily_sugary_drinks">
+            <button type="button" class="nc-quiz__option" data-value="0">
+              <span class="nc-quiz__option-label">None — I'm pretty clean</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="1">
+              <span class="nc-quiz__option-label">1 per day</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="2-3">
+              <span class="nc-quiz__option-label">2–3 per day</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="4+">
+              <span class="nc-quiz__option-label">4 or more per day</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="nc-quiz__step" data-step="3">
+          <div class="nc-quiz__step-icon">😴</div>
+          <h2 class="nc-quiz__question">How would you rate your sleep quality?</h2>
+          <p class="nc-quiz__helper">Think about how you've been sleeping this past week</p>
+          <div class="nc-quiz__options" data-field="sleep_quality">
+            <button type="button" class="nc-quiz__option" data-value="great">
+              <span class="nc-quiz__option-icon">🌟</span>
+              <span class="nc-quiz__option-label">Great — I sleep like a baby</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="okay">
+              <span class="nc-quiz__option-icon">😐</span>
+              <span class="nc-quiz__option-label">Okay — could be better</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="poor">
+              <span class="nc-quiz__option-icon">😩</span>
+              <span class="nc-quiz__option-label">Poor — I toss and turn</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="terrible">
+              <span class="nc-quiz__option-icon">💀</span>
+              <span class="nc-quiz__option-label">Terrible — what is sleep?</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="nc-quiz__step" data-step="4">
+          <div class="nc-quiz__step-icon">🎯</div>
+          <h2 class="nc-quiz__question">What matters most to you right now?</h2>
+          <p class="nc-quiz__helper">Pick your #1 priority</p>
+          <div class="nc-quiz__options" data-field="motivation">
+            <button type="button" class="nc-quiz__option" data-value="cut_sugar">
+              <span class="nc-quiz__option-icon">🚫</span>
+              <span class="nc-quiz__option-label">Cutting back on sugar</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="sleep_better">
+              <span class="nc-quiz__option-icon">🛏️</span>
+              <span class="nc-quiz__option-label">Sleeping better</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="healthier_habits">
+              <span class="nc-quiz__option-icon">💪</span>
+              <span class="nc-quiz__option-label">Building healthier habits</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="relaxation">
+              <span class="nc-quiz__option-icon">🧘</span>
+              <span class="nc-quiz__option-label">Finding a better way to unwind</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="nc-quiz__step" data-step="5">
+          <div class="nc-quiz__step-icon">🧠</div>
+          <h2 class="nc-quiz__question">Do you check sugar content before buying a drink?</h2>
+          <p class="nc-quiz__helper">Be honest — no judgement here</p>
+          <div class="nc-quiz__options" data-field="checks_sugar">
+            <button type="button" class="nc-quiz__option" data-value="always">
+              <span class="nc-quiz__option-label">Always — I read every label</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="sometimes">
+              <span class="nc-quiz__option-label">Sometimes — depends on my mood</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="rarely">
+              <span class="nc-quiz__option-label">Rarely — I just grab what looks good</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="never">
+              <span class="nc-quiz__option-label">Never — wait, I should?</span>
+            </button>
+          </div>
+        </div>
+
+        <input type="hidden" name="evening_drink" id="quiz-evening-drink">
+        <input type="hidden" name="daily_sugary_drinks" id="quiz-daily-drinks">
+        <input type="hidden" name="sleep_quality" id="quiz-sleep-quality">
+        <input type="hidden" name="motivation" id="quiz-motivation">
+        <input type="hidden" name="checks_sugar" id="quiz-checks-sugar">
+      </form>
+
+      <button class="nc-quiz__back" id="quiz-back-btn" style="display: none;">← Back</button>
+    </div>
+  </section>
+
+  <!-- ===== SIGNUP ===== -->
+  <section class="nc-signup" id="waitlist-signup" style="display: none;">
+    <div class="nc-signup__container">
+      <div class="nc-signup__header">
+        <div class="nc-signup__icon">🎉</div>
+        <h2 class="nc-signup__title">Your Results Are Ready!</h2>
+        <p class="nc-signup__subtitle">
+          Enter your info below to see your personalized sugar report
+          and get early access to Nightcap.
+        </p>
+      </div>
+      <form id="waitlist-form" class="nc-signup__form" novalidate>
+        <div class="nc-form-group">
+          <label class="nc-label" for="signup-name">First Name</label>
+          <input type="text" id="signup-name" name="first_name" class="nc-input" placeholder="Your first name" required autocomplete="given-name">
+          <span class="nc-input-error" id="name-error"></span>
+        </div>
+        <div class="nc-form-group">
+          <label class="nc-label" for="signup-email">Email Address</label>
+          <input type="email" id="signup-email" name="email" class="nc-input" placeholder="you@example.com" required autocomplete="email">
+          <span class="nc-input-error" id="email-error"></span>
+        </div>
+        <div class="nc-form-group">
+          <label class="nc-label" for="signup-phone">
+            Phone Number
+            <span class="nc-label__badge">Get a text when we launch</span>
+          </label>
+          <input type="tel" id="signup-phone" name="phone" class="nc-input" placeholder="(555) 123-4567" autocomplete="tel">
+          <span class="nc-input-error" id="phone-error"></span>
+        </div>
+        <div class="nc-form-group nc-form-group--checkbox">
+          <label class="nc-checkbox">
+            <input type="checkbox" id="sms-consent" name="sms_consent" checked>
+            <span class="nc-checkbox__mark"></span>
+            <span class="nc-checkbox__text">
+              Yes, text me my results + a link to download the Nightcap app.
+              <span class="nc-checkbox__legal">Msg & data rates may apply. Reply STOP to unsubscribe.</span>
+            </span>
+          </label>
+        </div>
+        <div class="nc-form-group nc-form-group--checkbox">
+          <label class="nc-checkbox">
+            <input type="checkbox" id="email-consent" name="email_consent" checked>
+            <span class="nc-checkbox__mark"></span>
+            <span class="nc-checkbox__text">Send me early access updates and exclusive offers via email.</span>
+          </label>
+        </div>
+        <button type="submit" class="nc-btn nc-btn--primary nc-btn--full" id="signup-submit-btn">
+          <span class="nc-btn__text">See My Results & Join Waitlist</span>
+          <span class="nc-btn__loading" style="display: none;"><span class="nc-spinner"></span> Saving...</span>
+        </button>
+        <p class="nc-signup__privacy">🔒 We respect your privacy. Unsubscribe anytime.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== RESULTS ===== -->
+  <section class="nc-results" id="quiz-results" style="display: none;">
+    <div class="nc-results__container">
+      <div class="nc-results__report">
+        <div class="nc-results__score-ring">
+          <svg viewBox="0 0 120 120" class="nc-results__ring-svg">
+            <circle cx="60" cy="60" r="54" class="nc-results__ring-bg"/>
+            <circle cx="60" cy="60" r="54" class="nc-results__ring-fill" id="results-ring"/>
+          </svg>
+          <div class="nc-results__score-value">
+            <span id="results-sugar-grams">0</span>g
+          </div>
+        </div>
+        <h2 class="nc-results__title" id="results-title">Your Daily Sugar Snapshot</h2>
+        <p class="nc-results__subtitle" id="results-subtitle"></p>
+        <div class="nc-results__breakdown">
+          <div class="nc-results__stat">
+            <span class="nc-results__stat-number" id="results-daily-sugar">0g</span>
+            <span class="nc-results__stat-label">Estimated daily sugar from drinks</span>
+          </div>
+          <div class="nc-results__stat">
+            <span class="nc-results__stat-number" id="results-weekly-sugar">0g</span>
+            <span class="nc-results__stat-label">That's per week</span>
+          </div>
+          <div class="nc-results__stat">
+            <span class="nc-results__stat-number" id="results-yearly-sugar">0 lbs</span>
+            <span class="nc-results__stat-label">Sugar from drinks per year</span>
+          </div>
+        </div>
+        <div class="nc-results__insight" id="results-insight">
+          <div class="nc-results__insight-icon">💡</div>
+          <p id="results-insight-text"></p>
+        </div>
+      </div>
+      <div class="nc-results__cta-card">
+        <h3 class="nc-results__cta-title">Nightcap: Your Better Evening Ritual</h3>
+        <ul class="nc-results__benefits">
+          <li>✓ 0g sugar — naturally sweetened</li>
+          <li>✓ Functional ingredients for relaxation & sleep</li>
+          <li>✓ Replaces sugary evening drinks</li>
+          <li>✓ Tastes incredible — not like "health food"</li>
+        </ul>
+        <div class="nc-results__cta-actions">
+          <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">📲 Get the Nightcap App</button>
+          <p class="nc-results__cta-note" id="results-sms-note">We'll also text you a personalized download link!</p>
+        </div>
+      </div>
+      <div class="nc-results__share">
+        <p class="nc-results__share-label">Think a friend needs to see their sugar intake?</p>
+        <div class="nc-results__share-buttons">
+          <button class="nc-btn nc-btn--outline nc-btn--sm" id="share-quiz-btn">Share the Quiz</button>
+          <button class="nc-btn nc-btn--outline nc-btn--sm" id="refer-friend-btn">Refer a Friend — Skip the Line</button>
+        </div>
+      </div>
+      <div class="nc-results__position">
+        <p>You're <strong>#<span id="results-position">2,848</span></strong> on the waitlist</p>
+        <p class="nc-results__position-note">Refer friends to move up! Each referral bumps you 10 spots.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="nc-footer">
+    <div class="nc-footer__container">
+      <div class="nc-footer__brand">
+        <h3 class="nc-footer__logo">Nightcap</h3>
+        <p class="nc-footer__tagline">The better way to wind down.</p>
+      </div>
+      <div class="nc-footer__links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+      <p class="nc-footer__legal">
+        &copy; 2026 Nightcap. All rights reserved.
+        These statements have not been evaluated by the FDA.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/nightcap-quiz.js"></script>
+  <script src="assets/nightcap-waitlist.js"></script>
+</body>
+</html>
