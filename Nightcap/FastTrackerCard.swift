@@ -4,7 +4,8 @@ import SwiftUI
 
 struct FastTrackerCard: View {
     @EnvironmentObject var store: FastingStore
-    @State private var showResetModal = false
+    @State private var showResetModal   = false
+    @State private var showEditStart    = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -23,6 +24,28 @@ struct FastTrackerCard: View {
                 .foregroundStyle(Color("NCTextSecondary"))
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
+
+            // Editable start time
+            if let startDate = store.lastSugarDate {
+                Button {
+                    showEditStart = true
+                } label: {
+                    HStack(spacing: 4) {
+                        Text("Started")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                        Text(startDate, style: .relative)
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                        Text("ago")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                        Image(systemName: "pencil")
+                            .font(.system(size: 9, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
+                    }
+                }
+            }
 
             Divider()
                 .background(Color("NCTextTertiary").opacity(0.5))
@@ -43,6 +66,11 @@ struct FastTrackerCard: View {
         .cornerRadius(16)
         .sheet(isPresented: $showResetModal) {
             ResetModal()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showEditStart) {
+            EditStartTimeSheet()
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
@@ -215,5 +243,71 @@ struct ResetModal: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .transition(.opacity)
+    }
+}
+
+// MARK: - Edit Start Time Sheet
+
+struct EditStartTimeSheet: View {
+    @EnvironmentObject var store: FastingStore
+    @Environment(\.dismiss) var dismiss
+
+    @State private var selectedDate: Date = Date()
+
+    var body: some View {
+        ZStack {
+            Color("NCBackground").ignoresSafeArea()
+
+            VStack(alignment: .leading, spacing: 28) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Edit start time")
+                        .font(.system(size: 24, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+
+                    Text("When did you actually last have processed sugar?")
+                        .font(.system(size: 15))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .lineSpacing(4)
+                }
+
+                DatePicker(
+                    "",
+                    selection: $selectedDate,
+                    in: ...Date(),
+                    displayedComponents: [.date, .hourAndMinute]
+                )
+                .datePickerStyle(.graphical)
+                .tint(Color("NCAccent"))
+                .labelsHidden()
+
+                Spacer()
+
+                VStack(spacing: 12) {
+                    Button {
+                        store.setInitialDate(at: selectedDate)
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color("NCBackground"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(Color("NCAccent"))
+                            .cornerRadius(12)
+                    }
+
+                    Button { dismiss() } label: {
+                        Text("Cancel")
+                            .font(.system(size: 14))
+                            .foregroundStyle(Color("NCTextSecondary"))
+                            .padding(.vertical, 8)
+                    }
+                }
+            }
+            .padding(24)
+        }
+        .onAppear {
+            selectedDate = store.lastSugarDate ?? Date()
+        }
     }
 }
