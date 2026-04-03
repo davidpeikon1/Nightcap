@@ -22,6 +22,8 @@ struct NightcapApp: App {
         .onChange(of: scenePhase) { _, phase in
             if phase == .background {
                 WidgetCenter.shared.reloadAllTimelines()
+            } else if phase == .active {
+                fastingStore.syncBadgeCount()
             }
         }
     }

@@ -320,6 +320,7 @@ class FastingStore: ObservableObject {
         }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
         WidgetCenter.shared.reloadAllTimelines()
+        Task { try? await UNUserNotificationCenter.current().setBadgeCount(0) }
     }
 
     func logCraving(_ trigger: CravingTrigger) {
@@ -383,6 +384,18 @@ class FastingStore: ObservableObject {
         defaults.set(streakDays, forKey: Keys.streakDays)
         lastStreakCheckDate = today
         defaults.set(today, forKey: Keys.lastStreakCheck)
+
+        // Update app icon badge to reflect current streak (requires notification auth).
+        Task {
+            try? await UNUserNotificationCenter.current().setBadgeCount(streakDays)
+        }
+    }
+
+    /// Call on app foreground to ensure the badge reflects the latest streak.
+    func syncBadgeCount() {
+        Task {
+            try? await UNUserNotificationCenter.current().setBadgeCount(streakDays)
+        }
     }
 
     private func checkBadges() {
