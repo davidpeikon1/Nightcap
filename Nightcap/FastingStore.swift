@@ -241,7 +241,8 @@ class FastingStore: ObservableObject {
     // MARK: Private
 
     private var timer: AnyCancellable?
-    private let defaults = UserDefaults.standard
+    /// Shared with the widget via App Group.
+    private let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
     private var lastStreakCheckDate: Date = .distantPast
     /// Tracks the last phase we saw so we can fire the toast on transitions.
     private var lastKnownPhase: FastingPhase = .justStarted

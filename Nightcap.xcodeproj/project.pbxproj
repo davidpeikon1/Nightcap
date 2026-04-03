@@ -25,7 +25,41 @@
 		AA000001000000000000010A /* FastHistoryView.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA000001000000000000010B; };
 		BB000001000000000000001A /* Assets.xcassets in Resources */       = {isa = PBXBuildFile; fileRef = BB000001000000000000001B; };
 		BB000001000000000000002A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000002B; };
+		AA000001000000000000011A /* ConfettiView.swift in Sources */      = {isa = PBXBuildFile; fileRef = AA000001000000000000011B; };
+		AA000001000000000000012A /* ShareCardView.swift in Sources */     = {isa = PBXBuildFile; fileRef = AA000001000000000000012B; };
+		AA000001000000000000013A /* PhaseDetailSheet.swift in Sources */  = {isa = PBXBuildFile; fileRef = AA000001000000000000013B; };
+		WA000001000000000000001A /* NightcapWidget.swift in Sources */    = {isa = PBXBuildFile; fileRef = WA000001000000000000001B; };
+		WA000001000000000000002A /* Assets.xcassets in Resources */       = {isa = PBXBuildFile; fileRef = WA000001000000000000002B; };
+		WF000001000000000000001A /* NightcapWidget.appex in Embed Foundation Extensions */ = {
+			isa = PBXBuildFile;
+			fileRef = WA000001000000000000003B /* NightcapWidget.appex */;
+			settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); };
+		};
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		WG000001000000000000001A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 110000001100000011000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = WC000001000000000000001A;
+			remoteInfo = NightcapWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		WF000001000000000000002A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				WF000001000000000000001A /* NightcapWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AA000001000000000000001B /* NightcapApp.swift */       = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapApp.swift; sourceTree = "<group>"; };
@@ -41,16 +75,31 @@
 		AA00000100000000000000BB /* CravingToolkitSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingToolkitSection.swift; sourceTree = "<group>"; };
 		AA00000100000000000000CB /* ProgressSection.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSection.swift; sourceTree = "<group>"; };
 		AA00000100000000000000DB /* WeeklyInsightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyInsightCard.swift; sourceTree = "<group>"; };
-		AA00000100000000000000EB /* BodyScienceCard.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyScienceCard.swift; sourceTree = "<group>"; };
-		AA00000100000000000000FB /* SettingsSheet.swift */    = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
-		AA000001000000000000010B /* FastHistoryView.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastHistoryView.swift; sourceTree = "<group>"; };
+		AA00000100000000000000EB /* BodyScienceCard.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyScienceCard.swift; sourceTree = "<group>"; };
+		AA00000100000000000000FB /* SettingsSheet.swift */     = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
+		AA000001000000000000010B /* FastHistoryView.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastHistoryView.swift; sourceTree = "<group>"; };
+		AA000001000000000000011B /* ConfettiView.swift */      = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		AA000001000000000000012B /* ShareCardView.swift */     = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
+		AA000001000000000000013B /* PhaseDetailSheet.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseDetailSheet.swift; sourceTree = "<group>"; };
+		AA000001000000000000014B /* Nightcap.entitlements */   = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nightcap.entitlements; sourceTree = "<group>"; };
 		BB000001000000000000001B /* Assets.xcassets */         = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB000001000000000000002B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CC000001000000000000001B /* Nightcap.app */            = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightcap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		WA000001000000000000001B /* NightcapWidget.swift */    = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapWidget.swift; sourceTree = "<group>"; };
+		WA000001000000000000002B /* Assets.xcassets */         = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		WA000001000000000000003B /* NightcapWidget.appex */    = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NightcapWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		WA000001000000000000004B /* NightcapWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NightcapWidget.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DD000001000000000000001A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		WB000001000000000000002A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -64,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				EE000001000000000000002A /* Nightcap */,
+				WE000001000000000000001A /* NightcapWidget */,
 				EE000001000000000000003A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,6 +137,10 @@
 				AA00000100000000000000EB /* BodyScienceCard.swift */,
 				AA00000100000000000000FB /* SettingsSheet.swift */,
 				AA000001000000000000010B /* FastHistoryView.swift */,
+				AA000001000000000000011B /* ConfettiView.swift */,
+				AA000001000000000000012B /* ShareCardView.swift */,
+				AA000001000000000000013B /* PhaseDetailSheet.swift */,
+				AA000001000000000000014B /* Nightcap.entitlements */,
 				BB000001000000000000001B /* Assets.xcassets */,
 				EE000001000000000000004A /* Preview Content */,
 			);
@@ -97,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				CC000001000000000000001B /* Nightcap.app */,
+				WA000001000000000000003B /* NightcapWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +164,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		WE000001000000000000001A /* NightcapWidget */ = {
+			isa = PBXGroup;
+			children = (
+				WA000001000000000000001B /* NightcapWidget.swift */,
+				WA000001000000000000002B /* Assets.xcassets */,
+				WA000001000000000000004B /* NightcapWidget.entitlements */,
+			);
+			path = NightcapWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,15 +184,34 @@
 				FF000001000000000000003A /* Sources */,
 				DD000001000000000000001A /* Frameworks */,
 				FF000001000000000000004A /* Resources */,
+				WF000001000000000000002A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				WG000001000000000000002A /* PBXTargetDependency */,
 			);
 			name = Nightcap;
 			productName = Nightcap;
 			productReference = CC000001000000000000001B /* Nightcap.app */;
 			productType = "com.apple.product-type.application";
+		};
+		WC000001000000000000001A /* NightcapWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = WD000001000000000000003A /* Build configuration list for PBXNativeTarget "NightcapWidget" */;
+			buildPhases = (
+				WB000001000000000000001A /* Sources */,
+				WB000001000000000000002A /* Frameworks */,
+				WB000001000000000000003A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NightcapWidget;
+			productName = NightcapWidget;
+			productReference = WA000001000000000000003B /* NightcapWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -140,6 +224,9 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					FF000001000000000000001A = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					WC000001000000000000001A = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -158,6 +245,7 @@
 			projectRoot = "";
 			targets = (
 				FF000001000000000000001A /* Nightcap */,
+				WC000001000000000000001A /* NightcapWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -169,6 +257,14 @@
 			files = (
 				BB000001000000000000001A /* Assets.xcassets in Resources */,
 				BB000001000000000000002A /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		WB000001000000000000003A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				WA000001000000000000002A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,10 +291,29 @@
 				AA00000100000000000000EA /* BodyScienceCard.swift in Sources */,
 				AA00000100000000000000FA /* SettingsSheet.swift in Sources */,
 				AA000001000000000000010A /* FastHistoryView.swift in Sources */,
+				AA000001000000000000011A /* ConfettiView.swift in Sources */,
+				AA000001000000000000012A /* ShareCardView.swift in Sources */,
+				AA000001000000000000013A /* PhaseDetailSheet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		WB000001000000000000001A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				WA000001000000000000001A /* NightcapWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		WG000001000000000000002A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = WC000001000000000000001A /* NightcapWidget */;
+			targetProxy = WG000001000000000000001A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FF000001000000000000006A /* Debug */ = {
@@ -270,6 +385,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Nightcap/Nightcap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nightcap/Preview Content\"";
@@ -299,6 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Nightcap/Nightcap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nightcap/Preview Content\"";
@@ -323,6 +440,61 @@
 			};
 			name = Release;
 		};
+		WD000001000000000000001A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = NightcapWidget/NightcapWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NightcapWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightcap.app.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		WD000001000000000000002A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = NightcapWidget/NightcapWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NightcapWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightcap.app.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -340,6 +512,15 @@
 			buildConfigurations = (
 				FF000001000000000000008A /* Debug */,
 				FF000001000000000000009A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		WD000001000000000000003A /* Build configuration list for PBXNativeTarget "NightcapWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				WD000001000000000000001A /* Debug */,
+				WD000001000000000000002A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

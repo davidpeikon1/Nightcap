@@ -202,10 +202,19 @@ struct MilestoneSheet: View {
     let badge: BadgeID
     @EnvironmentObject var store: FastingStore
     @Environment(\.dismiss) var dismiss
+    @State private var shareImage: UIImage? = nil
+    @State private var showShareSheet = false
 
     var body: some View {
         ZStack {
             Color("NCBackground").ignoresSafeArea()
+
+            // Confetti for major milestones
+            if badge.useConfetti {
+                ConfettiView()
+                    .ignoresSafeArea()
+                    .zIndex(1)
+            }
 
             VStack(spacing: 24) {
                 Spacer()
@@ -214,7 +223,6 @@ struct MilestoneSheet: View {
                     Circle()
                         .fill(Color("NCSuccess").opacity(0.08))
                         .frame(width: 80, height: 80)
-
                     Image(systemName: badge.symbol)
                         .font(.system(size: 32, weight: .light))
                         .foregroundStyle(Color("NCSuccess"))
@@ -231,23 +239,72 @@ struct MilestoneSheet: View {
                     .lineSpacing(6)
                     .padding(.horizontal, 32)
 
+                Text(badge.scienceFact)
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+                    .padding(.horizontal, 32)
+
                 Spacer()
 
-                Button {
-                    store.dismissBadge()
-                    dismiss()
-                } label: {
-                    Text("Keep going")
-                        .font(.system(size: 17, weight: .medium))
-                        .foregroundStyle(Color("NCBackground"))
+                VStack(spacing: 12) {
+                    // Share button
+                    Button {
+                        Task { @MainActor in
+                            shareImage = makeShareImage(
+                                badge: badge,
+                                elapsedSeconds: store.elapsedSeconds
+                            )
+                            showShareSheet = shareImage != nil
+                        }
+                    } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "square.and.arrow.up")
+                                .font(.system(size: 14, weight: .light))
+                            Text("Share this milestone")
+                                .font(.system(size: 15, weight: .regular))
+                        }
+                        .foregroundStyle(Color("NCTextSecondary"))
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 18)
-                        .background(Color("NCAccent"))
+                        .padding(.vertical, 14)
+                        .background(Color("NCSurface"))
                         .cornerRadius(12)
+                    }
+
+                    Button {
+                        store.dismissBadge()
+                        dismiss()
+                    } label: {
+                        Text("Keep going")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color("NCBackground"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(Color("NCAccent"))
+                            .cornerRadius(12)
+                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
             }
+            .zIndex(2)
+        }
+        .sheet(isPresented: $showShareSheet) {
+            if let img = shareImage {
+                ShareSheet(items: [img])
+                    .presentationDetents([.medium, .large])
+            }
         }
     }
+}
+
+// MARK: - UIActivityViewController wrapper
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }

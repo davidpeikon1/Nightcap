@@ -3,6 +3,7 @@ import SwiftUI
 struct BodyScienceCard: View {
     @EnvironmentObject var store: FastingStore
     @State private var isExpanded = false
+    @State private var showPhaseDetail = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -22,10 +23,19 @@ struct BodyScienceCard: View {
 
                     Spacer()
 
-                    Text(store.fastingPhase.rawValue.uppercased())
-                        .font(.system(size: 10, weight: .medium))
-                        .tracking(1.5)
-                        .foregroundStyle(Color("NCSuccess"))
+                    Button {
+                        showPhaseDetail = true
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text(store.fastingPhase.rawValue.uppercased())
+                                .font(.system(size: 10, weight: .medium))
+                                .tracking(1.5)
+                                .foregroundStyle(Color("NCSuccess"))
+                            Image(systemName: "info.circle")
+                                .font(.system(size: 10, weight: .light))
+                                .foregroundStyle(Color("NCSuccess").opacity(0.7))
+                        }
+                    }
 
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                         .font(.system(size: 10, weight: .light))
@@ -56,6 +66,11 @@ struct BodyScienceCard: View {
         .background(Color("NCSurface"))
         .cornerRadius(16)
         .animation(.spring(duration: 0.3), value: isExpanded)
+        .sheet(isPresented: $showPhaseDetail) {
+            PhaseDetailSheet(phase: store.fastingPhase)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+        }
     }
 
     private var phaseStrip: some View {
