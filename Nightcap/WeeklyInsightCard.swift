@@ -2,7 +2,16 @@ import SwiftUI
 
 struct WeeklyInsightCard: View {
     @EnvironmentObject var store: FastingStore
-    @State private var isDismissed = false
+    @State private var isDismissed = Self.loadDismissed()
+
+    private static let dismissKey = "weeklyInsightDismissedWeek"
+
+    /// True if the user dismissed the card during the current ISO week.
+    private static func loadDismissed() -> Bool {
+        guard let savedWeek = UserDefaults.standard.object(forKey: dismissKey) as? Int else { return false }
+        let currentWeek = Calendar.current.component(.weekOfYear, from: Date())
+        return savedWeek == currentWeek
+    }
 
     var body: some View {
         Group {
@@ -44,6 +53,9 @@ struct WeeklyInsightCard: View {
 
             Button {
                 withAnimation { isDismissed = true }
+                // Persist so the card stays dismissed for the rest of the current week.
+                let week = Calendar.current.component(.weekOfYear, from: Date())
+                UserDefaults.standard.set(week, forKey: Self.dismissKey)
             } label: {
                 Text("Dismiss")
                     .font(.system(size: 13))
