@@ -315,7 +315,10 @@ struct SettingsSheet: View {
                 if settings.authorizationStatus == .authorized {
                     UNUserNotificationCenter.current().getPendingNotificationRequests { reqs in
                         DispatchQueue.main.async {
-                            notificationsOn = !reqs.isEmpty
+                            // Only check for the daily identifiers — milestone notifications
+                            // exist separately and shouldn't drive this toggle.
+                            let dailyIDs: Set<String> = ["nightcap.morning", "nightcap.evening"]
+                            notificationsOn = reqs.contains { dailyIDs.contains($0.identifier) }
                         }
                     }
                 }

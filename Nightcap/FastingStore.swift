@@ -289,6 +289,9 @@ class FastingStore: ObservableObject {
         defaults.set(0, forKey: Keys.streakDays)
         lastStreakCheckDate = .distantPast
         defaults.set(Date.distantPast, forKey: Keys.lastStreakCheck)
+        // Clear badges so each new fast earns them fresh (badge sheet + celebration replay).
+        earnedBadges = []
+        saveBadges()
         // Reset phase tracking so the first transition fires correctly again.
         lastKnownPhase = .justStarted
         defaults.removeObject(forKey: Keys.lastKnownPhase)
@@ -297,7 +300,6 @@ class FastingStore: ObservableObject {
         UINotificationFeedbackGenerator().notificationOccurred(.success)
         WidgetCenter.shared.reloadAllTimelines()
         // Re-schedule future milestone notifications from the new reset date.
-        // earnedBadges has just been reset to [] so all milestones are re-queued.
         NotificationManager.shared.scheduleFutureMilestoneNotifications(from: date, earnedBadges: [])
     }
 

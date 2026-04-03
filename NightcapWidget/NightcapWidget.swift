@@ -302,6 +302,134 @@ struct MediumWidgetView: View {
     }
 }
 
+// MARK: - Large Widget
+
+struct LargeWidgetView: View {
+    let entry: FastingEntry
+
+    var body: some View {
+        guard entry.data.lastSugarDate != nil else {
+            return AnyView(
+                VStack(spacing: 16) {
+                    Image(systemName: "timer")
+                        .font(.system(size: 40, weight: .thin))
+                        .foregroundStyle(Color.ncTextTert)
+                    Text("nightcap")
+                        .font(.system(size: 13, weight: .light))
+                        .tracking(3)
+                        .foregroundStyle(Color.ncTextTert)
+                    Text("Open the app to start\nyour sugar-free fast.")
+                        .font(.system(size: 16, weight: .light))
+                        .foregroundStyle(Color.ncTextPrimary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+                }
+                .padding(20)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .containerBackground(Color.ncBackground, for: .widget)
+            )
+        }
+        return AnyView(trackingView)
+    }
+
+    private var trackingView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Header
+            HStack {
+                Text("nightcap")
+                    .font(.system(size: 10, weight: .light))
+                    .tracking(2)
+                    .foregroundStyle(Color.ncTextTert)
+                Spacer()
+                Text(entry.data.phase(at: entry.date).uppercased())
+                    .font(.system(size: 8, weight: .semibold))
+                    .tracking(1.5)
+                    .foregroundStyle(Color.ncSuccess)
+            }
+
+            Spacer(minLength: 12)
+
+            // Big timer
+            Text(entry.data.formattedElapsed(at: entry.date))
+                .font(.system(size: 56, weight: .light).monospacedDigit())
+                .foregroundStyle(Color.ncTextPrimary)
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
+
+            Text("sugar free")
+                .font(.system(size: 14, weight: .light))
+                .foregroundStyle(Color.ncTextSecond)
+
+            Spacer(minLength: 16)
+
+            // Phase progress bar
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Color.ncTextTert.opacity(0.25)).frame(height: 5)
+                    Capsule()
+                        .fill(Color.ncSuccess)
+                        .frame(
+                            width: geo.size.width * entry.data.phaseProgress(at: entry.date),
+                            height: 5
+                        )
+                }
+            }
+            .frame(height: 5)
+
+            Spacer(minLength: 20)
+
+            // Divider
+            Rectangle()
+                .fill(Color.ncTextTert.opacity(0.2))
+                .frame(height: 1)
+
+            Spacer(minLength: 16)
+
+            // Phase description
+            Text(phaseBodyScience(for: entry.data.phase(at: entry.date)))
+                .font(.system(size: 13, weight: .light))
+                .foregroundStyle(Color.ncTextSecond)
+                .lineSpacing(4)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Spacer(minLength: 16)
+
+            // Next milestone footer
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("NEXT MILESTONE")
+                        .font(.system(size: 8, weight: .medium))
+                        .tracking(1.5)
+                        .foregroundStyle(Color.ncTextTert)
+                    Text(entry.data.nextMilestone(at: entry.date))
+                        .font(.system(size: 14, weight: .light).monospacedDigit())
+                        .foregroundStyle(Color.ncTextPrimary)
+                }
+                Spacer()
+            }
+        }
+        .padding(18)
+        .containerBackground(Color.ncBackground, for: .widget)
+    }
+
+    private func phaseBodyScience(for phase: String) -> String {
+        switch phase {
+        case "Starting Out":
+            return "Your blood sugar is beginning to stabilize. The craving you feel is your brain expecting its usual dopamine hit — not your body needing fuel."
+        case "First Day":
+            return "Your liver is burning through glycogen reserves. Any fatigue you feel is the metabolic shift starting."
+        case "Withdrawal":
+            return "Headaches and irritability now are your brain recalibrating reward pathways. Serotonin is shifting back to your gut."
+        case "Breakthrough":
+            return "The compulsive edge of cravings drops sharply at 72 hours. Your taste receptors are beginning to reset."
+        case "Rewiring":
+            return "Your gut microbiome has measurably shifted. Bacteria that amplify cravings are dying off."
+        default: // Freedom
+            return "At two weeks, fMRI studies show reduced reward-center activation in response to sugar images. You have literally rewired."
+        }
+    }
+}
+
 // MARK: - Lock Screen Circular
 
 struct CircularWidgetView: View {
@@ -358,6 +486,8 @@ struct NightcapWidgetEntryView: View {
 
     var body: some View {
         switch family {
+        case .systemLarge:
+            LargeWidgetView(entry: entry)
         case .systemMedium:
             MediumWidgetView(entry: entry)
         case .accessoryCircular:
@@ -384,6 +514,7 @@ struct NightcapWidget: Widget {
         .supportedFamilies([
             .systemSmall,
             .systemMedium,
+            .systemLarge,
             .accessoryCircular,
             .accessoryRectangular,
         ])
