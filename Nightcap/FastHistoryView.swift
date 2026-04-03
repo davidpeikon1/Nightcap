@@ -530,20 +530,55 @@ struct FastHistoryView: View {
         func count(in range: ClosedRange<Int>) -> Int {
             logs.filter { range.contains(Calendar.current.component(.hour, from: $0.date)) }.count
         }
-        let morning   = count(in: 6...11)
-        let afternoon = count(in: 12...17)
-        let evening   = count(in: 18...21)
-        let night     = count(in: 22...23) + count(in: 0...5)
-        let peak      = [("Morning", morning), ("Afternoon", afternoon), ("Evening", evening), ("Night", night)]
-            .max(by: { $0.1 < $1.1 })
-        return HStack {
-            Image(systemName: "clock")
-                .font(.system(size: 11, weight: .light))
+        let slots: [(label: String, icon: String, count: Int)] = [
+            ("Morning",   "sunrise",      count(in: 6...11)),
+            ("Afternoon", "sun.max",      count(in: 12...17)),
+            ("Evening",   "sunset",       count(in: 18...21)),
+            ("Night",     "moon.stars",   count(in: 22...23) + count(in: 0...5)),
+        ]
+        let maxCount = max(1, slots.map(\.count).max() ?? 1)
+
+        return VStack(alignment: .leading, spacing: 8) {
+            Text("TIME OF DAY")
+                .font(.system(size: 10, weight: .medium))
+                .tracking(1.5)
                 .foregroundStyle(Color("NCTextTertiary"))
-            Text(peak.map { "Most cravings: \($0.0)" } ?? "")
-                .font(.system(size: 12, weight: .light))
-                .foregroundStyle(Color("NCTextSecondary"))
-            Spacer()
+
+            HStack(spacing: 8) {
+                ForEach(slots, id: \.label) { slot in
+                    VStack(spacing: 6) {
+                        GeometryReader { geo in
+                            VStack {
+                                Spacer()
+                                RoundedRectangle(cornerRadius: 3)
+                                    .fill(
+                                        slot.count == maxCount && slot.count > 0
+                                            ? Color("NCWarning").opacity(0.7)
+                                            : Color("NCTextTertiary").opacity(0.25)
+                                    )
+                                    .frame(
+                                        height: slot.count == 0 ? 3
+                                            : max(6, geo.size.height * CGFloat(slot.count) / CGFloat(maxCount))
+                                    )
+                            }
+                        }
+                        .frame(height: 40)
+
+                        Image(systemName: slot.icon)
+                            .font(.system(size: 10, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary"))
+
+                        Text(slot.label)
+                            .font(.system(size: 9))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("\(slot.label): \(slot.count) craving\(slot.count == 1 ? "" : "s")")
+                }
+            }
         }
     }
 
