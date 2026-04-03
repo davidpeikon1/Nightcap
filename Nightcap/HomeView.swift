@@ -14,32 +14,44 @@ struct HomeView: View {
         ZStack(alignment: .top) {
             Color("NCBackground").ignoresSafeArea()
 
-            ScrollView {
-                VStack(spacing: 20) {
-                    topBar
-                        .padding(.top, 56)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 20) {
+                        topBar
+                            .padding(.top, 56)
 
-                    // Weekly insight (only when there's enough data)
-                    WeeklyInsightCard()
+                        // Weekly insight (only when there's enough data)
+                        WeeklyInsightCard()
 
-                    // Feature 1 — Fast tracker
-                    FastTrackerCard()
+                        // Feature 1 — Fast tracker
+                        FastTrackerCard()
 
-                    // Feature 2 — Daily reframe
-                    DailyReframeCard()
+                        // Feature 2 — Daily reframe
+                        DailyReframeCard()
 
-                    // Body science (collapsed by default, tap to expand)
-                    BodyScienceCard()
+                        // Body science (collapsed by default, tap to expand)
+                        BodyScienceCard()
 
-                    // Progress + badges
-                    ProgressSection()
+                        // Progress + badges
+                        ProgressSection()
 
-                    // Feature 3 — Craving toolkit
-                    CravingToolkitSection()
+                        // Feature 3 — Craving toolkit
+                        CravingToolkitSection()
+                            .id("cravingToolkit")
 
-                    Spacer(minLength: 60)
+                        Spacer(minLength: 60)
+                    }
+                    .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
+                .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenCravingToolkit)) { _ in
+                    guard !coachmarkMode else { return }
+                    // Delay slightly so the expand animation starts first, then scroll.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        withAnimation(.spring(duration: 0.5)) {
+                            proxy.scrollTo("cravingToolkit", anchor: .top)
+                        }
+                    }
+                }
             }
 
             // Phase-unlock toast — floats above scroll content

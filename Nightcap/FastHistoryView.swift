@@ -80,6 +80,8 @@ struct FastHistoryView: View {
                 }
             }
             .frame(height: 140)
+            .accessibilityLabel(chartAccessibilityLabel)
+            .accessibilityHint("Bar chart showing fasting duration for each past fast")
 
             // Legend
             HStack(spacing: 16) {
@@ -258,6 +260,14 @@ struct FastHistoryView: View {
     }
 
     // MARK: - Helpers
+
+    private var chartAccessibilityLabel: String {
+        let data = store.historyChartData
+        guard !data.isEmpty else { return "No fasting history yet." }
+        let longest = data.map(\.hours).max() ?? 0
+        let avg = data.map(\.hours).reduce(0, +) / Double(data.count)
+        return "\(data.count) fast\(data.count == 1 ? "" : "s") recorded. Longest: \(formatHoursCompact(longest * 3600)). Average: \(formatHoursCompact(avg * 3600))."
+    }
 
     private func barColor(for hours: Double) -> Color {
         if hours >= 72 { return Color("NCSuccess") }

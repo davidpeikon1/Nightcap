@@ -210,7 +210,7 @@ struct CountdownTool: View {
 
 struct ReframeCardTool: View {
     @State private var currentIndex: Int = 0
-    @State private var cardText: String = QuoteLibrary.cravingCards[0]
+    @State private var cardText: String = QuoteLibrary.cravingCards.first ?? ""
     @State private var dragOffset: CGFloat = 0
 
     var body: some View {
