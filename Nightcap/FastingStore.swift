@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import UIKit
+import WidgetKit
 
 // MARK: - Supporting Types
 
@@ -293,6 +294,7 @@ class FastingStore: ObservableObject {
 
         lastSugarDate = date
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func resetAllData() {
@@ -408,6 +410,24 @@ class FastingStore: ObservableObject {
     // MARK: Computed
 
     var isTracking: Bool { lastSugarDate != nil }
+
+    var formattedElapsed: String {
+        let total = Int(elapsedSeconds)
+        let d = total / 86400
+        let h = (total % 86400) / 3600
+        let m = (total % 3600) / 60
+        let s = total % 60
+        if d >= 7 { return "\(d) days" }
+        if d >= 1 { return "\(d)d \(h)h" }
+        if h >= 1 { return "\(h)h \(m)m" }
+        return String(format: "%d:%02d", m, s)
+    }
+
+    /// Sets the initial start date during onboarding without recording a reset event.
+    func setInitialDate(at date: Date) {
+        lastSugarDate = date
+        WidgetCenter.shared.reloadAllTimelines()
+    }
 
     var fastingPhase: FastingPhase {
         let h = elapsedSeconds / 3600

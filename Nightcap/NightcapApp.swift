@@ -1,10 +1,12 @@
 import SwiftUI
 import AppIntents
+import WidgetKit
 
 @main
 struct NightcapApp: App {
     @StateObject private var fastingStore = FastingStore()
     @StateObject private var appState    = AppState()
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         NightcapShortcuts.updateAppShortcutParameters()
@@ -15,6 +17,11 @@ struct NightcapApp: App {
             RootView()
                 .environmentObject(fastingStore)
                 .environmentObject(appState)
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 }

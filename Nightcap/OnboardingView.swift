@@ -63,18 +63,18 @@ struct HookScreen: View {
 
                 VStack(spacing: 12) {
                     hookButton("Today") {
-                        fastingStore.logSugar(at: Calendar.current.startOfDay(for: Date()))
+                        fastingStore.setInitialDate(at: Calendar.current.startOfDay(for: Date()))
                         appState.advance(to: .timerCoachmark)
                     }
                     hookButton("Yesterday") {
                         let d = Calendar.current.date(byAdding: .day, value: -1,
                                                       to: Calendar.current.startOfDay(for: Date()))!
-                        fastingStore.logSugar(at: d)
+                        fastingStore.setInitialDate(at: d)
                         appState.advance(to: .timerCoachmark)
                     }
                     hookButton("A few days ago") {
                         let d = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
-                        fastingStore.logSugar(at: d)
+                        fastingStore.setInitialDate(at: d)
                         appState.advance(to: .timerCoachmark)
                     }
                 }
