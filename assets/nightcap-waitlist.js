@@ -1,7 +1,7 @@
 /**
- * Nightcap Waitlist Signup + Personalized Results
- * Handles form validation, API submission, personalized result rendering,
- * and triggers SMS/email with app download link.
+ * Nightcap Waitlist Signup + Personalized Results v2
+ * Phone auto-formatting, live validation, confetti, referral system,
+ * animated counters, countdown timer, toast notifications, analytics.
  */
 (function () {
   'use strict';
@@ -11,6 +11,8 @@
     waitlistEndpoint: '/apps/nightcap-waitlist/subscribe',
     smsEndpoint: '/apps/nightcap-waitlist/sms',
     appDownloadUrl: 'https://nightcap.app/download',
+    launchDate: new Date('2026-07-15T09:00:00-04:00'),
+    baseUrl: window.location.origin + window.location.pathname,
   };
 
   // ---------- DOM ----------
@@ -22,6 +24,101 @@
   var btnLoading = submitBtn ? submitBtn.querySelector('.nc-btn__loading') : null;
 
   if (!form) return;
+
+  // ---------- Countdown Timer ----------
+  function initCountdown() {
+    var container = document.getElementById('launch-countdown');
+    if (!container) return;
+
+    function update() {
+      var now = new Date();
+      var diff = CONFIG.launchDate - now;
+      if (diff <= 0) {
+        container.innerHTML = '<div class="nc-countdown__block"><span class="nc-countdown__number">Live!</span></div>';
+        return;
+      }
+
+      var days = Math.floor(diff / 86400000);
+      var hours = Math.floor((diff % 86400000) / 3600000);
+      var minutes = Math.floor((diff % 3600000) / 60000);
+      var seconds = Math.floor((diff % 60000) / 1000);
+
+      var blocks = container.querySelectorAll('.nc-countdown__number');
+      if (blocks.length === 4) {
+        blocks[0].textContent = days;
+        blocks[1].textContent = String(hours).padStart(2, '0');
+        blocks[2].textContent = String(minutes).padStart(2, '0');
+        blocks[3].textContent = String(seconds).padStart(2, '0');
+      }
+    }
+
+    update();
+    setInterval(update, 1000);
+  }
+  initCountdown();
+
+  // ---------- Phone Auto-Format ----------
+  var phoneInput = document.getElementById('signup-phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function (e) {
+      var val = e.target.value.replace(/\D/g, '');
+      if (val.length === 0) {
+        e.target.value = '';
+      } else if (val.length <= 3) {
+        e.target.value = '(' + val;
+      } else if (val.length <= 6) {
+        e.target.value = '(' + val.slice(0, 3) + ') ' + val.slice(3);
+      } else {
+        e.target.value = '(' + val.slice(0, 3) + ') ' + val.slice(3, 6) + '-' + val.slice(6, 10);
+      }
+    });
+  }
+
+  // ---------- Live Validation ----------
+  var nameInput = document.getElementById('signup-name');
+  var emailInput = document.getElementById('signup-email');
+
+  if (nameInput) {
+    nameInput.addEventListener('blur', function () {
+      var val = nameInput.value.trim();
+      clearFieldError('signup-name');
+      if (val.length > 0 && val.length < 2) {
+        showError('signup-name', 'Name must be at least 2 characters');
+      } else if (val.length >= 2) {
+        nameInput.classList.add('valid');
+      }
+    });
+    nameInput.addEventListener('input', function () {
+      clearFieldError('signup-name');
+    });
+  }
+
+  if (emailInput) {
+    emailInput.addEventListener('blur', function () {
+      var val = emailInput.value.trim();
+      clearFieldError('signup-email');
+      if (val.length > 0 && !validateEmail(val)) {
+        showError('signup-email', 'Please enter a valid email address');
+      } else if (val.length > 0 && validateEmail(val)) {
+        emailInput.classList.add('valid');
+      }
+    });
+    emailInput.addEventListener('input', function () {
+      clearFieldError('signup-email');
+    });
+  }
+
+  if (phoneInput) {
+    phoneInput.addEventListener('blur', function () {
+      var val = phoneInput.value.trim();
+      clearFieldError('signup-phone');
+      if (val.length > 0 && !validatePhone(val)) {
+        showError('signup-phone', 'Please enter a valid 10-digit phone number');
+      } else if (val.length > 0 && validatePhone(val)) {
+        phoneInput.classList.add('valid');
+      }
+    });
+  }
 
   // ---------- Form Validation ----------
   function validateEmail(email) {
@@ -35,16 +132,30 @@
 
   function showError(fieldId, message) {
     var input = document.getElementById(fieldId);
-    var errorEl = document.getElementById(
-      fieldId.replace('signup-', '') + '-error'
-    );
-    if (input) input.classList.add('error');
-    if (errorEl) errorEl.textContent = message;
+    var errorEl = document.getElementById(fieldId.replace('signup-', '') + '-error');
+    if (input) {
+      input.classList.remove('valid');
+      input.classList.add('error');
+    }
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.setAttribute('role', 'alert');
+    }
+  }
+
+  function clearFieldError(fieldId) {
+    var input = document.getElementById(fieldId);
+    var errorEl = document.getElementById(fieldId.replace('signup-', '') + '-error');
+    if (input) input.classList.remove('error', 'valid');
+    if (errorEl) {
+      errorEl.textContent = '';
+      errorEl.removeAttribute('role');
+    }
   }
 
   function clearErrors() {
     form.querySelectorAll('.nc-input').forEach(function (input) {
-      input.classList.remove('error');
+      input.classList.remove('error', 'valid');
     });
     form.querySelectorAll('.nc-input-error').forEach(function (el) {
       el.textContent = '';
@@ -62,11 +173,10 @@
     var smsConsent = document.getElementById('sms-consent').checked;
     var emailConsent = document.getElementById('email-consent').checked;
 
-    // Validate
     var valid = true;
 
-    if (!name) {
-      showError('signup-name', 'Please enter your first name');
+    if (!name || name.length < 2) {
+      showError('signup-name', name ? 'Name must be at least 2 characters' : 'Please enter your first name');
       valid = false;
     }
 
@@ -83,20 +193,25 @@
       valid = false;
     }
 
-    if (!valid) return;
+    if (!valid) {
+      // Focus first error field
+      var firstError = form.querySelector('.nc-input.error');
+      if (firstError) firstError.focus();
+      return;
+    }
 
-    // Show loading
+    // Loading state
     if (btnText) btnText.style.display = 'none';
     if (btnLoading) btnLoading.style.display = 'inline-flex';
     submitBtn.disabled = true;
 
-    // Gather all data
     var quizData = window.__nightcapQuizData || {};
+    var phoneDigits = phone ? phone.replace(/\D/g, '') : null;
 
     var payload = {
       first_name: name,
       email: email,
-      phone: phone || null,
+      phone: phoneDigits,
       sms_consent: smsConsent && !!phone,
       email_consent: emailConsent,
       quiz_data: {
@@ -109,11 +224,11 @@
         estimated_weekly_sugar: quizData.estimated_weekly_sugar,
         estimated_yearly_sugar_lbs: quizData.estimated_yearly_sugar_lbs,
       },
+      utm: quizData._utm || {},
       source: 'waitlist_quiz',
       timestamp: new Date().toISOString(),
     };
 
-    // Submit to backend
     submitWaitlist(payload);
   });
 
@@ -128,18 +243,17 @@
         return res.json();
       })
       .then(function (data) {
-        // If SMS consent, trigger personalized text
         if (payload.sms_consent && payload.phone) {
           triggerSMS(payload);
         }
-
-        // Show personalized results
         showResults(payload, data);
+        showToast('Welcome to the Nightcap waitlist!', 'success');
+        track('waitlist_signup', { method: payload.phone ? 'email+sms' : 'email' });
       })
       .catch(function () {
-        // Even on error, show results (store data locally as fallback)
         storeLocally(payload);
-        showResults(payload, { position: Math.floor(Math.random() * 500) + 2800 });
+        showResults(payload, { position: generatePosition() });
+        showToast('You\'re on the waitlist!', 'success');
       })
       .finally(function () {
         if (btnText) btnText.style.display = 'inline';
@@ -161,9 +275,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(smsPayload),
-    }).catch(function () {
-      // SMS send failed silently — not critical
-    });
+    }).catch(function () {});
   }
 
   function buildPersonalizedSMS(payload) {
@@ -171,25 +283,16 @@
     var sugar = payload.quiz_data.estimated_daily_sugar || 0;
     var motivation = payload.quiz_data.motivation;
 
-    var motivationMessages = {
-      cut_sugar:
-        "You're consuming ~" + sugar + "g of sugar daily from drinks alone. Nightcap has 0g. ",
-      sleep_better:
-        'Better sleep starts with what you drink. Nightcap is made with ingredients that actually help you wind down. ',
-      healthier_habits:
-        "Small swaps = big results. Replacing sugary drinks with Nightcap saves you ~" +
-        (sugar * 365) + "g of sugar per year. ",
-      relaxation:
-        'Your evening ritual matters. Nightcap helps you unwind without the sugar crash. ',
+    var msgs = {
+      cut_sugar: "You're consuming ~" + sugar + "g of sugar daily from drinks alone. Nightcap has 0g.",
+      sleep_better: 'Better sleep starts with what you drink. Nightcap is made with ingredients that actually help you wind down.',
+      healthier_habits: "Small swaps = big results. Replacing sugary drinks with Nightcap saves you ~" + (sugar * 365) + "g of sugar per year.",
+      relaxation: 'Your evening ritual matters. Nightcap helps you unwind without the sugar crash.',
     };
 
-    var msg =
-      'Hey ' + name + '! ' +
-      (motivationMessages[motivation] || "Thanks for taking the Nightcap sugar quiz! ") +
-      "Download the Nightcap app to track your progress: " +
-      CONFIG.appDownloadUrl;
-
-    return msg;
+    return 'Hey ' + name + '! ' +
+      (msgs[motivation] || 'Thanks for taking the Nightcap sugar quiz!') +
+      ' Download the Nightcap app: ' + CONFIG.appDownloadUrl;
   }
 
   // ---------- Local Fallback ----------
@@ -198,33 +301,53 @@
       var existing = JSON.parse(localStorage.getItem('nightcap_waitlist') || '[]');
       existing.push(payload);
       localStorage.setItem('nightcap_waitlist', JSON.stringify(existing));
-    } catch (e) {
-      // Storage full or unavailable
+    } catch (e) {}
+  }
+
+  // ---------- Generate Referral Code ----------
+  function generateReferralCode(email) {
+    var hash = 0;
+    for (var i = 0; i < email.length; i++) {
+      hash = ((hash << 5) - hash) + email.charCodeAt(i);
+      hash |= 0;
     }
+    return 'NC' + Math.abs(hash).toString(36).toUpperCase().slice(0, 6);
+  }
+
+  function generatePosition() {
+    return Math.floor(Math.random() * 500) + 2800;
   }
 
   // ---------- Show Results ----------
   function showResults(payload, serverData) {
     var quizData = payload.quiz_data;
+    var dailySugar = quizData.estimated_daily_sugar || 0;
 
-    // Hide signup, show results
+    // Transition sections
+    signupSection.classList.remove('active');
     signupSection.style.display = 'none';
-    resultsSection.style.display = 'block';
-    resultsSection.classList.add('nc-section-visible-block');
+    resultsSection.classList.add('active');
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Animate sugar ring
-    animateRing(quizData.estimated_daily_sugar || 0);
+    // Fire confetti!
+    setTimeout(fireConfetti, 400);
 
-    // Populate stats
-    var dailySugar = quizData.estimated_daily_sugar || 0;
-    document.getElementById('results-sugar-grams').textContent = dailySugar;
-    document.getElementById('results-daily-sugar').textContent = dailySugar + 'g';
-    document.getElementById('results-weekly-sugar').textContent =
-      (quizData.estimated_weekly_sugar || 0) + 'g';
-    document.getElementById('results-yearly-sugar').textContent =
-      (quizData.estimated_yearly_sugar_lbs || '0') + ' lbs';
+    // Animate ring with delay
+    setTimeout(function () { animateRing(dailySugar); }, 600);
+
+    // Animated counter for sugar grams
+    animateCounter('results-sugar-grams', 0, dailySugar, 1500);
+
+    // Set stat numbers with counter animations
+    var weeklySugar = quizData.estimated_weekly_sugar || 0;
+    var yearlySugarLbs = quizData.estimated_yearly_sugar_lbs || 0;
+
+    animateCounterText('results-daily-sugar', dailySugar, 'g');
+    animateCounterText('results-weekly-sugar', weeklySugar, 'g');
+
+    var yearlyEl = document.getElementById('results-yearly-sugar');
+    if (yearlyEl) yearlyEl.textContent = yearlySugarLbs + ' lbs';
 
     // Personalized title & subtitle
     var title = document.getElementById('results-title');
@@ -232,55 +355,85 @@
 
     if (dailySugar === 0) {
       title.textContent = payload.first_name + ", you're doing amazing!";
-      subtitle.textContent =
-        "Your drink choices are already low-sugar. Nightcap will make your evenings even better with functional ingredients for relaxation and sleep.";
+      subtitle.textContent = "Your drink choices are already low-sugar. Nightcap will make your evenings even better with functional ingredients for relaxation and sleep.";
     } else if (dailySugar <= 30) {
       title.textContent = payload.first_name + ", not bad — but there's room to improve";
-      subtitle.textContent =
-        "You're consuming about " + dailySugar + "g of sugar from drinks daily. That adds up to " +
-        quizData.estimated_yearly_sugar_lbs + " lbs per year. Nightcap can help you get to zero.";
+      subtitle.textContent = "You're consuming about " + dailySugar + "g of sugar from drinks daily. That adds up to " + yearlySugarLbs + " lbs per year. Nightcap can help you get to zero.";
     } else if (dailySugar <= 80) {
       title.textContent = payload.first_name + ", your sugar intake might surprise you";
-      subtitle.textContent =
-        "At " + dailySugar + "g per day from drinks alone, you're consuming " +
-        quizData.estimated_yearly_sugar_lbs +
-        " lbs of sugar per year — just from beverages. Time for a swap.";
+      subtitle.textContent = "At " + dailySugar + "g per day from drinks alone, you're consuming " + yearlySugarLbs + " lbs of sugar per year — just from beverages. Time for a swap.";
     } else {
       title.textContent = payload.first_name + ", let's talk about that sugar intake";
-      subtitle.textContent =
-        "You're getting roughly " + dailySugar + "g of sugar per day from drinks — that's " +
-        quizData.estimated_yearly_sugar_lbs +
-        " lbs per year. The good news? Nightcap is an easy swap with 0g sugar.";
+      subtitle.textContent = "You're getting roughly " + dailySugar + "g of sugar per day from drinks — that's " + yearlySugarLbs + " lbs per year. The good news? Nightcap is an easy swap with 0g sugar.";
     }
 
-    // Personalized insight based on motivation + sleep
+    // Insight
     var insightText = document.getElementById('results-insight-text');
-    var insights = getPersonalizedInsight(quizData);
-    insightText.textContent = insights;
+    if (insightText) insightText.textContent = getPersonalizedInsight(quizData);
 
-    // Waitlist position
-    var position = serverData.position || Math.floor(Math.random() * 500) + 2800;
-    document.getElementById('results-position').textContent =
-      position.toLocaleString();
+    // Position
+    var position = serverData.position || generatePosition();
+    var positionEl = document.getElementById('results-position');
+    if (positionEl) positionEl.textContent = position.toLocaleString();
 
     // SMS note
     var smsNote = document.getElementById('results-sms-note');
-    if (payload.sms_consent && payload.phone) {
-      smsNote.textContent =
-        "We just texted " + maskPhone(payload.phone) + " with your personalized download link!";
-    } else {
-      smsNote.textContent = 'Check your email for your personalized download link!';
+    if (smsNote) {
+      if (payload.sms_consent && payload.phone) {
+        smsNote.textContent = "We just texted " + maskPhone(payload.phone) + " with your personalized download link!";
+      } else {
+        smsNote.textContent = 'Check your email for your personalized download link!';
+      }
     }
 
-    // App download button
-    var downloadBtn = document.getElementById('download-app-btn');
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', function () {
-        window.open(CONFIG.appDownloadUrl, '_blank');
+    // ---------- Referral System ----------
+    var refCode = generateReferralCode(payload.email);
+    var refUrl = CONFIG.baseUrl + '?ref=' + refCode;
+
+    var refInput = document.getElementById('referral-url');
+    if (refInput) refInput.value = refUrl;
+
+    var refCopyBtn = document.getElementById('referral-copy-btn');
+    if (refCopyBtn) {
+      refCopyBtn.addEventListener('click', function () {
+        copyToClipboard(refUrl);
+        refCopyBtn.textContent = 'Copied!';
+        showToast('Referral link copied!', 'success');
+        setTimeout(function () { refCopyBtn.textContent = 'Copy'; }, 2000);
+        track('referral_copied');
       });
     }
 
-    // Share button
+    // Social share buttons for referral
+    var twitterShare = document.getElementById('share-twitter');
+    if (twitterShare) {
+      twitterShare.addEventListener('click', function () {
+        var text = 'I just found out I consume ' + dailySugar + 'g of sugar per day just from drinks. Wild. Take the quiz:';
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(refUrl), '_blank', 'width=550,height=420');
+        track('referral_shared', { platform: 'twitter' });
+      });
+    }
+
+    var smsShare = document.getElementById('share-sms');
+    if (smsShare) {
+      smsShare.addEventListener('click', function () {
+        var text = 'Hey! I just took this sugar quiz and found out I drink ' + dailySugar + 'g of sugar per day. You should try it: ' + refUrl;
+        window.open('sms:?body=' + encodeURIComponent(text));
+        track('referral_shared', { platform: 'sms' });
+      });
+    }
+
+    var emailShare = document.getElementById('share-email');
+    if (emailShare) {
+      emailShare.addEventListener('click', function () {
+        var subject = 'You need to take this sugar quiz';
+        var body = "Hey, I just found out I'm consuming " + dailySugar + "g of sugar per day just from drinks. It was a real wake-up call.\n\nTake the 60-second quiz: " + refUrl;
+        window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+        track('referral_shared', { platform: 'email' });
+      });
+    }
+
+    // Quiz share button (Web Share API)
     var shareBtn = document.getElementById('share-quiz-btn');
     if (shareBtn) {
       shareBtn.addEventListener('click', function () {
@@ -288,17 +441,66 @@
           navigator.share({
             title: 'Nightcap Sugar Quiz',
             text: 'I just found out I consume ' + dailySugar + 'g of sugar per day from drinks. Take the quiz!',
-            url: window.location.href,
+            url: refUrl,
           });
         } else {
-          copyToClipboard(window.location.href);
+          copyToClipboard(refUrl);
           shareBtn.textContent = 'Link Copied!';
-          setTimeout(function () {
-            shareBtn.textContent = 'Share the Quiz';
-          }, 2000);
+          setTimeout(function () { shareBtn.textContent = 'Share the Quiz'; }, 2000);
         }
       });
     }
+
+    // App download button
+    var downloadBtn = document.getElementById('download-app-btn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function () {
+        track('app_download_clicked');
+        window.open(CONFIG.appDownloadUrl, '_blank');
+      });
+    }
+  }
+
+  // ---------- Animated Counter ----------
+  function animateCounter(elementId, start, end, duration) {
+    var el = document.getElementById(elementId);
+    if (!el) return;
+
+    var startTime = null;
+    var diff = end - start;
+
+    function tick(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      // Ease out cubic
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(start + diff * eased);
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+    }
+
+    // Delay start for staggered effect
+    setTimeout(function () {
+      requestAnimationFrame(tick);
+    }, 800);
+  }
+
+  function animateCounterText(elementId, value, suffix) {
+    var el = document.getElementById(elementId);
+    if (!el) return;
+    var startTime = null;
+    var duration = 1200;
+
+    function tick(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(value * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    setTimeout(function () { requestAnimationFrame(tick); }, 1000);
   }
 
   // ---------- Ring Animation ----------
@@ -306,71 +508,142 @@
     var ring = document.getElementById('results-ring');
     if (!ring) return;
 
-    // Add gradient def if missing
     var svg = ring.closest('svg');
     if (svg && !svg.querySelector('#ring-gradient')) {
       var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
       var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
       gradient.setAttribute('id', 'ring-gradient');
-      gradient.innerHTML =
-        '<stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#06d6a0"/>';
+      gradient.innerHTML = '<stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#06d6a0"/>';
       defs.appendChild(gradient);
       svg.insertBefore(defs, svg.firstChild);
     }
 
-    // Circumference = 2 * π * r = 2 * 3.14159 * 54 ≈ 339.292
     var circumference = 339.292;
-    // Max out at 200g for visual scale
     var percent = Math.min(grams / 200, 1);
     var offset = circumference * (1 - percent);
 
-    setTimeout(function () {
-      ring.style.strokeDashoffset = offset;
-    }, 300);
+    ring.style.strokeDashoffset = offset;
+  }
+
+  // ---------- Confetti ----------
+  function fireConfetti() {
+    var canvas = document.getElementById('confetti-canvas');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.id = 'confetti-canvas';
+      canvas.className = 'nc-confetti-canvas';
+      document.body.appendChild(canvas);
+    }
+
+    var ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var particles = [];
+    var colors = ['#7c3aed', '#a78bfa', '#06d6a0', '#f59e0b', '#ec4899', '#3b82f6', '#fff'];
+
+    for (var i = 0; i < 150; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height * -1,
+        w: Math.random() * 8 + 4,
+        h: Math.random() * 4 + 2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 4,
+        vy: Math.random() * 3 + 2,
+        rotation: Math.random() * 360,
+        rotationSpeed: (Math.random() - 0.5) * 10,
+        opacity: 1,
+      });
+    }
+
+    var frame = 0;
+    var maxFrames = 180;
+
+    function animate() {
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(function (p) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.05;
+        p.rotation += p.rotationSpeed;
+        if (frame > maxFrames * 0.6) {
+          p.opacity -= 0.02;
+        }
+
+        if (p.opacity <= 0) return;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+
+      if (frame < maxFrames) {
+        requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.remove();
+      }
+    }
+
+    requestAnimationFrame(animate);
   }
 
   // ---------- Personalized Insights ----------
   function getPersonalizedInsight(quizData) {
     var parts = [];
 
-    // Sleep-based insight
     if (quizData.sleep_quality === 'terrible' || quizData.sleep_quality === 'poor') {
-      parts.push(
-        "Research shows that high sugar intake — especially in the evening — disrupts sleep quality and REM cycles."
-      );
+      parts.push("Research shows that high sugar intake — especially in the evening — disrupts sleep quality and REM cycles.");
     }
 
-    // Motivation-based insight
     var motivationInsights = {
-      cut_sugar:
-        "Switching your evening drink to Nightcap alone could eliminate " +
-        (quizData.estimated_daily_sugar || 0) + "g of sugar from your daily intake.",
-      sleep_better:
-        "Nightcap contains magnesium, L-theanine, and chamomile — clinically-studied ingredients that promote deep, restful sleep.",
-      healthier_habits:
-        "Building one small habit — like swapping your evening drink — creates a ripple effect across your health.",
-      relaxation:
-        "Unlike alcohol or sugary drinks that spike and crash, Nightcap uses adaptogens to promote calm without the downsides.",
+      cut_sugar: "Switching your evening drink to Nightcap alone could eliminate " + (quizData.estimated_daily_sugar || 0) + "g of sugar from your daily intake.",
+      sleep_better: "Nightcap contains magnesium, L-theanine, and chamomile — clinically-studied ingredients that promote deep, restful sleep.",
+      healthier_habits: "Building one small habit — like swapping your evening drink — creates a ripple effect across your health.",
+      relaxation: "Unlike alcohol or sugary drinks that spike and crash, Nightcap uses adaptogens to promote calm without the downsides.",
     };
 
-    parts.push(
-      motivationInsights[quizData.motivation] ||
-        "Nightcap was designed to be the healthiest, tastiest evening drink you'll ever try."
-    );
+    parts.push(motivationInsights[quizData.motivation] || "Nightcap was designed to be the healthiest, tastiest evening drink you'll ever try.");
 
-    // Sugar awareness
     if (quizData.checks_sugar === 'never' || quizData.checks_sugar === 'rarely') {
-      parts.push(
-        "Most people don't realize that a single \"healthy\" juice can have more sugar than a candy bar."
-      );
+      parts.push("Most people don't realize that a single \"healthy\" juice can have more sugar than a candy bar.");
     }
 
     return parts.join(' ');
   }
 
+  // ---------- Toast System ----------
+  function showToast(message, type) {
+    var container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      container.className = 'nc-toast-container';
+      container.setAttribute('aria-live', 'polite');
+      document.body.appendChild(container);
+    }
+
+    var toast = document.createElement('div');
+    toast.className = 'nc-toast nc-toast--' + (type || 'info');
+    toast.innerHTML = '<span class="nc-toast__icon" aria-hidden="true">' + (type === 'success' ? '&#10003;' : 'i') + '</span><span>' + message + '</span>';
+    container.appendChild(toast);
+
+    setTimeout(function () {
+      toast.classList.add('exiting');
+      setTimeout(function () { toast.remove(); }, 300);
+    }, 4000);
+  }
+
   // ---------- Helpers ----------
   function maskPhone(phone) {
-    var digits = phone.replace(/\D/g, '');
+    var digits = String(phone).replace(/\D/g, '');
     return '***-***-' + digits.slice(-4);
   }
 
@@ -378,14 +651,20 @@
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text);
     } else {
-      var textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.left = '-9999px';
-      document.body.appendChild(textarea);
-      textarea.select();
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
       document.execCommand('copy');
-      document.body.removeChild(textarea);
+      document.body.removeChild(ta);
+    }
+  }
+
+  function track(name, data) {
+    if (window.__nightcapTrack) {
+      window.__nightcapTrack(name, data);
     }
   }
 })();

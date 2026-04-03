@@ -1,170 +1,173 @@
-<section class="nc-quiz" id="sugar-quiz">
+<section class="nc-quiz" id="sugar-quiz" aria-labelledby="quiz-heading">
+  <h2 id="quiz-heading" class="nc-sr-only">Sugar Usage Quiz</h2>
   <div class="nc-quiz__container">
-    <!-- Progress Bar -->
-    <div class="nc-quiz__progress">
-      <div class="nc-quiz__progress-bar" id="quiz-progress-bar" style="width: 0%"></div>
-      <span class="nc-quiz__progress-text" id="quiz-progress-text">Question 1 of 5</span>
+    <div class="nc-quiz__progress" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" aria-label="Quiz progress">
+      <div class="nc-quiz__progress-bar" id="quiz-progress-bar" style="width: 20%"></div>
     </div>
+    <span class="nc-quiz__progress-text" id="quiz-progress-text" aria-live="polite">Question 1 of 5</span>
 
-    <!-- Quiz Form (data collected for personalization) -->
     <form id="sugar-quiz-form" class="nc-quiz__form" novalidate>
-
-      <!-- Question 1: Evening Drink Habit -->
+      <!-- Q1: Evening Drink -->
       <div class="nc-quiz__step active" data-step="1">
-        <div class="nc-quiz__step-icon">🌙</div>
-        <h2 class="nc-quiz__question">What's your go-to evening drink?</h2>
-        <p class="nc-quiz__helper">Pick the one you reach for most nights</p>
-        <div class="nc-quiz__options" data-field="evening_drink">
-          <button type="button" class="nc-quiz__option" data-value="soda">
-            <span class="nc-quiz__option-icon">🥤</span>
+        <div class="nc-quiz__step-icon" aria-hidden="true">&#127769;</div>
+        <h3 class="nc-quiz__question">What's your go-to evening drink?</h3>
+        <p class="nc-quiz__helper" id="q1-helper">Pick the one you reach for most nights</p>
+        <div class="nc-quiz__options" data-field="evening_drink" role="radiogroup" aria-labelledby="q1-helper">
+          <button type="button" class="nc-quiz__option" data-value="soda" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#129380;</span>
             <span class="nc-quiz__option-label">Soda or soft drink</span>
             <span class="nc-quiz__option-sugar">~39g sugar</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="juice">
-            <span class="nc-quiz__option-icon">🧃</span>
+          <button type="button" class="nc-quiz__option" data-value="juice" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#129483;</span>
             <span class="nc-quiz__option-label">Juice or smoothie</span>
             <span class="nc-quiz__option-sugar">~28g sugar</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="wine_beer">
-            <span class="nc-quiz__option-icon">🍷</span>
+          <button type="button" class="nc-quiz__option" data-value="wine_beer" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#127863;</span>
             <span class="nc-quiz__option-label">Wine or beer</span>
             <span class="nc-quiz__option-sugar">~4-14g sugar</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="tea_coffee">
-            <span class="nc-quiz__option-icon">☕</span>
+          <button type="button" class="nc-quiz__option" data-value="tea_coffee" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#9749;</span>
             <span class="nc-quiz__option-label">Tea or coffee (sweetened)</span>
             <span class="nc-quiz__option-sugar">~12g sugar</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="water">
-            <span class="nc-quiz__option-icon">💧</span>
+          <button type="button" class="nc-quiz__option" data-value="water" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#128167;</span>
             <span class="nc-quiz__option-label">Water or sparkling water</span>
             <span class="nc-quiz__option-sugar">0g sugar</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="energy_sports">
-            <span class="nc-quiz__option-icon">⚡</span>
+          <button type="button" class="nc-quiz__option" data-value="energy_sports" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#9889;</span>
             <span class="nc-quiz__option-label">Energy or sports drink</span>
             <span class="nc-quiz__option-sugar">~34g sugar</span>
           </button>
         </div>
       </div>
 
-      <!-- Question 2: Frequency -->
+      <!-- Q2: Frequency -->
       <div class="nc-quiz__step" data-step="2">
-        <div class="nc-quiz__step-icon">📊</div>
-        <h2 class="nc-quiz__question">How many sugary drinks do you have per day?</h2>
-        <p class="nc-quiz__helper">Include everything — coffee, soda, juice, cocktails</p>
-        <div class="nc-quiz__options" data-field="daily_sugary_drinks">
-          <button type="button" class="nc-quiz__option" data-value="0">
+        <div class="nc-quiz__step-icon" aria-hidden="true">&#128202;</div>
+        <h3 class="nc-quiz__question">How many sugary drinks do you have per day?</h3>
+        <p class="nc-quiz__helper" id="q2-helper">Include everything — coffee, soda, juice, cocktails</p>
+        <div class="nc-quiz__options" data-field="daily_sugary_drinks" role="radiogroup" aria-labelledby="q2-helper">
+          <button type="button" class="nc-quiz__option" data-value="0" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
             <span class="nc-quiz__option-label">None — I'm pretty clean</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="1">
+          <button type="button" class="nc-quiz__option" data-value="1" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
             <span class="nc-quiz__option-label">1 per day</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="2-3">
-            <span class="nc-quiz__option-label">2–3 per day</span>
+          <button type="button" class="nc-quiz__option" data-value="2-3" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-label">2&#8211;3 per day</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="4+">
+          <button type="button" class="nc-quiz__option" data-value="4+" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
             <span class="nc-quiz__option-label">4 or more per day</span>
           </button>
         </div>
       </div>
 
-      <!-- Question 3: Sleep Quality -->
+      <!-- Q3: Sleep Quality -->
       <div class="nc-quiz__step" data-step="3">
-        <div class="nc-quiz__step-icon">😴</div>
-        <h2 class="nc-quiz__question">How would you rate your sleep quality?</h2>
-        <p class="nc-quiz__helper">Think about how you've been sleeping this past week</p>
-        <div class="nc-quiz__options" data-field="sleep_quality">
-          <button type="button" class="nc-quiz__option" data-value="great">
-            <span class="nc-quiz__option-icon">🌟</span>
+        <div class="nc-quiz__step-icon" aria-hidden="true">&#128564;</div>
+        <h3 class="nc-quiz__question">How would you rate your sleep quality?</h3>
+        <p class="nc-quiz__helper" id="q3-helper">Think about how you've been sleeping this past week</p>
+        <div class="nc-quiz__options" data-field="sleep_quality" role="radiogroup" aria-labelledby="q3-helper">
+          <button type="button" class="nc-quiz__option" data-value="great" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#127775;</span>
             <span class="nc-quiz__option-label">Great — I sleep like a baby</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="okay">
-            <span class="nc-quiz__option-icon">😐</span>
+          <button type="button" class="nc-quiz__option" data-value="okay" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#128528;</span>
             <span class="nc-quiz__option-label">Okay — could be better</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="poor">
-            <span class="nc-quiz__option-icon">😩</span>
+          <button type="button" class="nc-quiz__option" data-value="poor" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#128553;</span>
             <span class="nc-quiz__option-label">Poor — I toss and turn</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="terrible">
-            <span class="nc-quiz__option-icon">💀</span>
+          <button type="button" class="nc-quiz__option" data-value="terrible" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#128128;</span>
             <span class="nc-quiz__option-label">Terrible — what is sleep?</span>
           </button>
         </div>
       </div>
 
-      <!-- Question 4: Motivation -->
+      <!-- Q4: Motivation -->
       <div class="nc-quiz__step" data-step="4">
-        <div class="nc-quiz__step-icon">🎯</div>
-        <h2 class="nc-quiz__question">What matters most to you right now?</h2>
-        <p class="nc-quiz__helper">Pick your #1 priority</p>
-        <div class="nc-quiz__options" data-field="motivation">
-          <button type="button" class="nc-quiz__option" data-value="cut_sugar">
-            <span class="nc-quiz__option-icon">🚫</span>
+        <div class="nc-quiz__step-icon" aria-hidden="true">&#127919;</div>
+        <h3 class="nc-quiz__question">What matters most to you right now?</h3>
+        <p class="nc-quiz__helper" id="q4-helper">Pick your #1 priority</p>
+        <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q4-helper">
+          <button type="button" class="nc-quiz__option" data-value="cut_sugar" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#128683;</span>
             <span class="nc-quiz__option-label">Cutting back on sugar</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="sleep_better">
-            <span class="nc-quiz__option-icon">🛏️</span>
+          <button type="button" class="nc-quiz__option" data-value="sleep_better" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#128716;&#65039;</span>
             <span class="nc-quiz__option-label">Sleeping better</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="healthier_habits">
-            <span class="nc-quiz__option-icon">💪</span>
+          <button type="button" class="nc-quiz__option" data-value="healthier_habits" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#128170;</span>
             <span class="nc-quiz__option-label">Building healthier habits</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="relaxation">
-            <span class="nc-quiz__option-icon">🧘</span>
+          <button type="button" class="nc-quiz__option" data-value="relaxation" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+            <span class="nc-quiz__option-icon" aria-hidden="true">&#129495;</span>
             <span class="nc-quiz__option-label">Finding a better way to unwind</span>
           </button>
         </div>
       </div>
 
-      <!-- Question 5: Awareness -->
+      <!-- Q5: Sugar Awareness -->
       <div class="nc-quiz__step" data-step="5">
-        <div class="nc-quiz__step-icon">🧠</div>
-        <h2 class="nc-quiz__question">Do you check sugar content before buying a drink?</h2>
-        <p class="nc-quiz__helper">Be honest — no judgement here</p>
-        <div class="nc-quiz__options" data-field="checks_sugar">
-          <button type="button" class="nc-quiz__option" data-value="always">
+        <div class="nc-quiz__step-icon" aria-hidden="true">&#129504;</div>
+        <h3 class="nc-quiz__question">Do you check sugar content before buying a drink?</h3>
+        <p class="nc-quiz__helper" id="q5-helper">Be honest — no judgement here</p>
+        <div class="nc-quiz__options" data-field="checks_sugar" role="radiogroup" aria-labelledby="q5-helper">
+          <button type="button" class="nc-quiz__option" data-value="always" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
             <span class="nc-quiz__option-label">Always — I read every label</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="sometimes">
+          <button type="button" class="nc-quiz__option" data-value="sometimes" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
             <span class="nc-quiz__option-label">Sometimes — depends on my mood</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="rarely">
+          <button type="button" class="nc-quiz__option" data-value="rarely" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
             <span class="nc-quiz__option-label">Rarely — I just grab what looks good</span>
           </button>
-          <button type="button" class="nc-quiz__option" data-value="never">
+          <button type="button" class="nc-quiz__option" data-value="never" role="radio" aria-checked="false">
+            <span class="nc-quiz__option-radio" aria-hidden="true"></span>
             <span class="nc-quiz__option-label">Never — wait, I should?</span>
           </button>
         </div>
       </div>
-
-      <!-- Hidden fields to store quiz data -->
-      <input type="hidden" name="evening_drink" id="quiz-evening-drink">
-      <input type="hidden" name="daily_sugary_drinks" id="quiz-daily-drinks">
-      <input type="hidden" name="sleep_quality" id="quiz-sleep-quality">
-      <input type="hidden" name="motivation" id="quiz-motivation">
-      <input type="hidden" name="checks_sugar" id="quiz-checks-sugar">
     </form>
 
-    <!-- Back Button -->
-    <button class="nc-quiz__back" id="quiz-back-btn" style="display: none;">
-      ← Back
-    </button>
+    <button class="nc-quiz__back" id="quiz-back-btn" aria-label="Go to previous question">&#8592; Back</button>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Sugar Usage Quiz",
-  "settings": [
-    {
-      "type": "text",
-      "id": "quiz_heading",
-      "label": "Quiz Section Heading",
-      "default": "How Much Sugar Are You Really Drinking?"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}

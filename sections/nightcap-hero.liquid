@@ -1,34 +1,59 @@
-<section class="nc-hero" id="hero">
-  <div class="nc-hero__bg">
+<a href="#sugar-quiz" class="nc-skip-link">Skip to quiz</a>
+
+<section class="nc-hero" id="hero" aria-labelledby="hero-title">
+  <div class="nc-hero__bg" aria-hidden="true">
     <div class="nc-hero__gradient"></div>
     <div class="nc-hero__stars"></div>
   </div>
   <div class="nc-hero__content">
-    <div class="nc-badge">Coming Soon</div>
-    <h1 class="nc-hero__title">
-      <span class="nc-hero__title-line">Wind Down</span>
-      <span class="nc-hero__title-line nc-hero__title-line--accent">Without the Sugar Crash</span>
+    <div class="nc-badge" aria-label="Coming Soon">Coming Soon</div>
+    <h1 class="nc-hero__title" id="hero-title">
+      <span class="nc-hero__title-line">{{ section.settings.headline_line1 | default: 'Wind Down' }}</span>
+      <span class="nc-hero__title-line nc-hero__title-line--accent">{{ section.settings.headline_line2 | default: 'Without the Sugar Crash' }}</span>
     </h1>
     <p class="nc-hero__subtitle">
-      Nightcap is a new kind of evening beverage — crafted to help you relax,
-      recover, and sleep better. Zero sugar. Real ingredients. No compromises.
+      {{ section.settings.subheadline | default: 'Nightcap is a new kind of evening beverage — crafted to help you relax, recover, and sleep better. Zero sugar. Real ingredients. No compromises.' }}
     </p>
+
+    <!-- Countdown Timer -->
+    <div class="nc-countdown" id="launch-countdown" aria-label="Countdown to launch">
+      <div class="nc-countdown__block">
+        <span class="nc-countdown__number" aria-label="Days">--</span>
+        <span class="nc-countdown__label">Days</span>
+      </div>
+      <span class="nc-countdown__separator" aria-hidden="true">:</span>
+      <div class="nc-countdown__block">
+        <span class="nc-countdown__number" aria-label="Hours">--</span>
+        <span class="nc-countdown__label">Hours</span>
+      </div>
+      <span class="nc-countdown__separator" aria-hidden="true">:</span>
+      <div class="nc-countdown__block">
+        <span class="nc-countdown__number" aria-label="Minutes">--</span>
+        <span class="nc-countdown__label">Min</span>
+      </div>
+      <span class="nc-countdown__separator" aria-hidden="true">:</span>
+      <div class="nc-countdown__block">
+        <span class="nc-countdown__number" aria-label="Seconds">--</span>
+        <span class="nc-countdown__label">Sec</span>
+      </div>
+    </div>
+
     <div class="nc-hero__cta-group">
-      <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
+      <button class="nc-btn nc-btn--primary nc-btn--pulse" id="start-quiz-btn" aria-label="Start the Sugar Quiz">
         Take the Sugar Quiz
-        <span class="nc-btn__arrow">→</span>
+        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-hero__cta-note">Find out how much hidden sugar you're really consuming</p>
+      <p class="nc-hero__cta-note">60 seconds. Zero judgement. Real data.</p>
     </div>
     <div class="nc-hero__social-proof">
-      <div class="nc-hero__avatars">
+      <div class="nc-hero__avatars" aria-hidden="true">
         <div class="nc-avatar">D</div>
         <div class="nc-avatar">M</div>
         <div class="nc-avatar">S</div>
         <div class="nc-avatar">+</div>
       </div>
       <span class="nc-hero__waitlist-count">
-        <strong id="waitlist-count">2,847</strong> people on the waitlist
+        <strong id="waitlist-count">{{ section.settings.waitlist_count | default: '2,847' }}</strong> people on the waitlist
       </span>
     </div>
   </div>
@@ -40,15 +65,27 @@
   "settings": [
     {
       "type": "text",
-      "id": "headline",
-      "label": "Headline",
-      "default": "Wind Down Without the Sugar Crash"
+      "id": "headline_line1",
+      "label": "Headline Line 1",
+      "default": "Wind Down"
+    },
+    {
+      "type": "text",
+      "id": "headline_line2",
+      "label": "Headline Line 2 (gradient)",
+      "default": "Without the Sugar Crash"
     },
     {
       "type": "textarea",
       "id": "subheadline",
       "label": "Sub-headline",
-      "default": "Nightcap is a new kind of evening beverage — crafted to help you relax, recover, and sleep better."
+      "default": "Nightcap is a new kind of evening beverage — crafted to help you relax, recover, and sleep better. Zero sugar. Real ingredients. No compromises."
+    },
+    {
+      "type": "text",
+      "id": "waitlist_count",
+      "label": "Waitlist Count (display)",
+      "default": "2,847"
     }
   ]
 }
