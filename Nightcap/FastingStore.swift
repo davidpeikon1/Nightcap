@@ -517,10 +517,13 @@ class FastingStore: ObservableObject {
 
     var weeklyInsight: WeeklyInsight? {
         let weekAgo = Date().addingTimeInterval(-7 * 86400)
-        let recentResets = resetEvents.filter { $0.date > weekAgo }
+        let recentResets   = resetEvents.filter { $0.date > weekAgo }
         let recentCravings = cravingLogs.filter { $0.date > weekAgo }
 
-        guard !recentResets.isEmpty || !recentCravings.isEmpty else { return nil }
+        // Show the card if there's at least one data point: a reset, a craving log,
+        // or an active fast that's been running for over 24 hours.
+        let hasActiveFastData = isTracking && elapsedSeconds >= 86_400
+        guard !recentResets.isEmpty || !recentCravings.isEmpty || hasActiveFastData else { return nil }
 
         let longest = recentResets.map(\.fastDuration).max() ?? elapsedSeconds
         let topTrigger = mostCommonTrigger(in: recentCravings)
