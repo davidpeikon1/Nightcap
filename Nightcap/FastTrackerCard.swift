@@ -213,6 +213,7 @@ struct ResetModal: View {
                 resetFormView
             }
         }
+        .onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) }
     }
 
     private var resetFormView: some View {
@@ -241,6 +242,12 @@ struct ResetModal: View {
                     .background(Color("NCSurface"))
                     .cornerRadius(10)
                     .submitLabel(.done)
+                    .onSubmit {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+                    .onChange(of: note) { _, v in
+                        if v.count > 120 { note = String(v.prefix(120)) }
+                    }
             }
 
             Spacer()
