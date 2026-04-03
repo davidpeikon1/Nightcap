@@ -357,6 +357,11 @@ class FastingStore: ObservableObject {
         saveDecodable(cravingLogs, forKey: Keys.cravingLogs)
     }
 
+    func deleteCravingLog(id: UUID) {
+        cravingLogs.removeAll { $0.id == id }
+        saveDecodable(cravingLogs, forKey: Keys.cravingLogs)
+    }
+
     func dismissBadge() {
         newlyUnlockedBadge = nil
     }

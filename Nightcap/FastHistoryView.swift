@@ -477,6 +477,15 @@ struct FastHistoryView: View {
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 2)
+            .contextMenu {
+                Button(role: .destructive) {
+                    withAnimation {
+                        store.deleteCravingLog(id: log.id)
+                    }
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
 
             if !isLast {
                 Rectangle()

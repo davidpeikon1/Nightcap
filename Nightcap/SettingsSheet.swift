@@ -343,7 +343,8 @@ struct SettingsSheet: View {
 
     private var dailyNotifSubtitle: String {
         let fmt = DateFormatter()
-        fmt.dateFormat = "h a"
+        fmt.dateStyle = .none
+        fmt.timeStyle = .short
         let morning = fmt.string(from: morningTime)
         let evening = fmt.string(from: eveningTime)
         return "\(morning) reframe · \(evening) craving check-in"
