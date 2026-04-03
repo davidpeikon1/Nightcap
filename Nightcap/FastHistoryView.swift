@@ -102,10 +102,18 @@ struct FastHistoryView: View {
         let longestText = store.longestFastEver > 0
             ? formatHoursCompact(store.longestFastEver)
             : "—"
-        return HStack(spacing: 12) {
-            statCard(value: longestText,                    label: "Longest fast")
-            statCard(value: "\(store.streakDays)",          label: "Day streak")
-            statCard(value: "\(store.resetEvents.count)",   label: "Total resets")
+        let totalText = store.totalSugarFreeTime > 0
+            ? formatHoursCompact(store.totalSugarFreeTime)
+            : "—"
+        return VStack(spacing: 12) {
+            HStack(spacing: 12) {
+                statCard(value: longestText,                  label: "Longest fast")
+                statCard(value: "\(store.streakDays)",        label: "Day streak")
+            }
+            HStack(spacing: 12) {
+                statCard(value: "\(store.resetEvents.count)", label: "Total resets")
+                statCard(value: totalText,                    label: "Total clean time")
+            }
         }
     }
 

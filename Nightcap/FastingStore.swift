@@ -509,6 +509,11 @@ class FastingStore: ObservableObject {
         return max(historical, elapsedSeconds)
     }
 
+    /// Total accumulated sugar-free time across all fasts (past + current).
+    var totalSugarFreeTime: TimeInterval {
+        resetEvents.map(\.fastDuration).reduce(0, +) + elapsedSeconds
+    }
+
     /// Up to last 30 fasts (current fast first), suitable for a bar chart.
     struct HistoryEntry: Identifiable {
         let id = UUID()
