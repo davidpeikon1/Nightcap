@@ -73,13 +73,13 @@ class NotificationManager {
 
     // MARK: - Milestone notifications
 
+    /// Fires immediately (1 s) when the user is in-app and earns a badge.
     func scheduleMilestoneNotification(badge: BadgeID) {
         let content = UNMutableNotificationContent()
         content.title = "\(badge.label)."
         content.body  = badge.scienceFact
         content.sound = .default
 
-        // Fire immediately (after 1 second) as a local push
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
             identifier: "nightcap.milestone.\(badge.rawValue)",
@@ -87,5 +87,44 @@ class NotificationManager {
             trigger: trigger
         )
         UNUserNotificationCenter.current().add(request)
+    }
+
+    /// Schedules a future notification for every unearned milestone based on
+    /// when it will be reached. Called whenever lastSugarDate changes so users
+    /// receive a notification even if they never open the app again.
+    func scheduleFutureMilestoneNotifications(from lastSugarDate: Date, earnedBadges: Set<BadgeID>) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else { return }
+
+            // Remove any previously scheduled future milestone notifications.
+            let identifiers = BadgeID.allCases.map { "nightcap.milestone.future.\($0.rawValue)" }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+
+            let now = Date()
+            for badge in BadgeID.allCases {
+                guard !earnedBadges.contains(badge) else { continue }
+                let unlockDate = lastSugarDate.addingTimeInterval(badge.threshold)
+                let interval   = unlockDate.timeIntervalSince(now)
+                guard interval > 5 else { continue } // already passed (or imminent)
+
+                let content = UNMutableNotificationContent()
+                content.title = "\(badge.label)."
+                // Keep body concise for lock screen; use first sentence of celebration text.
+                let body = badge.celebrationText
+                    .components(separatedBy: "\n")
+                    .first?
+                    .trimmingCharacters(in: .whitespaces) ?? badge.celebrationText
+                content.body  = body
+                content.sound = .default
+
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+                let request  = UNNotificationRequest(
+                    identifier: "nightcap.milestone.future.\(badge.rawValue)",
+                    content: content,
+                    trigger: trigger
+                )
+                UNUserNotificationCenter.current().add(request)
+            }
+        }
     }
 }

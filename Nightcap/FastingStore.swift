@@ -295,6 +295,9 @@ class FastingStore: ObservableObject {
         lastSugarDate = date
         UINotificationFeedbackGenerator().notificationOccurred(.success)
         WidgetCenter.shared.reloadAllTimelines()
+        // Re-schedule future milestone notifications from the new reset date.
+        // earnedBadges has just been reset to [] so all milestones are re-queued.
+        NotificationManager.shared.scheduleFutureMilestoneNotifications(from: date, earnedBadges: [])
     }
 
     func resetAllData() {
@@ -427,6 +430,7 @@ class FastingStore: ObservableObject {
     func setInitialDate(at date: Date) {
         lastSugarDate = date
         WidgetCenter.shared.reloadAllTimelines()
+        NotificationManager.shared.scheduleFutureMilestoneNotifications(from: date, earnedBadges: earnedBadges)
     }
 
     var fastingPhase: FastingPhase {
