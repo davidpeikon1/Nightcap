@@ -6,6 +6,7 @@ import StoreKit
 struct ProgressSection: View {
     @EnvironmentObject var store: FastingStore
     @State private var selectedBadge: BadgeID? = nil
+    @State private var selectedLockedBadge: BadgeID? = nil
     @State private var showHistory = false
 
     private var orderedBadges: [BadgeID] {
@@ -41,6 +42,8 @@ struct ProgressSection: View {
                                 .onTapGesture {
                                     if store.earnedBadges.contains(badge) {
                                         selectedBadge = badge
+                                    } else if store.isTracking {
+                                        selectedLockedBadge = badge
                                     }
                                 }
                         }
@@ -73,6 +76,11 @@ struct ProgressSection: View {
         }
         .sheet(item: $selectedBadge) { badge in
             BadgeDetailView(badge: badge)
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(item: $selectedLockedBadge) { badge in
+            LockedBadgeSheet(badge: badge)
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
@@ -208,7 +216,7 @@ struct BadgeView: View {
             ? "\(badge.label) badge, earned. \(badge.celebrationText.components(separatedBy: "\n").first ?? "")"
             : "\(badge.label) badge, locked"
         )
-        .accessibilityHint(earned ? "Double tap to view details" : "")
+        .accessibilityHint(earned ? "Double tap to view details" : "Double tap to see how to unlock")
     }
 }
 
@@ -392,6 +400,83 @@ struct MilestoneSheet: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Locked Badge Sheet
+
+struct LockedBadgeSheet: View {
+    let badge: BadgeID
+    @EnvironmentObject var store: FastingStore
+    @Environment(\.dismiss) var dismiss
+
+    private var remaining: TimeInterval {
+        max(0, badge.threshold - store.elapsedSeconds)
+    }
+
+    private var remainingText: String {
+        let secs = Int(remaining)
+        let h = secs / 3600
+        let m = (secs % 3600) / 60
+        let d = h / 24
+        if remaining < 60  { return "almost there" }
+        if d >= 1 { return "\(d)d \(h % 24)h away" }
+        if h > 0  { return "\(h)h \(m)m away" }
+        return "\(m)m away"
+    }
+
+    var body: some View {
+        ZStack {
+            Color("NCBackground").ignoresSafeArea()
+
+            VStack(spacing: 28) {
+                Spacer()
+
+                ZStack {
+                    Circle()
+                        .fill(Color("NCTextTertiary").opacity(0.08))
+                        .frame(width: 100, height: 100)
+                        .overlay(
+                            Circle()
+                                .stroke(Color("NCTextTertiary").opacity(0.2), lineWidth: 1)
+                        )
+                    Image(systemName: badge.symbol)
+                        .font(.system(size: 40, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary").opacity(0.5))
+                }
+
+                VStack(spacing: 10) {
+                    Text(badge.label)
+                        .font(.system(size: 28, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                    Text(remainingText)
+                        .font(.system(size: 15, design: .monospaced))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                }
+
+                Text(badge.scienceFact)
+                    .font(.system(size: 14, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .lineSpacing(5)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
+
+                Spacer()
+
+                Button { dismiss() } label: {
+                    Text("Keep going")
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(Color("NCBackground"))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(Color("NCAccent"))
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 32)
+            }
+        }
+        .accessibilityLabel("\(badge.label) badge, locked. \(remainingText).")
     }
 }
 

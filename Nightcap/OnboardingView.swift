@@ -48,6 +48,7 @@ struct OnboardingView: View {
 struct HookScreen: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var fastingStore: FastingStore
+    @State private var showCustomPicker = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -77,11 +78,30 @@ struct HookScreen: View {
                         fastingStore.setInitialDate(at: d)
                         appState.advance(to: .timerCoachmark)
                     }
+
+                    Button {
+                        showCustomPicker = true
+                    } label: {
+                        Text("Pick exact time...")
+                            .font(.system(size: 15))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                            .padding(.top, 4)
+                    }
                 }
                 .padding(.horizontal, 24)
             }
 
             Spacer()
+        }
+        .sheet(isPresented: $showCustomPicker, onDismiss: {
+            // Advance to next step if the user saved a date via the picker.
+            if fastingStore.lastSugarDate != nil {
+                appState.advance(to: .timerCoachmark)
+            }
+        }) {
+            EditStartTimeSheet()
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
         }
     }
 

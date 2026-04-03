@@ -329,6 +329,11 @@ class FastingStore: ObservableObject {
         Task { try? await UNUserNotificationCenter.current().setBadgeCount(0) }
     }
 
+    func deleteResetEvent(id: UUID) {
+        resetEvents.removeAll { $0.id == id }
+        saveDecodable(resetEvents, forKey: Keys.resetEvents)
+    }
+
     func logCraving(_ trigger: CravingTrigger) {
         let log = CravingLog(trigger: trigger)
         cravingLogs.insert(log, at: 0)

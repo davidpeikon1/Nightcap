@@ -234,6 +234,15 @@ struct FastHistoryView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
+            .contextMenu {
+                Button(role: .destructive) {
+                    withAnimation {
+                        store.deleteResetEvent(id: event.id)
+                    }
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
 
             if !isLast {
                 Rectangle()
