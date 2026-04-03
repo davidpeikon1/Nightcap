@@ -5,9 +5,9 @@ struct ContextualCopy {
     static func line(for elapsedSeconds: TimeInterval, on date: Date = Date()) -> String {
         let tier = QuoteTier.tier(for: elapsedSeconds)
         let bucket = lines[tier] ?? lines[.zeroToThirtyMin]!
-        // Rotate through lines using minute of hour so it feels fresh without being random
-        let minute = Calendar.current.component(.minute, from: date)
-        return bucket[minute % bucket.count]
+        // Rotate once per hour so the copy stays stable while the user watches the timer.
+        let hour = Calendar.current.component(.hour, from: date)
+        return bucket[hour % bucket.count]
     }
 
     static let lines: [QuoteTier: [String]] = [
