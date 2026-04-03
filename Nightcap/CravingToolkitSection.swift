@@ -1,6 +1,42 @@
 import SwiftUI
 import Combine
 
+// MARK: - Countdown State (lifted so it survives tab switches)
+
+final class CountdownState: ObservableObject {
+    @Published var secondsLeft: Int = 20 * 60
+    @Published var isRunning: Bool = false
+    @Published var completed: Bool = false
+    var timer: AnyCancellable?
+
+    func start() {
+        isRunning = true
+        timer = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self else { return }
+                if self.secondsLeft > 0 {
+                    self.secondsLeft -= 1
+                } else {
+                    self.stop()
+                    withAnimation { self.completed = true }
+                }
+            }
+    }
+
+    func stop() {
+        isRunning = false
+        timer?.cancel()
+        timer = nil
+    }
+
+    func reset() {
+        stop()
+        secondsLeft = 20 * 60
+        completed = false
+    }
+}
+
 // MARK: - Toolkit Section
 
 struct CravingToolkitSection: View {
@@ -8,6 +44,7 @@ struct CravingToolkitSection: View {
     @EnvironmentObject var appState: AppState
     @State private var isExpanded = false
     @State private var activeTool: ToolTab? = nil
+    @StateObject private var countdownState = CountdownState()
 
     enum ToolTab: String, CaseIterable, Identifiable {
         case countdown = "20 Minutes"
@@ -64,7 +101,7 @@ struct CravingToolkitSection: View {
                     // Tool content
                     Group {
                         switch activeTool {
-                        case .countdown: CountdownTool()
+                        case .countdown: CountdownTool(state: countdownState)
                         case .reframe:   ReframeCardTool()
                         case .why:       WhyReminderTool()
                         case .log:       LogCravingTool()
@@ -106,14 +143,11 @@ struct CravingToolkitSection: View {
 // MARK: - Tool 1: 20-Minute Countdown
 
 struct CountdownTool: View {
-    @State private var isRunning = false
-    @State private var secondsLeft: Int = 20 * 60
-    @State private var timer: AnyCancellable?
-    @State private var completed = false
+    @ObservedObject var state: CountdownState
 
     var body: some View {
         VStack(spacing: 20) {
-            if completed {
+            if state.completed {
                 VStack(spacing: 12) {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 36, weight: .light))
@@ -140,19 +174,14 @@ struct CountdownTool: View {
                         .multilineTextAlignment(.center)
                 }
 
-                // Countdown display
                 Text(formattedTime)
                     .font(.system(size: 48, weight: .light).monospacedDigit())
-                    .foregroundStyle(isRunning ? Color("NCTextPrimary") : Color("NCTextTertiary"))
+                    .foregroundStyle(state.isRunning ? Color("NCTextPrimary") : Color("NCTextTertiary"))
 
                 Button {
-                    if isRunning {
-                        stopTimer()
-                    } else {
-                        startTimer()
-                    }
+                    if state.isRunning { state.stop() } else { state.start() }
                 } label: {
-                    Text(isRunning ? "Pause" : (secondsLeft < 20 * 60 ? "Resume" : "Start the 20 minutes"))
+                    Text(state.isRunning ? "Pause" : (state.secondsLeft < 20 * 60 ? "Resume" : "Start the 20 minutes"))
                         .font(.system(size: 15, weight: .medium))
                         .foregroundStyle(Color("NCBackground"))
                         .frame(maxWidth: .infinity)
@@ -161,11 +190,8 @@ struct CountdownTool: View {
                         .cornerRadius(12)
                 }
 
-                if secondsLeft < 20 * 60 && !isRunning {
-                    Button {
-                        secondsLeft = 20 * 60
-                        completed = false
-                    } label: {
+                if state.secondsLeft < 20 * 60 && !state.isRunning {
+                    Button { state.reset() } label: {
                         Text("Reset")
                             .font(.system(size: 13))
                             .foregroundStyle(Color("NCTextSecondary"))
@@ -176,27 +202,7 @@ struct CountdownTool: View {
     }
 
     private var formattedTime: String {
-        String(format: "%d:%02d", secondsLeft / 60, secondsLeft % 60)
-    }
-
-    private func startTimer() {
-        isRunning = true
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-            .autoconnect()
-            .sink { _ in
-                if secondsLeft > 0 {
-                    secondsLeft -= 1
-                } else {
-                    stopTimer()
-                    withAnimation { completed = true }
-                }
-            }
-    }
-
-    private func stopTimer() {
-        isRunning = false
-        timer?.cancel()
-        timer = nil
+        String(format: "%d:%02d", state.secondsLeft / 60, state.secondsLeft % 60)
     }
 }
 
