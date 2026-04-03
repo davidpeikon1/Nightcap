@@ -97,6 +97,8 @@ struct ProgressSection: View {
         .padding(16)
         .background(Color("NCSurface"))
         .cornerRadius(12)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(store.fastingPhase.rawValue) phase. \(store.timeToNextMilestone) to next milestone.")
     }
 }
 
@@ -131,6 +133,11 @@ struct BadgeView: View {
                 .multilineTextAlignment(.center)
                 .frame(width: 60)
         }
+        .accessibilityLabel(earned
+            ? "\(badge.label) badge, earned. \(badge.celebrationText.components(separatedBy: "\n").first ?? "")"
+            : "\(badge.label) badge, locked"
+        )
+        .accessibilityHint(earned ? "Double tap to view details" : "")
     }
 }
 
