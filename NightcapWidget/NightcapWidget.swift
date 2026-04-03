@@ -112,16 +112,25 @@ struct FastingProvider: TimelineProvider {
     }
 }
 
-// MARK: - Colour helpers (no asset catalog in extension)
+// MARK: - Colour helpers (no asset catalog in extension — dark/light manual)
 
 private extension Color {
-    static let ncBackground  = Color(red: 0.980, green: 0.973, blue: 0.961)
-    static let ncSurface     = Color(red: 0.949, green: 0.937, blue: 0.914)
-    static let ncTextPrimary = Color(red: 0.110, green: 0.110, blue: 0.102)
-    static let ncTextSecond  = Color(red: 0.541, green: 0.533, blue: 0.502)
-    static let ncTextTert    = Color(red: 0.710, green: 0.698, blue: 0.675)
-    static let ncSuccess     = Color(red: 0.290, green: 0.486, blue: 0.349)
-    static let ncWarning     = Color(red: 0.757, green: 0.486, blue: 0.227)
+    static func nc(_ light: (Double, Double, Double), _ dark: (Double, Double, Double)) -> Color {
+        Color(uiColor: UIColor { tc in
+            tc.userInterfaceStyle == .dark
+                ? UIColor(red: dark.0,  green: dark.1,  blue: dark.2,  alpha: 1)
+                : UIColor(red: light.0, green: light.1, blue: light.2, alpha: 1)
+        })
+    }
+
+    static let ncBackground  = nc((0.980, 0.973, 0.961), (0.078, 0.071, 0.063))
+    static let ncSurface     = nc((0.949, 0.937, 0.914), (0.118, 0.110, 0.098))
+    static let ncTextPrimary = nc((0.110, 0.110, 0.102), (0.933, 0.922, 0.898))
+    static let ncTextSecond  = nc((0.541, 0.533, 0.502), (0.600, 0.588, 0.557))
+    static let ncTextTert    = nc((0.710, 0.698, 0.675), (0.427, 0.416, 0.392))
+    static let ncSuccess     = nc((0.290, 0.486, 0.349), (0.373, 0.624, 0.455))
+    static let ncWarning     = nc((0.757, 0.486, 0.227), (0.847, 0.569, 0.294))
+    static let ncAccent      = nc((0.173, 0.173, 0.165), (0.914, 0.902, 0.878))
 }
 
 // MARK: - Small Widget
