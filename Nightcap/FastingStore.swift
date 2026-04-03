@@ -86,7 +86,7 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
 
     var useConfetti: Bool {
         switch self {
-        case .oneMonth, .hundredDays: return true
+        case .oneWeek, .oneMonth, .hundredDays: return true
         default: return false
         }
     }

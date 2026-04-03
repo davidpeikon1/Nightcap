@@ -61,9 +61,11 @@ struct ProgressSection: View {
                 .allowsHitTesting(false)
             }
 
-            // Next badge callout (only when there's a reachable unearned badge)
+            // Next badge callout or all-earned celebration
             if let next = nextUnearnedBadge {
                 nextBadgeRow(next)
+            } else if store.earnedBadges.count == BadgeID.allCases.count && store.isTracking {
+                allBadgesEarnedRow
             }
 
             // Phase progress bar
@@ -124,6 +126,33 @@ struct ProgressSection: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(store.fastingPhase.rawValue) phase. \(store.timeToNextMilestone) to next milestone.")
     }
+    // MARK: - All badges earned
+
+    private var allBadgesEarnedRow: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "checkmark.seal.fill")
+                .font(.system(size: 16, weight: .light))
+                .foregroundStyle(Color("NCSuccess"))
+                .frame(width: 20)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text("All badges earned.")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(Color("NCTextPrimary"))
+                Text("100 days and counting. This is identity now.")
+                    .font(.system(size: 11, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(Color("NCSurface"))
+        .cornerRadius(10)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("All badges earned. 100 days and counting.")
+    }
+
     // MARK: - Next unearned badge
 
     private var nextUnearnedBadge: BadgeID? {
