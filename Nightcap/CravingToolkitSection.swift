@@ -174,9 +174,28 @@ struct CountdownTool: View {
                         .multilineTextAlignment(.center)
                 }
 
-                Text(formattedTime)
-                    .font(.system(size: 48, weight: .light).monospacedDigit())
-                    .foregroundStyle(state.isRunning ? Color("NCTextPrimary") : Color("NCTextTertiary"))
+                ZStack {
+                    // Background track
+                    Circle()
+                        .stroke(Color("NCTextTertiary").opacity(0.15), lineWidth: 3)
+                        .frame(width: 148, height: 148)
+
+                    // Progress arc — fills as time runs down
+                    let progress = 1.0 - Double(state.secondsLeft) / Double(20 * 60)
+                    Circle()
+                        .trim(from: 0, to: progress)
+                        .stroke(
+                            state.isRunning ? Color("NCAccent") : Color("NCTextTertiary").opacity(0.35),
+                            style: StrokeStyle(lineWidth: 3, lineCap: .round)
+                        )
+                        .frame(width: 148, height: 148)
+                        .rotationEffect(.degrees(-90))
+                        .animation(.linear(duration: 1), value: state.secondsLeft)
+
+                    Text(formattedTime)
+                        .font(.system(size: 48, weight: .light).monospacedDigit())
+                        .foregroundStyle(state.isRunning ? Color("NCTextPrimary") : Color("NCTextTertiary"))
+                }
 
                 Button {
                     if state.isRunning { state.stop() } else { state.start() }

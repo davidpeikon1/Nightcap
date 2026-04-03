@@ -248,6 +248,20 @@ struct ResetModal: View {
                     .onChange(of: note) { _, v in
                         if v.count > 120 { note = String(v.prefix(120)) }
                     }
+
+                if note.count > 80 {
+                    HStack {
+                        Spacer()
+                        Text("\(note.count) / 120")
+                            .font(.system(size: 11))
+                            .foregroundStyle(
+                                note.count > 110 ? Color("NCWarning") : Color("NCTextTertiary")
+                            )
+                    }
+                    .padding(.top, 2)
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.2), value: note.count > 80)
+                }
             }
 
             Spacer()
