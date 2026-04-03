@@ -21,6 +21,9 @@ struct FastHistoryView: View {
                         } else {
                             resetList
                         }
+                        if !store.cravingLogs.isEmpty {
+                            cravingInsightsCard
+                        }
                         Spacer(minLength: 32)
                     }
                     .padding(.horizontal, 24)
@@ -276,5 +279,134 @@ struct FastHistoryView: View {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .abbreviated
         return formatter.localizedString(for: date, relativeTo: Date())
+    }
+
+    // MARK: - Craving Insights Card
+
+    private var cravingInsightsCard: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text("CRAVING LOG")
+                    .font(.system(size: 11, weight: .medium))
+                    .tracking(2)
+                    .foregroundStyle(Color("NCTextSecondary"))
+                Spacer()
+                Text("\(store.cravingLogs.count) total")
+                    .font(.system(size: 11, design: .monospaced))
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
+
+            // Trigger breakdown bars
+            VStack(spacing: 10) {
+                ForEach(CravingTrigger.allCases) { trigger in
+                    triggerBar(trigger)
+                }
+            }
+
+            // Time-of-day breakdown
+            if store.cravingLogs.count >= 3 {
+                Rectangle()
+                    .fill(Color("NCTextTertiary").opacity(0.3))
+                    .frame(height: 1)
+                timeOfDayRow
+            }
+
+            // Recent entries (last 5)
+            if !store.cravingLogs.isEmpty {
+                Rectangle()
+                    .fill(Color("NCTextTertiary").opacity(0.3))
+                    .frame(height: 1)
+
+                VStack(spacing: 0) {
+                    ForEach(Array(store.cravingLogs.prefix(5).enumerated()), id: \.element.id) { idx, log in
+                        cravingRow(log: log, isLast: idx == min(store.cravingLogs.count, 5) - 1)
+                    }
+                }
+                .background(Color("NCBackground"))
+                .cornerRadius(8)
+            }
+        }
+        .padding(20)
+        .background(Color("NCSurface"))
+        .cornerRadius(16)
+    }
+
+    private func triggerBar(_ trigger: CravingTrigger) -> some View {
+        let count  = store.cravingLogs.filter { $0.trigger == trigger }.count
+        let total  = max(1, store.cravingLogs.count)
+        let fraction = Double(count) / Double(total)
+
+        return HStack(spacing: 10) {
+            Text(trigger.rawValue)
+                .font(.system(size: 12))
+                .foregroundStyle(Color("NCTextSecondary"))
+                .frame(width: 120, alignment: .leading)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color("NCBackground"))
+                        .frame(height: 6)
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(count > 0 ? Color("NCWarning").opacity(0.7) : Color.clear)
+                        .frame(width: geo.size.width * fraction, height: 6)
+                }
+            }
+            .frame(height: 6)
+
+            Text("\(count)")
+                .font(.system(size: 11, design: .monospaced))
+                .foregroundStyle(Color("NCTextTertiary"))
+                .frame(width: 20, alignment: .trailing)
+        }
+    }
+
+    private var timeOfDayRow: some View {
+        let logs = store.cravingLogs
+        func count(in range: ClosedRange<Int>) -> Int {
+            logs.filter { range.contains(Calendar.current.component(.hour, from: $0.date)) }.count
+        }
+        let morning   = count(in: 6...11)
+        let afternoon = count(in: 12...17)
+        let evening   = count(in: 18...21)
+        let night     = count(in: 22...23) + count(in: 0...5)
+        let peak      = [("Morning", morning), ("Afternoon", afternoon), ("Evening", evening), ("Night", night)]
+            .max(by: { $0.1 < $1.1 })
+        return HStack {
+            Image(systemName: "clock")
+                .font(.system(size: 11, weight: .light))
+                .foregroundStyle(Color("NCTextTertiary"))
+            Text(peak.map { "Most cravings: \($0.0)" } ?? "")
+                .font(.system(size: 12, weight: .light))
+                .foregroundStyle(Color("NCTextSecondary"))
+            Spacer()
+        }
+    }
+
+    private func cravingRow(log: CravingLog, isLast: Bool) -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 12) {
+                Circle()
+                    .fill(Color("NCWarning").opacity(0.5))
+                    .frame(width: 6, height: 6)
+                Text(log.trigger.rawValue)
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color("NCTextPrimary"))
+                Spacer()
+                Text(relativeDate(log.date))
+                    .font(.system(size: 11, design: .monospaced))
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
+            .padding(.vertical, 10)
+            .padding(.horizontal, 2)
+
+            if !isLast {
+                Rectangle()
+                    .fill(Color("NCTextTertiary").opacity(0.2))
+                    .frame(height: 1)
+            }
+        }
     }
 }
