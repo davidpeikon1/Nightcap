@@ -285,6 +285,10 @@ struct MilestoneSheet: View {
     @State private var shareImage: UIImage? = nil
     @State private var showShareSheet = false
 
+    private var shareText: String {
+        "\(badge.label) sugar-free. \(store.formattedElapsed) and counting.\n\n\(badge.celebrationText)\n\n— tracked with Nightcap"
+    }
+
     var body: some View {
         ZStack {
             Color("NCBackground").ignoresSafeArea()
@@ -332,11 +336,14 @@ struct MilestoneSheet: View {
                     // Share button
                     Button {
                         Task { @MainActor in
-                            shareImage = makeShareImage(
+                            let img = makeShareImage(
                                 badge: badge,
                                 elapsedSeconds: store.elapsedSeconds
                             )
-                            showShareSheet = shareImage != nil
+                            // Prefer the rendered image; fall back to plain text if
+                            // ImageRenderer fails (e.g. in the simulator without a display).
+                            shareImage = img
+                            showShareSheet = true
                         }
                     } label: {
                         HStack(spacing: 8) {
@@ -371,10 +378,10 @@ struct MilestoneSheet: View {
             .zIndex(2)
         }
         .sheet(isPresented: $showShareSheet) {
-            if let img = shareImage {
-                ShareSheet(items: [img])
-                    .presentationDetents([.medium, .large])
-            }
+            // Use the rendered image if available, otherwise share plain text.
+            let items: [Any] = shareImage.map { [$0] } ?? [shareText]
+            ShareSheet(items: items)
+                .presentationDetents([.medium, .large])
         }
         .onAppear {
             // Request a review at the 1-week milestone — a high-satisfaction moment.
