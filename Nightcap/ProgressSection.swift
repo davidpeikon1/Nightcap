@@ -33,18 +33,34 @@ struct ProgressSection: View {
                 }
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(orderedBadges, id: \.self) { badge in
-                        BadgeView(badge: badge, earned: store.earnedBadges.contains(badge))
-                            .onTapGesture {
-                                if store.earnedBadges.contains(badge) {
-                                    selectedBadge = badge
+            ZStack(alignment: .trailing) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(orderedBadges, id: \.self) { badge in
+                            BadgeView(badge: badge, earned: store.earnedBadges.contains(badge))
+                                .onTapGesture {
+                                    if store.earnedBadges.contains(badge) {
+                                        selectedBadge = badge
+                                    }
                                 }
-                            }
+                        }
                     }
+                    .padding(.horizontal, 1) // prevent clipping
                 }
-                .padding(.horizontal, 1) // prevent clipping
+
+                // Right-edge fade hint — indicates more badges to scroll to
+                LinearGradient(
+                    colors: [Color("NCBackground").opacity(0), Color("NCBackground")],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .frame(width: 32)
+                .allowsHitTesting(false)
+            }
+
+            // Next badge callout (only when there's a reachable unearned badge)
+            if let next = nextUnearnedBadge {
+                nextBadgeRow(next)
             }
 
             // Phase progress bar
@@ -99,6 +115,61 @@ struct ProgressSection: View {
         .cornerRadius(12)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(store.fastingPhase.rawValue) phase. \(store.timeToNextMilestone) to next milestone.")
+    }
+    // MARK: - Next unearned badge
+
+    private var nextUnearnedBadge: BadgeID? {
+        guard store.isTracking else { return nil }
+        return BadgeID.allCases.first { !store.earnedBadges.contains($0) }
+    }
+
+    private func nextBadgeRow(_ badge: BadgeID) -> some View {
+        let remaining = max(0, badge.threshold - store.elapsedSeconds)
+        let progress  = min(1.0, store.elapsedSeconds / badge.threshold)
+
+        let remainingText: String = {
+            let h = Int(remaining) / 3600
+            let m = (Int(remaining) % 3600) / 60
+            if h >= 24 { return "\(h / 24)d \(h % 24)h" }
+            if h > 0   { return "\(h)h \(m)m" }
+            return "\(m)m"
+        }()
+
+        return HStack(spacing: 12) {
+            Image(systemName: badge.symbol)
+                .font(.system(size: 14, weight: .light))
+                .foregroundStyle(Color("NCTextTertiary"))
+                .frame(width: 20)
+
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text(badge.label)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                    Spacer()
+                    Text(remaining < 60 ? "almost there" : "\(remainingText) away")
+                        .font(.system(size: 11, design: .monospaced))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                }
+
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .fill(Color("NCTextTertiary").opacity(0.2))
+                            .frame(height: 4)
+                        Capsule()
+                            .fill(Color("NCSuccess").opacity(0.6))
+                            .frame(width: geo.size.width * progress, height: 4)
+                            .animation(.spring(duration: 0.8), value: progress)
+                    }
+                }
+                .frame(height: 4)
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(Color("NCSurface"))
+        .cornerRadius(10)
     }
 }
 

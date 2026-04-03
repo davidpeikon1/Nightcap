@@ -577,7 +577,8 @@ class FastingStore: ObservableObject {
     ) -> String {
         if resets == 0 {
             let days = Int(longestFast / 86400)
-            return "Zero resets this week. \(days > 0 ? "\(days) days and counting." : "You're on a clean run.") That's not common. Keep building on it."
+            let dayLabel = days == 1 ? "1 day" : "\(days) days"
+            return "Zero resets this week. \(days > 0 ? "\(dayLabel) and counting." : "You're on a clean run.") That's not common. Keep building on it."
         }
 
         let eveningResets = recentResets.filter {
