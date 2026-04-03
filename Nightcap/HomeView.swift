@@ -115,6 +115,7 @@ struct HomeView: View {
             HStack(spacing: 12) {
                 if store.streakDays > 0 {
                     streakBadge
+                        .transition(.scale(scale: 0.8).combined(with: .opacity))
                 }
                 Button {
                     showSettings = true
@@ -124,6 +125,7 @@ struct HomeView: View {
                         .foregroundStyle(Color("NCTextSecondary"))
                 }
             }
+            .animation(.spring(duration: 0.4), value: store.streakDays > 0)
         }
     }
 

@@ -269,6 +269,7 @@ struct ReframeCardTool: View {
 
 struct WhyReminderTool: View {
     @EnvironmentObject var appState: AppState
+    @State private var showGoalPicker = false
 
     private var statement: String {
         switch appState.userGoal {
@@ -297,6 +298,84 @@ struct WhyReminderTool: View {
                     .lineSpacing(4)
                     .multilineTextAlignment(.center)
             }
+
+            Button {
+                showGoalPicker = true
+            } label: {
+                Text(appState.userGoal == nil ? "Set your reason" : "Change reason")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color("NCTextTertiary"))
+                    .padding(.top, 4)
+            }
+        }
+        .sheet(isPresented: $showGoalPicker) {
+            GoalPickerSheet()
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
+    }
+}
+
+// MARK: - Compact goal picker (reused from onboarding, dismissable)
+
+struct GoalPickerSheet: View {
+    @EnvironmentObject var appState: AppState
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        ZStack {
+            Color("NCBackground").ignoresSafeArea()
+
+            VStack(alignment: .leading, spacing: 24) {
+                Text("What's your reason?")
+                    .font(.system(size: 22, weight: .light))
+                    .foregroundStyle(Color("NCTextPrimary"))
+                    .padding(.top, 8)
+
+                VStack(spacing: 10) {
+                    ForEach(UserGoal.allCases) { goal in
+                        goalPill(goal)
+                    }
+                }
+
+                Spacer()
+
+                Button { dismiss() } label: {
+                    Text("Done")
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(Color("NCBackground"))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(Color("NCAccent"))
+                        .cornerRadius(12)
+                }
+            }
+            .padding(24)
+        }
+    }
+
+    private func goalPill(_ goal: UserGoal) -> some View {
+        let isSelected = appState.userGoal == goal
+        return Button {
+            withAnimation(.spring(duration: 0.2)) {
+                appState.setGoal(goal)
+            }
+        } label: {
+            HStack {
+                Text(goal.rawValue)
+                    .font(.system(size: 15, weight: isSelected ? .medium : .regular))
+                    .foregroundStyle(isSelected ? Color("NCBackground") : Color("NCTextPrimary"))
+                Spacer()
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(Color("NCBackground"))
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            .background(isSelected ? Color("NCAccent") : Color("NCSurface"))
+            .cornerRadius(12)
         }
     }
 }
