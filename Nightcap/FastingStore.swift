@@ -149,7 +149,8 @@ enum TimerDisplay {
 
 // MARK: - Fasting Phase
 
-enum FastingPhase: String, CaseIterable, Hashable {
+enum FastingPhase: String, CaseIterable, Hashable, Identifiable {
+    var id: String { rawValue }
     case justStarted  = "Starting Out"
     case firstDay     = "First Day"
     case withdrawal   = "Withdrawal"

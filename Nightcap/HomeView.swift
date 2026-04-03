@@ -9,6 +9,7 @@ struct HomeView: View {
 
     @State private var showSettings      = false
     @State private var showQuickReset    = false
+    @State private var showPhaseDetail: FastingPhase? = nil
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -54,13 +55,18 @@ struct HomeView: View {
                 }
             }
 
-            // Phase-unlock toast — floats above scroll content
+            // Phase-unlock toast — floats above scroll content, tappable for details
             if let phase = store.phaseJustUnlocked {
-                PhaseUnlockToast(phase: phase)
-                    .padding(.top, 56)
-                    .padding(.horizontal, 24)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                    .zIndex(10)
+                Button {
+                    showPhaseDetail = phase
+                } label: {
+                    PhaseUnlockToast(phase: phase)
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 56)
+                .padding(.horizontal, 24)
+                .transition(.move(edge: .top).combined(with: .opacity))
+                .zIndex(10)
             }
         }
         .allowsHitTesting(!coachmarkMode)
@@ -82,6 +88,11 @@ struct HomeView: View {
         .sheet(isPresented: $showQuickReset) {
             ResetModal()
                 .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(item: $showPhaseDetail) { phase in
+            PhaseDetailSheet(phase: phase)
+                .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
         .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenResetModal)) { _ in
@@ -154,11 +165,16 @@ struct PhaseUnlockToast: View {
 
             Spacer()
 
-            Text(phase.tagline)
-                .font(.system(size: 12, weight: .light))
-                .foregroundStyle(Color("NCTextSecondary"))
-                .multilineTextAlignment(.trailing)
-                .frame(maxWidth: 110)
+            VStack(alignment: .trailing, spacing: 3) {
+                Text(phase.tagline)
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .multilineTextAlignment(.trailing)
+                Text("Tap for details")
+                    .font(.system(size: 10, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
+            .frame(maxWidth: 110)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
@@ -167,6 +183,8 @@ struct PhaseUnlockToast: View {
                 .fill(Color("NCSurface"))
                 .shadow(color: Color("NCTextPrimary").opacity(0.08), radius: 12, y: 4)
         )
+        .accessibilityLabel("New phase unlocked: \(phase.rawValue). \(phase.tagline). Tap for details.")
+        .accessibilityHint("Opens the phase detail view")
     }
 }
 
