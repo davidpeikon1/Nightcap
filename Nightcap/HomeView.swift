@@ -7,7 +7,8 @@ struct HomeView: View {
     /// When true the view is rendered under onboarding coachmarks — disable interaction.
     var coachmarkMode: Bool = false
 
-    @State private var showSettings = false
+    @State private var showSettings      = false
+    @State private var showQuickReset    = false
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -65,6 +66,15 @@ struct HomeView: View {
             SettingsSheet()
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showQuickReset) {
+            ResetModal()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenResetModal)) { _ in
+            guard !coachmarkMode else { return }
+            showQuickReset = true
         }
     }
 

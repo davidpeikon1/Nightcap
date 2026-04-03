@@ -30,6 +30,7 @@
 		AA000001000000000000013A /* PhaseDetailSheet.swift in Sources */  = {isa = PBXBuildFile; fileRef = AA000001000000000000013B; };
 		AA000001000000000000015A /* NightcapIntents.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA000001000000000000015B; };
 		AA000001000000000000016A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000016B; };
+		AA000001000000000000017A /* NightcapDelegate.swift in Sources */  = {isa = PBXBuildFile; fileRef = AA000001000000000000017B; };
 		WA000001000000000000005A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = WA000001000000000000005B; };
 		WA000001000000000000001A /* NightcapWidget.swift in Sources */    = {isa = PBXBuildFile; fileRef = WA000001000000000000001B; };
 		WA000001000000000000002A /* Assets.xcassets in Resources */       = {isa = PBXBuildFile; fileRef = WA000001000000000000002B; };
@@ -87,6 +88,7 @@
 		AA000001000000000000014B /* Nightcap.entitlements */   = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nightcap.entitlements; sourceTree = "<group>"; };
 		AA000001000000000000015B /* NightcapIntents.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapIntents.swift; sourceTree = "<group>"; };
 		AA000001000000000000016B /* PrivacyInfo.xcprivacy */   = {isa = PBXFileReference; lastKnownFileType = "text.xml"; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		AA000001000000000000017B /* NightcapDelegate.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapDelegate.swift; sourceTree = "<group>"; };
 		WA000001000000000000005B /* PrivacyInfo.xcprivacy */   = {isa = PBXFileReference; lastKnownFileType = "text.xml"; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BB000001000000000000001B /* Assets.xcassets */         = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB000001000000000000002B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				AA000001000000000000013B /* PhaseDetailSheet.swift */,
 				AA000001000000000000015B /* NightcapIntents.swift */,
 				AA000001000000000000016B /* PrivacyInfo.xcprivacy */,
+				AA000001000000000000017B /* NightcapDelegate.swift */,
 				AA000001000000000000014B /* Nightcap.entitlements */,
 				BB000001000000000000001B /* Assets.xcassets */,
 				EE000001000000000000004A /* Preview Content */,
@@ -306,6 +309,7 @@
 				AA000001000000000000012A /* ShareCardView.swift in Sources */,
 				AA000001000000000000013A /* PhaseDetailSheet.swift in Sources */,
 				AA000001000000000000015A /* NightcapIntents.swift in Sources */,
+				AA000001000000000000017A /* NightcapDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

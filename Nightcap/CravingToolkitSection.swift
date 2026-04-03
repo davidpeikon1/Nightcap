@@ -79,6 +79,12 @@ struct CravingToolkitSection: View {
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenCravingToolkit)) { _ in
+            withAnimation(.spring(duration: 0.35)) {
+                isExpanded = true
+                activeTool = .countdown
+            }
+        }
     }
 
     private func tabChip(_ tab: ToolTab) -> some View {

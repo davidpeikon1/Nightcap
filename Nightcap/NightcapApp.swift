@@ -4,6 +4,7 @@ import WidgetKit
 
 @main
 struct NightcapApp: App {
+    @UIApplicationDelegateAdaptor(NightcapDelegate.self) var delegate
     @StateObject private var fastingStore = FastingStore()
     @StateObject private var appState    = AppState()
     @Environment(\.scenePhase) private var scenePhase
