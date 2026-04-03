@@ -159,6 +159,13 @@ struct FastHistoryView: View {
         }
     }
 
+    /// True when the current fast is strictly longer than all previous fasts.
+    private var isPersonalBest: Bool {
+        guard store.isTracking else { return false }
+        let previousBest = store.resetEvents.map(\.fastDuration).max() ?? 0
+        return store.elapsedSeconds > previousBest && previousBest > 0
+    }
+
     private var currentFastRow: some View {
         HStack(spacing: 14) {
             Circle()
@@ -166,9 +173,20 @@ struct FastHistoryView: View {
                 .frame(width: 8, height: 8)
 
             VStack(alignment: .leading, spacing: 3) {
-                Text("In progress")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color("NCTextPrimary"))
+                HStack(spacing: 6) {
+                    Text("In progress")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                    if isPersonalBest {
+                        Text("PB")
+                            .font(.system(size: 9, weight: .semibold))
+                            .foregroundStyle(Color("NCSuccess"))
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .background(Color("NCSuccess").opacity(0.12))
+                            .cornerRadius(4)
+                    }
+                }
                 Text(store.formattedElapsed + " · " + store.fastingPhase.rawValue)
                     .font(.system(size: 12))
                     .foregroundStyle(Color("NCTextSecondary"))
