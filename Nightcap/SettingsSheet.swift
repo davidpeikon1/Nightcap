@@ -168,7 +168,10 @@ struct SettingsSheet: View {
                         if on {
                             NotificationManager.shared.scheduleDailyNotifications()
                         } else {
-                            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                            // Only remove daily check-ins, not proactive milestone notifications.
+                            UNUserNotificationCenter.current().removePendingNotificationRequests(
+                                withIdentifiers: ["nightcap.morning", "nightcap.evening"]
+                            )
                         }
                     }
             case .denied:
