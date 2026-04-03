@@ -8,6 +8,67 @@ struct FastTrackerCard: View {
     @State private var showEditStart    = false
 
     var body: some View {
+        Group {
+            if store.lastSugarDate == nil {
+                startTrackingView
+            } else {
+                trackingView
+            }
+        }
+        .padding(20)
+        .background(Color("NCSurface"))
+        .cornerRadius(16)
+        .sheet(isPresented: $showResetModal) {
+            ResetModal()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showEditStart) {
+            EditStartTimeSheet()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+    }
+
+    // MARK: Empty State
+
+    private var startTrackingView: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("SUGAR FREE FOR")
+                .font(.system(size: 11, weight: .medium))
+                .tracking(2)
+                .foregroundStyle(Color("NCTextSecondary"))
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Not tracking yet.")
+                    .font(.system(size: 32, weight: .light))
+                    .foregroundStyle(Color("NCTextPrimary"))
+
+                Text("When you're ready, tell us when you last had processed sugar.")
+                    .font(.system(size: 15, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Button {
+                showEditStart = true
+            } label: {
+                Text("Start tracking")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Color("NCBackground"))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color("NCAccent"))
+                    .cornerRadius(12)
+            }
+            .padding(.top, 4)
+        }
+    }
+
+    // MARK: Tracking State
+
+    private var trackingView: some View {
         VStack(alignment: .leading, spacing: 20) {
             // Label
             Text("SUGAR FREE FOR")
@@ -60,19 +121,6 @@ struct FastTrackerCard: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 4)
             }
-        }
-        .padding(20)
-        .background(Color("NCSurface"))
-        .cornerRadius(16)
-        .sheet(isPresented: $showResetModal) {
-            ResetModal()
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-        }
-        .sheet(isPresented: $showEditStart) {
-            EditStartTimeSheet()
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
         }
     }
 
