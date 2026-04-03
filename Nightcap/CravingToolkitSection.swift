@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import UIKit
 
 // MARK: - Countdown State (lifted so it survives tab switches)
 
@@ -19,6 +20,7 @@ final class CountdownState: ObservableObject {
                     self.secondsLeft -= 1
                 } else {
                     self.stop()
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                     withAnimation { self.completed = true }
                 }
             }

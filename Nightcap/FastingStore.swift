@@ -292,6 +292,9 @@ class FastingStore: ObservableObject {
         // Clear badges so each new fast earns them fresh (badge sheet + celebration replay).
         earnedBadges = []
         saveBadges()
+        // Dismiss any in-flight badge sheet or phase toast from the previous fast.
+        newlyUnlockedBadge = nil
+        phaseJustUnlocked  = nil
         // Reset phase tracking so the first transition fires correctly again.
         lastKnownPhase = .justStarted
         defaults.removeObject(forKey: Keys.lastKnownPhase)
