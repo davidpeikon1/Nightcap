@@ -372,15 +372,17 @@ class FastingStore: ObservableObject {
         let today = cal.startOfDay(for: Date())
         let last  = cal.startOfDay(for: lastStreakCheckDate)
 
-        guard today != last else { return }
+        guard today > last else { return }
 
-        let daysSinceReset = cal.dateComponents([.day], from: lastSugar, to: Date()).day ?? 0
-        if daysSinceReset >= 1 && today > last {
-            streakDays += 1
-            defaults.set(streakDays, forKey: Keys.streakDays)
-            lastStreakCheckDate = today
-            defaults.set(today, forKey: Keys.lastStreakCheck)
-        }
+        // Recompute the streak as complete calendar days since lastSugarDate.
+        // Computing from scratch handles the case where the app wasn't opened
+        // for several days (previously only incremented by 1 per session).
+        let fastStart = cal.startOfDay(for: lastSugar)
+        let completeDays = max(0, cal.dateComponents([.day], from: fastStart, to: today).day ?? 0)
+        streakDays = completeDays
+        defaults.set(streakDays, forKey: Keys.streakDays)
+        lastStreakCheckDate = today
+        defaults.set(today, forKey: Keys.lastStreakCheck)
     }
 
     private func checkBadges() {
