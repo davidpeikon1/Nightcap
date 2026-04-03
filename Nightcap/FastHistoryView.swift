@@ -4,6 +4,7 @@ import Charts
 struct FastHistoryView: View {
     @EnvironmentObject var store: FastingStore
     @Environment(\.dismiss) var dismiss
+    @State private var showAllCravings = false
 
     var body: some View {
         NavigationStack {
@@ -333,19 +334,43 @@ struct FastHistoryView: View {
                 timeOfDayRow
             }
 
-            // Recent entries (last 5)
+            // Recent entries
             if !store.cravingLogs.isEmpty {
                 Rectangle()
                     .fill(Color("NCTextTertiary").opacity(0.3))
                     .frame(height: 1)
 
+                let visibleLogs = showAllCravings
+                    ? Array(store.cravingLogs.enumerated())
+                    : Array(store.cravingLogs.prefix(5).enumerated())
+                let lastIdx = visibleLogs.indices.last ?? 0
+
                 VStack(spacing: 0) {
-                    ForEach(Array(store.cravingLogs.prefix(5).enumerated()), id: \.element.id) { idx, log in
-                        cravingRow(log: log, isLast: idx == min(store.cravingLogs.count, 5) - 1)
+                    ForEach(visibleLogs, id: \.element.id) { idx, log in
+                        cravingRow(log: log, isLast: idx == lastIdx)
                     }
                 }
                 .background(Color("NCBackground"))
                 .cornerRadius(8)
+
+                if store.cravingLogs.count > 5 {
+                    Button {
+                        withAnimation(.spring(duration: 0.35)) {
+                            showAllCravings.toggle()
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text(showAllCravings
+                                 ? "Show less"
+                                 : "Show all \(store.cravingLogs.count)")
+                                .font(.system(size: 12))
+                            Image(systemName: showAllCravings ? "chevron.up" : "chevron.down")
+                                .font(.system(size: 10, weight: .light))
+                        }
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .padding(.top, 4)
+                    }
+                }
             }
         }
         .padding(20)
