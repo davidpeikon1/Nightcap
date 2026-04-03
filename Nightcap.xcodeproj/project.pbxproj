@@ -1,0 +1,339 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA000001000000000000001A /* NightcapApp.swift in Sources */       = {isa = PBXBuildFile; fileRef = AA000001000000000000001B; };
+		AA000001000000000000002A /* AppState.swift in Sources */          = {isa = PBXBuildFile; fileRef = AA000001000000000000002B; };
+		AA000001000000000000003A /* FastingStore.swift in Sources */      = {isa = PBXBuildFile; fileRef = AA000001000000000000003B; };
+		AA000001000000000000004A /* QuoteLibrary.swift in Sources */      = {isa = PBXBuildFile; fileRef = AA000001000000000000004B; };
+		AA000001000000000000005A /* ContextualCopy.swift in Sources */    = {isa = PBXBuildFile; fileRef = AA000001000000000000005B; };
+		AA000001000000000000006A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000006B; };
+		AA000001000000000000007A /* OnboardingView.swift in Sources */    = {isa = PBXBuildFile; fileRef = AA000001000000000000007B; };
+		AA000001000000000000008A /* HomeView.swift in Sources */          = {isa = PBXBuildFile; fileRef = AA000001000000000000008B; };
+		AA000001000000000000009A /* FastTrackerCard.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA000001000000000000009B; };
+		AA00000100000000000000AA /* DailyReframeCard.swift in Sources */  = {isa = PBXBuildFile; fileRef = AA00000100000000000000AB; };
+		AA00000100000000000000BA /* CravingToolkitSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BB; };
+		AA00000100000000000000CA /* ProgressSection.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA00000100000000000000CB; };
+		AA00000100000000000000DA /* WeeklyInsightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000DB; };
+		BB000001000000000000001A /* Assets.xcassets in Resources */       = {isa = PBXBuildFile; fileRef = BB000001000000000000001B; };
+		BB000001000000000000002A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000002B; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA000001000000000000001B /* NightcapApp.swift */       = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapApp.swift; sourceTree = "<group>"; };
+		AA000001000000000000002B /* AppState.swift */          = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AA000001000000000000003B /* FastingStore.swift */      = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingStore.swift; sourceTree = "<group>"; };
+		AA000001000000000000004B /* QuoteLibrary.swift */      = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
+		AA000001000000000000005B /* ContextualCopy.swift */    = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextualCopy.swift; sourceTree = "<group>"; };
+		AA000001000000000000006B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		AA000001000000000000007B /* OnboardingView.swift */    = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AA000001000000000000008B /* HomeView.swift */          = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AA000001000000000000009B /* FastTrackerCard.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTrackerCard.swift; sourceTree = "<group>"; };
+		AA00000100000000000000AB /* DailyReframeCard.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReframeCard.swift; sourceTree = "<group>"; };
+		AA00000100000000000000BB /* CravingToolkitSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingToolkitSection.swift; sourceTree = "<group>"; };
+		AA00000100000000000000CB /* ProgressSection.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSection.swift; sourceTree = "<group>"; };
+		AA00000100000000000000DB /* WeeklyInsightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyInsightCard.swift; sourceTree = "<group>"; };
+		BB000001000000000000001B /* Assets.xcassets */         = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB000001000000000000002B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CC000001000000000000001B /* Nightcap.app */            = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightcap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD000001000000000000001A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EE000001000000000000001A /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				EE000001000000000000002A /* Nightcap */,
+				EE000001000000000000003A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EE000001000000000000002A /* Nightcap */ = {
+			isa = PBXGroup;
+			children = (
+				AA000001000000000000001B /* NightcapApp.swift */,
+				AA000001000000000000002B /* AppState.swift */,
+				AA000001000000000000003B /* FastingStore.swift */,
+				AA000001000000000000004B /* QuoteLibrary.swift */,
+				AA000001000000000000005B /* ContextualCopy.swift */,
+				AA000001000000000000006B /* NotificationManager.swift */,
+				AA000001000000000000007B /* OnboardingView.swift */,
+				AA000001000000000000008B /* HomeView.swift */,
+				AA000001000000000000009B /* FastTrackerCard.swift */,
+				AA00000100000000000000AB /* DailyReframeCard.swift */,
+				AA00000100000000000000BB /* CravingToolkitSection.swift */,
+				AA00000100000000000000CB /* ProgressSection.swift */,
+				AA00000100000000000000DB /* WeeklyInsightCard.swift */,
+				BB000001000000000000001B /* Assets.xcassets */,
+				EE000001000000000000004A /* Preview Content */,
+			);
+			path = Nightcap;
+			sourceTree = "<group>";
+		};
+		EE000001000000000000003A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC000001000000000000001B /* Nightcap.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EE000001000000000000004A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BB000001000000000000002B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF000001000000000000001A /* Nightcap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF000001000000000000002A /* Build configuration list for PBXNativeTarget "Nightcap" */;
+			buildPhases = (
+				FF000001000000000000003A /* Sources */,
+				DD000001000000000000001A /* Frameworks */,
+				FF000001000000000000004A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nightcap;
+			productName = Nightcap;
+			productReference = CC000001000000000000001B /* Nightcap.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		110000001100000011000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					FF000001000000000000001A = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = FF000001000000000000005A /* Build configuration list for PBXProject "Nightcap" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EE000001000000000000001A /* Root */;
+			productRefGroup = EE000001000000000000003A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF000001000000000000001A /* Nightcap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF000001000000000000004A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB000001000000000000001A /* Assets.xcassets in Resources */,
+				BB000001000000000000002A /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF000001000000000000003A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000001000000000000001A /* NightcapApp.swift in Sources */,
+				AA000001000000000000002A /* AppState.swift in Sources */,
+				AA000001000000000000003A /* FastingStore.swift in Sources */,
+				AA000001000000000000004A /* QuoteLibrary.swift in Sources */,
+				AA000001000000000000005A /* ContextualCopy.swift in Sources */,
+				AA000001000000000000006A /* NotificationManager.swift in Sources */,
+				AA000001000000000000007A /* OnboardingView.swift in Sources */,
+				AA000001000000000000008A /* HomeView.swift in Sources */,
+				AA000001000000000000009A /* FastTrackerCard.swift in Sources */,
+				AA00000100000000000000AA /* DailyReframeCard.swift in Sources */,
+				AA00000100000000000000BA /* CravingToolkitSection.swift in Sources */,
+				AA00000100000000000000CA /* ProgressSection.swift in Sources */,
+				AA00000100000000000000DA /* WeeklyInsightCard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FF000001000000000000006A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FF000001000000000000007A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF000001000000000000008A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Nightcap/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Nightcap sends check-ins at the moments when cravings are most common.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightcap.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		FF000001000000000000009A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Nightcap/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Nightcap sends check-ins at the moments when cravings are most common.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightcap.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF000001000000000000005A /* Build configuration list for PBXProject "Nightcap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF000001000000000000006A /* Debug */,
+				FF000001000000000000007A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF000001000000000000002A /* Build configuration list for PBXNativeTarget "Nightcap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF000001000000000000008A /* Debug */,
+				FF000001000000000000009A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 110000001100000011000000 /* Project object */;
+}
