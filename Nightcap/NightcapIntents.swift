@@ -111,8 +111,16 @@ private func formatElapsed(_ s: TimeInterval) -> String {
     let h = (total % 86400) / 3600
     let m = (total % 3600) / 60
     if d >= 7 { return "\(d) days" }
-    if d >= 1 { return "\(d) day\(d == 1 ? "" : "s") and \(h) hour\(h == 1 ? "" : "s")" }
-    if h >= 1 { return "\(h) hour\(h == 1 ? "" : "s") and \(m) minute\(m == 1 ? "" : "s")" }
+    if d >= 1 {
+        return h > 0
+            ? "\(d) day\(d == 1 ? "" : "s") and \(h) hour\(h == 1 ? "" : "s")"
+            : "\(d) day\(d == 1 ? "" : "s")"
+    }
+    if h >= 1 {
+        return m > 0
+            ? "\(h) hour\(h == 1 ? "" : "s") and \(m) minute\(m == 1 ? "" : "s")"
+            : "\(h) hour\(h == 1 ? "" : "s")"
+    }
     return "\(m) minute\(m == 1 ? "" : "s")"
 }
 
