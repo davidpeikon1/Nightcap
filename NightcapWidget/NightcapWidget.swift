@@ -436,14 +436,20 @@ struct CircularWidgetView: View {
     let entry: FastingEntry
 
     var body: some View {
-        VStack(spacing: 1) {
+        if entry.data.lastSugarDate == nil {
             Image(systemName: "timer")
-                .font(.system(size: 11, weight: .light))
-            Text(compactElapsed)
-                .font(.system(size: 13, weight: .medium).monospacedDigit())
-                .minimumScaleFactor(0.7)
+                .font(.system(size: 18, weight: .thin))
+                .containerBackground(for: .widget) { }
+        } else {
+            VStack(spacing: 1) {
+                Image(systemName: "timer")
+                    .font(.system(size: 11, weight: .light))
+                Text(compactElapsed)
+                    .font(.system(size: 13, weight: .medium).monospacedDigit())
+                    .minimumScaleFactor(0.7)
+            }
+            .containerBackground(for: .widget) { }
         }
-        .containerBackground(for: .widget) { }
     }
 
     private var compactElapsed: String {
@@ -461,6 +467,22 @@ struct RectangularWidgetView: View {
     let entry: FastingEntry
 
     var body: some View {
+        if entry.data.lastSugarDate == nil {
+            HStack(spacing: 10) {
+                Image(systemName: "timer")
+                    .font(.system(size: 14, weight: .light))
+                Text("Start your fast")
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(.primary)
+            }
+            .containerBackground(for: .widget) { }
+        } else {
+            trackingView
+                .containerBackground(for: .widget) { }
+        }
+    }
+
+    private var trackingView: some View {
         HStack(spacing: 10) {
             Image(systemName: "timer")
                 .font(.system(size: 14, weight: .light))
@@ -474,7 +496,6 @@ struct RectangularWidgetView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .containerBackground(for: .widget) { }
     }
 }
 
