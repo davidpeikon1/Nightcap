@@ -130,6 +130,35 @@ struct SmallWidgetView: View {
     let entry: FastingEntry
 
     var body: some View {
+        if entry.data.lastSugarDate == nil {
+            notStartedView
+        } else {
+            trackingView
+        }
+    }
+
+    private var notStartedView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("nightcap")
+                .font(.system(size: 9, weight: .light))
+                .tracking(1.5)
+                .foregroundStyle(Color.ncTextTert)
+            Spacer()
+            Text("Start your fast")
+                .font(.system(size: 16, weight: .light))
+                .foregroundStyle(Color.ncTextPrimary)
+                .lineLimit(2)
+            Spacer(minLength: 4)
+            Text("Open the app to begin")
+                .font(.system(size: 10, weight: .light))
+                .foregroundStyle(Color.ncTextTert)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        .containerBackground(Color.ncBackground, for: .widget)
+    }
+
+    private var trackingView: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("nightcap")
                 .font(.system(size: 9, weight: .light))
@@ -150,7 +179,6 @@ struct SmallWidgetView: View {
 
             Spacer(minLength: 8)
 
-            // Phase label + mini-bar
             VStack(alignment: .leading, spacing: 5) {
                 Text(entry.data.phase(at: entry.date).uppercased())
                     .font(.system(size: 8, weight: .medium))
@@ -181,6 +209,32 @@ struct MediumWidgetView: View {
     let entry: FastingEntry
 
     var body: some View {
+        guard entry.data.lastSugarDate != nil else {
+            return AnyView(
+                HStack(spacing: 16) {
+                    Image(systemName: "timer")
+                        .font(.system(size: 28, weight: .thin))
+                        .foregroundStyle(Color.ncTextTert)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("nightcap")
+                            .font(.system(size: 11, weight: .light))
+                            .tracking(2)
+                            .foregroundStyle(Color.ncTextTert)
+                        Text("Open the app to start\nyour sugar-free fast.")
+                            .font(.system(size: 14, weight: .light))
+                            .foregroundStyle(Color.ncTextPrimary)
+                            .lineSpacing(3)
+                    }
+                    Spacer()
+                }
+                .padding(16)
+                .containerBackground(Color.ncBackground, for: .widget)
+            )
+        }
+        return AnyView(trackingView)
+    }
+
+    private var trackingView: some View {
         HStack(alignment: .top, spacing: 0) {
             // Left — timer
             VStack(alignment: .leading, spacing: 0) {
