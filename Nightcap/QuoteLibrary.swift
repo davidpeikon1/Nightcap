@@ -180,6 +180,16 @@ struct QuoteLibrary {
                 science: "Research on dietary behavior change identifies 2 weeks as the critical threshold after which the probability of long-term maintenance rises sharply. Neurological habituation to the absence of the substance strengthens, and the perceived difficulty of maintenance decreases. You are statistically in a different category now.",
                 tier: .fourteenTo30Days
             ),
+            ReframeQuote(
+                text: "At this point, cravings are mostly memory, not biology. The biology has already shifted — what you're navigating now is the echo of the old pattern.",
+                science: "By two weeks, physiological sugar dependence has largely resolved. What persists is conditioned craving — stimulus-response associations formed through repeated pairing of cues (stress, time of day, environment) with sugar. These conditioned responses weaken through extinction: repeated exposure to the cue without the reward.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "Your skin, your sleep, your energy — these aren't linear. The improvements compound quietly over weeks. You may be in the middle of one right now.",
+                science: "Glycation — the binding of sugar molecules to collagen and elastin — reverses slowly but measurably after sustained sugar reduction. At two weeks, AGE (advanced glycation end-product) formation has significantly slowed. Sleep architecture improvements, driven by stable nocturnal blood glucose, are often fully consolidated by week 2–3.",
+                tier: .fourteenTo30Days
+            ),
         ],
 
         .thirtyPlusDays: [
@@ -191,6 +201,16 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "You're not trying to quit sugar anymore. That's not what this is. You've already quit. What you're doing now is living differently.",
                 science: "The neuroscience of identity consolidation shows that after sustained behavior change, the brain begins encoding the new behavior as default rather than effortful. The neural pathway for the old habit weakens through disuse; the new pattern strengthens through repetition. This is no longer a decision you're making. It's becoming who you are.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "People around you have probably noticed something. They might not know what. You do.",
+                science: "The visible effects of sustained sugar elimination — reduced inflammation markers, improved skin clarity, more stable mood, sharper cognition — are often noticed by others before the person themselves can see them clearly. Changes that compound over 30 days are significant enough to be externally observable.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "This far in, the occasional offer of something sweet at a social event doesn't feel like restraint. It feels like preference. That's the shift.",
+                science: "Identity-based preference change — the point at which behavior aligns with self-concept rather than willpower — is the most durable form of habit maintenance. When the question becomes 'this isn't for me' rather than 'I'm trying not to', relapse probability drops significantly. Research suggests this shift occurs, on average, somewhere between weeks 3 and 6.",
                 tier: .thirtyPlusDays
             ),
         ],

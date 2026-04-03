@@ -1,10 +1,12 @@
 import SwiftUI
 import Charts
+import UIKit
 
 struct FastHistoryView: View {
     @EnvironmentObject var store: FastingStore
     @Environment(\.dismiss) var dismiss
     @State private var showAllCravings = false
+    @State private var editingReset: ResetEvent? = nil
 
     var body: some View {
         NavigationStack {
@@ -39,6 +41,11 @@ struct FastHistoryView: View {
                         .foregroundStyle(Color("NCAccent"))
                         .fontWeight(.medium)
                 }
+            }
+            .sheet(item: $editingReset) { event in
+                EditNoteSheet(event: event)
+                    .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
             }
         }
     }
@@ -235,6 +242,11 @@ struct FastHistoryView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
             .contextMenu {
+                Button {
+                    editingReset = event
+                } label: {
+                    Label("Edit note", systemImage: "pencil")
+                }
                 Button(role: .destructive) {
                     withAnimation {
                         store.deleteResetEvent(id: event.id)
@@ -472,5 +484,121 @@ struct FastHistoryView: View {
                     .frame(height: 1)
             }
         }
+    }
+}
+
+// MARK: - Edit Note Sheet
+
+struct EditNoteSheet: View {
+    let event: ResetEvent
+    @EnvironmentObject var store: FastingStore
+    @Environment(\.dismiss) var dismiss
+    @State private var note: String
+
+    init(event: ResetEvent) {
+        self.event = event
+        self._note = State(initialValue: event.note ?? "")
+    }
+
+    var body: some View {
+        ZStack {
+            Color("NCBackground").ignoresSafeArea()
+
+            VStack(alignment: .leading, spacing: 28) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Edit note")
+                        .font(.system(size: 24, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+
+                    Text(durationLabel + " · " + dateLabel)
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("What was it?")
+                        .font(.system(size: 12, weight: .medium))
+                        .tracking(1)
+                        .foregroundStyle(Color("NCTextTertiary"))
+
+                    TextField("e.g. chocolate after dinner", text: $note)
+                        .font(.system(size: 15))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                        .padding(14)
+                        .background(Color("NCSurface"))
+                        .cornerRadius(10)
+                        .submitLabel(.done)
+                        .onSubmit {
+                            UIApplication.shared.sendAction(
+                                #selector(UIResponder.resignFirstResponder),
+                                to: nil, from: nil, for: nil
+                            )
+                        }
+                        .onChange(of: note) { _, v in
+                            if v.count > 120 { note = String(v.prefix(120)) }
+                        }
+
+                    if note.count > 80 {
+                        HStack {
+                            Spacer()
+                            Text("\(note.count) / 120")
+                                .font(.system(size: 11))
+                                .foregroundStyle(
+                                    note.count > 110 ? Color("NCWarning") : Color("NCTextTertiary")
+                                )
+                        }
+                        .padding(.top, 2)
+                        .transition(.opacity)
+                        .animation(.easeInOut(duration: 0.2), value: note.count > 80)
+                    }
+                }
+
+                Spacer()
+
+                VStack(spacing: 12) {
+                    Button {
+                        store.updateResetEventNote(id: event.id, note: note.isEmpty ? nil : note)
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color("NCBackground"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(Color("NCAccent"))
+                            .cornerRadius(12)
+                    }
+
+                    Button { dismiss() } label: {
+                        Text("Cancel")
+                            .font(.system(size: 14))
+                            .foregroundStyle(Color("NCTextSecondary"))
+                            .padding(.vertical, 8)
+                    }
+                }
+            }
+            .padding(24)
+        }
+        .onTapGesture {
+            UIApplication.shared.sendAction(
+                #selector(UIResponder.resignFirstResponder),
+                to: nil, from: nil, for: nil
+            )
+        }
+    }
+
+    private var durationLabel: String {
+        let h = Int(event.fastDuration) / 3600
+        let d = h / 24
+        let m = (Int(event.fastDuration) % 3600) / 60
+        if d > 0 { return "\(d)d \(h % 24)h \(m)m" }
+        if h > 0 { return "\(h)h \(m)m" }
+        return "\(m)m"
+    }
+
+    private var dateLabel: String {
+        let f = RelativeDateTimeFormatter()
+        f.unitsStyle = .abbreviated
+        return f.localizedString(for: event.date, relativeTo: Date())
     }
 }

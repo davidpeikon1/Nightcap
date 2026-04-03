@@ -136,6 +136,14 @@ struct ResetEvent: Codable, Identifiable {
         self.fastDuration = fastDuration
         self.note = note
     }
+
+    /// Used to update mutable fields while preserving identity.
+    fileprivate init(preserving id: UUID, date: Date, fastDuration: TimeInterval, note: String?) {
+        self.id = id
+        self.date = date
+        self.fastDuration = fastDuration
+        self.note = note
+    }
 }
 
 // MARK: - Timer Display
@@ -331,6 +339,14 @@ class FastingStore: ObservableObject {
 
     func deleteResetEvent(id: UUID) {
         resetEvents.removeAll { $0.id == id }
+        saveDecodable(resetEvents, forKey: Keys.resetEvents)
+    }
+
+    func updateResetEventNote(id: UUID, note: String?) {
+        guard let idx = resetEvents.firstIndex(where: { $0.id == id }) else { return }
+        let old = resetEvents[idx]
+        resetEvents[idx] = ResetEvent(preserving: old.id, date: old.date,
+                                      fastDuration: old.fastDuration, note: note)
         saveDecodable(resetEvents, forKey: Keys.resetEvents)
     }
 
