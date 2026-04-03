@@ -63,7 +63,10 @@
       <div class="nc-badge" aria-label="Coming Soon">Coming Soon</div>
       <h1 class="nc-hero__title" id="hero-title">
         <span class="nc-hero__title-line">Wind Down</span>
-        <span class="nc-hero__title-line nc-hero__title-line--accent">Without the Sugar Crash</span>
+        <span class="nc-hero__title-line nc-hero__title-line--accent"
+              data-ab-test="hero_headline"
+              data-ab-a="Without the Sugar Crash"
+              data-ab-b="How Much Sugar Are You Really Drinking?">Without the Sugar Crash</span>
       </h1>
       <p class="nc-hero__subtitle">
         Nightcap is a new kind of evening beverage — crafted to help you relax,
@@ -257,6 +260,51 @@
           <span class="nc-proof__press-logo">Shape</span>
           <span class="nc-proof__press-logo">Men's Health</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="nc-faq nc-reveal" id="faq" aria-labelledby="faq-title">
+    <div class="nc-faq__container">
+      <h2 class="nc-faq__title" id="faq-title">Questions? We've Got Answers.</h2>
+      <div class="nc-faq__list">
+        <details class="nc-faq__item">
+          <summary class="nc-faq__question">What exactly is Nightcap?</summary>
+          <div class="nc-faq__answer">
+            <p>Nightcap is a functional evening beverage with zero sugar, designed to replace the drinks that are quietly wrecking your sleep and health. Think of it as the opposite of an energy drink — made with magnesium, L-theanine, chamomile, and adaptogens to help you wind down naturally.</p>
+          </div>
+        </details>
+        <details class="nc-faq__item">
+          <summary class="nc-faq__question">When does it launch?</summary>
+          <div class="nc-faq__answer">
+            <p>We're targeting Summer 2026. Waitlist members get first access, and the higher you are on the list, the earlier you'll be able to order. Take the quiz and refer friends to move up.</p>
+          </div>
+        </details>
+        <details class="nc-faq__item">
+          <summary class="nc-faq__question">How is this different from sleepy-time tea?</summary>
+          <div class="nc-faq__answer">
+            <p>We use clinically-dosed, bioavailable forms of each ingredient (like magnesium glycinate, not oxide). Most teas use trace amounts of herbs that don't actually move the needle. Nightcap is formulated to produce real, measurable results — and it tastes like something you'd order at a cocktail bar, not a health food store.</p>
+          </div>
+        </details>
+        <details class="nc-faq__item">
+          <summary class="nc-faq__question">What does it taste like?</summary>
+          <div class="nc-faq__answer">
+            <p>We've spent over a year on flavor. Expect something refreshing, lightly botanical, with a hint of citrus — naturally sweetened with monk fruit and allulose. Beta testers consistently say it's the best-tasting functional beverage they've ever had.</p>
+          </div>
+        </details>
+        <details class="nc-faq__item">
+          <summary class="nc-faq__question">Is there caffeine?</summary>
+          <div class="nc-faq__answer">
+            <p>Zero caffeine. Nightcap is designed for evening consumption. L-theanine (one of our key ingredients) actually promotes relaxation without causing drowsiness — it's the calming compound found in green tea, isolated without the caffeine.</p>
+          </div>
+        </details>
+        <details class="nc-faq__item">
+          <summary class="nc-faq__question">What does joining the waitlist get me?</summary>
+          <div class="nc-faq__answer">
+            <p>Early access before anyone else, exclusive launch pricing (up to 40% off), your personalized sugar report, and access to the Nightcap app for tracking your evening habits. Referring friends bumps you higher on the list.</p>
+          </div>
+        </details>
       </div>
     </div>
   </section>
@@ -708,6 +756,7 @@
   <!-- Toast Container -->
   <div id="toast-container" class="nc-toast-container" aria-live="polite"></div>
 
+  <script src="assets/nightcap-ab.js"></script>
   <script src="assets/nightcap-quiz.js"></script>
   <script src="assets/nightcap-waitlist.js"></script>
 

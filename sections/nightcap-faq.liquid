@@ -1,0 +1,45 @@
+<section class="nc-faq nc-reveal" id="faq" aria-labelledby="faq-title">
+  <div class="nc-faq__container">
+    <h2 class="nc-faq__title" id="faq-title">Questions? We've Got Answers.</h2>
+    <div class="nc-faq__list">
+      {% for block in section.blocks %}
+        <details class="nc-faq__item" {{ block.shopify_attributes }}>
+          <summary class="nc-faq__question">{{ block.settings.question }}</summary>
+          <div class="nc-faq__answer">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "What exactly is Nightcap?", "answer": "Nightcap is a functional evening beverage with zero sugar, designed to replace the drinks that are quietly wrecking your sleep and health." } },
+        { "type": "question", "settings": { "question": "When does it launch?", "answer": "We're targeting Summer 2026. Waitlist members get first access." } },
+        { "type": "question", "settings": { "question": "How is this different from sleepy-time tea?", "answer": "We use clinically-dosed, bioavailable forms of each ingredient. Most teas use trace amounts that don't move the needle." } },
+        { "type": "question", "settings": { "question": "What does it taste like?", "answer": "Refreshing, lightly botanical, with a hint of citrus. Naturally sweetened with monk fruit and allulose." } },
+        { "type": "question", "settings": { "question": "Is there caffeine?", "answer": "Zero caffeine. Nightcap is designed for evening consumption." } },
+        { "type": "question", "settings": { "question": "What does joining the waitlist get me?", "answer": "Early access, exclusive launch pricing (up to 40% off), your personalized sugar report, and access to the Nightcap app." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

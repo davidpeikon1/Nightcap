@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Move Up the Waitlist — Nightcap</title>
+  <!--
+    KLAVIYO DAY 7 EMAIL — "Referral / Move Up"
+    Triggered: 7 days after "Joined Waitlist" event
+    Variables: {{ first_name }}, {{ quiz_estimated_daily_sugar }}
+  -->
+  <style>
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    body { margin: 0; padding: 0; width: 100% !important; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .email-bg { background-color: #0a0a12 !important; }
+      .email-card { background-color: #141422 !important; }
+    }
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; padding: 16px !important; }
+      .stack-col { display: block !important; width: 100% !important; text-align: center !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #0a0a12;">
+  <div style="display: none; max-height: 0; overflow: hidden;">
+    {{ first_name|default:'Hey' }}, refer 3 friends and jump the line. Here's your unique link.
+  </div>
+
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0a0a12;" class="email-bg">
+    <tr>
+      <td align="center" style="padding: 40px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="560" class="email-container" style="max-width: 560px; width: 100%;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom: 32px;">
+              <span style="font-family: Georgia, serif; font-size: 24px; font-weight: 700; color: #e8e8f0;">Nightcap</span>
+            </td>
+          </tr>
+
+          <!-- Hero -->
+          <tr>
+            <td style="background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,214,160,0.05)); border-radius: 16px; padding: 40px 32px; border: 1px solid rgba(124,58,237,0.2); text-align: center;" class="email-card">
+              <span style="font-size: 48px; display: block; margin-bottom: 16px;">&#128640;</span>
+              <h1 style="margin: 0 0 12px; font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: #e8e8f0;">
+                Want to skip the line?
+              </h1>
+              <p style="margin: 0; font-size: 15px; color: #9898b0; line-height: 1.7;">
+                {{ first_name|default:'Hey' }}, you've been on the Nightcap waitlist for a week now. Here's the deal: <strong style="color: #e8e8f0;">every friend who signs up through your link bumps you 10 spots</strong>. Refer 3 friends and you jump 30 spots closer to the front.
+              </p>
+            </td>
+          </tr>
+
+          <tr><td style="height: 24px;"></td></tr>
+
+          <!-- How Referral Works -->
+          <tr>
+            <td style="background: #141422; border-radius: 16px; padding: 28px 32px; border: 1px solid rgba(124,58,237,0.15);" class="email-card">
+              <h2 style="margin: 0 0 20px; font-family: Georgia, serif; font-size: 20px; font-weight: 600; color: #e8e8f0; text-align: center;">How It Works</h2>
+
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <span style="display: inline-block; width: 28px; height: 28px; background: linear-gradient(135deg, #7c3aed, #5b21b6); border-radius: 50%; color: #fff; font-weight: 700; font-size: 13px; text-align: center; line-height: 28px; margin-right: 12px;">1</span>
+                    <span style="font-size: 14px; color: #e8e8f0;">Share your unique link with friends</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <span style="display: inline-block; width: 28px; height: 28px; background: linear-gradient(135deg, #7c3aed, #5b21b6); border-radius: 50%; color: #fff; font-weight: 700; font-size: 13px; text-align: center; line-height: 28px; margin-right: 12px;">2</span>
+                    <span style="font-size: 14px; color: #e8e8f0;">They take the sugar quiz &amp; join the waitlist</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0;">
+                    <span style="display: inline-block; width: 28px; height: 28px; background: linear-gradient(135deg, #7c3aed, #5b21b6); border-radius: 50%; color: #fff; font-weight: 700; font-size: 13px; text-align: center; line-height: 28px; margin-right: 12px;">3</span>
+                    <span style="font-size: 14px; color: #e8e8f0;">You move up 10 spots per referral &#127881;</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 24px;"></td></tr>
+
+          <!-- Share CTA -->
+          <tr>
+            <td style="text-align: center;">
+              <p style="margin: 0 0 16px; font-size: 14px; color: #9898b0;">Your unique referral link:</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="background: #0a0a12; border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 14px 20px; text-align: center;">
+                    <span style="font-size: 14px; color: #a78bfa; word-break: break-all;">
+                      {{ referral_url|default:'https://nightcap.com/waitlist?ref=YOUR_CODE' }}
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 20px;"></td></tr>
+
+          <!-- Share Buttons -->
+          <tr>
+            <td align="center">
+              <table role="presentation" cellpadding="0" cellspacing="8">
+                <tr>
+                  <td style="background: #141422; border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 12px 24px;" class="stack-col">
+                    <a href="https://twitter.com/intent/tweet?text=I%20just%20found%20out%20how%20much%20sugar%20I%20drink%20daily.%20Take%20the%20quiz%3A&url={{ referral_url|url_encode }}" style="color: #a78bfa; font-size: 13px; font-weight: 600; text-decoration: none;">&#120143; Share on X</a>
+                  </td>
+                  <td style="background: #141422; border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 12px 24px;" class="stack-col">
+                    <a href="mailto:?subject=You%20need%20to%20take%20this%20sugar%20quiz&body=I%20found%20out%20I%20consume%20{{ quiz_estimated_daily_sugar|default:'a lot of' }}g%20of%20sugar%20daily.%20Take%20the%20quiz%3A%20{{ referral_url|url_encode }}" style="color: #a78bfa; font-size: 13px; font-weight: 600; text-decoration: none;">&#9993; Email a Friend</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 24px;"></td></tr>
+
+          <!-- Sugar Reminder -->
+          <tr>
+            <td style="background: rgba(245,158,11,0.06); border-radius: 12px; padding: 20px 24px; border: 1px solid rgba(245,158,11,0.15); text-align: center;">
+              <p style="margin: 0; font-size: 13px; color: #9898b0;">
+                Remember: you're consuming an estimated <strong style="color: #f59e0b; font-size: 18px;">{{ quiz_estimated_daily_sugar|default:'??' }}g</strong> of sugar per day from drinks.
+                <br>Nightcap has <strong style="color: #06d6a0;">0g</strong>. The switch is coming.
+              </p>
+            </td>
+          </tr>
+
+          <tr><td style="height: 32px;"></td></tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center">
+              <p style="margin: 0 0 8px; font-family: Georgia, serif; font-size: 16px; font-weight: 600; color: #e8e8f0;">Nightcap</p>
+              <p style="margin: 0 0 8px; font-size: 12px; color: #686880;">The better way to wind down.</p>
+              <p style="margin: 0; font-size: 11px; color: #686880; line-height: 1.6;">
+                <a href="{{ unsubscribe_url|default:'#' }}" style="color: #7c3aed; text-decoration: underline;">Unsubscribe</a> &nbsp;|&nbsp;
+                <a href="{{ manage_preferences_url|default:'#' }}" style="color: #7c3aed; text-decoration: underline;">Manage preferences</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

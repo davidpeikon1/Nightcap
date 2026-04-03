@@ -22,6 +22,7 @@
 <body>
   {{ content_for_layout }}
 
+  {{ 'nightcap-ab.js' | asset_url | script_tag }}
   {{ 'nightcap-quiz.js' | asset_url | script_tag }}
   {{ 'nightcap-waitlist.js' | asset_url | script_tag }}
 

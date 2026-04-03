@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>What's Actually Inside Nightcap — Nightcap</title>
+  <!--
+    KLAVIYO DAY 3 EMAIL — "Meet the Ingredients"
+    Triggered: 3 days after "Joined Waitlist" event
+    Variables: {{ first_name }}, {{ quiz_motivation }}, {{ quiz_sleep_quality }}
+  -->
+  <style>
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    body { margin: 0; padding: 0; width: 100% !important; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .email-bg { background-color: #0a0a12 !important; }
+      .email-card { background-color: #141422 !important; }
+    }
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; padding: 16px !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #0a0a12;">
+  <div style="display: none; max-height: 0; overflow: hidden;">
+    {{ first_name|default:'Hey' }}, here's exactly what's in Nightcap and why each ingredient matters for you.
+  </div>
+
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0a0a12;" class="email-bg">
+    <tr>
+      <td align="center" style="padding: 40px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="560" class="email-container" style="max-width: 560px; width: 100%;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom: 32px;">
+              <span style="font-family: Georgia, serif; font-size: 24px; font-weight: 700; color: #e8e8f0;">Nightcap</span>
+            </td>
+          </tr>
+
+          <!-- Hero -->
+          <tr>
+            <td style="background: #141422; border-radius: 16px; padding: 40px 32px; border: 1px solid rgba(124,58,237,0.15);" class="email-card">
+              <h1 style="margin: 0 0 16px; font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: #e8e8f0; text-align: center;">
+                {{ first_name|default:'Hey' }}, let's talk ingredients
+              </h1>
+              <p style="margin: 0; font-size: 15px; color: #9898b0; line-height: 1.7; text-align: center;">
+                You joined the Nightcap waitlist because
+                {% if quiz_motivation == "sleep_better" %}you want better sleep{% elif quiz_motivation == "cut_sugar" %}you're cutting sugar{% elif quiz_motivation == "relaxation" %}you want a better way to unwind{% else %}you're building healthier habits{% endif %}.
+                Here's exactly how each ingredient helps.
+              </p>
+            </td>
+          </tr>
+
+          <tr><td style="height: 16px;"></td></tr>
+
+          <!-- Ingredient 1 -->
+          <tr>
+            <td style="background: #141422; border-radius: 16px; padding: 24px 32px; border: 1px solid rgba(124,58,237,0.15);" class="email-card">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <span style="font-size: 28px;">&#129497;</span>
+                    <span style="font-family: Georgia, serif; font-size: 18px; font-weight: 600; color: #e8e8f0; margin-left: 8px;">Magnesium Glycinate</span>
+                    <span style="display: inline-block; padding: 2px 8px; background: rgba(6,214,160,0.12); color: #06d6a0; font-size: 11px; font-weight: 600; border-radius: 100px; margin-left: 8px;">RELAXATION</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 10px;">
+                    <p style="margin: 0; font-size: 14px; color: #9898b0; line-height: 1.7;">
+                      80% of Americans are magnesium deficient. This form (glycinate) is the most bioavailable — it crosses the blood-brain barrier to calm your nervous system, relax muscles, and prepare your body for sleep. Most supplements use oxide, which your body barely absorbs.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 12px;"></td></tr>
+
+          <!-- Ingredient 2 -->
+          <tr>
+            <td style="background: #141422; border-radius: 16px; padding: 24px 32px; border: 1px solid rgba(124,58,237,0.15);" class="email-card">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <span style="font-size: 28px;">&#127861;</span>
+                    <span style="font-family: Georgia, serif; font-size: 18px; font-weight: 600; color: #e8e8f0; margin-left: 8px;">L-Theanine</span>
+                    <span style="display: inline-block; padding: 2px 8px; background: rgba(6,214,160,0.12); color: #06d6a0; font-size: 11px; font-weight: 600; border-radius: 100px; margin-left: 8px;">FOCUS &amp; CALM</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 10px;">
+                    <p style="margin: 0; font-size: 14px; color: #9898b0; line-height: 1.7;">
+                      Found naturally in green tea, L-theanine promotes alpha brain waves — the state between awake and asleep. It creates calm alertness without drowsiness. Studies show it reduces stress markers within 30 minutes.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 12px;"></td></tr>
+
+          <!-- Ingredient 3 -->
+          <tr>
+            <td style="background: #141422; border-radius: 16px; padding: 24px 32px; border: 1px solid rgba(124,58,237,0.15);" class="email-card">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <span style="font-size: 28px;">&#127804;</span>
+                    <span style="font-family: Georgia, serif; font-size: 18px; font-weight: 600; color: #e8e8f0; margin-left: 8px;">Chamomile Extract</span>
+                    <span style="display: inline-block; padding: 2px 8px; background: rgba(6,214,160,0.12); color: #06d6a0; font-size: 11px; font-weight: 600; border-radius: 100px; margin-left: 8px;">SLEEP</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 10px;">
+                    <p style="margin: 0; font-size: 14px; color: #9898b0; line-height: 1.7;">
+                      Not your grandma's chamomile tea. We use a concentrated extract standardized to 1.2% apigenin — the active compound that binds to GABA receptors in your brain (the same ones targeted by anti-anxiety medications, but naturally).
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 12px;"></td></tr>
+
+          <!-- Ingredient 4 -->
+          <tr>
+            <td style="background: #141422; border-radius: 16px; padding: 24px 32px; border: 1px solid rgba(124,58,237,0.15);" class="email-card">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <span style="font-size: 28px;">&#127807;</span>
+                    <span style="font-family: Georgia, serif; font-size: 18px; font-weight: 600; color: #e8e8f0; margin-left: 8px;">Ashwagandha KSM-66</span>
+                    <span style="display: inline-block; padding: 2px 8px; background: rgba(6,214,160,0.12); color: #06d6a0; font-size: 11px; font-weight: 600; border-radius: 100px; margin-left: 8px;">STRESS RELIEF</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 10px;">
+                    <p style="margin: 0; font-size: 14px; color: #9898b0; line-height: 1.7;">
+                      KSM-66 is the gold-standard ashwagandha extract backed by 24 clinical trials. It reduces cortisol by up to 30%, improves sleep quality scores, and helps your body recover from daily stress. This isn't a generic adaptogen — it's the real deal.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 24px;"></td></tr>
+
+          <!-- CTA -->
+          <tr>
+            <td align="center">
+              <p style="margin: 0 0 16px; font-size: 15px; color: #e8e8f0; font-weight: 500;">
+                Want to start tracking your sugar intake now?
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background: linear-gradient(135deg, #7c3aed, #5b21b6); border-radius: 12px; padding: 14px 36px;">
+                    <a href="{{ app_download_url|default:'https://nightcap.app/download' }}" style="color: #fff; font-size: 15px; font-weight: 600; text-decoration: none;">Download the App</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr><td style="height: 32px;"></td></tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center">
+              <p style="margin: 0 0 8px; font-family: Georgia, serif; font-size: 16px; font-weight: 600; color: #e8e8f0;">Nightcap</p>
+              <p style="margin: 0; font-size: 11px; color: #686880; line-height: 1.6;">
+                <a href="{{ unsubscribe_url|default:'#' }}" style="color: #7c3aed; text-decoration: underline;">Unsubscribe</a> &nbsp;|&nbsp;
+                <a href="{{ manage_preferences_url|default:'#' }}" style="color: #7c3aed; text-decoration: underline;">Manage preferences</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
