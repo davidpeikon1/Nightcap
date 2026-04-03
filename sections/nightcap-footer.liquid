@@ -1,3 +1,30 @@
+<!-- Exit Intent Popup -->
+<div class="nc-exit-popup" id="exit-popup" role="dialog" aria-labelledby="exit-popup-title" aria-modal="true">
+  <div class="nc-exit-popup__overlay" id="exit-popup-overlay"></div>
+  <div class="nc-exit-popup__card">
+    <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close popup">&times;</button>
+    <div class="nc-exit-popup__icon" aria-hidden="true">&#9888;&#65039;</div>
+    <h3 class="nc-exit-popup__title" id="exit-popup-title">Wait — you didn't find out your number!</h3>
+    <p class="nc-exit-popup__desc">Enter your email and we'll send your personalized sugar report — no quiz needed.</p>
+    <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
+      <input type="email" class="nc-input" id="exit-popup-email" placeholder="you@example.com" required aria-label="Email address">
+      <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Get My Report</button>
+    </form>
+    <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button> for a more detailed breakdown.</p>
+  </div>
+</div>
+
+<!-- Sticky CTA -->
+<div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
+  <div class="nc-sticky-cta__inner">
+    <span class="nc-sticky-cta__text"><strong>Nightcap</strong> &mdash; Join <span id="sticky-count">{{ section.settings.waitlist_count | default: '2,847' }}</span> on the waitlist</span>
+    <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="nc-toast-container" aria-live="polite"></div>
+
 <footer class="nc-footer">
   <div class="nc-footer__container">
     <div class="nc-footer__brand">
@@ -19,6 +46,13 @@
 {% schema %}
 {
   "name": "Nightcap Footer",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "waitlist_count",
+      "label": "Waitlist Count (display)",
+      "default": "2,847"
+    }
+  ]
 }
 {% endschema %}
