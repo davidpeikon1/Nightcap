@@ -278,10 +278,13 @@ struct SettingsSheet: View {
         if totalSecs > 0 {
             let td = Int(totalSecs) / 86400
             let th = (Int(totalSecs) % 86400) / 3600
-            let totalStr = td > 0 ? "\(td)d \(th)h" : "\(th)h"
+            let totalStr = td > 0 ? (th > 0 ? "\(td)d \(th)h" : "\(td)d") : "\(th)h"
             lines.append("ALL-TIME STATS")
             lines.append("Total clean time: \(totalStr)")
             lines.append("Total fasts: \(store.resetEvents.count + (store.isTracking ? 1 : 0))")
+            if store.bestStreakDays > 0 {
+                lines.append("Best streak: \(store.bestStreakDays) day\(store.bestStreakDays == 1 ? "" : "s")")
+            }
             lines.append("")
         }
 

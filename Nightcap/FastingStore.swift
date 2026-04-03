@@ -242,6 +242,7 @@ class FastingStore: ObservableObject {
     }
     @Published var elapsedSeconds: TimeInterval = 0
     @Published var streakDays: Int = 0
+    @Published var bestStreakDays: Int = 0
     @Published var earnedBadges: Set<BadgeID> = []
     @Published var newlyUnlockedBadge: BadgeID? = nil
     @Published var cravingLogs: [CravingLog] = []
@@ -262,6 +263,7 @@ class FastingStore: ObservableObject {
         static let lastSugarDate    = "lastSugarDate"
         static let streakDays       = "streakDays"
         static let lastStreakCheck  = "lastStreakCheckDate"
+        static let bestStreakDays   = "bestStreakDays"
         static let earnedBadges     = "earnedBadges"
         static let cravingLogs      = "cravingLogs"
         static let resetEvents      = "resetEvents"
@@ -273,6 +275,7 @@ class FastingStore: ObservableObject {
     init() {
         self.lastSugarDate     = defaults.object(forKey: Keys.lastSugarDate) as? Date
         self.streakDays        = defaults.integer(forKey: Keys.streakDays)
+        self.bestStreakDays    = defaults.integer(forKey: Keys.bestStreakDays)
         self.lastStreakCheckDate = (defaults.object(forKey: Keys.lastStreakCheck) as? Date) ?? .distantPast
         self.earnedBadges      = loadBadges()
         self.cravingLogs       = loadDecodable(forKey: Keys.cravingLogs) ?? []
@@ -325,7 +328,8 @@ class FastingStore: ObservableObject {
         phaseJustUnlocked  = nil
         lastKnownPhase     = .justStarted
         lastStreakCheckDate = .distantPast
-        [Keys.lastSugarDate, Keys.streakDays, Keys.lastStreakCheck,
+        bestStreakDays = 0
+        [Keys.lastSugarDate, Keys.streakDays, Keys.bestStreakDays, Keys.lastStreakCheck,
          Keys.earnedBadges, Keys.cravingLogs, Keys.resetEvents, Keys.lastKnownPhase
         ].forEach { defaults.removeObject(forKey: $0) }
         // Cancel all pending milestone notifications so they don't fire after a reset.
@@ -414,6 +418,10 @@ class FastingStore: ObservableObject {
         let completeDays = max(0, cal.dateComponents([.day], from: fastStart, to: today).day ?? 0)
         streakDays = completeDays
         defaults.set(streakDays, forKey: Keys.streakDays)
+        if streakDays > bestStreakDays {
+            bestStreakDays = streakDays
+            defaults.set(bestStreakDays, forKey: Keys.bestStreakDays)
+        }
         lastStreakCheckDate = today
         defaults.set(today, forKey: Keys.lastStreakCheck)
 

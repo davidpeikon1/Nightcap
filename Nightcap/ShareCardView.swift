@@ -70,8 +70,8 @@ struct ShareCardView: View {
         let h = (total % 86400) / 3600
         let m = (total % 3600) / 60
         if d >= 7 { return "\(d) days sugar-free" }
-        if d >= 1 { return "\(d)d \(h)h sugar-free" }
-        if h >= 1 { return "\(h)h \(m)m sugar-free" }
+        if d >= 1 { return h > 0 ? "\(d)d \(h)h sugar-free" : "\(d)d sugar-free" }
+        if h >= 1 { return m > 0 ? "\(h)h \(m)m sugar-free" : "\(h)h sugar-free" }
         return "\(m) minutes sugar-free"
     }
 }
