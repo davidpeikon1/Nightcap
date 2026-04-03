@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PhaseDetailSheet: View {
     let phase: FastingPhase
+    @EnvironmentObject var store: FastingStore
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -105,6 +106,11 @@ struct PhaseDetailSheet: View {
                             .padding(.vertical, 2)
                             .background(phaseColor.opacity(0.12))
                             .cornerRadius(4)
+                        if let entryDate = phaseEntryDate(for: p) {
+                            Text(relativeDate(entryDate))
+                                .font(.system(size: 10, design: .monospaced))
+                                .foregroundStyle(phaseColor.opacity(0.7))
+                        }
                     }
                     Spacer()
                     Text(p.milestoneLabel)
@@ -177,6 +183,19 @@ struct PhaseDetailSheet: View {
             .background(Color("NCSurface"))
             .cornerRadius(12)
         }
+    }
+
+    // MARK: - Helpers
+
+    private func phaseEntryDate(for p: FastingPhase) -> Date? {
+        guard let start = store.lastSugarDate else { return nil }
+        return start.addingTimeInterval(p.previousThreshold)
+    }
+
+    private func relativeDate(_ date: Date) -> String {
+        let f = RelativeDateTimeFormatter()
+        f.unitsStyle = .abbreviated
+        return f.localizedString(for: date, relativeTo: Date())
     }
 
     // MARK: - Data

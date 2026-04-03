@@ -34,9 +34,12 @@ struct WeeklyInsightCard: View {
             // Stats
             VStack(spacing: 10) {
                 statRow("Longest fast", value: insight.longestFastFormatted)
-                statRow("Resets", value: "\(insight.resetCount)")
+                statRow("Resets this week", value: "\(insight.resetCount)")
+                if store.streakDays > 0 {
+                    statRow("Current streak", value: "\(store.streakDays)d")
+                }
                 if let trigger = insight.topTrigger {
-                    statRow("Most common trigger", value: trigger.rawValue)
+                    statRow("Top craving trigger", value: trigger.rawValue)
                 }
             }
 
