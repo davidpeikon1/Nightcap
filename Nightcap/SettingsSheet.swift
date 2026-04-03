@@ -167,7 +167,7 @@ struct SettingsSheet: View {
                 Text("Daily check-ins")
                     .font(.system(size: 15))
                     .foregroundStyle(Color("NCTextPrimary"))
-                Text("7am reframe · 9pm craving check-in")
+                Text(dailyNotifSubtitle)
                     .font(.system(size: 12))
                     .foregroundStyle(Color("NCTextTertiary"))
             }
@@ -324,6 +324,14 @@ struct SettingsSheet: View {
                 }
             }
         }
+    }
+
+    private var dailyNotifSubtitle: String {
+        let fmt = DateFormatter()
+        fmt.dateFormat = "h a"
+        let morning = fmt.string(from: morningTime)
+        let evening = fmt.string(from: eveningTime)
+        return "\(morning) reframe · \(evening) craving check-in"
     }
 
     private var appVersion: String {
