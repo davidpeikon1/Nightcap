@@ -103,7 +103,7 @@ struct ProgressSection: View {
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 3)
-                        .fill(Color("NCSurface"))
+                        .fill(Color("NCTextTertiary").opacity(0.25))
                         .frame(height: 6)
 
                     RoundedRectangle(cornerRadius: 3)
