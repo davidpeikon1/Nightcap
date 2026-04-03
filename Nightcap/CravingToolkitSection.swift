@@ -148,7 +148,7 @@ struct CountdownTool: View {
     var body: some View {
         VStack(spacing: 20) {
             if state.completed {
-                VStack(spacing: 12) {
+                VStack(spacing: 16) {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 36, weight: .light))
                         .foregroundStyle(Color("NCSuccess"))
@@ -157,6 +157,15 @@ struct CountdownTool: View {
                         .font(.system(size: 18, weight: .light))
                         .foregroundStyle(Color("NCTextPrimary"))
                         .multilineTextAlignment(.center)
+
+                    Button {
+                        state.reset()
+                    } label: {
+                        Text("Start another 20 minutes")
+                            .font(.system(size: 13))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                            .padding(.top, 4)
+                    }
                 }
                 .padding(.vertical, 16)
             } else {
