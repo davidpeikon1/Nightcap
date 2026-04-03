@@ -96,7 +96,9 @@ struct HomeView: View {
                 .presentationDragIndicator(.visible)
         }
         .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenResetModal)) { _ in
-            guard !coachmarkMode else { return }
+            // Only open the reset modal when a fast is actually in progress;
+            // firing this with nothing tracked would log a 0-second reset entry.
+            guard !coachmarkMode, store.isTracking else { return }
             showQuickReset = true
         }
     }
