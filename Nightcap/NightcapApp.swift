@@ -1,9 +1,14 @@
 import SwiftUI
+import AppIntents
 
 @main
 struct NightcapApp: App {
     @StateObject private var fastingStore = FastingStore()
     @StateObject private var appState    = AppState()
+
+    init() {
+        NightcapShortcuts.updateAppShortcutParameters()
+    }
 
     var body: some Scene {
         WindowGroup {

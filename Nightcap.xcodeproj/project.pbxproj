@@ -28,6 +28,7 @@
 		AA000001000000000000011A /* ConfettiView.swift in Sources */      = {isa = PBXBuildFile; fileRef = AA000001000000000000011B; };
 		AA000001000000000000012A /* ShareCardView.swift in Sources */     = {isa = PBXBuildFile; fileRef = AA000001000000000000012B; };
 		AA000001000000000000013A /* PhaseDetailSheet.swift in Sources */  = {isa = PBXBuildFile; fileRef = AA000001000000000000013B; };
+		AA000001000000000000015A /* NightcapIntents.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA000001000000000000015B; };
 		WA000001000000000000001A /* NightcapWidget.swift in Sources */    = {isa = PBXBuildFile; fileRef = WA000001000000000000001B; };
 		WA000001000000000000002A /* Assets.xcassets in Resources */       = {isa = PBXBuildFile; fileRef = WA000001000000000000002B; };
 		WF000001000000000000001A /* NightcapWidget.appex in Embed Foundation Extensions */ = {
@@ -82,6 +83,7 @@
 		AA000001000000000000012B /* ShareCardView.swift */     = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
 		AA000001000000000000013B /* PhaseDetailSheet.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseDetailSheet.swift; sourceTree = "<group>"; };
 		AA000001000000000000014B /* Nightcap.entitlements */   = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nightcap.entitlements; sourceTree = "<group>"; };
+		AA000001000000000000015B /* NightcapIntents.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapIntents.swift; sourceTree = "<group>"; };
 		BB000001000000000000001B /* Assets.xcassets */         = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB000001000000000000002B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CC000001000000000000001B /* Nightcap.app */            = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightcap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,7 @@
 				AA000001000000000000011B /* ConfettiView.swift */,
 				AA000001000000000000012B /* ShareCardView.swift */,
 				AA000001000000000000013B /* PhaseDetailSheet.swift */,
+				AA000001000000000000015B /* NightcapIntents.swift */,
 				AA000001000000000000014B /* Nightcap.entitlements */,
 				BB000001000000000000001B /* Assets.xcassets */,
 				EE000001000000000000004A /* Preview Content */,
@@ -294,6 +297,7 @@
 				AA000001000000000000011A /* ConfettiView.swift in Sources */,
 				AA000001000000000000012A /* ShareCardView.swift in Sources */,
 				AA000001000000000000013A /* PhaseDetailSheet.swift in Sources */,
+				AA000001000000000000015A /* NightcapIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

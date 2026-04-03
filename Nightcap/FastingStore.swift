@@ -379,6 +379,7 @@ class FastingStore: ObservableObject {
                 saveBadges()
                 newlyUnlockedBadge = badge
                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                NotificationManager.shared.scheduleMilestoneNotification(badge: badge)
                 break // one at a time
             }
         }
