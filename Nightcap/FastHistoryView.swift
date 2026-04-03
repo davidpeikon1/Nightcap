@@ -394,7 +394,8 @@ struct FastHistoryView: View {
     private func formatHoursCompact(_ seconds: TimeInterval) -> String {
         let h = Int(seconds) / 3600
         let d = h / 24
-        if d > 0 { return "\(d)d \(h % 24)h" }
+        let rem = h % 24
+        if d > 0 { return rem > 0 ? "\(d)d \(rem)h" : "\(d)d" }
         return "\(h)h"
     }
 

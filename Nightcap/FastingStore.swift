@@ -475,8 +475,8 @@ class FastingStore: ObservableObject {
         let m = (total % 3600) / 60
         let s = total % 60
         if d >= 7 { return "\(d) days" }
-        if d >= 1 { return "\(d)d \(h)h" }
-        if h >= 1 { return "\(h)h \(m)m" }
+        if d >= 1 { return h > 0 ? "\(d)d \(h)h" : "\(d)d" }
+        if h >= 1 { return m > 0 ? "\(h)h \(m)m" : "\(h)h" }
         return String(format: "%d:%02d", m, s)
     }
 
