@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 // MARK: - Progress Section
 
@@ -202,6 +203,7 @@ struct MilestoneSheet: View {
     let badge: BadgeID
     @EnvironmentObject var store: FastingStore
     @Environment(\.dismiss) var dismiss
+    @Environment(\.requestReview) private var requestReview
     @State private var shareImage: UIImage? = nil
     @State private var showShareSheet = false
 
@@ -294,6 +296,15 @@ struct MilestoneSheet: View {
             if let img = shareImage {
                 ShareSheet(items: [img])
                     .presentationDetents([.medium, .large])
+            }
+        }
+        .onAppear {
+            // Request a review at the 1-week milestone — a high-satisfaction moment.
+            // Apple allows 3 prompts per year; this fires only once (badge earned once).
+            if badge == .oneWeek {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                    requestReview()
+                }
             }
         }
     }

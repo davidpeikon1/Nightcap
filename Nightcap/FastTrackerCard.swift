@@ -52,36 +52,52 @@ struct FastTrackerCard: View {
 
     @ViewBuilder
     private var timerView: some View {
-        switch store.timerDisplay {
-        case .minutesSeconds(let m, let s):
-            HStack(alignment: .lastTextBaseline, spacing: 4) {
-                monoText(String(format: "%02d", m), size: 52)
-                monoText(":", size: 44).foregroundStyle(Color("NCTextTertiary"))
-                monoText(String(format: "%02d", s), size: 52)
-            }
+        Group {
+            switch store.timerDisplay {
+            case .minutesSeconds(let m, let s):
+                HStack(alignment: .lastTextBaseline, spacing: 4) {
+                    monoText(String(format: "%02d", m), size: 52)
+                    monoText(":", size: 44).foregroundStyle(Color("NCTextTertiary"))
+                    monoText(String(format: "%02d", s), size: 52)
+                }
 
-        case .hoursMinutes(let h, let m):
-            HStack(alignment: .lastTextBaseline, spacing: 16) {
-                unitBlock(value: h, unit: "h")
-                unitBlock(value: m, unit: "m")
-            }
+            case .hoursMinutes(let h, let m):
+                HStack(alignment: .lastTextBaseline, spacing: 16) {
+                    unitBlock(value: h, unit: "h")
+                    unitBlock(value: m, unit: "m")
+                }
 
-        case .daysHoursMinutes(let d, let h, let m):
-            HStack(alignment: .lastTextBaseline, spacing: 16) {
-                unitBlock(value: d, unit: "d")
-                unitBlock(value: h, unit: "h")
-                unitBlock(value: m, unit: "m")
-            }
+            case .daysHoursMinutes(let d, let h, let m):
+                HStack(alignment: .lastTextBaseline, spacing: 16) {
+                    unitBlock(value: d, unit: "d")
+                    unitBlock(value: h, unit: "h")
+                    unitBlock(value: m, unit: "m")
+                }
 
-        case .days(let d):
-            HStack(alignment: .lastTextBaseline, spacing: 6) {
-                monoText("\(d)", size: 64)
-                Text("days")
-                    .font(.system(size: 22, weight: .light))
-                    .foregroundStyle(Color("NCTextSecondary"))
-                    .padding(.bottom, 6)
+            case .days(let d):
+                HStack(alignment: .lastTextBaseline, spacing: 6) {
+                    monoText("\(d)", size: 64)
+                    Text("days")
+                        .font(.system(size: 22, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .padding(.bottom, 6)
+                }
             }
         }
+        .accessibilityLabel(timerAccessibilityLabel)
+        .accessibilityHint("Sugar-free elapsed time")
+    }
+
+    private var timerAccessibilityLabel: String {
+        let total = Int(store.elapsedSeconds)
+        let d = total / 86400
+        let h = (total % 86400) / 3600
+        let m = (total % 3600) / 60
+        let s = total % 60
+        if d > 0 { return "\(d) day\(d == 1 ? "" : "s"), \(h) hour\(h == 1 ? "" : "s")" }
+        if h > 0 { return "\(h) hour\(h == 1 ? "" : "s"), \(m) minute\(m == 1 ? "" : "s")" }
+        if m > 0 { return "\(m) minute\(m == 1 ? "" : "s"), \(s) second\(s == 1 ? "" : "s")" }
+        return "\(s) second\(s == 1 ? "" : "s")"
     }
 
     private func monoText(_ text: String, size: CGFloat) -> Text {
