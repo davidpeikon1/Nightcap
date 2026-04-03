@@ -17,6 +17,10 @@
   <meta name="twitter:title" content="Nightcap — How Much Sugar Are You Really Drinking?">
   <meta name="twitter:description" content="Take the 60-second sugar quiz. The results might shock you.">
 
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0a0a12">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -199,6 +203,59 @@
           <h3 class="nc-ingredients__card-title">Ashwagandha KSM-66</h3>
           <p class="nc-ingredients__card-desc">Gold-standard adaptogen. Reduces cortisol by up to 30% in clinical trials.</p>
           <span class="nc-ingredients__card-tag">Stress Relief</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOCIAL PROOF ===== -->
+  <section class="nc-proof nc-reveal" id="social-proof" aria-labelledby="proof-title">
+    <div class="nc-proof__container">
+      <h2 class="nc-proof__title" id="proof-title">Early Testers Are Already Obsessed</h2>
+      <div class="nc-proof__grid">
+        <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
+          <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="nc-proof__quote">"I used to have wine every night to unwind. Nightcap replaced that completely. I sleep deeper and wake up feeling amazing."</p>
+          <div class="nc-proof__author">
+            <div class="nc-proof__avatar">S</div>
+            <div>
+              <span class="nc-proof__name">Sarah M.</span>
+              <span class="nc-proof__detail">Beta Tester &middot; NYC</span>
+            </div>
+          </div>
+        </div>
+        <div class="nc-proof__card nc-reveal nc-reveal--delay-2">
+          <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="nc-proof__quote">"As someone who tracks macros, this is a game changer. Zero sugar, actually works, and tastes like something I'd order at a bar."</p>
+          <div class="nc-proof__author">
+            <div class="nc-proof__avatar">D</div>
+            <div>
+              <span class="nc-proof__name">David K.</span>
+              <span class="nc-proof__detail">Beta Tester &middot; Austin</span>
+            </div>
+          </div>
+        </div>
+        <div class="nc-proof__card nc-reveal nc-reveal--delay-3">
+          <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="nc-proof__quote">"My Oura ring data doesn't lie — deep sleep went up 22% the first week I switched to Nightcap. Nothing else changed."</p>
+          <div class="nc-proof__author">
+            <div class="nc-proof__avatar">M</div>
+            <div>
+              <span class="nc-proof__name">Michelle T.</span>
+              <span class="nc-proof__detail">Beta Tester &middot; LA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Press / Credibility Bar -->
+      <div class="nc-proof__press">
+        <span class="nc-proof__press-label">Featured in</span>
+        <div class="nc-proof__press-logos">
+          <span class="nc-proof__press-logo">Well+Good</span>
+          <span class="nc-proof__press-logo">mindbodygreen</span>
+          <span class="nc-proof__press-logo">Shape</span>
+          <span class="nc-proof__press-logo">Men's Health</span>
         </div>
       </div>
     </div>
@@ -623,6 +680,22 @@
       </p>
     </div>
   </footer>
+
+  <!-- ===== EXIT INTENT POPUP ===== -->
+  <div class="nc-exit-popup" id="exit-popup" role="dialog" aria-labelledby="exit-popup-title" aria-modal="true">
+    <div class="nc-exit-popup__overlay" id="exit-popup-overlay"></div>
+    <div class="nc-exit-popup__card">
+      <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close popup">&times;</button>
+      <div class="nc-exit-popup__icon" aria-hidden="true">&#9888;&#65039;</div>
+      <h3 class="nc-exit-popup__title" id="exit-popup-title">Wait — you didn't find out your number!</h3>
+      <p class="nc-exit-popup__desc">Enter your email and we'll send your personalized sugar report — no quiz needed.</p>
+      <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
+        <input type="email" class="nc-input" id="exit-popup-email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Get My Report</button>
+      </form>
+      <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button> for a more detailed breakdown.</p>
+    </div>
+  </div>
 
   <!-- Sticky CTA (appears on scroll past hero) -->
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">

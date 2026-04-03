@@ -1,0 +1,57 @@
+<section class="nc-proof nc-reveal" id="social-proof" aria-labelledby="proof-title">
+  <div class="nc-proof__container">
+    <h2 class="nc-proof__title" id="proof-title">Early Testers Are Already Obsessed</h2>
+    <div class="nc-proof__grid">
+      {% for block in section.blocks %}
+        <div class="nc-proof__card nc-reveal nc-reveal--delay-{{ forloop.index }}">
+          <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="nc-proof__quote">"{{ block.settings.quote }}"</p>
+          <div class="nc-proof__author">
+            <div class="nc-proof__avatar">{{ block.settings.name | slice: 0 }}</div>
+            <div>
+              <span class="nc-proof__name">{{ block.settings.name }}</span>
+              <span class="nc-proof__detail">{{ block.settings.detail }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="nc-proof__press">
+      <span class="nc-proof__press-label">Featured in</span>
+      <div class="nc-proof__press-logos">
+        <span class="nc-proof__press-logo">Well+Good</span>
+        <span class="nc-proof__press-logo">mindbodygreen</span>
+        <span class="nc-proof__press-logo">Shape</span>
+        <span class="nc-proof__press-logo">Men's Health</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social Proof",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Sarah M." },
+        { "type": "text", "id": "detail", "label": "Detail", "default": "Beta Tester" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Proof",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "I used to have wine every night to unwind. Nightcap replaced that completely. I sleep deeper and wake up feeling amazing.", "name": "Sarah M.", "detail": "Beta Tester · NYC" } },
+        { "type": "testimonial", "settings": { "quote": "As someone who tracks macros, this is a game changer. Zero sugar, actually works, and tastes like something I'd order at a bar.", "name": "David K.", "detail": "Beta Tester · Austin" } },
+        { "type": "testimonial", "settings": { "quote": "My Oura ring data doesn't lie — deep sleep went up 22% the first week I switched to Nightcap. Nothing else changed.", "name": "Michelle T.", "detail": "Beta Tester · LA" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

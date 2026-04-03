@@ -695,4 +695,128 @@
       window.__nightcapTrack(name, data);
     }
   }
+
+  // ---------- Exit Intent Popup ----------
+  (function initExitIntent() {
+    var popup = document.getElementById('exit-popup');
+    var overlay = document.getElementById('exit-popup-overlay');
+    var closeBtn = document.getElementById('exit-popup-close');
+    var exitForm = document.getElementById('exit-popup-form');
+    var quizLink = document.getElementById('exit-popup-quiz');
+
+    if (!popup) return;
+
+    var shown = false;
+    var quizStarted = false;
+    var signedUp = false;
+
+    // Listen for quiz start / signup to suppress popup
+    window.addEventListener('nightcap:quiz_started', function () { quizStarted = true; });
+    window.addEventListener('nightcap:waitlist_signup', function () { signedUp = true; });
+
+    // Check if already dismissed this session
+    try {
+      if (sessionStorage.getItem('nc_exit_dismissed')) return;
+    } catch (e) {}
+
+    // Trigger on mouse leaving viewport (desktop)
+    document.addEventListener('mouseout', function (e) {
+      if (shown || quizStarted || signedUp) return;
+      if (e.clientY <= 0 && e.relatedTarget === null) {
+        showPopup();
+      }
+    });
+
+    // Trigger on scroll-up-fast on mobile (simulated exit intent)
+    var lastScrollY = 0;
+    var scrollSamples = 0;
+    window.addEventListener('scroll', function () {
+      if (shown || quizStarted || signedUp) return;
+      var currentY = window.scrollY;
+      // After user has scrolled at least 40% of page and scrolls back up fast
+      if (currentY > document.body.scrollHeight * 0.4) {
+        scrollSamples++;
+      }
+      if (scrollSamples > 10 && currentY < lastScrollY - 200) {
+        showPopup();
+      }
+      lastScrollY = currentY;
+    }, { passive: true });
+
+    function showPopup() {
+      if (shown) return;
+      shown = true;
+      popup.classList.add('active');
+      track('exit_intent_shown');
+      // Trap focus
+      var emailInput = document.getElementById('exit-popup-email');
+      if (emailInput) setTimeout(function () { emailInput.focus(); }, 300);
+    }
+
+    function hidePopup() {
+      popup.classList.remove('active');
+      try { sessionStorage.setItem('nc_exit_dismissed', '1'); } catch (e) {}
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', hidePopup);
+    if (overlay) overlay.addEventListener('click', hidePopup);
+
+    // ESC key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && popup.classList.contains('active')) {
+        hidePopup();
+      }
+    });
+
+    // Form submit
+    if (exitForm) {
+      exitForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var emailInput = document.getElementById('exit-popup-email');
+        var email = emailInput ? emailInput.value.trim() : '';
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          if (emailInput) {
+            emailInput.classList.add('error');
+            setTimeout(function () { emailInput.classList.remove('error'); }, 1500);
+          }
+          return;
+        }
+
+        // Submit to waitlist with minimal data
+        var payload = {
+          first_name: '',
+          email: email,
+          phone: null,
+          sms_consent: false,
+          email_consent: true,
+          quiz_data: {},
+          source: 'exit_intent',
+          timestamp: new Date().toISOString(),
+        };
+
+        fetch(CONFIG.waitlistEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }).catch(function () {
+          storeLocally(payload);
+        });
+
+        hidePopup();
+        showToast("You're on the list! Check your email.", 'success');
+        track('exit_intent_signup', { email: email });
+      });
+    }
+
+    // "Take the quiz" link in popup
+    if (quizLink) {
+      quizLink.addEventListener('click', function () {
+        hidePopup();
+        if (window.__nightcapStartQuiz) {
+          window.__nightcapStartQuiz();
+        }
+      });
+    }
+  })();
 })();
