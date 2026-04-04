@@ -59,6 +59,21 @@ struct QuoteLibrary {
                 science: "Research on habit loops shows that the period immediately after a relapse is when most people abandon their goal entirely — not because the goal is wrong, but because shame triggers avoidance. Staying engaged after a reset is the most important behavior in long-term change.",
                 tier: .zeroToThirtyMin
             ),
+            ReframeQuote(
+                text: "The craving is at peak intensity right now. In 15 minutes, the neurochemistry will be different. That's not optimism — it's the documented pattern.",
+                science: "Craving intensity follows a predictable bell curve: it rises to a peak, then falls, regardless of whether the craving is acted on. Studies tracking subjective craving intensity show that the decline begins within 10–15 minutes without any behavioral intervention. Outlasting the peak is the entire game.",
+                tier: .zeroToThirtyMin
+            ),
+            ReframeQuote(
+                text: "The decision to open this app was made by the part of your brain that wants to change. That part got you here. That's not nothing.",
+                science: "Executive function — the prefrontal cortex's capacity for goal-directed behavior — is measurably impaired by acute sugar cravings through competing dopaminergic signals. Actively seeking behavioral support rather than immediately acting on a craving represents the prefrontal cortex winning a contest against the limbic system.",
+                tier: .zeroToThirtyMin
+            ),
+            ReframeQuote(
+                text: "The food you're thinking about right now contains 0 nutrients your body actually needs. What your body needs is on the other side of 20 minutes.",
+                science: "Processed sugar provides energy but no essential micronutrients, fiber, or macronutrients that support biological function. The craving is for dopamine, not nutrition. Separating the chemical drive from the biological narrative is one of the most useful cognitive reframes in early habit change.",
+                tier: .zeroToThirtyMin
+            ),
         ],
 
         .thirtyMinToTwoHours: [
@@ -75,6 +90,21 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "An hour ago you made a choice. Your body is already responding to it. The response isn't dramatic — but it's happening.",
                 science: "Insulin levels begin normalizing within 1–2 hours after the last glucose exposure. The liver, which bears the primary burden of processing fructose, begins reducing its metabolic load. These are quiet changes. They're still real.",
+                tier: .thirtyMinToTwoHours
+            ),
+            ReframeQuote(
+                text: "The evening sugar habit exists because your brain associated that time with the reward. The time is real. The need is not.",
+                science: "Circadian rhythm research shows that appetite-regulating hormones like ghrelin have daily patterns shaped by habitual meal timing. The body begins preparing for expected rewards before they arrive. Disrupting the timing disrupts the preparation — and over repeated cycles, the association weakens.",
+                tier: .thirtyMinToTwoHours
+            ),
+            ReframeQuote(
+                text: "Every hour without it, the reward prediction your brain built around sugar gets slightly weaker. You're training the system.",
+                science: "Reward prediction error (RPE) is the gap between an expected dopamine signal and the one that actually arrives. When an expected reward doesn't appear, the brain revises its prediction downward. Each non-reinforced craving is extinction learning in action — it permanently recalibrates the expected reward.",
+                tier: .thirtyMinToTwoHours
+            ),
+            ReframeQuote(
+                text: "Right now your body is doing what it's supposed to do after you remove an addictive substance. The discomfort is the adjustment, not the failure.",
+                science: "Withdrawal from substances that activate dopamine reward pathways — including processed sugar — follows a predictable trajectory: discomfort peaks early and resolves with continued abstinence. It is the biological cost of recalibration. It is finite, and it ends.",
                 tier: .thirtyMinToTwoHours
             ),
         ],
@@ -95,6 +125,16 @@ struct QuoteLibrary {
                 science: "Ghrelin, often called the hunger hormone, spikes in response to habitual eating cues — including time of day and environmental triggers — and drives the sensation of craving independent of actual hunger. Understanding that cravings are hormonal allows you to observe them rather than obey them.",
                 tier: .twoToSixHours
             ),
+            ReframeQuote(
+                text: "The energy dip you might feel right now is your metabolism recalibrating after running on peak-and-crash fuel. Stable energy is on the other side of this.",
+                science: "After sustained high-sugar dietary patterns, the body's energy systems have calibrated to expect frequent glucose inputs. Their absence creates a temporary energy trough while the system recalibrates toward fat oxidation and stable blood glucose. This is a normal, temporary adjustment that resolves within the first few days.",
+                tier: .twoToSixHours
+            ),
+            ReframeQuote(
+                text: "You've passed the daily window when most people consume sugar. The industry's model requires daily use. You've already broken the daily pattern.",
+                science: "Habitual daily intake creates cue-response associations reinforced by circadian hormonal patterns. Passing the daily window without reinforcing the behavior begins disrupting these associations from day one. The disruption compounds with each passing day.",
+                tier: .twoToSixHours
+            ),
         ],
 
         .sixTo24Hours: [
@@ -111,6 +151,16 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "Most people have consumed processed sugar again by now. By this point, you're already in the minority.",
                 science: "Research on dietary behavior change shows that the first 6 hours after a decision to change are the highest-risk period for reverting to the baseline behavior. If you're past this window, you've already outlasted the majority of people who make the same decision.",
+                tier: .sixTo24Hours
+            ),
+            ReframeQuote(
+                text: "More than half a day. Every minute now is compound interest on a decision you already made.",
+                science: "The physiological difficulty of sugar elimination is strongly front-loaded: the hardest moments cluster in the first 4–6 hours. After this point, moment-to-moment difficulty drops while metabolic and neurochemical benefits begin accumulating. You have crossed the inflection point.",
+                tier: .sixTo24Hours
+            ),
+            ReframeQuote(
+                text: "The hardest part of the first day is behind you. What's ahead tonight is ordinary — not the craving window you already survived.",
+                science: "Sugar cravings follow a circadian pattern that peaks in the late morning and early evening — correlated with cortisol and ghrelin cycles. After clearing the first evening window, the physiological pressure drops. The rest of the night is biologically quieter.",
                 tier: .sixTo24Hours
             ),
         ],
@@ -131,6 +181,16 @@ struct QuoteLibrary {
                 science: "Habit formation research suggests that the first 2–3 days of a behavior change are the period of highest volatility and highest neurological plasticity. The brain is actively deciding whether this is a new pattern or a temporary deviation. Every day in this window counts more than days later in the process.",
                 tier: .oneToThreeDays
             ),
+            ReframeQuote(
+                text: "Day 2 is where most people convince themselves they don't really need to do this. If that thought appeared today — that's exactly when you're most right to stay.",
+                science: "Behavior change research identifies day 2 as the second-highest risk point for abandonment. Motivation has begun to decline while physiological discomfort has not yet fully resolved. Recognizing this as a predictable phase — not a signal — is the difference between stopping and continuing.",
+                tier: .oneToThreeDays
+            ),
+            ReframeQuote(
+                text: "By day 2–3, the dopamine pull is still strong — but it's measurably weaker than day 1. The direction matters as much as the destination.",
+                science: "Dopamine D2 receptor rebound begins within 24–72 hours of removing the overstimulating substance. The restoration isn't complete — but the trajectory toward baseline has started. In recovery research, the direction of change is a meaningful clinical indicator independent of how far the trajectory has traveled.",
+                tier: .oneToThreeDays
+            ),
         ],
 
         .threeToSevenDays: [
@@ -149,6 +209,16 @@ struct QuoteLibrary {
                 science: "Classical conditioning governs most sugar cravings by day 4–5. The conditioned stimulus (9pm, the couch, the TV) triggers the conditioned response (craving) independent of genuine metabolic need. Breaking the stimulus-response link requires repeated exposure to the cue without the reward — which is exactly what you're doing.",
                 tier: .threeToSevenDays
             ),
+            ReframeQuote(
+                text: "The valley of withdrawal is behind you. What's ahead is conditioned craving — triggered by time and place, not biology. Different mechanism. Different tools.",
+                science: "The neurological challenge in sugar elimination transitions from acute withdrawal (days 1–3) to conditioned craving (days 3–14). Conditioned cravings respond to behavioral substitution, environmental modification, and extinction learning — not willpower. You are past the hardest version of this.",
+                tier: .threeToSevenDays
+            ),
+            ReframeQuote(
+                text: "A week ago you made a decision. You've now carried it through multiple high-risk moments. That's consolidation — the brain is storing it differently than a single choice.",
+                science: "Memory consolidation research distinguishes between episodic memory (a single event) and procedural learning (repeated behavioral patterns). Maintaining a behavior change through multiple contextual variations encodes it as procedural rather than episodic. The neural pathway is meaningfully different after a week.",
+                tier: .threeToSevenDays
+            ),
         ],
 
         .sevenTo14Days: [
@@ -165,6 +235,16 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "At this stage, the work is identity, not willpower. The question shifts from 'how do I resist this?' to 'is this who I am?'",
                 science: "Identity-based habit change — extensively documented in behavioral psychology research — is one of the most durable predictors of long-term success. When behavior aligns with self-concept rather than willpower or rules, relapse rates drop significantly. The question changes from 'how do I resist this?' to 'is this who I am?'",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "Your energy and hunger are more predictable than they were a week ago. That's blood sugar stability — and most people have never experienced what you're currently experiencing.",
+                science: "Glycemic variability — the amplitude of blood glucose fluctuations over a day — drives fatigue, mood instability, and cognitive fog. After 7–10 days of sugar reduction, glycemic variability drops substantially, producing a qualitatively different energy experience. Most people have not felt this since childhood.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "At this stage, the decision isn't happening at the moment of craving. It already happened — days ago. You're living inside a decision, not making one.",
+                science: "Behavioral consolidation research distinguishes between situational decision-making and implementation of a prior commitment. After the first 7–10 days, people who maintain a behavior change have shifted from making the decision moment-to-moment to executing one already made. This structural shift is what makes the behavior durable.",
                 tier: .sevenTo14Days
             ),
         ],
