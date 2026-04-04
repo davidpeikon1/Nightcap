@@ -722,9 +722,14 @@ class FastingStore: ObservableObject {
             return h >= 20
         }
 
+        // All resets in the evening: name the pattern explicitly.
         if eveningResets.count == resets && resets > 1 {
             let allOrBoth = resets == 2 ? "Both" : "All \(resets)"
             return "\(allOrBoth) resets happened after 8pm. The hour after dinner is your highest-leverage window — and your most vulnerable one."
+        }
+        // Majority evening (≥ 2 of 3+): still a meaningful pattern worth naming.
+        if eveningResets.count >= 2 && eveningResets.count > resets / 2 {
+            return "\(eveningResets.count) of your \(resets) resets happened after 8pm. The pattern is pointing somewhere. The hour after dinner is the window to watch."
         }
 
         if let trigger = topTrigger, trigger == .stress {
