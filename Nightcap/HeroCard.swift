@@ -130,6 +130,14 @@ struct HeroCard: View {
         return "\(m)M TO PB"
     }
 
+    /// True when the user has a streak worth protecting and the current hour
+    /// falls in the highest-risk evening window (6pm–11pm).
+    private var shouldShowStreakWarning: Bool {
+        guard store.streakDays >= 3, store.isTracking else { return false }
+        let hour = Calendar.current.component(.hour, from: Date())
+        return (18...23).contains(hour)
+    }
+
     private var trackingSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center) {
@@ -173,6 +181,18 @@ struct HeroCard: View {
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 14)
+
+            // Streak protection — Loss Aversion: surfacing what's at stake when
+            // the user is in the window where most streaks end.
+            if shouldShowStreakWarning {
+                Text("Your \(store.streakDays)-day streak is in the window where most resets happen. Tonight is the one that counts.")
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCWarning").opacity(0.8))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 4)
+                    .transition(.opacity)
+            }
 
             // Show the previous fast's duration for the first 30 minutes after a reset.
             // Reframes the reset as data rather than leaving that moment in silence.

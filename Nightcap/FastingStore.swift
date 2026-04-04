@@ -416,6 +416,9 @@ class FastingStore: ObservableObject {
         WidgetCenter.shared.reloadAllTimelines()
         // Re-schedule future milestone notifications from the new reset date.
         NotificationManager.shared.scheduleFutureMilestoneNotifications(from: date, earnedBadges: [])
+        // Schedule personal-best notifications (includes the fast just logged).
+        let pbTarget = resetEvents.map(\.fastDuration).max() ?? 0
+        NotificationManager.shared.schedulePersonalBestNotifications(from: date, previousBest: pbTarget)
     }
 
     func resetAllData() {
@@ -432,11 +435,12 @@ class FastingStore: ObservableObject {
         [Keys.lastSugarDate, Keys.streakDays, Keys.bestStreakDays, Keys.lastStreakCheck,
          Keys.earnedBadges, Keys.cravingLogs, Keys.resetEvents, Keys.lastKnownPhase
         ].forEach { defaults.removeObject(forKey: $0) }
-        // Cancel all pending milestone notifications so they don't fire after a reset.
+        // Cancel all pending milestone and PB notifications.
         let ids = BadgeID.allCases.flatMap {
             ["nightcap.milestone.\($0.rawValue)", "nightcap.milestone.future.\($0.rawValue)"]
         }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
+        NotificationManager.shared.clearPersonalBestNotifications()
         WidgetCenter.shared.reloadAllTimelines()
         Task { try? await UNUserNotificationCenter.current().setBadgeCount(0) }
     }
@@ -594,6 +598,11 @@ class FastingStore: ObservableObject {
         lastSugarDate = date
         WidgetCenter.shared.reloadAllTimelines()
         NotificationManager.shared.scheduleFutureMilestoneNotifications(from: date, earnedBadges: earnedBadges)
+        // Schedule PB notifications if there are previous fasts to beat.
+        let pbTarget = resetEvents.map(\.fastDuration).max() ?? 0
+        if pbTarget > 0 {
+            NotificationManager.shared.schedulePersonalBestNotifications(from: date, previousBest: pbTarget)
+        }
     }
 
     var fastingPhase: FastingPhase {

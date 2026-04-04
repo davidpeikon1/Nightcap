@@ -53,6 +53,23 @@ enum UserGoal: String, CaseIterable, Identifiable {
         }
     }
 
+    /// Default if-then implementation intention derived from the user's goal.
+    /// Used in the craving toolkit's "My Plan" tool when no custom plan is saved.
+    var defaultIfThenPlan: String {
+        switch self {
+        case .sleepBetter:
+            return "remind myself the 3am waking is blood sugar — not a real need — and wait 20 minutes."
+        case .moreEnergy:
+            return "eat something with protein or fat instead and wait 20 minutes for the craving to pass."
+        case .breakCravings:
+            return "start the 20-minute timer and wait. The craving has a ceiling. I know where the ceiling is."
+        case .loseWeight:
+            return "drink water and remember: this is the insulin lever. Resetting reactivates fat storage."
+        case .curious:
+            return "get curious about it instead of acting on it — what does it actually feel like to wait it out?"
+        }
+    }
+
     /// Rotates through 3 affirmations by day-of-year so "My Why" feels fresh
     /// across multiple visits without requiring any stored state.
     var affirmation: String {

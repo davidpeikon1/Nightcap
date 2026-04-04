@@ -190,6 +190,65 @@ class NotificationManager {
         "The biology of tomorrow is being written right now.",
     ]
 
+    // MARK: - Personal Best notifications
+
+    /// Schedules two notifications around the user's personal best threshold:
+    ///   1. An approach alert 2 hours before the PB — fires even when app is closed.
+    ///   2. An achievement alert at the exact moment the PB is broken.
+    /// Safe to call redundantly; previous PB notifications are removed first.
+    func schedulePersonalBestNotifications(from lastSugarDate: Date, previousBest: TimeInterval) {
+        let ids = ["nightcap.pb.approach", "nightcap.pb.achieved"]
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
+        guard previousBest > 3_600 else { return } // skip trivially short PBs
+
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else { return }
+
+            let pbDate       = lastSugarDate.addingTimeInterval(previousBest)
+            let approachDate = pbDate.addingTimeInterval(-7_200)
+            let now          = Date()
+
+            // Approach notification — 2 hours before PB
+            let approachInterval = approachDate.timeIntervalSince(now)
+            if approachInterval > 5 {
+                let content  = UNMutableNotificationContent()
+                content.title = "2 hours from your personal best."
+                content.body  = "You've never made it past \(self.formattedDuration(previousBest)) before. You're about to."
+                content.sound = .default
+                let trigger  = UNTimeIntervalNotificationTrigger(timeInterval: approachInterval, repeats: false)
+                let request  = UNNotificationRequest(identifier: "nightcap.pb.approach", content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request)
+            }
+
+            // Achievement notification — at the exact PB moment
+            let achieveInterval = pbDate.timeIntervalSince(now)
+            if achieveInterval > 5 {
+                let content  = UNMutableNotificationContent()
+                content.title = "Personal best."
+                content.body  = "You just went further than \(self.formattedDuration(previousBest)). New record."
+                content.sound = .default
+                let trigger  = UNTimeIntervalNotificationTrigger(timeInterval: achieveInterval, repeats: false)
+                let request  = UNNotificationRequest(identifier: "nightcap.pb.achieved", content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request)
+            }
+        }
+    }
+
+    func clearPersonalBestNotifications() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: ["nightcap.pb.approach", "nightcap.pb.achieved"]
+        )
+    }
+
+    private func formattedDuration(_ seconds: TimeInterval) -> String {
+        let h = Int(seconds) / 3600
+        let d = h / 24
+        let rh = h % 24
+        if d >= 7 { return "\(d) days" }
+        if d >= 1 { return rh > 0 ? "\(d)d \(rh)h" : "\(d)d" }
+        return "\(h)h"
+    }
+
     // MARK: - Milestone notifications
 
     /// Fires immediately (1 s) when the user is in-app and earns a badge.

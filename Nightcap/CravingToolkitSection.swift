@@ -53,6 +53,7 @@ struct CravingToolkitSection: View {
         case breathe   = "Breathe"
         case reframe   = "Quick Reframe"
         case why       = "My Why"
+        case ifThen    = "My Plan"
         case log       = "Log It"
         var id: String { rawValue }
     }
@@ -108,6 +109,7 @@ struct CravingToolkitSection: View {
                         case .breathe:   BreathingTool()
                         case .reframe:   ReframeCardTool()
                         case .why:       WhyReminderTool()
+                        case .ifThen:    IfThenPlanTool()
                         case .log:       LogCravingTool(activeTool: $activeTool)
                         case nil:        EmptyView()
                         }
@@ -785,6 +787,130 @@ struct BreathingTool: View {
                         .fill(i < state.cycles ? Color("NCSuccess") : Color("NCTextTertiary").opacity(0.25))
                         .frame(width: 7, height: 7)
                         .animation(.easeInOut(duration: 0.3), value: state.cycles)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Tool 6: Implementation Intentions (If-Then Plan)
+
+/// Lets the user store a specific behavioral plan for when a craving hits.
+/// Pre-populated from their goal; editable and persisted in UserDefaults.
+/// Grounded in Gollwitzer (1999): if-then plans increase follow-through by ~35%.
+struct IfThenPlanTool: View {
+    @EnvironmentObject var appState: AppState
+
+    @State private var savedPlan: String? = UserDefaults.standard.string(forKey: "user.ifThenPlan")
+    @State private var isEditing = false
+    @State private var draftPlan = ""
+
+    private static let planKey = "user.ifThenPlan"
+
+    private var displayPlan: String {
+        savedPlan ?? (appState.userGoal?.defaultIfThenPlan ?? "wait 20 minutes and let the craving pass.")
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            if isEditing {
+                editingView
+            } else {
+                displayView
+            }
+        }
+        .animation(.easeInOut(duration: 0.22), value: isEditing)
+    }
+
+    private var displayView: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("When I feel the pull,")
+                    .font(.system(size: 13, weight: .regular))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                Text("I will \(displayPlan)")
+                    .font(.system(size: 16, weight: .light))
+                    .foregroundStyle(Color("NCTextPrimary"))
+                    .lineSpacing(5)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(14)
+            .background(Color("NCBackground"))
+            .cornerRadius(10)
+
+            if savedPlan == nil {
+                HStack(spacing: 0) {
+                    Text("Based on your goal. ")
+                        .font(.system(size: 12, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                    Button {
+                        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                        draftPlan = displayPlan
+                        withAnimation { isEditing = true }
+                    } label: {
+                        Text("Personalize it →")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color("NCSuccess"))
+                    }
+                }
+            } else {
+                Button {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    draftPlan = displayPlan
+                    withAnimation { isEditing = true }
+                } label: {
+                    Text("Edit plan")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                }
+            }
+
+            Text("Specific if-then plans increase follow-through by ~35% compared to general intentions. (Gollwitzer, 1999)")
+                .font(.system(size: 11, weight: .light))
+                .foregroundStyle(Color("NCTextTertiary").opacity(0.65))
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var editingView: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("When I feel the pull, I will...")
+                .font(.system(size: 13, weight: .regular))
+                .foregroundStyle(Color("NCTextSecondary"))
+
+            TextField("describe your specific action", text: $draftPlan, axis: .vertical)
+                .font(.system(size: 15))
+                .foregroundStyle(Color("NCTextPrimary"))
+                .padding(14)
+                .background(Color("NCBackground"))
+                .cornerRadius(10)
+                .lineLimit(2...5)
+
+            HStack(spacing: 12) {
+                Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    let trimmed = draftPlan.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !trimmed.isEmpty else { withAnimation { isEditing = false }; return }
+                    UserDefaults.standard.set(trimmed, forKey: Self.planKey)
+                    savedPlan = trimmed
+                    withAnimation { isEditing = false }
+                } label: {
+                    Text("Save plan")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(Color("NCBackground"))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(Color("NCAccent"))
+                        .cornerRadius(10)
+                }
+
+                Button {
+                    withAnimation { isEditing = false }
+                } label: {
+                    Text("Cancel")
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color("NCTextSecondary"))
                 }
             }
         }
