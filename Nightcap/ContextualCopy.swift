@@ -39,6 +39,9 @@ struct ContextualCopy {
             "Your blood chemistry is already different than it was an hour ago.",
             "The hardest part of the first hour is behind you.",
             "Insulin is normalizing. The fog, if you feel it, is temporary and chemical.",
+            "The blood sugar spike that started this has already peaked. What you're feeling now is the descent.",
+            "The brain's reward signal is quieter now than it was 30 minutes ago. The urgency was the peak.",
+            "Two hours from now you won't remember this moment with the same intensity. That's not optimism — that's neurochemistry.",
         ],
 
         .twoToSixHours: [
@@ -49,6 +52,9 @@ struct ContextualCopy {
             "The acute pull is over. What remains is the echo — and echoes fade.",
             "The biological pull has weakened. What remains is habit — and habits respond to interruption.",
             "Three hours from now this won't feel the same as it does right now.",
+            "By hour 3, the acute fructose load your liver was processing has largely cleared. The metabolic noise is quieter.",
+            "The habitual hunger signal fires on a schedule, not a need. What you feel right now is the schedule, not your body asking for anything.",
+            "Insulin is measurably lower right now than it was a few hours ago. Every downstream system responds to that drop.",
         ],
 
         .sixTo24Hours: [
@@ -59,6 +65,9 @@ struct ContextualCopy {
             "The hardest part of the first day is behind you.",
             "Your cortisol won't spike tonight looking for glucose to stabilize. That's a different night's sleep.",
             "The cravings that showed up today were habit. You showed them something different.",
+            "The first 12 hours are the metabolic handoff — your body shifting fuel sources. The flat feeling is the transition, not your baseline.",
+            "The cravings today are schedule-based, not need-based. Your body ate at this time yesterday. The expectation is wrong — and it will weaken.",
+            "By the end of today, your liver's glycogen reserves will be significantly depleted. Tomorrow's energy runs on a different substrate.",
         ],
 
         .oneToThreeDays: [

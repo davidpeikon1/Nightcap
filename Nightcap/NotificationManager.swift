@@ -296,6 +296,44 @@ class NotificationManager {
         return "\(h)h"
     }
 
+    // MARK: - Streak milestone notifications
+
+    /// Fires ~2 s after a streak milestone is confirmed. Called from FastingStore
+    /// when streakDays crosses 3, 7, 14, 30, or 100.
+    func scheduleStreakMilestoneNotification(days: Int) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else { return }
+            let content = UNMutableNotificationContent()
+            content.title = "\(days) clean day\(days == 1 ? "" : "s")."
+            content.body  = self.streakMilestoneBody(for: days)
+            content.sound = .default
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+            let request  = UNNotificationRequest(
+                identifier: "nightcap.streak.\(days)",
+                content: content,
+                trigger: trigger
+            )
+            UNUserNotificationCenter.current().add(request)
+        }
+    }
+
+    private func streakMilestoneBody(for days: Int) -> String {
+        switch days {
+        case 3:
+            return "Three consecutive clean days. The withdrawal window is closing. The biology is moving."
+        case 7:
+            return "Seven clean days. Your gut microbiome has measurably shifted. The bacteria that amplify cravings are being starved out."
+        case 14:
+            return "Two weeks. fMRI studies show reduced reward-center activation at this mark. Taste, sleep, dopamine — all changed."
+        case 30:
+            return "Thirty clean days. Dopamine receptor density has had meaningful recovery time. This is identity now, not discipline."
+        case 100:
+            return "100 consecutive clean days. The neural pathway for the old habit has weakened through disuse. This is who you are."
+        default:
+            return "Another day further. The compound interest is accumulating."
+        }
+    }
+
     // MARK: - Milestone notifications
 
     /// Fires immediately (1 s) when the user is in-app and earns a badge.

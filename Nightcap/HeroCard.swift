@@ -194,16 +194,25 @@ struct HeroCard: View {
                     .transition(.opacity)
             }
 
-            // Show the previous fast's duration for the first 30 minutes after a reset.
-            // Reframes the reset as data rather than leaving that moment in silence.
+            // Post-reset recovery arc — shown for the first 30 minutes after a reset.
+            // "Back on the clock." for the first 2 minutes, then the previous fast
+            // duration + a recovery reframe for the rest of the 30-minute window.
             if store.elapsedSeconds < 1_800, let lastReset = store.resetEvents.first {
-                Text("Previous fast: \(formatFastDuration(lastReset.fastDuration)). \(previousFastSuffix(lastReset.fastDuration))")
-                    .font(.system(size: 13, weight: .light))
-                    .foregroundStyle(Color("NCTextTertiary"))
-                    .lineSpacing(3)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 6)
-                    .transition(.opacity)
+                VStack(alignment: .leading, spacing: 4) {
+                    if store.elapsedSeconds < 120 {
+                        Text("Back on the clock.")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(Color("NCTextPrimary"))
+                            .transition(.opacity)
+                    }
+                    Text("Previous fast: \(formatFastDuration(lastReset.fastDuration)). \(previousFastSuffix(lastReset.fastDuration))")
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                        .lineSpacing(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.top, 6)
+                .transition(.opacity)
             }
 
             // Day-specific biological fact — anchors the user to where they specifically are.
@@ -343,9 +352,12 @@ struct HeroCard: View {
     /// Context-aware suffix for the "Previous fast: X" post-reset message.
     private func previousFastSuffix(_ seconds: TimeInterval) -> String {
         let h = seconds / 3600
+        if h >= 720 { return "Over a month. Those biological changes don't reverse on a reset. The work is still in your system." }
         if h >= 336 { return "That streak changed your biology. It doesn't reverse overnight." }
         if h >= 168 { return "A week or more before the reset. The biology of those days is still in your system." }
+        if h >= 72  { return "Three or more days in. The dopamine recalibration that started has not reversed." }
         if h >= 24  { return "A full day before the reset. Every hour counted." }
+        if h >= 6   { return "Several hours in. The insulin drop was real. So was every minute of it." }
         return "That's data, not failure."
     }
 

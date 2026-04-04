@@ -86,6 +86,30 @@ struct CravingToolkitSection: View {
 
             if isExpanded {
                 VStack(spacing: 0) {
+                    // Implementation intention banner — surfaces the user's saved plan
+                    // at the moment of need. Research shows if-then plans work best
+                    // when recalled at the triggering moment, not after the fact.
+                    if let plan = UserDefaults.standard.string(forKey: "user.ifThenPlan") {
+                        HStack(alignment: .top, spacing: 10) {
+                            Image(systemName: "checkmark.circle")
+                                .font(.system(size: 11, weight: .light))
+                                .foregroundStyle(Color("NCSuccess").opacity(0.6))
+                                .padding(.top, 1)
+                            Text("When I feel the pull, I will \(plan)")
+                                .font(.system(size: 12, weight: .light))
+                                .foregroundStyle(Color("NCTextSecondary"))
+                                .lineSpacing(3)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(Color("NCSurface").opacity(0.7))
+
+                        Rectangle()
+                            .fill(Color("NCTextTertiary").opacity(0.2))
+                            .frame(height: 1)
+                    }
+
                     // Tab strip
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {

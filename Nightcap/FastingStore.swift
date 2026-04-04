@@ -538,6 +538,7 @@ class FastingStore: ObservableObject {
         // for several days (previously only incremented by 1 per session).
         let fastStart = cal.startOfDay(for: lastSugar)
         let completeDays = max(0, cal.dateComponents([.day], from: fastStart, to: today).day ?? 0)
+        let previousStreak = streakDays
         streakDays = completeDays
         defaults.set(streakDays, forKey: Keys.streakDays)
         if streakDays > bestStreakDays {
@@ -546,6 +547,11 @@ class FastingStore: ObservableObject {
         }
         lastStreakCheckDate = today
         defaults.set(today, forKey: Keys.lastStreakCheck)
+        // Fire a streak milestone notification when crossing a key threshold.
+        let milestones = [3, 7, 14, 30, 100]
+        if milestones.contains(streakDays), streakDays != previousStreak {
+            NotificationManager.shared.scheduleStreakMilestoneNotification(days: streakDays)
+        }
 
         // Update app icon badge to reflect current streak (requires notification auth).
         Task {
