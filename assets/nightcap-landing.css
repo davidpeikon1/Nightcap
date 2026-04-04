@@ -1027,14 +1027,15 @@ body::after {
   background: var(--nc-bg-card);
   border: 1px solid var(--nc-border);
   border-radius: var(--nc-radius);
-  padding: 20px 16px;
+  padding: 24px 16px;
   text-align: center;
-  transition: transform var(--nc-transition), border-color var(--nc-transition);
+  box-shadow: var(--nc-shadow-sm);
+  transition: all var(--nc-transition);
 }
 
 .nc-results__stat:hover {
   transform: translateY(-2px);
-  border-color: rgba(42, 37, 32, 0.3);
+  box-shadow: var(--nc-shadow-md);
 }
 
 .nc-results__stat-number {
