@@ -323,6 +323,36 @@ struct QuoteLibrary {
                 science: "C-reactive protein (CRP), interleukin-6 (IL-6), and other inflammatory biomarkers are directly elevated by chronic sugar and refined carbohydrate intake. Sustained reduction produces measurable decreases in these markers, typically becoming statistically significant at 4–6 weeks. Inflammation is silent but expensive. You've been paying down the debt for a month.",
                 tier: .thirtyPlusDays
             ),
+            ReframeQuote(
+                text: "Sleep at this stage is running on a different substrate. Without the glucose crash waking you at 3am, the architecture of your night has changed.",
+                science: "Nocturnal blood glucose instability — triggered by high evening sugar intake — causes cortisol to spike at 2–4am to stabilize blood glucose, fragmenting slow-wave and REM sleep. After 30+ days of sugar reduction, this mechanism is largely absent. Sleep architecture improves as a consequence, producing deeper and more restorative sleep.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "The fat around your organs — the kind that drives metabolic disease — has been actively mobilizing for weeks. This is the mechanism the research points to.",
+                science: "Visceral adipose tissue is highly sensitive to insulin. When fasting insulin falls — as it does with sustained sugar reduction — visceral fat mobilizes preferentially over subcutaneous fat. Research shows measurable visceral fat reduction within 2–4 weeks of significant sugar restriction, with continued decline over months of sustained reduction.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Every major chronic disease in the top ten has a documented relationship with chronic sugar and insulin. You've been addressing all of them simultaneously, for over a month.",
+                science: "Chronic hyperinsulinemia — driven by refined carbohydrate and sugar overconsumption — is independently associated with cardiovascular disease, type 2 diabetes, several cancers, Alzheimer's disease, and accelerated cellular aging. Sustained sugar reduction addresses all of these mechanisms simultaneously — not through a single targeted intervention, but by removing the underlying driver.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Your gut has been changing the chemistry of your mood without you noticing. The bacteria that produce calm and clarity have been growing for over a month.",
+                science: "Gut-derived serotonin — 90% of the body's total supply — is produced by enterochromaffin cells whose function is directly shaped by microbiome composition. Bacteroidetes and Bifidobacterium species, which increase with sugar restriction, produce short-chain fatty acids that support serotonin synthesis. The gut is generating different neurochemistry than it was a month ago.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "The decision isn't in front of you anymore. It's behind you. What you're living now is the outcome of a decision you made and held.",
+                science: "Habit research distinguishes between active decision-making and implementation of a prior commitment. After 30+ days, neuroimaging shows the prefrontal cortex is less activated during food decisions — not because deliberation is absent, but because the new default behavior has been encoded. The decision no longer requires the same cognitive load it once did.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Glycation — where sugar molecules bind to collagen and accelerate biological aging — has been actively reversing since you stopped feeding it.",
+                science: "Advanced glycation end-products (AGEs) form when sugar molecules bind irreversibly to proteins, particularly collagen and elastin. This is one of the primary mechanisms of biological aging, affecting skin, blood vessels, kidneys, and the brain. AGE formation slows immediately with dietary sugar reduction, and the body's repair mechanisms — including enzymatic deglycation — accelerate in the absence of ongoing AGE formation.",
+                tier: .thirtyPlusDays
+            ),
         ],
     ]
 

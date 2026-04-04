@@ -25,7 +25,7 @@ struct NightcapApp: App {
             } else if phase == .active {
                 fastingStore.syncBadgeCount()
                 // Re-schedule daily notifications on each foreground so the
-                // weekday-rotating messages stay current.
+                // 14-day day-offset window stays current.
                 NotificationManager.shared.checkAuthorizationStatus { status in
                     if status == .authorized {
                         NotificationManager.shared.scheduleDailyNotifications()
