@@ -77,6 +77,26 @@ class NightcapDelegate: NSObject, UIApplicationDelegate {
 
 extension NightcapDelegate: UNUserNotificationCenterDelegate {
 
+    /// Called while the app is in the foreground and a notification is about to be
+    /// delivered. Suppress in-app milestone banners — the MilestoneSheet already
+    /// handles those. Show streak, PB, morning, evening, and personalized banners
+    /// even while in-app so users who open the app right after crossing a threshold
+    /// still receive the feedback.
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        let id = notification.request.identifier
+        // Milestone sheets are shown in-app via FastingStore.newlyUnlockedBadge —
+        // suppress the redundant banner for those identifiers only.
+        if id.hasPrefix("nightcap.milestone") {
+            completionHandler([])
+        } else {
+            completionHandler([.banner, .sound])
+        }
+    }
+
     /// Called when the user taps a delivered notification.
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,

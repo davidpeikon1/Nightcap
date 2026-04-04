@@ -230,9 +230,9 @@ class NotificationManager {
 
     // MARK: - Notification body pools
 
-    /// Fourteen morning messages — distributed across weekdays so the message
-    /// rotates through both pools before repeating. Forward-looking: begins the
-    /// day with curiosity and grounded context.
+    /// Generic morning messages used when no user goal is set. 25-entry pool so
+    /// the cycle length doesn't align with weekly patterns. Forward-looking: begins
+    /// the day with curiosity and grounded context.
     private let morningBodies: [String] = [
         "This morning's reframe is ready when you are.",
         "Every day without processed sugar, your brain gets a little more of itself back.",
@@ -262,9 +262,9 @@ class NotificationManager {
         "Your blood chemistry shifted while you slept. Open to find out how.",
     ]
 
-    /// Fourteen evening messages — distributed across weekdays so the message
-    /// rotates through both pools before repeating. Present-tense shielding:
-    /// acknowledges the moment without alarm.
+    /// Evening messages for all users. 25-entry pool so the cycle length doesn't
+    /// align with weekly patterns. Present-tense shielding: acknowledges the
+    /// moment without alarm.
     private let eveningBodies: [String] = [
         "The hour after dinner is where most streaks end. Not tonight.",
         "The evening pull is mostly habit. It will pass without you.",
