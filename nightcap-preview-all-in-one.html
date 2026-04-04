@@ -70,9 +70,11 @@ body {
   font-weight: 400;
   background: var(--nc-bg);
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(220, 210, 195, 0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 20% 100%, rgba(210, 205, 195, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 30% at 85% 60%, rgba(215, 208, 198, 0.25) 0%, transparent 50%);
+    radial-gradient(ellipse 90% 60% at 50% -5%, rgba(210, 195, 178, 0.7) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 0% 30%, rgba(200, 190, 175, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 35% at 100% 50%, rgba(205, 195, 182, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(195, 190, 182, 0.4) 0%, transparent 50%);
+  background-attachment: fixed;
   color: var(--nc-text);
   line-height: 1.65;
   letter-spacing: -0.005em;
@@ -302,7 +304,9 @@ body {
 }
 
 .nc-hero__gradient {
-  display: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 45%, rgba(200, 188, 170, 0.45) 0%, transparent 70%);
 }
 
 .nc-hero__stars {
