@@ -103,6 +103,13 @@ struct ContextualCopy {
             "Food tastes different now. That's the receptor sensitivity coming back, not imagination.",
             "Thirty days of quiet work has changed your gut, your sleep, your insulin response, and your brain. It's in the ledger.",
             "The compound interest of this is invisible until it isn't. You're in the middle of it accumulating.",
+            "Inflammation is systemic and silent — and it responds to sustained dietary change. Yours is falling.",
+            "At this stage the biology is doing the work. You're maintaining, not fighting.",
+            "The social version of this is easier now too. Preference has replaced restraint.",
+            "Visceral fat — the kind that drives metabolic disease — responds faster to insulin reduction than any other intervention. This is that intervention.",
+            "Your gut microbiome at this point is producing more of the neurotransmitters associated with calm and clarity. That's not metaphor.",
+            "Glycation — where sugar binds to collagen and accelerates aging — has been actively reversing since you stopped feeding it.",
+            "The person who wanted to change this is the same one who is living the change. That's not nothing.",
         ],
     ]
 }
