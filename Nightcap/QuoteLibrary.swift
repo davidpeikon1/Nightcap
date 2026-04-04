@@ -510,6 +510,11 @@ struct QuoteLibrary {
                 science: "Chronic low-grade systemic inflammation, measured via C-reactive protein (CRP), interleukin-6 (IL-6), and TNF-alpha, is directly elevated by refined sugar and fructose intake through multiple pathways including hyperinsulinemia, gut permeability, and gut dysbiosis. Sustained sugar reduction shows statistically significant reductions in inflammatory biomarkers at 4–6 weeks. The change is silent because inflammation is largely asymptomatic — its resolution may show as improved energy, clearer thinking, or reduced joint discomfort.",
                 tier: .fourteenTo30Days
             ),
+            ReframeQuote(
+                text: "The liver at this stage is doing a different job than it was at the start. Without the fructose overload, it has shifted from fat-building to fat-clearing. The architecture of the organ is changing.",
+                science: "Non-alcoholic fatty liver disease (NAFLD) — driven largely by dietary fructose, which is metabolized almost exclusively in the liver — begins reversing within weeks of sustained sugar reduction. Clinical studies show measurable reductions in hepatic triglyceride content within 2–4 weeks of dietary change. The liver's capacity for fat oxidation, insulin processing, and detoxification improves progressively as hepatic fat load decreases.",
+                tier: .fourteenTo30Days
+            ),
         ],
 
         .thirtyPlusDays: [
@@ -596,6 +601,31 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "The question at this stage isn't 'can I keep going.' You already answered that. The question is what you do with the biology you've been building.",
                 science: "After sustained behavior change of 30+ days, goal-maintenance research shows a qualitative shift in the structure of decision-making. The question moves from 'will I continue' (which requires active decision) to 'how do I build on this' (which assumes continuation). This shift in goal framing is predictive of long-term success and reflects the consolidation of identity-based rather than willpower-based maintenance.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "BDNF — the molecule the brain uses to build and repair neurons — increases with sustained sugar reduction. Your brain is more plastic now than it was a month ago.",
+                science: "Brain-derived neurotrophic factor (BDNF) is suppressed by chronic high-sugar diets through a mechanism involving insulin resistance and elevated cortisol. BDNF is essential for neuroplasticity, memory consolidation, and mood regulation. Research in both animal models and human subjects shows significant increases in BDNF with dietary sugar reduction, sustained aerobic exercise, and caloric restriction. Months of sugar elimination produce the longest-sustained BDNF elevation.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Most of what the food industry sells is engineered to override the satiety signal that would otherwise stop you. You've been outside that system for over a month. That's a rare position.",
+                science: "Palatability engineering — the systematic optimization of taste, texture, and reward response in processed food — is designed to suppress satiety and override leptin and CCK signals that normally end a meal. The obese gut microbiome, which is promoted by high-sugar diets, also upregulates ghrelin and suppresses satiety hormones. Sustained sugar elimination rebuilds leptin sensitivity and reduces the palatability-engineered demand. The baseline appetite signal becomes audible again.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Insulin resistance — which accumulates silently and drives most of the diseases of aging — has been actively reversing for over a month. You can't see it, but it's in the ledger.",
+                science: "Insulin resistance develops over years of chronic hyperinsulinemia, silently impairing glucose uptake, mitochondrial function, and cellular signaling across every major organ system. Reversal follows a similar time course but responds strongly to dietary change. Research consistently shows statistically significant improvements in HOMA-IR (the primary measure of insulin resistance) after 4–8 weeks of sustained sugar reduction. At one month, the reversal is real and measurable.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "The pattern of eating that caused the most harm to your metabolism was probably invisible to you at the time. The pattern of not eating it is invisible now too. That asymmetry is the whole game.",
+                science: "Metabolic damage from chronic sugar overconsumption is cumulative, slow-onset, and largely asymptomatic until threshold states (pre-diabetes, fatty liver, hypertension) emerge. Recovery follows the same asymptomatic, accumulative pattern in reverse. The absence of visible progress does not mean the absence of progress — the ledger is filling on both ends, in opposite directions. Most meaningful biological change happens below the threshold of awareness.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Your telomeres — the cellular clock at the end of each chromosome — degrade faster with chronic oxidative stress and inflammation. Both have been falling for a month. The clock is running slower.",
+                science: "Telomere attrition is accelerated by chronic oxidative stress, inflammatory cytokines (TNF-alpha, IL-6, CRP), and hyperglycemia — all of which are elevated by habitual processed sugar intake. Research associates shorter telomere length with accelerated biological aging and increased all-cause mortality risk. Dietary interventions that reduce inflammation and oxidative stress show measurable telomere protection effects at the 4–12 week mark.",
                 tier: .thirtyPlusDays
             ),
         ],
