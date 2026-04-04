@@ -91,7 +91,7 @@ class NotificationManager {
     private func scheduleMorning() {
         let content = UNMutableNotificationContent()
         content.title = "Good morning."
-        content.body  = "Your fast is still running. A new reframe is waiting."
+        content.body  = "A new reframe is ready for today."
         content.sound = .default
 
         var components = DateComponents()

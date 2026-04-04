@@ -68,13 +68,13 @@ struct CravingToolkitSection: View {
                 HStack {
                     Text("Having a craving?")
                         .font(.system(size: 15, weight: .regular))
-                        .foregroundStyle(Color("NCWarning"))
+                        .foregroundStyle(Color("NCTextSecondary"))
 
                     Spacer()
 
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                         .font(.system(size: 12, weight: .light))
-                        .foregroundStyle(Color("NCWarning"))
+                        .foregroundStyle(Color("NCTextSecondary"))
                 }
                 .padding(20)
                 .background(Color("NCSurface"))
