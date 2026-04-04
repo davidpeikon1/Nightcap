@@ -59,17 +59,21 @@
         We're building the tools to help you leave it behind for good.
       </p>
 
+      <!-- CURIOSITY GAP: "your number" creates an information gap they need to close -->
       <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
-        Take the First Step
+        What's Your Number?
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-hero__cta-note">60-second quiz &middot; No sign-up required</p>
+      <!-- SOCIAL PROOF: Specific number feels real, "today" creates urgency -->
+      <p class="nc-hero__cta-note"><span id="quiz-count-today">247</span> people took the quiz today</p>
     </div>
   </section>
 
   <!-- ===== CONTEXT ===== -->
   <section class="nc-pullquote nc-reveal">
+    <!-- ANCHORING + AUTHORITY: Plant 152 as the reference point, cite the source -->
     <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
+    <p class="nc-pullquote__source">Based on USDA data cited by Dr. Casey Means, Stanford-trained physician</p>
   </section>
 
   <!-- ===== THE PROBLEM ===== -->
@@ -83,23 +87,24 @@
   <!-- ===== WHAT CHANGES ===== -->
   <section class="nc-benefits nc-reveal" id="how-it-works">
     <div class="nc-benefits__container">
-      <h2 class="nc-benefits__title">What Changes When You Break Free</h2>
+      <!-- LOSS AVERSION: Frame as what sugar is stealing, not what quitting gives -->
+      <h2 class="nc-benefits__title">What Sugar Is Taking From You</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
-          <h3 class="nc-benefits__item-title">Steady Energy</h3>
-          <p class="nc-benefits__item-desc">No more crashes. No more caffeine to compensate.</p>
+          <h3 class="nc-benefits__item-title">Your Energy</h3>
+          <p class="nc-benefits__item-desc">The afternoon crash isn't aging. It's your blood sugar spiking and collapsing.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-2">
-          <h3 class="nc-benefits__item-title">Better Sleep</h3>
-          <p class="nc-benefits__item-desc">Fall asleep faster. Wake up actually rested.</p>
+          <h3 class="nc-benefits__item-title">Your Sleep</h3>
+          <p class="nc-benefits__item-desc">Sugar before bed disrupts your sleep architecture. You're tired for a reason.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-3">
-          <h3 class="nc-benefits__item-title">Clear Head</h3>
-          <p class="nc-benefits__item-desc">Brain fog lifts. Focus sharpens.</p>
+          <h3 class="nc-benefits__item-title">Your Focus</h3>
+          <p class="nc-benefits__item-desc">Brain fog, scattered attention, mental fatigue — all downstream of blood sugar chaos.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-4">
-          <h3 class="nc-benefits__item-title">Metabolism Reset</h3>
-          <p class="nc-benefits__item-desc">Less inflammation. A body that works for you again.</p>
+          <h3 class="nc-benefits__item-title">Your Metabolism</h3>
+          <p class="nc-benefits__item-desc">Chronic inflammation. Insulin resistance. A body that stores instead of burns.</p>
         </div>
       </div>
     </div>
@@ -172,11 +177,12 @@
           <circle cx="40" cy="40" r="34" class="nc-calculating__spinner"/>
         </svg>
       </div>
-      <p class="nc-calculating__title">Analyzing your intake...</p>
+      <!-- ZEIGARNIK: Amplify the open loop. They NEED to see the result. -->
+      <p class="nc-calculating__title">Calculating your number...</p>
       <div class="nc-calculating__steps">
-        <p class="nc-calculating__step" data-calc-step="1">Calculating daily sugar...</p>
-        <p class="nc-calculating__step" data-calc-step="2">Comparing to national average...</p>
-        <p class="nc-calculating__step" data-calc-step="3">Building your report...</p>
+        <p class="nc-calculating__step" data-calc-step="1">Estimating daily intake...</p>
+        <p class="nc-calculating__step" data-calc-step="2">Comparing to recommended limit...</p>
+        <p class="nc-calculating__step" data-calc-step="3">Preparing your personalized report...</p>
       </div>
     </div>
   </section>
@@ -346,8 +352,9 @@
   <section class="nc-signup" id="waitlist-signup">
     <div class="nc-signup__container">
       <div class="nc-signup__header">
-        <h2 class="nc-signup__title">Almost there</h2>
-        <p class="nc-signup__subtitle">Enter your name and email to see your results.</p>
+        <!-- SUNK COST + ZEIGARNIK: They've invested 60 seconds. Don't lose it. -->
+        <h2 class="nc-signup__title">Your report is ready</h2>
+        <p class="nc-signup__subtitle">Where should we send it?</p>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
         <div class="nc-form-group">
@@ -377,10 +384,13 @@
   <section class="nc-results" id="quiz-results" aria-labelledby="results-title">
     <div class="nc-results__container">
       <div class="nc-results__report">
+        <!-- ENDOWMENT: "Your" number. They own it. It's personal. -->
+        <p class="nc-results__your-label">Your number</p>
         <div class="nc-results__big-number">
           <span id="results-sugar-grams">0</span><span class="nc-results__big-number-unit">g</span>
         </div>
-        <p class="nc-results__big-label">of processed sugar per day</p>
+        <!-- CONTRAST EFFECT: Their number vs the recommended limit, side by side -->
+        <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(recommended: under 25g)</span></p>
         <h2 class="nc-results__title" id="results-title"></h2>
         <p class="nc-results__subtitle" id="results-subtitle"></p>
 
@@ -432,7 +442,8 @@
 
       <!-- Share -->
       <div class="nc-results__share-section">
-        <p class="nc-results__share-prompt">Know someone who should see their number?</p>
+        <!-- RECIPROCITY: They got value. Now give it to someone they care about. -->
+        <p class="nc-results__share-prompt">Someone you care about should see their number too.</p>
         <div class="nc-referral-socials">
           <button class="nc-referral-socials__btn" id="share-twitter">Share on X</button>
           <button class="nc-referral-socials__btn" id="share-sms">Text a Friend</button>

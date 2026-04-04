@@ -404,7 +404,6 @@
     var weeklySugar = quizData.estimated_weekly_sugar || 0;
     var yearlySugarLbs = quizData.estimated_yearly_sugar_lbs || 0;
 
-    animateCounterText('results-daily-sugar', dailySugar, 'g');
     animateCounterText('results-weekly-sugar', weeklySugar, 'g');
 
     var yearlyEl = document.getElementById('results-yearly-sugar');
@@ -414,18 +413,21 @@
     var title = document.getElementById('results-title');
     var subtitle = document.getElementById('results-subtitle');
 
+    // ANCHORING: Always contrast their number against the 25g limit
+    var multiple = Math.round(dailySugar / 25);
+
     if (dailySugar <= 25) {
-      title.textContent = payload.first_name + ", you're ahead of the curve";
-      subtitle.textContent = "At " + dailySugar + "g per day, you're well below the national average of 190g. You're already doing what most Americans haven't figured out yet. Keep going.";
+      title.textContent = payload.first_name + ", you're in the clear";
+      subtitle.textContent = "Under 25g per day. You're doing what 88% of Americans can't. Stay here.";
     } else if (dailySugar <= 75) {
-      title.textContent = payload.first_name + ", there's room to improve";
-      subtitle.textContent = "You're consuming about " + dailySugar + "g of processed sugar daily — that's " + yearlySugarLbs + " lbs per year. Better than average, but still above the recommended 25g. The Nightcap app can help you close the gap.";
+      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
+      subtitle.textContent = dailySugar + "g per day. That's " + yearlySugarLbs + " lbs of processed sugar per year — and most of it is hiding in foods you think are healthy.";
     } else if (dailySugar <= 150) {
-      title.textContent = payload.first_name + ", this number might surprise you";
-      subtitle.textContent = "At " + dailySugar + "g per day, you're consuming " + yearlySugarLbs + " lbs of processed sugar per year. That's " + Math.round(dailySugar / 25) + "x the recommended daily limit. The good news? Now you know — and that's the first step.";
+      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
+      subtitle.textContent = dailySugar + "g per day adds up to " + yearlySugarLbs + " lbs per year. That's not a willpower problem — it's a visibility problem. Now you can see it.";
     } else {
-      title.textContent = payload.first_name + ", let's talk about your number";
-      subtitle.textContent = "You're consuming roughly " + dailySugar + "g of processed sugar per day — " + yearlySugarLbs + " lbs per year. That's close to the national average that's driving the metabolic health crisis. But awareness is where change starts.";
+      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. This is what the food system does when you're not watching. Now you're watching.";
     }
 
     // Insight

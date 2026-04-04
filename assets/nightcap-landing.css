@@ -929,6 +929,15 @@ body::after {
   margin-bottom: 2rem;
 }
 
+.nc-results__your-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--nc-text-dim);
+  margin-bottom: 0.5rem;
+}
+
 .nc-results__big-number {
   font-family: var(--nc-font-display);
   font-size: clamp(5rem, 15vw, 8rem);
@@ -951,6 +960,11 @@ body::after {
   font-weight: 500;
   color: var(--nc-text-muted);
   margin-bottom: 2rem;
+}
+
+.nc-results__contrast {
+  color: var(--nc-text-dim);
+  font-size: 0.78rem;
 }
 
 /* Ring */
@@ -1507,6 +1521,13 @@ body::after {
   font-style: normal;
   opacity: 1;
   font-weight: 700;
+}
+
+.nc-pullquote__source {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--nc-text-dim);
+  margin-top: 1.25rem;
 }
 
 /* ---------- Benefits Grid ---------- */
