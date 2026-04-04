@@ -414,6 +414,38 @@ body {
   color: var(--nc-text-muted);
 }
 
+/* ---------- Return Banner ---------- */
+.nc-return-banner {
+  margin-top: 2rem;
+  padding: 16px 24px;
+  background: rgba(200, 184, 154, 0.08);
+  border: 1px solid rgba(200, 184, 154, 0.2);
+  border-radius: var(--nc-radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: nc-fadeInUp 0.5s ease-out;
+}
+
+.nc-return-banner p {
+  font-size: 0.9rem;
+  color: var(--nc-text-muted);
+  margin: 0;
+}
+
+.nc-return-banner strong {
+  color: var(--nc-primary);
+}
+
+@media (max-width: 480px) {
+  .nc-return-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 /* ---------- Quiz ---------- */
 .nc-quiz {
   display: none;
@@ -1932,6 +1964,71 @@ body {
 .nc-calculating__step.done::before {
   content: '\2713  ';
   color: var(--nc-accent);
+}
+
+/* ---------- Sugar Equivalents ---------- */
+.nc-equivalents {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.nc-equivalents__title {
+  font-size: 0.85rem;
+  color: var(--nc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.nc-equivalents__grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nc-equivalents__item {
+  padding: 16px 20px;
+  background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
+  min-width: 110px;
+}
+
+.nc-equivalents__emoji {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.nc-equivalents__value {
+  display: block;
+  font-family: var(--nc-font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--nc-primary);
+}
+
+.nc-equivalents__label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--nc-text-muted);
+  margin-top: 2px;
+}
+
+@media (max-width: 480px) {
+  .nc-equivalents__grid {
+    gap: 10px;
+  }
+
+  .nc-equivalents__item {
+    padding: 12px 14px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .nc-equivalents__value {
+    font-size: 1.35rem;
+  }
 }
 
 /* ---------- Next Steps ---------- */

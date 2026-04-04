@@ -25,6 +25,41 @@
 
   if (!form) return;
 
+  // ---------- Returning Visitor ----------
+  (function checkReturningVisitor() {
+    try {
+      var saved = localStorage.getItem('nightcap_last_results');
+      if (!saved) return;
+      var data = JSON.parse(saved);
+      if (!data || !data.payload || !data.timestamp) return;
+
+      // Only show if results are less than 30 days old
+      var age = Date.now() - new Date(data.timestamp).getTime();
+      if (age > 30 * 24 * 60 * 60 * 1000) return;
+
+      // Add a "See your results again" banner to the hero
+      var hero = document.getElementById('hero');
+      if (!hero) return;
+
+      var banner = document.createElement('div');
+      banner.className = 'nc-return-banner';
+      banner.innerHTML = '<p>Welcome back! You consumed <strong>' + data.payload.quiz_data.estimated_daily_sugar + 'g</strong> of processed sugar per day.</p>' +
+        '<button class="nc-btn nc-btn--primary nc-btn--sm" id="return-results-btn">See My Results Again</button>';
+      hero.querySelector('.nc-hero__content').appendChild(banner);
+
+      document.getElementById('return-results-btn').addEventListener('click', function () {
+        // Hide everything, show results
+        ['hero', 'why', 'how-it-works', 'ingredients', 'social-proof', 'faq'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.style.display = 'none';
+        });
+        window.__nightcapQuizData = data.payload.quiz_data;
+        showResults(data.payload, data.serverData || { position: generatePosition() });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    } catch (e) {}
+  })();
+
   // ---------- Countdown Timer ----------
   function initCountdown() {
     var container = document.getElementById('launch-countdown');
@@ -324,6 +359,13 @@
     var quizData = payload.quiz_data;
     var dailySugar = quizData.estimated_daily_sugar || 0;
 
+    // Save for returning visitors
+    try {
+      localStorage.setItem('nightcap_last_results', JSON.stringify({
+        payload: payload, serverData: serverData, timestamp: new Date().toISOString()
+      }));
+    } catch (e) {}
+
     // Transition sections
     signupSection.classList.remove('active');
     signupSection.style.display = 'none';
@@ -339,6 +381,9 @@
 
     // Animate comparison chart
     setTimeout(function () { animateComparisonChart(dailySugar); }, 1200);
+
+    // Sugar equivalents
+    populateEquivalents(dailySugar);
 
     // Personalized next steps
     personalizeNextSteps(quizData);
@@ -580,6 +625,21 @@
         }
       });
     }
+  }
+
+  // ---------- Sugar Equivalents ----------
+  function populateEquivalents(dailySugar) {
+    var donuts = Math.round((dailySugar / 22) * 10) / 10; // 22g per glazed donut
+    var cookies = Math.round((dailySugar / 12) * 10) / 10; // 12g per cookie
+    var candyPerYear = Math.round((dailySugar * 365) / 27); // 27g per Snickers
+
+    var donutEl = document.getElementById('equiv-donuts');
+    var cookieEl = document.getElementById('equiv-cookies');
+    var candyEl = document.getElementById('equiv-candy');
+
+    if (donutEl) donutEl.textContent = donuts;
+    if (cookieEl) cookieEl.textContent = cookies;
+    if (candyEl) candyEl.textContent = candyPerYear.toLocaleString();
   }
 
   // ---------- Personalized Next Steps ----------

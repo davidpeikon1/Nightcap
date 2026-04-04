@@ -446,6 +446,38 @@ body {
   color: var(--nc-text-muted);
 }
 
+/* ---------- Return Banner ---------- */
+.nc-return-banner {
+  margin-top: 2rem;
+  padding: 16px 24px;
+  background: rgba(200, 184, 154, 0.08);
+  border: 1px solid rgba(200, 184, 154, 0.2);
+  border-radius: var(--nc-radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: nc-fadeInUp 0.5s ease-out;
+}
+
+.nc-return-banner p {
+  font-size: 0.9rem;
+  color: var(--nc-text-muted);
+  margin: 0;
+}
+
+.nc-return-banner strong {
+  color: var(--nc-primary);
+}
+
+@media (max-width: 480px) {
+  .nc-return-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 /* ---------- Quiz ---------- */
 .nc-quiz {
   display: none;
@@ -1966,6 +1998,71 @@ body {
   color: var(--nc-accent);
 }
 
+/* ---------- Sugar Equivalents ---------- */
+.nc-equivalents {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.nc-equivalents__title {
+  font-size: 0.85rem;
+  color: var(--nc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.nc-equivalents__grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nc-equivalents__item {
+  padding: 16px 20px;
+  background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
+  min-width: 110px;
+}
+
+.nc-equivalents__emoji {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.nc-equivalents__value {
+  display: block;
+  font-family: var(--nc-font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--nc-primary);
+}
+
+.nc-equivalents__label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--nc-text-muted);
+  margin-top: 2px;
+}
+
+@media (max-width: 480px) {
+  .nc-equivalents__grid {
+    gap: 10px;
+  }
+
+  .nc-equivalents__item {
+    padding: 12px 14px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .nc-equivalents__value {
+    font-size: 1.35rem;
+  }
+}
+
 /* ---------- Next Steps ---------- */
 .nc-next-steps {
   margin: 2.5rem 0;
@@ -3019,6 +3116,28 @@ body {
           </div>
         </div>
 
+        <!-- Sugar Equivalents -->
+        <div class="nc-equivalents" id="results-equivalents">
+          <h3 class="nc-equivalents__title">That's the same as eating</h3>
+          <div class="nc-equivalents__grid">
+            <div class="nc-equivalents__item">
+              <span class="nc-equivalents__emoji" aria-hidden="true">&#127849;</span>
+              <span class="nc-equivalents__value" id="equiv-donuts">0</span>
+              <span class="nc-equivalents__label">donuts per day</span>
+            </div>
+            <div class="nc-equivalents__item">
+              <span class="nc-equivalents__emoji" aria-hidden="true">&#127852;</span>
+              <span class="nc-equivalents__value" id="equiv-cookies">0</span>
+              <span class="nc-equivalents__label">cookies per day</span>
+            </div>
+            <div class="nc-equivalents__item">
+              <span class="nc-equivalents__emoji" aria-hidden="true">&#127851;</span>
+              <span class="nc-equivalents__value" id="equiv-candy">0</span>
+              <span class="nc-equivalents__label">candy bars per year</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Sugar Source Breakdown -->
         <div class="nc-sources" id="results-sources">
           <h3 class="nc-sources__title">Where Your Sugar Comes From</h3>
@@ -3743,6 +3862,41 @@ body {
 
   if (!form) return;
 
+  // ---------- Returning Visitor ----------
+  (function checkReturningVisitor() {
+    try {
+      var saved = localStorage.getItem('nightcap_last_results');
+      if (!saved) return;
+      var data = JSON.parse(saved);
+      if (!data || !data.payload || !data.timestamp) return;
+
+      // Only show if results are less than 30 days old
+      var age = Date.now() - new Date(data.timestamp).getTime();
+      if (age > 30 * 24 * 60 * 60 * 1000) return;
+
+      // Add a "See your results again" banner to the hero
+      var hero = document.getElementById('hero');
+      if (!hero) return;
+
+      var banner = document.createElement('div');
+      banner.className = 'nc-return-banner';
+      banner.innerHTML = '<p>Welcome back! You consumed <strong>' + data.payload.quiz_data.estimated_daily_sugar + 'g</strong> of processed sugar per day.</p>' +
+        '<button class="nc-btn nc-btn--primary nc-btn--sm" id="return-results-btn">See My Results Again</button>';
+      hero.querySelector('.nc-hero__content').appendChild(banner);
+
+      document.getElementById('return-results-btn').addEventListener('click', function () {
+        // Hide everything, show results
+        ['hero', 'why', 'how-it-works', 'ingredients', 'social-proof', 'faq'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.style.display = 'none';
+        });
+        window.__nightcapQuizData = data.payload.quiz_data;
+        showResults(data.payload, data.serverData || { position: generatePosition() });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    } catch (e) {}
+  })();
+
   // ---------- Countdown Timer ----------
   function initCountdown() {
     var container = document.getElementById('launch-countdown');
@@ -4042,6 +4196,13 @@ body {
     var quizData = payload.quiz_data;
     var dailySugar = quizData.estimated_daily_sugar || 0;
 
+    // Save for returning visitors
+    try {
+      localStorage.setItem('nightcap_last_results', JSON.stringify({
+        payload: payload, serverData: serverData, timestamp: new Date().toISOString()
+      }));
+    } catch (e) {}
+
     // Transition sections
     signupSection.classList.remove('active');
     signupSection.style.display = 'none';
@@ -4057,6 +4218,9 @@ body {
 
     // Animate comparison chart
     setTimeout(function () { animateComparisonChart(dailySugar); }, 1200);
+
+    // Sugar equivalents
+    populateEquivalents(dailySugar);
 
     // Personalized next steps
     personalizeNextSteps(quizData);
@@ -4298,6 +4462,21 @@ body {
         }
       });
     }
+  }
+
+  // ---------- Sugar Equivalents ----------
+  function populateEquivalents(dailySugar) {
+    var donuts = Math.round((dailySugar / 22) * 10) / 10; // 22g per glazed donut
+    var cookies = Math.round((dailySugar / 12) * 10) / 10; // 12g per cookie
+    var candyPerYear = Math.round((dailySugar * 365) / 27); // 27g per Snickers
+
+    var donutEl = document.getElementById('equiv-donuts');
+    var cookieEl = document.getElementById('equiv-cookies');
+    var candyEl = document.getElementById('equiv-candy');
+
+    if (donutEl) donutEl.textContent = donuts;
+    if (cookieEl) cookieEl.textContent = cookies;
+    if (candyEl) candyEl.textContent = candyPerYear.toLocaleString();
   }
 
   // ---------- Personalized Next Steps ----------
