@@ -156,6 +156,21 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         }
     }
 
+    /// Short anticipatory line shown on the locked badge sheet — what this milestone represents.
+    var lookaheadText: String {
+        switch self {
+        case .firstHour:   return "The first craving cycle is about to close."
+        case .firstDay:    return "Your first full day without the spike is almost here."
+        case .threeDays:   return "The compulsive edge drops sharply at 72 hours."
+        case .oneWeek:     return "At one week, your gut and your brain are measurably different."
+        case .twoWeeks:    return "Two weeks is the threshold most people never reach."
+        case .oneMonth:    return "A month marks the beginning of real dopamine receptor recovery."
+        case .hundredDays: return "100 days is where this stops being a streak and becomes identity."
+        case .sixMonths:   return "Six months of compound interest about to come due."
+        case .oneYear:     return "One year without processed sugar. Almost there."
+        }
+    }
+
     /// The dismiss button label shown when this badge is still locked.
     var lockedDismissText: String {
         switch self {

@@ -561,9 +561,15 @@ struct LockedBadgeSheet: View {
                     }
                 }
 
-                Text(badge.scienceFact)
-                    .font(.system(size: 14, weight: .light))
+                Text(badge.lookaheadText)
+                    .font(.system(size: 15, weight: .light))
                     .foregroundStyle(Color("NCTextSecondary"))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
+
+                Text(badge.scienceFact)
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
                     .lineSpacing(5)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
