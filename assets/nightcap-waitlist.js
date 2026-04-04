@@ -288,18 +288,25 @@
     // ANCHORING: Always contrast their number against the 25g limit
     var multiple = Math.round(dailySugar / 25);
 
+    // SPOTLIGHT EFFECT: No shame. FRESH START: This is day one. STORYTELLING: They're the hero.
     if (dailySugar <= 25) {
-      title.textContent = payload.first_name + ", you're in the clear";
-      subtitle.textContent = "Under 25g per day. You're doing what 88% of Americans can't.";
+      title.textContent = payload.first_name + ", you're already there";
+      subtitle.textContent = "Under 25g. Most people never get here. You did it without even knowing the number.";
     } else if (dailySugar <= 75) {
       title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = "You probably thought you were doing fine. Most people do. But " + dailySugar + "g per day adds up to " + yearlySugarLbs + " lbs per year — mostly from foods that don't even taste sweet.";
+      subtitle.textContent = "Not because you eat badly. Because " + dailySugar + "g per day hides in foods that don't even taste sweet. Now that you can see it, you can change it. Today is day one.";
     } else if (dailySugar <= 150) {
       title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. It's not because you eat \"badly\" — it's because the system hides it everywhere. Now you can see it.";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. Nobody showed you the math until now. This is the moment it changes.";
     } else {
       title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. Not because you're careless — because 73% of packaged foods have sugar and you were never shown the math.";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. You're not the problem — the food system is. And now you have the one thing it didn't want you to have: the number.";
+    }
+
+    // PEAK-END RULE: A genuine warm moment after the data shock
+    var reframe = document.getElementById('results-reframe');
+    if (reframe && dailySugar > 25) {
+      reframe.textContent = "Knowing your number is the hardest part. Everything after this gets easier.";
     }
 
     // Share URL

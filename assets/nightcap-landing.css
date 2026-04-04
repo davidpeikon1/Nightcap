@@ -198,6 +198,8 @@ body::after {
   background: var(--nc-primary);
   color: #F2EBE0;
   box-shadow: var(--nc-shadow-md);
+  font-size: 0.95rem;
+  padding: 18px 40px;
 }
 
 .nc-btn--primary:hover:not(:disabled) {
@@ -1777,6 +1779,15 @@ body::after {
 }
 
 /* ---------- Results Equivalent Line ---------- */
+.nc-results__reframe {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--nc-text);
+  opacity: 0.45;
+  margin: 1.5rem 0 0;
+}
+
 .nc-results__equivalent {
   font-family: var(--nc-font-display);
   font-size: 1.1rem;
@@ -1863,6 +1874,16 @@ body::after {
   color: var(--nc-text);
   opacity: 0.5;
   line-height: 1.6;
+}
+
+.nc-next-steps__note {
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--nc-text-dim);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nc-border);
 }
 
 /* ---------- Source Breakdown ---------- */

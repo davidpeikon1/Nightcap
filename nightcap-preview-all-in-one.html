@@ -222,6 +222,8 @@ body::after {
   background: var(--nc-primary);
   color: #F2EBE0;
   box-shadow: var(--nc-shadow-md);
+  font-size: 0.95rem;
+  padding: 18px 40px;
 }
 
 .nc-btn--primary:hover:not(:disabled) {
@@ -1801,6 +1803,15 @@ body::after {
 }
 
 /* ---------- Results Equivalent Line ---------- */
+.nc-results__reframe {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--nc-text);
+  opacity: 0.45;
+  margin: 1.5rem 0 0;
+}
+
 .nc-results__equivalent {
   font-family: var(--nc-font-display);
   font-size: 1.1rem;
@@ -1887,6 +1898,16 @@ body::after {
   color: var(--nc-text);
   opacity: 0.5;
   line-height: 1.6;
+}
+
+.nc-next-steps__note {
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--nc-text-dim);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nc-border);
 }
 
 /* ---------- Source Breakdown ---------- */
@@ -2064,8 +2085,7 @@ body::after {
         <span class="nc-hero__title-line--accent">Help Is Coming.</span>
       </h1>
       <p class="nc-hero__subtitle">
-        It's in everything. It's addictive. And willpower isn't enough.<br>
-        We're building the tools to help you leave it behind for good.
+        It's in everything. It's addictive. And willpower isn't enough.
       </p>
 
       <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
@@ -2077,12 +2097,7 @@ body::after {
   </section>
 
   <!-- ===== CONTEXT ===== -->
-  <!-- 1. RECIPROCITY: Give value first — free quiz insight before asking for anything -->
-  <!-- Already implemented: quiz gives free personalized data before email ask -->
-  <!-- Strengthened: show their number on signup page before they give email -->
 
-  <!-- 2. COMMITMENT & CONSISTENCY: Small yes → bigger yes -->
-  <!-- Pre-commitment question before quiz starts -->
   <section class="nc-precommit" id="precommit">
     <div class="nc-precommit__container">
       <p class="nc-precommit__question">Do you want to know how much processed sugar you're really consuming?</p>
@@ -2093,7 +2108,6 @@ body::after {
     </div>
   </section>
 
-  <!-- 3. AUTHORITY: Cite credible sources -->
   <section class="nc-pullquote nc-reveal" id="pullquote">
     <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
     <p class="nc-pullquote__source">Based on USDA data &middot; Cited by Dr. Casey Means, Stanford-trained physician &middot; Author of <em>Good Energy</em></p>
@@ -2102,8 +2116,8 @@ body::after {
   <!-- ===== THE PROBLEM ===== -->
   <section class="nc-why nc-reveal" id="why">
     <div class="nc-why__container">
-      <h2 class="nc-why__title">You already know something is wrong.</h2>
-      <p class="nc-why__subtitle">The cravings that won't stop. The crash every afternoon. The feeling that your body isn't working the way it should. You're right — and it's not your fault. 73% of packaged foods contain hidden sugar. The system is designed to keep you stuck.</p>
+      <h2 class="nc-why__title">You already know something is off.</h2>
+      <p class="nc-why__subtitle">The cravings. The crash. The fog. You've felt it. And every time you've tried to fix it, the system pulled you back — because 73% of packaged foods contain hidden sugar. It's not a fair fight. But now you can see the field.</p>
     </div>
   </section>
 
@@ -2371,7 +2385,7 @@ body::after {
       </div>
       <div class="nc-signup__header">
         <h2 class="nc-signup__title">See your full report</h2>
-        <p class="nc-signup__subtitle">Breakdown by source. How you compare. What to do next.</p>
+        <p class="nc-signup__subtitle">Breakdown by source. How you compare. Your first three moves.</p>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
         <div class="nc-form-group">
@@ -2405,8 +2419,9 @@ body::after {
         <div class="nc-results__big-number">
           <span id="results-sugar-grams">0</span><span class="nc-results__big-number-unit">g</span>
         </div>
-        <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(AHA recommended limit: 25g)</span></p>
+        <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(AHA limit: 25g)</span></p>
         <h2 class="nc-results__title" id="results-title"></h2>
+        <p class="nc-results__reframe" id="results-reframe"></p>
         <p class="nc-results__subtitle" id="results-subtitle"></p>
 
         <!-- Context -->
@@ -2429,7 +2444,7 @@ body::after {
 
       <!-- Next Steps -->
       <div class="nc-next-steps" id="results-next-steps">
-        <h3 class="nc-next-steps__title">What to do next</h3>
+        <h3 class="nc-next-steps__title">Your first three moves</h3>
         <div class="nc-next-steps__list">
           <div class="nc-next-steps__item">
             <h4 class="nc-next-steps__heading" id="next-step-1-title">Start reading labels</h4>
@@ -2444,10 +2459,10 @@ body::after {
             <p class="nc-next-steps__desc" id="next-step-3-desc">Pick your biggest source. Replace it. One swap per week transforms your intake.</p>
           </div>
         </div>
+        <p class="nc-next-steps__note">Fair warning: once you start looking, you'll see sugar everywhere. That's the point.</p>
       </div>
 
       <!-- CTA -->
-      <!-- 6. SCARCITY: Limited early access creates urgency -->
       <div class="nc-results__cta-section">
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
           Get Early Access to the App
@@ -2456,7 +2471,6 @@ body::after {
         <p class="nc-results__cta-note">First 5,000 spots &middot; <span id="spots-remaining">2,153</span> remaining</p>
       </div>
 
-      <!-- 7. UNITY: Shared identity — "people like you" framing -->
       <div class="nc-results__share-section">
         <p class="nc-results__share-prompt">You're one of the people who chose to look.<br>Most don't. Share this with someone who's ready.</p>
         <div class="nc-referral-socials">
@@ -3317,18 +3331,25 @@ body::after {
     // ANCHORING: Always contrast their number against the 25g limit
     var multiple = Math.round(dailySugar / 25);
 
+    // SPOTLIGHT EFFECT: No shame. FRESH START: This is day one. STORYTELLING: They're the hero.
     if (dailySugar <= 25) {
-      title.textContent = payload.first_name + ", you're in the clear";
-      subtitle.textContent = "Under 25g per day. You're doing what 88% of Americans can't.";
+      title.textContent = payload.first_name + ", you're already there";
+      subtitle.textContent = "Under 25g. Most people never get here. You did it without even knowing the number.";
     } else if (dailySugar <= 75) {
       title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = "You probably thought you were doing fine. Most people do. But " + dailySugar + "g per day adds up to " + yearlySugarLbs + " lbs per year — mostly from foods that don't even taste sweet.";
+      subtitle.textContent = "Not because you eat badly. Because " + dailySugar + "g per day hides in foods that don't even taste sweet. Now that you can see it, you can change it. Today is day one.";
     } else if (dailySugar <= 150) {
       title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. It's not because you eat \"badly\" — it's because the system hides it everywhere. Now you can see it.";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. Nobody showed you the math until now. This is the moment it changes.";
     } else {
       title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. Not because you're careless — because 73% of packaged foods have sugar and you were never shown the math.";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. You're not the problem — the food system is. And now you have the one thing it didn't want you to have: the number.";
+    }
+
+    // PEAK-END RULE: A genuine warm moment after the data shock
+    var reframe = document.getElementById('results-reframe');
+    if (reframe && dailySugar > 25) {
+      reframe.textContent = "Knowing your number is the hardest part. Everything after this gets easier.";
     }
 
     // Share URL
