@@ -105,13 +105,38 @@ struct HeroCard: View {
 
     // MARK: - Tracking state
 
+    /// True only when the current fast is already the user's all-time longest.
+    /// Requires at least one completed previous fast so the comparison is meaningful.
+    private var isPersonalBest: Bool {
+        guard store.isTracking, !store.resetEvents.isEmpty else { return false }
+        let previousBest = store.resetEvents.map(\.fastDuration).max() ?? 0
+        return store.elapsedSeconds > previousBest
+    }
+
     private var trackingSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("SUGAR FREE FOR")
-                .font(.system(size: 11, weight: .medium))
-                .tracking(2)
-                .foregroundStyle(Color("NCTextSecondary"))
-                .padding(.bottom, 14)
+            HStack(alignment: .center) {
+                Text("SUGAR FREE FOR")
+                    .font(.system(size: 11, weight: .medium))
+                    .tracking(2)
+                    .foregroundStyle(Color("NCTextSecondary"))
+
+                Spacer()
+
+                if isPersonalBest {
+                    Text("PERSONAL BEST")
+                        .font(.system(size: 9, weight: .semibold))
+                        .tracking(1)
+                        .foregroundStyle(Color("NCSuccess"))
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 3)
+                        .background(Color("NCSuccess").opacity(0.12))
+                        .cornerRadius(4)
+                        .transition(.scale(scale: 0.8).combined(with: .opacity))
+                }
+            }
+            .padding(.bottom, 14)
+            .animation(.spring(duration: 0.4), value: isPersonalBest)
 
             timerView
 
