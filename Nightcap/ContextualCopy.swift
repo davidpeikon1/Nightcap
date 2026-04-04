@@ -78,6 +78,12 @@ struct ContextualCopy {
             "The physiological pull is almost resolved. What's left is habit — and you're already interrupting it.",
             "The gut microbiome is already responding. Beneficial bacteria populations grow in the absence of their competitor.",
             "Dopamine receptor sensitivity begins recovering around 72 hours. The biology is already turning.",
+            "The cravings between days 1 and 3 are withdrawal, not hunger. The body is not asking for sugar — it is asking for its baseline back.",
+            "At 48 hours, most of the acute fructose signaling has resolved. What arrives now is the conditioned schedule, not the biology.",
+            "The liver's glycogen-to-fat conversion pathway has quieted. The metabolic noise that drove yesterday's cravings is lower today.",
+            "Day 2 has the highest dropout rate of any window. If you're reading this, you're past the most statistically dangerous moment.",
+            "Sleep architecture begins improving around day 2. Less cortisol chasing glucose through the night means more slow-wave recovery.",
+            "The inflammatory signaling tied to processed sugar has been dropping for 48 hours. It doesn't announce itself — it just quietly resolves.",
         ],
 
         .threeToSevenDays: [

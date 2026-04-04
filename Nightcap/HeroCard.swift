@@ -307,6 +307,12 @@ struct HeroCard: View {
                 .font(.system(size: 26, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
 
+            if let lastReset = store.resetEvents.first {
+                Text("Last fast: \(formatFastDuration(lastReset.fastDuration)).")
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
+
             Text("Set the clock to when you last had processed sugar.")
                 .font(.system(size: 14, weight: .light))
                 .foregroundStyle(Color("NCTextSecondary"))

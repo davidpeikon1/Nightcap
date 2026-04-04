@@ -185,20 +185,19 @@ struct PhaseUnlockToast: View {
                 Text(phase.rawValue)
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(Color("NCTextPrimary"))
+                Text(phaseBioFact)
+                    .font(.system(size: 11, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 1)
             }
 
             Spacer()
 
-            VStack(alignment: .trailing, spacing: 3) {
-                Text(phase.tagline)
-                    .font(.system(size: 12, weight: .light))
-                    .foregroundStyle(Color("NCTextSecondary"))
-                    .multilineTextAlignment(.trailing)
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 10, weight: .light))
-                    .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
-            }
-            .frame(maxWidth: 110)
+            Image(systemName: "chevron.right")
+                .font(.system(size: 10, weight: .light))
+                .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
@@ -207,8 +206,20 @@ struct PhaseUnlockToast: View {
                 .fill(Color("NCSurface"))
                 .shadow(color: Color("NCTextPrimary").opacity(0.08), radius: 12, y: 4)
         )
-        .accessibilityLabel("Entering \(phase.rawValue) phase. \(phase.tagline).")
+        .accessibilityLabel("Entering \(phase.rawValue) phase. \(phase.tagline). \(phaseBioFact)")
         .accessibilityHint("Opens the phase detail view")
+    }
+
+    /// A one-sentence biological fact specific to the moment of entering this phase.
+    private var phaseBioFact: String {
+        switch phase {
+        case .justStarted:  return "The craving window opens. It closes in under 20 minutes."
+        case .firstDay:     return "Your insulin is falling. The liver has begun clearing fructose."
+        case .withdrawal:   return "Dopamine receptor sensitivity starts recovering. The hard part is here."
+        case .breakthrough: return "The acute biological pull is resolving. What remains is conditioned reflex."
+        case .rewiring:     return "Your gut microbiome has measurably shifted. Craving-amplifying bacteria are declining."
+        case .freedom:      return "Two weeks. fMRI studies show reduced reward-center response to sugar images at this mark."
+        }
     }
 }
 
