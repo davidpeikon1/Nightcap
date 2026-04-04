@@ -47,11 +47,12 @@ struct GetFastingStatusIntent: AppIntent {
                 dialog: IntentDialog("No fast is currently being tracked in Nightcap.")
             )
         }
-        let time  = formatElapsed(elapsed)
-        let phase = phaseLabel(for: elapsed)
+        let time    = formatElapsed(elapsed)
+        let phase   = phaseLabel(for: elapsed)
+        let tagline = phaseTagline(for: elapsed)
         return .result(
             value: time,
-            dialog: IntentDialog("You've been sugar free for \(time), in the \(phase) phase.")
+            dialog: IntentDialog("Sugar free for \(time). You're in the \(phase) phase. \(tagline)")
         )
     }
 }
@@ -82,9 +83,10 @@ struct GetNextMilestoneIntent: AppIntent {
                 dialog: IntentDialog("You've earned every Nightcap milestone. A year without processed sugar. That's not a streak — that's a different relationship with food.")
             )
         }
+        let teaser = milestoneTeaser(for: elapsed)
         return .result(
             value: milestone,
-            dialog: IntentDialog("Your next milestone is \(milestone) away.")
+            dialog: IntentDialog("Your next milestone is \(milestone) away. \(teaser)")
         )
     }
 }
@@ -133,6 +135,33 @@ private func phaseLabel(for elapsed: TimeInterval) -> String {
     case 72..<168:  return "Breakthrough"
     case 168..<336: return "Rewiring"
     default:        return "Freedom"
+    }
+}
+
+private func phaseTagline(for elapsed: TimeInterval) -> String {
+    let h = elapsed / 3600
+    switch h {
+    case ..<1:      return "The fast has begun."
+    case 1..<24:    return "Cravings peak and pass."
+    case 24..<72:   return "Your body is adapting."
+    case 72..<168:  return "The compulsion is fading."
+    case 168..<336: return "Rewriting the blueprint."
+    default:        return "You're free."
+    }
+}
+
+private func milestoneTeaser(for elapsed: TimeInterval) -> String {
+    let h = elapsed / 3600
+    switch h {
+    case ..<1:        return "The first craving cycle is about to close."
+    case 1..<24:      return "Your first full day without the spike is almost here."
+    case 24..<72:     return "The compulsive edge drops sharply at 72 hours."
+    case 72..<168:    return "At one week, your gut and brain are measurably different."
+    case 168..<336:   return "Two weeks is the threshold most people never reach."
+    case 336..<720:   return "A month marks the beginning of real dopamine receptor recovery."
+    case 720..<2400:  return "100 days is where this stops being a streak and becomes identity."
+    case 2400..<4320: return "Six months of compound interest about to come due."
+    default:          return "One year without processed sugar. Almost there."
     }
 }
 
