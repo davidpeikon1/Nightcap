@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nightcap — App Preview</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;display:flex;flex-direction:column;align-items:center;padding:28px 16px 60px;gap:20px;color:#eeebd5}
+.label{font-size:12px;color:#555;text-align:center;letter-spacing:1px}
+.scenario-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.sbtn{background:#181818;color:#666;border:1px solid #2a2a2a;border-radius:20px;padding:6px 16px;font-size:13px;cursor:pointer;font-family:inherit;transition:all .2s}
+.sbtn.active{background:#242424;color:#eeebd5;border-color:#444}
+.sbtn:hover:not(.active){border-color:#333;color:#999}
+.phone{width:393px;height:852px;background:#141210;border-radius:52px;border:8px solid #252525;overflow:hidden;position:relative;box-shadow:0 40px 100px rgba(0,0,0,.8),inset 0 0 0 1px #333}
+.island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;z-index:100}
+.screen{width:100%;height:100%;overflow-y:auto;overflow-x:hidden;display:none;scrollbar-width:none}
+.screen::-webkit-scrollbar{display:none}
+.screen.on{display:block}
+.scroll{padding:60px 22px 80px;display:flex;flex-direction:column;gap:18px}
+
+/* top bar */
+.topbar{display:flex;align-items:center}
+.wordmark{font-size:22px;font-weight:300;color:#eeebd5;letter-spacing:-.5px}
+.topbar-r{margin-left:auto;display:flex;align-items:center;gap:10px}
+.streak{display:none;align-items:center;gap:5px;background:#1e1c19;padding:5px 11px;border-radius:8px;font-size:13px}
+.streak .fire{color:#d89148}
+.streak .days{font-weight:500;color:#eeebd5}
+.gear{background:none;border:none;color:#999690;font-size:17px;cursor:pointer;padding:3px}
+
+/* cards */
+.card{background:#1e1c19;border-radius:16px;padding:20px}
+.sec{font-size:11px;font-weight:500;letter-spacing:2px;color:#999690;text-transform:uppercase}
+.div{height:1px;background:rgba(109,106,100,.4);margin:12px 0}
+.row{display:flex;justify-content:space-between;align-items:center}
+.rl{font-size:13px;color:#999690}
+.rv{font-size:13px;font-weight:500;font-family:'SF Mono',monospace;color:#eeebd5}
+
+/* tracker */
+.timer-wrap{display:flex;align-items:flex-end;gap:14px;margin:14px 0 14px}
+.tnum{font-size:52px;font-weight:300;font-variant-numeric:tabular-nums;color:#eeebd5;line-height:1}
+.tunit{font-size:18px;font-weight:300;color:#999690;padding-bottom:6px}
+.tcol{font-size:44px;font-weight:300;color:#6d6a64;line-height:1;padding-bottom:2px}
+.ctx{font-size:15px;font-weight:300;color:#999690;line-height:1.6;margin-bottom:12px}
+.startbtn{display:flex;align-items:center;gap:4px;font-size:12px;color:#6d6a64;background:none;border:none;cursor:pointer;font-family:inherit;margin-bottom:14px}
+.hdiv{border:none;border-top:1px solid rgba(109,106,100,.5);margin:0 0 12px}
+.reset-trig{background:none;border:none;font-size:14px;color:#d89148;cursor:pointer;font-family:inherit;width:100%;padding:4px 0}
+
+/* reframe */
+.qtext{font-size:18px;font-weight:300;color:#eeebd5;line-height:1.65;margin-bottom:14px}
+.sci-toggle{display:flex;align-items:center;gap:6px;background:none;border:none;font-size:13px;color:#5f9f74;cursor:pointer;font-family:inherit;padding:0}
+.sci-body{font-size:13px;font-weight:300;color:#999690;line-height:1.6;margin-top:12px;display:none}
+.sci-body.on{display:block}
+
+/* body science */
+.bsci-hdr{display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:none;width:100%;font-family:inherit;padding:0;text-align:left}
+.phase-chip{font-size:10px;font-weight:500;letter-spacing:1.5px;color:#5f9f74;margin-left:auto;margin-right:6px}
+.chev{color:#6d6a64;font-size:10px}
+.bsci-body{display:none;margin-top:14px}
+.bsci-body.on{display:block}
+.bsci-text{font-size:15px;font-weight:300;color:#eeebd5;line-height:1.6;margin-bottom:14px}
+.pstrip{display:flex;gap:0;margin-top:4px}
+.pseg{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.pbar{width:100%;height:2px;background:rgba(109,106,100,.25);border-radius:2px}
+.pbar.past{background:rgba(95,159,116,.7)}
+.pbar.active{background:#5f9f74;height:4px}
+.pbar-lbl{font-size:9px;font-weight:500;color:#5f9f74}
+
+/* progress */
+.prog-hdr{display:flex;align-items:center;margin-bottom:14px}
+.badge-ct{font-size:11px;font-family:monospace;color:#6d6a64;margin-right:10px}
+.hist-link{background:none;border:none;font-size:12px;color:#999690;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;margin-left:auto}
+.badges-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;margin-bottom:14px}
+.badges-row::-webkit-scrollbar{display:none}
+.bdg{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;min-width:58px}
+.bdg-c{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;border:1px solid rgba(109,106,100,.3);background:#1e1c19;color:#6d6a64;transition:transform .15s;flex-shrink:0}
+.bdg-c:hover{transform:scale(1.06)}
+.bdg-c.earned{background:rgba(95,159,116,.12);border-color:rgba(95,159,116,.4);color:#5f9f74}
+.bdg-lbl{font-size:10px;color:#6d6a64;text-align:center;width:60px;line-height:1.2}
+.bdg-lbl.earned{color:#eeebd5}
+.nxt-row{background:#1e1c19;border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.nxt-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.nxt-name{font-size:12px;font-weight:500;color:#999690;display:flex;align-items:center;gap:7px}
+.nxt-eta{font-size:11px;font-family:monospace;color:#6d6a64}
+.bar-track{height:4px;background:rgba(109,106,100,.2);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;background:rgba(95,159,116,.6);border-radius:4px;transition:width .8s}
+.phase-card{background:#1e1c19;border-radius:12px;padding:16px}
+.phase-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.phase-nm{font-size:13px;font-weight:500;color:#eeebd5}
+.phase-eta{font-size:12px;font-family:monospace;color:#6d6a64}
+.phase-track{height:6px;background:rgba(109,106,100,.25);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.phase-fill{height:100%;background:#5f9f74;border-radius:3px;transition:width .8s}
+.phase-tag{font-size:12px;font-weight:300;color:#999690}
+
+/* toolkit */
+.tk-hdr{display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:none;width:100%;font-family:inherit;padding:0;text-align:left}
+.tk-body{display:none;margin-top:18px}
+.tk-body.on{display:block}
+.tk-tabs{display:flex;border-bottom:1px solid rgba(109,106,100,.3);margin-bottom:18px}
+.tk-tab{flex:1;background:none;border:none;font-family:inherit;font-size:12px;color:#6d6a64;cursor:pointer;padding:7px 2px;border-bottom:2px solid transparent;transition:all .2s;text-align:center}
+.tk-tab.active{color:#eeebd5;border-bottom-color:#eeebd5}
+.tk-panel{display:none}
+.tk-panel.active{display:block}
+
+/* countdown */
+.cd-wrap{display:flex;flex-direction:column;align-items:center;gap:18px}
+.cd-ring{position:relative;width:148px;height:148px}
+.cd-ring svg{transform:rotate(-90deg);position:absolute;top:0;left:0}
+.cd-time{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:34px;font-weight:300;font-family:monospace;color:#eeebd5}
+.cd-lbl{font-size:14px;font-weight:300;color:#999690;text-align:center;line-height:1.55}
+.cd-btn{background:#e9e6e0;color:#141210;border:none;border-radius:12px;padding:13px 28px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit}
+.cd-btn.paused{background:#1e1c19;color:#999690}
+
+/* craving cards */
+.cr-card{background:#141210;border-radius:12px;padding:20px;min-height:90px;cursor:pointer;margin-bottom:10px}
+.cr-text{font-size:17px;font-weight:300;color:#eeebd5;line-height:1.6}
+.cr-hint{font-size:11px;color:#6d6a64;text-align:center}
+
+/* trigger grid */
+.trig-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.trig-btn{background:#141210;border:none;border-radius:12px;padding:18px 10px;font-family:inherit;cursor:pointer;text-align:center;transition:background .2s}
+.trig-btn:hover{background:rgba(95,159,116,.08)}
+.trig-icon{font-size:20px;margin-bottom:5px}
+.trig-name{font-size:13px;font-weight:400;color:#eeebd5;display:block}
+.trig-ins{font-size:13px;font-weight:300;color:#999690;line-height:1.5;margin-top:12px;display:none;border-left:2px solid rgba(95,159,116,.4);padding-left:12px}
+
+/* my why */
+.why-rsn{font-size:18px;font-weight:300;color:#eeebd5;line-height:1.6;margin-bottom:14px}
+.why-aff{font-size:14px;font-weight:300;color:#999690;line-height:1.6;border-left:2px solid rgba(95,159,116,.4);padding-left:12px}
+
+/* overlays */
+.overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:50;display:none;align-items:flex-end}
+.overlay.on{display:flex}
+.sheet{background:#141210;border-radius:20px 20px 0 0;width:100%;padding:10px 22px 36px;max-height:85%;overflow-y:auto}
+.sh-handle{width:36px;height:4px;background:rgba(109,106,100,.4);border-radius:2px;margin:0 auto 18px}
+.sh-title{font-size:24px;font-weight:300;color:#eeebd5;margin-bottom:8px}
+.sh-sub{font-size:15px;color:#999690;line-height:1.5;margin-bottom:22px}
+.note-lbl{font-size:12px;font-weight:500;letter-spacing:1px;color:#6d6a64;margin-bottom:7px;display:block}
+.note-in{width:100%;background:#1e1c19;border:none;border-radius:10px;padding:13px;font-size:15px;color:#eeebd5;font-family:inherit;outline:none;margin-bottom:18px}
+.note-in::placeholder{color:#6d6a64}
+.pbtn{width:100%;background:#e9e6e0;color:#141210;border:none;border-radius:12px;padding:17px;font-size:17px;font-weight:500;cursor:pointer;font-family:inherit;margin-bottom:10px}
+.sbtn2{width:100%;background:none;border:none;font-size:14px;color:#999690;cursor:pointer;font-family:inherit;padding:8px}
+.conf-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:28px 0}
+.conf-icon{font-size:30px;color:#999690}
+.conf-title{font-size:20px;font-weight:300;color:#eeebd5}
+.conf-sub{font-size:14px;color:#999690}
+
+/* badge sheet */
+.bdg-sh-circle{width:100px;height:100px;border-radius:50%;background:rgba(95,159,116,.1);display:flex;align-items:center;justify-content:center;font-size:40px;margin:8px auto 14px}
+.bdg-sh-name{font-size:28px;font-weight:300;color:#eeebd5;text-align:center;margin-bottom:8px}
+.bdg-sh-cel{font-size:16px;font-weight:300;color:#999690;text-align:center;line-height:1.6;margin-bottom:12px;white-space:pre-line}
+.bdg-sh-sci{font-size:12px;font-weight:300;color:#6d6a64;text-align:center;line-height:1.5;margin-bottom:22px}
+.share-btn{width:100%;background:#1e1c19;border:none;border-radius:12px;padding:13px;font-size:15px;color:#999690;cursor:pointer;font-family:inherit;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+
+/* locked badge */
+.lk-circle{width:100px;height:100px;border-radius:50%;background:rgba(109,106,100,.08);border:1px solid rgba(109,106,100,.2);display:flex;align-items:center;justify-content:center;font-size:40px;margin:8px auto 14px;filter:grayscale(.8)opacity(.5)}
+.lk-name{font-size:28px;font-weight:300;color:#eeebd5;text-align:center;margin-bottom:6px}
+.lk-eta{font-size:15px;font-family:monospace;color:#6d6a64;text-align:center;margin-bottom:16px}
+.lk-sci{font-size:13px;font-weight:300;color:#999690;text-align:center;line-height:1.55;padding:0 8px;margin-bottom:22px}
+
+/* settings */
+.sett-ov{position:absolute;top:0;left:0;right:0;bottom:0;background:#141210;z-index:50;display:none;flex-direction:column}
+.sett-ov.on{display:flex}
+.sett-nav{display:flex;align-items:flex-end;padding:60px 16px 8px}
+.sett-title{font-size:34px;font-weight:700;color:#eeebd5}
+.done{margin-left:auto;background:none;border:none;font-size:15px;font-weight:500;color:#e9e6e0;cursor:pointer;font-family:inherit}
+.sett-scroll{flex:1;overflow-y:auto;padding:8px 0 40px}
+.sett-sec{margin-bottom:26px;padding:0 14px}
+.sett-sec-hdr{font-size:11px;font-weight:500;letter-spacing:1.5px;color:#999690;text-transform:uppercase;margin-bottom:7px;padding-left:4px}
+.sett-grp{background:#1e1c19;border-radius:12px;overflow:hidden}
+.sett-row{display:flex;align-items:center;padding:13px 14px;border-bottom:1px solid rgba(109,106,100,.15)}
+.sett-row:last-child{border-bottom:none}
+.sett-rl{font-size:15px;color:#eeebd5;flex:1}
+.sett-rv{font-size:15px;color:#999690}
+.sett-check{color:#5f9f74;font-size:13px;font-weight:600;margin-left:10px}
+.toggle-on{width:44px;height:26px;background:#5f9f74;border-radius:13px;position:relative;margin-left:10px;flex-shrink:0}
+.toggle-on::after{content:'';width:22px;height:22px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px}
+
+/* history */
+.nav-bar{display:flex;align-items:flex-end;padding:58px 16px 6px;position:sticky;top:0;background:#141210;z-index:10}
+.nav-title{font-size:34px;font-weight:700;color:#eeebd5}
+.hscroll{padding:6px 22px 80px;display:flex;flex-direction:column;gap:18px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat-card{background:#1e1c19;border-radius:12px;padding:15px;text-align:center}
+.sc-val{font-size:22px;font-weight:300;font-variant-numeric:tabular-nums;color:#eeebd5;display:block;margin-bottom:3px}
+.sc-lbl{font-size:11px;color:#999690}
+.hmap{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:10px 0 6px}
+.hcell{aspect-ratio:1;border-radius:3px;background:rgba(109,106,100,.15)}
+.hcell.clean{background:rgba(95,159,116,.5)}
+.hcell.reset{background:rgba(216,145,75,.5)}
+.bar-chart{display:flex;gap:8px;align-items:flex-end;height:130px;margin:10px 0}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end}
+.bbar{width:100%;border-radius:4px 4px 0 0;min-height:4px}
+.bcol-lbl{font-size:9px;color:#6d6a64}
+.ritem{display:flex;align-items:center;gap:13px;padding:13px 15px;border-bottom:1px solid rgba(109,106,100,.15)}
+.ritem:last-child{border-bottom:none}
+.rdot{width:6px;height:6px;border-radius:50%;background:rgba(109,106,100,.4);flex-shrink:0}
+.rdot.cur{background:#5f9f74;width:8px;height:8px}
+.rinfo{flex:1}
+.rdur{font-size:14px;color:#eeebd5}
+.rnote{font-size:12px;color:#999690;margin-top:2px}
+.rdate{font-size:11px;font-family:monospace;color:#6d6a64}
+.legend{display:flex;gap:14px;margin-top:4px}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#6d6a64}
+.leg-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.leg-sq{width:8px;height:8px;border-radius:2px;display:inline-block}
+
+/* toast */
+.toast{position:absolute;top:58px;left:22px;right:22px;background:#1e1c19;border-radius:14px;padding:13px 15px;display:none;align-items:center;gap:13px;z-index:40;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.toast.show{display:flex;animation:slidedn .4s ease}
+@keyframes slidedn{from{transform:translateY(-16px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* confetti */
+.confetti-wrap{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden;z-index:55}
+.cp{position:absolute;width:8px;height:8px;border-radius:2px;top:-20px;animation:fall 2.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(900px) rotate(720deg);opacity:0}}
+
+@media(max-width:440px){.phone{width:100%;max-width:393px;height:80vh;min-height:600px;border-radius:32px;border-width:5px}}
+</style>
+</head>
+<body>
+<div class="label">NIGHTCAP — INTERACTIVE APP PREVIEW</div>
+<div class="scenario-bar">
+  <button class="sbtn" onclick="setScenario('fresh')">First 20 min</button>
+  <button class="sbtn" onclick="setScenario('day1')">Day 1</button>
+  <button class="sbtn active" onclick="setScenario('day3')">Day 3</button>
+  <button class="sbtn" onclick="setScenario('week1')">Week 1</button>
+  <button class="sbtn" onclick="setScenario('week2')">2 Weeks</button>
+  <button class="sbtn" onclick="setScenario('month')">1 Month</button>
+</div>
+
+<div class="phone" id="phone">
+  <div class="island"></div>
+
+  <!-- Phase toast -->
+  <div class="toast" id="toast">
+    <span style="color:#5f9f74;font-size:18px">↑</span>
+    <div>
+      <div style="font-size:12px;font-weight:500;color:#999690">New phase unlocked</div>
+      <div id="toast-name" style="font-size:15px;font-weight:500;color:#eeebd5"></div>
+    </div>
+    <div style="margin-left:auto;text-align:right">
+      <div id="toast-tag" style="font-size:12px;font-weight:300;color:#999690"></div>
+      <div style="font-size:10px;color:#6d6a64;margin-top:2px">Tap for details</div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen on" id="s-home">
+    <div class="scroll">
+
+      <div class="topbar">
+        <div class="wordmark">nightcap</div>
+        <div class="topbar-r">
+          <div class="streak" id="streak-badge">
+            <span class="fire">🔥</span>
+            <span class="days" id="streak-text">3 days</span>
+          </div>
+          <button class="gear" onclick="openSettings()">⚙</button>
+        </div>
+      </div>
+
+      <!-- Weekly insight -->
+      <div class="card" id="weekly-card">
+        <div class="sec" style="margin-bottom:13px">This Week</div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:10px">
+          <div class="row"><span class="rl">Longest fast</span><span class="rv" id="w-longest">3d 2h</span></div>
+          <div class="row"><span class="rl">Resets this week</span><span class="rv">0</span></div>
+          <div class="row" id="w-streak-row"><span class="rl">Current streak</span><span class="rv" id="w-streak">3d</span></div>
+        </div>
+        <div class="div"></div>
+        <div style="font-size:14px;font-weight:300;color:#999690;line-height:1.6" id="w-copy">Zero resets this week. 3 days and counting. That's not common. Keep building on it.</div>
+        <button style="background:none;border:none;font-size:13px;color:#6d6a64;cursor:pointer;margin-top:10px;font-family:inherit;padding:4px 0" onclick="document.getElementById('weekly-card').style.display='none'">Dismiss</button>
+      </div>
+
+      <!-- Fast Tracker -->
+      <div class="card">
+        <div class="sec" style="margin-bottom:14px">SUGAR FREE FOR</div>
+        <div class="timer-wrap" id="timer-display"></div>
+        <div class="ctx" id="ctx-copy">Your taste buds have a half-life of 10 days. The reset has started.</div>
+        <button class="startbtn">Started <span id="started-ago" style="margin:0 2px">3 days</span> ago ✏</button>
+        <hr class="hdiv">
+        <button class="reset-trig" onclick="openReset()">I just had processed sugar</button>
+      </div>
+
+      <!-- Daily Reframe -->
+      <div class="card">
+        <div class="row" style="margin-bottom:10px">
+          <span class="sec">TODAY'S REFRAME</span>
+          <span style="font-size:11px;font-weight:400;font-family:monospace;color:#6d6a64" id="day-lbl">day 4</span>
+        </div>
+        <div class="div"></div>
+        <div class="qtext" id="q-text">The behavioral pattern is starting to shift. The craving still shows up. But it's a reflex now, not a need.</div>
+        <button class="sci-toggle" onclick="toggleSci()">
+          <span>The science</span><span id="sci-chev" style="margin-left:2px">›</span>
+        </button>
+        <div class="sci-body" id="sci-body">Behavioral neuroscience distinguishes between habitual cravings and physiological cravings. After 2–3 days without processed sugar, the physiological component has largely resolved. What remains is habit — which responds to a different set of interventions.</div>
+      </div>
+
+      <!-- Body Science -->
+      <div class="card">
+        <button class="bsci-hdr" onclick="toggleBsci()">
+          <span style="color:#5f9f74;font-size:13px">⚗</span>
+          <span class="sec" style="margin:0">WHAT'S HAPPENING NOW</span>
+          <span class="phase-chip" id="phase-chip">BREAKTHROUGH</span>
+          <span style="font-size:10px;color:rgba(95,159,116,.7)">ⓘ</span>
+          <span class="chev" id="bsci-chev" style="margin-left:8px">▼</span>
+        </button>
+        <div class="bsci-body" id="bsci-body">
+          <div class="div" style="margin-top:12px"></div>
+          <div class="bsci-text" id="bsci-text">The compulsive edge of cravings drops sharply at 72 hours. Your taste receptors are beginning to reset — an apple will soon taste like dessert.</div>
+          <div class="pstrip" id="pstrip"></div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div>
+        <div class="prog-hdr">
+          <span class="sec">YOUR PROGRESS</span>
+          <span class="badge-ct" id="badge-ct"></span>
+          <button class="hist-link" onclick="openHistory()">History →</button>
+        </div>
+        <div class="badges-row" id="badges-row"></div>
+        <div class="nxt-row" id="nxt-row">
+          <div class="nxt-info">
+            <span class="nxt-name"><span id="nxt-icon" style="font-size:14px">📅</span><span id="nxt-lbl">2 Weeks</span></span>
+            <span class="nxt-eta" id="nxt-eta">11d away</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="nxt-fill" style="width:30%"></div></div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-hdr">
+            <span class="phase-nm" id="p-name">Breakthrough</span>
+            <span class="phase-eta" id="p-eta">4d away</span>
+          </div>
+          <div class="phase-track"><div class="phase-fill" id="p-fill" style="width:45%"></div></div>
+          <div class="phase-tag" id="p-tag">The compulsion is fading.</div>
+        </div>
+      </div>
+
+      <!-- Craving Toolkit -->
+      <div class="card">
+        <button class="tk-hdr" onclick="toggleToolkit()">
+          <span style="font-size:13px;color:#5f9f74">💊</span>
+          <span class="sec" style="margin:0">HAVING A CRAVING?</span>
+          <span class="chev" id="tk-chev" style="margin-left:auto">▼</span>
+        </button>
+        <div class="tk-body" id="tk-body">
+          <div class="tk-tabs">
+            <button class="tk-tab active" onclick="switchTab(this,'t-twenty')">20 Min</button>
+            <button class="tk-tab" onclick="switchTab(this,'t-reframe')">Reframe</button>
+            <button class="tk-tab" onclick="switchTab(this,'t-why')">My Why</button>
+            <button class="tk-tab" onclick="switchTab(this,'t-log')">Log It</button>
+          </div>
+          <div class="tk-panel active" id="t-twenty">
+            <div class="cd-wrap">
+              <div class="cd-ring">
+                <svg width="148" height="148" viewBox="0 0 148 148">
+                  <circle fill="none" stroke="rgba(109,106,100,.15)" stroke-width="3" cx="74" cy="74" r="70"/>
+                  <circle id="cd-ring" fill="none" stroke="rgba(109,106,100,.35)" stroke-width="3" stroke-linecap="round" cx="74" cy="74" r="70" stroke-dasharray="439.8" stroke-dashoffset="439.8"/>
+                </svg>
+                <div class="cd-time" id="cd-time">20:00</div>
+              </div>
+              <div class="cd-lbl">You don't need to resist it — just outlast it.<br>The craving will pass.</div>
+              <button class="cd-btn" id="cd-btn" onclick="toggleCD()">Start</button>
+            </div>
+          </div>
+          <div class="tk-panel" id="t-reframe">
+            <div class="cr-card" onclick="nextCard()">
+              <div class="cr-text" id="cr-text">The craving is loudest right before it disappears.</div>
+            </div>
+            <div class="cr-hint">Tap for another</div>
+          </div>
+          <div class="tk-panel" id="t-why">
+            <div class="why-rsn">Sleep better.</div>
+            <div class="why-aff">Sugar spikes your cortisol, keeping you wired at night. Breaking the cycle is the most underrated sleep hack.</div>
+          </div>
+          <div class="tk-panel" id="t-log">
+            <div class="trig-grid">
+              <button class="trig-btn" onclick="logT(this,'Boredom cravings are the brain seeking dopamine through the easiest available route. A 5-minute walk produces the same effect.')"><div class="trig-icon">🥱</div><span class="trig-name">Boredom</span></button>
+              <button class="trig-btn" onclick="logT(this,'Stress triggers cortisol, which drives glucose cravings as a quick energy fix. Deep breathing lowers cortisol within 2 minutes.')"><div class="trig-icon">😤</div><span class="trig-name">Stress</span></button>
+              <button class="trig-btn" onclick="logT(this,'Habit cravings are conditioned responses — the brain fires the craving because it expects the reward at this time, in this place.')"><div class="trig-icon">🕐</div><span class="trig-name">Habit / time</span></button>
+              <button class="trig-btn" onclick="logT(this,'Social eating cues are among the strongest. Having a non-sugar alternative ready for group settings is the single most effective intervention.')"><div class="trig-icon">👥</div><span class="trig-name">Social</span></button>
+            </div>
+            <div class="trig-ins" id="trig-ins"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /scroll -->
+  </div><!-- /home -->
+
+  <!-- HISTORY -->
+  <div class="screen" id="s-hist">
+    <div class="nav-bar">
+      <span class="nav-title">Fast History</span>
+      <button class="done" onclick="closeHistory()">Done</button>
+    </div>
+    <div class="hscroll">
+      <div class="card">
+        <div class="row" style="margin-bottom:10px"><span class="sec">FASTING HISTORY</span><span style="font-size:11px;color:#6d6a64">hours per fast</span></div>
+        <div class="bar-chart" id="h-chart"></div>
+        <div class="legend">
+          <div class="leg-item"><span class="leg-dot" style="background:rgba(109,106,100,.5)"></span>&lt;24h</div>
+          <div class="leg-item"><span class="leg-dot" style="background:rgba(216,145,75,.7)"></span>1–3d</div>
+          <div class="leg-item"><span class="leg-dot" style="background:#5f9f74"></span>3d+</div>
+        </div>
+      </div>
+      <div class="stats-grid" id="h-stats"></div>
+      <div class="card">
+        <div class="sec" style="margin-bottom:10px">28-DAY ACTIVITY</div>
+        <div class="hmap" id="hmap"></div>
+        <div class="legend">
+          <div class="leg-item"><span class="leg-sq" style="background:rgba(95,159,116,.5)"></span>Clean</div>
+          <div class="leg-item"><span class="leg-sq" style="background:rgba(216,145,75,.5)"></span>Reset</div>
+          <div class="leg-item"><span class="leg-sq" style="background:rgba(109,106,100,.15)"></span>Untracked</div>
+        </div>
+      </div>
+      <div>
+        <div class="sec" style="margin-bottom:9px">CURRENT FAST</div>
+        <div style="background:#1e1c19;border-radius:12px;padding:15px;margin-bottom:18px;display:flex;align-items:center;gap:13px">
+          <div class="rdot cur"></div>
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+              <span style="font-size:14px;font-weight:500;color:#eeebd5">In progress</span>
+              <span id="pb-chip" style="font-size:9px;font-weight:600;color:#5f9f74;padding:2px 5px;background:rgba(95,159,116,.12);border-radius:4px;display:none">PB</span>
+            </div>
+            <span style="font-size:12px;color:#999690" id="cur-info">3d 2h · Breakthrough</span>
+          </div>
+          <span style="margin-left:auto;font-size:11px;font-family:monospace;color:#6d6a64" id="cur-date">3 days ago</span>
+        </div>
+        <div class="sec" style="margin-bottom:9px">PAST FASTS</div>
+        <div style="background:#1e1c19;border-radius:12px;overflow:hidden" id="reset-list"></div>
+      </div>
+      <div class="card">
+        <div class="sec" style="margin-bottom:14px">CRAVING INSIGHTS</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:1.5px;color:#6d6a64;margin-bottom:10px">TIME OF DAY</div>
+        <div style="display:flex;gap:8px;height:80px;align-items:flex-end;margin-bottom:4px" id="tod-chart"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESET MODAL -->
+  <div class="overlay" id="ov-reset">
+    <div class="sheet">
+      <div class="sh-handle"></div>
+      <div id="reset-form">
+        <div class="sh-title">Starting fresh.</div>
+        <div class="sh-sub">Everyone resets. The fact that you're tracking it puts you ahead of most people.</div>
+        <span class="note-lbl">WHAT WAS IT?</span>
+        <input class="note-in" id="note-in" placeholder="e.g. chocolate after dinner" maxlength="120">
+        <button class="pbtn" onclick="confirmReset()">Restart my fast</button>
+        <button class="sbtn2" onclick="closeReset()">I didn't actually have sugar</button>
+      </div>
+      <div id="reset-conf" style="display:none">
+        <div class="conf-wrap">
+          <div class="conf-icon">↺</div>
+          <div class="conf-title">Fast restarted.</div>
+          <div class="conf-sub">Every reset is data.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BADGE SHEET (earned) -->
+  <div class="overlay" id="ov-badge">
+    <div class="sheet" style="max-height:90%">
+      <div class="sh-handle"></div>
+      <div class="bdg-sh-circle" id="bs-circle">⏱</div>
+      <div class="bdg-sh-name" id="bs-name">First Hour</div>
+      <div class="bdg-sh-cel" id="bs-cel">The first hour is the hardest commitment.</div>
+      <div class="bdg-sh-sci" id="bs-sci">Your blood sugar has started to stabilize.</div>
+      <button class="share-btn">↑ &nbsp;Share this milestone</button>
+      <button class="pbtn" onclick="closeBadge()">Keep going</button>
+    </div>
+  </div>
+
+  <!-- LOCKED BADGE SHEET -->
+  <div class="overlay" id="ov-locked">
+    <div class="sheet" style="max-height:90%">
+      <div class="sh-handle"></div>
+      <div class="lk-circle" id="lk-circle">📅</div>
+      <div class="lk-name" id="lk-name">2 Weeks</div>
+      <div class="lk-eta" id="lk-eta">11d away</div>
+      <div class="lk-sci" id="lk-sci">fMRI studies show reduced reward-center activation in response to sugar images at two weeks. You have literally rewired.</div>
+      <button class="pbtn" onclick="closeLocked()">Keep going</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="sett-ov" id="s-settings">
+    <div class="sett-nav"><span class="sett-title">Settings</span><button class="done" onclick="closeSettings()">Done</button></div>
+    <div class="sett-scroll">
+      <div class="sett-sec">
+        <div class="sett-sec-hdr">Your goal</div>
+        <div class="sett-grp">
+          <div class="sett-row"><span class="sett-rl">Sleep better</span><span class="sett-check">✓</span></div>
+          <div class="sett-row"><span class="sett-rl">More energy in the mornings</span></div>
+          <div class="sett-row"><span class="sett-rl">Break the craving cycle</span></div>
+          <div class="sett-row"><span class="sett-rl">Lose weight</span></div>
+          <div class="sett-row"><span class="sett-rl">Just curious</span></div>
+        </div>
+      </div>
+      <div class="sett-sec">
+        <div class="sett-sec-hdr">Reminders</div>
+        <div class="sett-grp">
+          <div class="sett-row">
+            <div><div class="sett-rl">Daily check-ins</div><div style="font-size:12px;color:#6d6a64;margin-top:2px">7:00 AM reframe · 9:00 PM craving check-in</div></div>
+            <div class="toggle-on"></div>
+          </div>
+          <div class="sett-row"><span class="sett-rl">Morning</span><span class="sett-rv">7:00 AM</span></div>
+          <div class="sett-row"><span class="sett-rl">Evening</span><span class="sett-rv">9:00 PM</span></div>
+        </div>
+      </div>
+      <div class="sett-sec">
+        <div class="sett-sec-hdr">About</div>
+        <div class="sett-grp">
+          <div class="sett-row"><span class="sett-rl">Version</span><span class="sett-rv">1.0</span></div>
+          <div class="sett-row"><span class="sett-rl">Build</span><span class="sett-rv">1</span></div>
+        </div>
+      </div>
+      <div class="sett-sec">
+        <div class="sett-sec-hdr">Data</div>
+        <div class="sett-grp">
+          <div class="sett-row" style="cursor:pointer"><span class="sett-rl">Export my data</span></div>
+          <div class="sett-row" style="cursor:pointer"><span class="sett-rl">Re-run onboarding</span></div>
+          <div class="sett-row" style="cursor:pointer"><span class="sett-rl" style="color:#d89148">Clear all data</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /phone -->
+<div class="label" style="max-width:500px;line-height:1.6">Tap badges · expand cards · try the craving toolkit · log a reset · browse history</div>
+<script>
+const BADGES=[
+  {id:'firstHour',  lbl:'First Hour', sym:'⏱', t:3600,       cel:'The first hour is the hardest commitment.',              sci:'Your blood sugar has started to stabilize. The craving peak — a 20-minute neurochemical event — has passed.'},
+  {id:'firstDay',   lbl:'First Day',  sym:'🌅', t:86400,      cel:'One full day.',                                          sci:'Your liver has cleared most of the fructose. Insulin is falling toward baseline. Sleep tonight will be different.'},
+  {id:'threeDays',  lbl:'3 Days',     sym:'③',  t:259200,     cel:'Three days. The compulsive edge is fading.',             sci:'Dopamine receptor sensitivity is beginning to recover. Taste receptor reset has started.'},
+  {id:'oneWeek',    lbl:'1 Week',     sym:'⑦',  t:604800,     cel:'Your gut has changed.\nYour sleep has changed.\nThis is real.', sci:'Your gut microbiome has measurably shifted. Firmicutes are decreasing. Bacteroidetes are growing.'},
+  {id:'twoWeeks',   lbl:'2 Weeks',    sym:'📅', t:1209600,    cel:"Two weeks. You've crossed the threshold most people never reach.", sci:'fMRI studies show reduced reward-center activation in response to sugar images at two weeks. You have literally rewired.'},
+  {id:'oneMonth',   lbl:'1 Month',    sym:'🌙', t:2592000,    cel:'A month. Something real has changed — inside and out.',  sci:'D2 receptor density has had meaningful time to recover. The baseline you feel now is closer to your actual biology.'},
+  {id:'hundredDays',lbl:'100 Days',   sym:'🏅', t:8640000,    cel:"100 days.\nYou're not trying to quit sugar anymore.\nYou don't eat it.", sci:'The neural pathway for the old habit has weakened through disuse. The new pattern has strengthened through repetition. This is identity now.'},
+];
+const PHASES=[
+  {name:'Starting Out', tag:'The fast has begun.',       min:0,       max:3600,    sci:'Your blood sugar is beginning to stabilize. The craving you feel is your brain expecting its usual dopamine hit — not your body needing fuel.'},
+  {name:'First Day',    tag:'Cravings peak and pass.',   min:3600,    max:86400,   sci:'Your liver is burning through glycogen reserves. Any fatigue you feel is the metabolic shift starting. It ends by tonight.'},
+  {name:'Withdrawal',   tag:'Your body is adapting.',    min:86400,   max:259200,  sci:'Headaches and irritability now are your brain recalibrating reward pathways. Serotonin production is shifting back to your gut.'},
+  {name:'Breakthrough', tag:'The compulsion is fading.', min:259200,  max:604800,  sci:'The compulsive edge of cravings drops sharply at 72 hours. Your taste receptors are beginning to reset — an apple will soon taste like dessert.'},
+  {name:'Rewiring',     tag:'Rewriting the blueprint.',  min:604800,  max:1209600, sci:'Your gut microbiome has measurably shifted. Bacteria that amplify cravings are dying off. Bacteria that produce calm and clarity are growing.'},
+  {name:'Freedom',      tag:"You're free.",              min:1209600, max:Infinity,sci:'At two weeks, fMRI studies show reduced reward-center activation in response to sugar images. You have literally rewired.'},
+];
+const CTX={
+  0:      'The craving window is open. It will close. Give it 20 minutes.',
+  1800:   'The dopamine spike has passed. The craving is losing its grip.',
+  7200:   'Insulin is falling. The fog is chemical, not personal.',
+  21600:  "By now your liver has cleared most of the fructose. You're running cleaner.",
+  86400:  'Your taste buds have a half-life of 10 days. The reset has started.',
+  259200: 'After 72 hours, dopamine receptor sensitivity begins to recover.',
+  604800: "A week without processed sugar has measurably changed your gut microbiome. That's biology, not motivation.",
+  1209600:'Two weeks. Your liver has recalibrated. Your insulin sensitivity has improved.',
+  2592000:"A month. Your dopamine system has had meaningful time to recover.",
+};
+const QUOTES={
+  0:      {t:'Processed sugar activates the same dopamine pathways as alcohol. The craving you feel right now is real — and it will pass within 20 minutes.',s:"Fructose triggers a release of dopamine and opioid peptides in the brain's reward center. The 20-minute window is real — after it closes, the neurochemical pull weakens significantly."},
+  1800:   {t:'The dopamine spike has already peaked and is falling. What you feel right now is the system normalizing, not failing.',s:'Blood glucose rises rapidly after consuming refined sugar. What feels like craving during this window is your body seeking to re-trigger the spike — not genuine hunger.'},
+  7200:   {t:'Insulin is falling. The fog you feel — if you feel it — is chemical, not personal.',s:'Post-sugar cognitive fog is caused by reactive hypoglycemia: insulin overshoots, blood glucose drops below baseline, and the brain becomes temporarily underperforming.'},
+  21600:  {t:"By now your liver has cleared most of the fructose from your last meal. You're running on a cleaner fuel than you were yesterday.",s:'The liver is the primary site of fructose metabolism. After 6–8 hours without processed sugar, liver glycogen from fructose has largely been cleared.'},
+  86400:  {t:"The behavioral pattern is starting to shift. The craving still shows up. But it's a reflex now, not a need.",s:'After 2–3 days without processed sugar, the physiological craving component has largely resolved. What remains is habit — which responds to a different set of interventions.'},
+  259200: {t:'After 72 hours, dopamine receptor sensitivity begins to recover. Things that used to taste bland will start tasting good again.',s:'Chronic sugar exposure causes downregulation of D2 dopamine receptors. After 3–4 days without the stimulus, receptor upregulation begins.'},
+  604800: {t:"At this stage, the work is identity. You're not someone who is trying to quit sugar. You're becoming someone who doesn't eat it.",s:'Identity-based habit change is one of the most durable predictors of long-term success. The question changes from how do I resist this to is this who I am.'},
+  1209600:{t:'Two weeks. Your insulin sensitivity has measurably improved. The downstream effects — energy, skin, sleep — are just beginning.',s:'Insulin resistance begins to reverse with as little as 2 weeks of refined sugar reduction. A 2015 study found significant improvements in metabolic markers after just 9 days.'},
+  2592000:{t:"A month. Your dopamine system has had meaningful time to recover. The baseline you feel now is closer to your actual biology than anything you've felt in years.",s:'D2 receptor density requires approximately 4 weeks to show significant recovery. Neuroimaging studies show measurable changes in the brain reward circuitry at 30 days.'},
+};
+const CARDS=[
+  'The craving is loudest right before it disappears.',
+  "What you're feeling is 5–10 grams of dopamine chemistry. It will metabolize.",
+  'This exact feeling has a 20-minute half-life. It cannot sustain itself.',
+  'The food you\'re craving was designed in a lab to make you feel exactly this. That\'s not hunger.',
+  "In 3 hours you'll be grateful you didn't.",
+  "You're not fighting the food. You're outlasting a hormone.",
+  'Every craving you outlast weakens the neural path that produced it.',
+  'Your prefrontal cortex is temporarily losing to your limbic system. It wins when you wait.',
+];
+const SCENARIOS={
+  fresh: {e:18*60+34,     streak:0},
+  day1:  {e:14*3600+23*60,streak:0},
+  day3:  {e:3*86400+2*3600,streak:3},
+  week1: {e:6*86400+22*3600,streak:6},
+  week2: {e:13*86400+4*3600,streak:13},
+  month: {e:31*86400,     streak:31},
+};
+
+let startTime=Date.now()-SCENARIOS.day3.e*1000;
+let curScenario='day3';
+let cdSecs=1200,cdRunning=false,cdInterval=null,cardIdx=0;
+
+function elapsed(){return(Date.now()-startTime)/1000}
+function pad(n){return String(n).padStart(2,'0')}
+function phase(e){return PHASES.find(p=>e>=p.min&&e<p.max)||PHASES[PHASES.length-1]}
+function phaseProg(e){const p=phase(e);if(p.name==='Freedom')return 1;return Math.min(1,(e-p.min)/(p.max-p.min))}
+function compact(s){const t=Math.floor(s),d=Math.floor(t/86400),h=Math.floor((t%86400)/3600),m=Math.floor((t%3600)/60);if(d>0)return h>0?d+'d '+h+'h':d+'d';if(h>0)return m>0?h+'h '+m+'m':h+'h';return m+'m'}
+function relFmt(s){const d=Math.floor(s/86400),h=Math.floor((s%86400)/3600);if(d>0)return d===1?'1 day':d+' days';if(h>0)return h===1?'1 hour':h+' hours';return 'just now'}
+function getCtx(e){const ks=Object.keys(CTX).map(Number).sort((a,b)=>b-a);for(const k of ks)if(e>=k)return CTX[k];return CTX[0]}
+function getQuote(e){const ks=Object.keys(QUOTES).map(Number).sort((a,b)=>b-a);for(const k of ks)if(e>=k)return QUOTES[k];return QUOTES[0]}
+function nextMilestone(e){const p=phase(e);if(p.name==='Freedom')return'Living in freedom';const r=p.max-e,h=Math.floor(r/3600),m=Math.floor((r%3600)/60),d=Math.floor(h/24),rh=h%24;if(d>=1)return rh>0?d+'d '+rh+'h away':d+'d away';if(h>0)return m>0?h+'h '+m+'m away':h+'h away';return m+'m away'}
+
+function timerHTML(e){
+  const t=Math.floor(e),d=Math.floor(t/86400),h=Math.floor((t%86400)/3600),m=Math.floor((t%3600)/60),s=t%60;
+  const ub=(v,u)=>`<div style="display:flex;align-items:flex-end;gap:3px"><span class="tnum">${v}</span><span class="tunit">${u}</span></div>`;
+  if(d>=7)return`<span class="tnum">${d}</span><span class="tunit" style="padding-bottom:10px;margin-left:6px">days</span>`;
+  if(d>=1){let h2=h>0?ub(h,'h'):'';return ub(d,'d')+h2+ub(m,'m')}
+  if(h>=1)return ub(h,'h')+ub(m,'m');
+  return`<span class="tnum">${pad(m)}</span><span class="tcol">:</span><span class="tnum">${pad(s)}</span>`;
+}
+
+function updateAll(){
+  const e=elapsed(),p=phase(e),s=SCENARIOS[curScenario];
+  document.getElementById('timer-display').innerHTML=timerHTML(e);
+  document.getElementById('ctx-copy').textContent=getCtx(e);
+  document.getElementById('started-ago').textContent=relFmt(e);
+  const q=getQuote(e);
+  document.getElementById('q-text').textContent=q.t;
+  document.getElementById('sci-body').textContent=q.s;
+  document.getElementById('day-lbl').textContent='day '+(Math.max(1,Math.floor(e/86400)+1));
+  document.getElementById('phase-chip').textContent=p.name.toUpperCase();
+  document.getElementById('bsci-text').textContent=p.sci;
+  document.getElementById('p-name').textContent=p.name;
+  document.getElementById('p-tag').textContent=p.tag;
+  document.getElementById('p-eta').textContent=nextMilestone(e);
+  document.getElementById('p-fill').style.width=(phaseProg(e)*100)+'%';
+  renderPstrip(e,p);
+  const sk=s.streak;
+  const sb=document.getElementById('streak-badge');
+  if(sk>0){sb.style.display='flex';document.getElementById('streak-text').textContent=sk+' day'+(sk!==1?'s':'')}else sb.style.display='none';
+  updateWeekly(e,sk);
+  renderBadges(e);
+  updateHistory(e,s);
+}
+
+function renderPstrip(e,cur){
+  document.getElementById('pstrip').innerHTML=PHASES.map(p=>{
+    const past=p.max<=e&&p.name!=='Freedom';
+    const active=p.name===cur.name;
+    return`<div class="pseg"><div class="pbar ${past?'past':active?'active':''}"></div>${active?'<div class="pbar-lbl">'+p.name+'</div>':''}</div>`;
+  }).join('');
+}
+
+function updateWeekly(e,sk){
+  document.getElementById('w-longest').textContent=compact(e);
+  document.getElementById('w-streak').textContent=sk+'d';
+  document.getElementById('w-streak-row').style.display=sk>0?'flex':'none';
+  const d=Math.floor(e/86400);
+  const copy=d===0?'Zero resets this week. Keep the first window clean — it sets the pattern.':d<7?`Zero resets this week. ${d} day${d!==1?'s':''} and counting. That's not common. Keep building on it.`:'Zero resets this week. This is the territory where it becomes a different kind of life.';
+  document.getElementById('w-copy').textContent=copy;
+}
+
+function renderBadges(e){
+  const row=document.getElementById('badges-row');
+  row.innerHTML=BADGES.map(b=>{
+    const earned=e>=b.t;
+    return`<div class="bdg" onclick="tapBadge('${b.id}',${earned},${e})"><div class="bdg-c ${earned?'earned':''}">${b.sym}</div><div class="bdg-lbl ${earned?'earned':''}">${b.lbl}</div></div>`;
+  }).join('');
+  const ec=BADGES.filter(b=>e>=b.t).length;
+  document.getElementById('badge-ct').textContent=ec>0?ec+'/'+BADGES.length:'';
+  const nxt=BADGES.find(b=>e<b.t);
+  const nr=document.getElementById('nxt-row');
+  if(nxt){
+    nr.style.display='block';
+    document.getElementById('nxt-icon').textContent=nxt.sym;
+    document.getElementById('nxt-lbl').textContent=nxt.lbl;
+    const r=nxt.t-e,h=Math.floor(r/3600),m=Math.floor((r%3600)/60),d=Math.floor(h/24),rh=h%24;
+    const eta=r<60?'almost there':d>=1?(rh>0?d+'d '+rh+'h away':d+'d away'):h>0?(m>0?h+'h '+m+'m away':h+'h away'):m+'m away';
+    document.getElementById('nxt-eta').textContent=eta;
+    document.getElementById('nxt-fill').style.width=(Math.min(1,e/nxt.t)*100)+'%';
+  }else nr.style.display='none';
+}
+
+function updateHistory(e,sc){
+  const p=phase(e);
+  document.getElementById('cur-info').textContent=compact(e)+' · '+p.name;
+  document.getElementById('cur-date').textContent=relFmt(e)+' ago';
+  document.getElementById('pb-chip').style.display=e>86400?'inline-block':'none';
+  document.getElementById('h-stats').innerHTML=[
+    {v:compact(e),l:'Longest fast'},
+    {v:sc.streak>0?sc.streak+'d':'—',l:'Best streak'},
+    {v:'3',l:'Total resets'},
+    {v:compact(e+86400*4+3600*6),l:'Total clean time'},
+  ].map(x=>`<div class="stat-card"><span class="sc-val">${x.v}</span><span class="sc-lbl">${x.l}</span></div>`).join('');
+  renderHmap(e);renderBarChart(e);renderResets();renderTOD();
+}
+
+function renderHmap(e){
+  const days=Math.floor(e/86400);
+  document.getElementById('hmap').innerHTML=Array.from({length:28},(_,i)=>{
+    const d=27-i;
+    const cls=d>days+3?'':(d>=3&&d<=days)?'clean':(d<3&&d>0)?'reset':'';
+    return`<div class="hcell ${cls}"></div>`;
+  }).join('');
+}
+
+function renderBarChart(e){
+  const data=[
+    {h:8,d:0},{h:12,d:0},{h:20,d:0},{h:5,d:0},{h:14,d:0},
+    {h:72,d:3},{h:18,d:0},{h:e/3600,d:Math.floor(e/86400),cur:true},
+  ];
+  const mx=Math.max(...data.map(b=>b.h));
+  document.getElementById('h-chart').innerHTML=data.map(b=>{
+    const ht=Math.max(4,(b.h/mx)*120);
+    const col=b.d>=3?'#5f9f74':b.d>=1?'rgba(216,145,75,.7)':'rgba(109,106,100,.5)';
+    return`<div class="bcol"><div class="bbar" style="height:${ht}px;background:${col}"></div><span class="bcol-lbl">${b.cur?'now':''}</span></div>`;
+  }).join('');
+}
+
+function renderResets(){
+  document.getElementById('reset-list').innerHTML=[
+    {dur:'8h',  date:'3 weeks ago', note:'office birthday cake'},
+    {dur:'3d',  date:'6 weeks ago', note:'holiday dinner'},
+    {dur:'20h', date:'2 months ago',note:null},
+  ].map(r=>`<div class="ritem"><div class="rdot"></div><div class="rinfo"><div class="rdur">${r.dur} fast</div>${r.note?'<div class="rnote">'+r.note+'</div>':''}</div><div class="rdate">${r.date}</div></div>`).join('');
+}
+
+function renderTOD(){
+  const slots=[{l:'Morning',n:1},{l:'Afternoon',n:3},{l:'Evening',n:7},{l:'Night',n:2}];
+  const mx=Math.max(...slots.map(s=>s.n));
+  document.getElementById('tod-chart').innerHTML=slots.map(s=>{
+    const h=Math.max(8,(s.n/mx)*64);
+    return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:flex-end"><span style="font-size:10px;color:#6d6a64;font-family:monospace">${s.n}</span><div style="width:100%;height:${h}px;background:rgba(216,145,75,.6);border-radius:4px 4px 0 0"></div><span style="font-size:10px;color:#6d6a64">${s.l}</span></div>`;
+  }).join('');
+}
+
+// Scenarios
+function setScenario(k){
+  curScenario=k;
+  startTime=Date.now()-SCENARIOS[k].e*1000;
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  ['bsci-body','sci-body','tk-body'].forEach(id=>{const el=document.getElementById(id);el&&el.classList.remove('on')});
+  document.getElementById('bsci-chev').textContent='▼';
+  document.getElementById('sci-chev').textContent='›';
+  document.getElementById('tk-chev').textContent='▼';
+  document.getElementById('weekly-card').style.display='';
+  updateAll();
+}
+
+// Toggles
+function toggleSci(){const b=document.getElementById('sci-body'),c=document.getElementById('sci-chev');b.classList.toggle('on');c.textContent=b.classList.contains('on')?'˅':'›'}
+function toggleBsci(){const b=document.getElementById('bsci-body'),c=document.getElementById('bsci-chev');b.classList.toggle('on');c.textContent=b.classList.contains('on')?'▲':'▼'}
+function toggleToolkit(){const b=document.getElementById('tk-body'),c=document.getElementById('tk-chev');b.classList.toggle('on');c.textContent=b.classList.contains('on')?'▲':'▼'}
+function switchTab(btn,panelId){
+  document.querySelectorAll('.tk-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tk-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+// Modals
+function openReset(){document.getElementById('ov-reset').classList.add('on');document.getElementById('reset-form').style.display='block';document.getElementById('reset-conf').style.display='none';document.getElementById('note-in').value=''}
+function closeReset(){document.getElementById('ov-reset').classList.remove('on')}
+function confirmReset(){
+  document.getElementById('reset-form').style.display='none';
+  document.getElementById('reset-conf').style.display='block';
+  setTimeout(()=>{closeReset();setScenario2('fresh')},1800);
+}
+function setScenario2(k){
+  curScenario=k;startTime=Date.now()-SCENARIOS[k].e*1000;
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[onclick="setScenario(\'fresh\')"]').classList.add('active');
+  updateAll();
+}
+function tapBadge(id,earned,e){
+  const b=BADGES.find(x=>x.id===id);if(!b)return;
+  if(earned){
+    document.getElementById('bs-circle').textContent=b.sym;
+    document.getElementById('bs-name').textContent=b.lbl;
+    document.getElementById('bs-cel').textContent=b.cel;
+    document.getElementById('bs-sci').textContent=b.sci;
+    document.getElementById('ov-badge').classList.add('on');
+    if(b.id==='oneWeek'||b.id==='oneMonth'||b.id==='hundredDays')launchConfetti();
+  }else{
+    const r=b.t-e,h=Math.floor(r/3600),m=Math.floor((r%3600)/60),d=Math.floor(h/24),rh=h%24;
+    const eta=r<60?'almost there':d>=1?(rh>0?d+'d '+rh+'h away':d+'d away'):h>0?(m>0?h+'h '+m+'m away':h+'h away'):m+'m away';
+    document.getElementById('lk-circle').textContent=b.sym;
+    document.getElementById('lk-name').textContent=b.lbl;
+    document.getElementById('lk-eta').textContent=eta;
+    document.getElementById('lk-sci').textContent=b.sci;
+    document.getElementById('ov-locked').classList.add('on');
+  }
+}
+function closeBadge(){document.getElementById('ov-badge').classList.remove('on')}
+function closeLocked(){document.getElementById('ov-locked').classList.remove('on')}
+function openHistory(){document.getElementById('s-home').classList.remove('on');document.getElementById('s-hist').classList.add('on')}
+function closeHistory(){document.getElementById('s-hist').classList.remove('on');document.getElementById('s-home').classList.add('on')}
+function openSettings(){document.getElementById('s-settings').classList.add('on')}
+function closeSettings(){document.getElementById('s-settings').classList.remove('on')}
+function logT(btn,ins){
+  document.querySelectorAll('.trig-btn').forEach(b=>b.style.background='');
+  btn.style.background='rgba(95,159,116,.1)';
+  const el=document.getElementById('trig-ins');el.textContent=ins;el.style.display='block';
+}
+function nextCard(){
+  cardIdx=(cardIdx+1)%CARDS.length;
+  const el=document.getElementById('cr-text');
+  el.style.opacity='0';el.style.transition='opacity .15s';
+  setTimeout(()=>{el.textContent=CARDS[cardIdx];el.style.opacity='1'},150);
+}
+
+// Countdown
+function toggleCD(){
+  const btn=document.getElementById('cd-btn');
+  if(cdRunning){clearInterval(cdInterval);cdRunning=false;btn.textContent='Resume';btn.classList.remove('paused')}
+  else{
+    cdRunning=true;btn.textContent='Pause';btn.classList.add('paused');
+    cdInterval=setInterval(()=>{
+      if(cdSecs<=0){clearInterval(cdInterval);cdRunning=false;document.getElementById('cd-time').textContent='✓';btn.textContent='Start another 20 min';btn.classList.remove('paused');btn.onclick=restartCD;return}
+      cdSecs--;updateCDDisplay();
+    },1000);
+  }
+}
+function restartCD(){cdSecs=1200;cdRunning=false;clearInterval(cdInterval);document.getElementById('cd-btn').textContent='Start';document.getElementById('cd-btn').classList.remove('paused');document.getElementById('cd-btn').onclick=toggleCD;updateCDDisplay()}
+function updateCDDisplay(){
+  document.getElementById('cd-time').textContent=pad(Math.floor(cdSecs/60))+':'+pad(cdSecs%60);
+  const prog=1-(cdSecs/1200),circ=2*Math.PI*70,offset=circ*(1-prog);
+  const ring=document.getElementById('cd-ring');
+  ring.style.strokeDasharray=circ;ring.style.strokeDashoffset=offset;
+  ring.style.stroke=cdRunning?'#e9e6e0':'rgba(109,106,100,.35)';
+}
+
+// Confetti
+function launchConfetti(){
+  const wrap=document.createElement('div');wrap.className='confetti-wrap';
+  document.getElementById('ov-badge').appendChild(wrap);
+  const cols=['#5f9f74','#d89148','#e9e6e0','#999690','#eeebd5'];
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');p.className='cp';
+    p.style.left=Math.random()*100+'%';
+    p.style.background=cols[Math.floor(Math.random()*cols.length)];
+    p.style.animationDelay=Math.random()*1.2+'s';
+    p.style.animationDuration=(2+Math.random())+'s';
+    wrap.appendChild(p);
+  }
+  setTimeout(()=>wrap.remove(),4000);
+}
+
+// Close overlays on bg tap
+['ov-reset','ov-badge','ov-locked'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',function(e){if(e.target===this){if(id==='ov-reset')closeReset();else if(id==='ov-badge')closeBadge();else closeLocked()}});
+});
+
+updateAll();
+setInterval(updateAll,1000);
+updateCDDisplay();
+</script>
+</body>
+</html>
