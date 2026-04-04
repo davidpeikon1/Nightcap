@@ -92,6 +92,19 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         default: return false
         }
     }
+
+    /// The dismiss button label shown after viewing this milestone.
+    var dismissText: String {
+        switch self {
+        case .firstHour:   return "Keep the clock running."
+        case .firstDay:    return "Day 2 starts now."
+        case .threeDays:   return "Keep going."
+        case .oneWeek:     return "Keep going."
+        case .twoWeeks:    return "Keep going."
+        case .oneMonth:    return "Keep going."
+        case .hundredDays: return "This is your life now."
+        }
+    }
 }
 
 enum CravingTrigger: String, CaseIterable, Codable, Identifiable {

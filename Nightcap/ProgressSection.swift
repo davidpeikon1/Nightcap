@@ -1,5 +1,6 @@
 import SwiftUI
 import StoreKit
+import UIKit
 
 // MARK: - Progress Section
 
@@ -134,7 +135,8 @@ struct ProgressSection: View {
     // MARK: - All badges earned
 
     private var allBadgesEarnedRow: some View {
-        HStack(spacing: 12) {
+        let days = max(100, Int(store.elapsedSeconds / 86400))
+        return HStack(spacing: 12) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 16, weight: .light))
                 .foregroundStyle(Color("NCSuccess"))
@@ -144,7 +146,7 @@ struct ProgressSection: View {
                 Text("All badges earned.")
                     .font(.system(size: 13, weight: .medium))
                     .foregroundStyle(Color("NCTextPrimary"))
-                Text("100 days and counting. This is identity now.")
+                Text("\(days) days and counting. This is identity now.")
                     .font(.system(size: 11, weight: .light))
                     .foregroundStyle(Color("NCTextSecondary"))
             }
@@ -155,7 +157,7 @@ struct ProgressSection: View {
         .background(Color("NCSurface"))
         .cornerRadius(10)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("All badges earned. 100 days and counting.")
+        .accessibilityLabel("All badges earned. \(days) days and counting.")
     }
 
     // MARK: - Next unearned badge
@@ -244,7 +246,7 @@ struct BadgeView: View {
             }
 
             Text(badge.label)
-                .font(.system(size: 10, weight: .regular))
+                .font(.system(size: 11, weight: .regular))
                 .foregroundStyle(earned ? Color("NCTextPrimary") : Color("NCTextTertiary"))
                 .multilineTextAlignment(.center)
                 .frame(width: 60)
@@ -305,7 +307,7 @@ struct BadgeDetailView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text("Keep going")
+                    Text(badge.dismissText)
                         .font(.system(size: 17, weight: .medium))
                         .foregroundStyle(Color("NCBackground"))
                         .frame(maxWidth: .infinity)
@@ -394,7 +396,7 @@ struct MilestoneSheet: View {
                         HStack(spacing: 8) {
                             Image(systemName: "square.and.arrow.up")
                                 .font(.system(size: 14, weight: .light))
-                            Text("Share this milestone")
+                            Text("Share your progress")
                                 .font(.system(size: 15, weight: .regular))
                         }
                         .foregroundStyle(Color("NCTextSecondary"))
@@ -408,7 +410,7 @@ struct MilestoneSheet: View {
                         store.dismissBadge()
                         dismiss()
                     } label: {
-                        Text("Keep going")
+                        Text(badge.dismissText)
                             .font(.system(size: 17, weight: .medium))
                             .foregroundStyle(Color("NCBackground"))
                             .frame(maxWidth: .infinity)
@@ -429,6 +431,7 @@ struct MilestoneSheet: View {
                 .presentationDetents([.medium, .large])
         }
         .onAppear {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
             // Request a review at the 1-week milestone — a high-satisfaction moment.
             // Apple allows 3 prompts per year; this fires only once (badge earned once).
             if badge == .oneWeek {

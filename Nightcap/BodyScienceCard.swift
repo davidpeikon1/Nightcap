@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct BodyScienceCard: View {
     @EnvironmentObject var store: FastingStore
@@ -9,6 +10,7 @@ struct BodyScienceCard: View {
         VStack(alignment: .leading, spacing: 0) {
             // Header row
             Button {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 withAnimation(.spring(duration: 0.3)) { isExpanded.toggle() }
             } label: {
                 HStack(spacing: 10) {
@@ -16,7 +18,7 @@ struct BodyScienceCard: View {
                         .font(.system(size: 13, weight: .light))
                         .foregroundStyle(Color("NCSuccess"))
 
-                    Text("WHAT'S HAPPENING NOW")
+                    Text("YOUR BODY NOW")
                         .font(.system(size: 11, weight: .medium))
                         .tracking(2)
                         .foregroundStyle(Color("NCTextSecondary"))
@@ -70,6 +72,7 @@ struct BodyScienceCard: View {
             // Auto-expand when a new phase unlocks so users immediately see
             // what's happening biologically. Skip .justStarted (reset state).
             if newPhase != .justStarted {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 withAnimation(.spring(duration: 0.35)) { isExpanded = true }
             }
         }
