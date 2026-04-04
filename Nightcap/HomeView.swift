@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct HomeView: View {
     @EnvironmentObject var store: FastingStore
@@ -56,6 +57,7 @@ struct HomeView: View {
             // Phase-unlock toast — floats above scroll content, tappable for details
             if let phase = store.phaseJustUnlocked {
                 Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     showPhaseDetail = phase
                 } label: {
                     PhaseUnlockToast(phase: phase)

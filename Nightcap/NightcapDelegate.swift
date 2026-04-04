@@ -48,7 +48,7 @@ class NightcapDelegate: NSObject, UIApplicationDelegate {
             UIApplicationShortcutItem(
                 type: "com.nightcap.app.logReset",
                 localizedTitle: "Log a Reset",
-                localizedSubtitle: "I just had processed sugar",
+                localizedSubtitle: "Log it as data",
                 icon: UIApplicationShortcutIcon(systemImageName: "arrow.counterclockwise")
             ),
             UIApplicationShortcutItem(

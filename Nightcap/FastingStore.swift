@@ -434,8 +434,9 @@ class FastingStore: ObservableObject {
         guard current != lastKnownPhase else { return }
         // Only announce forward transitions (skip .justStarted, which is the reset state).
         if current != .justStarted {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             phaseJustUnlocked = current
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { [weak self] in
                 guard let self, self.phaseJustUnlocked == current else { return }
                 self.phaseJustUnlocked = nil
             }
