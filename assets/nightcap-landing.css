@@ -1015,33 +1015,24 @@ body::after {
 
 /* Breakdown Stats */
 .nc-results__breakdown {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin: 2.5rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin: 2rem 0;
 }
 
 .nc-results__stat {
-  background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
-  padding: 24px 16px;
   text-align: center;
-  box-shadow: var(--nc-shadow-sm);
-  transition: all var(--nc-transition);
-}
-
-.nc-results__stat:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--nc-shadow-md);
 }
 
 .nc-results__stat-number {
   display: block;
-  font-size: 1.5rem;
+  font-family: var(--nc-font-display);
+  font-size: 1.75rem;
   font-weight: 700;
-  color: var(--nc-warning);
-  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+  color: var(--nc-text);
+  margin-bottom: 2px;
 }
 
 .nc-results__stat-label {
@@ -2147,56 +2138,40 @@ body::after {
 /* ---------- Next Steps ---------- */
 .nc-next-steps {
   margin: 2.5rem 0;
-  padding: 28px 24px;
-  background: linear-gradient(135deg, rgba(42, 37, 32, 0.06), rgba(42, 37, 32, 0.02));
-  border: 1px solid rgba(42, 37, 32, 0.15);
-  border-radius: var(--nc-radius-lg);
+  padding: 2rem 0;
+  border-top: 1px solid var(--nc-border);
 }
 
 .nc-next-steps__title {
   font-family: var(--nc-font-display);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  text-align: center;
+  letter-spacing: -0.01em;
   margin-bottom: 1.5rem;
 }
 
 .nc-next-steps__list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 }
 
 .nc-next-steps__item {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-
-.nc-next-steps__number {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--nc-primary);
-  color: var(--nc-bg);
-  font-weight: 700;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
+  padding-left: 1rem;
+  border-left: 2px solid var(--nc-border);
 }
 
 .nc-next-steps__heading {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .nc-next-steps__desc {
-  font-size: 0.85rem;
-  color: var(--nc-text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.5;
   line-height: 1.6;
 }
 
