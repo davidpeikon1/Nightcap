@@ -622,9 +622,16 @@ final class BreathingState: ObservableObject {
         phase = newPhase
         beat = 4
         timer?.cancel()
+        // Distinct haptics for each phase so the exercise can be done eyes-closed.
         switch newPhase {
-        case .inhale: circleScale = 1.0
-        case .exhale: circleScale = 0.55
+        case .inhale:
+            circleScale = 1.0
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        case .hold1, .hold2:
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        case .exhale:
+            circleScale = 0.55
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
         default: break
         }
         timer = Timer.publish(every: 1, on: .main, in: .common)
