@@ -1342,6 +1342,20 @@ body {
   font-weight: 700;
 }
 
+.nc-pullquote__big {
+  font-family: var(--nc-font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--nc-text);
+  margin: 0.75rem 0 0;
+  line-height: 1.1;
+}
+
+.nc-pullquote__big em {
+  font-style: normal;
+}
+
 .nc-pullquote__source {
   font-size: 0.72rem;
   font-weight: 500;
@@ -1510,10 +1524,10 @@ body {
 
 .nc-bottom-cta__text {
   font-family: var(--nc-font-display);
-  font-size: 1.25rem;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 1.4;
+  line-height: 1.25;
   margin-bottom: 2rem;
 }
 
@@ -2102,7 +2116,8 @@ body {
   </section>
 
   <section class="nc-pullquote nc-reveal" id="pullquote">
-    <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
+    <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.</p>
+    <p class="nc-pullquote__big">Today it's <em>152.</em></p>
     <p class="nc-pullquote__source">Dr. Casey Means, <em>Good Energy</em></p>
   </section>
 
@@ -2159,17 +2174,6 @@ body {
     </div>
   </section>
 
-  <!-- ===== BOTTOM CTA (for scrollers who read everything) ===== -->
-  <section class="nc-bottom-cta nc-reveal" id="bottom-cta">
-    <div class="nc-bottom-cta__container">
-      <p class="nc-bottom-cta__text">Most people have no idea how much sugar they consume. Do you?</p>
-      <button class="nc-btn nc-btn--primary nc-bottom-cta__btn" id="bottom-quiz-btn">
-        Take the Quiz
-        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
-      </button>
-    </div>
-  </section>
-
   <!-- ===== FAQ ===== -->
   <section class="nc-faq nc-reveal" id="faq">
     <div class="nc-faq__container">
@@ -2189,7 +2193,7 @@ body {
         <details class="nc-faq__item">
           <summary class="nc-faq__question">What happens after the quiz?</summary>
           <div class="nc-faq__answer">
-            <p>Your personalized sugar report — daily, weekly, and yearly intake broken down by source. A specific action plan. Early access to the Nightcap app.</p>
+            <p>Your personalized sugar report — daily, weekly, and yearly intake. A specific action plan. Early access to the Nightcap app.</p>
           </div>
         </details>
         <details class="nc-faq__item">
@@ -2199,6 +2203,17 @@ body {
           </div>
         </details>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== BOTTOM CTA ===== -->
+  <section class="nc-bottom-cta nc-reveal" id="bottom-cta">
+    <div class="nc-bottom-cta__container">
+      <p class="nc-bottom-cta__text">Most people have no idea<br>how much sugar they consume.</p>
+      <button class="nc-btn nc-btn--primary nc-bottom-cta__btn" id="bottom-quiz-btn">
+        Take the Quiz
+        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+      </button>
     </div>
   </section>
 
