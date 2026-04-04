@@ -4,8 +4,9 @@ import UserNotifications
 // MARK: - Notification names for shortcut → SwiftUI bridge
 
 extension Notification.Name {
-    static let nightcapOpenResetModal    = Notification.Name("nightcap.openResetModal")
+    static let nightcapOpenResetModal     = Notification.Name("nightcap.openResetModal")
     static let nightcapOpenCravingToolkit = Notification.Name("nightcap.openCravingToolkit")
+    static let nightcapOpenHistory        = Notification.Name("nightcap.openHistory")
 }
 
 // MARK: - UIApplicationDelegate
@@ -86,9 +87,16 @@ extension NightcapDelegate: UNUserNotificationCenterDelegate {
         // Evening check-in notifications → open craving toolkit.
         // Identifiers follow "nightcap.evening.dN" (day-offset) or legacy "nightcap.evening.wdN";
         // hasPrefix covers both. Delay so SwiftUI views are mounted before receiving the notification.
-        if id.hasPrefix("nightcap.evening") {
+        if id.hasPrefix("nightcap.evening") || id.hasPrefix("nightcap.personalized") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 NotificationCenter.default.post(name: .nightcapOpenCravingToolkit, object: nil)
+            }
+        }
+        // Milestone and streak notifications → open history view so users see their progress.
+        else if id.hasPrefix("nightcap.milestone") || id.hasPrefix("nightcap.streak") ||
+                id.hasPrefix("nightcap.pb") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationCenter.default.post(name: .nightcapOpenHistory, object: nil)
             }
         }
         completionHandler()
