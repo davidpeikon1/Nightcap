@@ -76,8 +76,8 @@ struct WidgetFastData {
         let m = (total % 3600) / 60
         let s = total % 60
         if d >= 7 { return "\(d) days" }
-        if d >= 1 { return "\(d)d \(h)h" }
-        if h >= 1 { return "\(h)h \(m)m" }
+        if d >= 1 { return h > 0 ? "\(d)d \(h)h" : "\(d)d" }
+        if h >= 1 { return m > 0 ? "\(h)h \(m)m" : "\(h)h" }
         return String(format: "%d:%02d", m, s)
     }
 
@@ -100,7 +100,7 @@ struct WidgetFastData {
         let rh = Int(remaining) / 3600
         let rm = (Int(remaining) % 3600) / 60
         if rh >= 24 { let d = rh / 24; let remH = rh % 24; return remH > 0 ? "\(d)d \(remH)h" : "\(d)d" }
-        if rh > 0   { return "\(rh)h \(rm)m" }
+        if rh > 0   { return rm > 0 ? "\(rh)h \(rm)m" : "\(rh)h" }
         return "\(rm)m"
     }
 
