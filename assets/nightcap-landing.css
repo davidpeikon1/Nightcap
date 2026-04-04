@@ -23,7 +23,7 @@
   --nc-text-muted: #57534E;
   --nc-text-dim: #78716C;
   --nc-error: #B84040;
-  --nc-warning: #2A2520;
+  --nc-warning: #1C1917;
   --nc-success: #3D362E;
   --nc-border: rgba(42, 37, 32, 0.1);
   --nc-glow: rgba(42, 37, 32, 0.08);
@@ -513,7 +513,7 @@ body {
 .nc-quiz__options {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .nc-quiz__option {
@@ -892,7 +892,7 @@ body {
 
 .nc-results__title {
   font-family: var(--nc-font-display);
-  font-size: 1.5rem;
+  font-size: clamp(1.4rem, 3.5vw, 1.75rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
@@ -1888,7 +1888,7 @@ body {
   left: 0;
   right: 0;
   z-index: 9000;
-  background: rgba(232, 223, 207, 0.92);
+  background: rgba(240, 235, 227, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--nc-border);
