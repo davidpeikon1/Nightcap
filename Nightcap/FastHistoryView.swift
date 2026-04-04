@@ -437,9 +437,14 @@ struct FastHistoryView: View {
                     .foregroundStyle(Color("NCTextTertiary"))
             }
 
-            // Trigger breakdown bars
+            // Trigger breakdown bars — sorted by count descending so the most relevant triggers surface first.
+            let sortedTriggers = CravingTrigger.allCases.sorted { a, b in
+                let countA = store.cravingLogs.filter { $0.trigger == a }.count
+                let countB = store.cravingLogs.filter { $0.trigger == b }.count
+                return countA > countB
+            }
             VStack(spacing: 10) {
-                ForEach(CravingTrigger.allCases) { trigger in
+                ForEach(sortedTriggers) { trigger in
                     triggerBar(trigger)
                 }
             }
@@ -505,9 +510,9 @@ struct FastHistoryView: View {
             Text(trigger.rawValue)
                 .font(.system(size: 12))
                 .foregroundStyle(Color("NCTextSecondary"))
-                .frame(width: 120, alignment: .leading)
+                .frame(width: 140, alignment: .leading)
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.75)
 
             GeometryReader { geo in
                 ZStack(alignment: .leading) {

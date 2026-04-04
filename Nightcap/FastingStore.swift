@@ -724,6 +724,22 @@ class FastingStore: ObservableObject {
             return "Boredom drove most of your cravings this week. The brain seeks dopamine through the easiest route available. A 5-minute walk produces the same effect — without the reset."
         }
 
+        if let trigger = topTrigger, trigger == .fatigue {
+            return "Low energy was your most common craving trigger this week. Fatigue and sugar cravings share a root cause — cortisol dysregulation and disrupted sleep. The craving is real; sugar isn't the fix."
+        }
+
+        if let trigger = topTrigger, trigger == .hunger {
+            return "Genuine hunger drove most of your logged cravings this week. Fat and protein satisfy hunger durably; sugar spikes insulin, which drops blood glucose, which makes you hungrier within the hour."
+        }
+
+        if let trigger = topTrigger, trigger == .social {
+            return "Social situations were your most common craving trigger this week. The brain has strong conditioned associations between group contexts and shared food rewards. Knowing the cue is the first step to interrupting it."
+        }
+
+        if let trigger = topTrigger, trigger == .habit {
+            return "Habit and time-of-day cravings drove most of your logs this week. The brain fires the craving because it expects the reward at this time, in this place — independent of actual hunger."
+        }
+
         return "\(resets) reset\(resets == 1 ? "" : "s") this week. Each one is information, not failure."
     }
 }

@@ -36,12 +36,12 @@ struct ResetModal: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("What triggered it?")
-                    .font(.system(size: 12, weight: .medium))
-                    .tracking(1)
+                Text("NOTE")
+                    .font(.system(size: 11, weight: .medium))
+                    .tracking(1.5)
                     .foregroundStyle(Color("NCTextTertiary"))
 
-                TextField("e.g. chocolate after dinner", text: $note)
+                TextField("e.g. birthday cake, work stress, social pressure", text: $note)
                     .font(.system(size: 15))
                     .foregroundStyle(Color("NCTextPrimary"))
                     .padding(14)

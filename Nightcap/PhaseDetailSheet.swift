@@ -266,19 +266,19 @@ struct PhaseDetailSheet: View {
             "Don't make major decisions today. Your prefrontal cortex is temporarily compromised by the withdrawal.",
         ]
         case .breakthrough: return [
-            "Start tasting food without sweeteners this week. Your baseline is resetting and you'll notice it now.",
-            "This is the right time to swap one habitual sugary item for a natural whole-food equivalent.",
-            "The craving you feel at day 4–5 is almost entirely habit, not hunger. Interrupt the pattern physically — move your body.",
+            "By day 4 the craving is almost entirely habit, not hunger. The two feel physiologically identical — but the biological pull has already resolved.",
+            "Natural sweetness is starting to register differently. Fruit and plain dairy now hit receptors that processed sugar had desensitized.",
+            "The craving at this stage is a conditioned response looking for its cue. Disrupting the cue — different route, different room — disrupts the response.",
         ]
         case .rewiring: return [
-            "This is the week to change your kitchen. Remove trigger foods from visible, accessible locations.",
-            "Start building a replacement ritual for the time of day you typically had sugar.",
-            "Social accountability at the one-week mark dramatically increases completion rates. Telling someone makes it concrete.",
+            "At one week, the bacteria that amplify sugar cravings have decreased measurably. The gut is changing the signal, not just the behavior.",
+            "Replacement rituals form fastest when the cue is kept but the routine changes. Same time, same place — different action.",
+            "Talking about a commitment to someone else increases follow-through significantly. The mechanism is self-concept consistency, not accountability.",
         ]
         case .freedom: return [
-            "When you encounter processed sugar at a social event, you don't need to announce it or explain it. You just don't eat it.",
-            "Any lapse now is data, not failure. Note the context, the trigger, the time of day — and move on.",
-            "Your taste baseline has reset. Let yourself enjoy this: the world is slightly more flavorful than it was a month ago.",
+            "At social events, preference has replaced restraint for most people at this stage. 'I don't eat that' carries a different weight than 'I'm trying not to.'",
+            "Any lapse now is data. The context, the trigger, the time of day — it all maps to a pattern that can be read and interrupted.",
+            "Taste receptors have reset. What was ordinary before now has more depth. That's receptor sensitivity recovering, not imagination.",
         ]
         }
     }
