@@ -75,10 +75,11 @@ html {
 
 body {
   font-family: var(--nc-font);
+  font-weight: 400;
   background: var(--nc-bg);
   color: var(--nc-text);
   line-height: 1.65;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -118,16 +119,16 @@ body::after {
 /* ---------- Utility ---------- */
 .nc-badge {
   display: inline-block;
-  padding: 5px 14px;
+  padding: 6px 16px;
   background: transparent;
-  border: 1px solid rgba(200, 184, 154, 0.2);
+  border: 1px solid rgba(42, 37, 32, 0.15);
   border-radius: 100px;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--nc-text-muted);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   animation: nc-fadeInDown 0.6s ease-out;
 }
 
@@ -361,12 +362,13 @@ body::after {
 }
 
 .nc-hero__subtitle {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.75;
-  max-width: 500px;
+  opacity: 0.65;
+  max-width: 480px;
   margin: 0 auto 2.5rem;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
 .nc-hero__cta-group {
@@ -376,7 +378,8 @@ body::after {
 .nc-hero__cta-note {
   margin-top: 14px;
   font-size: 0.8rem;
-  color: var(--nc-text-dim);
+  font-weight: 500;
+  color: var(--nc-text-muted);
   letter-spacing: 0.01em;
 }
 
@@ -611,14 +614,16 @@ body::after {
 
 .nc-quiz__question {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
   font-weight: 600;
+  letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 .nc-quiz__helper {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  font-weight: 500;
   color: var(--nc-text-muted);
   margin-bottom: 2rem;
 }
@@ -706,10 +711,11 @@ body::after {
 }
 
 .nc-quiz__option-sugar {
-  font-size: 0.8rem;
-  color: var(--nc-warning);
-  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--nc-text-muted);
+  font-weight: 500;
   white-space: nowrap;
+  opacity: 0.7;
 }
 
 /* Back button */
@@ -789,9 +795,11 @@ body::after {
 }
 
 .nc-signup__subtitle {
-  color: var(--nc-text-muted);
-  font-size: 1rem;
-  line-height: 1.6;
+  color: var(--nc-text);
+  opacity: 0.55;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.7;
 }
 
 /* Form Elements */
@@ -1030,9 +1038,11 @@ body::after {
 }
 
 .nc-results__subtitle {
-  color: var(--nc-text-muted);
-  font-size: 1rem;
-  line-height: 1.6;
+  color: var(--nc-text);
+  opacity: 0.6;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.75;
   max-width: 480px;
   margin: 0 auto;
 }
@@ -1069,7 +1079,9 @@ body::after {
 
 .nc-results__stat-label {
   font-size: 0.75rem;
-  color: var(--nc-text-muted);
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.5;
   line-height: 1.4;
 }
 
@@ -1122,14 +1134,11 @@ body::after {
 
 .nc-results__benefits li {
   padding: 10px 0;
-  font-size: 0.95rem;
-  color: var(--nc-text-muted);
-  border-bottom: 1px solid rgba(200, 184, 154,0.04);
-  transition: color var(--nc-transition);
-}
-
-.nc-results__benefits li:hover {
+  font-size: 0.9rem;
+  font-weight: 500;
   color: var(--nc-text);
+  opacity: 0.6;
+  border-bottom: 1px solid var(--nc-border);
 }
 
 .nc-results__benefits li:last-child {
@@ -1438,10 +1447,11 @@ body::after {
 
 .nc-why__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
   font-weight: 600;
-  line-height: 1.3;
-  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
 }
 
 .nc-why__highlight {
@@ -1462,11 +1472,12 @@ body::after {
 }
 
 .nc-why__subtitle {
-  font-size: 1.05rem;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.7;
-  line-height: 1.75;
-  margin-bottom: 2.5rem;
+  opacity: 0.6;
+  line-height: 1.8;
+  margin-bottom: 3rem;
 }
 
 .nc-why__stats {
@@ -1495,9 +1506,10 @@ body::after {
 }
 
 .nc-why__stat-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.6;
+  opacity: 0.5;
   line-height: 1.5;
 }
 
@@ -1514,9 +1526,10 @@ body::after {
 
 .nc-how__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
   font-weight: 600;
-  margin-bottom: 3rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 3.5rem;
 }
 
 .nc-how__steps {
@@ -1550,10 +1563,11 @@ body::after {
 }
 
 .nc-how__step-desc {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.6;
-  line-height: 1.6;
+  opacity: 0.5;
+  line-height: 1.65;
 }
 
 .nc-how__connector {
@@ -1654,9 +1668,10 @@ body::after {
 
 .nc-proof__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
   font-weight: 600;
-  margin-bottom: 2.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
 }
 
 .nc-proof__grid {
@@ -1693,9 +1708,11 @@ body::after {
 }
 
 .nc-proof__quote {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 500;
   color: var(--nc-text);
-  line-height: 1.7;
+  opacity: 0.75;
+  line-height: 1.75;
   font-style: italic;
   flex: 1;
   padding-top: 8px;
@@ -1784,10 +1801,11 @@ body::after {
 
 .nc-faq__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
   font-weight: 600;
+  letter-spacing: -0.02em;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .nc-faq__list {
@@ -1855,10 +1873,11 @@ body::after {
 }
 
 .nc-faq__answer p {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.7;
-  line-height: 1.75;
+  opacity: 0.6;
+  line-height: 1.8;
   margin: 0;
 }
 
@@ -2664,7 +2683,7 @@ body::after {
 
       <div class="nc-hero__cta-group">
         <button class="nc-btn nc-btn--primary nc-btn--pulse" id="start-quiz-btn" aria-label="Start the Sugar Quiz">
-          See Your Real Number
+          Take the First Step
           <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
         </button>
         <p class="nc-hero__cta-note">60-second quiz. No sign-up required.</p>
@@ -2710,7 +2729,7 @@ body::after {
       </div>
 
       <button class="nc-btn nc-btn--primary" id="why-quiz-btn" aria-label="Take the quiz to find out your sugar intake">
-        See Where I Stand
+        Take the First Step
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
     </div>
@@ -3338,7 +3357,7 @@ body::after {
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="nc-sticky-cta__inner">
       <span class="nc-sticky-cta__text"><strong style="font-family: 'Playfair Display', Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase;">NIGHTCAP</strong> &mdash; Ready to see your real number?</span>
-      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
+      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the First Step &#8594;</button>
     </div>
   </div>
 
