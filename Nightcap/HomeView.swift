@@ -21,14 +21,11 @@ struct HomeView: View {
                         topBar
                             .padding(.top, 56)
 
+                        // Hero card: quote first, timer below — both visible on open
+                        HeroCard()
+
                         // Weekly insight (only when there's enough data)
                         WeeklyInsightCard()
-
-                        // Feature 1 — Fast tracker
-                        FastTrackerCard()
-
-                        // Feature 2 — Daily reframe
-                        DailyReframeCard()
 
                         // Body science (collapsed by default, tap to expand)
                         BodyScienceCard()
