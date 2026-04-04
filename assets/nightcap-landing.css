@@ -45,6 +45,10 @@ body {
   font-family: var(--nc-font);
   font-weight: 400;
   background: var(--nc-bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(220, 210, 195, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 20% 100%, rgba(210, 205, 195, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 30% at 85% 60%, rgba(215, 208, 198, 0.25) 0%, transparent 50%);
   color: var(--nc-text);
   line-height: 1.65;
   letter-spacing: -0.005em;
@@ -318,12 +322,13 @@ body {
 }
 
 .nc-hero__subtitle {
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: var(--nc-text-muted);
-  max-width: 440px;
+  font-size: 1.1rem;
+  font-weight: 450;
+  color: var(--nc-text);
+  opacity: 0.7;
+  max-width: 460px;
   margin: 0 auto 3rem;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
 .nc-hero__cta-group {
@@ -331,11 +336,10 @@ body {
 }
 
 .nc-hero__cta-note {
-  margin-top: 14px;
-  font-size: 0.8rem;
+  margin-top: 1rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  color: var(--nc-text-muted);
-  letter-spacing: 0.01em;
+  color: var(--nc-text-dim);
 }
 
 /* Countdown */
