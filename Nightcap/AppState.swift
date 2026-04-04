@@ -83,26 +83,46 @@ enum UserGoal: String, CaseIterable, Identifiable {
             "Sugar spikes your cortisol, keeping you wired at night. Breaking the cycle is the most underrated lever for sleep.",
             "Blood sugar crashes at 2–4am trigger a cortisol response that wakes you. Eliminate the spike, eliminate the crash.",
             "Deep sleep — the restorative kind — is disrupted by glycemic variability. Stable blood sugar is the foundation of real rest.",
+            "Ghrelin, the hunger hormone, fires on a learned schedule. The 3am hunger that used to wake you was a blood sugar response — not a need.",
+            "Adenosine, the molecule that builds sleep pressure throughout the day, accumulates cleanly when your metabolic load is low. You're sleeping differently now.",
+            "REM sleep — when memories consolidate — extends when the brain isn't managing a nocturnal glucose correction. That's a different kind of rest.",
+            "The 90-minute sleep cycle that governs restoration is disrupted by cortisol spikes. Removing the spikes changes the architecture of the night.",
         ]
         case .moreEnergy: return [
             "The post-lunch crash isn't tiredness — it's blood sugar correction. Remove the spike, remove the crash.",
             "Real energy doesn't have a crash at the other end. Stable blood glucose is qualitatively different from borrowed energy.",
             "The fatigue you've normalized is partly chemical. It's not your baseline — it's your baseline plus sugar debt.",
+            "Mitochondria — the energy producers in every cell — run more efficiently on fat oxidation than on glucose peaks and corrections. You're fueling differently now.",
+            "Cortisol variability throughout the day drops when blood sugar is stable. Steadier energy isn't inspiration — it's a different hormonal environment.",
+            "The afternoon crash most people schedule their day around is reactive hypoglycemia. It's not inevitable — it's dietary.",
+            "The flat period during the first few days of transition is the system reconfiguring, not your natural state. On the other side is a baseline you haven't measured yet.",
         ]
         case .breakCravings: return [
             "Cravings aren't a character flaw. They're a dopamine loop. Loops can be rewritten.",
             "The craving has a 20-minute half-life. Every time you outlast it, the neural path that produced it weakens.",
             "You're not fighting willpower against desire. You're interrupting a conditioned response. Those respond to extinction, not force.",
+            "The mesolimbic dopamine system — the brain's reward center — is already quieter than it was on day one. The signal weakens with each non-reinforced craving.",
+            "Conditioned cravings fire because a cue was paired with a reward enough times to become automatic. The pairing breaks through repetition. That's what you're doing.",
+            "By three weeks, the extinction of the old craving reflex has been measurable in clinical settings. You're in that window now.",
+            "The craving isn't asking for food. It's asking for a dopamine spike. The distinction is the whole game.",
         ]
         case .loseWeight: return [
             "Processed sugar drives insulin, and insulin drives fat storage. This is the lever.",
             "Visceral fat — the metabolically active kind — responds faster to insulin reduction than any other dietary change.",
             "When insulin falls, fat mobilizes. The mechanism isn't mysterious — you're working with it, not against it.",
+            "Lipolysis — the breakdown of stored fat for fuel — is suppressed by insulin. Lower insulin means fat can actually move. You've been creating that environment.",
+            "The liver's role in fat synthesis is driven by fructose overload. Removing the overload lets the liver shift from fat-building to fat-clearing.",
+            "Leptin — the satiety hormone that tells you when you've had enough — works better when insulin is lower. You're rebuilding sensitivity to both signals simultaneously.",
+            "Visceral fat isn't just a storage problem — it actively secretes inflammatory signals that make weight loss harder. Reducing it changes the hormonal environment.",
         ]
         case .curious: return [
             "Most people have never tracked what their body actually feels like without processed sugar. Baseline data is rare — and often surprising.",
             "The question 'what is my actual baseline?' is one of the most interesting experiments you can run on yourself.",
             "You're running an n=1 trial on your own biology. The data is already coming in.",
+            "The differences you're noticing — in energy, sleep, hunger timing, mood — are biological signals. Most people never collect this data because they never change the variable.",
+            "What researchers study in controlled trials, you're running on yourself with direct access to the outcome data. That's a different kind of knowing.",
+            "Baseline is a harder question than it sounds. You can't know what your actual baseline is without changing the things that are modifying it. That's what this is.",
+            "Every day adds to a picture most people never draw. The longer you run it, the more specific the answer gets.",
         ]
         }
     }
