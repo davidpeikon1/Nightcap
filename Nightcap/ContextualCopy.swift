@@ -102,7 +102,7 @@ struct ContextualCopy {
             "Habit cravings weaken through exposure without reward. You've been doing that for two weeks. The reflex is fading.",
             "The hardest mile was the first one. You are now in territory most people have never mapped.",
             "Fasting insulin at this mark looks different than it did two weeks ago. Every downstream system follows it.",
-            "Identity and behavior are converging. The person who does this and the person you are becoming the same person.",
+            "Identity and behavior are converging. The person who does this and the person you are becoming are the same person.",
         ],
 
         .thirtyPlusDays: [
