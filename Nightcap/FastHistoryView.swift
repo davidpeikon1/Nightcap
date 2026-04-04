@@ -504,10 +504,16 @@ struct FastHistoryView: View {
     private func formatDuration(_ seconds: TimeInterval) -> String {
         let h = Int(seconds) / 3600
         let d = h / 24
+        let rh = h % 24
         let m = (Int(seconds) % 3600) / 60
         if seconds < 60 { return "< 1 min fast" }
-        if d > 0 { return "\(d)d \(h % 24)h \(m)m fast" }
-        if h > 0 { return "\(h)h \(m)m fast" }
+        if d > 0 {
+            if rh == 0 && m == 0 { return "\(d)d fast" }
+            if rh == 0 { return "\(d)d \(m)m fast" }
+            if m == 0  { return "\(d)d \(rh)h fast" }
+            return "\(d)d \(rh)h \(m)m fast"
+        }
+        if h > 0 { return m > 0 ? "\(h)h \(m)m fast" : "\(h)h fast" }
         return "\(m)m fast"
     }
 
@@ -870,9 +876,15 @@ struct EditNoteSheet: View {
     private var durationLabel: String {
         let h = Int(event.fastDuration) / 3600
         let d = h / 24
+        let rh = h % 24
         let m = (Int(event.fastDuration) % 3600) / 60
-        if d > 0 { return "\(d)d \(h % 24)h \(m)m" }
-        if h > 0 { return "\(h)h \(m)m" }
+        if d > 0 {
+            if rh == 0 && m == 0 { return "\(d)d" }
+            if rh == 0 { return "\(d)d \(m)m" }
+            if m == 0  { return "\(d)d \(rh)h" }
+            return "\(d)d \(rh)h \(m)m"
+        }
+        if h > 0 { return m > 0 ? "\(h)h \(m)m" : "\(h)h" }
         return "\(m)m"
     }
 
