@@ -19,8 +19,8 @@ struct FastHistoryView: View {
                             chartCard
                         }
                         statsRow
-                        if let trend = trendInsightText {
-                            trendCard(trend)
+                        if let trend = trendInsight {
+                            trendCard(trend.text, positive: trend.positive)
                         }
                         if store.isTracking || !store.resetEvents.isEmpty {
                             activityGrid
@@ -113,7 +113,7 @@ struct FastHistoryView: View {
 
     /// Compares the 3 most recent completed fasts against the 3 before them.
     /// Returns nil when there's insufficient data or the difference is trivial.
-    private var trendInsightText: String? {
+    private var trendInsight: (text: String, positive: Bool)? {
         let durations = store.resetEvents.map(\.fastDuration)
         guard durations.count >= 4 else { return nil }
         let recent = Array(durations.prefix(3))
@@ -125,10 +125,10 @@ struct FastHistoryView: View {
         guard abs(diffH) >= 2 else { return nil }
         if diffH > 0 {
             let h = Int(diffH)
-            return "Your last \(recent.count) fasts averaged \(h)h longer than the \(older.count) before them. The trend is moving in the right direction."
+            return ("Your last \(recent.count) fasts averaged \(h)h longer than the \(older.count) before them. The trend is moving in the right direction.", true)
         } else {
             let h = Int(-diffH)
-            return "Your recent fasts are averaging \(h)h shorter. Patterns usually have a cause worth logging."
+            return ("Your recent fasts are averaging \(h)h shorter. Patterns usually have a cause worth logging.", false)
         }
     }
 
@@ -167,11 +167,11 @@ struct FastHistoryView: View {
         }
     }
 
-    private func trendCard(_ text: String) -> some View {
+    private func trendCard(_ text: String, positive: Bool) -> some View {
         HStack(alignment: .top, spacing: 14) {
-            Image(systemName: "chart.line.uptrend.xyaxis")
+            Image(systemName: positive ? "chart.line.uptrend.xyaxis" : "chart.line.downtrend.xyaxis")
                 .font(.system(size: 14, weight: .light))
-                .foregroundStyle(Color("NCSuccess").opacity(0.7))
+                .foregroundStyle(positive ? Color("NCSuccess").opacity(0.7) : Color("NCWarning").opacity(0.7))
                 .padding(.top, 1)
             Text(text)
                 .font(.system(size: 13, weight: .light))
@@ -333,20 +333,29 @@ struct FastHistoryView: View {
     private enum DayStatus { case clean, reset, notTracking }
 
     private var activityGrid: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        let days = last28Days()
+        let cleanCount = days.filter { statusForDay($0) == .clean }.count
+        let longestRun: Int = {
+            var best = 0, current = 0
+            for day in days {
+                if statusForDay(day) == .clean { current += 1; best = max(best, current) }
+                else { current = 0 }
+            }
+            return best
+        }()
+
+        return VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("LAST 4 WEEKS")
                     .font(.system(size: 11, weight: .medium))
                     .tracking(2)
                     .foregroundStyle(Color("NCTextSecondary"))
                 Spacer()
-                HStack(spacing: 10) {
-                    legendDot(color: Color("NCSuccess").opacity(0.7), label: "clean day")
-                    legendDot(color: Color("NCWarning").opacity(0.5), label: "reset day")
-                }
+                Text("\(cleanCount)/28 clean")
+                    .font(.system(size: 11, design: .monospaced))
+                    .foregroundStyle(cleanCount >= 21 ? Color("NCSuccess").opacity(0.8) : Color("NCTextTertiary"))
             }
 
-            let days = last28Days()
             let gridColumns = Array(repeating: GridItem(.flexible(), spacing: 4), count: 7)
             let weekdayLetters = days.prefix(7).map { date -> String in
                 let wd = Calendar.current.component(.weekday, from: date) // 1=Sun...7=Sat
@@ -384,6 +393,25 @@ struct FastHistoryView: View {
                         )
                         .accessibilityLabel(accessibilityDayLabel(date: date, status: status))
                 }
+            }
+
+            // Longest-run callout — only when the run is worth noting
+            if longestRun >= 5 {
+                HStack(spacing: 6) {
+                    Image(systemName: "flame")
+                        .font(.system(size: 10, weight: .light))
+                        .foregroundStyle(Color("NCSuccess").opacity(0.7))
+                    Text("Best run this period: \(longestRun) day\(longestRun == 1 ? "" : "s")")
+                        .font(.system(size: 11, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                }
+                .padding(.top, 2)
+            }
+
+            // Legend
+            HStack(spacing: 10) {
+                legendDot(color: Color("NCSuccess").opacity(0.7), label: "clean day")
+                legendDot(color: Color("NCWarning").opacity(0.5), label: "reset day")
             }
         }
         .padding(20)

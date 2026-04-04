@@ -280,17 +280,17 @@ enum FastingPhase: String, CaseIterable, Hashable, Identifiable {
     var bodyScience: String {
         switch self {
         case .justStarted:
-            return "Your blood sugar is beginning to stabilize. The craving you feel is your brain expecting its usual dopamine hit — not your body needing fuel."
+            return "Your blood sugar is beginning to stabilize after the last glucose spike. The craving you feel is your brain's reward system anticipating a dopamine hit it has learned to expect — not your body needing fuel. Ghrelin, cortisol, and dopamine are all on schedule. They peak within the first 20 minutes and then fall. The window you are in right now is finite. It closes."
         case .firstDay:
-            return "Your liver is burning through glycogen reserves. Any fatigue you feel is the metabolic shift starting. It ends by tonight."
+            return "Your liver is burning through glycogen reserves built from the last glucose load. Any fatigue you feel is the metabolic handoff — your body shifting toward fat as its primary fuel source. Insulin is falling. Fructose from the last meal has largely cleared the portal circulation. Tonight's sleep will be chemically different: without a glucose spike to manage through the night, cortisol has less work to do."
         case .withdrawal:
-            return "Headaches and irritability now are your brain recalibrating reward pathways. Serotonin production is shifting back to your gut — which is in flux but healing."
+            return "Headaches and irritability at this stage are your brain recalibrating. Chronic dopamine spikes suppress receptor sensitivity — your brain has been compensating by reducing D2 receptor density, and that correction is now underway. The discomfort is the system correcting, not breaking. Serotonin production — 90% of which originates in the gut — is shifting as the microbiome responds to the absence of its primary fuel source."
         case .breakthrough:
-            return "The compulsive edge of cravings drops sharply at 72 hours. Your taste receptors are beginning to reset — an apple will soon taste like dessert."
+            return "72 hours is a measurable threshold. The compulsive pull — the kind that makes you negotiate with yourself — drops sharply here as the acute neurochemical withdrawal resolves. What remains beyond this point is conditioned reflex, not physiology. The same cue now produces a quieter signal. Taste receptor desensitization has already started unwinding. An apple is about to taste like something again."
         case .rewiring:
-            return "Your gut microbiome has measurably shifted. Bacteria that amplify cravings are dying off. Bacteria that produce calm and clarity are growing."
+            return "Your gut microbiome has measurably shifted in composition. Firmicutes — bacteria that thrive on sugar and amplify cravings through their metabolic byproducts — are declining. Bacteroidetes are growing in their place. Roughly 90% of your serotonin is produced in the gut; as the microbiome shifts, so does the neurochemical signal reaching your brain. The gut-brain axis is producing a different output than it was on day one."
         case .freedom:
-            return "At two weeks, fMRI studies show reduced reward-center activation in response to sugar images. You have literally rewired."
+            return "At two weeks, fMRI imaging shows measurably reduced activation in the nucleus accumbens — the brain's reward center — in response to images of sugary food. This is not motivation or willpower. It is structural change. Your taste receptor recalibration is nearly complete. Glycation — where excess glucose binds to collagen and accelerates cellular aging — has been interrupted for two full weeks. The biology is different in every measurable way."
         }
     }
 
