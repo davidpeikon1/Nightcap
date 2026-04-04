@@ -294,7 +294,7 @@ struct GoalSheet: View {
                 }
             }
             .navigationTitle("")
-            .navigationBarHidden(true)
+            .toolbar(.hidden, for: .navigationBar)
         }
         .presentationDetents([.large])
         .presentationDragIndicator(.visible)
