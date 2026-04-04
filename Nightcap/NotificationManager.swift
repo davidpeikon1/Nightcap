@@ -389,6 +389,13 @@ class NotificationManager {
         "Pattern recognized. What happens in the next 20 minutes is the whole game.",
         "The data says this is your window. The craving is a schedule. You can work with a schedule.",
         "Your logs put this as the high-risk hour. You already know how to get through it.",
+        "The craving fires on schedule, not on need. Your logs confirm the schedule. You can be ready for it.",
+        "This hour shows up most often in your logs. That makes it the one that matters most to close.",
+        "Your peak craving window has a ceiling. You know where it is. Twenty minutes and it's done.",
+        "The pattern is real and you mapped it. Knowing where the ambush is changes how you walk through it.",
+        "Your data says this hour is where the old reflex looks for an opening. Don't give it one.",
+        "The craving knows your schedule better than you do right now. Use the timer.",
+        "Every time you hold this window, the next occurrence is slightly weaker. That's the mechanism.",
     ]
 
     private func formattedDuration(_ seconds: TimeInterval) -> String {

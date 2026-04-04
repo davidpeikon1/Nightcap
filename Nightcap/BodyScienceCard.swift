@@ -118,7 +118,17 @@ struct BodyScienceCard: View {
         let h = Int(remaining) / 3600
         let m = max(1, (Int(remaining) % 3600) / 60)
         let label = h > 0 ? "\(h)h \(m)m" : "\(m)m"
-        return "\(label) to \(next.rawValue)."
+        let teaser: String = {
+            switch next {
+            case .firstDay:     return "Your first 24 hours is close."
+            case .withdrawal:   return "The acute pull is almost behind you."
+            case .breakthrough: return "72 hours — the compulsive edge drops here."
+            case .rewiring:     return "One week. The gut has measurably shifted."
+            case .freedom:      return "Two weeks. fMRI shows structural change at this mark."
+            default:            return ""
+            }
+        }()
+        return "\(label) to \(next.rawValue). \(teaser)"
     }
 
     private var phaseStrip: some View {
