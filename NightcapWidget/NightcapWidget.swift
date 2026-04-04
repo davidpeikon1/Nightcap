@@ -99,7 +99,7 @@ struct WidgetFastData {
         }()
         let rh = Int(remaining) / 3600
         let rm = (Int(remaining) % 3600) / 60
-        if rh >= 24 { return "\(rh/24)d \(rh%24)h" }
+        if rh >= 24 { let d = rh / 24; let remH = rh % 24; return remH > 0 ? "\(d)d \(remH)h" : "\(d)d" }
         if rh > 0   { return "\(rh)h \(rm)m" }
         return "\(rm)m"
     }
