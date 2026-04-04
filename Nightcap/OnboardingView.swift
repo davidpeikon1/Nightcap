@@ -274,6 +274,7 @@ struct GoalSheet: View {
     private func goalPill(_ goal: UserGoal) -> some View {
         let isSelected = selected == goal
         return Button {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             withAnimation(.spring(duration: 0.25)) { selected = goal }
         } label: {
             HStack {

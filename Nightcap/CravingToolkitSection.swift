@@ -323,7 +323,7 @@ struct WhyReminderTool: View {
         case .sleepBetter:   return "I'm doing this because I want to wake up rested."
         case .moreEnergy:    return "I'm doing this because I want real energy — not borrowed energy."
         case .breakCravings: return "I'm doing this because the craving cycle ends here."
-        case .loseWeight:    return "I'm doing this because my body deserves a clean fuel."
+        case .loseWeight:    return "I'm doing this because fat storage is driven by insulin, and insulin is driven by sugar. This is the lever."
         case .curious:       return "I'm doing this to find out what my baseline actually feels like."
         case nil:            return "I'm doing this because something needs to change."
         }
@@ -347,6 +347,7 @@ struct WhyReminderTool: View {
             }
 
             Button {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 showGoalPicker = true
             } label: {
                 Text(appState.userGoal == nil ? "Set your reason" : "Change reason")
@@ -387,7 +388,10 @@ struct GoalPickerSheet: View {
 
                 Spacer()
 
-                Button { dismiss() } label: {
+                Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    dismiss()
+                } label: {
                     Text("Done")
                         .font(.system(size: 17, weight: .medium))
                         .foregroundStyle(Color("NCBackground"))
@@ -404,6 +408,7 @@ struct GoalPickerSheet: View {
     private func goalPill(_ goal: UserGoal) -> some View {
         let isSelected = appState.userGoal == goal
         return Button {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             withAnimation(.spring(duration: 0.2)) {
                 appState.setGoal(goal)
             }
@@ -454,6 +459,7 @@ struct LogCravingTool: View {
                         .padding(.top, 4)
 
                     Button {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         selectedTrigger = nil
                         logged = false
                     } label: {

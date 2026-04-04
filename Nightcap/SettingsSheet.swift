@@ -142,6 +142,7 @@ struct SettingsSheet: View {
     private func goalRow(_ goal: UserGoal) -> some View {
         let isSelected = selectedGoal == goal
         return Button {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             withAnimation(.spring(duration: 0.2)) {
                 selectedGoal = goal
                 appState.setGoal(goal)
@@ -192,6 +193,7 @@ struct SettingsSheet: View {
                     }
             case .denied:
                 Button("Open Settings") {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(url)
                     }
@@ -200,6 +202,7 @@ struct SettingsSheet: View {
                 .foregroundStyle(Color("NCWarning"))
             default:
                 Button("Enable") {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     NotificationManager.shared.requestPermission { granted in
                         notificationsOn = granted
                         checkNotificationStatus()
