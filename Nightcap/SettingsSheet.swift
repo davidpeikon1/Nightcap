@@ -188,12 +188,16 @@ struct SettingsSheet: View {
                         if on {
                             NotificationManager.shared.scheduleDailyNotifications()
                         } else {
-                            // Only remove daily check-ins (both legacy and weekday-specific),
-                            // not proactive milestone notifications.
+                            // Remove all daily check-in variants (legacy, weekday, and day-offset),
+                            // but not proactive milestone notifications.
                             var ids = ["nightcap.morning", "nightcap.evening"]
                             for wd in 1...7 {
                                 ids.append("nightcap.morning.wd\(wd)")
                                 ids.append("nightcap.evening.wd\(wd)")
+                            }
+                            for d in 0..<14 {
+                                ids.append("nightcap.morning.d\(d)")
+                                ids.append("nightcap.evening.d\(d)")
                             }
                             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
                         }
