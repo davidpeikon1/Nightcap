@@ -5,11 +5,13 @@ import SwiftUI
 
 struct WidgetFastData {
     let lastSugarDate: Date?
+    let currentQuote: String?
 
     static func load() -> WidgetFastData {
         let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
         return WidgetFastData(
-            lastSugarDate: defaults.object(forKey: "lastSugarDate") as? Date
+            lastSugarDate: defaults.object(forKey: "lastSugarDate") as? Date,
+            currentQuote: defaults.string(forKey: "currentQuoteText")
         )
     }
 
@@ -61,14 +63,18 @@ struct WidgetFastData {
 
     func nextMilestone(at date: Date) -> String {
         let h = elapsed(at: date) / 3600
-        if h >= 336 { return "Living in freedom" }
+        if h >= 8_760 { return "All milestones complete" }
         let remaining: TimeInterval = {
             switch h {
-            case ..<1:      return 3_600    - elapsed(at: date)
-            case 1..<24:    return 86_400   - elapsed(at: date)
-            case 24..<72:   return 259_200  - elapsed(at: date)
-            case 72..<168:  return 604_800  - elapsed(at: date)
-            default:        return 1_209_600 - elapsed(at: date)
+            case ..<1:         return 3_600      - elapsed(at: date)
+            case 1..<24:       return 86_400     - elapsed(at: date)
+            case 24..<72:      return 259_200    - elapsed(at: date)
+            case 72..<168:     return 604_800    - elapsed(at: date)
+            case 168..<336:    return 1_209_600  - elapsed(at: date)
+            case 336..<720:    return 2_592_000  - elapsed(at: date)
+            case 720..<2_400:  return 8_640_000  - elapsed(at: date)
+            case 2_400..<4_320: return 15_552_000 - elapsed(at: date)
+            default:           return 31_536_000 - elapsed(at: date)
             }
         }()
         let rh = Int(remaining) / 3600
@@ -90,7 +96,7 @@ struct FastingEntry: TimelineEntry {
 
 struct FastingProvider: TimelineProvider {
     func placeholder(in context: Context) -> FastingEntry {
-        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800)))
+        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800), currentQuote: nil))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (FastingEntry) -> Void) {
@@ -394,8 +400,8 @@ struct LargeWidgetView: View {
 
             Spacer(minLength: 16)
 
-            // Phase description
-            Text(phaseBodyScience(for: entry.data.phase(at: entry.date)))
+            // Daily quote (from app) or phase body science fallback
+            Text(entry.data.currentQuote ?? phaseBodyScience(for: entry.data.phase(at: entry.date)))
                 .font(.system(size: 13, weight: .light))
                 .foregroundStyle(Color.ncTextSecond)
                 .lineSpacing(4)

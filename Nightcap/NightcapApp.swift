@@ -31,6 +31,11 @@ struct NightcapApp: App {
                         NotificationManager.shared.scheduleDailyNotifications()
                     }
                 }
+                // Write the current daily quote to the App Group so the widget
+                // can display it without needing direct access to QuoteLibrary.
+                let quote = QuoteLibrary.dailyQuote(for: fastingStore.elapsedSeconds)
+                UserDefaults(suiteName: "group.com.nightcap.app")?
+                    .set(quote.text, forKey: "currentQuoteText")
             }
         }
     }
