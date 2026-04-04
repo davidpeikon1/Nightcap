@@ -202,7 +202,7 @@ enum CravingTrigger: String, CaseIterable, Codable, Identifiable {
         switch self {
         case .boredom: return "Boredom cravings are the brain seeking dopamine through the easiest available route. A 5-minute walk produces the same effect."
         case .stress:  return "Stress triggers cortisol, which drives glucose cravings as a quick energy fix. Deep breathing lowers cortisol within 2 minutes."
-        case .habit:   return "Habit cravings are conditioned responses — the brain fires the craving because it expects the reward at this time, in this place."
+        case .habit:   return "Habit cravings are conditioned responses — the brain fires because it expects the reward at this time, in this place. Disrupting the cue breaks the chain: different room, different sequence, different route."
         case .social:  return "Social eating cues are among the strongest — the brain associates group contexts with shared food rewards. A non-sugar alternative in hand disrupts the cue."
         case .fatigue: return "Low energy and sugar cravings often share the same root: cortisol dysregulation and poor sleep. Protein, fat, and water work. Sugar spikes and then crashes harder."
         case .hunger:  return "Genuine hunger is a signal worth respecting. Fat and protein satisfy it durably. Sugar spikes insulin, which drops blood glucose, which makes you hungrier within the hour."
