@@ -788,10 +788,10 @@ body::after {
 
 .nc-signup__title {
   font-family: var(--nc-font-display);
-  font-size: 2.25rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .nc-signup__subtitle {
@@ -1413,7 +1413,7 @@ body::after {
 
 /* ---------- Why Section ---------- */
 .nc-why {
-  padding: 120px 32px;
+  padding: 60px 32px 120px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1516,28 +1516,25 @@ body::after {
 
 /* ---------- Pull Quote ---------- */
 .nc-pullquote {
-  padding: 80px 32px;
+  padding: 100px 32px;
   text-align: center;
-}
-
-.nc-pullquote__container {
-  max-width: 680px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .nc-pullquote__text {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.4;
+  margin: 0;
 }
 
 .nc-pullquote__text em {
   font-style: normal;
-  color: var(--nc-text);
   opacity: 1;
   font-weight: 700;
 }
@@ -1699,11 +1696,7 @@ body::after {
 }
 
 .nc-proof__title {
-  font-family: var(--nc-font-display);
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 3rem;
+  display: none;
 }
 
 .nc-proof__grid {
@@ -1812,36 +1805,31 @@ body::after {
 }
 
 .nc-faq__title {
-  font-family: var(--nc-font-display);
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-align: center;
-  margin-bottom: 3rem;
+  display: none;
 }
 
 .nc-faq__list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 }
 
 .nc-faq__item {
-  background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--nc-border);
+  border-radius: 0;
   overflow: hidden;
   transition: all var(--nc-transition);
-  box-shadow: var(--nc-shadow-sm);
 }
 
-.nc-faq__item[open] {
-  border-color: rgba(42, 37, 32, 0.3);
+.nc-faq__item:first-child {
+  border-top: 1px solid var(--nc-border);
 }
 
 .nc-faq__question {
-  padding: 18px 24px;
-  font-size: 1rem;
+  padding: 20px 0;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--nc-text);
   cursor: pointer;
@@ -1875,7 +1863,7 @@ body::after {
 }
 
 .nc-faq__answer {
-  padding: 0 24px 18px;
+  padding: 0 0 20px;
   animation: nc-faqOpen 0.3s ease-out;
 }
 
@@ -2710,146 +2698,113 @@ body::after {
       </div>
 
       <h1 class="nc-hero__title" id="hero-title">
-        <span class="nc-hero__title-line">Quitting Sugar Is Hard.</span>
-        <span class="nc-hero__title-line nc-hero__title-line--accent">Help Is Coming.</span>
+        Quitting Sugar Is Hard.<br>
+        <span class="nc-hero__title-line--accent">Help Is Coming.</span>
       </h1>
       <p class="nc-hero__subtitle">
         It's in everything. It's addictive. And willpower isn't enough.<br>
         We're building the tools to help you leave it behind for good.
       </p>
 
-      <div class="nc-hero__cta-group">
-        <button class="nc-btn nc-btn--primary" id="start-quiz-btn" aria-label="Start the Sugar Quiz">
-          Take the First Step
-          <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
-        </button>
-        <p class="nc-hero__cta-note">60-second quiz &middot; No sign-up required</p>
-      </div>
+      <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
+        Take the First Step
+        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+      </button>
+      <p class="nc-hero__cta-note">60-second quiz &middot; No sign-up required</p>
     </div>
   </section>
 
-  <!-- ===== PULL QUOTE ===== -->
-  <section class="nc-pullquote nc-reveal" aria-hidden="true">
-    <div class="nc-pullquote__container">
-      <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year. Today, it's <em>152.</em></p>
-    </div>
+  <!-- ===== CONTEXT ===== -->
+  <section class="nc-pullquote nc-reveal">
+    <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
   </section>
 
-  <!-- ===== WHY SECTION ===== -->
-  <section class="nc-why nc-reveal" id="why" aria-labelledby="why-title">
+  <!-- ===== THE PROBLEM ===== -->
+  <section class="nc-why nc-reveal" id="why">
     <div class="nc-why__container">
-      <h2 class="nc-why__title" id="why-title">You've tried to cut back.<br>The cravings always win.</h2>
-      <p class="nc-why__subtitle">It's not a willpower problem. 73% of packaged foods contain added sugar. The system is designed to keep you hooked.</p>
-
-      <div class="nc-why__stats">
-        <div class="nc-why__stat">
-          <span class="nc-why__stat-number" data-count-to="152">1</span>
-          <span class="nc-why__stat-label">lbs of sugar per person per year</span>
-        </div>
-        <div class="nc-why__stat">
-          <span class="nc-why__stat-number" data-count-to="73">0</span>
-          <span class="nc-why__stat-label">% of packaged foods have added sugar</span>
-        </div>
-        <div class="nc-why__stat">
-          <span class="nc-why__stat-number" data-count-to="60">0</span>
-          <span class="nc-why__stat-label">+ names sugar hides behind on labels</span>
-        </div>
-      </div>
+      <h2 class="nc-why__title">You've tried to cut back.<br>The cravings always win.</h2>
+      <p class="nc-why__subtitle">It's not a willpower problem. 73% of packaged foods contain added sugar, and it hides behind 60+ names on labels. The system is designed to keep you hooked.</p>
     </div>
   </section>
 
   <!-- ===== WHAT CHANGES ===== -->
-  <section class="nc-benefits nc-reveal" id="how-it-works" aria-labelledby="how-title">
+  <section class="nc-benefits nc-reveal" id="how-it-works">
     <div class="nc-benefits__container">
-      <h2 class="nc-benefits__title" id="how-title">What Changes When You Break Free</h2>
+      <h2 class="nc-benefits__title">What Changes When You Break Free</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
           <h3 class="nc-benefits__item-title">Steady Energy</h3>
-          <p class="nc-benefits__item-desc">No more crashes. No more caffeine to compensate. Energy that lasts.</p>
+          <p class="nc-benefits__item-desc">No more crashes. No more caffeine to compensate.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-2">
           <h3 class="nc-benefits__item-title">Better Sleep</h3>
-          <p class="nc-benefits__item-desc">Fall asleep faster. Stay asleep longer. Wake up actually rested.</p>
+          <p class="nc-benefits__item-desc">Fall asleep faster. Wake up actually rested.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-3">
           <h3 class="nc-benefits__item-title">Clear Head</h3>
-          <p class="nc-benefits__item-desc">Brain fog lifts. Focus sharpens. The clarity comes back.</p>
+          <p class="nc-benefits__item-desc">Brain fog lifts. Focus sharpens.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-4">
           <h3 class="nc-benefits__item-title">Metabolism Reset</h3>
-          <p class="nc-benefits__item-desc">Less inflammation. Balanced hormones. A body that works for you again.</p>
+          <p class="nc-benefits__item-desc">Less inflammation. A body that works for you again.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===== SOCIAL PROOF ===== -->
-  <section class="nc-proof nc-reveal" id="social-proof" aria-labelledby="proof-title">
+  <section class="nc-proof nc-reveal" id="social-proof">
     <div class="nc-proof__container">
-      <h2 class="nc-proof__title" id="proof-title">You're Not Alone in This</h2>
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
           <p class="nc-proof__quote">"Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was all hiding."</p>
-          <p class="nc-proof__attribution">&mdash; Sarah M., NYC</p>
+          <p class="nc-proof__attribution">Sarah M., NYC</p>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-2">
           <p class="nc-proof__quote">"The 3pm crash, the brain fog — I thought that was just aging. Three weeks off processed sugar, all of it was gone."</p>
-          <p class="nc-proof__attribution">&mdash; David K., Austin</p>
+          <p class="nc-proof__attribution">David K., Austin</p>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-3">
-          <p class="nc-proof__quote">"My husband thought he was fine because he doesn't eat candy. His bread, sauces, and protein bars? 72g a day. Now we're doing it together."</p>
-          <p class="nc-proof__attribution">&mdash; Michelle T., LA</p>
+          <p class="nc-proof__quote">"My husband thought he was fine because he doesn't eat candy. His bread, sauces, and protein bars? 72g a day."</p>
+          <p class="nc-proof__attribution">Michelle T., LA</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===== FAQ ===== -->
-  <section class="nc-faq nc-reveal" id="faq" aria-labelledby="faq-title">
+  <section class="nc-faq nc-reveal" id="faq">
     <div class="nc-faq__container">
-      <h2 class="nc-faq__title" id="faq-title">Questions</h2>
       <div class="nc-faq__list">
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">I've tried quitting sugar before. Why would this be different?</summary>
+          <summary class="nc-faq__question">I've tried quitting sugar before. Why is this different?</summary>
           <div class="nc-faq__answer">
-            <p>Willpower alone doesn't work. Sugar is addictive and hidden in 73% of packaged foods. Nightcap gives you the awareness to see it, the tools to track it, and eventually products that replace the craving at its source.</p>
-          </div>
-        </details>
-        <details class="nc-faq__item">
-          <summary class="nc-faq__question">I don't eat that much sugar — do I need this?</summary>
-          <div class="nc-faq__answer">
-            <p>That's what everyone says before the quiz. Most "healthy eaters" discover they're consuming 2-4x the recommended amount. Sugar hides behind 60+ names on labels. Take 60 seconds and see.</p>
+            <p>Willpower alone doesn't work. Nightcap gives you the awareness to see where sugar is hiding, the tools to track it daily, and eventually products that replace the craving at its source.</p>
           </div>
         </details>
         <details class="nc-faq__item">
           <summary class="nc-faq__question">What is Nightcap?</summary>
           <div class="nc-faq__answer">
-            <p>A complete system to help you leave processed sugar behind. Awareness (this quiz), daily tracking (the app), and eventually products that replace cravings at their source. Not a diet. Not a fad. Tools that make quitting stick.</p>
-          </div>
-        </details>
-        <details class="nc-faq__item">
-          <summary class="nc-faq__question">Will I have to give up everything I enjoy?</summary>
-          <div class="nc-faq__answer">
-            <p>No. It's about replacing processed sugar with things that make you feel better. Most people find that once they spot where sugar is hiding and make targeted swaps, they don't miss it. The cravings fade. The energy improves.</p>
+            <p>A system to help you leave processed sugar behind. Awareness (quiz), daily tracking (app), and eventually products that replace cravings at their source. Not a diet. Not a fad.</p>
           </div>
         </details>
         <details class="nc-faq__item">
           <summary class="nc-faq__question">What happens after the quiz?</summary>
           <div class="nc-faq__answer">
-            <p>Your personalized sugar report — daily, weekly, and yearly intake broken down by source. A specific action plan based on your answers. Early access to the Nightcap app and community.</p>
+            <p>Your personalized sugar report — daily, weekly, and yearly intake broken down by source. A specific action plan. Early access to the Nightcap app.</p>
           </div>
         </details>
         <details class="nc-faq__item">
           <summary class="nc-faq__question">Is my data private?</summary>
           <div class="nc-faq__answer">
-            <p>Yes. Never sold, shared, or used for ads. Unsubscribe anytime.</p>
+            <p>Yes. Never sold or shared. Unsubscribe anytime.</p>
           </div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- ===== CALCULATING TRANSITION ===== -->
+  <!-- ===== CALCULATING ===== -->
   <section class="nc-calculating" id="calculating-screen" aria-live="polite">
     <div class="nc-calculating__container">
       <div class="nc-calculating__ring">
@@ -2864,11 +2819,11 @@ body::after {
           <circle cx="40" cy="40" r="34" class="nc-calculating__spinner"/>
         </svg>
       </div>
-      <h2 class="nc-calculating__title" id="calculating-text">Analyzing your sugar intake...</h2>
+      <p class="nc-calculating__title">Analyzing your intake...</p>
       <div class="nc-calculating__steps">
-        <p class="nc-calculating__step" data-calc-step="1">Calculating daily processed sugar intake...</p>
-        <p class="nc-calculating__step" data-calc-step="2">Comparing to the 152 lb national average...</p>
-        <p class="nc-calculating__step" data-calc-step="3">Building your personalized sugar report...</p>
+        <p class="nc-calculating__step" data-calc-step="1">Calculating daily sugar...</p>
+        <p class="nc-calculating__step" data-calc-step="2">Comparing to national average...</p>
+        <p class="nc-calculating__step" data-calc-step="3">Building your report...</p>
       </div>
     </div>
   </section>
@@ -2877,15 +2832,6 @@ body::after {
   <section class="nc-quiz" id="sugar-quiz" aria-labelledby="quiz-heading">
     <h2 id="quiz-heading" class="nc-sr-only">Sugar Usage Quiz</h2>
     <div class="nc-quiz__container">
-      <!-- Progress Bar -->
-      <div class="nc-quiz__progress"
-           role="progressbar"
-           aria-valuemin="1"
-           aria-valuemax="5"
-           aria-valuenow="1"
-           aria-label="Quiz progress">
-        <div class="nc-quiz__progress-bar" id="quiz-progress-bar" style="width: 20%"></div>
-      </div>
       <div class="nc-quiz__dots" aria-hidden="true">
         <span class="nc-quiz__dot active" data-dot="1"></span>
         <span class="nc-quiz__dot" data-dot="2"></span>

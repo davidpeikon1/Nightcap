@@ -756,10 +756,10 @@ body::after {
 
 .nc-signup__title {
   font-family: var(--nc-font-display);
-  font-size: 2.25rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .nc-signup__subtitle {
@@ -1381,7 +1381,7 @@ body::after {
 
 /* ---------- Why Section ---------- */
 .nc-why {
-  padding: 120px 32px;
+  padding: 60px 32px 120px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1484,28 +1484,25 @@ body::after {
 
 /* ---------- Pull Quote ---------- */
 .nc-pullquote {
-  padding: 80px 32px;
+  padding: 100px 32px;
   text-align: center;
-}
-
-.nc-pullquote__container {
-  max-width: 680px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .nc-pullquote__text {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.4;
+  margin: 0;
 }
 
 .nc-pullquote__text em {
   font-style: normal;
-  color: var(--nc-text);
   opacity: 1;
   font-weight: 700;
 }
@@ -1667,11 +1664,7 @@ body::after {
 }
 
 .nc-proof__title {
-  font-family: var(--nc-font-display);
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 3rem;
+  display: none;
 }
 
 .nc-proof__grid {
@@ -1780,36 +1773,31 @@ body::after {
 }
 
 .nc-faq__title {
-  font-family: var(--nc-font-display);
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-align: center;
-  margin-bottom: 3rem;
+  display: none;
 }
 
 .nc-faq__list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 }
 
 .nc-faq__item {
-  background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--nc-border);
+  border-radius: 0;
   overflow: hidden;
   transition: all var(--nc-transition);
-  box-shadow: var(--nc-shadow-sm);
 }
 
-.nc-faq__item[open] {
-  border-color: rgba(42, 37, 32, 0.3);
+.nc-faq__item:first-child {
+  border-top: 1px solid var(--nc-border);
 }
 
 .nc-faq__question {
-  padding: 18px 24px;
-  font-size: 1rem;
+  padding: 20px 0;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--nc-text);
   cursor: pointer;
@@ -1843,7 +1831,7 @@ body::after {
 }
 
 .nc-faq__answer {
-  padding: 0 24px 18px;
+  padding: 0 0 20px;
   animation: nc-faqOpen 0.3s ease-out;
 }
 
