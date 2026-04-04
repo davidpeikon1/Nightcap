@@ -343,6 +343,9 @@
     // Populate share card
     populateShareCard(quizData);
 
+    // Animate source breakdown
+    setTimeout(function () { animateSourceBreakdown(quizData); }, 1400);
+
     // Animated counter for sugar grams
     animateCounter('results-sugar-grams', 0, dailySugar, 1500);
 
@@ -573,6 +576,25 @@
         }
       });
     }
+  }
+
+  // ---------- Source Breakdown Animation ----------
+  function animateSourceBreakdown(quizData) {
+    var breakfast = quizData.sugar_from_breakfast || 0;
+    var drinks = quizData.sugar_from_drinks || 0;
+    var processed = quizData.sugar_from_processed || 0;
+    var maxSource = Math.max(breakfast, drinks, processed, 1);
+
+    function setBar(barId, valId, grams) {
+      var bar = document.getElementById(barId);
+      var val = document.getElementById(valId);
+      if (bar) bar.style.width = Math.max((grams / maxSource) * 100, 8) + '%';
+      if (val) val.textContent = grams + 'g';
+    }
+
+    setBar('source-bar-breakfast', 'source-val-breakfast', breakfast);
+    setBar('source-bar-drinks', 'source-val-drinks', drinks);
+    setBar('source-bar-processed', 'source-val-processed', processed);
   }
 
   // ---------- Comparison Chart Animation ----------

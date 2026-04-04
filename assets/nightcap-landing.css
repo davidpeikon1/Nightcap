@@ -1909,6 +1909,73 @@ body {
   color: var(--nc-accent);
 }
 
+/* ---------- Source Breakdown ---------- */
+.nc-sources {
+  margin: 2rem 0;
+  padding: 24px;
+  background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
+}
+
+.nc-sources__title {
+  font-family: var(--nc-font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.nc-sources__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nc-sources__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nc-sources__item-label {
+  font-size: 0.85rem;
+  color: var(--nc-text-muted);
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.nc-sources__item-bar-track {
+  flex: 1;
+  height: 22px;
+  background: rgba(200, 184, 154, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.nc-sources__item-bar {
+  height: 100%;
+  background: var(--nc-primary);
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  min-width: 32px;
+}
+
+.nc-sources__item-bar--breakfast { background: #C8B89A; }
+.nc-sources__item-bar--drinks { background: #A89878; }
+.nc-sources__item-bar--processed { background: #8B7D6B; }
+
+.nc-sources__item-value {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
 /* ---------- Share Card ---------- */
 .nc-share-card {
   margin: 2.5rem 0;

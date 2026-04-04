@@ -1941,6 +1941,73 @@ body {
   color: var(--nc-accent);
 }
 
+/* ---------- Source Breakdown ---------- */
+.nc-sources {
+  margin: 2rem 0;
+  padding: 24px;
+  background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
+}
+
+.nc-sources__title {
+  font-family: var(--nc-font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.nc-sources__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nc-sources__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nc-sources__item-label {
+  font-size: 0.85rem;
+  color: var(--nc-text-muted);
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.nc-sources__item-bar-track {
+  flex: 1;
+  height: 22px;
+  background: rgba(200, 184, 154, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.nc-sources__item-bar {
+  height: 100%;
+  background: var(--nc-primary);
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  min-width: 32px;
+}
+
+.nc-sources__item-bar--breakfast { background: #C8B89A; }
+.nc-sources__item-bar--drinks { background: #A89878; }
+.nc-sources__item-bar--processed { background: #8B7D6B; }
+
+.nc-sources__item-value {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
 /* ---------- Share Card ---------- */
 .nc-share-card {
   margin: 2.5rem 0;
@@ -2864,6 +2931,37 @@ body {
           </div>
         </div>
 
+        <!-- Sugar Source Breakdown -->
+        <div class="nc-sources" id="results-sources">
+          <h3 class="nc-sources__title">Where Your Sugar Comes From</h3>
+          <div class="nc-sources__list">
+            <div class="nc-sources__item">
+              <span class="nc-sources__item-label">Breakfast</span>
+              <div class="nc-sources__item-bar-track">
+                <div class="nc-sources__item-bar nc-sources__item-bar--breakfast" id="source-bar-breakfast" style="width: 0%">
+                  <span class="nc-sources__item-value" id="source-val-breakfast">0g</span>
+                </div>
+              </div>
+            </div>
+            <div class="nc-sources__item">
+              <span class="nc-sources__item-label">Drinks</span>
+              <div class="nc-sources__item-bar-track">
+                <div class="nc-sources__item-bar nc-sources__item-bar--drinks" id="source-bar-drinks" style="width: 0%">
+                  <span class="nc-sources__item-value" id="source-val-drinks">0g</span>
+                </div>
+              </div>
+            </div>
+            <div class="nc-sources__item">
+              <span class="nc-sources__item-label">Packaged food</span>
+              <div class="nc-sources__item-bar-track">
+                <div class="nc-sources__item-bar nc-sources__item-bar--processed" id="source-bar-processed" style="width: 0%">
+                  <span class="nc-sources__item-value" id="source-val-processed">0g</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Comparison Chart -->
         <div class="nc-compare" id="results-compare">
           <h3 class="nc-compare__title">How You Compare</h3>
@@ -3412,6 +3510,9 @@ body {
 
     var dailyTotal = breakfast + drinks + processed;
 
+    quizData.sugar_from_breakfast = breakfast;
+    quizData.sugar_from_drinks = drinks;
+    quizData.sugar_from_processed = processed;
     quizData.estimated_daily_sugar = Math.round(dailyTotal);
     quizData.estimated_weekly_sugar = Math.round(dailyTotal * 7);
     quizData.estimated_yearly_sugar_lbs = parseFloat(
@@ -3825,6 +3926,9 @@ body {
     // Populate share card
     populateShareCard(quizData);
 
+    // Animate source breakdown
+    setTimeout(function () { animateSourceBreakdown(quizData); }, 1400);
+
     // Animated counter for sugar grams
     animateCounter('results-sugar-grams', 0, dailySugar, 1500);
 
@@ -4055,6 +4159,25 @@ body {
         }
       });
     }
+  }
+
+  // ---------- Source Breakdown Animation ----------
+  function animateSourceBreakdown(quizData) {
+    var breakfast = quizData.sugar_from_breakfast || 0;
+    var drinks = quizData.sugar_from_drinks || 0;
+    var processed = quizData.sugar_from_processed || 0;
+    var maxSource = Math.max(breakfast, drinks, processed, 1);
+
+    function setBar(barId, valId, grams) {
+      var bar = document.getElementById(barId);
+      var val = document.getElementById(valId);
+      if (bar) bar.style.width = Math.max((grams / maxSource) * 100, 8) + '%';
+      if (val) val.textContent = grams + 'g';
+    }
+
+    setBar('source-bar-breakfast', 'source-val-breakfast', breakfast);
+    setBar('source-bar-drinks', 'source-val-drinks', drinks);
+    setBar('source-bar-processed', 'source-val-processed', processed);
   }
 
   // ---------- Comparison Chart Animation ----------

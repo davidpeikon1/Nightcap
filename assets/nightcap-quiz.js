@@ -288,6 +288,9 @@
 
     var dailyTotal = breakfast + drinks + processed;
 
+    quizData.sugar_from_breakfast = breakfast;
+    quizData.sugar_from_drinks = drinks;
+    quizData.sugar_from_processed = processed;
     quizData.estimated_daily_sugar = Math.round(dailyTotal);
     quizData.estimated_weekly_sugar = Math.round(dailyTotal * 7);
     quizData.estimated_yearly_sugar_lbs = parseFloat(

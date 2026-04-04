@@ -77,19 +77,24 @@ Deploy `api/waitlist-subscribe.js` and `api/waitlist-sms.js` as serverless funct
 
 ### 3. Quiz Data as Profile Properties
 The API automatically stores these on each Klaviyo profile:
-- `quiz_evening_drink`
-- `quiz_daily_sugary_drinks`
-- `quiz_sleep_quality`
-- `quiz_motivation`
-- `quiz_checks_sugar`
-- `quiz_estimated_daily_sugar`
-- `quiz_estimated_weekly_sugar`
-- `quiz_estimated_yearly_sugar_lbs`
+- `quiz_breakfast` — breakfast type (cereal_toast, yogurt_smoothie, coffee_pastry, eggs_protein, skip)
+- `quiz_daily_sweet_drinks` — sweetened drinks per day (0, 1, 2-3, 4+)
+- `quiz_processed_foods` — packaged food frequency (rarely, some, most, almost_all)
+- `quiz_checks_labels` — label reading habits (always, sometimes, rarely, never)
+- `quiz_motivation` — reason for reducing sugar (prevent_disease, energy, weight, family, curiosity)
+- `quiz_sugar_from_breakfast` — estimated grams from breakfast
+- `quiz_sugar_from_drinks` — estimated grams from drinks
+- `quiz_sugar_from_processed` — estimated grams from packaged foods
+- `quiz_estimated_daily_sugar` — total daily processed sugar estimate
+- `quiz_estimated_weekly_sugar` — weekly total
+- `quiz_estimated_yearly_sugar_lbs` — yearly total in pounds
 
 Use these for **segmentation**:
-- "Heavy sugar users" → `quiz_estimated_daily_sugar > 50`
-- "Sleep-focused" → `quiz_motivation == "sleep_better"`
-- "Sugar-unaware" → `quiz_checks_sugar == "never"`
+- "Heavy sugar users" → `quiz_estimated_daily_sugar > 100`
+- "Drink-heavy" → `quiz_sugar_from_drinks > 50`
+- "Prevention-motivated" → `quiz_motivation == "prevent_disease"`
+- "Sugar-unaware" → `quiz_checks_labels == "never"`
+- "Family-motivated" → `quiz_motivation == "family"`
 
 ---
 
