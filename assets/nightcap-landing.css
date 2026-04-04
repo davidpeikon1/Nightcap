@@ -449,9 +449,34 @@ body {
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.nc-quiz__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.nc-quiz__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(200, 184, 154, 0.15);
+  transition: all var(--nc-transition);
+}
+
+.nc-quiz__dot.active {
+  background: var(--nc-primary);
+  transform: scale(1.2);
+}
+
+.nc-quiz__dot.completed {
+  background: var(--nc-primary);
+  opacity: 0.5;
+}
+
 .nc-quiz__progress-text {
   display: block;
-  text-align: right;
+  text-align: center;
   font-size: 0.8rem;
   color: var(--nc-text-muted);
   margin-bottom: 2rem;

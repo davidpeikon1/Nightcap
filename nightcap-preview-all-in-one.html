@@ -481,9 +481,34 @@ body {
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.nc-quiz__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.nc-quiz__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(200, 184, 154, 0.15);
+  transition: all var(--nc-transition);
+}
+
+.nc-quiz__dot.active {
+  background: var(--nc-primary);
+  transform: scale(1.2);
+}
+
+.nc-quiz__dot.completed {
+  background: var(--nc-primary);
+  opacity: 0.5;
+}
+
 .nc-quiz__progress-text {
   display: block;
-  text-align: right;
+  text-align: center;
   font-size: 0.8rem;
   color: var(--nc-text-muted);
   margin-bottom: 2rem;
@@ -2518,16 +2543,16 @@ body {
 
       <div class="nc-why__stats">
         <div class="nc-why__stat">
-          <span class="nc-why__stat-number">152 lbs</span>
-          <span class="nc-why__stat-label">Processed sugar consumed per American per year</span>
+          <span class="nc-why__stat-number" data-count-to="152">1</span>
+          <span class="nc-why__stat-label">Processed sugar consumed per American per year (lbs)</span>
         </div>
         <div class="nc-why__stat">
-          <span class="nc-why__stat-number">73%</span>
-          <span class="nc-why__stat-label">Of packaged foods contain added sugar</span>
+          <span class="nc-why__stat-number" data-count-to="73">0</span>
+          <span class="nc-why__stat-label">% of packaged foods contain added sugar</span>
         </div>
         <div class="nc-why__stat">
-          <span class="nc-why__stat-number">88%</span>
-          <span class="nc-why__stat-label">Of Americans are metabolically unhealthy</span>
+          <span class="nc-why__stat-number" data-count-to="88">0</span>
+          <span class="nc-why__stat-label">% of Americans are metabolically unhealthy</span>
         </div>
       </div>
 
@@ -2726,6 +2751,13 @@ body {
            aria-valuenow="1"
            aria-label="Quiz progress">
         <div class="nc-quiz__progress-bar" id="quiz-progress-bar" style="width: 20%"></div>
+      </div>
+      <div class="nc-quiz__dots" aria-hidden="true">
+        <span class="nc-quiz__dot active" data-dot="1"></span>
+        <span class="nc-quiz__dot" data-dot="2"></span>
+        <span class="nc-quiz__dot" data-dot="3"></span>
+        <span class="nc-quiz__dot" data-dot="4"></span>
+        <span class="nc-quiz__dot" data-dot="5"></span>
       </div>
       <span class="nc-quiz__progress-text" id="quiz-progress-text" aria-live="polite">Question 1 of 5</span>
 
@@ -3423,6 +3455,13 @@ body {
         e.preventDefault();
         if (!isTransitioning) selectOption(focused);
       }
+    } else if (e.key >= '1' && e.key <= '9') {
+      // Number keys select option directly
+      var numIdx = parseInt(e.key, 10) - 1;
+      if (numIdx < options.length && !isTransitioning) {
+        e.preventDefault();
+        selectOption(options[numIdx]);
+      }
     }
   });
 
@@ -3525,6 +3564,18 @@ body {
     // ARIA
     progressBar.setAttribute('aria-valuenow', currentStep);
     progressBar.setAttribute('aria-valuetext', 'Question ' + currentStep + ' of ' + TOTAL_STEPS);
+
+    // Step dots
+    var dots = quizSection.querySelectorAll('.nc-quiz__dot');
+    dots.forEach(function (dot, i) {
+      var dotStep = i + 1;
+      dot.classList.remove('active', 'completed');
+      if (dotStep === currentStep) {
+        dot.classList.add('active');
+      } else if (dotStep < currentStep) {
+        dot.classList.add('completed');
+      }
+    });
   }
 
   function finishQuiz() {
@@ -4085,10 +4136,11 @@ body {
     }
 
     // Social share buttons for referral
+    var yearlyLbs = quizData.estimated_yearly_sugar_lbs || 0;
     var twitterShare = document.getElementById('share-twitter');
     if (twitterShare) {
       twitterShare.addEventListener('click', function () {
-        var text = 'I just found out I consume ' + dailySugar + 'g of sugar per day just from drinks. Wild. Take the quiz:';
+        var text = 'I just found out I consume ' + dailySugar + 'g of processed sugar per day — that\'s ' + yearlyLbs + ' lbs per year.\n\n200 years ago it was 1 lb/year. Now it\'s 152.\n\nFind out your number:';
         window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(refUrl), '_blank', 'width=550,height=420');
         track('referral_shared', { platform: 'twitter' });
       });
@@ -4097,7 +4149,7 @@ body {
     var smsShare = document.getElementById('share-sms');
     if (smsShare) {
       smsShare.addEventListener('click', function () {
-        var text = 'Hey! I just took this sugar quiz and found out I drink ' + dailySugar + 'g of sugar per day. You should try it: ' + refUrl;
+        var text = 'I just took this 60-second quiz and found out I consume ' + dailySugar + 'g of processed sugar per day. That\'s ' + yearlyLbs + ' lbs a year. You need to see your number: ' + refUrl;
         window.open('sms:?body=' + encodeURIComponent(text));
         track('referral_shared', { platform: 'sms' });
       });
@@ -4106,8 +4158,8 @@ body {
     var emailShare = document.getElementById('share-email');
     if (emailShare) {
       emailShare.addEventListener('click', function () {
-        var subject = 'You need to take this sugar quiz';
-        var body = "Hey, I just found out I'm consuming " + dailySugar + "g of sugar per day just from drinks. It was a real wake-up call.\n\nTake the 60-second quiz: " + refUrl;
+        var subject = 'You need to see how much processed sugar you consume';
+        var body = "Hey,\n\nI just took this 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day — that's " + yearlyLbs + " lbs per year.\n\nApparently Americans went from 1 lb of sugar per year 200 years ago to 152 lbs today. Most of it is hidden in everyday foods.\n\nTake the quiz and see your number: " + refUrl;
         window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
         track('referral_shared', { platform: 'email' });
       });
@@ -4621,23 +4673,49 @@ body {
 
 </script>
 
-  <!-- Scroll Reveal Observer -->
+  <!-- Scroll Reveal + Counter Observer -->
   <script>
   (function () {
+    // Scroll reveals
     var reveals = document.querySelectorAll('.nc-reveal');
-    if (!reveals.length || !('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window)) {
       reveals.forEach(function (el) { el.classList.add('visible'); });
       return;
     }
-    var observer = new IntersectionObserver(function (entries) {
+    var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(function (el) { observer.observe(el); });
+    reveals.forEach(function (el) { revealObserver.observe(el); });
+
+    // Animated stat counters
+    var counters = document.querySelectorAll('[data-count-to]');
+    var counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.dataset.countTo, 10);
+          var start = parseInt(el.textContent, 10) || 0;
+          var duration = 2000;
+          var startTime = null;
+
+          function tick(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(start + (target - start) * eased);
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (el) { counterObserver.observe(el); });
   })();
   </script>
 </body>

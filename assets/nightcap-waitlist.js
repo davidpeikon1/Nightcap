@@ -418,10 +418,11 @@
     }
 
     // Social share buttons for referral
+    var yearlyLbs = quizData.estimated_yearly_sugar_lbs || 0;
     var twitterShare = document.getElementById('share-twitter');
     if (twitterShare) {
       twitterShare.addEventListener('click', function () {
-        var text = 'I just found out I consume ' + dailySugar + 'g of sugar per day just from drinks. Wild. Take the quiz:';
+        var text = 'I just found out I consume ' + dailySugar + 'g of processed sugar per day — that\'s ' + yearlyLbs + ' lbs per year.\n\n200 years ago it was 1 lb/year. Now it\'s 152.\n\nFind out your number:';
         window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(refUrl), '_blank', 'width=550,height=420');
         track('referral_shared', { platform: 'twitter' });
       });
@@ -430,7 +431,7 @@
     var smsShare = document.getElementById('share-sms');
     if (smsShare) {
       smsShare.addEventListener('click', function () {
-        var text = 'Hey! I just took this sugar quiz and found out I drink ' + dailySugar + 'g of sugar per day. You should try it: ' + refUrl;
+        var text = 'I just took this 60-second quiz and found out I consume ' + dailySugar + 'g of processed sugar per day. That\'s ' + yearlyLbs + ' lbs a year. You need to see your number: ' + refUrl;
         window.open('sms:?body=' + encodeURIComponent(text));
         track('referral_shared', { platform: 'sms' });
       });
@@ -439,8 +440,8 @@
     var emailShare = document.getElementById('share-email');
     if (emailShare) {
       emailShare.addEventListener('click', function () {
-        var subject = 'You need to take this sugar quiz';
-        var body = "Hey, I just found out I'm consuming " + dailySugar + "g of sugar per day just from drinks. It was a real wake-up call.\n\nTake the 60-second quiz: " + refUrl;
+        var subject = 'You need to see how much processed sugar you consume';
+        var body = "Hey,\n\nI just took this 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day — that's " + yearlyLbs + " lbs per year.\n\nApparently Americans went from 1 lb of sugar per year 200 years ago to 152 lbs today. Most of it is hidden in everyday foods.\n\nTake the quiz and see your number: " + refUrl;
         window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
         track('referral_shared', { platform: 'email' });
       });

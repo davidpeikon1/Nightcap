@@ -117,6 +117,13 @@
         e.preventDefault();
         if (!isTransitioning) selectOption(focused);
       }
+    } else if (e.key >= '1' && e.key <= '9') {
+      // Number keys select option directly
+      var numIdx = parseInt(e.key, 10) - 1;
+      if (numIdx < options.length && !isTransitioning) {
+        e.preventDefault();
+        selectOption(options[numIdx]);
+      }
     }
   });
 
@@ -219,6 +226,18 @@
     // ARIA
     progressBar.setAttribute('aria-valuenow', currentStep);
     progressBar.setAttribute('aria-valuetext', 'Question ' + currentStep + ' of ' + TOTAL_STEPS);
+
+    // Step dots
+    var dots = quizSection.querySelectorAll('.nc-quiz__dot');
+    dots.forEach(function (dot, i) {
+      var dotStep = i + 1;
+      dot.classList.remove('active', 'completed');
+      if (dotStep === currentStep) {
+        dot.classList.add('active');
+      } else if (dotStep < currentStep) {
+        dot.classList.add('completed');
+      }
+    });
   }
 
   function finishQuiz() {
