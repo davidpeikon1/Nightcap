@@ -89,7 +89,7 @@ struct ContextualCopy {
         ],
 
         .fourteenTo30Days: [
-            "Two weeks. Hepatic fat accumulation has slowed. Insulin sensitivity is measurably different for most people at this mark.",
+            "Hepatic fat accumulation has slowed. Insulin sensitivity is measurably different at this stage — and it keeps improving.",
             "Past the point where most people turn back.",
             "At this stage, cravings are mostly memory, not biology. The biology has already shifted.",
             "Most people never find out what their body actually feels like without chronic sugar. You're finding out.",
