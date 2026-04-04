@@ -559,6 +559,12 @@ struct QuoteLibrary {
         // Identity
         "Every time you don't, you're teaching your brain who you are.",
         "The person who decides this and the person who lives it are the same person. You're both of them right now.",
+        "You opened this app instead of acting on the craving. That's not nothing. That's the whole mechanism.",
+        "What you're building right now isn't visible to anyone else. You're the only one who knows what it cost.",
+        "The version of you who got this far doesn't need this. That person already decided.",
+        // Situational
+        "If you're in the kitchen: leave the room. The craving is partly a conditioned response to being in that space.",
+        "Tomorrow morning you'll either be glad you held or wish you had. You know which one you want to be.",
     ]
 
     // MARK: Selection
