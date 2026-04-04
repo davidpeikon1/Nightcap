@@ -342,12 +342,22 @@ struct SettingsSheet: View {
         }
 
         // Behavioral analysis
-        let totalDays = max(1, Int(store.totalSugarFreeTime / 86400))
-        if totalDays >= 7 {
+        let totalCleanDays = Int(store.totalSugarFreeTime / 86400)
+        if totalCleanDays >= 7 {
             lines.append("")
             lines.append("BEHAVIORAL ANALYSIS")
-            let cleanRate = (totalDays - store.resetEvents.count) * 100 / totalDays
-            lines.append("Clean rate: \(cleanRate)% (\(store.resetEvents.count) resets over \(totalDays) days)")
+            // Average fast duration across all completed and current fasts.
+            let totalFastCount = store.resetEvents.count + (store.isTracking ? 1 : 0)
+            if totalFastCount > 0 {
+                let avgSecs = store.totalSugarFreeTime / Double(totalFastCount)
+                let avgH = Int(avgSecs) / 3600
+                let avgD = avgH / 24
+                let avgStr = avgD > 0
+                    ? (avgH % 24 > 0 ? "\(avgD)d \(avgH % 24)h" : "\(avgD)d")
+                    : "\(avgH)h"
+                lines.append("Average fast length: \(avgStr)")
+            }
+            lines.append("Total resets logged: \(store.resetEvents.count)")
 
             if !store.cravingLogs.isEmpty {
                 // Peak craving hour
