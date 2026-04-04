@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nightcap — Quitting Sugar Is Hard. Help Is Coming.</title>
-  <meta name="description" content="Find out how much processed sugar you're really consuming. 60-second quiz, personalized report, and tools to help you break free.">
+  <title>Nightcap — Leave Processed Sugar Behind</title>
+  <meta name="description" content="Quitting sugar is hard. We're building the tools to help. Take the 60-second quiz and see how much you're really consuming.">
 
   <meta property="og:title" content="Nightcap — How Much Processed Sugar Are You Really Consuming?">
   <meta property="og:description" content="200 years ago, Americans consumed 1 pound of sugar per year. Today it's 152. Take the 60-second quiz and see your number.">
@@ -343,16 +343,18 @@ body {
   font-family: var(--nc-font-display);
   font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
 }
+
 
 .nc-hero__title-line {
   display: block;
 }
 
 .nc-hero__title-line--accent {
+  display: block;
   color: var(--nc-text-muted);
   font-weight: 500;
 }
@@ -1460,11 +1462,12 @@ body {
 }
 
 .nc-proof__quote {
-  font-size: 0.92rem;
+  font-family: var(--nc-font-display);
+  font-size: 1.05rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.75;
-  line-height: 1.75;
+  opacity: 0.8;
+  line-height: 1.6;
   font-style: italic;
   flex: 1;
   padding-top: 8px;
@@ -2070,16 +2073,16 @@ body {
       </div>
 
       <h1 class="nc-hero__title" id="hero-title">
-        Quitting Sugar<br>Is Hard.<br>
+        Quitting Sugar Is Hard.
         <span class="nc-hero__title-line--accent">Help Is Coming.</span>
       </h1>
       <p class="nc-hero__subtitle">
-        It's in everything. It's addictive. And willpower isn't enough.<br>
-        We're building the tools to help you finally break free.
+        It's in everything. It's addictive. And willpower alone<br>
+        isn't enough. We're building something better.
       </p>
 
       <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
-        See Your Sugar Intake
+        Take the Quiz
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
       <p class="nc-hero__cta-note">60-second quiz &middot; <span id="quiz-count-today">247</span> people took it today</p>
@@ -2161,7 +2164,7 @@ body {
     <div class="nc-bottom-cta__container">
       <p class="nc-bottom-cta__text">Most people have no idea how much sugar they consume. Do you?</p>
       <button class="nc-btn nc-btn--primary nc-bottom-cta__btn" id="bottom-quiz-btn">
-        See Your Sugar Intake
+        Take the Quiz
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
     </div>
@@ -2238,9 +2241,8 @@ body {
       <form id="sugar-quiz-form" class="nc-quiz__form" novalidate>
         <!-- Q1: Breakfast -->
         <div class="nc-quiz__step active" data-step="1">
-          <p class="nc-quiz__almost">Quick quiz</p>
-          <h3 class="nc-quiz__question">What does your morning usually look like?</h3>
-          <p class="nc-quiz__helper" id="q1-helper">Pick the closest match</p>
+          <h3 class="nc-quiz__question">What does your morning look like?</h3>
+          <p class="nc-quiz__helper" id="q1-helper">Just pick the closest one</p>
           <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
             <button type="button" class="nc-quiz__option" data-value="cereal_toast" role="radio" aria-checked="false">
               <span class="nc-quiz__option-label">Cereal, granola, or toast with jam</span>
@@ -2480,7 +2482,7 @@ body {
         <span class="nc-logo__text">NIGHTCAP</span>
         <div class="nc-logo__lines"></div>
       </div>
-      <p class="nc-footer__tagline">Helping America leave processed sugar behind.</p>
+      <p class="nc-footer__tagline">Leave processed sugar behind.</p>
       <div class="nc-footer__links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
