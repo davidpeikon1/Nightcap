@@ -286,6 +286,26 @@ struct QuoteLibrary {
                 science: "Acute sugar reduction affects sleep architecture in two phases. In the first 2–3 days, the brain recalibrates its nocturnal glucose management systems, producing some disruption. After this recalibration, slow-wave sleep increases and the 2–4am cortisol spike — which fires to stabilize crashing blood glucose — stops occurring. Most people experience measurably improved sleep beginning on night 3 or 4 of sustained sugar restriction.",
                 tier: .oneToThreeDays
             ),
+            ReframeQuote(
+                text: "Within the first 24–48 hours, the bacteria in your gut that thrive on sugar start losing their food supply. You're already reshaping the colony.",
+                science: "The gut microbiome responds rapidly to dietary change. Sugar-fermenting Firmicutes species — which release short-chain fatty acids that signal the brain to seek more sugar — begin declining within 24–48 hours of reduced sugar intake. This is not a slow process. The microbial shift begins on the timescale of days, and early changes influence craving intensity through the gut-brain axis.",
+                tier: .oneToThreeDays
+            ),
+            ReframeQuote(
+                text: "Ghrelin — the hunger hormone — fires on a schedule, not in response to actual need. You ate at this time yesterday. It will subside in 20 minutes whether or not you eat.",
+                science: "Ghrelin is released on a learned schedule, conditioned by prior meal timing. It is not a reliable indicator of caloric need; it is a clock. Studies show that ghrelin peaks and subsides within 20–30 minutes regardless of whether food is consumed. Riding out the spike rather than responding to it teaches the system a new schedule over 3–5 days of consistent non-response.",
+                tier: .oneToThreeDays
+            ),
+            ReframeQuote(
+                text: "Every time insulin doesn't spike, your body spends a few more minutes in fat-burning mode rather than fat-storage mode. The lever is being pulled in a new direction.",
+                science: "Insulin is the primary driver of lipogenesis — the conversion of circulating glucose to stored fat. When insulin is chronically elevated by frequent sugar intake, fat mobilization is suppressed. Within 1–2 days of reducing sugar, fasting insulin begins to fall, and fat oxidation increases as the default metabolic state. The shift is incremental but continuous.",
+                tier: .oneToThreeDays
+            ),
+            ReframeQuote(
+                text: "Your liver finished clearing its fructose load within the first 48 hours. It's no longer converting excess sugar to fat at the rate it was. The internal chemistry has already changed.",
+                science: "Fructose is metabolized almost exclusively in the liver, where it is converted to glucose, lactate, and triglycerides. After sustained sugar intake, hepatic fructose clearance and fat synthesis remain elevated for roughly 24–48 hours after the last dose. After this window, the liver shifts into maintenance mode rather than overload processing — a measurable biochemical change that precedes any visible external result.",
+                tier: .oneToThreeDays
+            ),
         ],
 
         .threeToSevenDays: [
@@ -463,6 +483,31 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "The adaptation you're feeling isn't the calm before something hard. It's the calm that comes after something hard. You're on the other side of the valley.",
                 science: "The neurological and physiological difficulty of sugar elimination peaks in the first 1–2 weeks, driven by acute withdrawal, dopamine system dysregulation, and active microbiome transition. After this window, the biological systems stabilize into a lower-resistance state — not temporarily, but structurally. The ease you may be experiencing is not complacency. It is resolution.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "At 28 days, D2 receptor density has had meaningful time to recover. The reward system responds differently now — to everything. The world is more rewarding. Not because it changed. Because the system receiving it did.",
+                science: "Chronic dopaminergic overstimulation — as occurs with habitual refined sugar consumption — causes compensatory downregulation of D2 receptors in the striatum. This blunts reward response to all stimuli, not just the primary substance. Recovery requires 3–6 weeks of reduced overstimulation. At 28 days, receptor density is meaningfully recovering. The heightened sense of reward from ordinary things at this stage reflects receptor upregulation, not novelty.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "Leptin — the satiety hormone — works better when insulin is lower. For weeks, your cells have been hearing its signal more clearly. Hunger that ends when you've had enough is what that feels like.",
+                science: "Chronic hyperinsulinemia causes leptin resistance, where leptin signals fail to produce satiety despite adequate fat stores. This is a primary mechanism of progressive overeating. With sustained insulin reduction, leptin sensitivity recovers — satiety signals become more reliable, portions that previously felt insufficient now feel sufficient. This is a genuine physiological change, not willpower.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "Taste receptor cells complete one full generation cycle in 10–14 days. You're past that threshold. What you taste now is what food actually tastes like. The old calibration was compressed — everything else was too quiet.",
+                science: "Taste receptor cells in the oral epithelium turn over completely every 10–14 days. Chronic exposure to high-intensity sweet stimuli suppresses sensitivity across the taste spectrum, compressing dynamic range for all flavors. After a full 10–14 day cycle without sugar overexposure, receptor sensitivity is normalized. At 2–3 weeks, users consistently report increased flavor complexity and reduced tolerance for previously acceptable sweetness levels.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "This long in, you're not making the decision not to eat sugar. You're simply living in a way where that's not on the table. That's a structural change, not a behavioral one.",
+                science: "Cognitive neuroscience distinguishes between deliberate inhibitory control — active suppression of a behavioral impulse — and structural abstention, where the behavior is not part of the active decision space. The former is effortful and depletes executive resources. The latter requires no effortful control. Research on long-term behavior change identifies this shift from effortful to structural as occurring, on average, between weeks 2 and 6. You are in or past this window.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "The inflammation that runs silently under everything — the kind linked to metabolic disease, cardiovascular risk, and accelerated aging — has been dropping for weeks. It doesn't announce itself. It just quietly resolves.",
+                science: "Chronic low-grade systemic inflammation, measured via C-reactive protein (CRP), interleukin-6 (IL-6), and TNF-alpha, is directly elevated by refined sugar and fructose intake through multiple pathways including hyperinsulinemia, gut permeability, and gut dysbiosis. Sustained sugar reduction shows statistically significant reductions in inflammatory biomarkers at 4–6 weeks. The change is silent because inflammation is largely asymptomatic — its resolution may show as improved energy, clearer thinking, or reduced joint discomfort.",
                 tier: .fourteenTo30Days
             ),
         ],
