@@ -83,9 +83,9 @@ extension NightcapDelegate: UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
         let id = response.notification.request.identifier
-        // Evening check-in notifications (any weekday variant) → open craving toolkit.
-        // Identifiers now follow the pattern "nightcap.evening.wdN" so check with prefix.
-        // Delay so SwiftUI views are mounted before receiving the notification.
+        // Evening check-in notifications → open craving toolkit.
+        // Identifiers follow "nightcap.evening.dN" (day-offset) or legacy "nightcap.evening.wdN";
+        // hasPrefix covers both. Delay so SwiftUI views are mounted before receiving the notification.
         if id.hasPrefix("nightcap.evening") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 NotificationCenter.default.post(name: .nightcapOpenCravingToolkit, object: nil)
