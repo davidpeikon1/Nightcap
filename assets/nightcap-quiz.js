@@ -221,7 +221,7 @@
   function updateProgress() {
     var percent = (currentStep / TOTAL_STEPS) * 100;
     progressBar.style.width = percent + '%';
-    progressText.textContent = 'Question ' + currentStep + ' of ' + TOTAL_STEPS;
+    if (progressText) progressText.textContent = 'Question ' + currentStep + ' of ' + TOTAL_STEPS;
 
     // ARIA
     progressBar.setAttribute('aria-valuenow', currentStep);

@@ -632,17 +632,11 @@
 
   // ---------- Sugar Equivalents ----------
   function populateEquivalents(dailySugar) {
-    var donuts = Math.round((dailySugar / 22) * 10) / 10; // 22g per glazed donut
-    var cookies = Math.round((dailySugar / 12) * 10) / 10; // 12g per cookie
-    var candyPerYear = Math.round((dailySugar * 365) / 27); // 27g per Snickers
-
-    var donutEl = document.getElementById('equiv-donuts');
-    var cookieEl = document.getElementById('equiv-cookies');
-    var candyEl = document.getElementById('equiv-candy');
-
-    if (donutEl) donutEl.textContent = donuts;
-    if (cookieEl) cookieEl.textContent = cookies;
-    if (candyEl) candyEl.textContent = candyPerYear.toLocaleString();
+    var el = document.getElementById('results-equivalent');
+    if (!el) return;
+    var donuts = Math.round((dailySugar / 22) * 10) / 10;
+    var candyPerYear = Math.round((dailySugar * 365) / 27);
+    el.textContent = "That\u2019s equivalent to " + donuts + " donuts every single day \u2014 or " + candyPerYear.toLocaleString() + " candy bars per year.";
   }
 
   // ---------- Personalized Next Steps ----------
