@@ -1049,6 +1049,12 @@ body::after {
   text-align: center;
 }
 
+.nc-results__stat--sep {
+  color: var(--nc-text-dim);
+  font-size: 1.5rem;
+  align-self: center;
+}
+
 .nc-results__stat-number {
   display: block;
   font-family: var(--nc-font-display);
@@ -1326,7 +1332,7 @@ body::after {
 
 /* ---------- Footer ---------- */
 .nc-footer {
-  padding: 60px 32px;
+  padding: 80px 32px 60px;
   border-top: 1px solid var(--nc-border);
   text-align: center;
 }
@@ -1336,14 +1342,16 @@ body::after {
   margin: 0 auto;
 }
 
-.nc-footer__brand .nc-logo {
-  margin-bottom: 0.5rem;
+.nc-footer .nc-logo {
+  margin-bottom: 1.5rem;
 }
 
 .nc-footer__tagline {
-  font-size: 0.85rem;
-  color: var(--nc-text-muted);
-  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.4;
+  margin-bottom: 2rem;
 }
 
 .nc-footer__links {
@@ -1354,15 +1362,18 @@ body::after {
 }
 
 .nc-footer__links a {
-  font-size: 0.8rem;
-  color: var(--nc-text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.35;
   text-decoration: none;
-  transition: color var(--nc-transition);
+  transition: opacity var(--nc-transition);
 }
 
 .nc-footer__links a:hover {
-  color: var(--nc-primary-light);
+  opacity: 0.7;
 }
+
 
 .nc-footer__links a:focus-visible {
   outline: 2px solid var(--nc-primary-light);
@@ -1370,9 +1381,11 @@ body::after {
 }
 
 .nc-footer__legal {
-  font-size: 0.7rem;
-  color: var(--nc-text-muted);
-  opacity: 0.6;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.25;
+  margin-top: 2rem;
 }
 
 /* ---------- Scroll Reveal ---------- */
@@ -1923,11 +1936,6 @@ body::after {
 
 .nc-exit-popup__close:hover {
   color: var(--nc-text);
-}
-
-.nc-exit-popup__icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
 }
 
 .nc-exit-popup__title {
@@ -2948,13 +2956,11 @@ body::after {
   </section>
 
   <!-- ===== SIGNUP ===== -->
-  <section class="nc-signup" id="waitlist-signup" aria-labelledby="signup-title">
+  <section class="nc-signup" id="waitlist-signup">
     <div class="nc-signup__container">
       <div class="nc-signup__header">
-        <h2 class="nc-signup__title" id="signup-title">Your Results Are Ready</h2>
-        <p class="nc-signup__subtitle">
-          Enter your info to see your personalized sugar report.
-        </p>
+        <h2 class="nc-signup__title">Almost there</h2>
+        <p class="nc-signup__subtitle">Enter your name and email to see your results.</p>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
         <div class="nc-form-group">
@@ -2965,7 +2971,7 @@ body::after {
         </div>
         <div class="nc-form-group">
           <input type="email" id="signup-email" name="email" class="nc-input"
-                 placeholder="Email address" required autocomplete="email"
+                 placeholder="Email" required autocomplete="email"
                  aria-describedby="email-error" aria-required="true">
           <span class="nc-input-error" id="email-error" aria-live="polite"></span>
         </div>
@@ -2975,7 +2981,7 @@ body::after {
             <span class="nc-spinner" aria-hidden="true"></span>
           </span>
         </button>
-        <p class="nc-signup__privacy">We respect your privacy. Unsubscribe anytime.</p>
+        <p class="nc-signup__privacy">No spam. Unsubscribe anytime.</p>
       </form>
     </div>
   </section>
@@ -2997,13 +3003,10 @@ body::after {
         <!-- Stats -->
         <div class="nc-results__breakdown">
           <div class="nc-results__stat">
-            <span class="nc-results__stat-number" id="results-daily-sugar">0g</span>
-            <span class="nc-results__stat-label">per day</span>
-          </div>
-          <div class="nc-results__stat">
             <span class="nc-results__stat-number" id="results-weekly-sugar">0g</span>
             <span class="nc-results__stat-label">per week</span>
           </div>
+          <div class="nc-results__stat nc-results__stat--sep">&middot;</div>
           <div class="nc-results__stat">
             <span class="nc-results__stat-number" id="results-yearly-sugar">0 lbs</span>
             <span class="nc-results__stat-label">per year</span>
@@ -3055,7 +3058,7 @@ body::after {
   <!-- ===== FOOTER ===== -->
   <footer class="nc-footer">
     <div class="nc-footer__container">
-      <div class="nc-logo nc-logo--sm" style="margin-bottom: 1.5rem;">
+      <div class="nc-logo nc-logo--sm">
         <div class="nc-logo__lines"></div>
         <span class="nc-logo__text">NIGHTCAP</span>
         <div class="nc-logo__lines"></div>
@@ -3075,21 +3078,20 @@ body::after {
     <div class="nc-exit-popup__overlay" id="exit-popup-overlay"></div>
     <div class="nc-exit-popup__card">
       <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close popup">&times;</button>
-      <div class="nc-exit-popup__icon" aria-hidden="true">&#9888;&#65039;</div>
-      <h3 class="nc-exit-popup__title" id="exit-popup-title">You're not alone in this</h3>
-      <p class="nc-exit-popup__desc">Leave your email — we'll send your sugar estimate and let you know when our tools are ready.</p>
+      <h3 class="nc-exit-popup__title" id="exit-popup-title">Before you go</h3>
+      <p class="nc-exit-popup__desc">Get your sugar estimate and early access to our tools.</p>
       <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
-        <input type="email" class="nc-input" id="exit-popup-email" placeholder="you@example.com" required aria-label="Email address">
-        <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Get My Report</button>
+        <input type="email" class="nc-input" id="exit-popup-email" placeholder="Email" required aria-label="Email">
+        <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Send My Estimate</button>
       </form>
-      <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button> for a more detailed breakdown.</p>
+      <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button></p>
     </div>
   </div>
 
   <!-- Sticky CTA (appears on scroll past hero) -->
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="nc-sticky-cta__inner">
-      <span class="nc-sticky-cta__text"><strong style="font-family: 'Playfair Display', Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase;">NIGHTCAP</strong> &mdash; Ready to see your real number?</span>
+      <span class="nc-sticky-cta__text"><strong style="font-family: var(--nc-font-display); letter-spacing: 0.12em; text-transform: uppercase;">NIGHTCAP</strong></span>
       <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the First Step &#8594;</button>
     </div>
   </div>

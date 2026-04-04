@@ -1025,6 +1025,12 @@ body::after {
   text-align: center;
 }
 
+.nc-results__stat--sep {
+  color: var(--nc-text-dim);
+  font-size: 1.5rem;
+  align-self: center;
+}
+
 .nc-results__stat-number {
   display: block;
   font-family: var(--nc-font-display);
@@ -1302,7 +1308,7 @@ body::after {
 
 /* ---------- Footer ---------- */
 .nc-footer {
-  padding: 60px 32px;
+  padding: 80px 32px 60px;
   border-top: 1px solid var(--nc-border);
   text-align: center;
 }
@@ -1312,14 +1318,16 @@ body::after {
   margin: 0 auto;
 }
 
-.nc-footer__brand .nc-logo {
-  margin-bottom: 0.5rem;
+.nc-footer .nc-logo {
+  margin-bottom: 1.5rem;
 }
 
 .nc-footer__tagline {
-  font-size: 0.85rem;
-  color: var(--nc-text-muted);
-  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.4;
+  margin-bottom: 2rem;
 }
 
 .nc-footer__links {
@@ -1330,15 +1338,18 @@ body::after {
 }
 
 .nc-footer__links a {
-  font-size: 0.8rem;
-  color: var(--nc-text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.35;
   text-decoration: none;
-  transition: color var(--nc-transition);
+  transition: opacity var(--nc-transition);
 }
 
 .nc-footer__links a:hover {
-  color: var(--nc-primary-light);
+  opacity: 0.7;
 }
+
 
 .nc-footer__links a:focus-visible {
   outline: 2px solid var(--nc-primary-light);
@@ -1346,9 +1357,11 @@ body::after {
 }
 
 .nc-footer__legal {
-  font-size: 0.7rem;
-  color: var(--nc-text-muted);
-  opacity: 0.6;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--nc-text);
+  opacity: 0.25;
+  margin-top: 2rem;
 }
 
 /* ---------- Scroll Reveal ---------- */
@@ -1899,11 +1912,6 @@ body::after {
 
 .nc-exit-popup__close:hover {
   color: var(--nc-text);
-}
-
-.nc-exit-popup__icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
 }
 
 .nc-exit-popup__title {
