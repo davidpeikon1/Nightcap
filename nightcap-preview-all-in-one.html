@@ -84,6 +84,19 @@ body {
   overflow-x: hidden;
 }
 
+/* Subtle noise texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+}
+
 /* ---------- Skip Link (A11y) ---------- */
 .nc-skip-link {
   position: absolute;
@@ -303,9 +316,10 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(200, 184, 154, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(200, 184, 154, 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, var(--nc-bg) 0%, #1f1f1f 100%);
+    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(200, 184, 154, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200, 184, 154, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 70%, rgba(200, 184, 154, 0.03) 0%, transparent 60%),
+    linear-gradient(180deg, var(--nc-bg) 0%, #141414 100%);
 }
 
 .nc-hero__stars {
@@ -374,9 +388,10 @@ body {
 }
 
 .nc-hero__cta-note {
-  margin-top: 12px;
-  font-size: 0.85rem;
-  color: var(--nc-text-muted);
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--nc-text-dim);
+  letter-spacing: 0.01em;
 }
 
 /* Countdown */
@@ -431,18 +446,18 @@ body {
 }
 
 .nc-avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--nc-primary), var(--nc-accent));
+  background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #fff;
-  border: 2px solid var(--nc-bg);
-  margin-left: -8px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--nc-primary);
+  margin-left: -6px;
 }
 
 .nc-avatar:first-child {
@@ -450,25 +465,26 @@ body {
 }
 
 .nc-hero__waitlist-count {
-  font-size: 0.9rem;
-  color: var(--nc-text-muted);
+  font-size: 0.8rem;
+  color: var(--nc-text-dim);
 }
 
 /* ---------- Scroll Hint ---------- */
 .nc-scroll-hint {
-  margin-top: 2rem;
+  margin-top: 3rem;
   text-align: center;
-  animation: nc-scrollBounce 2s ease-in-out infinite;
+  animation: nc-scrollBounce 2.5s ease-in-out infinite;
 }
 
 .nc-scroll-hint__arrow {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--nc-text-dim);
+  opacity: 0.5;
 }
 
 @keyframes nc-scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50% { transform: translateY(8px); opacity: 0.8; }
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(6px); opacity: 0.6; }
 }
 
 /* ---------- Return Banner ---------- */
@@ -1193,7 +1209,7 @@ body {
   background: var(--nc-primary);
   border: none;
   border-radius: var(--nc-radius);
-  color: #fff;
+  color: #161616;
   font-family: var(--nc-font);
   font-weight: 600;
   font-size: 0.85rem;
@@ -1410,15 +1426,26 @@ body {
   overflow: hidden;
 }
 
-.nc-why::before {
+/* Section dividers */
+.nc-why::before,
+.nc-how::before,
+.nc-proof::before,
+.nc-faq::before {
   content: '';
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
+  width: 60px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200, 184, 154, 0.3), transparent);
+  background: var(--nc-primary);
+  opacity: 0.25;
+}
+
+.nc-how,
+.nc-proof,
+.nc-faq {
+  position: relative;
 }
 
 .nc-why__container {
@@ -1521,17 +1548,9 @@ body {
 }
 
 .nc-how__step-number {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--nc-primary), var(--nc-primary-dark));
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px;
+  font-size: 2rem;
+  margin: 0 auto 14px;
+  line-height: 1;
 }
 
 .nc-how__step-icon {
@@ -1552,12 +1571,12 @@ body {
 }
 
 .nc-how__connector {
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--nc-primary), var(--nc-accent));
-  margin-top: 54px;
+  width: 32px;
+  height: 1px;
+  background: var(--nc-primary);
+  margin-top: 24px;
   flex-shrink: 0;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 /* ---------- Ingredients ---------- */
@@ -1663,7 +1682,7 @@ body {
 }
 
 .nc-proof__card {
-  padding: 28px;
+  padding: 32px;
   background: var(--nc-bg-card);
   border: 1px solid var(--nc-border);
   border-radius: var(--nc-radius);
@@ -1671,20 +1690,29 @@ body {
   flex-direction: column;
   gap: 16px;
   box-shadow: var(--nc-shadow-sm);
+  position: relative;
 }
 
-.nc-proof__stars {
-  color: #C8B89A;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
+.nc-proof__card::before {
+  content: '\201C';
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  font-family: var(--nc-font-display);
+  font-size: 4rem;
+  color: var(--nc-primary);
+  opacity: 0.15;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .nc-proof__quote {
   font-size: 0.9rem;
   color: var(--nc-text);
-  line-height: 1.6;
+  line-height: 1.7;
   font-style: italic;
   flex: 1;
+  padding-top: 8px;
 }
 
 .nc-proof__author {
@@ -1877,13 +1905,14 @@ body {
 
 .nc-exit-popup__card {
   position: relative;
-  max-width: 420px;
+  max-width: 400px;
   width: 100%;
   background: var(--nc-bg-card);
   border: 1px solid var(--nc-border);
   border-radius: var(--nc-radius-lg);
   padding: 2.5rem;
   text-align: center;
+  box-shadow: var(--nc-shadow-lg);
   animation: nc-popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -2431,12 +2460,12 @@ body {
   left: 0;
   right: 0;
   z-index: 9000;
-  background: rgba(10, 10, 18, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(22, 22, 22, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--nc-border);
-  padding: 12px 24px;
-  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 14px 32px;
+  transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nc-sticky-cta.visible {
