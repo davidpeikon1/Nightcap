@@ -58,6 +58,7 @@ struct HomeView: View {
             if let phase = store.phaseJustUnlocked {
                 Button {
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    store.phaseJustUnlocked = nil   // dismiss immediately so it can't re-appear after sheet closes
                     showPhaseDetail = phase
                 } label: {
                     PhaseUnlockToast(phase: phase)

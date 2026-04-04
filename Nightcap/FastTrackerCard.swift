@@ -18,6 +18,7 @@ struct ResetModal: View {
                 resetFormView
             }
         }
+        .animation(.easeInOut(duration: 0.28), value: didConfirm)
         .onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) }
     }
 

@@ -9,6 +9,7 @@ struct SettingsSheet: View {
     @State private var selectedGoal: UserGoal?
     @State private var notificationsOn: Bool = false
     @State private var notifStatus: UNAuthorizationStatus = .notDetermined
+    @State private var notifStatusLoaded = false
     @State private var showResetConfirm = false
     @State private var showResetOnboarding = false
     @State private var showExportSheet = false
@@ -175,7 +176,9 @@ struct SettingsSheet: View {
 
             Spacer()
 
-            switch notifStatus {
+            switch notifStatusLoaded ? notifStatus : nil {
+            case .none:
+                Color.clear.frame(width: 44, height: 31) // placeholder while status loads
             case .authorized:
                 Toggle("", isOn: $notificationsOn)
                     .tint(Color("NCAccent"))
@@ -344,8 +347,11 @@ struct SettingsSheet: View {
                             // exist separately and shouldn't drive this toggle.
                             let dailyIDs: Set<String> = ["nightcap.morning", "nightcap.evening"]
                             notificationsOn = reqs.contains { dailyIDs.contains($0.identifier) }
+                            notifStatusLoaded = true
                         }
                     }
+                } else {
+                    notifStatusLoaded = true
                 }
             }
         }

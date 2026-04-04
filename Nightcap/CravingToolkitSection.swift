@@ -110,6 +110,9 @@ struct CravingToolkitSection: View {
                         case nil:        EmptyView()
                         }
                     }
+                    .id(activeTool)
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.18), value: activeTool)
                     .padding(20)
                     .background(Color("NCSurface"))
                     .cornerRadius(16, corners: [.bottomLeft, .bottomRight])
@@ -256,7 +259,7 @@ struct ReframeCardTool: View {
                 .offset(x: dragOffset)
                 .gesture(
                     DragGesture()
-                        .onChanged { dragOffset = $0.translation.width }
+                        .onChanged { dragOffset = min(0, $0.translation.width) }
                         .onEnded { value in
                             if value.translation.width < -40 {
                                 nextCard()
@@ -484,6 +487,7 @@ struct LogCravingTool: View {
                 }
             }
         }
+        .animation(.easeInOut(duration: 0.22), value: logged)
     }
 
     private func triggerChip(_ trigger: CravingTrigger) -> some View {

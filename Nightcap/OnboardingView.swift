@@ -37,7 +37,13 @@ struct OnboardingView: View {
         .onChange(of: appState.onboardingStep) { _, step in
             showGoalSheet = (step == .goalSetting)
         }
-        .sheet(isPresented: $showGoalSheet) {
+        .sheet(isPresented: $showGoalSheet, onDismiss: {
+            // Safety fallback: if the sheet was dismissed without advancing, advance now
+            // so the user is never stranded on a non-interactive coachmark screen.
+            if appState.onboardingStep == .goalSetting {
+                appState.advance(to: .notifications)
+            }
+        }) {
             GoalSheet()
                 .interactiveDismissDisabled()
         }
@@ -94,6 +100,13 @@ struct HookScreen: View {
 
             Spacer()
         }
+        .onAppear {
+            // If the app was killed mid-onboarding after the date was already set,
+            // skip ahead rather than showing the hook buttons over a running clock.
+            if fastingStore.lastSugarDate != nil {
+                appState.advance(to: .timerCoachmark)
+            }
+        }
         .sheet(isPresented: $showCustomPicker, onDismiss: {
             // Advance to next step if the user saved a date via the picker.
             if fastingStore.lastSugarDate != nil {
@@ -110,7 +123,7 @@ struct HookScreen: View {
         Button {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             action()
-        }
+        } label: {
             Text(title)
                 .font(.system(size: 17, weight: .regular))
                 .foregroundStyle(Color("NCTextPrimary"))
@@ -300,6 +313,8 @@ struct GoalSheet: View {
 
 struct NotificationPermissionScreen: View {
     @EnvironmentObject var appState: AppState
+    @State private var isRequesting = false
+    @State private var alreadyDenied = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -329,18 +344,37 @@ struct NotificationPermissionScreen: View {
             Spacer()
 
             VStack(spacing: 16) {
-                Button {
-                    NotificationManager.shared.requestPermission { _ in
-                        appState.advance(to: .firstMilestone)
+                if alreadyDenied {
+                    Button {
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        Text("Open Settings to enable")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color("NCBackground"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(Color("NCWarning"))
+                            .cornerRadius(12)
                     }
-                } label: {
-                    Text("Turn on reminders")
-                        .font(.system(size: 17, weight: .medium))
-                        .foregroundStyle(Color("NCBackground"))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 18)
-                        .background(Color("NCAccent"))
-                        .cornerRadius(12)
+                } else {
+                    Button {
+                        guard !isRequesting else { return }
+                        isRequesting = true
+                        NotificationManager.shared.requestPermission { _ in
+                            appState.advance(to: .firstMilestone)
+                        }
+                    } label: {
+                        Text("Turn on reminders")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color("NCBackground"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(isRequesting ? Color("NCAccent").opacity(0.6) : Color("NCAccent"))
+                            .cornerRadius(12)
+                    }
+                    .disabled(isRequesting)
                 }
 
                 Button { appState.advance(to: .firstMilestone) } label: {
@@ -352,6 +386,16 @@ struct NotificationPermissionScreen: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 40)
+        }
+        .onAppear {
+            NotificationManager.shared.checkAuthorizationStatus { status in
+                if status == .authorized {
+                    // Already authorized — skip straight to next screen.
+                    appState.advance(to: .firstMilestone)
+                } else if status == .denied {
+                    alreadyDenied = true
+                }
+            }
         }
     }
 }

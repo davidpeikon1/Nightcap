@@ -639,7 +639,9 @@ class FastingStore: ObservableObject {
         let hasActiveFastData = isTracking && elapsedSeconds >= 86_400
         guard !recentResets.isEmpty || !recentCravings.isEmpty || hasActiveFastData else { return nil }
 
-        let longest = recentResets.map(\.fastDuration).max() ?? elapsedSeconds
+        // Include current fast in the longest comparison so an ongoing PB is reflected.
+        let allDurations = recentResets.map(\.fastDuration) + (isTracking ? [elapsedSeconds] : [])
+        let longest = allDurations.max() ?? elapsedSeconds
         let topTrigger = mostCommonTrigger(in: recentCravings)
 
         let copy = weeklyInsightCopy(

@@ -51,6 +51,7 @@ struct ProgressSection: View {
                                     } else if store.isTracking {
                                         selectedLockedBadge = badge
                                     }
+                                    // If not tracking: haptic fires but no sheet opens (intentional)
                                 }
                         }
                     }

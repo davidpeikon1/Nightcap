@@ -181,7 +181,7 @@ struct FastHistoryView: View {
     private var isPersonalBest: Bool {
         guard store.isTracking else { return false }
         let previousBest = store.resetEvents.map(\.fastDuration).max() ?? 0
-        return store.elapsedSeconds > previousBest && previousBest > 0
+        return store.elapsedSeconds > previousBest
     }
 
     private var currentFastRow: some View {
@@ -405,6 +405,7 @@ struct FastHistoryView: View {
         let h = Int(seconds) / 3600
         let d = h / 24
         let m = (Int(seconds) % 3600) / 60
+        if seconds < 60 { return "< 1 min fast" }
         if d > 0 { return "\(d)d \(h % 24)h \(m)m fast" }
         if h > 0 { return "\(h)h \(m)m fast" }
         return "\(m)m fast"
@@ -602,6 +603,7 @@ struct FastHistoryView: View {
             .padding(.horizontal, 2)
             .contextMenu {
                 Button(role: .destructive) {
+                    UINotificationFeedbackGenerator().notificationOccurred(.warning)
                     withAnimation {
                         store.deleteCravingLog(id: log.id)
                     }
