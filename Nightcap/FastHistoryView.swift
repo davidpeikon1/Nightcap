@@ -19,6 +19,9 @@ struct FastHistoryView: View {
                             chartCard
                         }
                         statsRow
+                        if let trend = trendInsightText {
+                            trendCard(trend)
+                        }
                         if store.isTracking || !store.resetEvents.isEmpty {
                             activityGrid
                         }
@@ -106,6 +109,29 @@ struct FastHistoryView: View {
         .cornerRadius(16)
     }
 
+    // MARK: - Trend Insight
+
+    /// Compares the 3 most recent completed fasts against the 3 before them.
+    /// Returns nil when there's insufficient data or the difference is trivial.
+    private var trendInsightText: String? {
+        let durations = store.resetEvents.map(\.fastDuration)
+        guard durations.count >= 4 else { return nil }
+        let recent = Array(durations.prefix(3))
+        let older  = Array(durations.dropFirst(3).prefix(3))
+        guard !older.isEmpty else { return nil }
+        let recentAvg = recent.reduce(0, +) / Double(recent.count)
+        let olderAvg  = older.reduce(0, +)  / Double(older.count)
+        let diffH = (recentAvg - olderAvg) / 3600
+        guard abs(diffH) >= 2 else { return nil }
+        if diffH > 0 {
+            let h = Int(diffH)
+            return "Your last \(recent.count) fasts averaged \(h)h longer than the \(older.count) before them. The trend is moving in the right direction."
+        } else {
+            let h = Int(-diffH)
+            return "Your recent fasts are averaging \(h)h shorter. Patterns usually have a cause worth logging."
+        }
+    }
+
     // MARK: - Stats Row
 
     private var statsRow: some View {
@@ -139,6 +165,23 @@ struct FastHistoryView: View {
                 statCard(value: totalText,                    label: "Time fasted")
             }
         }
+    }
+
+    private func trendCard(_ text: String) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: "chart.line.uptrend.xyaxis")
+                .font(.system(size: 14, weight: .light))
+                .foregroundStyle(Color("NCSuccess").opacity(0.7))
+                .padding(.top, 1)
+            Text(text)
+                .font(.system(size: 13, weight: .light))
+                .foregroundStyle(Color("NCTextSecondary"))
+                .lineSpacing(4)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(16)
+        .background(Color("NCSurface"))
+        .cornerRadius(12)
     }
 
     private func statCard(value: String, label: String) -> some View {

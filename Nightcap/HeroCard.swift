@@ -113,6 +113,23 @@ struct HeroCard: View {
         return store.elapsedSeconds > previousBest
     }
 
+    /// Seconds remaining until the user beats their personal best.
+    /// Returns nil when already past it, when there's no prior fast, or when more than 2 h away.
+    private var distanceToPB: TimeInterval? {
+        guard store.isTracking, !store.resetEvents.isEmpty else { return nil }
+        let best = store.resetEvents.map(\.fastDuration).max() ?? 0
+        let shortfall = best - store.elapsedSeconds
+        guard shortfall > 0, shortfall <= 7_200 else { return nil }
+        return shortfall
+    }
+
+    private func pbApproachLabel(_ shortfall: TimeInterval) -> String {
+        let h = Int(shortfall) / 3600
+        let m = max(1, (Int(shortfall) % 3600) / 60)
+        if h > 0 { return "\(h)H \(m)M TO PB" }
+        return "\(m)M TO PB"
+    }
+
     private var trackingSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center) {
@@ -131,6 +148,16 @@ struct HeroCard: View {
                         .padding(.horizontal, 7)
                         .padding(.vertical, 3)
                         .background(Color("NCSuccess").opacity(0.12))
+                        .cornerRadius(4)
+                        .transition(.scale(scale: 0.8).combined(with: .opacity))
+                } else if let shortfall = distanceToPB {
+                    Text(pbApproachLabel(shortfall))
+                        .font(.system(size: 9, weight: .semibold))
+                        .tracking(1)
+                        .foregroundStyle(Color("NCWarning"))
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 3)
+                        .background(Color("NCWarning").opacity(0.12))
                         .cornerRadius(4)
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 }

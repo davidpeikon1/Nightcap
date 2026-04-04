@@ -38,6 +38,38 @@ struct ResetModal: View {
         return "Starting fresh."
     }
 
+    /// Detects if the current reset is happening during a time-of-day or weekday
+    /// pattern that has shown up before — surfaces the pattern without lecturing.
+    private var timingPatternNote: String? {
+        let resets = store.resetEvents
+        guard resets.count >= 3 else { return nil }
+        let cal  = Calendar.current
+        let hour = cal.component(.hour, from: Date())
+
+        // Evening window (6pm–11pm) — the highest-risk window for most users.
+        if (18...23).contains(hour) {
+            let eveningCount = resets.filter {
+                (18...23).contains(cal.component(.hour, from: $0.date))
+            }.count
+            if eveningCount >= 2, eveningCount * 2 >= resets.count {
+                return "\(eveningCount) of your \(resets.count) resets happened in the evening. This is that window."
+            }
+        }
+
+        // Weekday pattern — same day of week appearing 2+ times out of 4+ total.
+        let weekday = cal.component(.weekday, from: Date())
+        let sameWeekdayCount = resets.filter {
+            cal.component(.weekday, from: $0.date) == weekday
+        }.count
+        if sameWeekdayCount >= 2, resets.count >= 4, sameWeekdayCount * 3 >= resets.count {
+            let days = ["", "Sundays", "Mondays", "Tuesdays", "Wednesdays",
+                        "Thursdays", "Fridays", "Saturdays"]
+            return "\(sameWeekdayCount) of your \(resets.count) resets have happened on \(days[weekday]). Worth noting."
+        }
+
+        return nil
+    }
+
     /// Context-aware body copy based on how long the current fast ran.
     private var resetSubtitle: String {
         let h = store.elapsedSeconds / 3600
@@ -100,6 +132,22 @@ struct ResetModal: View {
                     .padding(.top, 2)
                     .transition(.opacity)
                     .animation(.easeInOut(duration: 0.2), value: note.count > 80)
+                }
+            }
+
+            // Timing pattern — shows if this reset fits a recurring time-of-day or
+            // weekday pattern. Informs rather than shames; tertiary color matches tone.
+            if let pattern = timingPatternNote {
+                HStack(alignment: .top, spacing: 12) {
+                    Rectangle()
+                        .fill(Color("NCWarning").opacity(0.4))
+                        .frame(width: 2)
+                        .cornerRadius(1)
+                    Text(pattern)
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
 

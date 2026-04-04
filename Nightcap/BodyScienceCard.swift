@@ -72,6 +72,16 @@ struct BodyScienceCard: View {
 
                     // Phase journey mini-strip
                     phaseStrip
+
+                    // Approaching-next-phase callout — Zeigarnik: the open loop
+                    // of an almost-reached milestone keeps it salient.
+                    if let callout = nextPhaseCallout {
+                        Text(callout)
+                            .font(.system(size: 12, weight: .light))
+                            .foregroundStyle(Color("NCSuccess").opacity(0.8))
+                            .padding(.top, 4)
+                            .transition(.opacity)
+                    }
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
@@ -93,6 +103,22 @@ struct BodyScienceCard: View {
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
+    }
+
+    /// Returns a short callout when the next phase is within 4 hours.
+    /// Nil in Freedom phase (no next phase) and when more than 4 h away.
+    private var nextPhaseCallout: String? {
+        let phase = store.fastingPhase
+        guard phase != .freedom else { return nil }
+        let remaining = phase.nextThreshold - store.elapsedSeconds
+        guard remaining > 0, remaining <= 14_400 else { return nil }
+        let phases = FastingPhase.allCases
+        guard let idx = phases.firstIndex(of: phase), idx + 1 < phases.count else { return nil }
+        let next = phases[idx + 1]
+        let h = Int(remaining) / 3600
+        let m = max(1, (Int(remaining) % 3600) / 60)
+        let label = h > 0 ? "\(h)h \(m)m" : "\(m)m"
+        return "\(label) to \(next.rawValue)."
     }
 
     private var phaseStrip: some View {
