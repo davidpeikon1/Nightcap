@@ -150,7 +150,7 @@ struct HeroCard: View {
             // Show the previous fast's duration for the first 30 minutes after a reset.
             // Reframes the reset as data rather than leaving that moment in silence.
             if store.elapsedSeconds < 1_800, let lastReset = store.resetEvents.first {
-                Text("Previous fast: \(formatFastDuration(lastReset.fastDuration)). That's data, not failure.")
+                Text("Previous fast: \(formatFastDuration(lastReset.fastDuration)). \(previousFastSuffix(lastReset.fastDuration))")
                     .font(.system(size: 13, weight: .light))
                     .foregroundStyle(Color("NCTextTertiary"))
                     .lineSpacing(3)
@@ -291,6 +291,15 @@ struct HeroCard: View {
         if h > 0 { return "\(h) hour\(h == 1 ? "" : "s"), \(m) minute\(m == 1 ? "" : "s")" }
         if m > 0 { return "\(m) minute\(m == 1 ? "" : "s"), \(s) second\(s == 1 ? "" : "s")" }
         return "\(s) second\(s == 1 ? "" : "s")"
+    }
+
+    /// Context-aware suffix for the "Previous fast: X" post-reset message.
+    private func previousFastSuffix(_ seconds: TimeInterval) -> String {
+        let h = seconds / 3600
+        if h >= 336 { return "That streak changed your biology. It doesn't reverse overnight." }
+        if h >= 168 { return "A week or more before the reset. The biology of those days is still in your system." }
+        if h >= 24  { return "A full day before the reset. Every hour counted." }
+        return "That's data, not failure."
     }
 
     private func formatFastDuration(_ seconds: TimeInterval) -> String {
