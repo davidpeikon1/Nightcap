@@ -22,6 +22,23 @@ struct ResetModal: View {
         .onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) }
     }
 
+    /// Context-aware body copy based on how long the current fast ran.
+    private var resetSubtitle: String {
+        let h = store.elapsedSeconds / 3600
+        switch h {
+        case ..<1:
+            return "Everyone resets. The first hour is the highest-risk window — and you made it this far."
+        case 1..<24:
+            return "A few hours in. The fast showed you where the hard moments are. That's data worth keeping."
+        case 24..<72:
+            return "Every reset is information. What triggered this one is worth noting before you clock back in."
+        case 72..<336:
+            return "Days in and then a reset — that's where the behavioral pattern lives. The note field is worth using."
+        default:
+            return "That was a real streak. What you built in those days doesn't reverse overnight — the biology doesn't work that way."
+        }
+    }
+
     private var resetFormView: some View {
         VStack(alignment: .leading, spacing: 28) {
             VStack(alignment: .leading, spacing: 8) {
@@ -29,7 +46,7 @@ struct ResetModal: View {
                     .font(.system(size: 24, weight: .light))
                     .foregroundStyle(Color("NCTextPrimary"))
 
-                Text("Everyone resets. The fact that you're tracking it puts you ahead of most people.")
+                Text(resetSubtitle)
                     .font(.system(size: 15))
                     .foregroundStyle(Color("NCTextSecondary"))
                     .lineSpacing(4)
