@@ -172,6 +172,22 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         }
     }
 
+    /// Anti-licensing line shown in MilestoneSheet — counters "I've earned a break" thinking.
+    /// Badge-specific so it doesn't feel generic on repeat milestone views.
+    var antiLicensingText: String {
+        switch self {
+        case .firstHour:   return "The craving window is closed. Keep the clock running."
+        case .firstDay:    return "24 hours in. The streak is still running."
+        case .threeDays:   return "The hard part is behind you. The clock is still running."
+        case .oneWeek:     return "Seven days. The biology is already different. Keep it going."
+        case .twoWeeks:    return "Two weeks. You've crossed the threshold most people never reach."
+        case .oneMonth:    return "A month. The dopamine receptors are recovering. The clock is still running."
+        case .hundredDays: return "100 days. This is identity now. The clock is still running."
+        case .sixMonths:   return "Six months. The compound interest keeps accumulating."
+        case .oneYear:     return "A year. This is who you are now. The clock is still running."
+        }
+    }
+
     /// The dismiss button label shown when this badge is still locked.
     var lockedDismissText: String {
         switch self {

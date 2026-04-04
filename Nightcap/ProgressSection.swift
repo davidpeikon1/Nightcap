@@ -428,8 +428,9 @@ struct MilestoneSheet: View {
                     .lineSpacing(4)
                     .padding(.horizontal, 32)
 
-                // Licensing effect — counter "I've earned a break" thinking at milestone moments
-                Text("The streak is still running.")
+                // Licensing effect — counter "I've earned a break" thinking at milestone moments.
+                // Badge-specific so it doesn't feel generic on repeat milestone views.
+                Text(badge.antiLicensingText)
                     .font(.system(size: 12, weight: .light))
                     .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
                     .multilineTextAlignment(.center)
