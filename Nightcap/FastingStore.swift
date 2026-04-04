@@ -455,12 +455,16 @@ class FastingStore: ObservableObject {
          Keys.earnedBadges, Keys.cravingLogs, Keys.resetEvents, Keys.lastKnownPhase
         ].forEach { defaults.removeObject(forKey: $0) }
         defaults.removeObject(forKey: "bestFastDuration")
-        // Cancel all pending milestone and PB notifications.
-        let ids = BadgeID.allCases.flatMap {
+        // Cancel all pending milestone, PB, streak, and personalized notifications.
+        var ids = BadgeID.allCases.flatMap {
             ["nightcap.milestone.\($0.rawValue)",
              "nightcap.milestone.future.\($0.rawValue)",
              "nightcap.milestone.approach.\($0.rawValue)"]
         }
+        // Streak milestone identifiers
+        ids += [3, 7, 14, 30, 100].map { "nightcap.streak.\($0)" }
+        // Personalized peak-craving notifications (14-day rolling window)
+        ids += (0..<14).map { "nightcap.personalized.d\($0)" }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
         NotificationManager.shared.clearPersonalBestNotifications()
         WidgetCenter.shared.reloadAllTimelines()
