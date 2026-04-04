@@ -1,6 +1,6 @@
 <section class="nc-proof nc-reveal" id="social-proof" aria-labelledby="proof-title">
   <div class="nc-proof__container">
-    <h2 class="nc-proof__title" id="proof-title">Early Testers Are Already Obsessed</h2>
+    <h2 class="nc-proof__title" id="proof-title">What People Say After Taking the Quiz</h2>
     <div class="nc-proof__grid">
       {% for block in section.blocks %}
         <div class="nc-proof__card nc-reveal nc-reveal--delay-{{ forloop.index }}">
@@ -16,22 +16,12 @@
         </div>
       {% endfor %}
     </div>
-    <div class="nc-proof__press">
-      <span class="nc-proof__press-label">Featured in</span>
-      <div class="nc-proof__press-logos">
-        <span class="nc-proof__press-logo">Well+Good</span>
-        <span class="nc-proof__press-logo">mindbodygreen</span>
-        <span class="nc-proof__press-logo">Shape</span>
-        <span class="nc-proof__press-logo">Men's Health</span>
-      </div>
-    </div>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Social Proof",
-  "settings": [],
   "blocks": [
     {
       "type": "testimonial",
@@ -39,7 +29,7 @@
       "settings": [
         { "type": "textarea", "id": "quote", "label": "Quote" },
         { "type": "text", "id": "name", "label": "Name", "default": "Sarah M." },
-        { "type": "text", "id": "detail", "label": "Detail", "default": "Beta Tester" }
+        { "type": "text", "id": "detail", "label": "Detail", "default": "Quiz Taker" }
       ]
     }
   ],
@@ -47,9 +37,9 @@
     {
       "name": "Social Proof",
       "blocks": [
-        { "type": "testimonial", "settings": { "quote": "I used to have wine every night to unwind. Nightcap replaced that completely. I sleep deeper and wake up feeling amazing.", "name": "Sarah M.", "detail": "Beta Tester · NYC" } },
-        { "type": "testimonial", "settings": { "quote": "As someone who tracks macros, this is a game changer. Zero sugar, actually works, and tastes like something I'd order at a bar.", "name": "David K.", "detail": "Beta Tester · Austin" } },
-        { "type": "testimonial", "settings": { "quote": "My Oura ring data doesn't lie — deep sleep went up 22% the first week I switched to Nightcap. Nothing else changed.", "name": "Michelle T.", "detail": "Beta Tester · LA" } }
+        { "type": "testimonial", "settings": { "quote": "I thought I was eating healthy. Turns out my 'healthy' granola, oat milk, and kombucha add up to 68g of sugar a day. This quiz was a wake-up call.", "name": "Sarah M.", "detail": "Quiz Taker · NYC" } },
+        { "type": "testimonial", "settings": { "quote": "Seeing my yearly number — 47 lbs of processed sugar — hit different. I started reading labels the next day. That awareness alone changed my habits.", "name": "David K.", "detail": "Quiz Taker · Austin" } },
+        { "type": "testimonial", "settings": { "quote": "I sent this to my whole family. My dad had no idea his 'heart-healthy' orange juice was giving him 30g of sugar every morning. He stopped that week.", "name": "Michelle T.", "detail": "Quiz Taker · LA" } }
       ]
     }
   ]

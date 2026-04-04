@@ -6,44 +6,28 @@
     <div class="nc-hero__stars"></div>
   </div>
   <div class="nc-hero__content">
-    <div class="nc-badge" aria-label="Coming Soon">Coming Soon</div>
+    <div class="nc-logo" aria-label="Nightcap">
+      <div class="nc-logo__lines"></div>
+      <span class="nc-logo__text">NIGHTCAP</span>
+      <div class="nc-logo__lines"></div>
+    </div>
+
     <h1 class="nc-hero__title" id="hero-title">
-      <span class="nc-hero__title-line">{{ section.settings.headline_line1 | default: 'Wind Down' }}</span>
-      <span class="nc-hero__title-line nc-hero__title-line--accent">{{ section.settings.headline_line2 | default: 'Without the Sugar Crash' }}</span>
+      <span class="nc-hero__title-line">How Much Processed Sugar</span>
+      <span class="nc-hero__title-line nc-hero__title-line--accent">Are You Really Consuming?</span>
     </h1>
     <p class="nc-hero__subtitle">
-      {{ section.settings.subheadline | default: 'Nightcap is a new kind of evening beverage — crafted to help you relax, recover, and sleep better. Zero sugar. Real ingredients. No compromises.' }}
+      200 years ago, Americans consumed 1 pound of sugar per year.
+      Today it's 152 pounds. Most people have no idea how much they're actually eating.
+      Find out in 60 seconds.
     </p>
-
-    <!-- Countdown Timer -->
-    <div class="nc-countdown" id="launch-countdown" aria-label="Countdown to launch">
-      <div class="nc-countdown__block">
-        <span class="nc-countdown__number" aria-label="Days">--</span>
-        <span class="nc-countdown__label">Days</span>
-      </div>
-      <span class="nc-countdown__separator" aria-hidden="true">:</span>
-      <div class="nc-countdown__block">
-        <span class="nc-countdown__number" aria-label="Hours">--</span>
-        <span class="nc-countdown__label">Hours</span>
-      </div>
-      <span class="nc-countdown__separator" aria-hidden="true">:</span>
-      <div class="nc-countdown__block">
-        <span class="nc-countdown__number" aria-label="Minutes">--</span>
-        <span class="nc-countdown__label">Min</span>
-      </div>
-      <span class="nc-countdown__separator" aria-hidden="true">:</span>
-      <div class="nc-countdown__block">
-        <span class="nc-countdown__number" aria-label="Seconds">--</span>
-        <span class="nc-countdown__label">Sec</span>
-      </div>
-    </div>
 
     <div class="nc-hero__cta-group">
       <button class="nc-btn nc-btn--primary nc-btn--pulse" id="start-quiz-btn" aria-label="Start the Sugar Quiz">
         Take the Sugar Quiz
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-hero__cta-note">60 seconds. Zero judgement. Real data.</p>
+      <p class="nc-hero__cta-note">60 seconds. No sign-up required. See your real number.</p>
     </div>
     <div class="nc-hero__social-proof">
       <div class="nc-hero__avatars" aria-hidden="true">
@@ -53,7 +37,7 @@
         <div class="nc-avatar">+</div>
       </div>
       <span class="nc-hero__waitlist-count">
-        <strong id="waitlist-count">{{ section.settings.waitlist_count | default: '2,847' }}</strong> people on the waitlist
+        <strong id="waitlist-count">{{ section.settings.quiz_count | default: '2,847' }}</strong> people have taken the quiz
       </span>
     </div>
   </div>
@@ -65,26 +49,8 @@
   "settings": [
     {
       "type": "text",
-      "id": "headline_line1",
-      "label": "Headline Line 1",
-      "default": "Wind Down"
-    },
-    {
-      "type": "text",
-      "id": "headline_line2",
-      "label": "Headline Line 2 (gradient)",
-      "default": "Without the Sugar Crash"
-    },
-    {
-      "type": "textarea",
-      "id": "subheadline",
-      "label": "Sub-headline",
-      "default": "Nightcap is a new kind of evening beverage — crafted to help you relax, recover, and sleep better. Zero sugar. Real ingredients. No compromises."
-    },
-    {
-      "type": "text",
-      "id": "waitlist_count",
-      "label": "Waitlist Count (display)",
+      "id": "quiz_count",
+      "label": "Quiz Count (display)",
       "default": "2,847"
     }
   ]

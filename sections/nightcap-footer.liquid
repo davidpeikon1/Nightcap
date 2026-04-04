@@ -4,20 +4,20 @@
   <div class="nc-exit-popup__card">
     <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close popup">&times;</button>
     <div class="nc-exit-popup__icon" aria-hidden="true">&#9888;&#65039;</div>
-    <h3 class="nc-exit-popup__title" id="exit-popup-title">Wait — you didn't find out your number!</h3>
-    <p class="nc-exit-popup__desc">Enter your email and we'll send your personalized sugar report — no quiz needed.</p>
+    <h3 class="nc-exit-popup__title" id="exit-popup-title">You didn't find out your number</h3>
+    <p class="nc-exit-popup__desc">Americans consume 152 lbs of processed sugar per year. Enter your email and we'll send you a personalized estimate of yours.</p>
     <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
       <input type="email" class="nc-input" id="exit-popup-email" placeholder="you@example.com" required aria-label="Email address">
-      <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Get My Report</button>
+      <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Send My Estimate</button>
     </form>
-    <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button> for a more detailed breakdown.</p>
+    <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button> for a detailed breakdown.</p>
   </div>
 </div>
 
 <!-- Sticky CTA -->
 <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
   <div class="nc-sticky-cta__inner">
-    <span class="nc-sticky-cta__text"><strong>Nightcap</strong> &mdash; Join <span id="sticky-count">{{ section.settings.waitlist_count | default: '2,847' }}</span> on the waitlist</span>
+    <span class="nc-sticky-cta__text"><strong style="font-family: 'Playfair Display', Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase;">NIGHTCAP</strong> &mdash; See your processed sugar number</span>
     <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
   </div>
 </div>
@@ -28,8 +28,12 @@
 <footer class="nc-footer">
   <div class="nc-footer__container">
     <div class="nc-footer__brand">
-      <h3 class="nc-footer__logo">Nightcap</h3>
-      <p class="nc-footer__tagline">The better way to wind down.</p>
+      <div class="nc-logo nc-logo--sm">
+        <div class="nc-logo__lines"></div>
+        <span class="nc-logo__text">NIGHTCAP</span>
+        <div class="nc-logo__lines"></div>
+      </div>
+      <p class="nc-footer__tagline">Helping America eliminate processed sugar.</p>
     </div>
     <div class="nc-footer__links">
       <a href="/pages/privacy">Privacy Policy</a>
@@ -38,21 +42,10 @@
     </div>
     <p class="nc-footer__legal">
       &copy; {{ 'now' | date: '%Y' }} Nightcap. All rights reserved.
-      These statements have not been evaluated by the FDA.
     </p>
   </div>
 </footer>
 
 {% schema %}
-{
-  "name": "Nightcap Footer",
-  "settings": [
-    {
-      "type": "text",
-      "id": "waitlist_count",
-      "label": "Waitlist Count (display)",
-      "default": "2,847"
-    }
-  ]
-}
+{ "name": "Footer", "settings": [] }
 {% endschema %}

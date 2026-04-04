@@ -2,10 +2,10 @@
   <div class="nc-signup__container">
     <div class="nc-signup__header">
       <div class="nc-signup__icon" aria-hidden="true">&#127881;</div>
-      <h2 class="nc-signup__title" id="signup-title">Your Results Are Ready!</h2>
+      <h2 class="nc-signup__title" id="signup-title">Your Results Are Ready</h2>
       <p class="nc-signup__subtitle">
-        Enter your info below to see your personalized sugar report
-        and get early access to Nightcap.
+        Enter your info to see your personalized sugar report
+        and get access to tools that help you reduce processed sugar.
       </p>
     </div>
     <form id="waitlist-form" class="nc-signup__form" novalidate>
@@ -26,7 +26,7 @@
       <div class="nc-form-group">
         <label class="nc-label" for="signup-phone">
           Phone Number
-          <span class="nc-label__badge">Get a text when we launch</span>
+          <span class="nc-label__badge">Get a text when the app launches</span>
         </label>
         <input type="tel" id="signup-phone" name="phone" class="nc-input"
                placeholder="(555) 123-4567" autocomplete="tel"
@@ -38,7 +38,7 @@
           <input type="checkbox" id="sms-consent" name="sms_consent" checked>
           <span class="nc-checkbox__mark" aria-hidden="true"></span>
           <span class="nc-checkbox__text">
-            Yes, text me my results + a link to download the Nightcap app.
+            Yes, text me my results and a link to the Nightcap app.
             <span class="nc-checkbox__legal">Msg &amp; data rates may apply. Reply STOP to unsubscribe.</span>
           </span>
         </label>
@@ -47,11 +47,11 @@
         <label class="nc-checkbox">
           <input type="checkbox" id="email-consent" name="email_consent" checked>
           <span class="nc-checkbox__mark" aria-hidden="true"></span>
-          <span class="nc-checkbox__text">Send me early access updates and exclusive offers via email.</span>
+          <span class="nc-checkbox__text">Send me sugar reduction tips and early access updates.</span>
         </label>
       </div>
       <button type="submit" class="nc-btn nc-btn--primary nc-btn--full" id="signup-submit-btn">
-        <span class="nc-btn__text">See My Results &amp; Join Waitlist</span>
+        <span class="nc-btn__text">See My Results</span>
         <span class="nc-btn__loading" style="display: none;" role="status">
           <span class="nc-spinner" aria-hidden="true"></span>
           <span>Saving...</span>
@@ -63,8 +63,5 @@
 </section>
 
 {% schema %}
-{
-  "name": "Waitlist Signup",
-  "settings": []
-}
+{ "name": "Signup Form", "settings": [] }
 {% endschema %}

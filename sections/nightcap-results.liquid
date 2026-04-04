@@ -5,8 +5,8 @@
         <svg viewBox="0 0 120 120" class="nc-results__ring-svg" role="img" aria-label="Sugar intake ring chart">
           <defs>
             <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#7c3aed"/>
-              <stop offset="100%" stop-color="#06d6a0"/>
+              <stop offset="0%" stop-color="#C8B89A"/>
+              <stop offset="100%" stop-color="#A89878"/>
             </linearGradient>
           </defs>
           <circle cx="60" cy="60" r="54" class="nc-results__ring-bg"/>
@@ -16,13 +16,13 @@
           <span id="results-sugar-grams">0</span>g
         </div>
       </div>
-      <h2 class="nc-results__title" id="results-title">Your Daily Sugar Snapshot</h2>
+      <h2 class="nc-results__title" id="results-title">Your Processed Sugar Report</h2>
       <p class="nc-results__subtitle" id="results-subtitle"></p>
 
       <div class="nc-results__breakdown">
         <div class="nc-results__stat">
           <span class="nc-results__stat-number" id="results-daily-sugar">0g</span>
-          <span class="nc-results__stat-label">Daily sugar from drinks</span>
+          <span class="nc-results__stat-label">Daily processed sugar</span>
         </div>
         <div class="nc-results__stat">
           <span class="nc-results__stat-number" id="results-weekly-sugar">0g</span>
@@ -47,23 +47,23 @@
             </div>
           </div>
           <div class="nc-compare__row">
-            <span class="nc-compare__label">Average American</span>
+            <span class="nc-compare__label">Avg. American</span>
             <div class="nc-compare__bar-track">
               <div class="nc-compare__bar nc-compare__bar--avg" style="width: 0%">
-                <span class="nc-compare__bar-value">77g</span>
+                <span class="nc-compare__bar-value">190g</span>
               </div>
             </div>
           </div>
           <div class="nc-compare__row">
-            <span class="nc-compare__label">Nightcap Drinker</span>
+            <span class="nc-compare__label">Recommended</span>
             <div class="nc-compare__bar-track">
               <div class="nc-compare__bar nc-compare__bar--nc" style="width: 0%">
-                <span class="nc-compare__bar-value">0g</span>
+                <span class="nc-compare__bar-value">&lt;25g</span>
               </div>
             </div>
           </div>
         </div>
-        <p class="nc-compare__footnote">Daily sugar from beverages (grams)</p>
+        <p class="nc-compare__footnote">Daily processed sugar intake (grams)</p>
       </div>
 
       <div class="nc-results__insight" id="results-insight">
@@ -72,16 +72,16 @@
       </div>
     </div>
 
-    <!-- Shareable Results Card -->
+    <!-- Share Card -->
     <div class="nc-share-card" id="share-card">
       <div class="nc-share-card__inner" id="share-card-inner">
         <div class="nc-share-card__header">
-          <span class="nc-share-card__logo">Nightcap</span>
+          <span class="nc-share-card__logo">NIGHTCAP</span>
           <span class="nc-share-card__badge">Sugar Quiz Results</span>
         </div>
         <div class="nc-share-card__body">
           <div class="nc-share-card__big-number" id="share-card-sugar">0g</div>
-          <div class="nc-share-card__label">sugar per day from drinks</div>
+          <div class="nc-share-card__label">processed sugar per day</div>
           <div class="nc-share-card__divider"></div>
           <div class="nc-share-card__stats">
             <div class="nc-share-card__stat">
@@ -95,58 +95,56 @@
           </div>
         </div>
         <div class="nc-share-card__footer">
-          <span>Take the quiz: nightcap.com/quiz</span>
+          <span>Find out yours: nightcap.com/quiz</span>
         </div>
       </div>
       <button class="nc-btn nc-btn--outline nc-btn--sm nc-share-card__save" id="save-share-card">&#128247; Save &amp; Share on Stories</button>
     </div>
 
+    <!-- CTA -->
     <div class="nc-results__cta-card">
-      <h3 class="nc-results__cta-title">Nightcap: Your Better Evening Ritual</h3>
+      <h3 class="nc-results__cta-title">Ready to Take Control?</h3>
       <ul class="nc-results__benefits">
-        <li>&#10003; 0g sugar — naturally sweetened</li>
-        <li>&#10003; Functional ingredients for relaxation &amp; sleep</li>
-        <li>&#10003; Replaces sugary evening drinks</li>
-        <li>&#10003; Tastes incredible — not like "health food"</li>
+        <li>&#10003; Track your daily processed sugar intake</li>
+        <li>&#10003; Spot hidden sugar sources in your diet</li>
+        <li>&#10003; Set reduction goals and build new habits</li>
+        <li>&#10003; Join a community eliminating processed sugar</li>
       </ul>
       <div class="nc-results__cta-actions">
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">&#128242; Get the Nightcap App</button>
-        <p class="nc-results__cta-note" id="results-sms-note">We'll also text you a personalized download link!</p>
+        <p class="nc-results__cta-note" id="results-sms-note">We'll text you a link to start tracking.</p>
       </div>
     </div>
 
-    <!-- Referral System -->
+    <!-- Referral -->
     <div class="nc-results__referral">
-      <h3 class="nc-results__referral-title">Move Up the Waitlist</h3>
-      <p class="nc-results__referral-subtitle">Share your unique link. Each friend who signs up bumps you 10 spots.</p>
+      <h3 class="nc-results__referral-title">Help Someone Else See Their Number</h3>
+      <p class="nc-results__referral-subtitle">Share the quiz. The first step to change is awareness — and you can give that to someone you care about.</p>
       <div class="nc-referral-link">
         <input type="text" class="nc-referral-link__input" id="referral-url" readonly aria-label="Your referral link">
         <button class="nc-referral-link__copy" id="referral-copy-btn" aria-label="Copy referral link">Copy</button>
       </div>
       <div class="nc-referral-socials">
         <button class="nc-referral-socials__btn" id="share-twitter" aria-label="Share on Twitter">&#120143; Post</button>
-        <button class="nc-referral-socials__btn" id="share-sms" aria-label="Share via text message">&#128172; Text a Friend</button>
+        <button class="nc-referral-socials__btn" id="share-sms" aria-label="Share via text">&#128172; Text a Friend</button>
         <button class="nc-referral-socials__btn" id="share-email" aria-label="Share via email">&#9993; Email</button>
       </div>
     </div>
 
     <div class="nc-results__share">
-      <p class="nc-results__share-label">Think a friend needs to see their sugar intake?</p>
+      <p class="nc-results__share-label">Know someone who needs to see their number?</p>
       <div class="nc-results__share-buttons">
         <button class="nc-btn nc-btn--outline nc-btn--sm" id="share-quiz-btn">Share the Quiz</button>
       </div>
     </div>
 
     <div class="nc-results__position">
-      <p>You're <strong>#<span id="results-position">2,848</span></strong> on the waitlist</p>
-      <p class="nc-results__position-note">Refer friends to move up!</p>
+      <p><strong><span id="results-position">2,848</span></strong> people are working to eliminate processed sugar</p>
+      <p class="nc-results__position-note">You're one of them now.</p>
     </div>
   </div>
 </section>
 
 {% schema %}
-{
-  "name": "Quiz Results",
-  "settings": []
-}
+{ "name": "Quiz Results", "settings": [] }
 {% endschema %}

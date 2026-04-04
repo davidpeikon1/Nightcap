@@ -1,273 +1,139 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Your Sugar Quiz Results — Nightcap</title>
+  <title>Your Sugar Report — Nightcap</title>
   <!--
-    KLAVIYO PERSONALIZED WELCOME EMAIL
-    ===================================
+    KLAVIYO DAY 0 — PERSONALIZED SUGAR REPORT
     Triggered by: "Joined Waitlist" event
-    Available variables (from quiz_data profile properties):
-      {{ first_name }}
-      {{ quiz_estimated_daily_sugar }}
-      {{ quiz_estimated_weekly_sugar }}
-      {{ quiz_estimated_yearly_sugar_lbs }}
-      {{ quiz_motivation }}
-      {{ quiz_sleep_quality }}
-      {{ quiz_evening_drink }}
-      {{ app_download_url }}
-
-    Setup in Klaviyo:
-    1. Create a Flow triggered by "Joined Waitlist" metric
-    2. Use this HTML as the email template
-    3. Personalization variables map to profile properties
+    Variables: {{ first_name }}, {{ quiz_estimated_daily_sugar }},
+    {{ quiz_estimated_weekly_sugar }}, {{ quiz_estimated_yearly_sugar_lbs }},
+    {{ quiz_motivation }}, {{ app_download_url }}
   -->
   <style>
-    /* Reset */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
-    body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; }
-
-    /* Dark mode support */
-    @media (prefers-color-scheme: dark) {
-      .email-bg { background-color: #0a0a12 !important; }
-      .email-card { background-color: #141422 !important; }
-      .email-text { color: #e8e8f0 !important; }
-      .email-muted { color: #9898b0 !important; }
-    }
-
-    /* Mobile */
-    @media only screen and (max-width: 600px) {
-      .email-container { width: 100% !important; padding: 16px !important; }
-      .email-stat { display: block !important; width: 100% !important; margin-bottom: 8px !important; }
-      .email-stat-row { display: block !important; }
-      .email-hero-text { font-size: 28px !important; }
-    }
+    body, table, td, a { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; padding: 0; width: 100% !important; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) { .bg { background-color: #1a1a1a !important; } .card { background-color: #242424 !important; } }
+    @media only screen and (max-width: 600px) { .container { width: 100% !important; padding: 16px !important; } .stat { display: block !important; width: 100% !important; margin-bottom: 8px !important; } }
   </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #0a0a12; font-family: 'Helvetica Neue', Arial, sans-serif;">
-
-  <!-- Preheader -->
-  <div style="display: none; max-height: 0; overflow: hidden; mso-hide: all;">
-    {{ first_name|default:'Hey' }}, you're consuming {{ quiz_estimated_daily_sugar|default:'??' }}g of sugar per day from drinks alone. Here's your full report.
+<body style="margin: 0; padding: 0; background-color: #1a1a1a;">
+  <div style="display: none; max-height: 0; overflow: hidden;">
+    {{ first_name|default:'Hey' }}, you're consuming an estimated {{ quiz_estimated_daily_sugar|default:'??' }}g of processed sugar per day. Here's your full report.
   </div>
 
-  <!-- Email Body -->
-  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0a0a12;" class="email-bg">
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1a1a1a;" class="bg">
     <tr>
       <td align="center" style="padding: 40px 16px;">
-        <table role="presentation" cellpadding="0" cellspacing="0" width="560" class="email-container" style="max-width: 560px; width: 100%;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="560" class="container" style="max-width: 560px; width: 100%;">
 
           <!-- Logo -->
           <tr>
             <td align="center" style="padding-bottom: 32px;">
-              <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 24px; font-weight: 700; color: #e8e8f0; letter-spacing: -0.5px;">Nightcap</span>
+              <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 700; color: #C8B89A; letter-spacing: 0.08em; text-transform: uppercase;">NIGHTCAP</span>
             </td>
           </tr>
 
-          <!-- Hero Card -->
+          <!-- Hero -->
           <tr>
-            <td style="background: linear-gradient(135deg, #141422, #1a1a2e); border-radius: 16px; padding: 40px 32px; border: 1px solid rgba(124, 58, 237, 0.15);" class="email-card">
-
-              <!-- Greeting -->
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                  <td align="center" style="padding-bottom: 24px;">
-                    <span style="font-size: 40px; line-height: 1;">&#127769;</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center" style="padding-bottom: 8px;">
-                    <h1 style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; font-weight: 700; color: #e8e8f0; line-height: 1.2;" class="email-hero-text email-text">
-                      {{ first_name|default:'Hey' }}, here's your sugar report
-                    </h1>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center" style="padding-bottom: 32px;">
-                    <p style="margin: 0; font-size: 16px; color: #9898b0; line-height: 1.6;" class="email-muted">
-                      Based on your quiz answers, we crunched the numbers.
-                    </p>
-                  </td>
-                </tr>
-              </table>
+            <td style="background: #242424; border-radius: 16px; padding: 40px 32px; border: 1px solid rgba(200,184,154,0.15);" class="card">
+              <h1 style="margin: 0 0 12px; font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; color: #E8E0D0; text-align: center;">
+                {{ first_name|default:'Hey' }}, here's your number
+              </h1>
+              <p style="margin: 0 0 32px; font-size: 15px; color: #9B9384; line-height: 1.7; text-align: center;">
+                Based on your quiz answers, we estimated your daily processed sugar intake.
+              </p>
 
               <!-- Big Number -->
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center" style="padding-bottom: 8px;">
-                    <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 64px; font-weight: 700; color: #7c3aed; line-height: 1;">
+                    <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 64px; font-weight: 700; color: #C8B89A;">
                       {{ quiz_estimated_daily_sugar|default:'??' }}g
                     </span>
                   </td>
                 </tr>
                 <tr>
                   <td align="center" style="padding-bottom: 32px;">
-                    <span style="font-size: 14px; color: #9898b0; text-transform: uppercase; letter-spacing: 0.1em;" class="email-muted">
-                      Sugar per day from drinks
+                    <span style="font-size: 14px; color: #9B9384; text-transform: uppercase; letter-spacing: 0.1em;">
+                      Processed sugar per day
                     </span>
                   </td>
                 </tr>
               </table>
 
-              <!-- Stats Row -->
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" class="email-stat-row">
+              <!-- Stats -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
-                  <td width="33%" align="center" style="padding: 16px 8px; background: rgba(255,255,255,0.03); border-radius: 8px;" class="email-stat">
-                    <span style="display: block; font-size: 24px; font-weight: 700; color: #f59e0b;">{{ quiz_estimated_daily_sugar|default:'0' }}g</span>
-                    <span style="display: block; font-size: 11px; color: #9898b0; margin-top: 4px;" class="email-muted">Per day</span>
+                  <td width="32%" align="center" style="padding: 16px 8px; background: rgba(200,184,154,0.05); border-radius: 8px;" class="stat">
+                    <span style="display: block; font-size: 24px; font-weight: 700; color: #C8B89A;">{{ quiz_estimated_daily_sugar|default:'0' }}g</span>
+                    <span style="display: block; font-size: 11px; color: #9B9384; margin-top: 4px;">Per day</span>
                   </td>
                   <td width="4%">&nbsp;</td>
-                  <td width="33%" align="center" style="padding: 16px 8px; background: rgba(255,255,255,0.03); border-radius: 8px;" class="email-stat">
-                    <span style="display: block; font-size: 24px; font-weight: 700; color: #f59e0b;">{{ quiz_estimated_weekly_sugar|default:'0' }}g</span>
-                    <span style="display: block; font-size: 11px; color: #9898b0; margin-top: 4px;" class="email-muted">Per week</span>
+                  <td width="32%" align="center" style="padding: 16px 8px; background: rgba(200,184,154,0.05); border-radius: 8px;" class="stat">
+                    <span style="display: block; font-size: 24px; font-weight: 700; color: #C8B89A;">{{ quiz_estimated_weekly_sugar|default:'0' }}g</span>
+                    <span style="display: block; font-size: 11px; color: #9B9384; margin-top: 4px;">Per week</span>
                   </td>
                   <td width="4%">&nbsp;</td>
-                  <td width="33%" align="center" style="padding: 16px 8px; background: rgba(255,255,255,0.03); border-radius: 8px;" class="email-stat">
-                    <span style="display: block; font-size: 24px; font-weight: 700; color: #f59e0b;">{{ quiz_estimated_yearly_sugar_lbs|default:'0' }} lbs</span>
-                    <span style="display: block; font-size: 11px; color: #9898b0; margin-top: 4px;" class="email-muted">Per year</span>
+                  <td width="32%" align="center" style="padding: 16px 8px; background: rgba(200,184,154,0.05); border-radius: 8px;" class="stat">
+                    <span style="display: block; font-size: 24px; font-weight: 700; color: #C8B89A;">{{ quiz_estimated_yearly_sugar_lbs|default:'0' }} lbs</span>
+                    <span style="display: block; font-size: 11px; color: #9B9384; margin-top: 4px;">Per year</span>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- Spacer -->
           <tr><td style="height: 24px;"></td></tr>
 
-          <!-- Personalized Insight Card -->
+          <!-- Context -->
           <tr>
-            <td style="background-color: #141422; border-radius: 16px; padding: 28px 32px; border: 1px solid rgba(124, 58, 237, 0.15);" class="email-card">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                  <td style="padding-bottom: 12px;">
-                    <span style="font-size: 20px;">&#128161;</span>
-                    <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-weight: 600; color: #e8e8f0; margin-left: 8px;" class="email-text">Your personalized insight</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <!--
-                      Use Klaviyo conditional blocks to show motivation-based copy:
-                      {% if quiz_motivation == "cut_sugar" %}
-                    -->
-                    <p style="margin: 0; font-size: 15px; color: #9898b0; line-height: 1.7;" class="email-muted">
-                      {% if quiz_motivation == "cut_sugar" %}
-                        Switching your evening drink to Nightcap alone could eliminate {{ quiz_estimated_daily_sugar }}g of sugar from your daily intake. That's {{ quiz_estimated_yearly_sugar_lbs }} fewer pounds of sugar per year — just from one simple swap.
-                      {% elif quiz_motivation == "sleep_better" %}
-                        Nightcap contains magnesium, L-theanine, and chamomile — clinically-studied ingredients that promote deep, restful sleep. Combined with cutting sugar before bed, you're setting yourself up for dramatically better rest.
-                      {% elif quiz_motivation == "healthier_habits" %}
-                        Building one small habit — like swapping your evening drink — creates a ripple effect across your health. Nightcap makes that swap easy and delicious.
-                      {% elif quiz_motivation == "relaxation" %}
-                        Unlike alcohol or sugary drinks that spike and crash, Nightcap uses adaptogens to promote calm without the downsides. It's the evening ritual you've been looking for.
-                      {% else %}
-                        Nightcap was designed to be the healthiest, tastiest evening drink you'll ever try. Zero sugar, real functional ingredients, and a flavor you'll actually crave.
-                      {% endif %}
-                    </p>
-                  </td>
-                </tr>
-              </table>
+            <td style="background: #242424; border-radius: 16px; padding: 28px 32px; border: 1px solid rgba(200,184,154,0.15);" class="card">
+              <p style="margin: 0; font-size: 15px; color: #9B9384; line-height: 1.7;">
+                {% if quiz_motivation == "prevent_disease" %}
+                  You said your #1 goal is preventing health problems before they start. That's exactly the right approach — 88% of Americans are already metabolically unhealthy, and processed sugar is the primary driver. Your awareness today is the first step toward a different outcome.
+                {% elif quiz_motivation == "energy" %}
+                  You said you want more stable energy. Blood sugar spikes from processed sugar cause the crashes, brain fog, and afternoon slumps most people accept as normal. Getting your intake under 25g/day can stabilize your energy within the first week.
+                {% elif quiz_motivation == "weight" %}
+                  You said weight management matters most to you. Processed sugar drives fat storage through insulin spikes. Cutting your current intake would eliminate {{ quiz_estimated_yearly_sugar_lbs }} lbs of sugar per year — a massive metabolic shift without counting a single calorie.
+                {% elif quiz_motivation == "family" %}
+                  You said you want to set a better example for your family. Kids today consume more sugar by age 8 than adults did in an entire lifetime 200 years ago. By changing your own habits, you change what your family sees as normal.
+                {% else %}
+                  Now you know your number. Most people are surprised — and that surprise is where change begins. The average American consumes 152 lbs of processed sugar per year. The recommended limit? Under 25g per day.
+                {% endif %}
+              </p>
             </td>
           </tr>
 
-          <!-- Spacer -->
           <tr><td style="height: 24px;"></td></tr>
 
-          <!-- CTA Card: Download App -->
+          <!-- CTA -->
           <tr>
-            <td style="background-color: #141422; border-radius: 16px; padding: 32px; text-align: center; border: 1px solid rgba(124, 58, 237, 0.15);" class="email-card">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <td align="center">
+              <p style="margin: 0 0 16px; font-size: 15px; color: #E8E0D0; font-weight: 500;">
+                Ready to start reducing?
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td align="center" style="padding-bottom: 16px;">
-                    <h2 style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 22px; font-weight: 600; color: #e8e8f0;" class="email-text">
-                      Get the Nightcap App
-                    </h2>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center" style="padding-bottom: 24px;">
-                    <p style="margin: 0; font-size: 14px; color: #9898b0; line-height: 1.6;" class="email-muted">
-                      Track your sugar intake, build better evening habits, and be first to know when Nightcap launches.
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center">
-                    <!-- CTA Button -->
-                    <table role="presentation" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="background: linear-gradient(135deg, #7c3aed, #5b21b6); border-radius: 12px; padding: 16px 40px;">
-                          <a href="{{ app_download_url|default:'https://nightcap.app/download' }}" style="color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block;">
-                            &#128242; Download the App
-                          </a>
-                        </td>
-                      </tr>
-                    </table>
+                  <td style="background: #C8B89A; border-radius: 8px; padding: 14px 36px;">
+                    <a href="{{ app_download_url|default:'https://nightcap.app/download' }}" style="color: #1a1a1a; font-size: 15px; font-weight: 700; text-decoration: none;">Track Your Sugar Intake</a>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- Spacer -->
-          <tr><td style="height: 24px;"></td></tr>
-
-          <!-- What's Coming -->
-          <tr>
-            <td style="background-color: #141422; border-radius: 16px; padding: 28px 32px; border: 1px solid rgba(124, 58, 237, 0.15);" class="email-card">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                  <td style="padding-bottom: 16px;">
-                    <h3 style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-weight: 600; color: #e8e8f0;" class="email-text">What's in Nightcap?</h3>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.04);">
-                    <span style="font-size: 14px; color: #06d6a0; font-weight: 600;">&#10003; 0g Sugar</span>
-                    <span style="font-size: 13px; color: #9898b0; display: block; margin-top: 2px;" class="email-muted">Naturally sweetened. No artificial anything.</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-                    <span style="font-size: 14px; color: #06d6a0; font-weight: 600;">&#10003; Functional Ingredients</span>
-                    <span style="font-size: 13px; color: #9898b0; display: block; margin-top: 2px;" class="email-muted">Magnesium, L-theanine, chamomile, and adaptogens.</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-                    <span style="font-size: 14px; color: #06d6a0; font-weight: 600;">&#10003; Designed for Evening</span>
-                    <span style="font-size: 13px; color: #9898b0; display: block; margin-top: 2px;" class="email-muted">Helps you wind down, relax, and sleep deeper.</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-top: 12px;">
-                    <span style="font-size: 14px; color: #06d6a0; font-weight: 600;">&#10003; Tastes Incredible</span>
-                    <span style="font-size: 13px; color: #9898b0; display: block; margin-top: 2px;" class="email-muted">Not like "health food." You'll actually look forward to it.</span>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- Spacer -->
           <tr><td style="height: 32px;"></td></tr>
 
           <!-- Footer -->
           <tr>
-            <td align="center" style="padding: 0 16px;">
-              <p style="margin: 0 0 8px; font-family: Georgia, 'Times New Roman', serif; font-size: 16px; font-weight: 600; color: #e8e8f0;" class="email-text">Nightcap</p>
-              <p style="margin: 0 0 16px; font-size: 12px; color: #686880;">The better way to wind down.</p>
-              <p style="margin: 0; font-size: 11px; color: #686880; line-height: 1.6;">
-                You're receiving this because you joined the Nightcap waitlist.<br>
-                <a href="{{ unsubscribe_url|default:'#' }}" style="color: #7c3aed; text-decoration: underline;">Unsubscribe</a> &nbsp;|&nbsp;
-                <a href="{{ manage_preferences_url|default:'#' }}" style="color: #7c3aed; text-decoration: underline;">Manage preferences</a>
-              </p>
-              <p style="margin: 16px 0 0; font-size: 10px; color: #686880;">
-                &copy; 2026 Nightcap. All rights reserved.<br>
-                These statements have not been evaluated by the FDA.
+            <td align="center">
+              <p style="margin: 0 0 4px; font-family: 'Playfair Display', Georgia, serif; font-size: 14px; font-weight: 700; color: #C8B89A; letter-spacing: 0.08em; text-transform: uppercase;">NIGHTCAP</p>
+              <p style="margin: 0 0 16px; font-size: 12px; color: #6B6560;">Helping America eliminate processed sugar.</p>
+              <p style="margin: 0; font-size: 11px; color: #6B6560; line-height: 1.6;">
+                <a href="{{ unsubscribe_url|default:'#' }}" style="color: #C8B89A; text-decoration: underline;">Unsubscribe</a> &nbsp;|&nbsp;
+                <a href="{{ manage_preferences_url|default:'#' }}" style="color: #C8B89A; text-decoration: underline;">Manage preferences</a>
               </p>
             </td>
           </tr>
