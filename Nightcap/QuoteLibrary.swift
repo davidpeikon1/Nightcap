@@ -219,6 +219,16 @@ struct QuoteLibrary {
                 science: "Memory consolidation research distinguishes between episodic memory (a single event) and procedural learning (repeated behavioral patterns). Maintaining a behavior change through multiple contextual variations encodes it as procedural rather than episodic. The neural pathway is meaningfully different after a week.",
                 tier: .threeToSevenDays
             ),
+            ReframeQuote(
+                text: "The bacteria that amplify sugar cravings need sugar to survive. They've been without it for days. Their population is declining. Your cravings are partly them — and they're losing.",
+                science: "Firmicutes bacteria, which are upregulated by high-sugar diets and which produce signaling molecules that drive sugar cravings, require dietary fructose and glucose to maintain their population. After several days of sugar restriction, their relative abundance decreases measurably. The gut-brain axis — the direct communication channel between gut bacteria and the brain's craving circuitry — begins transmitting different signals.",
+                tier: .threeToSevenDays
+            ),
+            ReframeQuote(
+                text: "Your sleep this week is running on different chemistry. Without the blood glucose swing at 2am, your cortisol won't spike to compensate. That's a structural change in how your body runs the night.",
+                science: "Nocturnal blood glucose instability — driven by high-sugar meals, particularly in the evening — triggers cortisol release at 2–4am as the body attempts to stabilize falling glucose. This cortisol spike fragments slow-wave sleep and causes the characteristic 3am waking pattern common in high-sugar consumers. After 3–5 days of sugar reduction, nocturnal glucose is significantly more stable, and this cortisol event often stops occurring.",
+                tier: .threeToSevenDays
+            ),
         ],
 
         .sevenTo14Days: [
@@ -245,6 +255,41 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "At this stage, the decision isn't happening at the moment of craving. It already happened — days ago. You're living inside a decision, not making one.",
                 science: "Behavioral consolidation research distinguishes between situational decision-making and implementation of a prior commitment. After the first 7–10 days, people who maintain a behavior change have shifted from making the decision moment-to-moment to executing one already made. This structural shift is what makes the behavior durable.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "Taste receptors regenerate roughly every two weeks. Yours have been regenerating under different conditions. Natural sweetness is starting to register differently.",
+                science: "Sweet taste receptors (T1R2/T1R3) are downregulated by chronic high-sugar exposure — the same mechanism that causes tolerance in other sensory systems. After 7–14 days of reduced sugar intake, receptor sensitivity begins recovering. People consistently report that fruit, plain dairy, and other naturally sweet foods taste noticeably sweeter — not because the foods changed, but because the receptors did.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "Inflammation is largely invisible until it isn't. At a week of reduced sugar, your circulating inflammatory markers have had real time to fall. The absence of that background noise changes everything downstream.",
+                science: "Dietary fructose drives de novo lipogenesis and activates inflammatory pathways via NF-κB signaling. Serum CRP (C-reactive protein), a primary inflammatory marker, responds measurably to dietary change within 7–14 days. Low-grade chronic inflammation — associated with fatigue, joint discomfort, brain fog, and accelerated aging — begins declining with sustained sugar reduction.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "There's a moment that happens somewhere in week two when you stop tracking what you're not eating and start not noticing it. That moment is close.",
+                science: "Behavioral automaticity research identifies the shift from 'monitoring and suppressing' to 'default behavior' as the inflection point in habit formation. Once a behavior becomes automatic, cognitive load drops to near zero and the behavior stops requiring active management. Studies on habit formation suggest this shift typically occurs between 7 and 21 days of consistent practice.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "Slow-wave sleep — the deep restorative stage — is suppressed by blood sugar volatility. At a week in, that volatility has largely resolved. You may be sleeping more deeply than you have in years.",
+                science: "Polysomnography studies show that glycemic instability disrupts sleep architecture by reducing slow-wave sleep (SWS) and increasing nighttime awakenings. Stable nocturnal blood glucose — which follows within days of significant sugar restriction — is associated with increases in SWS and reductions in sleep latency. The cognitive benefits of restored SWS compound over the first two weeks.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "The craving is getting quieter. It still shows up — but its amplitude is different. That's not you getting better at resisting. That's the craving getting weaker.",
+                science: "Extinction learning — the neurological process by which conditioned stimulus-response associations weaken through unreinforced exposure — proceeds in a roughly logarithmic pattern. The rate of weakening is steepest in the first 7–14 days. The subjective experience of 'easier resistance' is, in most cases, not increased willpower but genuine reduction in craving intensity as the conditioned response extinguishes.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "Most people reset before they reach the point where the biology starts working for them instead of against them. You're in that window now.",
+                science: "The neurological balance of craving intensity versus inhibitory control shifts at approximately 7–14 days. Before this window, the drive is typically stronger than the constraint. After this window, the drive has weakened enough that baseline behavioral regulation becomes sufficient to maintain the change without extraordinary effort.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "Food tastes different at this stage. Flavors that used to be background are now foreground. That's not imagination — it's receptor recalibration. You're tasting the actual food.",
+                science: "Chronic exposure to intensely sweet foods causes sweet receptor downregulation and also raises the detection threshold for other taste qualities — the brain's resources for processing flavor are dominated by the high-salience sugar signal. As sweet receptor sensitivity recovers, other taste modalities strengthen. People in this window consistently report discovering complexity in foods they've eaten for years.",
                 tier: .sevenTo14Days
             ),
         ],
