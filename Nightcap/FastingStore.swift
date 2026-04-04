@@ -96,7 +96,7 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .oneMonth:    return "A month. Something real has changed — inside and out."
         case .hundredDays: return "100 days.\nYou're not trying to quit sugar anymore.\nYou don't eat it."
         case .sixMonths:
-            return "Six months.\nThe compound interest of this has been accumulating quietly.\nYour body is different than it was in January."
+            return "Six months.\nThe compound interest of this has been accumulating quietly.\nWhat you feel now is what 180 days of quiet work looks like."
         case .oneYear:
             return "A year without processed sugar.\nThis isn't a streak anymore.\nIt's just who you are."
         }
