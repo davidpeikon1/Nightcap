@@ -36,11 +36,11 @@ struct SettingsSheet: View {
                     // MARK: Notifications
                     Section {
                         notificationRow
-                        if notifStatus == .authorized && notificationsOn {
-                            timePicker("Morning", selection: $morningTime) { h in
+                        if notifStatus == .authorized {
+                            timePicker("Morning", selection: $morningTime, enabled: notificationsOn) { h in
                                 NotificationManager.shared.updateMorningHour(h)
                             }
-                            timePicker("Evening", selection: $eveningTime) { h in
+                            timePicker("Evening", selection: $eveningTime, enabled: notificationsOn) { h in
                                 NotificationManager.shared.updateEveningHour(h)
                             }
                         }
@@ -164,7 +164,7 @@ struct SettingsSheet: View {
     private var notificationRow: some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
-                Text("Daily check-ins")
+                Text("Daily reminders")
                     .font(.system(size: 15))
                     .foregroundStyle(Color("NCTextPrimary"))
                 Text(dailyNotifSubtitle)
@@ -213,15 +213,18 @@ struct SettingsSheet: View {
     private func timePicker(
         _ label: String,
         selection: Binding<Date>,
+        enabled: Bool,
         onChange: @escaping (Int) -> Void
     ) -> some View {
         HStack {
             Text(label)
                 .font(.system(size: 15))
-                .foregroundStyle(Color("NCTextPrimary"))
+                .foregroundStyle(enabled ? Color("NCTextPrimary") : Color("NCTextTertiary"))
             Spacer()
             DatePicker("", selection: selection, displayedComponents: .hourAndMinute)
                 .labelsHidden()
+                .disabled(!enabled)
+                .opacity(enabled ? 1 : 0.4)
                 .onChange(of: selection.wrappedValue) { _, date in
                     onChange(Calendar.current.component(.hour, from: date))
                 }

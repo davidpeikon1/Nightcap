@@ -131,6 +131,15 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .hundredDays: return "This is your life now."
         }
     }
+
+    /// The dismiss button label shown when this badge is still locked.
+    var lockedDismissText: String {
+        switch self {
+        case .firstHour:   return "Keep the clock running."
+        case .firstDay:    return "Keep the clock running."
+        default:           return "Keep going."
+        }
+    }
 }
 
 enum CravingTrigger: String, CaseIterable, Codable, Identifiable {
@@ -570,7 +579,7 @@ class FastingStore: ObservableObject {
 
     var timeToNextMilestone: String {
         if fastingPhase == .freedom { return "Living in freedom" }
-        let remaining = fastingPhase.nextThreshold - elapsedSeconds
+        let remaining = max(0, fastingPhase.nextThreshold - elapsedSeconds)
         let h = Int(remaining) / 3600
         let m = (Int(remaining) % 3600) / 60
         if h >= 24 {

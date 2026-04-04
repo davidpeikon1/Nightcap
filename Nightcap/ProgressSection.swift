@@ -511,7 +511,7 @@ struct LockedBadgeSheet: View {
                 Spacer()
 
                 Button { dismiss() } label: {
-                    Text("Keep going")
+                    Text(badge.lockedDismissText)
                         .font(.system(size: 17, weight: .medium))
                         .foregroundStyle(Color("NCBackground"))
                         .frame(maxWidth: .infinity)
