@@ -96,7 +96,13 @@ struct ProgressSection: View {
     }
 
     private var phaseProgressView: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        let isFreedom = store.fastingPhase == .freedom
+        let dayCount  = max(14, Int(store.elapsedSeconds / 86400))
+        let rightLabel = isFreedom
+            ? "day \(dayCount)"
+            : store.timeToNextMilestone
+
+        return VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text(store.fastingPhase.rawValue)
                     .font(.system(size: 13, weight: .medium))
@@ -104,9 +110,9 @@ struct ProgressSection: View {
 
                 Spacer()
 
-                Text(store.timeToNextMilestone)
+                Text(rightLabel)
                     .font(.system(size: 12, weight: .regular, design: .monospaced))
-                    .foregroundStyle(Color("NCTextTertiary"))
+                    .foregroundStyle(isFreedom ? Color("NCSuccess").opacity(0.8) : Color("NCTextTertiary"))
             }
 
             GeometryReader { geo in
@@ -131,7 +137,10 @@ struct ProgressSection: View {
         .background(Color("NCSurface"))
         .cornerRadius(12)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(store.fastingPhase.rawValue) phase. \(store.timeToNextMilestone) to next milestone.")
+        .accessibilityLabel(isFreedom
+            ? "Freedom phase. Day \(dayCount)."
+            : "\(store.fastingPhase.rawValue) phase. \(store.timeToNextMilestone) to next milestone."
+        )
     }
     // MARK: - All badges earned
 
