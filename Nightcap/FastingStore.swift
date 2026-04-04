@@ -589,6 +589,9 @@ class FastingStore: ObservableObject {
     }
 
     private func checkBadges() {
+        // Don't fire the next badge while a sheet is already showing — prevents
+        // the sheet from switching mid-display during catch-up after offline gaps.
+        guard newlyUnlockedBadge == nil else { return }
         for badge in BadgeID.allCases {
             guard !earnedBadges.contains(badge) else { continue }
             if elapsedSeconds >= badge.threshold {
