@@ -44,7 +44,7 @@ struct GetFastingStatusIntent: AppIntent {
         guard let elapsed = store.elapsed else {
             return .result(
                 value: "Not tracking",
-                dialog: IntentDialog("No fast is in progress. Open Nightcap to set the clock.")
+                dialog: IntentDialog("No fast is currently being tracked in Nightcap.")
             )
         }
         let time  = formatElapsed(elapsed)
@@ -72,14 +72,14 @@ struct GetNextMilestoneIntent: AppIntent {
         guard let elapsed = store.elapsed else {
             return .result(
                 value: "Not tracking",
-                dialog: IntentDialog("Open Nightcap to start your fast first.")
+                dialog: IntentDialog("No fast is currently being tracked in Nightcap.")
             )
         }
         let milestone = nextMilestone(for: elapsed)
         if milestone == "All milestones complete" {
             return .result(
                 value: milestone,
-                dialog: IntentDialog("You've earned every Nightcap milestone. You don't eat processed sugar anymore — that's just who you are now.")
+                dialog: IntentDialog("You've earned every Nightcap milestone. A hundred days. That's not a streak — that's a different relationship with food.")
             )
         }
         return .result(

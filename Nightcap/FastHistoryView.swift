@@ -122,8 +122,8 @@ struct FastHistoryView: View {
                 statCard(value: bestStreakText,               label: "Best streak")
             }
             HStack(spacing: 12) {
-                statCard(value: "\(store.resetEvents.count)", label: "Total resets")
-                statCard(value: totalText,                    label: "Total clean time")
+                statCard(value: "\(store.resetEvents.count)", label: "Resets")
+                statCard(value: totalText,                    label: "Time fasted")
             }
         }
     }
@@ -285,8 +285,8 @@ struct FastHistoryView: View {
                     .foregroundStyle(Color("NCTextSecondary"))
                 Spacer()
                 HStack(spacing: 10) {
-                    legendDot(color: Color("NCSuccess").opacity(0.7), label: "clean")
-                    legendDot(color: Color("NCWarning").opacity(0.5), label: "reset")
+                    legendDot(color: Color("NCSuccess").opacity(0.7), label: "clean day")
+                    legendDot(color: Color("NCWarning").opacity(0.5), label: "reset day")
                 }
             }
 
@@ -362,7 +362,7 @@ struct FastHistoryView: View {
             Text("Nothing to show yet.")
                 .font(.system(size: 17, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
-            Text("Each completed fast will be recorded here.")
+            Text("Your reset history will appear here.")
                 .font(.system(size: 14))
                 .foregroundStyle(Color("NCTextSecondary"))
         }
@@ -426,7 +426,7 @@ struct FastHistoryView: View {
     private var cravingInsightsCard: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text("CRAVING LOG")
+                Text("CRAVING PATTERNS")
                     .font(.system(size: 11, weight: .medium))
                     .tracking(2)
                     .foregroundStyle(Color("NCTextSecondary"))
@@ -653,7 +653,7 @@ struct EditNoteSheet: View {
                         .tracking(1.5)
                         .foregroundStyle(Color("NCTextTertiary"))
 
-                    TextField("e.g. birthday cake, work stress, travelling", text: $note)
+                    TextField("e.g. birthday cake, work stress, social pressure", text: $note)
                         .font(.system(size: 15))
                         .foregroundStyle(Color("NCTextPrimary"))
                         .padding(14)

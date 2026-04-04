@@ -32,12 +32,12 @@ struct ContextualCopy {
 
         .sixTo24Hours: [
             "By now your liver has cleared most of the fructose. You're running cleaner.",
-            "Sleep tonight will be different. Your cortisol won't spike at 3am looking for glucose.",
+            "Sleep tonight may be different. Without the glucose swings, your body has less to manage through the night.",
             "Most people have consumed sugar again by now. You haven't.",
         ],
 
         .oneToThreeDays: [
-            "Your taste buds have a half-life of 10 days. The reset has started.",
+            "Taste receptors regenerate roughly every two weeks. At this stage, the shift has started.",
             "Three days in. The cravings are starting to feel less automatic.",
             "The craving still shows up. But it's quieter than it was yesterday.",
         ],
@@ -45,7 +45,7 @@ struct ContextualCopy {
         .threeToSevenDays: [
             "After 72 hours, dopamine receptor sensitivity begins to recover.",
             "Around day 4, most people have their first genuine 'I don't actually want it' moment.",
-            "The cravings at day 4 are mostly habit, not hunger.",
+            "By the end of this week, most cravings are habit, not hunger.",
         ],
 
         .sevenTo14Days: [
@@ -55,14 +55,14 @@ struct ContextualCopy {
         ],
 
         .fourteenTo30Days: [
-            "Two weeks. Your liver has recalibrated. Your insulin sensitivity has improved. Something real has changed.",
+            "Two weeks. Hepatic fat accumulation has slowed. Insulin sensitivity is measurably different for most people at this mark.",
             "Past the point where most people turn back.",
             "At this stage, cravings are mostly memory, not biology. The biology has already shifted.",
             "Most people never find out what their body actually feels like without chronic sugar. You're finding out.",
         ],
 
         .thirtyPlusDays: [
-            "A month. Your dopamine system has had time to genuinely recover.",
+            "A month. Dopamine receptor sensitivity has had time to begin recovering. The system is different than it was.",
             "You're not trying to quit sugar anymore. You don't eat it.",
             "The neural pathway for the old habit has weakened through disuse. It doesn't disappear — it just loses priority.",
             "This is identity now, not discipline. The hardest work happened weeks ago.",
