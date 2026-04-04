@@ -1909,6 +1909,62 @@ body {
   color: var(--nc-accent);
 }
 
+/* ---------- Next Steps ---------- */
+.nc-next-steps {
+  margin: 2.5rem 0;
+  padding: 28px 24px;
+  background: linear-gradient(135deg, rgba(200, 184, 154, 0.06), rgba(200, 184, 154, 0.02));
+  border: 1px solid rgba(200, 184, 154, 0.15);
+  border-radius: var(--nc-radius-lg);
+}
+
+.nc-next-steps__title {
+  font-family: var(--nc-font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.nc-next-steps__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nc-next-steps__item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.nc-next-steps__number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--nc-primary);
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.nc-next-steps__heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.nc-next-steps__desc {
+  font-size: 0.85rem;
+  color: var(--nc-text-muted);
+  line-height: 1.6;
+}
+
 /* ---------- Source Breakdown ---------- */
 .nc-sources {
   margin: 2rem 0;

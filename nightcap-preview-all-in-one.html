@@ -1941,6 +1941,62 @@ body {
   color: var(--nc-accent);
 }
 
+/* ---------- Next Steps ---------- */
+.nc-next-steps {
+  margin: 2.5rem 0;
+  padding: 28px 24px;
+  background: linear-gradient(135deg, rgba(200, 184, 154, 0.06), rgba(200, 184, 154, 0.02));
+  border: 1px solid rgba(200, 184, 154, 0.15);
+  border-radius: var(--nc-radius-lg);
+}
+
+.nc-next-steps__title {
+  font-family: var(--nc-font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.nc-next-steps__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nc-next-steps__item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.nc-next-steps__number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--nc-primary);
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.nc-next-steps__heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.nc-next-steps__desc {
+  font-size: 0.85rem;
+  color: var(--nc-text-muted);
+  line-height: 1.6;
+}
+
 /* ---------- Source Breakdown ---------- */
 .nc-sources {
   margin: 2rem 0;
@@ -3001,6 +3057,34 @@ body {
         </div>
       </div>
 
+      <!-- Personalized Next Steps -->
+      <div class="nc-next-steps" id="results-next-steps">
+        <h3 class="nc-next-steps__title">Your 3 Next Steps</h3>
+        <div class="nc-next-steps__list">
+          <div class="nc-next-steps__item">
+            <div class="nc-next-steps__number">1</div>
+            <div class="nc-next-steps__content">
+              <h4 class="nc-next-steps__heading" id="next-step-1-title">Start reading labels</h4>
+              <p class="nc-next-steps__desc" id="next-step-1-desc">Check the "Added Sugars" line on everything you buy this week. You'll be shocked how quickly it adds up.</p>
+            </div>
+          </div>
+          <div class="nc-next-steps__item">
+            <div class="nc-next-steps__number">2</div>
+            <div class="nc-next-steps__content">
+              <h4 class="nc-next-steps__heading" id="next-step-2-title">Track for 7 days</h4>
+              <p class="nc-next-steps__desc" id="next-step-2-desc">Use the Nightcap app to log your daily sugar intake. Seeing the numbers daily changes behavior faster than any diet plan.</p>
+            </div>
+          </div>
+          <div class="nc-next-steps__item">
+            <div class="nc-next-steps__number">3</div>
+            <div class="nc-next-steps__content">
+              <h4 class="nc-next-steps__heading" id="next-step-3-title">Make one swap</h4>
+              <p class="nc-next-steps__desc" id="next-step-3-desc">Pick your biggest sugar source and find one alternative. One swap per week is all it takes to transform your intake.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Shareable Results Card -->
       <div class="nc-share-card" id="share-card">
         <div class="nc-share-card__inner" id="share-card-inner">
@@ -3923,6 +4007,9 @@ body {
     // Animate comparison chart
     setTimeout(function () { animateComparisonChart(dailySugar); }, 1200);
 
+    // Personalized next steps
+    personalizeNextSteps(quizData);
+
     // Populate share card
     populateShareCard(quizData);
 
@@ -4158,6 +4245,58 @@ body {
           track('share_card_saved', { method: 'screenshot_prompt' });
         }
       });
+    }
+  }
+
+  // ---------- Personalized Next Steps ----------
+  function personalizeNextSteps(quizData) {
+    var breakfast = quizData.sugar_from_breakfast || 0;
+    var drinks = quizData.sugar_from_drinks || 0;
+    var processed = quizData.sugar_from_processed || 0;
+
+    // Step 1: Always about label awareness (unless they already read labels)
+    var step1Title = document.getElementById('next-step-1-title');
+    var step1Desc = document.getElementById('next-step-1-desc');
+    if (step1Title && step1Desc) {
+      if (quizData.checks_labels === 'always') {
+        step1Title.textContent = 'Keep reading labels — and go deeper';
+        step1Desc.textContent = 'You already read labels — great. Now look specifically for the 60+ aliases sugar hides behind: dextrose, maltose, HFCS, "evaporated cane juice." The Nightcap app flags them all.';
+      }
+    }
+
+    // Step 2: Focus on their biggest source
+    var step2Title = document.getElementById('next-step-2-title');
+    var step2Desc = document.getElementById('next-step-2-desc');
+    if (step2Title && step2Desc) {
+      if (drinks >= breakfast && drinks >= processed) {
+        step2Title.textContent = 'Replace one drink per day';
+        step2Desc.textContent = 'Drinks are your biggest sugar source at ' + drinks + 'g/day. Swap one sweetened drink for water, black coffee, or unsweetened tea. That single change could cut ' + Math.round(drinks * 0.4) + 'g per day.';
+      } else if (breakfast >= drinks && breakfast >= processed) {
+        step2Title.textContent = 'Rethink your morning routine';
+        step2Desc.textContent = 'Breakfast is your biggest sugar source at ' + breakfast + 'g/day. Try eggs, avocado, or plain Greek yogurt with berries instead. You could cut your morning sugar by 80%.';
+      } else {
+        step2Title.textContent = 'Audit your packaged foods';
+        step2Desc.textContent = 'Packaged food is your biggest sugar source at ' + processed + 'g/day. Pick 3 items you buy regularly and check their sugar content. Find lower-sugar alternatives for just those 3.';
+      }
+    }
+
+    // Step 3: Based on motivation
+    var step3Title = document.getElementById('next-step-3-title');
+    var step3Desc = document.getElementById('next-step-3-desc');
+    if (step3Title && step3Desc) {
+      var motivationSteps = {
+        prevent_disease: { title: 'Get your baseline health markers', desc: 'Ask your doctor for fasting glucose, HbA1c, and fasting insulin levels. These show where you are metabolically — and give you a concrete before/after to track as you reduce sugar.' },
+        energy: { title: 'Track your energy for 7 days', desc: 'Rate your energy 1-10 at 10am, 2pm, and 7pm each day in the Nightcap app. As you reduce sugar, watch those afternoon crashes disappear. Data makes the habit stick.' },
+        weight: { title: 'Focus on sugar, not calories', desc: 'Don\'t count calories. Just reduce processed sugar to under 25g/day. When you stop spiking insulin, your body naturally stops storing excess fat. The weight change follows.' },
+        family: { title: 'Share the quiz with your family', desc: 'Send this quiz to your partner, your parents, your kids. When everyone sees their number, the whole household starts making different choices. That\'s how you change a family\'s trajectory.' },
+        curiosity: { title: 'Track for just 7 days', desc: 'You were curious — now feed that curiosity with data. Log your sugar intake in the Nightcap app for one week. Most people who track for 7 days naturally start reducing without even trying.' },
+      };
+
+      var step = motivationSteps[quizData.motivation];
+      if (step) {
+        step3Title.textContent = step.title;
+        step3Desc.textContent = step.desc;
+      }
     }
   }
 

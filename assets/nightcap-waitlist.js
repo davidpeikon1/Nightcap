@@ -340,6 +340,9 @@
     // Animate comparison chart
     setTimeout(function () { animateComparisonChart(dailySugar); }, 1200);
 
+    // Personalized next steps
+    personalizeNextSteps(quizData);
+
     // Populate share card
     populateShareCard(quizData);
 
@@ -575,6 +578,58 @@
           track('share_card_saved', { method: 'screenshot_prompt' });
         }
       });
+    }
+  }
+
+  // ---------- Personalized Next Steps ----------
+  function personalizeNextSteps(quizData) {
+    var breakfast = quizData.sugar_from_breakfast || 0;
+    var drinks = quizData.sugar_from_drinks || 0;
+    var processed = quizData.sugar_from_processed || 0;
+
+    // Step 1: Always about label awareness (unless they already read labels)
+    var step1Title = document.getElementById('next-step-1-title');
+    var step1Desc = document.getElementById('next-step-1-desc');
+    if (step1Title && step1Desc) {
+      if (quizData.checks_labels === 'always') {
+        step1Title.textContent = 'Keep reading labels — and go deeper';
+        step1Desc.textContent = 'You already read labels — great. Now look specifically for the 60+ aliases sugar hides behind: dextrose, maltose, HFCS, "evaporated cane juice." The Nightcap app flags them all.';
+      }
+    }
+
+    // Step 2: Focus on their biggest source
+    var step2Title = document.getElementById('next-step-2-title');
+    var step2Desc = document.getElementById('next-step-2-desc');
+    if (step2Title && step2Desc) {
+      if (drinks >= breakfast && drinks >= processed) {
+        step2Title.textContent = 'Replace one drink per day';
+        step2Desc.textContent = 'Drinks are your biggest sugar source at ' + drinks + 'g/day. Swap one sweetened drink for water, black coffee, or unsweetened tea. That single change could cut ' + Math.round(drinks * 0.4) + 'g per day.';
+      } else if (breakfast >= drinks && breakfast >= processed) {
+        step2Title.textContent = 'Rethink your morning routine';
+        step2Desc.textContent = 'Breakfast is your biggest sugar source at ' + breakfast + 'g/day. Try eggs, avocado, or plain Greek yogurt with berries instead. You could cut your morning sugar by 80%.';
+      } else {
+        step2Title.textContent = 'Audit your packaged foods';
+        step2Desc.textContent = 'Packaged food is your biggest sugar source at ' + processed + 'g/day. Pick 3 items you buy regularly and check their sugar content. Find lower-sugar alternatives for just those 3.';
+      }
+    }
+
+    // Step 3: Based on motivation
+    var step3Title = document.getElementById('next-step-3-title');
+    var step3Desc = document.getElementById('next-step-3-desc');
+    if (step3Title && step3Desc) {
+      var motivationSteps = {
+        prevent_disease: { title: 'Get your baseline health markers', desc: 'Ask your doctor for fasting glucose, HbA1c, and fasting insulin levels. These show where you are metabolically — and give you a concrete before/after to track as you reduce sugar.' },
+        energy: { title: 'Track your energy for 7 days', desc: 'Rate your energy 1-10 at 10am, 2pm, and 7pm each day in the Nightcap app. As you reduce sugar, watch those afternoon crashes disappear. Data makes the habit stick.' },
+        weight: { title: 'Focus on sugar, not calories', desc: 'Don\'t count calories. Just reduce processed sugar to under 25g/day. When you stop spiking insulin, your body naturally stops storing excess fat. The weight change follows.' },
+        family: { title: 'Share the quiz with your family', desc: 'Send this quiz to your partner, your parents, your kids. When everyone sees their number, the whole household starts making different choices. That\'s how you change a family\'s trajectory.' },
+        curiosity: { title: 'Track for just 7 days', desc: 'You were curious — now feed that curiosity with data. Log your sugar intake in the Nightcap app for one week. Most people who track for 7 days naturally start reducing without even trying.' },
+      };
+
+      var step = motivationSteps[quizData.motivation];
+      if (step) {
+        step3Title.textContent = step.title;
+        step3Desc.textContent = step.desc;
+      }
     }
   }
 
