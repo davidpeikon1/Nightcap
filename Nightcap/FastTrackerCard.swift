@@ -151,6 +151,24 @@ struct ResetModal: View {
                 }
             }
 
+            // Badge proximity warning — shown when the user is 60%+ toward
+            // the next badge. Shown in green to frame it as opportunity, not shame.
+            // This is the highest-leverage loss-aversion moment: seeing "3h from 1 Week"
+            // before confirming is the last meaningful pause before the reset.
+            if let proximity = formBadgeProximityText {
+                HStack(alignment: .top, spacing: 12) {
+                    Rectangle()
+                        .fill(Color("NCSuccess").opacity(0.5))
+                        .frame(width: 2)
+                        .cornerRadius(1)
+                    Text(proximity)
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color("NCSuccess").opacity(0.8))
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
             // Commitment reminder — surfaces the user's stated reason at the
             // moment they're about to reset (Cialdini: commitment & consistency).
             // Rendered only when a goal is set; kept in tertiary color so it
@@ -201,6 +219,25 @@ struct ResetModal: View {
             }
         }
         .padding(24)
+    }
+
+    /// Pre-confirmation badge proximity — shown in the form before the user confirms.
+    /// Surfaced when 60%+ toward the next badge, framed as opportunity (green).
+    private var formBadgeProximityText: String? {
+        guard store.isTracking else { return nil }
+        guard let nextBadge = BadgeID.allCases.first(where: { !store.earnedBadges.contains($0) }) else { return nil }
+        let remaining = nextBadge.threshold - store.elapsedSeconds
+        let pct = store.elapsedSeconds / nextBadge.threshold
+        guard pct >= 0.6, remaining > 60 else { return nil }
+        let h = Int(remaining) / 3600
+        let m = (Int(remaining) % 3600) / 60
+        let d = h / 24
+        let timeLabel: String = {
+            if d > 0 { let rh = h % 24; return rh > 0 ? "\(d)d \(rh)h" : "\(d)d" }
+            if h > 0 { return m > 0 ? "\(h)h \(m)m" : "\(h)h" }
+            return m == 1 ? "1 minute" : "\(m) minutes"
+        }()
+        return "\(timeLabel) from \(nextBadge.label)."
     }
 
     /// Near-miss: shown when the user was ≥60% toward the next badge.

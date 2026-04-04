@@ -506,17 +506,17 @@ struct LargeWidgetView: View {
     private func phaseBodyScience(for phase: String) -> String {
         switch phase {
         case "Starting Out":
-            return "The craving you feel right now is cortisol and dopamine expecting their routine hit. It's noise from old wiring — not a signal your body actually needs sugar."
+            return "Your blood sugar is beginning to stabilize after the last glucose spike. The craving you feel is your brain's reward system anticipating a dopamine hit it has learned to expect — not your body needing fuel. Ghrelin, cortisol, and dopamine peak in the first 20 minutes and then fall."
         case "First Day":
-            return "Your liver is burning through glycogen reserves. That flat, slightly tired feeling is the metabolic handoff — your body switching fuel sources. It passes."
+            return "Your liver is burning through glycogen reserves built from the last glucose load. Any fatigue you feel is the metabolic handoff — your body shifting toward fat as its primary fuel. Insulin is falling. Tonight's sleep will be chemically different: without a glucose spike to manage, cortisol has less work to do."
         case "Withdrawal":
-            return "Headaches and irritability now are withdrawal — your brain recalibrating reward pathways tuned to processed sugar. This is the hard part. It ends."
+            return "Headaches and irritability at this stage are your brain recalibrating. Chronic dopamine spikes suppress receptor sensitivity — your brain has been compensating by reducing D2 receptor density, and that correction is now underway. The discomfort is the system correcting, not breaking."
         case "Breakthrough":
-            return "72 hours is a threshold. The compulsive edge — the kind that makes you negotiate with yourself — drops measurably here. Your taste receptors are starting to recalibrate."
+            return "72 hours is a measurable threshold. The compulsive pull — the kind that makes you negotiate with yourself — drops sharply here as the acute neurochemical withdrawal resolves. What remains beyond this point is conditioned reflex, not physiology. Taste receptor desensitization has already started unwinding."
         case "Rewiring":
-            return "Your gut microbiome has shifted enough that the bacteria amplifying cravings are being starved out. The biology is changing from the inside out."
+            return "Your gut microbiome has measurably shifted. Firmicutes — bacteria that thrive on sugar and amplify cravings — are declining. Bacteroidetes are growing in their place. Roughly 90% of your serotonin is produced in the gut; as the microbiome shifts, so does the neurochemical signal reaching your brain."
         default: // Freedom
-            return "At two weeks, fMRI studies show measurably reduced reward-center activation in response to sugar cues. Gut, sleep, taste, dopamine — all measurably changed. The rewiring happened."
+            return "At two weeks, fMRI imaging shows measurably reduced activation in the nucleus accumbens in response to images of sugary food. This is not motivation or willpower — it is structural change. Your taste receptor recalibration is nearly complete. Glycation has been interrupted for two full weeks."
         }
     }
 }
