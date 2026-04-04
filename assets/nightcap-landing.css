@@ -483,6 +483,15 @@ body::after {
   to { opacity: 0; transform: translateX(-30px); }
 }
 
+.nc-quiz__almost {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nc-text-dim);
+  margin-bottom: 0.75rem;
+}
+
 .nc-quiz__question {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 3.5vw, 1.9rem);

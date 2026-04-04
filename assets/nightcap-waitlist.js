@@ -290,16 +290,16 @@
 
     if (dailySugar <= 25) {
       title.textContent = payload.first_name + ", you're in the clear";
-      subtitle.textContent = "Under 25g per day. You're doing what 88% of Americans can't. Stay here.";
+      subtitle.textContent = "Under 25g per day. You're doing what 88% of Americans can't.";
     } else if (dailySugar <= 75) {
-      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
-      subtitle.textContent = dailySugar + "g per day. That's " + yearlySugarLbs + " lbs of processed sugar per year — and most of it is hiding in foods you think are healthy.";
+      title.textContent = payload.first_name + ", " + multiple + "x the limit";
+      subtitle.textContent = "You probably thought you were doing fine. Most people do. But " + dailySugar + "g per day adds up to " + yearlySugarLbs + " lbs per year — mostly from foods that don't even taste sweet.";
     } else if (dailySugar <= 150) {
-      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
-      subtitle.textContent = dailySugar + "g per day adds up to " + yearlySugarLbs + " lbs per year. That's not a willpower problem — it's a visibility problem. Now you can see it.";
+      title.textContent = payload.first_name + ", " + multiple + "x the limit";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. It's not because you eat \"badly\" — it's because the system hides it everywhere. Now you can see it.";
     } else {
-      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. This is what the food system does when you're not watching. Now you're watching.";
+      title.textContent = payload.first_name + ", " + multiple + "x the limit";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. Not because you're careless — because 73% of packaged foods have sugar and you were never shown the math.";
     }
 
     // Share URL
@@ -310,7 +310,7 @@
     var twitterShare = document.getElementById('share-twitter');
     if (twitterShare) {
       twitterShare.addEventListener('click', function () {
-        var text = 'I just found out I consume ' + dailySugar + 'g of processed sugar per day — that\'s ' + yearlyLbs + ' lbs per year.\n\n200 years ago it was 1 lb/year. Now it\'s 152.\n\nFind out your number:';
+        var text = 'I just found out my number. ' + dailySugar + 'g of processed sugar. Per day.\n\nWhat\'s yours?';
         window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(refUrl), '_blank', 'width=550,height=420');
         track('referral_shared', { platform: 'twitter' });
       });
@@ -319,7 +319,7 @@
     var smsShare = document.getElementById('share-sms');
     if (smsShare) {
       smsShare.addEventListener('click', function () {
-        var text = 'I just took this 60-second quiz and found out I consume ' + dailySugar + 'g of processed sugar per day. That\'s ' + yearlyLbs + ' lbs a year. You need to see your number: ' + refUrl;
+        var text = 'I just found out I consume ' + dailySugar + 'g of processed sugar per day. I had no idea. You should see your number — takes 60 seconds: ' + refUrl;
         window.open('sms:?body=' + encodeURIComponent(text));
         track('referral_shared', { platform: 'sms' });
       });
@@ -328,8 +328,8 @@
     var emailShare = document.getElementById('share-email');
     if (emailShare) {
       emailShare.addEventListener('click', function () {
-        var subject = 'You need to see how much processed sugar you consume';
-        var body = "Hey,\n\nI just took this 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day — that's " + yearlyLbs + " lbs per year.\n\nApparently Americans went from 1 lb of sugar per year 200 years ago to 152 lbs today. Most of it is hidden in everyday foods.\n\nTake the quiz and see your number: " + refUrl;
+        var subject = 'Do you know your number?';
+        var body = "I just took a 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day. Had no idea.\n\nYou should see yours: " + refUrl;
         window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
         track('referral_shared', { platform: 'email' });
       });

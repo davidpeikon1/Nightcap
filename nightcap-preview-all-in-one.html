@@ -507,6 +507,15 @@ body::after {
   to { opacity: 0; transform: translateX(-30px); }
 }
 
+.nc-quiz__almost {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nc-text-dim);
+  margin-bottom: 0.75rem;
+}
+
 .nc-quiz__question {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 3.5vw, 1.9rem);
@@ -2012,7 +2021,7 @@ body::after {
         What's Your Number?
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-hero__cta-note"><span id="quiz-count-today">247</span> people took the quiz today</p>
+      <p class="nc-hero__cta-note">Takes 60 seconds &middot; Free &middot; <span id="quiz-count-today">247</span> people today</p>
     </div>
   </section>
 
@@ -2025,8 +2034,8 @@ body::after {
   <!-- ===== THE PROBLEM ===== -->
   <section class="nc-why nc-reveal" id="why">
     <div class="nc-why__container">
-      <h2 class="nc-why__title">You've tried to cut back.<br>The cravings always win.</h2>
-      <p class="nc-why__subtitle">It's not a willpower problem. 73% of packaged foods contain added sugar, and it hides behind 60+ names on labels. The system is designed to keep you hooked.</p>
+      <h2 class="nc-why__title">You already know something is wrong.</h2>
+      <p class="nc-why__subtitle">The cravings that won't stop. The crash every afternoon. The feeling that your body isn't working the way it should. You're right — and it's not your fault. 73% of packaged foods contain hidden sugar. The system is designed to keep you stuck.</p>
     </div>
   </section>
 
@@ -2078,7 +2087,7 @@ body::after {
   <!-- ===== BOTTOM CTA (for scrollers who read everything) ===== -->
   <section class="nc-bottom-cta nc-reveal" id="bottom-cta">
     <div class="nc-bottom-cta__container">
-      <p class="nc-bottom-cta__text">The average American consumes 6x the recommended sugar limit and doesn't know it.</p>
+      <p class="nc-bottom-cta__text">Find out in 60 seconds what most people go their whole life without knowing.</p>
       <button class="nc-btn nc-btn--primary nc-bottom-cta__btn" id="bottom-quiz-btn">
         What's Your Number?
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
@@ -2157,6 +2166,7 @@ body::after {
       <form id="sugar-quiz-form" class="nc-quiz__form" novalidate>
         <!-- Q1: Breakfast -->
         <div class="nc-quiz__step active" data-step="1">
+          <p class="nc-quiz__almost">Quick quiz</p>
           <h3 class="nc-quiz__question">What does your morning usually look like?</h3>
           <p class="nc-quiz__helper" id="q1-helper">Pick the closest match</p>
           <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
@@ -2233,6 +2243,7 @@ body::after {
 
         <!-- Q4: Label Awareness -->
         <div class="nc-quiz__step" data-step="4">
+          <p class="nc-quiz__almost">Almost there</p>
           <h3 class="nc-quiz__question">Do you check sugar on labels before buying?</h3>
           <p class="nc-quiz__helper" id="q4-helper">Be honest</p>
           <div class="nc-quiz__options" data-field="checks_labels" role="radiogroup" aria-labelledby="q4-helper">
@@ -2253,6 +2264,7 @@ body::after {
 
         <!-- Q5: Motivation -->
         <div class="nc-quiz__step" data-step="5">
+          <p class="nc-quiz__almost">Last question</p>
           <h3 class="nc-quiz__question">What's your main reason for wanting to cut back?</h3>
           <p class="nc-quiz__helper" id="q5-helper">Your #1 reason</p>
           <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q5-helper">
@@ -3194,16 +3206,16 @@ body::after {
 
     if (dailySugar <= 25) {
       title.textContent = payload.first_name + ", you're in the clear";
-      subtitle.textContent = "Under 25g per day. You're doing what 88% of Americans can't. Stay here.";
+      subtitle.textContent = "Under 25g per day. You're doing what 88% of Americans can't.";
     } else if (dailySugar <= 75) {
-      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
-      subtitle.textContent = dailySugar + "g per day. That's " + yearlySugarLbs + " lbs of processed sugar per year — and most of it is hiding in foods you think are healthy.";
+      title.textContent = payload.first_name + ", " + multiple + "x the limit";
+      subtitle.textContent = "You probably thought you were doing fine. Most people do. But " + dailySugar + "g per day adds up to " + yearlySugarLbs + " lbs per year — mostly from foods that don't even taste sweet.";
     } else if (dailySugar <= 150) {
-      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
-      subtitle.textContent = dailySugar + "g per day adds up to " + yearlySugarLbs + " lbs per year. That's not a willpower problem — it's a visibility problem. Now you can see it.";
+      title.textContent = payload.first_name + ", " + multiple + "x the limit";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. It's not because you eat \"badly\" — it's because the system hides it everywhere. Now you can see it.";
     } else {
-      title.textContent = payload.first_name + ", you're at " + multiple + "x the recommended limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. This is what the food system does when you're not watching. Now you're watching.";
+      title.textContent = payload.first_name + ", " + multiple + "x the limit";
+      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. Not because you're careless — because 73% of packaged foods have sugar and you were never shown the math.";
     }
 
     // Share URL
@@ -3214,7 +3226,7 @@ body::after {
     var twitterShare = document.getElementById('share-twitter');
     if (twitterShare) {
       twitterShare.addEventListener('click', function () {
-        var text = 'I just found out I consume ' + dailySugar + 'g of processed sugar per day — that\'s ' + yearlyLbs + ' lbs per year.\n\n200 years ago it was 1 lb/year. Now it\'s 152.\n\nFind out your number:';
+        var text = 'I just found out my number. ' + dailySugar + 'g of processed sugar. Per day.\n\nWhat\'s yours?';
         window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(refUrl), '_blank', 'width=550,height=420');
         track('referral_shared', { platform: 'twitter' });
       });
@@ -3223,7 +3235,7 @@ body::after {
     var smsShare = document.getElementById('share-sms');
     if (smsShare) {
       smsShare.addEventListener('click', function () {
-        var text = 'I just took this 60-second quiz and found out I consume ' + dailySugar + 'g of processed sugar per day. That\'s ' + yearlyLbs + ' lbs a year. You need to see your number: ' + refUrl;
+        var text = 'I just found out I consume ' + dailySugar + 'g of processed sugar per day. I had no idea. You should see your number — takes 60 seconds: ' + refUrl;
         window.open('sms:?body=' + encodeURIComponent(text));
         track('referral_shared', { platform: 'sms' });
       });
@@ -3232,8 +3244,8 @@ body::after {
     var emailShare = document.getElementById('share-email');
     if (emailShare) {
       emailShare.addEventListener('click', function () {
-        var subject = 'You need to see how much processed sugar you consume';
-        var body = "Hey,\n\nI just took this 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day — that's " + yearlyLbs + " lbs per year.\n\nApparently Americans went from 1 lb of sugar per year 200 years ago to 152 lbs today. Most of it is hidden in everyday foods.\n\nTake the quiz and see your number: " + refUrl;
+        var subject = 'Do you know your number?';
+        var body = "I just took a 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day. Had no idea.\n\nYou should see yours: " + refUrl;
         window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
         track('referral_shared', { platform: 'email' });
       });

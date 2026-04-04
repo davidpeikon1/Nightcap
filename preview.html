@@ -63,7 +63,7 @@
         What's Your Number?
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-hero__cta-note"><span id="quiz-count-today">247</span> people took the quiz today</p>
+      <p class="nc-hero__cta-note">Takes 60 seconds &middot; Free &middot; <span id="quiz-count-today">247</span> people today</p>
     </div>
   </section>
 
@@ -76,8 +76,8 @@
   <!-- ===== THE PROBLEM ===== -->
   <section class="nc-why nc-reveal" id="why">
     <div class="nc-why__container">
-      <h2 class="nc-why__title">You've tried to cut back.<br>The cravings always win.</h2>
-      <p class="nc-why__subtitle">It's not a willpower problem. 73% of packaged foods contain added sugar, and it hides behind 60+ names on labels. The system is designed to keep you hooked.</p>
+      <h2 class="nc-why__title">You already know something is wrong.</h2>
+      <p class="nc-why__subtitle">The cravings that won't stop. The crash every afternoon. The feeling that your body isn't working the way it should. You're right — and it's not your fault. 73% of packaged foods contain hidden sugar. The system is designed to keep you stuck.</p>
     </div>
   </section>
 
@@ -129,7 +129,7 @@
   <!-- ===== BOTTOM CTA (for scrollers who read everything) ===== -->
   <section class="nc-bottom-cta nc-reveal" id="bottom-cta">
     <div class="nc-bottom-cta__container">
-      <p class="nc-bottom-cta__text">The average American consumes 6x the recommended sugar limit and doesn't know it.</p>
+      <p class="nc-bottom-cta__text">Find out in 60 seconds what most people go their whole life without knowing.</p>
       <button class="nc-btn nc-btn--primary nc-bottom-cta__btn" id="bottom-quiz-btn">
         What's Your Number?
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
@@ -208,6 +208,7 @@
       <form id="sugar-quiz-form" class="nc-quiz__form" novalidate>
         <!-- Q1: Breakfast -->
         <div class="nc-quiz__step active" data-step="1">
+          <p class="nc-quiz__almost">Quick quiz</p>
           <h3 class="nc-quiz__question">What does your morning usually look like?</h3>
           <p class="nc-quiz__helper" id="q1-helper">Pick the closest match</p>
           <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
@@ -284,6 +285,7 @@
 
         <!-- Q4: Label Awareness -->
         <div class="nc-quiz__step" data-step="4">
+          <p class="nc-quiz__almost">Almost there</p>
           <h3 class="nc-quiz__question">Do you check sugar on labels before buying?</h3>
           <p class="nc-quiz__helper" id="q4-helper">Be honest</p>
           <div class="nc-quiz__options" data-field="checks_labels" role="radiogroup" aria-labelledby="q4-helper">
@@ -304,6 +306,7 @@
 
         <!-- Q5: Motivation -->
         <div class="nc-quiz__step" data-step="5">
+          <p class="nc-quiz__almost">Last question</p>
           <h3 class="nc-quiz__question">What's your main reason for wanting to cut back?</h3>
           <p class="nc-quiz__helper" id="q5-helper">Your #1 reason</p>
           <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q5-helper">
