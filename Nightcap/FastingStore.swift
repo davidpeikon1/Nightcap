@@ -73,8 +73,10 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
 
     var celebrationText: String {
         switch self {
-        case .firstHour:   return "The first hour is the hardest commitment."
-        case .firstDay:    return "One full day."
+        case .firstHour:
+            return "One hour.\nThe craving peaked and passed.\nThat was the hardest part."
+        case .firstDay:
+            return "One full day.\nYour body had 24 hours without the spike.\nTonight's sleep will be different."
         case .threeDays:   return "Three days. The compulsive edge is fading."
         case .oneWeek:
             return "Your gut has changed.\nYour sleep has changed.\nThis is real."
@@ -620,8 +622,11 @@ class FastingStore: ObservableObject {
     ) -> String {
         if resets == 0 {
             let days = Int(longestFast / 86400)
+            if days == 0 {
+                return "Less than a day in, and you're already tracking it. That's further than most people get."
+            }
             let dayLabel = days == 1 ? "1 day" : "\(days) days"
-            return "Zero resets this week. \(days > 0 ? "\(dayLabel) and counting." : "You're on a clean run.") That's not common. Keep building on it."
+            return "Zero resets this week. \(dayLabel) and counting. That's not common. Keep building on it."
         }
 
         let eveningResets = recentResets.filter {

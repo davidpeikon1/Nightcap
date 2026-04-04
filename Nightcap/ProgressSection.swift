@@ -192,7 +192,7 @@ struct ProgressSection: View {
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Color("NCTextSecondary"))
                     Spacer()
-                    Text(remaining < 60 ? "almost there" : "\(remainingText) away")
+                    Text(remaining < 120 ? "almost there" : "\(remainingText) away")
                         .font(.system(size: 11, design: .monospaced))
                         .foregroundStyle(Color("NCTextTertiary"))
                 }
@@ -456,7 +456,7 @@ struct LockedBadgeSheet: View {
         let h = secs / 3600
         let m = (secs % 3600) / 60
         let d = h / 24
-        if remaining < 60  { return "almost there" }
+        if remaining < 120 { return "almost there" }
         if d >= 1 {
             let rh = h % 24
             return rh > 0 ? "\(d)d \(rh)h away" : "\(d)d away"

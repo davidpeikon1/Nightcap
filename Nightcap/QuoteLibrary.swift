@@ -135,7 +135,7 @@ struct QuoteLibrary {
 
         .threeToSevenDays: [
             ReframeQuote(
-                text: "After 72 hours, dopamine receptor sensitivity begins to recover. Things that used to taste good — actually taste good — will start tasting good again.",
+                text: "After 72 hours, dopamine receptor sensitivity begins to recover. Foods you've forgotten you enjoyed are about to remind you they exist.",
                 science: "Chronic exposure to high-dopamine foods like sugar causes downregulation of D2 dopamine receptors — the brain physically reduces the number of receptors to compensate for overstimulation. After 3–4 days without the stimulus, receptor upregulation begins. This is why people who successfully reduce sugar often describe a new appreciation for simple flavors.",
                 tier: .threeToSevenDays
             ),

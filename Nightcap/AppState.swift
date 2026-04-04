@@ -26,7 +26,7 @@ enum UserGoal: String, CaseIterable, Identifiable {
 
     var affirmation: String {
         switch self {
-        case .sleepBetter:   return "Sugar spikes your cortisol, keeping you wired at night. Breaking the cycle is the most underrated sleep hack."
+        case .sleepBetter:   return "Sugar spikes your cortisol, keeping you wired at night. Breaking the cycle is the most underrated lever for sleep."
         case .moreEnergy:    return "The post-lunch crash isn't tiredness — it's blood sugar correction. Remove the spike, remove the crash."
         case .breakCravings: return "Cravings aren't a character flaw. They're a dopamine loop. Loops can be rewritten."
         case .loseWeight:    return "Processed sugar drives insulin, and insulin drives fat storage. This is the lever."

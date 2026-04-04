@@ -38,7 +38,7 @@ struct ContextualCopy {
 
         .oneToThreeDays: [
             "Your taste buds have a half-life of 10 days. The reset has started.",
-            "Three days in, the behavioral pattern begins to shift.",
+            "Three days in. Your brain is starting to stop expecting the hit.",
             "The craving still shows up. But it's quieter than it was yesterday.",
         ],
 
