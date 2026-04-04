@@ -130,6 +130,13 @@ class NotificationManager {
                 "Deep sleep — the restorative kind — improves when nocturnal glucose is stable. That's what you're working on.",
                 "The 2–4am waking that glucose spikes cause is becoming less likely every morning.",
                 "Your sleep debt is shifting. Blood sugar stability is the lever you pulled.",
+                "Three stages of sleep deepen when blood sugar is stable overnight. You're building architecture, not just hours.",
+                "The deep sleep window — when growth hormone peaks — isn't interrupted by glucose correction when sugar is gone.",
+                "Cortisol acts as your body's alarm when blood sugar drops in the night. Eliminate the drop, eliminate the alarm.",
+                "REM sleep — when memory consolidates — extends when the brain isn't managing a glucose crash.",
+                "Ghrelin spikes that wake people at 3am are partly driven by the blood sugar correction cycle. Your 3am is quieter now.",
+                "Adenosine — the sleep pressure molecule — accumulates cleanly when metabolic noise is low.",
+                "Slow-wave sleep lengthens when nocturnal insulin is low. Last night was different from the nights before you started.",
             ]
         case .moreEnergy:
             pool = [
@@ -140,6 +147,13 @@ class NotificationManager {
                 "Your cells are adapting. The flat period most people experience is the transition, not the destination.",
                 "The post-lunch crash is borrowed energy correcting itself. You're removing the borrow.",
                 "What you feel this morning is closer to your actual biological baseline than what you felt a week ago.",
+                "The 2pm crash you used to schedule around is no longer in the calendar.",
+                "Fat oxidation is a cleaner fuel — no spike, no correction, no crash. You're building the engine that runs on it.",
+                "Cortisol variability throughout the day is lower when blood sugar is stable. That's steadier energy, not just more.",
+                "The flat period during transition is the system reconfiguring. On the other side is a different baseline.",
+                "Energy that doesn't crash at the other end isn't a feeling — it's a different metabolic state. You're building it.",
+                "Mitochondrial density in cells increases with fat as the primary substrate. More energy per molecule.",
+                "The borrowed-energy cycle your body has been running is unwinding. What you feel on a clean morning is the real thing.",
             ]
         case .breakCravings:
             pool = [
@@ -150,6 +164,13 @@ class NotificationManager {
                 "The compulsive edge of the craving fades by day 3. Whatever you feel now is the echo.",
                 "You're interrupting a conditioned response. That's exactly what extinction training looks like.",
                 "The craving cycle you started this to end is ending. Each morning is evidence.",
+                "Habit extinction requires repeated exposure to the cue without the reward. That's what every day you hold is doing.",
+                "The mesolimbic dopamine system is restabilizing. The compulsive quality of the old craving is losing its mechanism.",
+                "Each time you're in the cue context without acting on it, the conditioned response weakens. That's the whole method.",
+                "The craving pathway is still there — it just has less signal behind it now. Disuse weakens the connection.",
+                "After three weeks, the conditioned craving response triggers less frequently and resolves faster. You're in that window.",
+                "The old craving cue still fires — but it's quieter every time you don't answer it.",
+                "What you're doing is what neuroscience calls extinction training. It works through repetition, not willpower.",
             ]
         case .loseWeight:
             pool = [
@@ -160,6 +181,13 @@ class NotificationManager {
                 "The fat-storage mechanism runs through insulin. Every morning clean is a morning it's lower.",
                 "Two weeks of reduced insulin produces measurable changes in visceral fat. You're building toward that.",
                 "Cortisol and insulin are both lower this morning. Both drive fat storage. Both are falling.",
+                "Chronic insulin elevation is the primary driver of visceral fat accumulation. Yours has been falling since you started.",
+                "Lipolysis — the process of breaking down stored fat for fuel — runs when insulin is low. Every morning clean is a morning it ran.",
+                "The liver's ability to process fat improves as fructose-driven lipogenesis drops. The whole system is running cleaner.",
+                "Fasting insulin is the single most predictive marker for metabolic health. Yours is trending down.",
+                "Visceral fat comes first — it's the most metabolically dangerous kind and responds fastest to insulin reduction.",
+                "Adipokines — signaling molecules from fat tissue — are shifting as visceral fat reduces. The hormonal environment is changing.",
+                "The fat-burning pathway that insulin suppresses has been running longer each day. This is what that mechanism looks like from the inside.",
             ]
         case .curious:
             pool = [
@@ -170,6 +198,13 @@ class NotificationManager {
                 "Most people have never tracked what their actual baseline is. You're in a rare category.",
                 "Each day adds to a dataset most people never collect. What are you noticing?",
                 "The experiment is still running. The data is still coming in.",
+                "Day-to-day energy variability is data. What pattern are you seeing?",
+                "The body's default state without sugar is different for everyone. You're finding yours.",
+                "Sleep, mood, hunger timing, focus — they each have their own answer. What's yours?",
+                "Baseline data is rare. Most people modify their diet and notice nothing because they weren't paying attention before they started.",
+                "The longer the trial runs, the more the data means. You're adding signal every day.",
+                "What you're learning about your own biology right now is information you can't get any other way.",
+                "The n=1 trial continues. The question 'what actually changed?' is worth asking specifically this morning.",
             ]
         case nil:
             return morningBodies[absoluteDay % morningBodies.count]

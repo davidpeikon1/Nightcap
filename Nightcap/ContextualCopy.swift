@@ -94,6 +94,12 @@ struct ContextualCopy {
             "Day 5 cravings are almost entirely conditioned responses. The biology has largely resolved.",
             "You're past the hardest part. Most people never get here.",
             "The difference between day 3 and day 7 is larger than most people expect.",
+            "The brain's reward circuitry is quieter at day 5 than it was at day 1. The signal is measurably weaker.",
+            "Taste recalibration is underway. Sweet things that used to taste normal are starting to register differently.",
+            "The habit cue still fires. But the compulsive pull behind it is losing its fuel.",
+            "By day 4, the gut-derived serotonin signal is shifting. The background steadiness that starts showing up is real.",
+            "Sleep is beginning to consolidate differently. Slow-wave sleep deepens when nocturnal glucose is stable.",
+            "You're in the window where the biology and the behavior start reinforcing each other.",
         ],
 
         .sevenTo14Days: [
@@ -104,6 +110,12 @@ struct ContextualCopy {
             "The brain is consolidating the new pattern. Each day makes the next one easier.",
             "Cravings at this stage are echoes of the old pattern, not the pattern itself.",
             "You're in territory that most people have never been in. The view is different here.",
+            "After one week, the Firmicutes that were amplifying cravings have declined measurably. The gut is sending a different signal.",
+            "The cortisol that used to spike at night looking for glucose has quieted. Your sleep architecture is changing.",
+            "Two weeks is when fMRI studies show structural change in the reward center's response to sugar cues. You're building toward it.",
+            "Taste receptor sensitivity has been recovering all week. Natural flavors are registering differently than they were.",
+            "The identity shift that starts here is not metaphorical. Behavior that required effort is becoming preference.",
+            "What most people call 'getting used to it' is D2 receptor recovery and conditioned reflexes weakening. That's what this is.",
         ],
 
         .fourteenTo30Days: [
