@@ -108,11 +108,14 @@ async function addToKlaviyo({ first_name, email, phone, sms_consent, email_conse
         properties: {
           // Quiz data stored as profile properties for segmentation
           waitlist_source: source,
-          quiz_evening_drink: quiz_data.evening_drink,
-          quiz_daily_sugary_drinks: quiz_data.daily_sugary_drinks,
-          quiz_sleep_quality: quiz_data.sleep_quality,
+          quiz_breakfast: quiz_data.breakfast,
+          quiz_daily_sweet_drinks: quiz_data.daily_sweet_drinks,
+          quiz_processed_foods: quiz_data.processed_foods,
+          quiz_checks_labels: quiz_data.checks_labels,
           quiz_motivation: quiz_data.motivation,
-          quiz_checks_sugar: quiz_data.checks_sugar,
+          quiz_sugar_from_breakfast: quiz_data.sugar_from_breakfast,
+          quiz_sugar_from_drinks: quiz_data.sugar_from_drinks,
+          quiz_sugar_from_processed: quiz_data.sugar_from_processed,
           quiz_estimated_daily_sugar: quiz_data.estimated_daily_sugar,
           quiz_estimated_weekly_sugar: quiz_data.estimated_weekly_sugar,
           quiz_estimated_yearly_sugar_lbs: quiz_data.estimated_yearly_sugar_lbs,
@@ -169,7 +172,9 @@ async function addToKlaviyo({ first_name, email, phone, sms_consent, email_conse
           properties: {
             motivation: quiz_data.motivation,
             estimated_daily_sugar: quiz_data.estimated_daily_sugar,
-            sleep_quality: quiz_data.sleep_quality,
+            sugar_from_breakfast: quiz_data.sugar_from_breakfast,
+            sugar_from_drinks: quiz_data.sugar_from_drinks,
+            sugar_from_processed: quiz_data.sugar_from_processed,
             app_download_url: APP_DOWNLOAD_URL,
           },
         },
@@ -191,16 +196,17 @@ async function sendPersonalizedSMS({ phone, first_name, quiz_data }) {
   const motivation = quiz_data.motivation;
 
   const motivationLines = {
-    cut_sugar: "You're consuming ~" + sugar + "g of sugar/day from drinks. Nightcap has 0g.",
-    sleep_better: 'Nightcap is made with ingredients clinically shown to improve sleep.',
-    healthier_habits: "One swap can change everything. You'd cut " + sugar + "g/day of sugar.",
-    relaxation: 'Unwind without the sugar crash. Nightcap uses adaptogens, not sugar.',
+    prevent_disease: "You're consuming ~" + sugar + "g of processed sugar/day. The time to act is now.",
+    energy: sugar + "g of processed sugar/day is likely behind your energy crashes.",
+    weight: sugar + "g/day of processed sugar adds up. Track it. Reduce it.",
+    family: "You consume ~" + sugar + "g of processed sugar daily. Share the quiz with your family.",
+    curiosity: "Your number: " + sugar + "g of processed sugar/day. Now track it.",
   };
 
   const message =
     'Hey ' + first_name + '! ' +
-    (motivationLines[motivation] || 'Thanks for joining the Nightcap waitlist!') +
-    '\n\nDownload the app: ' + APP_DOWNLOAD_URL +
+    (motivationLines[motivation] || 'You consume ~' + sugar + 'g of processed sugar per day.') +
+    '\n\nStart tracking: ' + APP_DOWNLOAD_URL +
     '\n\nReply STOP to opt out.';
 
   const params = new URLSearchParams();

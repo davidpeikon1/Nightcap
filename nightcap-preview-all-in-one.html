@@ -3261,7 +3261,7 @@ body {
           </div>
           <div class="nc-share-card__body">
             <div class="nc-share-card__big-number" id="share-card-sugar">0g</div>
-            <div class="nc-share-card__label">sugar per day from drinks</div>
+            <div class="nc-share-card__label">processed sugar per day</div>
             <div class="nc-share-card__divider"></div>
             <div class="nc-share-card__stats">
               <div class="nc-share-card__stat">
@@ -3275,7 +3275,7 @@ body {
             </div>
           </div>
           <div class="nc-share-card__footer">
-            <span>Take the quiz: nightcap.com/quiz</span>
+            <span>See yours: nightcap.com</span>
           </div>
         </div>
         <button class="nc-btn nc-btn--outline nc-btn--sm nc-share-card__save" id="save-share-card">
@@ -4101,11 +4101,14 @@ body {
       sms_consent: smsConsent && !!phone,
       email_consent: emailConsent,
       quiz_data: {
-        evening_drink: quizData.evening_drink,
-        daily_sugary_drinks: quizData.daily_sugary_drinks,
-        sleep_quality: quizData.sleep_quality,
+        breakfast: quizData.breakfast,
+        daily_sweet_drinks: quizData.daily_sweet_drinks,
+        processed_foods: quizData.processed_foods,
+        checks_labels: quizData.checks_labels,
         motivation: quizData.motivation,
-        checks_sugar: quizData.checks_sugar,
+        sugar_from_breakfast: quizData.sugar_from_breakfast,
+        sugar_from_drinks: quizData.sugar_from_drinks,
+        sugar_from_processed: quizData.sugar_from_processed,
         estimated_daily_sugar: quizData.estimated_daily_sugar,
         estimated_weekly_sugar: quizData.estimated_weekly_sugar,
         estimated_yearly_sugar_lbs: quizData.estimated_yearly_sugar_lbs,
