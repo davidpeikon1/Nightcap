@@ -13,21 +13,20 @@
     </div>
 
     <h1 class="nc-hero__title" id="hero-title">
-      <span class="nc-hero__title-line">How Much Processed Sugar</span>
-      <span class="nc-hero__title-line nc-hero__title-line--accent">Are You Really Consuming?</span>
+      <span class="nc-hero__title-line">Quitting Sugar Is Hard.</span>
+      <span class="nc-hero__title-line nc-hero__title-line--accent">Help Is Coming.</span>
     </h1>
     <p class="nc-hero__subtitle">
-      200 years ago, Americans consumed 1 pound of sugar per year.
-      Today it's 152 pounds. Most people have no idea how much they're actually eating.
-      Find out in 60 seconds.
+      It's in everything. It's addictive. And willpower isn't enough.
+      Nightcap is building the tools to help you leave processed sugar behind for good.
     </p>
 
     <div class="nc-hero__cta-group">
       <button class="nc-btn nc-btn--primary nc-btn--pulse" id="start-quiz-btn" aria-label="Start the Sugar Quiz">
-        Take the Sugar Quiz
+        See Your Real Number
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-hero__cta-note">60 seconds. No sign-up required. See your real number.</p>
+      <p class="nc-hero__cta-note">60-second quiz. No sign-up required.</p>
     </div>
     <div class="nc-hero__social-proof">
       <div class="nc-hero__avatars" aria-hidden="true">
@@ -37,7 +36,7 @@
         <div class="nc-avatar">+</div>
       </div>
       <span class="nc-hero__waitlist-count">
-        <strong id="waitlist-count">{{ section.settings.quiz_count | default: '2,847' }}</strong> people have taken the quiz
+        <strong id="waitlist-count">{{ section.settings.quiz_count | default: '2,847' }}</strong> people have taken the first step
       </span>
     </div>
   </div>
@@ -47,12 +46,7 @@
 {
   "name": "Nightcap Hero",
   "settings": [
-    {
-      "type": "text",
-      "id": "quiz_count",
-      "label": "Quiz Count (display)",
-      "default": "2,847"
-    }
+    { "type": "text", "id": "quiz_count", "label": "Quiz Count", "default": "2,847" }
   ]
 }
 {% endschema %}

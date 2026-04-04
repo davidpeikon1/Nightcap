@@ -2,27 +2,26 @@
 <div class="nc-exit-popup" id="exit-popup" role="dialog" aria-labelledby="exit-popup-title" aria-modal="true">
   <div class="nc-exit-popup__overlay" id="exit-popup-overlay"></div>
   <div class="nc-exit-popup__card">
-    <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close popup">&times;</button>
+    <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close">&times;</button>
     <div class="nc-exit-popup__icon" aria-hidden="true">&#9888;&#65039;</div>
-    <h3 class="nc-exit-popup__title" id="exit-popup-title">You didn't find out your number</h3>
-    <p class="nc-exit-popup__desc">Americans consume 152 lbs of processed sugar per year. Enter your email and we'll send you a personalized estimate of yours.</p>
+    <h3 class="nc-exit-popup__title" id="exit-popup-title">You're not alone in this</h3>
+    <p class="nc-exit-popup__desc">Leave your email — we'll send your sugar estimate and let you know when our tools are ready.</p>
     <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
-      <input type="email" class="nc-input" id="exit-popup-email" placeholder="you@example.com" required aria-label="Email address">
+      <input type="email" class="nc-input" id="exit-popup-email" placeholder="you@example.com" required aria-label="Email">
       <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Send My Estimate</button>
     </form>
-    <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button> for a detailed breakdown.</p>
+    <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button></p>
   </div>
 </div>
 
 <!-- Sticky CTA -->
 <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
   <div class="nc-sticky-cta__inner">
-    <span class="nc-sticky-cta__text"><strong style="font-family: 'Playfair Display', Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase;">NIGHTCAP</strong> &mdash; See your processed sugar number</span>
+    <span class="nc-sticky-cta__text"><strong style="font-family: 'Playfair Display', Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase;">NIGHTCAP</strong> &mdash; Ready to see your real number?</span>
     <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
   </div>
 </div>
 
-<!-- Toast Container -->
 <div id="toast-container" class="nc-toast-container" aria-live="polite"></div>
 
 <footer class="nc-footer">
@@ -33,16 +32,14 @@
         <span class="nc-logo__text">NIGHTCAP</span>
         <div class="nc-logo__lines"></div>
       </div>
-      <p class="nc-footer__tagline">Helping America eliminate processed sugar.</p>
+      <p class="nc-footer__tagline">Helping America leave processed sugar behind.</p>
     </div>
     <div class="nc-footer__links">
-      <a href="/pages/privacy">Privacy Policy</a>
-      <a href="/pages/terms">Terms of Service</a>
+      <a href="/pages/privacy">Privacy</a>
+      <a href="/pages/terms">Terms</a>
       <a href="mailto:hello@nightcap.com">Contact</a>
     </div>
-    <p class="nc-footer__legal">
-      &copy; {{ 'now' | date: '%Y' }} Nightcap. All rights reserved.
-    </p>
+    <p class="nc-footer__legal">&copy; {{ 'now' | date: '%Y' }} Nightcap. All rights reserved.</p>
   </div>
 </footer>
 

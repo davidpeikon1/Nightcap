@@ -1,10 +1,9 @@
 <section class="nc-proof nc-reveal" id="social-proof" aria-labelledby="proof-title">
   <div class="nc-proof__container">
-    <h2 class="nc-proof__title" id="proof-title">What People Say After Taking the Quiz</h2>
+    <h2 class="nc-proof__title" id="proof-title">You're Not Alone in This</h2>
     <div class="nc-proof__grid">
       {% for block in section.blocks %}
         <div class="nc-proof__card nc-reveal nc-reveal--delay-{{ forloop.index }}">
-          <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <p class="nc-proof__quote">"{{ block.settings.quote }}"</p>
           <div class="nc-proof__author">
             <div class="nc-proof__avatar">{{ block.settings.name | slice: 0 }}</div>
@@ -21,25 +20,25 @@
 
 {% schema %}
 {
-  "name": "Social Proof",
+  "name": "You're Not Alone",
   "blocks": [
     {
       "type": "testimonial",
       "name": "Testimonial",
       "settings": [
         { "type": "textarea", "id": "quote", "label": "Quote" },
-        { "type": "text", "id": "name", "label": "Name", "default": "Sarah M." },
-        { "type": "text", "id": "detail", "label": "Detail", "default": "Quiz Taker" }
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "detail", "label": "Detail" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Social Proof",
+      "name": "Testimonials",
       "blocks": [
-        { "type": "testimonial", "settings": { "quote": "I thought I was eating healthy. Turns out my 'healthy' granola, oat milk, and kombucha add up to 68g of sugar a day. This quiz was a wake-up call.", "name": "Sarah M.", "detail": "Quiz Taker · NYC" } },
-        { "type": "testimonial", "settings": { "quote": "Seeing my yearly number — 47 lbs of processed sugar — hit different. I started reading labels the next day. That awareness alone changed my habits.", "name": "David K.", "detail": "Quiz Taker · Austin" } },
-        { "type": "testimonial", "settings": { "quote": "I sent this to my whole family. My dad had no idea his 'heart-healthy' orange juice was giving him 30g of sugar every morning. He stopped that week.", "name": "Michelle T.", "detail": "Quiz Taker · LA" } }
+        { "type": "testimonial", "settings": { "quote": "Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was all hiding.", "name": "Sarah M.", "detail": "NYC" } },
+        { "type": "testimonial", "settings": { "quote": "The 3pm crash, the brain fog — I thought that was just aging. Three weeks off processed sugar, all of it was gone.", "name": "David K.", "detail": "Austin" } },
+        { "type": "testimonial", "settings": { "quote": "My husband thought he was fine because he doesn't eat candy. His bread, sauces, and protein bars? 72g a day. Now we're doing it together.", "name": "Michelle T.", "detail": "LA" } }
       ]
     }
   ]
