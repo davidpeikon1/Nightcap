@@ -18,7 +18,7 @@
   <meta name="twitter:description" content="Take the 60-second sugar quiz. The results might shock you.">
 
   <!-- Theme Color -->
-  <meta name="theme-color" content="#0a0a12">
+  <meta name="theme-color" content="#1a1a1a">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Fonts -->
@@ -42,25 +42,25 @@
 }
 
 :root {
-  --nc-bg: #0a0a12;
-  --nc-bg-card: #141422;
-  --nc-bg-card-hover: #1c1c32;
-  --nc-surface: #1a1a2e;
-  --nc-primary: #7c3aed;
-  --nc-primary-light: #a78bfa;
-  --nc-primary-dark: #5b21b6;
-  --nc-accent: #06d6a0;
-  --nc-accent-dark: #04a87e;
-  --nc-text: #e8e8f0;
-  --nc-text-muted: #9898b0;
-  --nc-text-dim: #686880;
-  --nc-error: #ef4444;
-  --nc-warning: #f59e0b;
-  --nc-success: #10b981;
-  --nc-border: rgba(124, 58, 237, 0.15);
-  --nc-glow: rgba(124, 58, 237, 0.3);
-  --nc-radius: 12px;
-  --nc-radius-lg: 20px;
+  --nc-bg: #1a1a1a;
+  --nc-bg-card: #242424;
+  --nc-bg-card-hover: #2e2e2e;
+  --nc-surface: #1f1f1f;
+  --nc-primary: #C8B89A;
+  --nc-primary-light: #D4C8AE;
+  --nc-primary-dark: #A89878;
+  --nc-accent: #C8B89A;
+  --nc-accent-dark: #A89878;
+  --nc-text: #E8E0D0;
+  --nc-text-muted: #9B9384;
+  --nc-text-dim: #6B6560;
+  --nc-error: #D4645C;
+  --nc-warning: #C8B89A;
+  --nc-success: #A89878;
+  --nc-border: rgba(200, 184, 154, 0.15);
+  --nc-glow: rgba(200, 184, 154, 0.2);
+  --nc-radius: 8px;
+  --nc-radius-lg: 16px;
   --nc-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --nc-font-display: 'Playfair Display', Georgia, serif;
   --nc-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -101,8 +101,8 @@ body {
 .nc-badge {
   display: inline-block;
   padding: 6px 16px;
-  background: rgba(124, 58, 237, 0.15);
-  border: 1px solid rgba(124, 58, 237, 0.3);
+  background: rgba(200, 184, 154, 0.15);
+  border: 1px solid rgba(200, 184, 154, 0.3);
   border-radius: 100px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -130,6 +130,62 @@ body {
   border: 0;
 }
 
+/* ---------- Logo ---------- */
+.nc-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2rem;
+}
+
+.nc-logo__text {
+  font-family: var(--nc-font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--nc-primary);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.nc-logo__lines {
+  width: 100%;
+  height: 6px;
+  position: relative;
+}
+
+.nc-logo__lines::before,
+.nc-logo__lines::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--nc-primary);
+}
+
+.nc-logo__lines::before {
+  top: 0;
+}
+
+.nc-logo__lines::after {
+  bottom: 0;
+}
+
+.nc-logo--sm .nc-logo__text {
+  font-size: 1.25rem;
+}
+
+.nc-logo--sm .nc-logo__lines {
+  height: 4px;
+}
+
+.nc-logo--sm .nc-logo__lines::before,
+.nc-logo--sm .nc-logo__lines::after {
+  height: 1px;
+}
+
 /* ---------- Buttons ---------- */
 .nc-btn {
   display: inline-flex;
@@ -152,12 +208,12 @@ body {
 .nc-btn--primary {
   background: linear-gradient(135deg, var(--nc-primary), var(--nc-primary-dark));
   color: #fff;
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 20px rgba(200, 184, 154, 0.3);
 }
 
 .nc-btn--primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 8px 30px rgba(200, 184, 154, 0.45);
 }
 
 .nc-btn--primary:active:not(:disabled) {
@@ -178,11 +234,11 @@ body {
 .nc-btn--outline {
   background: transparent;
   color: var(--nc-primary-light);
-  border: 1px solid rgba(124, 58, 237, 0.3);
+  border: 1px solid rgba(200, 184, 154, 0.3);
 }
 
 .nc-btn--outline:hover {
-  background: rgba(124, 58, 237, 0.1);
+  background: rgba(200, 184, 154, 0.1);
   border-color: var(--nc-primary-light);
 }
 
@@ -214,8 +270,8 @@ body {
 }
 
 @keyframes nc-pulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3); }
-  50% { box-shadow: 0 4px 40px rgba(124, 58, 237, 0.5), 0 0 60px rgba(124, 58, 237, 0.15); }
+  0%, 100% { box-shadow: 0 4px 20px rgba(200, 184, 154, 0.3); }
+  50% { box-shadow: 0 4px 40px rgba(200, 184, 154, 0.5), 0 0 60px rgba(200, 184, 154, 0.15); }
 }
 
 /* ---------- Hero ---------- */
@@ -239,23 +295,23 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(6, 214, 160, 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, var(--nc-bg) 0%, #0d0d1a 100%);
+    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(200, 184, 154, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(200, 184, 154, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, var(--nc-bg) 0%, #1f1f1f 100%);
 }
 
 .nc-hero__stars {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 60% 10%, rgba(255,255,255,0.2), transparent),
-    radial-gradient(1.5px 1.5px at 80% 50%, rgba(255,255,255,0.35), transparent),
-    radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.25), transparent),
-    radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.2), transparent),
-    radial-gradient(1px 1px at 75% 25%, rgba(255,255,255,0.15), transparent);
+    radial-gradient(1px 1px at 20% 30%, rgba(200, 184, 154,0.4), transparent),
+    radial-gradient(1px 1px at 40% 70%, rgba(200, 184, 154,0.3), transparent),
+    radial-gradient(1px 1px at 60% 10%, rgba(200, 184, 154,0.2), transparent),
+    radial-gradient(1.5px 1.5px at 80% 50%, rgba(200, 184, 154,0.35), transparent),
+    radial-gradient(1px 1px at 10% 80%, rgba(200, 184, 154,0.25), transparent),
+    radial-gradient(1px 1px at 90% 20%, rgba(200, 184, 154,0.3), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(200, 184, 154,0.2), transparent),
+    radial-gradient(1px 1px at 75% 25%, rgba(200, 184, 154,0.15), transparent);
   animation: nc-twinkle 4s ease-in-out infinite alternate;
 }
 
@@ -411,7 +467,7 @@ body {
 .nc-quiz__progress {
   position: relative;
   height: 4px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(200, 184, 154,0.08);
   border-radius: 100px;
   margin-bottom: 12px;
   overflow: hidden;
@@ -518,9 +574,9 @@ body {
 }
 
 .nc-quiz__option.selected {
-  background: rgba(124, 58, 237, 0.15);
+  background: rgba(200, 184, 154, 0.15);
   border-color: var(--nc-primary);
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 0 20px rgba(200, 184, 154, 0.15);
 }
 
 .nc-quiz__option-radio {
@@ -670,7 +726,7 @@ body {
 .nc-label__badge {
   font-size: 0.7rem;
   padding: 2px 8px;
-  background: rgba(6, 214, 160, 0.15);
+  background: rgba(200, 184, 154, 0.15);
   color: var(--nc-accent);
   border-radius: 100px;
   font-weight: 600;
@@ -696,7 +752,7 @@ body {
 
 .nc-input:focus {
   border-color: var(--nc-primary);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 0 0 3px rgba(200, 184, 154, 0.15);
 }
 
 .nc-input.error {
@@ -801,7 +857,7 @@ body {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(200, 184, 154,0.3);
   border-top-color: #fff;
   border-radius: 50%;
   animation: nc-spin 0.6s linear infinite;
@@ -849,7 +905,7 @@ body {
 
 .nc-results__ring-bg {
   fill: none;
-  stroke: rgba(255,255,255,0.06);
+  stroke: rgba(200, 184, 154,0.06);
   stroke-width: 8;
 }
 
@@ -911,7 +967,7 @@ body {
 
 .nc-results__stat:hover {
   transform: translateY(-2px);
-  border-color: rgba(124, 58, 237, 0.3);
+  border-color: rgba(200, 184, 154, 0.3);
 }
 
 .nc-results__stat-number {
@@ -930,8 +986,8 @@ body {
 
 /* Insight */
 .nc-results__insight {
-  background: rgba(124, 58, 237, 0.08);
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  background: rgba(200, 184, 154, 0.08);
+  border: 1px solid rgba(200, 184, 154, 0.2);
   border-radius: var(--nc-radius);
   padding: 20px 24px;
   display: flex;
@@ -978,7 +1034,7 @@ body {
   padding: 10px 0;
   font-size: 0.95rem;
   color: var(--nc-text-muted);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(200, 184, 154,0.04);
   transition: color var(--nc-transition);
 }
 
@@ -1002,8 +1058,8 @@ body {
 
 /* Referral Card */
 .nc-results__referral {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(6, 214, 160, 0.05));
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  background: linear-gradient(135deg, rgba(200, 184, 154, 0.08), rgba(200, 184, 154, 0.05));
+  border: 1px solid rgba(200, 184, 154, 0.2);
   border-radius: var(--nc-radius-lg);
   padding: 2rem;
   margin-bottom: 2rem;
@@ -1081,7 +1137,7 @@ body {
 .nc-referral-socials__btn:hover {
   border-color: var(--nc-primary-light);
   color: var(--nc-text);
-  background: rgba(124, 58, 237, 0.08);
+  background: rgba(200, 184, 154, 0.08);
 }
 
 /* Share */
@@ -1107,8 +1163,8 @@ body {
 .nc-results__position {
   text-align: center;
   padding: 1.5rem;
-  background: rgba(6, 214, 160, 0.06);
-  border: 1px solid rgba(6, 214, 160, 0.15);
+  background: rgba(200, 184, 154, 0.06);
+  border: 1px solid rgba(200, 184, 154, 0.15);
   border-radius: var(--nc-radius);
 }
 
@@ -1190,7 +1246,7 @@ body {
 /* ---------- Footer ---------- */
 .nc-footer {
   padding: 40px 24px;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(200, 184, 154,0.05);
   text-align: center;
 }
 
@@ -1199,11 +1255,8 @@ body {
   margin: 0 auto;
 }
 
-.nc-footer__logo {
-  font-family: var(--nc-font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 4px;
+.nc-footer__brand .nc-logo {
+  margin-bottom: 0.5rem;
 }
 
 .nc-footer__tagline {
@@ -1274,7 +1327,7 @@ body {
   transform: translateX(-50%);
   width: 200px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(200, 184, 154, 0.3), transparent);
 }
 
 .nc-why__container {
@@ -1418,7 +1471,7 @@ body {
 .nc-ingredients {
   padding: 80px 24px;
   text-align: center;
-  background: linear-gradient(180deg, transparent, rgba(124, 58, 237, 0.03), transparent);
+  background: linear-gradient(180deg, transparent, rgba(200, 184, 154, 0.03), transparent);
 }
 
 .nc-ingredients__container {
@@ -1455,7 +1508,7 @@ body {
 }
 
 .nc-ingredients__card:hover {
-  border-color: rgba(124, 58, 237, 0.3);
+  border-color: rgba(200, 184, 154, 0.3);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
@@ -1481,7 +1534,7 @@ body {
 .nc-ingredients__card-tag {
   display: inline-block;
   padding: 3px 10px;
-  background: rgba(6, 214, 160, 0.1);
+  background: rgba(200, 184, 154, 0.1);
   color: var(--nc-accent);
   font-size: 0.7rem;
   font-weight: 600;
@@ -1527,7 +1580,7 @@ body {
 }
 
 .nc-proof__stars {
-  color: #f59e0b;
+  color: #C8B89A;
   font-size: 0.9rem;
   letter-spacing: 2px;
 }
@@ -1545,7 +1598,7 @@ body {
   align-items: center;
   gap: 10px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(200, 184, 154, 0.04);
 }
 
 .nc-proof__avatar {
@@ -1578,7 +1631,7 @@ body {
 /* Press Bar */
 .nc-proof__press {
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(200, 184, 154, 0.04);
 }
 
 .nc-proof__press-label {
@@ -1644,7 +1697,7 @@ body {
 }
 
 .nc-faq__item[open] {
-  border-color: rgba(124, 58, 237, 0.3);
+  border-color: rgba(200, 184, 154, 0.3);
 }
 
 .nc-faq__question {
@@ -1839,7 +1892,7 @@ body {
 
 .nc-calculating__track {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.06);
+  stroke: rgba(200, 184, 154, 0.06);
   stroke-width: 4;
 }
 
@@ -1894,8 +1947,8 @@ body {
 }
 
 .nc-share-card__inner {
-  background: linear-gradient(145deg, #1a0a2e 0%, #0d0d1a 50%, #0a1a15 100%);
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  background: linear-gradient(145deg, #2a2520 0%, #1a1a1a 50%, #1f1d1a 100%);
+  border: 1px solid rgba(200, 184, 154, 0.25);
   border-radius: var(--nc-radius-lg);
   padding: 2rem 2rem 1.5rem;
   max-width: 360px;
@@ -1911,8 +1964,8 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(ellipse at 30% 20%, rgba(124, 58, 237, 0.12), transparent 50%),
-              radial-gradient(ellipse at 70% 80%, rgba(6, 214, 160, 0.08), transparent 50%);
+  background: radial-gradient(ellipse at 30% 20%, rgba(200, 184, 154, 0.12), transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(200, 184, 154, 0.08), transparent 50%);
   pointer-events: none;
 }
 
@@ -1934,8 +1987,8 @@ body {
 .nc-share-card__badge {
   font-size: 0.65rem;
   padding: 3px 10px;
-  background: rgba(124, 58, 237, 0.15);
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  background: rgba(200, 184, 154, 0.15);
+  border: 1px solid rgba(200, 184, 154, 0.25);
   border-radius: 100px;
   color: var(--nc-primary-light);
   text-transform: uppercase;
@@ -1952,7 +2005,7 @@ body {
   font-family: var(--nc-font-display);
   font-size: 4rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--nc-warning), #ef4444);
+  background: linear-gradient(135deg, var(--nc-warning), #D4645C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1997,7 +2050,7 @@ body {
   font-size: 0.7rem;
   color: var(--nc-text-dim);
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(200, 184, 154, 0.04);
 }
 
 .nc-share-card__save {
@@ -2044,7 +2097,7 @@ body {
 .nc-compare__bar-track {
   flex: 1;
   height: 28px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(200, 184, 154, 0.04);
   border-radius: 6px;
   overflow: hidden;
   position: relative;
@@ -2062,15 +2115,15 @@ body {
 }
 
 .nc-compare__bar--you {
-  background: linear-gradient(90deg, var(--nc-warning), #ef4444);
+  background: linear-gradient(90deg, #D4645C, var(--nc-primary));
 }
 
 .nc-compare__bar--avg {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.15));
+  background: linear-gradient(90deg, rgba(200, 184, 154, 0.12), rgba(200, 184, 154, 0.2));
 }
 
 .nc-compare__bar--nc {
-  background: linear-gradient(90deg, var(--nc-accent-dark), var(--nc-accent));
+  background: linear-gradient(90deg, #4a7c59, #6aae7a);
   min-width: 45px;
 }
 
@@ -2294,6 +2347,13 @@ body {
       <div class="nc-hero__stars"></div>
     </div>
     <div class="nc-hero__content">
+      <!-- Brand Logo -->
+      <div class="nc-logo" aria-label="Nightcap">
+        <div class="nc-logo__lines"></div>
+        <span class="nc-logo__text">NIGHTCAP</span>
+        <div class="nc-logo__lines"></div>
+      </div>
+
       <div class="nc-badge" aria-label="Coming Soon">Coming Soon</div>
       <h1 class="nc-hero__title" id="hero-title">
         <span class="nc-hero__title-line">Wind Down</span>
@@ -2550,8 +2610,8 @@ body {
         <svg viewBox="0 0 80 80" class="nc-calculating__svg">
           <defs>
             <linearGradient id="calc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#7c3aed"/>
-              <stop offset="100%" stop-color="#06d6a0"/>
+              <stop offset="0%" stop-color="#C8B89A"/>
+              <stop offset="100%" stop-color="#A89878"/>
             </linearGradient>
           </defs>
           <circle cx="40" cy="40" r="34" class="nc-calculating__track"/>
@@ -2817,8 +2877,8 @@ body {
           <svg viewBox="0 0 120 120" class="nc-results__ring-svg" role="img" aria-label="Sugar intake ring chart">
             <defs>
               <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="100%" stop-color="#06d6a0"/>
+                <stop offset="0%" stop-color="#C8B89A"/>
+                <stop offset="100%" stop-color="#A89878"/>
               </linearGradient>
             </defs>
             <circle cx="60" cy="60" r="54" class="nc-results__ring-bg"/>
@@ -2979,7 +3039,11 @@ body {
   <footer class="nc-footer">
     <div class="nc-footer__container">
       <div class="nc-footer__brand">
-        <h3 class="nc-footer__logo">Nightcap</h3>
+        <div class="nc-logo nc-logo--sm">
+          <div class="nc-logo__lines"></div>
+          <span class="nc-logo__text">NIGHTCAP</span>
+          <div class="nc-logo__lines"></div>
+        </div>
         <p class="nc-footer__tagline">The better way to wind down.</p>
       </div>
       <div class="nc-footer__links">
@@ -3013,7 +3077,7 @@ body {
   <!-- Sticky CTA (appears on scroll past hero) -->
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="nc-sticky-cta__inner">
-      <span class="nc-sticky-cta__text"><strong>Nightcap</strong> &mdash; Join <span id="sticky-count">2,847</span> on the waitlist</span>
+      <span class="nc-sticky-cta__text"><strong style="font-family: 'Playfair Display', Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase;">NIGHTCAP</strong> &mdash; Join <span id="sticky-count">2,847</span> on the waitlist</span>
       <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
     </div>
   </div>
@@ -3971,7 +4035,7 @@ body {
       var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
       var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
       gradient.setAttribute('id', 'ring-gradient');
-      gradient.innerHTML = '<stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#06d6a0"/>';
+      gradient.innerHTML = '<stop offset="0%" stop-color="#C8B89A"/><stop offset="100%" stop-color="#A89878"/>';
       defs.appendChild(gradient);
       svg.insertBefore(defs, svg.firstChild);
     }
@@ -4066,7 +4130,7 @@ body {
     canvas.height = window.innerHeight;
 
     var particles = [];
-    var colors = ['#7c3aed', '#a78bfa', '#06d6a0', '#f59e0b', '#ec4899', '#3b82f6', '#fff'];
+    var colors = ['#C8B89A', '#D4C8AE', '#A89878', '#E8E0D0', '#8B7D6B', '#B0A48E', '#fff'];
 
     for (var i = 0; i < 150; i++) {
       particles.push({

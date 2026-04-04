@@ -18,7 +18,7 @@
   <meta name="twitter:description" content="Take the 60-second sugar quiz. The results might shock you.">
 
   <!-- Theme Color -->
-  <meta name="theme-color" content="#0a0a12">
+  <meta name="theme-color" content="#1a1a1a">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Fonts -->
@@ -60,6 +60,13 @@
       <div class="nc-hero__stars"></div>
     </div>
     <div class="nc-hero__content">
+      <!-- Brand Logo -->
+      <div class="nc-logo" aria-label="Nightcap">
+        <div class="nc-logo__lines"></div>
+        <span class="nc-logo__text">NIGHTCAP</span>
+        <div class="nc-logo__lines"></div>
+      </div>
+
       <div class="nc-badge" aria-label="Coming Soon">Coming Soon</div>
       <h1 class="nc-hero__title" id="hero-title">
         <span class="nc-hero__title-line">Wind Down</span>
@@ -316,8 +323,8 @@
         <svg viewBox="0 0 80 80" class="nc-calculating__svg">
           <defs>
             <linearGradient id="calc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#7c3aed"/>
-              <stop offset="100%" stop-color="#06d6a0"/>
+              <stop offset="0%" stop-color="#C8B89A"/>
+              <stop offset="100%" stop-color="#A89878"/>
             </linearGradient>
           </defs>
           <circle cx="40" cy="40" r="34" class="nc-calculating__track"/>
@@ -583,8 +590,8 @@
           <svg viewBox="0 0 120 120" class="nc-results__ring-svg" role="img" aria-label="Sugar intake ring chart">
             <defs>
               <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="100%" stop-color="#06d6a0"/>
+                <stop offset="0%" stop-color="#C8B89A"/>
+                <stop offset="100%" stop-color="#A89878"/>
               </linearGradient>
             </defs>
             <circle cx="60" cy="60" r="54" class="nc-results__ring-bg"/>
@@ -745,7 +752,11 @@
   <footer class="nc-footer">
     <div class="nc-footer__container">
       <div class="nc-footer__brand">
-        <h3 class="nc-footer__logo">Nightcap</h3>
+        <div class="nc-logo nc-logo--sm">
+          <div class="nc-logo__lines"></div>
+          <span class="nc-logo__text">NIGHTCAP</span>
+          <div class="nc-logo__lines"></div>
+        </div>
         <p class="nc-footer__tagline">The better way to wind down.</p>
       </div>
       <div class="nc-footer__links">
@@ -779,7 +790,7 @@
   <!-- Sticky CTA (appears on scroll past hero) -->
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="nc-sticky-cta__inner">
-      <span class="nc-sticky-cta__text"><strong>Nightcap</strong> &mdash; Join <span id="sticky-count">2,847</span> on the waitlist</span>
+      <span class="nc-sticky-cta__text"><strong style="font-family: 'Playfair Display', Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase;">NIGHTCAP</strong> &mdash; Join <span id="sticky-count">2,847</span> on the waitlist</span>
       <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
     </div>
   </div>

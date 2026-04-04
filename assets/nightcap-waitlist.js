@@ -519,7 +519,7 @@
       var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
       var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
       gradient.setAttribute('id', 'ring-gradient');
-      gradient.innerHTML = '<stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#06d6a0"/>';
+      gradient.innerHTML = '<stop offset="0%" stop-color="#C8B89A"/><stop offset="100%" stop-color="#A89878"/>';
       defs.appendChild(gradient);
       svg.insertBefore(defs, svg.firstChild);
     }
@@ -614,7 +614,7 @@
     canvas.height = window.innerHeight;
 
     var particles = [];
-    var colors = ['#7c3aed', '#a78bfa', '#06d6a0', '#f59e0b', '#ec4899', '#3b82f6', '#fff'];
+    var colors = ['#C8B89A', '#D4C8AE', '#A89878', '#E8E0D0', '#8B7D6B', '#B0A48E', '#fff'];
 
     for (var i = 0; i < 150; i++) {
       particles.push({
