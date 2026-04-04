@@ -287,7 +287,7 @@
         if (i > 0) steps[i - 1].classList.add('done');
         step.classList.add('active');
       }, delay);
-      delay += 1000;
+      delay += 500;
     });
     // After all steps, mark last done and callback
     setTimeout(function () {
@@ -296,7 +296,7 @@
         steps[steps.length - 1].classList.add('done');
       }
     }, delay);
-    setTimeout(callback, delay + 600);
+    setTimeout(callback, delay + 400);
   }
 
   // ---------- Sugar Calculation ----------
