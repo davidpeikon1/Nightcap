@@ -95,7 +95,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
             return "Your gut has changed.\nYour sleep has changed.\nThis is real."
         case .twoWeeks:
             return "Two weeks.\nYou've crossed the threshold most people never reach.\nThe fMRI data at this mark is striking."
-        case .oneMonth:    return "A month. Something real has changed — inside and out."
+        case .oneMonth:
+            return "A month.\nDopamine receptor density has had meaningful time to recover.\nThe biology is measurably different from day one."
         case .hundredDays: return "100 days.\nYou're not trying to quit sugar anymore.\nYou don't eat it."
         case .sixMonths:
             return "Six months.\nThe compound interest of this has been accumulating quietly.\nWhat you feel now is what 180 days of quiet work looks like."
@@ -174,9 +175,15 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
     /// The dismiss button label shown when this badge is still locked.
     var lockedDismissText: String {
         switch self {
-        case .firstHour:   return "Keep the clock running."
-        case .firstDay:    return "Keep the clock running."
-        default:           return "Keep going."
+        case .firstHour:    return "Keep the clock running."
+        case .firstDay:     return "Keep the clock running."
+        case .threeDays:    return "Back to the clock."
+        case .oneWeek:      return "Back to the clock."
+        case .twoWeeks:     return "Still building."
+        case .oneMonth:     return "Still building."
+        case .hundredDays:  return "Still running."
+        case .sixMonths:    return "Still running."
+        case .oneYear:      return "Still running."
         }
     }
 }
