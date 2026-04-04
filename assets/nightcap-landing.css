@@ -19,9 +19,9 @@
   --nc-primary-dark: #1A1612;
   --nc-accent: #2A2520;
   --nc-accent-dark: #1A1612;
-  --nc-text: #1A1612;
-  --nc-text-muted: #5C554C;
-  --nc-text-dim: #8A8278;
+  --nc-text: #0F0D0A;
+  --nc-text-muted: #4A4540;
+  --nc-text-dim: #6E6860;
   --nc-error: #B84040;
   --nc-warning: #2A2520;
   --nc-success: #3D362E;
@@ -298,7 +298,7 @@ body::after {
 }
 
 @keyframes nc-twinkle {
-  0% { opacity: 0.5; }
+  0% { opacity: 0.65; }
   100% { opacity: 1; }
 }
 
@@ -330,14 +330,14 @@ body::after {
 
 .nc-hero__title-line--accent {
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .nc-hero__subtitle {
   font-size: 1.05rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.65;
+  opacity: 0.75;
   max-width: 480px;
   margin: 0 auto 2.5rem;
   line-height: 1.85;
@@ -456,7 +456,7 @@ body::after {
 }
 
 .nc-quiz__dot.completed {
-  opacity: 0.35;
+  opacity: 0.5;
 }
 
 /* Steps */
@@ -703,7 +703,7 @@ body::after {
 
 .nc-input::placeholder {
   color: var(--nc-text-muted);
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .nc-input:focus {
@@ -873,7 +873,7 @@ body::after {
 .nc-results__big-number-unit {
   font-size: 0.4em;
   font-weight: 500;
-  opacity: 0.5;
+  opacity: 0.65;
   vertical-align: baseline;
 }
 
@@ -941,7 +941,7 @@ body::after {
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.4;
 }
 
@@ -1084,7 +1084,7 @@ body::after {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.4;
+  opacity: 0.55;
   margin-bottom: 2rem;
 }
 
@@ -1099,7 +1099,7 @@ body::after {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.35;
+  opacity: 0.5;
   text-decoration: none;
   transition: opacity var(--nc-transition);
 }
@@ -1117,7 +1117,7 @@ body::after {
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.25;
+  opacity: 0.4;
   margin-top: 2rem;
 }
 
@@ -1159,7 +1159,7 @@ body::after {
   width: 60px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 .nc-benefits,
@@ -1203,7 +1203,7 @@ body::after {
   font-size: 1rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.6;
+  opacity: 0.75;
   line-height: 1.8;
   margin-bottom: 3rem;
 }
@@ -1237,7 +1237,7 @@ body::after {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.5;
 }
 
@@ -1307,7 +1307,7 @@ body::after {
   line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--nc-text);
-  opacity: 0.4;
+  opacity: 0.55;
   margin: 0;
 }
 
@@ -1340,7 +1340,7 @@ body::after {
   width: 60px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 .nc-benefits__container {
@@ -1390,7 +1390,7 @@ body::after {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.65;
 }
 
@@ -1484,7 +1484,7 @@ body::after {
   width: 60px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 .nc-bottom-cta__container {
@@ -1784,7 +1784,7 @@ body::after {
   font-weight: 500;
   font-style: italic;
   color: var(--nc-text);
-  opacity: 0.45;
+  opacity: 0.6;
   margin: 1.5rem 0 0;
 }
 
@@ -1795,7 +1795,7 @@ body::after {
   font-style: italic;
   text-align: center;
   color: var(--nc-text);
-  opacity: 0.45;
+  opacity: 0.6;
   margin: 2rem 0 2.5rem;
   line-height: 1.6;
 }
@@ -1872,7 +1872,7 @@ body::after {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.6;
 }
 

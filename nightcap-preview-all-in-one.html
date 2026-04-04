@@ -43,9 +43,9 @@
   --nc-primary-dark: #1A1612;
   --nc-accent: #2A2520;
   --nc-accent-dark: #1A1612;
-  --nc-text: #1A1612;
-  --nc-text-muted: #5C554C;
-  --nc-text-dim: #8A8278;
+  --nc-text: #0F0D0A;
+  --nc-text-muted: #4A4540;
+  --nc-text-dim: #6E6860;
   --nc-error: #B84040;
   --nc-warning: #2A2520;
   --nc-success: #3D362E;
@@ -322,7 +322,7 @@ body::after {
 }
 
 @keyframes nc-twinkle {
-  0% { opacity: 0.5; }
+  0% { opacity: 0.65; }
   100% { opacity: 1; }
 }
 
@@ -354,14 +354,14 @@ body::after {
 
 .nc-hero__title-line--accent {
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .nc-hero__subtitle {
   font-size: 1.05rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.65;
+  opacity: 0.75;
   max-width: 480px;
   margin: 0 auto 2.5rem;
   line-height: 1.85;
@@ -480,7 +480,7 @@ body::after {
 }
 
 .nc-quiz__dot.completed {
-  opacity: 0.35;
+  opacity: 0.5;
 }
 
 /* Steps */
@@ -727,7 +727,7 @@ body::after {
 
 .nc-input::placeholder {
   color: var(--nc-text-muted);
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .nc-input:focus {
@@ -897,7 +897,7 @@ body::after {
 .nc-results__big-number-unit {
   font-size: 0.4em;
   font-weight: 500;
-  opacity: 0.5;
+  opacity: 0.65;
   vertical-align: baseline;
 }
 
@@ -965,7 +965,7 @@ body::after {
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.4;
 }
 
@@ -1108,7 +1108,7 @@ body::after {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.4;
+  opacity: 0.55;
   margin-bottom: 2rem;
 }
 
@@ -1123,7 +1123,7 @@ body::after {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.35;
+  opacity: 0.5;
   text-decoration: none;
   transition: opacity var(--nc-transition);
 }
@@ -1141,7 +1141,7 @@ body::after {
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.25;
+  opacity: 0.4;
   margin-top: 2rem;
 }
 
@@ -1183,7 +1183,7 @@ body::after {
   width: 60px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 .nc-benefits,
@@ -1227,7 +1227,7 @@ body::after {
   font-size: 1rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.6;
+  opacity: 0.75;
   line-height: 1.8;
   margin-bottom: 3rem;
 }
@@ -1261,7 +1261,7 @@ body::after {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.5;
 }
 
@@ -1331,7 +1331,7 @@ body::after {
   line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--nc-text);
-  opacity: 0.4;
+  opacity: 0.55;
   margin: 0;
 }
 
@@ -1364,7 +1364,7 @@ body::after {
   width: 60px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 .nc-benefits__container {
@@ -1414,7 +1414,7 @@ body::after {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.65;
 }
 
@@ -1508,7 +1508,7 @@ body::after {
   width: 60px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 .nc-bottom-cta__container {
@@ -1808,7 +1808,7 @@ body::after {
   font-weight: 500;
   font-style: italic;
   color: var(--nc-text);
-  opacity: 0.45;
+  opacity: 0.6;
   margin: 1.5rem 0 0;
 }
 
@@ -1819,7 +1819,7 @@ body::after {
   font-style: italic;
   text-align: center;
   color: var(--nc-text);
-  opacity: 0.45;
+  opacity: 0.6;
   margin: 2rem 0 2.5rem;
   line-height: 1.6;
 }
@@ -1896,7 +1896,7 @@ body::after {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
+  opacity: 0.65;
   line-height: 1.6;
 }
 
@@ -2672,18 +2672,43 @@ body::after {
   captureUTM();
 
   // ---------- Start Quiz ----------
-  // COMMITMENT & CONSISTENCY: CTA shows pre-commitment question first
   if (startBtn) {
     startBtn.addEventListener('click', function () {
       showPrecommit();
     });
   }
 
+  // Pre-commitment screen handlers (bound once)
+  var precommit = document.getElementById('precommit');
+  var precommitYes = document.getElementById('precommit-yes');
+  var precommitNo = document.getElementById('precommit-no');
+  var precommitNoClicked = false;
+
+  if (precommitYes) {
+    precommitYes.addEventListener('click', function () {
+      if (precommit) { precommit.classList.remove('active'); precommit.style.display = 'none'; }
+      startQuizDirect();
+      trackEvent('precommit_yes');
+    });
+  }
+
+  if (precommitNo) {
+    precommitNo.addEventListener('click', function () {
+      if (!precommitNoClicked) {
+        precommitNo.textContent = 'Are you sure? It only takes 60 seconds.';
+        precommitNoClicked = true;
+        trackEvent('precommit_no');
+      } else {
+        if (precommit) { precommit.classList.remove('active'); precommit.style.display = 'none'; }
+        startQuizDirect();
+        trackEvent('precommit_no_then_yes');
+      }
+    });
+  }
+
   function showPrecommit() {
-    var precommit = document.getElementById('precommit');
     if (!precommit) { startQuizFromAnywhere(); return; }
 
-    // Hide hero and scrollable content
     var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
@@ -2692,36 +2717,9 @@ body::after {
     var sticky = document.getElementById('sticky-cta');
     if (sticky) sticky.classList.remove('visible');
 
+    precommit.style.display = '';
     precommit.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // "Yes" → start quiz (they've now committed)
-    var yesBtn = document.getElementById('precommit-yes');
-    if (yesBtn) {
-      yesBtn.addEventListener('click', function () {
-        precommit.classList.remove('active');
-        precommit.style.display = 'none';
-        startQuizDirect();
-        trackEvent('precommit_yes');
-      });
-    }
-
-    // "No" → they said no, but most will reconsider. Change text and offer again.
-    var noBtn = document.getElementById('precommit-no');
-    if (noBtn) {
-      noBtn.addEventListener('click', function () {
-        noBtn.textContent = 'Are you sure? It only takes 60 seconds.';
-        noBtn.style.color = 'var(--nc-text-muted)';
-        // Second click starts the quiz anyway
-        noBtn.addEventListener('click', function () {
-          precommit.classList.remove('active');
-          precommit.style.display = 'none';
-          startQuizDirect();
-          trackEvent('precommit_no_then_yes');
-        }, { once: true });
-        trackEvent('precommit_no');
-      }, { once: true });
-    }
   }
 
   function startQuizDirect() {
@@ -2813,10 +2811,14 @@ body::after {
     // Auto-advance
     isTransitioning = true;
     setTimeout(function () {
-      if (currentStep < TOTAL_STEPS) {
-        goToStep(currentStep + 1);
-      } else {
-        finishQuiz();
+      try {
+        if (currentStep < TOTAL_STEPS) {
+          goToStep(currentStep + 1);
+        } else {
+          finishQuiz();
+        }
+      } catch (e) {
+        console.error('Quiz navigation error:', e);
       }
       isTransitioning = false;
     }, 400);

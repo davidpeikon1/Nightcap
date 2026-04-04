@@ -63,18 +63,43 @@
   captureUTM();
 
   // ---------- Start Quiz ----------
-  // COMMITMENT & CONSISTENCY: CTA shows pre-commitment question first
   if (startBtn) {
     startBtn.addEventListener('click', function () {
       showPrecommit();
     });
   }
 
+  // Pre-commitment screen handlers (bound once)
+  var precommit = document.getElementById('precommit');
+  var precommitYes = document.getElementById('precommit-yes');
+  var precommitNo = document.getElementById('precommit-no');
+  var precommitNoClicked = false;
+
+  if (precommitYes) {
+    precommitYes.addEventListener('click', function () {
+      if (precommit) { precommit.classList.remove('active'); precommit.style.display = 'none'; }
+      startQuizDirect();
+      trackEvent('precommit_yes');
+    });
+  }
+
+  if (precommitNo) {
+    precommitNo.addEventListener('click', function () {
+      if (!precommitNoClicked) {
+        precommitNo.textContent = 'Are you sure? It only takes 60 seconds.';
+        precommitNoClicked = true;
+        trackEvent('precommit_no');
+      } else {
+        if (precommit) { precommit.classList.remove('active'); precommit.style.display = 'none'; }
+        startQuizDirect();
+        trackEvent('precommit_no_then_yes');
+      }
+    });
+  }
+
   function showPrecommit() {
-    var precommit = document.getElementById('precommit');
     if (!precommit) { startQuizFromAnywhere(); return; }
 
-    // Hide hero and scrollable content
     var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
@@ -83,36 +108,9 @@
     var sticky = document.getElementById('sticky-cta');
     if (sticky) sticky.classList.remove('visible');
 
+    precommit.style.display = '';
     precommit.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // "Yes" → start quiz (they've now committed)
-    var yesBtn = document.getElementById('precommit-yes');
-    if (yesBtn) {
-      yesBtn.addEventListener('click', function () {
-        precommit.classList.remove('active');
-        precommit.style.display = 'none';
-        startQuizDirect();
-        trackEvent('precommit_yes');
-      });
-    }
-
-    // "No" → they said no, but most will reconsider. Change text and offer again.
-    var noBtn = document.getElementById('precommit-no');
-    if (noBtn) {
-      noBtn.addEventListener('click', function () {
-        noBtn.textContent = 'Are you sure? It only takes 60 seconds.';
-        noBtn.style.color = 'var(--nc-text-muted)';
-        // Second click starts the quiz anyway
-        noBtn.addEventListener('click', function () {
-          precommit.classList.remove('active');
-          precommit.style.display = 'none';
-          startQuizDirect();
-          trackEvent('precommit_no_then_yes');
-        }, { once: true });
-        trackEvent('precommit_no');
-      }, { once: true });
-    }
   }
 
   function startQuizDirect() {
@@ -204,10 +202,14 @@
     // Auto-advance
     isTransitioning = true;
     setTimeout(function () {
-      if (currentStep < TOTAL_STEPS) {
-        goToStep(currentStep + 1);
-      } else {
-        finishQuiz();
+      try {
+        if (currentStep < TOTAL_STEPS) {
+          goToStep(currentStep + 1);
+        } else {
+          finishQuiz();
+        }
+      } catch (e) {
+        console.error('Quiz navigation error:', e);
       }
       isTransitioning = false;
     }, 400);
