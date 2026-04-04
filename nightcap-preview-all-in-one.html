@@ -751,6 +751,40 @@ body::after {
   60% { transform: translateY(-5px); }
 }
 
+/* Signup teaser */
+.nc-signup__teaser {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--nc-border);
+}
+
+.nc-signup__teaser-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--nc-text-dim);
+  margin-bottom: 0.25rem;
+}
+
+.nc-signup__teaser-number {
+  font-family: var(--nc-font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--nc-text);
+  margin: 0;
+}
+
+.nc-signup__teaser-sub {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--nc-text-dim);
+  margin-top: 0.25rem;
+}
+
 .nc-signup__title {
   font-family: var(--nc-font-display);
   font-size: 2rem;
@@ -1809,6 +1843,43 @@ body::after {
   opacity: 0.8;
 }
 
+/* ---------- Bottom CTA ---------- */
+.nc-bottom-cta {
+  padding: 80px 32px;
+  text-align: center;
+  position: relative;
+}
+
+.nc-bottom-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--nc-primary);
+  opacity: 0.25;
+}
+
+.nc-bottom-cta__container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.nc-bottom-cta__text {
+  font-family: var(--nc-font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
+.nc-bottom-cta__btn {
+  margin: 0 auto;
+}
+
 /* ---------- FAQ ---------- */
 .nc-faq {
   padding: 120px 32px;
@@ -2704,7 +2775,7 @@ body::after {
   </section>
 
   <!-- ===== CONTEXT ===== -->
-  <section class="nc-pullquote nc-reveal">
+  <section class="nc-pullquote nc-reveal" id="pullquote">
     <!-- ANCHORING + AUTHORITY: Plant 152 as the reference point, cite the source -->
     <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
     <p class="nc-pullquote__source">Based on USDA data cited by Dr. Casey Means, Stanford-trained physician</p>
@@ -2761,6 +2832,17 @@ body::after {
           <p class="nc-proof__attribution">Michelle T., LA</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== BOTTOM CTA (for scrollers who read everything) ===== -->
+  <section class="nc-bottom-cta nc-reveal" id="bottom-cta">
+    <div class="nc-bottom-cta__container">
+      <p class="nc-bottom-cta__text">The average American consumes 6x the recommended sugar limit and doesn't know it.</p>
+      <button class="nc-btn nc-btn--primary nc-bottom-cta__btn" id="bottom-quiz-btn">
+        What's Your Number?
+        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+      </button>
     </div>
   </section>
 
@@ -2985,10 +3067,15 @@ body::after {
   <!-- ===== SIGNUP ===== -->
   <section class="nc-signup" id="waitlist-signup">
     <div class="nc-signup__container">
+      <!-- TEASER: Flash their number to create urgency, then gate the full report -->
+      <div class="nc-signup__teaser" id="signup-teaser">
+        <p class="nc-signup__teaser-label">Your number</p>
+        <p class="nc-signup__teaser-number" id="signup-teaser-number">—</p>
+        <p class="nc-signup__teaser-sub">per day</p>
+      </div>
       <div class="nc-signup__header">
-        <!-- SUNK COST + ZEIGARNIK: They've invested 60 seconds. Don't lose it. -->
-        <h2 class="nc-signup__title">Your report is ready</h2>
-        <p class="nc-signup__subtitle">Where should we send it?</p>
+        <h2 class="nc-signup__title">See your full report</h2>
+        <p class="nc-signup__subtitle">Breakdown by source. How you compare. What to do next.</p>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
         <div class="nc-form-group">
@@ -3074,14 +3161,13 @@ body::after {
         <p class="nc-results__cta-note">Track your intake. Spot hidden sources. Build new habits.</p>
       </div>
 
-      <!-- Share -->
+      <!-- IDENTITY: Sharing = "I'm the kind of person who cares about this" -->
       <div class="nc-results__share-section">
-        <!-- RECIPROCITY: They got value. Now give it to someone they care about. -->
-        <p class="nc-results__share-prompt">Someone you care about should see their number too.</p>
+        <p class="nc-results__share-prompt">Most people have no idea what their number is.<br>You do now. Send the quiz to someone who should.</p>
         <div class="nc-referral-socials">
-          <button class="nc-referral-socials__btn" id="share-twitter">Share on X</button>
-          <button class="nc-referral-socials__btn" id="share-sms">Text a Friend</button>
-          <button class="nc-referral-socials__btn" id="share-email">Email</button>
+          <button class="nc-referral-socials__btn" id="share-sms">Text It</button>
+          <button class="nc-referral-socials__btn" id="share-email">Email It</button>
+          <button class="nc-referral-socials__btn" id="share-twitter">Post It</button>
         </div>
       </div>
     </div>
@@ -3285,7 +3371,7 @@ body::after {
 
   function startQuizFromAnywhere() {
     // Hide all pre-quiz sections
-    var sections = ['hero', 'why', 'how-it-works', 'ingredients'];
+    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -3477,10 +3563,15 @@ body::after {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       runCalculatingAnimation(function () {
         calcScreen.classList.remove('active');
+        // Populate teaser number before showing signup
+        var teaserNum = document.getElementById('signup-teaser-number');
+        if (teaserNum && quizData.estimated_daily_sugar) {
+          teaserNum.textContent = quizData.estimated_daily_sugar + 'g';
+        }
         signupSection.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         var nameInput = document.getElementById('signup-name');
-        if (nameInput) setTimeout(function () { nameInput.focus(); }, 300);
+        if (nameInput) setTimeout(function () { nameInput.focus(); }, 400);
       });
     } else {
       // Fallback: skip animation
@@ -3556,6 +3647,12 @@ body::after {
   var stickyQuizBtn = document.getElementById('sticky-quiz-btn');
   if (stickyQuizBtn) {
     stickyQuizBtn.addEventListener('click', startQuizFromAnywhere);
+  }
+
+  // Bottom CTA button
+  var bottomQuizBtn = document.getElementById('bottom-quiz-btn');
+  if (bottomQuizBtn) {
+    bottomQuizBtn.addEventListener('click', startQuizFromAnywhere);
   }
 
   // ---------- Sticky CTA on Scroll ----------

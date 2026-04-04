@@ -71,7 +71,7 @@
 
   function startQuizFromAnywhere() {
     // Hide all pre-quiz sections
-    var sections = ['hero', 'why', 'how-it-works', 'ingredients'];
+    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -263,10 +263,15 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       runCalculatingAnimation(function () {
         calcScreen.classList.remove('active');
+        // Populate teaser number before showing signup
+        var teaserNum = document.getElementById('signup-teaser-number');
+        if (teaserNum && quizData.estimated_daily_sugar) {
+          teaserNum.textContent = quizData.estimated_daily_sugar + 'g';
+        }
         signupSection.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         var nameInput = document.getElementById('signup-name');
-        if (nameInput) setTimeout(function () { nameInput.focus(); }, 300);
+        if (nameInput) setTimeout(function () { nameInput.focus(); }, 400);
       });
     } else {
       // Fallback: skip animation
@@ -342,6 +347,12 @@
   var stickyQuizBtn = document.getElementById('sticky-quiz-btn');
   if (stickyQuizBtn) {
     stickyQuizBtn.addEventListener('click', startQuizFromAnywhere);
+  }
+
+  // Bottom CTA button
+  var bottomQuizBtn = document.getElementById('bottom-quiz-btn');
+  if (bottomQuizBtn) {
+    bottomQuizBtn.addEventListener('click', startQuizFromAnywhere);
   }
 
   // ---------- Sticky CTA on Scroll ----------

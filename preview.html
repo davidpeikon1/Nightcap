@@ -70,7 +70,7 @@
   </section>
 
   <!-- ===== CONTEXT ===== -->
-  <section class="nc-pullquote nc-reveal">
+  <section class="nc-pullquote nc-reveal" id="pullquote">
     <!-- ANCHORING + AUTHORITY: Plant 152 as the reference point, cite the source -->
     <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
     <p class="nc-pullquote__source">Based on USDA data cited by Dr. Casey Means, Stanford-trained physician</p>
@@ -127,6 +127,17 @@
           <p class="nc-proof__attribution">Michelle T., LA</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== BOTTOM CTA (for scrollers who read everything) ===== -->
+  <section class="nc-bottom-cta nc-reveal" id="bottom-cta">
+    <div class="nc-bottom-cta__container">
+      <p class="nc-bottom-cta__text">The average American consumes 6x the recommended sugar limit and doesn't know it.</p>
+      <button class="nc-btn nc-btn--primary nc-bottom-cta__btn" id="bottom-quiz-btn">
+        What's Your Number?
+        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+      </button>
     </div>
   </section>
 
@@ -351,10 +362,15 @@
   <!-- ===== SIGNUP ===== -->
   <section class="nc-signup" id="waitlist-signup">
     <div class="nc-signup__container">
+      <!-- TEASER: Flash their number to create urgency, then gate the full report -->
+      <div class="nc-signup__teaser" id="signup-teaser">
+        <p class="nc-signup__teaser-label">Your number</p>
+        <p class="nc-signup__teaser-number" id="signup-teaser-number">—</p>
+        <p class="nc-signup__teaser-sub">per day</p>
+      </div>
       <div class="nc-signup__header">
-        <!-- SUNK COST + ZEIGARNIK: They've invested 60 seconds. Don't lose it. -->
-        <h2 class="nc-signup__title">Your report is ready</h2>
-        <p class="nc-signup__subtitle">Where should we send it?</p>
+        <h2 class="nc-signup__title">See your full report</h2>
+        <p class="nc-signup__subtitle">Breakdown by source. How you compare. What to do next.</p>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
         <div class="nc-form-group">
@@ -440,14 +456,13 @@
         <p class="nc-results__cta-note">Track your intake. Spot hidden sources. Build new habits.</p>
       </div>
 
-      <!-- Share -->
+      <!-- IDENTITY: Sharing = "I'm the kind of person who cares about this" -->
       <div class="nc-results__share-section">
-        <!-- RECIPROCITY: They got value. Now give it to someone they care about. -->
-        <p class="nc-results__share-prompt">Someone you care about should see their number too.</p>
+        <p class="nc-results__share-prompt">Most people have no idea what their number is.<br>You do now. Send the quiz to someone who should.</p>
         <div class="nc-referral-socials">
-          <button class="nc-referral-socials__btn" id="share-twitter">Share on X</button>
-          <button class="nc-referral-socials__btn" id="share-sms">Text a Friend</button>
-          <button class="nc-referral-socials__btn" id="share-email">Email</button>
+          <button class="nc-referral-socials__btn" id="share-sms">Text It</button>
+          <button class="nc-referral-socials__btn" id="share-email">Email It</button>
+          <button class="nc-referral-socials__btn" id="share-twitter">Post It</button>
         </div>
       </div>
     </div>
