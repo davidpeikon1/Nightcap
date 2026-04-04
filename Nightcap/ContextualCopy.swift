@@ -43,7 +43,7 @@ struct ContextualCopy {
             "Your gut microbiome starts shifting within hours of removing processed sugar.",
             "The craving you had an hour ago was a hormone, not a choice.",
             "By now your liver has cleared the acute fructose load. The system is quieter.",
-            "What felt urgent two hours ago is already fading. That's what the 20-minute rule is about.",
+            "The acute pull is over. What remains is the echo — and echoes fade.",
             "The biological pull has weakened. What remains is habit — and habits respond to interruption.",
             "Three hours from now this won't feel the same as it does right now.",
         ],
@@ -65,7 +65,7 @@ struct ContextualCopy {
             "Day 2 is where most people convince themselves they don't really need to do this. You're still here.",
             "The physiological pull is almost resolved. What's left is habit — and you're already interrupting it.",
             "The gut microbiome is already responding. Beneficial bacteria populations grow in the absence of their competitor.",
-            "Your taste receptors are beginning the process of recovery. It takes two weeks. You've started.",
+            "Dopamine receptor sensitivity begins recovering around 72 hours. The biology is already turning.",
         ],
 
         .threeToSevenDays: [

@@ -61,9 +61,10 @@ class NotificationManager {
     // MARK: - Scheduling
 
     /// Schedule 14 morning + 14 evening notifications — one per day for the next
-    /// 14 days — so every message in each pool fires before any repeats. Re-call on
-    /// each app foreground to keep the window fresh. Safe to call redundantly;
-    /// old requests are removed and replaced each time.
+    /// 14 days. Messages are drawn from 21-entry pools using an absolute day index
+    /// so every message cycles before repeating (~3 weeks). Re-call on each app
+    /// foreground to keep the window fresh. Safe to call redundantly; old requests
+    /// are removed and replaced each time.
     func scheduleDailyNotifications() {
         // Remove legacy identifiers (repeating weekday-based and any prior day-based).
         var toRemove = ["nightcap.morning", "nightcap.evening"]
@@ -143,6 +144,13 @@ class NotificationManager {
         "Whatever happened yesterday, the clock is running and the work continues.",
         "The biology of this is working for you, even while you sleep.",
         "Another morning on the right side of this. That's the whole job.",
+        "Fasting insulin is lower this morning than it was before you started. Every system downstream follows it.",
+        "The conditioned craving that shows up at a specific time today is a reflex, not a need. The difference matters.",
+        "One more day further than most people ever get. That's not nothing.",
+        "The gut bacteria that were amplifying your cravings have been declining since you started. This morning they're weaker.",
+        "Sleep last night ran on stable blood glucose. That's a different kind of recovery.",
+        "Your taste receptors this morning are more sensitive than they were when you started.",
+        "The work is quieter now. That's what progress looks like after the hard part is over.",
     ]
 
     /// Fourteen evening messages — distributed across weekdays so the message
@@ -163,6 +171,13 @@ class NotificationManager {
         "End tonight the same way you started this morning.",
         "Still running. That's the whole job tonight.",
         "Every evening you hold the line, tomorrow gets easier.",
+        "Tonight's cortisol won't spike at 3am looking for glucose to stabilize. That's a different sleep.",
+        "The evening craving is the pattern looking for its window. Close it.",
+        "What you don't eat tonight is compounding toward tomorrow's baseline.",
+        "The reflex will look for you around now. You've seen it before. You know how it ends.",
+        "Hold the evening and the morning takes care of itself.",
+        "The hard part of today is the next 90 minutes. After that, the biology quiets down.",
+        "Every night you close clean, the biology of tomorrow starts stronger.",
     ]
 
     // MARK: - Milestone notifications

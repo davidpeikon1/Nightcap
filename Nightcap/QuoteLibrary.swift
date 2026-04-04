@@ -498,6 +498,26 @@ struct QuoteLibrary {
                 science: "Advanced glycation end-products (AGEs) form when sugar molecules bind irreversibly to proteins, particularly collagen and elastin. This is one of the primary mechanisms of biological aging, affecting skin, blood vessels, kidneys, and the brain. AGE formation slows immediately with dietary sugar reduction, and the body's repair mechanisms — including enzymatic deglycation — accelerate in the absence of ongoing AGE formation.",
                 tier: .thirtyPlusDays
             ),
+            ReframeQuote(
+                text: "The hardest thing about long-term change is that it becomes invisible. Nobody sees what you're not eating. You know. That asymmetry is a form of discipline most people never develop.",
+                science: "Long-term behavior change research consistently shows that sustained private commitment — in the absence of social reinforcement or external accountability — is among the most demanding forms of self-regulation. Intrinsic motivation (values, identity) has been shown to be more durable than extrinsic motivation (social approval, rewards). You are operating on the harder, more durable form.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Blood pressure, resting heart rate, fasting glucose — chronic sugar affects all of them. At a month or more, all three have had time to move in the right direction.",
+                science: "Chronic high sugar intake elevates fasting insulin, which drives increased sodium retention (raising blood pressure), raises resting heart rate through sympathetic nervous system activation, and chronically elevates fasting blood glucose through insulin resistance. Sustained sugar reduction addresses all three mechanisms. Measurable improvements in cardiovascular markers are typically visible at 4–8 weeks of consistent dietary change.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "The brain at this stage is different from the brain on day one. D2 receptor density. Baseline dopamine tone. Reward sensitivity for ordinary things. All measurably changed.",
+                science: "Neuroimaging research on chronic high-sugar consumption shows downregulation of dopamine D2 receptors, reduced baseline striatal dopamine, and blunted reward response to non-sugar stimuli. Recovery from this profile — which resembles tolerance in substance use disorders — follows a roughly 4–8 week trajectory with sustained abstinence. At one month and beyond, the recovery is significant and measurable.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "The question at this stage isn't 'can I keep going.' You already answered that. The question is what you do with the biology you've been building.",
+                science: "After sustained behavior change of 30+ days, goal-maintenance research shows a qualitative shift in the structure of decision-making. The question moves from 'will I continue' (which requires active decision) to 'how do I build on this' (which assumes continuation). This shift in goal framing is predictive of long-term success and reflects the consolidation of identity-based rather than willpower-based maintenance.",
+                tier: .thirtyPlusDays
+            ),
         ],
     ]
 
