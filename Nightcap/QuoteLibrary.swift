@@ -127,6 +127,21 @@ struct QuoteLibrary {
                 science: "Withdrawal from substances that activate dopamine reward pathways — including processed sugar — follows a predictable trajectory: discomfort peaks early and resolves with continued abstinence. It is the biological cost of recalibration. It is finite, and it ends.",
                 tier: .thirtyMinToTwoHours
             ),
+            ReframeQuote(
+                text: "The blood sugar spike has resolved. What you feel now is insulin working — which means the system is doing exactly what it should be doing.",
+                science: "After a high-sugar meal, insulin clears circulating glucose within 60–120 minutes. The mild discomfort some people feel during this correction phase is sometimes misread as a craving for more sugar. It is insulin completing its job — not a signal to consume more.",
+                tier: .thirtyMinToTwoHours
+            ),
+            ReframeQuote(
+                text: "Somewhere in the last hour, the acute craving passed its peak. You may not have noticed it — which is exactly what winning this looks like.",
+                science: "Craving intensity follows a bell-curve pattern that peaks within the first 30–60 minutes and then declines. Studies tracking subjective craving intensity in real time show that the descent is often imperceptible to the individual experiencing it — they simply notice, later, that the urgency has faded. That is what you are in now.",
+                tier: .thirtyMinToTwoHours
+            ),
+            ReframeQuote(
+                text: "Sugar is the only ingredient where the regulatory science is settled, the consumer harm is documented, and the industry response is to reformulate rather than reduce. You're opting out of a product, not a food.",
+                science: "Refined sugar — particularly added fructose — has been independently linked to metabolic syndrome, non-alcoholic fatty liver disease, hyperinsulinemia, and dental caries in peer-reviewed literature spanning decades. The food industry's response has been reformulation, marketing pivots, and industry-funded research. The product's harm profile is not disputed among independent researchers. Recognizing what you're opting out of changes the frame from deprivation to refusal.",
+                tier: .thirtyMinToTwoHours
+            ),
         ],
 
         .twoToSixHours: [
