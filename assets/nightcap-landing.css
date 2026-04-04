@@ -514,26 +514,25 @@ body::after {
 .nc-quiz__dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 10px;
+  margin-bottom: 2.5rem;
 }
 
 .nc-quiz__dot {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: rgba(42, 37, 32, 0.12);
+  background: var(--nc-text);
+  opacity: 0.15;
   transition: all var(--nc-transition);
 }
 
 .nc-quiz__dot.active {
-  background: var(--nc-primary);
-  transform: scale(1.2);
+  opacity: 0.6;
 }
 
 .nc-quiz__dot.completed {
-  background: var(--nc-primary);
-  opacity: 0.5;
+  opacity: 0.35;
 }
 
 .nc-quiz__progress-text {
@@ -582,11 +581,11 @@ body::after {
 
 .nc-quiz__question {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-size: clamp(1.5rem, 3.5vw, 1.9rem);
   font-weight: 600;
   letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
 }
 
 .nc-quiz__helper {
@@ -606,27 +605,25 @@ body::after {
 .nc-quiz__option {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 22px;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
   background: var(--nc-bg-card);
   border: 1px solid var(--nc-border);
-  border-left: 3px solid transparent;
   border-radius: var(--nc-radius);
   cursor: pointer;
   transition: all var(--nc-transition);
   text-align: left;
   font-family: var(--nc-font);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 500;
   color: var(--nc-text);
   width: 100%;
-  box-shadow: var(--nc-shadow-sm);
 }
 
 .nc-quiz__option:hover {
   background: var(--nc-bg-card-hover);
-  border-left-color: var(--nc-primary);
-  transform: translateX(3px);
-  box-shadow: var(--nc-shadow-md);
+  border-color: rgba(42, 37, 32, 0.2);
 }
 
 .nc-quiz__option:focus-visible {
@@ -635,42 +632,18 @@ body::after {
 }
 
 .nc-quiz__option.selected {
-  background: rgba(42, 37, 32, 0.08);
-  border-color: rgba(42, 37, 32, 0.2);
-  border-left-color: var(--nc-primary);
-  box-shadow: var(--nc-shadow-md), inset 0 0 0 1px rgba(42, 37, 32, 0.05);
-}
-
-.nc-quiz__option-radio {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--nc-border);
-  flex-shrink: 0;
-  transition: all var(--nc-transition);
-  position: relative;
-}
-
-.nc-quiz__option.selected .nc-quiz__option-radio {
-  border-color: var(--nc-primary);
   background: var(--nc-primary);
+  border-color: var(--nc-primary);
+  color: var(--nc-bg);
 }
 
-.nc-quiz__option.selected .nc-quiz__option-radio::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--nc-bg);
+.nc-quiz__option.selected .nc-quiz__option-sugar {
+  color: var(--nc-bg);
+  opacity: 0.6;
 }
 
-.nc-quiz__option-icon {
-  font-size: 1.4rem;
-  flex-shrink: 0;
+.nc-quiz__step-icon {
+  display: none;
 }
 
 .nc-quiz__option-label {
@@ -680,10 +653,10 @@ body::after {
 
 .nc-quiz__option-sugar {
   font-size: 0.75rem;
-  color: var(--nc-text-muted);
   font-weight: 500;
+  color: var(--nc-text-dim);
   white-space: nowrap;
-  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Back button */
@@ -953,7 +926,31 @@ body::after {
 
 .nc-results__report {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+.nc-results__big-number {
+  font-family: var(--nc-font-display);
+  font-size: clamp(5rem, 15vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--nc-text);
+  margin-bottom: 0.25rem;
+}
+
+.nc-results__big-number-unit {
+  font-size: 0.4em;
+  font-weight: 500;
+  opacity: 0.5;
+  vertical-align: baseline;
+}
+
+.nc-results__big-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  margin-bottom: 2rem;
 }
 
 /* Ring */
@@ -1000,9 +997,10 @@ body::after {
 
 .nc-results__title {
   font-family: var(--nc-font-display);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
 }
 
 .nc-results__subtitle {
