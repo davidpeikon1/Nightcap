@@ -232,6 +232,6 @@ private func nextMilestone(for elapsed: TimeInterval) -> String {
             ? "\(d) day\(d == 1 ? "" : "s") and \(remH) hour\(remH == 1 ? "" : "s")"
             : "\(d) day\(d == 1 ? "" : "s")"
     }
-    if rh > 0   { return "\(rh) hour\(rh == 1 ? "" : "s") and \(rm) minute\(rm == 1 ? "" : "s")" }
+    if rh > 0   { return rm > 0 ? "\(rh) hour\(rh == 1 ? "" : "s") and \(rm) minute\(rm == 1 ? "" : "s")" : "\(rh) hour\(rh == 1 ? "" : "s")" }
     return "\(rm) minute\(rm == 1 ? "" : "s")"
 }
