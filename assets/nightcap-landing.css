@@ -1239,6 +1239,57 @@ body::after {
   line-height: 1.5;
 }
 
+/* ---------- Pre-commitment ---------- */
+.nc-precommit {
+  display: none;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.nc-precommit.active {
+  display: flex;
+  animation: nc-fadeInUp 0.5s ease-out;
+}
+
+.nc-precommit__container {
+  max-width: 480px;
+}
+
+.nc-precommit__question {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 2.5rem;
+}
+
+.nc-precommit__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nc-precommit__no {
+  background: none;
+  border: none;
+  font-family: var(--nc-font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--nc-text-dim);
+  cursor: pointer;
+  padding: 8px;
+  transition: color var(--nc-transition);
+}
+
+.nc-precommit__no:hover {
+  color: var(--nc-text-muted);
+}
+
 /* ---------- Pull Quote ---------- */
 .nc-pullquote {
   padding: 100px 32px;

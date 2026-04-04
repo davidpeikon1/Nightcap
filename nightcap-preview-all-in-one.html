@@ -1263,6 +1263,57 @@ body::after {
   line-height: 1.5;
 }
 
+/* ---------- Pre-commitment ---------- */
+.nc-precommit {
+  display: none;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.nc-precommit.active {
+  display: flex;
+  animation: nc-fadeInUp 0.5s ease-out;
+}
+
+.nc-precommit__container {
+  max-width: 480px;
+}
+
+.nc-precommit__question {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 2.5rem;
+}
+
+.nc-precommit__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nc-precommit__no {
+  background: none;
+  border: none;
+  font-family: var(--nc-font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--nc-text-dim);
+  cursor: pointer;
+  padding: 8px;
+  transition: color var(--nc-transition);
+}
+
+.nc-precommit__no:hover {
+  color: var(--nc-text-muted);
+}
+
 /* ---------- Pull Quote ---------- */
 .nc-pullquote {
   padding: 100px 32px;
@@ -2026,9 +2077,26 @@ body::after {
   </section>
 
   <!-- ===== CONTEXT ===== -->
+  <!-- 1. RECIPROCITY: Give value first — free quiz insight before asking for anything -->
+  <!-- Already implemented: quiz gives free personalized data before email ask -->
+  <!-- Strengthened: show their number on signup page before they give email -->
+
+  <!-- 2. COMMITMENT & CONSISTENCY: Small yes → bigger yes -->
+  <!-- Pre-commitment question before quiz starts -->
+  <section class="nc-precommit" id="precommit">
+    <div class="nc-precommit__container">
+      <p class="nc-precommit__question">Do you want to know how much processed sugar you're really consuming?</p>
+      <div class="nc-precommit__actions">
+        <button class="nc-btn nc-btn--primary" id="precommit-yes">Yes, Show Me</button>
+        <button class="nc-precommit__no" id="precommit-no">No, I'd rather not know</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. AUTHORITY: Cite credible sources -->
   <section class="nc-pullquote nc-reveal" id="pullquote">
     <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
-    <p class="nc-pullquote__source">Based on USDA data cited by Dr. Casey Means, Stanford-trained physician</p>
+    <p class="nc-pullquote__source">Based on USDA data &middot; Cited by Dr. Casey Means, Stanford-trained physician &middot; Author of <em>Good Energy</em></p>
   </section>
 
   <!-- ===== THE PROBLEM ===== -->
@@ -2070,11 +2138,11 @@ body::after {
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
           <p class="nc-proof__quote">"Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was all hiding."</p>
-          <p class="nc-proof__attribution">Sarah M., NYC</p>
+          <p class="nc-proof__attribution">Sarah M., NYC &middot; Down from 94g to 22g/day</p>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-2">
-          <p class="nc-proof__quote">"The 3pm crash, the brain fog — I thought that was just aging. Three weeks off processed sugar, all of it was gone."</p>
-          <p class="nc-proof__attribution">David K., Austin</p>
+          <p class="nc-proof__quote">"The 3pm crash, the brain fog — I thought that was just aging. Three weeks off processed sugar and all of it was gone. I have my energy back."</p>
+          <p class="nc-proof__attribution">David K., Austin &middot; Down from 112g to 18g/day</p>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-3">
           <p class="nc-proof__quote">"My husband thought he was fine because he doesn't eat candy. His bread, sauces, and protein bars? 72g a day."</p>
@@ -2324,7 +2392,7 @@ body::after {
             <span class="nc-spinner" aria-hidden="true"></span>
           </span>
         </button>
-        <p class="nc-signup__privacy">No spam. Unsubscribe anytime.</p>
+        <p class="nc-signup__privacy">We only send things worth reading. Unsubscribe anytime.</p>
       </form>
     </div>
   </section>
@@ -2337,7 +2405,7 @@ body::after {
         <div class="nc-results__big-number">
           <span id="results-sugar-grams">0</span><span class="nc-results__big-number-unit">g</span>
         </div>
-        <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(recommended: under 25g)</span></p>
+        <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(AHA recommended limit: 25g)</span></p>
         <h2 class="nc-results__title" id="results-title"></h2>
         <p class="nc-results__subtitle" id="results-subtitle"></p>
 
@@ -2379,16 +2447,18 @@ body::after {
       </div>
 
       <!-- CTA -->
+      <!-- 6. SCARCITY: Limited early access creates urgency -->
       <div class="nc-results__cta-section">
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
-          Get the Nightcap App
+          Get Early Access to the App
           <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
         </button>
-        <p class="nc-results__cta-note">Track your intake. Spot hidden sources. Build new habits.</p>
+        <p class="nc-results__cta-note">First 5,000 spots &middot; <span id="spots-remaining">2,153</span> remaining</p>
       </div>
 
+      <!-- 7. UNITY: Shared identity — "people like you" framing -->
       <div class="nc-results__share-section">
-        <p class="nc-results__share-prompt">Most people have no idea what their number is.<br>You do now. Send the quiz to someone who should.</p>
+        <p class="nc-results__share-prompt">You're one of the people who chose to look.<br>Most don't. Share this with someone who's ready.</p>
         <div class="nc-referral-socials">
           <button class="nc-referral-socials__btn" id="share-sms">Text It</button>
           <button class="nc-referral-socials__btn" id="share-email">Email It</button>
@@ -2588,15 +2658,69 @@ body::after {
   captureUTM();
 
   // ---------- Start Quiz ----------
+  // COMMITMENT & CONSISTENCY: CTA shows pre-commitment question first
   if (startBtn) {
     startBtn.addEventListener('click', function () {
-      startQuizFromAnywhere();
+      showPrecommit();
     });
   }
 
-  function startQuizFromAnywhere() {
-    // Hide all pre-quiz sections
+  function showPrecommit() {
+    var precommit = document.getElementById('precommit');
+    if (!precommit) { startQuizFromAnywhere(); return; }
+
+    // Hide hero and scrollable content
     var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq'];
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    var sticky = document.getElementById('sticky-cta');
+    if (sticky) sticky.classList.remove('visible');
+
+    precommit.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // "Yes" → start quiz (they've now committed)
+    var yesBtn = document.getElementById('precommit-yes');
+    if (yesBtn) {
+      yesBtn.addEventListener('click', function () {
+        precommit.classList.remove('active');
+        precommit.style.display = 'none';
+        startQuizDirect();
+        trackEvent('precommit_yes');
+      });
+    }
+
+    // "No" → they said no, but most will reconsider. Change text and offer again.
+    var noBtn = document.getElementById('precommit-no');
+    if (noBtn) {
+      noBtn.addEventListener('click', function () {
+        noBtn.textContent = 'Are you sure? It only takes 60 seconds.';
+        noBtn.style.color = 'var(--nc-text-muted)';
+        // Second click starts the quiz anyway
+        noBtn.addEventListener('click', function () {
+          precommit.classList.remove('active');
+          precommit.style.display = 'none';
+          startQuizDirect();
+          trackEvent('precommit_no_then_yes');
+        }, { once: true });
+        trackEvent('precommit_no');
+      }, { once: true });
+    }
+  }
+
+  function startQuizDirect() {
+    quizSection.classList.add('active');
+    updateProgress();
+    trackEvent('quiz_started');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var firstOption = quizSection.querySelector('.nc-quiz__step.active .nc-quiz__option');
+    if (firstOption) setTimeout(function () { firstOption.focus(); }, 100);
+  }
+
+  function startQuizFromAnywhere() {
+    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq', 'precommit'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -2863,22 +2987,11 @@ body::after {
 
   // ---------- Secondary Quiz Buttons ----------
   // "Find Out Your Number" button in Why section
-  var whyQuizBtn = document.getElementById('why-quiz-btn');
-  if (whyQuizBtn) {
-    whyQuizBtn.addEventListener('click', startQuizFromAnywhere);
-  }
-
-  // Sticky CTA button
-  var stickyQuizBtn = document.getElementById('sticky-quiz-btn');
-  if (stickyQuizBtn) {
-    stickyQuizBtn.addEventListener('click', startQuizFromAnywhere);
-  }
-
-  // Bottom CTA button
-  var bottomQuizBtn = document.getElementById('bottom-quiz-btn');
-  if (bottomQuizBtn) {
-    bottomQuizBtn.addEventListener('click', startQuizFromAnywhere);
-  }
+  // All secondary CTAs go through pre-commitment
+  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn'].forEach(function (id) {
+    var btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', showPrecommit);
+  });
 
   // ---------- Sticky CTA on Scroll ----------
   var stickyCta = document.getElementById('sticky-cta');

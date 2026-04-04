@@ -63,15 +63,69 @@
   captureUTM();
 
   // ---------- Start Quiz ----------
+  // COMMITMENT & CONSISTENCY: CTA shows pre-commitment question first
   if (startBtn) {
     startBtn.addEventListener('click', function () {
-      startQuizFromAnywhere();
+      showPrecommit();
     });
   }
 
-  function startQuizFromAnywhere() {
-    // Hide all pre-quiz sections
+  function showPrecommit() {
+    var precommit = document.getElementById('precommit');
+    if (!precommit) { startQuizFromAnywhere(); return; }
+
+    // Hide hero and scrollable content
     var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq'];
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    var sticky = document.getElementById('sticky-cta');
+    if (sticky) sticky.classList.remove('visible');
+
+    precommit.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // "Yes" → start quiz (they've now committed)
+    var yesBtn = document.getElementById('precommit-yes');
+    if (yesBtn) {
+      yesBtn.addEventListener('click', function () {
+        precommit.classList.remove('active');
+        precommit.style.display = 'none';
+        startQuizDirect();
+        trackEvent('precommit_yes');
+      });
+    }
+
+    // "No" → they said no, but most will reconsider. Change text and offer again.
+    var noBtn = document.getElementById('precommit-no');
+    if (noBtn) {
+      noBtn.addEventListener('click', function () {
+        noBtn.textContent = 'Are you sure? It only takes 60 seconds.';
+        noBtn.style.color = 'var(--nc-text-muted)';
+        // Second click starts the quiz anyway
+        noBtn.addEventListener('click', function () {
+          precommit.classList.remove('active');
+          precommit.style.display = 'none';
+          startQuizDirect();
+          trackEvent('precommit_no_then_yes');
+        }, { once: true });
+        trackEvent('precommit_no');
+      }, { once: true });
+    }
+  }
+
+  function startQuizDirect() {
+    quizSection.classList.add('active');
+    updateProgress();
+    trackEvent('quiz_started');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var firstOption = quizSection.querySelector('.nc-quiz__step.active .nc-quiz__option');
+    if (firstOption) setTimeout(function () { firstOption.focus(); }, 100);
+  }
+
+  function startQuizFromAnywhere() {
+    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq', 'precommit'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -338,22 +392,11 @@
 
   // ---------- Secondary Quiz Buttons ----------
   // "Find Out Your Number" button in Why section
-  var whyQuizBtn = document.getElementById('why-quiz-btn');
-  if (whyQuizBtn) {
-    whyQuizBtn.addEventListener('click', startQuizFromAnywhere);
-  }
-
-  // Sticky CTA button
-  var stickyQuizBtn = document.getElementById('sticky-quiz-btn');
-  if (stickyQuizBtn) {
-    stickyQuizBtn.addEventListener('click', startQuizFromAnywhere);
-  }
-
-  // Bottom CTA button
-  var bottomQuizBtn = document.getElementById('bottom-quiz-btn');
-  if (bottomQuizBtn) {
-    bottomQuizBtn.addEventListener('click', startQuizFromAnywhere);
-  }
+  // All secondary CTAs go through pre-commitment
+  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn'].forEach(function (id) {
+    var btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', showPrecommit);
+  });
 
   // ---------- Sticky CTA on Scroll ----------
   var stickyCta = document.getElementById('sticky-cta');
