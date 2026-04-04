@@ -231,7 +231,8 @@ body::after {
 }
 
 .nc-btn--primary:active:not(:disabled) {
-  transform: translateY(0);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: var(--nc-shadow-sm);
 }
 
 .nc-btn--primary:disabled {
@@ -350,7 +351,8 @@ body::after {
 }
 
 .nc-hero__title-line--accent {
-  color: var(--nc-primary);
+  color: var(--nc-text);
+  opacity: 0.5;
 }
 
 .nc-hero__subtitle {
@@ -644,6 +646,7 @@ body::after {
   line-height: 1;
   color: var(--nc-text);
   margin: 0;
+  animation: nc-numberLand 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .nc-signup__teaser-sub {
@@ -872,6 +875,12 @@ body::after {
   line-height: 1;
   color: var(--nc-text);
   margin-bottom: 0.25rem;
+  animation: nc-numberLand 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes nc-numberLand {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .nc-results__big-number-unit {
@@ -1323,11 +1332,12 @@ body::after {
   padding: 40px 32px;
   background: var(--nc-bg-card);
   text-align: left;
-  transition: background var(--nc-transition);
+  transition: all var(--nc-transition);
 }
 
 .nc-benefits__item:hover {
   background: var(--nc-bg-card-hover);
+  padding-left: 36px;
 }
 
 .nc-benefits__item-title {
@@ -1377,6 +1387,12 @@ body::after {
   gap: 16px;
   box-shadow: var(--nc-shadow-sm);
   position: relative;
+  transition: transform var(--nc-transition), box-shadow var(--nc-transition);
+}
+
+.nc-proof__card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--nc-shadow-md);
 }
 
 .nc-proof__card::before {
@@ -1471,6 +1487,7 @@ body::after {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--nc-border);
+  border-left: 2px solid transparent;
   border-radius: 0;
   overflow: hidden;
   transition: all var(--nc-transition);
@@ -1478,6 +1495,11 @@ body::after {
 
 .nc-faq__item:first-child {
   border-top: 1px solid var(--nc-border);
+}
+
+.nc-faq__item[open] {
+  border-left-color: var(--nc-primary);
+  padding-left: 16px;
 }
 
 .nc-faq__question {
@@ -1986,19 +2008,16 @@ body::after {
         We're building the tools to help you leave it behind for good.
       </p>
 
-      <!-- CURIOSITY GAP: "your number" creates an information gap they need to close -->
       <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
         What's Your Number?
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <!-- SOCIAL PROOF: Specific number feels real, "today" creates urgency -->
       <p class="nc-hero__cta-note"><span id="quiz-count-today">247</span> people took the quiz today</p>
     </div>
   </section>
 
   <!-- ===== CONTEXT ===== -->
   <section class="nc-pullquote nc-reveal" id="pullquote">
-    <!-- ANCHORING + AUTHORITY: Plant 152 as the reference point, cite the source -->
     <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.<br>Today it's <em>152.</em></p>
     <p class="nc-pullquote__source">Based on USDA data cited by Dr. Casey Means, Stanford-trained physician</p>
   </section>
@@ -2014,7 +2033,6 @@ body::after {
   <!-- ===== WHAT CHANGES ===== -->
   <section class="nc-benefits nc-reveal" id="how-it-works">
     <div class="nc-benefits__container">
-      <!-- LOSS AVERSION: Frame as what sugar is stealing, not what quitting gives -->
       <h2 class="nc-benefits__title">What Sugar Is Taking From You</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
@@ -2115,7 +2133,6 @@ body::after {
           <circle cx="40" cy="40" r="34" class="nc-calculating__spinner"/>
         </svg>
       </div>
-      <!-- ZEIGARNIK: Amplify the open loop. They NEED to see the result. -->
       <p class="nc-calculating__title">Calculating your number...</p>
       <div class="nc-calculating__steps">
         <p class="nc-calculating__step" data-calc-step="1">Estimating daily intake...</p>
@@ -2144,27 +2161,22 @@ body::after {
           <p class="nc-quiz__helper" id="q1-helper">Pick the closest match</p>
           <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
             <button type="button" class="nc-quiz__option" data-value="cereal_toast" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Cereal, granola, or toast with jam</span>
               <span class="nc-quiz__option-sugar">20-35g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="yogurt_smoothie" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Yogurt, smoothie, or oatmeal with fruit</span>
               <span class="nc-quiz__option-sugar">18-30g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="coffee_pastry" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Coffee shop drink + pastry or muffin</span>
               <span class="nc-quiz__option-sugar">40-65g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="eggs_protein" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Eggs, meat, or whole foods (no packaged)</span>
               <span class="nc-quiz__option-sugar">0-5g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="skip" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">I skip breakfast</span>
               <span class="nc-quiz__option-sugar">0g</span>
             </button>
@@ -2177,22 +2189,18 @@ body::after {
           <p class="nc-quiz__helper" id="q2-helper">Soda, juice, coffee drinks, sweet tea, sports drinks — all of it</p>
           <div class="nc-quiz__options" data-field="daily_sweet_drinks" role="radiogroup" aria-labelledby="q2-helper">
             <button type="button" class="nc-quiz__option" data-value="0" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">None — I mostly drink water</span>
               <span class="nc-quiz__option-sugar">0g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="1" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">1 per day</span>
               <span class="nc-quiz__option-sugar">25-40g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="2-3" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">2&#8211;3 per day</span>
               <span class="nc-quiz__option-sugar">50-100g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="4+" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">4 or more per day</span>
               <span class="nc-quiz__option-sugar">100-160g</span>
             </button>
@@ -2205,22 +2213,18 @@ body::after {
           <p class="nc-quiz__helper" id="q3-helper">Anything with a label — sauces, bars, bread, frozen meals</p>
           <div class="nc-quiz__options" data-field="processed_foods" role="radiogroup" aria-labelledby="q3-helper">
             <button type="button" class="nc-quiz__option" data-value="rarely" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Rarely — I cook most things from scratch</span>
               <span class="nc-quiz__option-sugar">5-10g hidden</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="some" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Some — a few packaged items per day</span>
               <span class="nc-quiz__option-sugar">15-30g hidden</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="most" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Most meals involve something packaged</span>
               <span class="nc-quiz__option-sugar">30-50g hidden</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="almost_all" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Almost everything — convenience is king</span>
               <span class="nc-quiz__option-sugar">50-80g hidden</span>
             </button>
@@ -2233,19 +2237,15 @@ body::after {
           <p class="nc-quiz__helper" id="q4-helper">Be honest</p>
           <div class="nc-quiz__options" data-field="checks_labels" role="radiogroup" aria-labelledby="q4-helper">
             <button type="button" class="nc-quiz__option" data-value="always" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Always — I read every label</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="sometimes" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Sometimes — depends on the product</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="rarely" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Rarely — I just grab what looks good</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="never" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Never — I don't think about it</span>
             </button>
           </div>
@@ -2257,23 +2257,18 @@ body::after {
           <p class="nc-quiz__helper" id="q5-helper">Your #1 reason</p>
           <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q5-helper">
             <button type="button" class="nc-quiz__option" data-value="prevent_disease" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Prevent health problems before they start</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="energy" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">More stable energy throughout the day</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="weight" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Lose weight or maintain a healthy weight</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="family" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">Set a better example for my family</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="curiosity" role="radio" aria-checked="false">
-              
               <span class="nc-quiz__option-label">I'm just curious how much I consume</span>
             </button>
           </div>
@@ -2289,7 +2284,6 @@ body::after {
   <!-- ===== SIGNUP ===== -->
   <section class="nc-signup" id="waitlist-signup">
     <div class="nc-signup__container">
-      <!-- TEASER: Flash their number to create urgency, then gate the full report -->
       <div class="nc-signup__teaser" id="signup-teaser">
         <p class="nc-signup__teaser-label">Your number</p>
         <p class="nc-signup__teaser-number" id="signup-teaser-number">—</p>
@@ -2327,12 +2321,10 @@ body::after {
   <section class="nc-results" id="quiz-results" aria-labelledby="results-title">
     <div class="nc-results__container">
       <div class="nc-results__report">
-        <!-- ENDOWMENT: "Your" number. They own it. It's personal. -->
         <p class="nc-results__your-label">Your number</p>
         <div class="nc-results__big-number">
           <span id="results-sugar-grams">0</span><span class="nc-results__big-number-unit">g</span>
         </div>
-        <!-- CONTRAST EFFECT: Their number vs the recommended limit, side by side -->
         <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(recommended: under 25g)</span></p>
         <h2 class="nc-results__title" id="results-title"></h2>
         <p class="nc-results__subtitle" id="results-subtitle"></p>
@@ -2383,7 +2375,6 @@ body::after {
         <p class="nc-results__cta-note">Track your intake. Spot hidden sources. Build new habits.</p>
       </div>
 
-      <!-- IDENTITY: Sharing = "I'm the kind of person who cares about this" -->
       <div class="nc-results__share-section">
         <p class="nc-results__share-prompt">Most people have no idea what their number is.<br>You do now. Send the quiz to someone who should.</p>
         <div class="nc-referral-socials">
