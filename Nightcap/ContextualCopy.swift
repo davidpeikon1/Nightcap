@@ -27,11 +27,11 @@ struct ContextualCopy {
 
         .thirtyMinToTwoHours: [
             "The dopamine spike has passed. The craving is losing its grip.",
-            "Blood sugar is starting to fall back toward baseline.",
+            "Blood glucose is stabilizing. The spike has resolved — what's left is the adjustment.",
             "Processed sugar is engineered to make this moment hard. You're still here.",
             "The peak has passed. What you feel now is the descent, not the climb.",
             "Your blood chemistry is already different than it was an hour ago.",
-            "The hardest 30 minutes are behind you.",
+            "The hardest part of the first hour is behind you.",
             "Insulin is normalizing. The fog, if you feel it, is temporary and chemical.",
         ],
 
