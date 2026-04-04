@@ -151,7 +151,7 @@ struct ContextualCopy {
             "Glycation — where sugar binds to collagen and accelerates aging — has been actively reversing since you stopped feeding it.",
             "The person who wanted to change this is the same one who is living the change. That's not nothing.",
             "The 3am cortisol spike that glucose crashes used to trigger hasn't fired in a long time. Your sleep architecture is different.",
-            "Glycation — where sugar binds to collagen and accelerates biological aging — has been actively reversing for weeks.",
+            "The hippocampus — the brain region most sensitive to insulin resistance — has had time to recover metabolically. Spatial memory and word retrieval run on stable fuel now.",
             "Your gut-brain axis is producing different neurochemistry. 90% of serotonin is made in the gut — and your gut has changed.",
             "What used to require willpower is now just what you do. That's not discipline. That's identity.",
             "The neurons that encoded the old habit are still there. Their connections have weakened through disuse. That's rewiring, not restraint.",
