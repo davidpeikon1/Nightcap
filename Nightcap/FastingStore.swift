@@ -152,7 +152,7 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return "This threshold is behind you."
         case .oneMonth:    return "This is becoming permanent."
         case .hundredDays: return "This is your life now."
-        case .sixMonths:   return "This is your life now."
+        case .sixMonths:   return "The compound interest is in the ledger."
         case .oneYear:     return "This is who you are."
         }
     }
@@ -441,7 +441,9 @@ class FastingStore: ObservableObject {
         defaults.removeObject(forKey: "bestFastDuration")
         // Cancel all pending milestone and PB notifications.
         let ids = BadgeID.allCases.flatMap {
-            ["nightcap.milestone.\($0.rawValue)", "nightcap.milestone.future.\($0.rawValue)"]
+            ["nightcap.milestone.\($0.rawValue)",
+             "nightcap.milestone.future.\($0.rawValue)",
+             "nightcap.milestone.approach.\($0.rawValue)"]
         }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
         NotificationManager.shared.clearPersonalBestNotifications()
