@@ -50,6 +50,7 @@ struct CravingToolkitSection: View {
 
     enum ToolTab: String, CaseIterable, Identifiable {
         case countdown = "20 Minutes"
+        case breathe   = "Breathe"
         case reframe   = "Quick Reframe"
         case why       = "My Why"
         case log       = "Log It"
@@ -104,6 +105,7 @@ struct CravingToolkitSection: View {
                     Group {
                         switch activeTool {
                         case .countdown: CountdownTool(state: countdownState)
+                        case .breathe:   BreathingTool()
                         case .reframe:   ReframeCardTool()
                         case .why:       WhyReminderTool()
                         case .log:       LogCravingTool()
@@ -346,9 +348,9 @@ struct ReframeCardTool: View {
             } label: {
                 HStack(spacing: 6) {
                     Text("Next")
+                        .font(.system(size: 14))
                     Image(systemName: "arrow.left")
                         .font(.system(size: 12, weight: .light))
-                        .font(.system(size: 14))
                 }
                 .foregroundStyle(Color("NCTextSecondary"))
                 .padding(.horizontal, 20)
@@ -562,6 +564,197 @@ struct LogCravingTool: View {
                 .frame(maxWidth: .infinity)
                 .background(isSelected ? Color("NCAccent") : Color("NCBackground"))
                 .cornerRadius(8)
+        }
+    }
+}
+
+// MARK: - Tool 5: Box Breathing
+
+final class BreathingState: ObservableObject {
+    enum Phase: Equatable { case ready, inhale, hold1, exhale, hold2, done }
+
+    @Published var phase: Phase = .ready
+    @Published var beat: Int = 4
+    @Published var cycles: Int = 0
+    @Published var circleScale: CGFloat = 0.55
+
+    private var timer: AnyCancellable?
+    private let totalCycles = 4
+
+    var instruction: String {
+        switch phase {
+        case .ready, .done: return ""
+        case .inhale:       return "Breathe in"
+        case .hold1, .hold2: return "Hold"
+        case .exhale:       return "Breathe out"
+        }
+    }
+
+    func start() { advance(to: .inhale) }
+
+    func reset() {
+        timer?.cancel()
+        phase = .ready
+        beat  = 4
+        cycles = 0
+        circleScale = 0.55
+    }
+
+    private func advance(to newPhase: Phase) {
+        phase = newPhase
+        beat = 4
+        timer?.cancel()
+        switch newPhase {
+        case .inhale: circleScale = 1.0
+        case .exhale: circleScale = 0.55
+        default: break
+        }
+        timer = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self else { return }
+                if self.beat > 1 {
+                    self.beat -= 1
+                } else {
+                    self.nextPhase()
+                }
+            }
+    }
+
+    private func nextPhase() {
+        switch phase {
+        case .inhale: advance(to: .hold1)
+        case .hold1:  advance(to: .exhale)
+        case .exhale: advance(to: .hold2)
+        case .hold2:
+            cycles += 1
+            if cycles >= totalCycles {
+                timer?.cancel()
+                withAnimation { phase = .done }
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+            } else {
+                advance(to: .inhale)
+            }
+        default: break
+        }
+    }
+}
+
+struct BreathingTool: View {
+    @StateObject private var state = BreathingState()
+
+    var body: some View {
+        VStack(spacing: 24) {
+            if state.phase == .ready {
+                readyView
+            } else if state.phase == .done {
+                doneView
+            } else {
+                activeView
+            }
+        }
+        .animation(.easeInOut(duration: 0.35), value: state.phase == .ready || state.phase == .done)
+    }
+
+    private var readyView: some View {
+        VStack(spacing: 20) {
+            VStack(spacing: 10) {
+                Text("Box breathing resets your nervous system in under 2 minutes.")
+                    .font(.system(size: 14, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .lineSpacing(4)
+                    .multilineTextAlignment(.center)
+
+                Text("4 in · 4 hold · 4 out · 4 hold")
+                    .font(.system(size: 11))
+                    .tracking(0.5)
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
+
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                state.start()
+            } label: {
+                Text("Begin")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Color("NCBackground"))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color("NCAccent"))
+                    .cornerRadius(12)
+            }
+        }
+    }
+
+    private var doneView: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "checkmark.circle")
+                .font(.system(size: 36, weight: .light))
+                .foregroundStyle(Color("NCSuccess"))
+
+            Text("Your nervous system has shifted.")
+                .font(.system(size: 18, weight: .light))
+                .foregroundStyle(Color("NCTextPrimary"))
+                .multilineTextAlignment(.center)
+
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                state.reset()
+            } label: {
+                Text("Do it again")
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color("NCTextTertiary"))
+                    .padding(.top, 4)
+            }
+        }
+        .padding(.vertical, 16)
+    }
+
+    private var activeView: some View {
+        VStack(spacing: 20) {
+            Text(state.instruction)
+                .font(.system(size: 22, weight: .light))
+                .foregroundStyle(Color("NCTextPrimary"))
+                .id(state.instruction)          // cross-fade when text changes
+                .transition(.opacity)
+                .animation(.easeInOut(duration: 0.3), value: state.instruction)
+
+            ZStack {
+                // Outer glow ring
+                Circle()
+                    .fill(Color("NCSuccess").opacity(0.06))
+                    .frame(width: 130, height: 130)
+
+                // Breathing circle
+                Circle()
+                    .fill(Color("NCSuccess").opacity(0.10))
+                    .frame(width: 130, height: 130)
+                    .scaleEffect(state.circleScale)
+                    .animation(.linear(duration: 4), value: state.circleScale)
+
+                Circle()
+                    .stroke(Color("NCSuccess").opacity(0.3), lineWidth: 1.5)
+                    .frame(width: 130, height: 130)
+                    .scaleEffect(state.circleScale)
+                    .animation(.linear(duration: 4), value: state.circleScale)
+
+                Text("\(state.beat)")
+                    .font(.system(size: 44, weight: .light).monospacedDigit())
+                    .foregroundStyle(Color("NCSuccess").opacity(0.85))
+            }
+            .frame(width: 130, height: 130)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(state.instruction), \(state.beat)")
+
+            // Cycle progress dots — 4 dots for 4 cycles
+            HStack(spacing: 8) {
+                ForEach(0..<4, id: \.self) { i in
+                    Circle()
+                        .fill(i < state.cycles ? Color("NCSuccess") : Color("NCTextTertiary").opacity(0.25))
+                        .frame(width: 7, height: 7)
+                        .animation(.easeInOut(duration: 0.3), value: state.cycles)
+                }
+            }
         }
     }
 }
