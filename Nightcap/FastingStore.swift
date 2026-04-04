@@ -89,10 +89,12 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
             return "One hour.\nThe craving peaked and passed.\nThat was the hardest part."
         case .firstDay:
             return "One full day.\nYour body had 24 hours without the spike.\nTonight's sleep will be different."
-        case .threeDays:   return "Three days. The compulsive edge is fading."
+        case .threeDays:
+            return "Three days.\nThe compulsive edge is fading.\nDay 4 is when most people have their first 'I don't want it' moment."
         case .oneWeek:
             return "Your gut has changed.\nYour sleep has changed.\nThis is real."
-        case .twoWeeks:    return "Two weeks. You've crossed the threshold most people never reach."
+        case .twoWeeks:
+            return "Two weeks.\nYou've crossed the threshold most people never reach.\nThe fMRI data at this mark is striking."
         case .oneMonth:    return "A month. Something real has changed — inside and out."
         case .hundredDays: return "100 days.\nYou're not trying to quit sugar anymore.\nYou don't eat it."
         case .sixMonths:
@@ -130,11 +132,11 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .firstHour:   return ""
         case .firstDay:    return "You're 1 hour from your first full day. Keep the clock running."
         case .threeDays:   return "1 hour from 3 days. The compulsive edge is almost gone."
-        case .oneWeek:     return "1 hour from 1 Week. You're in the final stretch."
-        case .twoWeeks:    return "2 hours from 2 weeks. You'll have crossed a threshold most people never reach."
-        case .oneMonth:    return "2 hours to 1 Month. Something real has already changed."
+        case .oneWeek:     return "1 hour from 1 week. After this, cravings are conditioned reflex — not physiology."
+        case .twoWeeks:    return "2 hours from 2 weeks. fMRI studies show measurable brain changes at this mark."
+        case .oneMonth:    return "2 hours from 1 month. Dopamine receptor recovery is measurable at this threshold."
         case .hundredDays: return "24 hours from 100 days. This is almost identity now."
-        case .sixMonths:   return "24 hours from 6 months. The compound interest of this is real."
+        case .sixMonths:   return "24 hours from 6 months. The cardiovascular risk changes are in your body now."
         case .oneYear:     return "24 hours from 1 year. This isn't a streak anymore."
         }
     }
