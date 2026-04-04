@@ -180,7 +180,7 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .firstDay:    return "24 hours in. The streak is still running."
         case .threeDays:   return "The hard part is behind you. The clock is still running."
         case .oneWeek:     return "Seven days. The biology is already different. Keep it going."
-        case .twoWeeks:    return "Two weeks. You've crossed the threshold most people never reach."
+        case .twoWeeks:    return "Two weeks. Past the threshold most people never reach. The clock is still running."
         case .oneMonth:    return "A month. The dopamine receptors are recovering. The clock is still running."
         case .hundredDays: return "100 days. This is identity now. The clock is still running."
         case .sixMonths:   return "Six months. The compound interest keeps accumulating."
