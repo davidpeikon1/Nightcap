@@ -703,6 +703,29 @@ class FastingStore: ObservableObject {
                 return "Less than a day in. The first 24 hours are the highest-risk window. The toolkit is there if you need it."
             }
             let dayLabel = days == 1 ? "1 day" : "\(days) days"
+
+            // If craving logs exist, acknowledge the trigger they resisted — more specific
+            // than a generic streak message and reinforces the value of logging.
+            if let trigger = topTrigger {
+                let triggerLine: String = {
+                    switch trigger {
+                    case .stress:
+                        return "Stress drove most of your cravings this week — but none of them won. That's what holding the line looks like."
+                    case .boredom:
+                        return "Boredom triggered most of your cravings this week — but none of them converted. The pull existed. You outlasted it."
+                    case .habit:
+                        return "Habit cravings showed up on schedule this week — but none of them won. The conditioned response is weaker than it was."
+                    case .social:
+                        return "Social situations drove most of your cravings this week — but none of them reset you. That's real."
+                    case .fatigue:
+                        return "Low energy drove most of your cravings this week — but none of them converted. You recognized the trigger. That's how this works."
+                    case .hunger:
+                        return "Genuine hunger drove most of your logged cravings — but none of them reset you. The pattern is breaking."
+                    }
+                }()
+                return "Zero resets this week. \(dayLabel) in. \(triggerLine)"
+            }
+
             switch days {
             case 1...6:
                 return "Zero resets this week. \(dayLabel) in. The acute withdrawal window is behind you — cravings from here are habit, not physiology."
