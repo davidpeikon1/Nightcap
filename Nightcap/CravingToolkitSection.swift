@@ -712,7 +712,7 @@ struct BreathingTool: View {
     }
 
     private var doneView: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             Image(systemName: "checkmark.circle")
                 .font(.system(size: 36, weight: .light))
                 .foregroundStyle(Color("NCSuccess"))
@@ -722,6 +722,13 @@ struct BreathingTool: View {
                 .foregroundStyle(Color("NCTextPrimary"))
                 .multilineTextAlignment(.center)
 
+            Text("The craving was feeding on cortisol. That's lower now.")
+                .font(.system(size: 13, weight: .light))
+                .foregroundStyle(Color("NCTextSecondary"))
+                .multilineTextAlignment(.center)
+                .lineSpacing(3)
+                .padding(.horizontal, 8)
+
             Button {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 state.reset()
@@ -729,7 +736,7 @@ struct BreathingTool: View {
                 Text("Do it again")
                     .font(.system(size: 13))
                     .foregroundStyle(Color("NCTextTertiary"))
-                    .padding(.top, 4)
+                    .padding(.top, 6)
             }
         }
         .padding(.vertical, 16)
