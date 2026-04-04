@@ -132,8 +132,11 @@ class NotificationManager {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             guard settings.authorizationStatus == .authorized else { return }
 
-            // Remove any previously scheduled future milestone notifications.
-            let identifiers = BadgeID.allCases.map { "nightcap.milestone.future.\($0.rawValue)" }
+            // Remove any previously scheduled future milestone and approach notifications.
+            let identifiers = BadgeID.allCases.flatMap { [
+                "nightcap.milestone.future.\($0.rawValue)",
+                "nightcap.milestone.approach.\($0.rawValue)"
+            ] }
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
 
             let now = Date()
@@ -143,6 +146,7 @@ class NotificationManager {
                 let interval   = unlockDate.timeIntervalSince(now)
                 guard interval > 5 else { continue } // already passed (or imminent)
 
+                // ── Milestone notification (fires at the moment of unlock) ──
                 let content = UNMutableNotificationContent()
                 content.title = "\(badge.label)."
                 let body = badge.celebrationText
@@ -159,6 +163,28 @@ class NotificationManager {
                     trigger: trigger
                 )
                 UNUserNotificationCenter.current().add(request)
+
+                // ── Approach notification (fires in the final stretch) ──
+                if let approachWindow = badge.approachInterval,
+                   !badge.approachBody.isEmpty {
+                    let approachInterval = interval - approachWindow
+                    guard approachInterval > 5 else { continue }
+
+                    let approachContent = UNMutableNotificationContent()
+                    approachContent.title = "Almost there."
+                    approachContent.body  = badge.approachBody
+                    approachContent.sound = .default
+
+                    let approachTrigger = UNTimeIntervalNotificationTrigger(
+                        timeInterval: approachInterval, repeats: false
+                    )
+                    let approachRequest = UNNotificationRequest(
+                        identifier: "nightcap.milestone.approach.\(badge.rawValue)",
+                        content: approachContent,
+                        trigger: approachTrigger
+                    )
+                    UNUserNotificationCenter.current().add(approachRequest)
+                }
             }
         }
     }

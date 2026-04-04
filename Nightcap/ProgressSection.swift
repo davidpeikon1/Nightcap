@@ -495,6 +495,12 @@ struct LockedBadgeSheet: View {
                     Text(remainingText)
                         .font(.system(size: 15, design: .monospaced))
                         .foregroundStyle(Color("NCTextTertiary"))
+                    if store.isTracking {
+                        Text("You're \(store.formattedElapsed) in.")
+                            .font(.system(size: 12, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary").opacity(0.7))
+                            .padding(.top, 2)
+                    }
                 }
 
                 Text(badge.scienceFact)

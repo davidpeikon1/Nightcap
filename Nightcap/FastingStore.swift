@@ -93,6 +93,32 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         }
     }
 
+    /// How far before the milestone to fire the approach notification (nil = none).
+    var approachInterval: TimeInterval? {
+        switch self {
+        case .firstHour:   return nil
+        case .firstDay:    return 3_600      // 1 hour before
+        case .threeDays:   return 3_600      // 1 hour before
+        case .oneWeek:     return 3_600      // 1 hour before
+        case .twoWeeks:    return 7_200      // 2 hours before
+        case .oneMonth:    return 7_200      // 2 hours before
+        case .hundredDays: return 86_400     // 1 day before
+        }
+    }
+
+    /// Notification body for the approach notification.
+    var approachBody: String {
+        switch self {
+        case .firstHour:   return ""
+        case .firstDay:    return "You're 1 hour from your first full day. Keep the clock running."
+        case .threeDays:   return "1 hour from 3 days. The compulsive edge is almost gone."
+        case .oneWeek:     return "1 hour from 1 Week. You're in the final stretch."
+        case .twoWeeks:    return "2 hours to 2 Weeks. You've crossed a threshold most people never reach."
+        case .oneMonth:    return "2 hours to 1 Month. Something real has already changed."
+        case .hundredDays: return "24 hours from 100 days. This is almost identity now."
+        }
+    }
+
     /// The dismiss button label shown after viewing this milestone.
     var dismissText: String {
         switch self {
