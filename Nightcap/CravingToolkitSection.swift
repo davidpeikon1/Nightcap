@@ -108,7 +108,7 @@ struct CravingToolkitSection: View {
                         case .breathe:   BreathingTool()
                         case .reframe:   ReframeCardTool()
                         case .why:       WhyReminderTool()
-                        case .log:       LogCravingTool()
+                        case .log:       LogCravingTool(activeTool: $activeTool)
                         case nil:        EmptyView()
                         }
                     }
@@ -495,6 +495,7 @@ struct GoalPickerSheet: View {
 
 struct LogCravingTool: View {
     @EnvironmentObject var store: FastingStore
+    @Binding var activeTool: CravingToolkitSection.ToolTab?
     @State private var selectedTrigger: CravingTrigger? = nil
     @State private var logged = false
 
@@ -516,6 +517,23 @@ struct LogCravingTool: View {
                         .lineSpacing(4)
                         .multilineTextAlignment(.center)
                         .padding(.top, 4)
+
+                    // For triggers where breathing directly helps, offer a one-tap path.
+                    if trigger == .stress || trigger == .boredom {
+                        Button {
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                            withAnimation(.spring(duration: 0.25)) { activeTool = .breathe }
+                        } label: {
+                            HStack(spacing: 5) {
+                                Text("Try box breathing now")
+                                    .font(.system(size: 12))
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 10, weight: .light))
+                            }
+                            .foregroundStyle(Color("NCSuccess"))
+                        }
+                        .padding(.top, 6)
+                    }
 
                     Button {
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
