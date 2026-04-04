@@ -240,6 +240,25 @@ struct ResetModal: View {
         return "\(timeLabel) from \(nextBadge.label)."
     }
 
+    /// Context-aware spotlight line — reduces shame and normalizes resets.
+    /// Varies by total reset count so it doesn't feel canned on repeat visits.
+    private var spotlightLine: String {
+        switch store.resetEvents.count {
+        case 1:
+            return "First one logged. Knowing where it happened is already more than most people do."
+        case 2:
+            return "Every reset is data. Two data points start a pattern."
+        case 3:
+            return "Three resets is enough data to see something. Check the times and triggers."
+        case 4...6:
+            return "The pattern is somewhere in those logs. It usually takes a few resets to see it."
+        case 7...10:
+            return "Everyone who has broken this habit has a reset history that looks like yours."
+        default:
+            return "Every reset is data. No one is tracking but you."
+        }
+    }
+
     /// Near-miss: shown when the user was ≥60% toward the next badge.
     /// Uses pre-reset state so the calculation survives the elapsed reset.
     private var nearMissText: String? {
@@ -274,8 +293,9 @@ struct ResetModal: View {
                     .multilineTextAlignment(.center)
             }
 
-            // Spotlight effect — reduce shame, normalize the experience
-            Text("Every reset is data. No one is tracking but you.")
+            // Spotlight effect — reduce shame, normalize the experience.
+            // Copy varies by reset count so it doesn't feel canned on repeat visits.
+            Text(spotlightLine)
                 .font(.system(size: 14))
                 .foregroundStyle(Color("NCTextSecondary"))
                 .multilineTextAlignment(.center)
