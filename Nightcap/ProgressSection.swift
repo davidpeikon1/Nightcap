@@ -239,6 +239,20 @@ struct ProgressSection: View {
                     }
                 }
                 .frame(height: 4)
+
+                // Science teaser — first sentence of the badge's scienceFact so
+                // the upcoming milestone feels meaningful, not just a timer.
+                let teaser = badge.scienceFact
+                    .components(separatedBy: ".")
+                    .first
+                    .map { $0.trimmingCharacters(in: .whitespaces) + "." } ?? ""
+                if !teaser.isEmpty {
+                    Text(teaser)
+                        .font(.system(size: 11, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary").opacity(0.65))
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
         }
         .padding(.horizontal, 14)
