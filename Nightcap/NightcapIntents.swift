@@ -44,14 +44,14 @@ struct GetFastingStatusIntent: AppIntent {
         guard let elapsed = store.elapsed else {
             return .result(
                 value: "Not tracking",
-                dialog: IntentDialog("You haven't started tracking yet. Open Nightcap to begin.")
+                dialog: IntentDialog("No fast is in progress. Open Nightcap to set the clock.")
             )
         }
         let time  = formatElapsed(elapsed)
         let phase = phaseLabel(for: elapsed)
         return .result(
             value: time,
-            dialog: IntentDialog("You've been sugar free for \(time). You're in the \(phase) phase.")
+            dialog: IntentDialog("You've been sugar free for \(time), in the \(phase) phase.")
         )
     }
 }

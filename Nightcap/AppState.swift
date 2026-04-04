@@ -30,7 +30,7 @@ enum UserGoal: String, CaseIterable, Identifiable {
         case .moreEnergy:    return "The post-lunch crash isn't tiredness — it's blood sugar correction. Remove the spike, remove the crash."
         case .breakCravings: return "Cravings aren't a character flaw. They're a dopamine loop. Loops can be rewritten."
         case .loseWeight:    return "Processed sugar drives insulin, and insulin drives fat storage. This is the lever."
-        case .curious:       return "Curiosity is how change starts. The data will speak for itself."
+        case .curious:       return "Most people have never tracked what their body actually feels like without processed sugar. Baseline data is rare — and often surprising."
         }
     }
 }

@@ -109,7 +109,7 @@ struct QuoteLibrary {
                 tier: .sixTo24Hours
             ),
             ReframeQuote(
-                text: "Most people have consumed processed sugar again by now. Statistically, you're already in the minority.",
+                text: "Most people have consumed processed sugar again by now. By this point, you're already in the minority.",
                 science: "Research on dietary behavior change shows that the first 6 hours after a decision to change are the highest-risk period for reverting to the baseline behavior. If you're past this window, you've already outlasted the majority of people who make the same decision.",
                 tier: .sixTo24Hours
             ),
@@ -163,7 +163,7 @@ struct QuoteLibrary {
                 tier: .sevenTo14Days
             ),
             ReframeQuote(
-                text: "At this stage, the work is identity. You're not someone who is trying to quit sugar. You're becoming someone who doesn't eat it.",
+                text: "At this stage, the work is identity, not willpower. The question shifts from 'how do I resist this?' to 'is this who I am?'",
                 science: "Identity-based habit change — extensively documented in behavioral psychology research — is one of the most durable predictors of long-term success. When behavior aligns with self-concept rather than willpower or rules, relapse rates drop significantly. The question changes from 'how do I resist this?' to 'is this who I am?'",
                 tier: .sevenTo14Days
             ),
@@ -199,7 +199,7 @@ struct QuoteLibrary {
                 tier: .thirtyPlusDays
             ),
             ReframeQuote(
-                text: "You're not trying to quit sugar anymore. That's not what this is. You've already quit. What you're doing now is living differently.",
+                text: "You're not trying to quit sugar anymore. You've already quit. What you're doing now is just living.",
                 science: "The neuroscience of identity consolidation shows that after sustained behavior change, the brain begins encoding the new behavior as default rather than effortful. The neural pathway for the old habit weakens through disuse; the new pattern strengthens through repetition. This is no longer a decision you're making. It's becoming who you are.",
                 tier: .thirtyPlusDays
             ),
@@ -219,7 +219,7 @@ struct QuoteLibrary {
     // MARK: Craving-moment cards (for the toolkit)
 
     static let cravingCards: [String] = [
-        "What you're feeling is 5–10 grams of dopamine chemistry. It will metabolize.",
+        "What you're feeling is a measurable neurochemical event. It will metabolize.",
         "This exact feeling has a 20-minute half-life. It cannot sustain itself.",
         "The food you're craving was designed in a lab to make you feel exactly this. That's not hunger.",
         "Your prefrontal cortex is temporarily losing to your limbic system. It wins when you wait.",

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct WeeklyInsightCard: View {
     @EnvironmentObject var store: FastingStore
@@ -57,6 +58,7 @@ struct WeeklyInsightCard: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             Button {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 withAnimation { isDismissed = true }
                 // Persist so the card stays dismissed for the rest of the current week.
                 let cal  = Calendar.current

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 // MARK: - Root Onboarding Container
 
@@ -82,7 +83,7 @@ struct HookScreen: View {
                     Button {
                         showCustomPicker = true
                     } label: {
-                        Text("Pick exact time...")
+                        Text("Pick an exact time")
                             .font(.system(size: 15))
                             .foregroundStyle(Color("NCTextTertiary"))
                             .padding(.top, 4)
@@ -106,7 +107,10 @@ struct HookScreen: View {
     }
 
     private func hookButton(_ title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            action()
+        }
             Text(title)
                 .font(.system(size: 17, weight: .regular))
                 .foregroundStyle(Color("NCTextPrimary"))
@@ -145,7 +149,7 @@ struct HomeWithCoachmark: View {
 
             } else if appState.onboardingStep == .quoteCoachmark {
                 CoachmarkBubble(
-                    text: "Your sugar fast started the moment you answered. This is your clock.",
+                    text: "The timer started the moment you answered. This is your clock.",
                     arrowUp: true
                 )
                 .padding(.top, 375)
@@ -305,13 +309,13 @@ struct NotificationPermissionScreen: View {
                     .foregroundStyle(Color("NCTextSecondary"))
 
                 VStack(spacing: 14) {
-                    Text("The hardest moments\nhappen at 9pm.")
+                    Text("The hardest moments\ntend to happen in the evening.")
                         .font(.system(size: 26, weight: .light))
                         .foregroundStyle(Color("NCTextPrimary"))
                         .multilineTextAlignment(.center)
                         .lineSpacing(4)
 
-                    Text("Let Nightcap check in with you at the times cravings are most likely. You can change this anytime.")
+                    Text("Evening cravings are when most resets happen. A reminder at the right moment can make the difference.")
                         .font(.system(size: 15))
                         .foregroundStyle(Color("NCTextSecondary"))
                         .multilineTextAlignment(.center)
@@ -359,14 +363,14 @@ struct FirstMilestoneScreen: View {
     private let rows: [(symbol: String, text: String)] = [
         ("clock",  "Your fast timer runs in the background"),
         ("book",   "A new reframe drops every morning"),
-        ("bell",   "We'll nudge you at the moments that matter"),
+        ("bell",   "A reminder fires at the moments cravings are highest"),
     ]
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
             VStack(spacing: 40) {
-                Text("Here's what happens next.")
+                Text("You're set.")
                     .font(.system(size: 28, weight: .light))
                     .foregroundStyle(Color("NCTextPrimary"))
                     .multilineTextAlignment(.center)
@@ -392,7 +396,7 @@ struct FirstMilestoneScreen: View {
             Button {
                 withAnimation { appState.advance(to: .complete) }
             } label: {
-                Text("Let's go")
+                Text("Start the clock")
                     .font(.system(size: 17, weight: .medium))
                     .foregroundStyle(Color("NCBackground"))
                     .frame(maxWidth: .infinity)

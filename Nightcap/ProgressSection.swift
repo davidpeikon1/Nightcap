@@ -26,6 +26,7 @@ struct ProgressSection: View {
                     .font(.system(size: 11, design: .monospaced))
                     .foregroundStyle(Color("NCTextTertiary"))
                 Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     showHistory = true
                 } label: {
                     HStack(spacing: 4) {
@@ -44,6 +45,7 @@ struct ProgressSection: View {
                         ForEach(orderedBadges, id: \.self) { badge in
                             BadgeView(badge: badge, earned: store.earnedBadges.contains(badge))
                                 .onTapGesture {
+                                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                                     if store.earnedBadges.contains(badge) {
                                         selectedBadge = badge
                                     } else if store.isTracking {
@@ -253,7 +255,7 @@ struct BadgeView: View {
             ? "\(badge.label) badge, earned. \(badge.celebrationText.components(separatedBy: "\n").first ?? "")"
             : "\(badge.label) badge, locked"
         )
-        .accessibilityHint(earned ? "Double tap to view details" : "Double tap to see how to unlock")
+        .accessibilityHint(earned ? "Opens badge details" : "Shows how to unlock")
     }
 }
 
@@ -380,6 +382,7 @@ struct MilestoneSheet: View {
                 VStack(spacing: 12) {
                     // Share button
                     Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                         Task { @MainActor in
                             let img = makeShareImage(
                                 badge: badge,

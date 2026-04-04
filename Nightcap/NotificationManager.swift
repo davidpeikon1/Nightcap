@@ -72,7 +72,7 @@ class NotificationManager {
     private func scheduleEvening() {
         let content = UNMutableNotificationContent()
         content.title = "Evening check-in."
-        content.body  = "This is the highest-risk hour for sugar. Your toolkit is one tap away."
+        content.body  = "This is the highest-risk hour for sugar."
         content.sound = .default
 
         var components = DateComponents()

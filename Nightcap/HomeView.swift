@@ -119,11 +119,15 @@ struct HomeView: View {
 
             HStack(spacing: 12) {
                 if store.streakDays > 0 {
-                    Button { showHistory = true } label: { streakBadge }
+                    Button {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        showHistory = true
+                    } label: { streakBadge }
                         .buttonStyle(.plain)
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 }
                 Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     showSettings = true
                 } label: {
                     Image(systemName: "gearshape")
@@ -163,8 +167,8 @@ struct PhaseUnlockToast: View {
                 .foregroundStyle(Color("NCSuccess"))
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("New phase unlocked")
-                    .font(.system(size: 12, weight: .medium))
+                Text("entering")
+                    .font(.system(size: 12, weight: .regular))
                     .foregroundStyle(Color("NCTextSecondary"))
                 Text(phase.rawValue)
                     .font(.system(size: 15, weight: .medium))
@@ -178,9 +182,9 @@ struct PhaseUnlockToast: View {
                     .font(.system(size: 12, weight: .light))
                     .foregroundStyle(Color("NCTextSecondary"))
                     .multilineTextAlignment(.trailing)
-                Text("Tap for details")
+                Image(systemName: "chevron.right")
                     .font(.system(size: 10, weight: .light))
-                    .foregroundStyle(Color("NCTextTertiary"))
+                    .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
             }
             .frame(maxWidth: 110)
         }
@@ -191,7 +195,7 @@ struct PhaseUnlockToast: View {
                 .fill(Color("NCSurface"))
                 .shadow(color: Color("NCTextPrimary").opacity(0.08), radius: 12, y: 4)
         )
-        .accessibilityLabel("New phase unlocked: \(phase.rawValue). \(phase.tagline). Tap for details.")
+        .accessibilityLabel("Entering \(phase.rawValue) phase. \(phase.tagline).")
         .accessibilityHint("Opens the phase detail view")
     }
 }

@@ -74,7 +74,7 @@ struct SettingsSheet: View {
                         Button {
                             showResetOnboarding = true
                         } label: {
-                            Text("Replay app intro")
+                            Text("Replay intro")
                                 .font(.system(size: 15))
                                 .foregroundStyle(Color("NCTextSecondary"))
                         }
@@ -121,11 +121,11 @@ struct SettingsSheet: View {
             Text("This will delete your fast history, badges, and craving logs. It cannot be undone.")
         }
         .confirmationDialog(
-            "Re-run onboarding?",
+            "Replay the intro?",
             isPresented: $showResetOnboarding,
             titleVisibility: .visible
         ) {
-            Button("Re-run onboarding") {
+            Button("Replay intro") {
                 appState.advance(to: .hook)
                 dismiss()
             }
@@ -179,6 +179,7 @@ struct SettingsSheet: View {
                 Toggle("", isOn: $notificationsOn)
                     .tint(Color("NCAccent"))
                     .labelsHidden()
+                    .accessibilityLabel("Daily reminders")
                     .onChange(of: notificationsOn) { _, on in
                         if on {
                             NotificationManager.shared.scheduleDailyNotifications()

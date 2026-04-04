@@ -60,13 +60,14 @@ struct CravingToolkitSection: View {
         VStack(spacing: 0) {
             // Collapsed header
             Button {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 withAnimation(.spring(duration: 0.35)) {
                     isExpanded.toggle()
                     if isExpanded && activeTool == nil { activeTool = .countdown }
                 }
             } label: {
                 HStack {
-                    Text("Having a craving?")
+                    Text("Craving toolkit")
                         .font(.system(size: 15, weight: .regular))
                         .foregroundStyle(Color("NCTextSecondary"))
 
@@ -160,6 +161,7 @@ struct CountdownTool: View {
                         .multilineTextAlignment(.center)
 
                     Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                         state.reset()
                     } label: {
                         Text("Start another 20 minutes")
@@ -177,7 +179,7 @@ struct CountdownTool: View {
                         .lineSpacing(3)
                         .multilineTextAlignment(.center)
 
-                    Text("You don't need to resist it — just outlast it.")
+                    Text("Resistance isn't the goal. Outlasting it is.")
                         .font(.system(size: 14, weight: .light))
                         .foregroundStyle(Color("NCTextSecondary"))
                         .lineSpacing(3)
@@ -286,9 +288,9 @@ struct ReframeCardTool: View {
                 nextCard()
             } label: {
                 HStack(spacing: 6) {
-                    Image(systemName: "arrow.right")
-                        .font(.system(size: 12, weight: .light))
                     Text("Next")
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 12, weight: .light))
                         .font(.system(size: 14))
                 }
                 .foregroundStyle(Color("NCTextSecondary"))
@@ -481,7 +483,7 @@ struct LogCravingTool: View {
     private func triggerChip(_ trigger: CravingTrigger) -> some View {
         let isSelected = selectedTrigger == trigger
         return Button {
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
             withAnimation(.spring(duration: 0.25)) {
                 selectedTrigger = trigger
                 store.logCraving(trigger)

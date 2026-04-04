@@ -113,7 +113,7 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .firstDay:    return "You're 1 hour from your first full day. Keep the clock running."
         case .threeDays:   return "1 hour from 3 days. The compulsive edge is almost gone."
         case .oneWeek:     return "1 hour from 1 Week. You're in the final stretch."
-        case .twoWeeks:    return "2 hours to 2 Weeks. You've crossed a threshold most people never reach."
+        case .twoWeeks:    return "2 hours from 2 weeks. You'll have crossed a threshold most people never reach."
         case .oneMonth:    return "2 hours to 1 Month. Something real has already changed."
         case .hundredDays: return "24 hours from 100 days. This is almost identity now."
         }
@@ -578,7 +578,7 @@ class FastingStore: ObservableObject {
     }
 
     var timeToNextMilestone: String {
-        if fastingPhase == .freedom { return "Living in freedom" }
+        if fastingPhase == .freedom { return "—" }
         let remaining = max(0, fastingPhase.nextThreshold - elapsedSeconds)
         let h = Int(remaining) / 3600
         let m = (Int(remaining) % 3600) / 60
@@ -672,7 +672,7 @@ class FastingStore: ObservableObject {
         if resets == 0 {
             let days = Int(longestFast / 86400)
             if days == 0 {
-                return "Less than a day in, and you're already tracking it. That's further than most people get."
+                return "Less than a day in. The first 24 hours are the highest-risk window. The toolkit is there if you need it."
             }
             let dayLabel = days == 1 ? "1 day" : "\(days) days"
             return "Zero resets this week. \(dayLabel) and counting. That's not common. Keep building on it."
@@ -685,7 +685,7 @@ class FastingStore: ObservableObject {
 
         if eveningResets.count == resets && resets > 1 {
             let allOrBoth = resets == 2 ? "Both" : "All \(resets)"
-            return "\(allOrBoth) resets happened after 8pm. Your strongest window is the hour after dinner — and your most vulnerable one. The craving toolkit is there for exactly that moment."
+            return "\(allOrBoth) resets happened after 8pm. The hour after dinner is your highest-leverage window — and your most vulnerable one."
         }
 
         if let trigger = topTrigger, trigger == .stress {
@@ -696,7 +696,7 @@ class FastingStore: ObservableObject {
             return "Boredom drove most of your cravings this week. The brain seeks dopamine through the easiest route available. A 5-minute walk produces the same effect — without the reset."
         }
 
-        return "Your data this week shows \(resets) reset\(resets == 1 ? "" : "s"). Each one is information, not failure. Patterns reveal leverage points. Keep logging."
+        return "\(resets) reset\(resets == 1 ? "" : "s") this week. Each one is information, not failure."
     }
 }
 

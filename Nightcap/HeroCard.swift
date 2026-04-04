@@ -124,6 +124,7 @@ struct HeroCard: View {
 
             if let startDate = store.lastSugarDate {
                 Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     showEditStart = true
                 } label: {
                     HStack(spacing: 4) {
@@ -167,11 +168,11 @@ struct HeroCard: View {
 
     private var notTrackingSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Not tracking yet.")
+            Text("Not tracking.")
                 .font(.system(size: 26, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
 
-            Text("When you're ready, tell us when you last had processed sugar.")
+            Text("Set the clock to when you last had processed sugar.")
                 .font(.system(size: 14, weight: .light))
                 .foregroundStyle(Color("NCTextSecondary"))
                 .lineSpacing(4)
@@ -181,7 +182,7 @@ struct HeroCard: View {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 showEditStart = true
             } label: {
-                Text("Start tracking")
+                Text("Set the clock")
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(Color("NCBackground"))
                     .frame(maxWidth: .infinity)
@@ -227,7 +228,6 @@ struct HeroCard: View {
             }
         }
         .accessibilityLabel(timerA11yLabel)
-        .accessibilityHint("Sugar-free elapsed time")
     }
 
     private var timerA11yLabel: String {
