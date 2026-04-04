@@ -647,7 +647,7 @@ struct EditNoteSheet: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("What was it?")
+                    Text("What triggered it?")
                         .font(.system(size: 12, weight: .medium))
                         .tracking(1)
                         .foregroundStyle(Color("NCTextTertiary"))
