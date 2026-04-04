@@ -149,6 +149,21 @@ struct HeroCard: View {
         return "\(m)M TO PB"
     }
 
+    /// Quiet milestone label for first-ever fasts (no previous resets).
+    /// Shown only when the user has never reset before — distinct from badge milestones,
+    /// which are transient pop-ups. This is a persistent in-card acknowledgment.
+    private var firstTimeMilestoneLabel: String? {
+        guard store.resetEvents.isEmpty, store.isTracking else { return nil }
+        let days  = Int(store.elapsedSeconds / 86400)
+        let hours = Int(store.elapsedSeconds / 3600)
+        if days >= 30  { return "Your first month." }
+        if days >= 14  { return "Two weeks." }
+        if days >= 7   { return "Your first week." }
+        if days >= 3   { return "Three days." }
+        if hours >= 24 { return "Your first day." }
+        return nil
+    }
+
     /// True when the user has a streak worth protecting and the current hour
     /// falls in the highest-risk evening window (6pm–11pm).
     private var shouldShowStreakWarning: Bool {
@@ -184,6 +199,16 @@ struct HeroCard: View {
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 14)
+
+            // First-ever fast milestone — quiet, persistent acknowledgment that
+            // a genuine "first" is happening. Distinct from badge pop-ups.
+            if let milestone = firstTimeMilestoneLabel {
+                Text(milestone)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(Color("NCSuccess").opacity(0.8))
+                    .padding(.top, 2)
+                    .transition(.opacity)
+            }
 
             // Streak protection — Loss Aversion: surfacing what's at stake when
             // the user is in the window where most streaks end.

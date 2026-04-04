@@ -20,6 +20,9 @@ final class CountdownState: ObservableObject {
                     self.secondsLeft -= 1
                 } else {
                     self.stop()
+                    // Track lifetime completions so the done screen can show the running count.
+                    let prev = UserDefaults.standard.integer(forKey: "countdown.completions")
+                    UserDefaults.standard.set(prev + 1, forKey: "countdown.completions")
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
                     withAnimation { self.completed = true }
                 }
@@ -186,15 +189,27 @@ struct CountdownTool: View {
     var body: some View {
         VStack(spacing: 20) {
             if state.completed {
+                let completions = UserDefaults.standard.integer(forKey: "countdown.completions")
+                let countLine: String = {
+                    if completions == 1 { return "The first one. The next will be easier." }
+                    return "That's \(completions) cravings you've waited out."
+                }()
                 VStack(spacing: 16) {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 36, weight: .light))
                         .foregroundStyle(Color("NCSuccess"))
 
-                    Text("It passed. They always do.")
-                        .font(.system(size: 18, weight: .light))
-                        .foregroundStyle(Color("NCTextPrimary"))
-                        .multilineTextAlignment(.center)
+                    VStack(spacing: 6) {
+                        Text("It passed. They always do.")
+                            .font(.system(size: 18, weight: .light))
+                            .foregroundStyle(Color("NCTextPrimary"))
+                            .multilineTextAlignment(.center)
+                        Text(countLine)
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(Color("NCTextSecondary"))
+                            .multilineTextAlignment(.center)
+                            .transition(.opacity)
+                    }
 
                     Button {
                         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
