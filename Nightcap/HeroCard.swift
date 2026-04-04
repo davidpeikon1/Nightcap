@@ -147,9 +147,9 @@ struct HeroCard: View {
             Button {
                 showResetModal = true
             } label: {
-                Text("I just had processed sugar")
+                Text("Log a reset")
                     .font(.system(size: 14))
-                    .foregroundStyle(Color("NCWarning"))
+                    .foregroundStyle(Color("NCTextSecondary"))
                     .frame(maxWidth: .infinity)
                     .padding(.top, 12)
                     .padding(.bottom, 4)
