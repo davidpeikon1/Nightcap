@@ -183,6 +183,17 @@ struct ProgressSection: View {
             return "\(m)m"
         }()
 
+        // Show the calendar date the badge unlocks when it's more than a day away —
+        // "unlocks Thursday" is more grounding than "5d 3h".
+        let unlockDateText: String? = {
+            guard remaining > 86_400, let start = store.lastSugarDate else { return nil }
+            let unlockDate = start.addingTimeInterval(badge.threshold)
+            let days = Calendar.current.dateComponents([.day], from: Date(), to: unlockDate).day ?? 0
+            let df = DateFormatter()
+            df.dateFormat = days < 7 ? "EEEE" : "MMM d"   // "Thursday" vs "Nov 14"
+            return "unlocks \(df.string(from: unlockDate))"
+        }()
+
         return HStack(spacing: 12) {
             Image(systemName: badge.symbol)
                 .font(.system(size: 14, weight: .light))
@@ -191,9 +202,16 @@ struct ProgressSection: View {
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
-                    Text(badge.label)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(Color("NCTextSecondary"))
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(badge.label)
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundStyle(Color("NCTextSecondary"))
+                        if let dateText = unlockDateText {
+                            Text(dateText)
+                                .font(.system(size: 10, design: .monospaced))
+                                .foregroundStyle(Color("NCTextTertiary").opacity(0.7))
+                        }
+                    }
                     Spacer()
                     Text(remaining < 120 ? "almost there" : "\(remainingText) away")
                         .font(.system(size: 11, design: .monospaced))
@@ -435,9 +453,9 @@ struct MilestoneSheet: View {
         }
         .onAppear {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
-            // Request a review at the 1-week milestone — a high-satisfaction moment.
-            // Apple allows 3 prompts per year; this fires only once (badge earned once).
-            if badge == .oneWeek {
+            // Request a review at the 1-week and 1-month milestones.
+            // Apple allows 3 prompts per year; each badge is earned at most once.
+            if badge == .oneWeek || badge == .oneMonth {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                     requestReview()
                 }
@@ -455,6 +473,16 @@ struct LockedBadgeSheet: View {
 
     private var remaining: TimeInterval {
         max(0, badge.threshold - store.elapsedSeconds)
+    }
+
+    /// Calendar date when this badge unlocks, shown when more than 1 day away.
+    private var unlockDateLabel: String? {
+        guard remaining > 86_400, let start = store.lastSugarDate else { return nil }
+        let unlockDate = start.addingTimeInterval(badge.threshold)
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: unlockDate).day ?? 0
+        let df = DateFormatter()
+        df.dateFormat = days < 7 ? "EEEE" : "MMM d"
+        return "unlocks \(df.string(from: unlockDate))"
     }
 
     private var remainingText: String {
@@ -491,7 +519,7 @@ struct LockedBadgeSheet: View {
                         .foregroundStyle(Color("NCTextTertiary").opacity(0.5))
                 }
 
-                VStack(spacing: 10) {
+                VStack(spacing: 8) {
                     Text(badge.label)
                         .font(.system(size: 28, weight: .light))
                         .foregroundStyle(Color("NCTextPrimary"))
@@ -502,7 +530,11 @@ struct LockedBadgeSheet: View {
                         Text("\(store.formattedElapsed) in.")
                             .font(.system(size: 12, weight: .light))
                             .foregroundStyle(Color("NCTextTertiary").opacity(0.7))
-                            .padding(.top, 2)
+                    }
+                    if let dateLabel = unlockDateLabel {
+                        Text(dateLabel)
+                            .font(.system(size: 11, design: .monospaced))
+                            .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
                     }
                 }
 

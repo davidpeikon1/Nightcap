@@ -109,17 +109,30 @@ struct FastHistoryView: View {
     // MARK: - Stats Row
 
     private var statsRow: some View {
-        let longestText = store.longestFastEver > 0
-            ? formatHoursCompact(store.longestFastEver)
-            : "—"
-        let totalText = store.totalSugarFreeTime > 0
-            ? formatHoursCompact(store.totalSugarFreeTime)
-            : "—"
-        let bestStreakText = store.bestStreakDays > 0 ? "\(store.bestStreakDays)d" : "—"
+        let longestText    = store.longestFastEver > 0 ? formatHoursCompact(store.longestFastEver) : "—"
+        let totalText      = store.totalSugarFreeTime > 0 ? formatHoursCompact(store.totalSugarFreeTime) : "—"
+        let bestStreakText  = store.bestStreakDays > 0 ? "\(store.bestStreakDays)d" : "—"
+
+        // Show average only when there are 2+ completed fasts — one data point isn't a pattern.
+        let showAvg = store.resetEvents.count >= 2
+        let avgText: String = {
+            guard showAvg else { return "—" }
+            let total = store.resetEvents.map(\.fastDuration).reduce(0, +)
+            return formatHoursCompact(total / Double(store.resetEvents.count))
+        }()
+
         return VStack(spacing: 12) {
-            HStack(spacing: 12) {
-                statCard(value: longestText,                  label: "Longest fast")
-                statCard(value: bestStreakText,               label: "Best streak")
+            if showAvg {
+                HStack(spacing: 12) {
+                    statCard(value: longestText,   label: "Longest fast")
+                    statCard(value: avgText,        label: "Avg. fast")
+                    statCard(value: bestStreakText, label: "Best streak")
+                }
+            } else {
+                HStack(spacing: 12) {
+                    statCard(value: longestText,   label: "Longest fast")
+                    statCard(value: bestStreakText, label: "Best streak")
+                }
             }
             HStack(spacing: 12) {
                 statCard(value: "\(store.resetEvents.count)", label: "Resets")
