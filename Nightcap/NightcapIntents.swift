@@ -25,6 +25,15 @@ struct NightcapShortcuts: AppShortcutsProvider {
             shortTitle: "Next Milestone",
             systemImageName: "flag"
         )
+        AppShortcut(
+            intent: GetStreakIntent(),
+            phrases: [
+                "What's my \(.applicationName) streak",
+                "How many days is my \(.applicationName) streak",
+            ],
+            shortTitle: "Check Streak",
+            systemImageName: "flame"
+        )
     }
 }
 
@@ -50,9 +59,12 @@ struct GetFastingStatusIntent: AppIntent {
         let time    = formatElapsed(elapsed)
         let phase   = phaseLabel(for: elapsed)
         let tagline = phaseTagline(for: elapsed)
+        let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
+        let streak = defaults.integer(forKey: "streakDays")
+        let streakLine = streak > 0 ? " \(streak) clean day\(streak == 1 ? "" : "s") in a row." : ""
         return .result(
             value: time,
-            dialog: IntentDialog("Sugar free for \(time). You're in the \(phase) phase. \(tagline)")
+            dialog: IntentDialog("Sugar free for \(time). You're in the \(phase) phase. \(tagline)\(streakLine)")
         )
     }
 }
@@ -87,6 +99,36 @@ struct GetNextMilestoneIntent: AppIntent {
         return .result(
             value: milestone,
             dialog: IntentDialog("Your next milestone is \(milestone) away. \(teaser)")
+        )
+    }
+}
+
+// MARK: - Get Streak
+
+struct GetStreakIntent: AppIntent {
+    static let title: LocalizedStringResource = "Check My Streak"
+    static let description = IntentDescription(
+        "See your current sugar-free streak in days.",
+        categoryName: "Information"
+    )
+    static let openAppWhenRun = false
+
+    @MainActor
+    func perform() async throws -> some ReturnsValue<String> & ProvidesDialog {
+        let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
+        let streak = defaults.integer(forKey: "streakDays")
+        let best   = defaults.integer(forKey: "bestStreakDays")
+        if streak == 0 {
+            return .result(
+                value: "0 days",
+                dialog: IntentDialog("No active streak yet. Start the clock in Nightcap whenever you're ready.")
+            )
+        }
+        let isPersonalBest = streak >= best && best > 0
+        let pbLine = isPersonalBest ? " That's a personal best." : (best > 0 ? " Your best is \(best) day\(best == 1 ? "" : "s")." : "")
+        return .result(
+            value: "\(streak) day\(streak == 1 ? "" : "s")",
+            dialog: IntentDialog("\(streak) clean day\(streak == 1 ? "" : "s").\(pbLine)")
         )
     }
 }

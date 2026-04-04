@@ -614,6 +614,33 @@ struct QuoteLibrary {
         "You've been here before and made it through. That track record is real data — and it's yours.",
         // Identity alignment
         "The craving thinks you'll follow the old pattern. That's not who you are right now.",
+        // Duration reframe — the math of the craving window
+        "The craving exists in a 20-minute window. You're somewhere inside it. You don't need to win — you just need to run out the clock.",
+        "Name how many minutes you've already waited. Whatever that number is, add 20. That's the finish line.",
+        // Biology as ally
+        "Your body's hunger signal and a craving use the same neural pathway. That's why they feel identical. One is real. One is chemistry.",
+        "The dopamine spike that's driving this has already peaked. What you're feeling now is the descent, not the climb.",
+        "Ghrelin — the hormone behind this feeling — spikes on a schedule. It fired because it expected the reward. Not because you need it.",
+        // Cognitive pattern-break
+        "Describe the craving like a scientist: where is it in your body? What does it actually feel like? Observation reduces intensity.",
+        "Ask yourself what specific feeling you're trying to get. Then ask whether this actually produces it, or just delays the absence of it.",
+        "The craving is pointing at a habit loop, not a need. Cue, routine, reward. You're looking at the routine. What's the cue?",
+        // Environmental
+        "If you can see the food: don't. Move. The brain's dopamine response to food cues fires before the first bite. Remove the cue.",
+        "If you're bored: you need stimulation, not sugar. These feel identical. They're not.",
+        "If you're stressed: cortisol is driving this. A 5-minute walk reduces cortisol by more than a snack does.",
+        // Long-game framing
+        "This version of you is the reason the future version of you won't struggle with this.",
+        "Every time you make it through this window, the threshold for the next one is lower. That's neuroplasticity, not willpower.",
+        "The version of you who doesn't want this anymore exists. You're building that person right now.",
+        // Sobriety toolkit borrowed from addiction research
+        "Surf it. The craving is a wave. It has a shape: rise, peak, fall. You're somewhere on that wave. Let it pass.",
+        "HALT: Are you Hungry (genuinely), Angry, Lonely, or Tired? Address the real thing.",
+        // Brief, high-contrast lines for the scanning reader
+        "The craving lies about its duration. It always feels like it will last forever. It lasts 20 minutes.",
+        "This is recoverable. Everything about this moment is recoverable.",
+        "The streak doesn't end with a craving. It ends with a decision. You haven't decided.",
+        "Wait. That's the whole instruction.",
     ]
 
     // MARK: Selection

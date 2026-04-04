@@ -56,31 +56,43 @@ struct HookScreen: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var fastingStore: FastingStore
     @State private var showCustomPicker = false
+    @State private var appeared = false
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
 
             VStack(spacing: 48) {
-                Text("When did you last have\nprocessed sugar?")
-                    .font(.system(size: 28, weight: .light))
-                    .foregroundStyle(Color("NCTextPrimary"))
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(6)
-                    .padding(.horizontal, 32)
+                VStack(spacing: 12) {
+                    Text("When did you last have\nprocessed sugar?")
+                        .font(.system(size: 28, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(6)
+                        .padding(.horizontal, 32)
+                        .opacity(appeared ? 1 : 0)
+                        .offset(y: appeared ? 0 : 12)
+
+                    Text("Your clock starts from that moment.")
+                        .font(.system(size: 14, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .multilineTextAlignment(.center)
+                        .opacity(appeared ? 1 : 0)
+                        .offset(y: appeared ? 0 : 8)
+                }
 
                 VStack(spacing: 12) {
-                    hookButton("Today") {
+                    hookButton("Today", delay: 0.15) {
                         fastingStore.setInitialDate(at: Calendar.current.startOfDay(for: Date()))
                         appState.advance(to: .timerCoachmark)
                     }
-                    hookButton("Yesterday") {
+                    hookButton("Yesterday", delay: 0.22) {
                         let d = Calendar.current.date(byAdding: .day, value: -1,
                                                       to: Calendar.current.startOfDay(for: Date()))!
                         fastingStore.setInitialDate(at: d)
                         appState.advance(to: .timerCoachmark)
                     }
-                    hookButton("A few days ago") {
+                    hookButton("A few days ago", delay: 0.29) {
                         let d = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
                         fastingStore.setInitialDate(at: d)
                         appState.advance(to: .timerCoachmark)
@@ -94,6 +106,8 @@ struct HookScreen: View {
                             .foregroundStyle(Color("NCTextTertiary"))
                             .padding(.top, 4)
                     }
+                    .opacity(appeared ? 1 : 0)
+                    .animation(.easeOut(duration: 0.4).delay(0.36), value: appeared)
                 }
                 .padding(.horizontal, 24)
             }
@@ -101,14 +115,13 @@ struct HookScreen: View {
             Spacer()
         }
         .onAppear {
-            // If the app was killed mid-onboarding after the date was already set,
-            // skip ahead rather than showing the hook buttons over a running clock.
             if fastingStore.lastSugarDate != nil {
                 appState.advance(to: .timerCoachmark)
+            } else {
+                withAnimation(.easeOut(duration: 0.5)) { appeared = true }
             }
         }
         .sheet(isPresented: $showCustomPicker, onDismiss: {
-            // Advance to next step if the user saved a date via the picker.
             if fastingStore.lastSugarDate != nil {
                 appState.advance(to: .timerCoachmark)
             }
@@ -119,7 +132,7 @@ struct HookScreen: View {
         }
     }
 
-    private func hookButton(_ title: String, action: @escaping () -> Void) -> some View {
+    private func hookButton(_ title: String, delay: Double, action: @escaping () -> Void) -> some View {
         Button {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             action()
@@ -132,6 +145,9 @@ struct HookScreen: View {
                 .background(Color("NCSurface"))
                 .cornerRadius(12)
         }
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 10)
+        .animation(.easeOut(duration: 0.4).delay(delay), value: appeared)
     }
 }
 
@@ -236,9 +252,10 @@ struct GoalSheet: View {
                                 .font(.system(size: 26, weight: .light))
                                 .foregroundStyle(Color("NCTextPrimary"))
                                 .lineSpacing(4)
-                            Text("This personalizes the context throughout the app.")
-                                .font(.system(size: 14))
+                            Text("Processed sugar drives different mechanisms for different outcomes. Your goal shapes the science you see.")
+                                .font(.system(size: 14, weight: .light))
                                 .foregroundStyle(Color("NCTextSecondary"))
+                                .lineSpacing(3)
                         }
 
                         VStack(spacing: 10) {
@@ -404,41 +421,52 @@ struct NotificationPermissionScreen: View {
 
 struct FirstMilestoneScreen: View {
     @EnvironmentObject var appState: AppState
+    @State private var visibleRows: Int = 0
 
     private let rows: [(symbol: String, text: String)] = [
-        ("clock",  "Your fast timer runs in the background"),
+        ("clock",  "Your timer is already running"),
         ("book",   "A new reframe drops every morning"),
-        ("bell",   "A reminder fires at the moments cravings are highest"),
+        ("bell",   "Reminders fire at your highest-risk moments"),
     ]
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
             VStack(spacing: 40) {
-                Text("You're set.")
-                    .font(.system(size: 28, weight: .light))
-                    .foregroundStyle(Color("NCTextPrimary"))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 32)
+                VStack(spacing: 8) {
+                    Text("You're set.")
+                        .font(.system(size: 28, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 32)
+                    Text("Here's what happens next.")
+                        .font(.system(size: 14, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .opacity(visibleRows >= 1 ? 1 : 0)
+                }
 
                 VStack(spacing: 20) {
-                    ForEach(rows, id: \.text) { row in
+                    ForEach(Array(rows.enumerated()), id: \.element.text) { idx, row in
                         HStack(spacing: 20) {
                             Image(systemName: row.symbol)
-                                .font(.system(size: 22, weight: .light))
-                                .foregroundStyle(Color("NCTextSecondary"))
+                                .font(.system(size: 20, weight: .light))
+                                .foregroundStyle(Color("NCSuccess"))
                                 .frame(width: 32)
                             Text(row.text)
-                                .font(.system(size: 16))
+                                .font(.system(size: 16, weight: .light))
                                 .foregroundStyle(Color("NCTextPrimary"))
                             Spacer()
                         }
+                        .opacity(visibleRows > idx ? 1 : 0)
+                        .offset(y: visibleRows > idx ? 0 : 8)
+                        .animation(.easeOut(duration: 0.4).delay(Double(idx) * 0.15), value: visibleRows)
                     }
                 }
                 .padding(.horizontal, 24)
             }
             Spacer()
             Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 withAnimation { appState.advance(to: .complete) }
             } label: {
                 Text("Start the clock")
@@ -451,6 +479,16 @@ struct FirstMilestoneScreen: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 48)
+            .opacity(visibleRows >= rows.count ? 1 : 0)
+            .animation(.easeOut(duration: 0.4).delay(0.55), value: visibleRows)
+        }
+        .onAppear {
+            // Stagger the rows in
+            for i in 1...rows.count {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
+                    withAnimation { visibleRows = i }
+                }
+            }
         }
     }
 }

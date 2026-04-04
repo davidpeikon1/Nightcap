@@ -341,6 +341,38 @@ struct SettingsSheet: View {
             lines.append("")
         }
 
+        // Behavioral analysis
+        let totalDays = max(1, Int(store.totalSugarFreeTime / 86400))
+        if totalDays >= 7 {
+            lines.append("")
+            lines.append("BEHAVIORAL ANALYSIS")
+            let cleanRate = (totalDays - store.resetEvents.count) * 100 / totalDays
+            lines.append("Clean rate: \(cleanRate)% (\(store.resetEvents.count) resets over \(totalDays) days)")
+
+            if !store.cravingLogs.isEmpty {
+                // Peak craving hour
+                let cal = Calendar.current
+                let hourCounts = Dictionary(
+                    grouping: store.cravingLogs,
+                    by: { cal.component(.hour, from: $0.date) }
+                ).mapValues(\.count)
+                if let peakHour = hourCounts.max(by: { $0.value < $1.value })?.key {
+                    let ampm = peakHour >= 12 ? "pm" : "am"
+                    let displayHour = peakHour == 0 ? 12 : (peakHour > 12 ? peakHour - 12 : peakHour)
+                    lines.append("Peak craving window: \(displayHour)\(ampm)")
+                }
+
+                // Most common trigger
+                var triggerCounts: [String: Int] = [:]
+                for log in store.cravingLogs {
+                    triggerCounts[log.trigger.rawValue, default: 0] += 1
+                }
+                if let topTrigger = triggerCounts.max(by: { $0.value < $1.value })?.key {
+                    lines.append("Most common trigger: \(topTrigger)")
+                }
+            }
+        }
+
         return lines.joined(separator: "\n")
     }
 
