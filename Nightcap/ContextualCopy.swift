@@ -23,6 +23,9 @@ struct ContextualCopy {
             "Every person who has ever broken this habit sat exactly where you are.",
             "The discomfort you feel is the old pattern resisting. That's what resistance feels like.",
             "This window has a floor. You're closer to the other side than you were 5 minutes ago.",
+            "The craving is loudest right before it breaks. This might be that moment.",
+            "You don't have to win. You just have to wait.",
+            "The clock is running. That's the only thing that matters right now.",
         ],
 
         .thirtyMinToTwoHours: [

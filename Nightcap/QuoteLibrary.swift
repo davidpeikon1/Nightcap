@@ -74,6 +74,26 @@ struct QuoteLibrary {
                 science: "Processed sugar provides energy but no essential micronutrients, fiber, or macronutrients that support biological function. The craving is for dopamine, not nutrition. Separating the chemical drive from the biological narrative is one of the most useful cognitive reframes in early habit change.",
                 tier: .zeroToThirtyMin
             ),
+            ReframeQuote(
+                text: "The pull you feel right now has chemistry behind it — glucose, ghrelin, dopamine. All three peak and fall on a predictable arc. You're inside the arc, not outside a failure.",
+                science: "The acute craving experience involves overlapping hormonal and neurochemical signals: ghrelin spikes within minutes of a habitual eating cue, dopamine creates anticipatory salience, and post-sugar blood glucose correction amplifies urgency. All three follow a predictable bell curve, subsiding within 15–20 minutes without behavioral intervention. You are not in an unbounded state — you are inside a measurable, finite arc.",
+                tier: .zeroToThirtyMin
+            ),
+            ReframeQuote(
+                text: "Everyone who has broken this habit struggled at the beginning. You are in the part of the story that most people don't survive. That's what this moment is.",
+                science: "Research on dietary behavior change consistently identifies the first 1–3 weeks as the highest-risk period for abandonment. The overwhelming majority of attempts end in this window — not because of character flaws, but because the neurochemical and habitual forces are at their strongest early. Continuing through early difficulty is the single strongest predictor of long-term success.",
+                tier: .zeroToThirtyMin
+            ),
+            ReframeQuote(
+                text: "The next 20 minutes don't require heroism. They require waiting. Those are different things.",
+                science: "Craving management research distinguishes between active suppression — which is effortful and prone to rebound — and passive persistence, which is simply not acting while the neurochemical event runs its course. Reframing the task from 'resisting' to 'waiting' measurably reduces perceived difficulty and improves outcomes. The craving does not require defeat. It requires patience.",
+                tier: .zeroToThirtyMin
+            ),
+            ReframeQuote(
+                text: "If you're honest about what just happened, that honesty is worth more than the cost of the reset. The pattern is readable. Readable patterns are breakable ones.",
+                science: "Self-monitoring and trigger identification are among the most evidence-supported interventions in behavior change research. Studies on habit modification show that individuals who accurately identify the cue, routine, and reward structure of a behavior are significantly more likely to successfully modify it. A reset that is observed and understood is more useful than many clean days that weren't.",
+                tier: .zeroToThirtyMin
+            ),
         ],
 
         .thirtyMinToTwoHours: [
@@ -378,6 +398,21 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "The research on longevity consistently points to one metabolic marker above others: fasting insulin. Two weeks of sugar reduction has moved yours in the right direction.",
                 science: "Chronically elevated insulin — driven primarily by refined carbohydrate and sugar consumption — is independently associated with accelerated cellular aging, increased cancer risk, and cardiovascular disease. Fasting insulin responds rapidly to dietary change: significant improvements are typically measurable within 2–3 weeks of sugar reduction.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "The social version of this is getting easier. 'I don't eat that' has started to feel true rather than effortful. That's not willpower — it's identity catching up with behavior.",
+                science: "Identity-based habit maintenance — studied extensively in behavioral psychology — represents the most durable form of long-term behavior change. When the self-concept ('I am someone who doesn't eat that') aligns with behavior, the cognitive load of maintenance drops significantly. Research identifies this identity consolidation as typically occurring between weeks 2 and 6 of consistent behavior change.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "Gut-derived serotonin — the majority of your body's supply — is produced in an environment that's been changing for weeks. The bacteria shaping that chemistry are different from what they were.",
+                science: "Approximately 90% of the body's serotonin is produced in the gut by enterochromaffin cells, whose function is directly modulated by microbiome composition. Bacteroidetes and Bifidobacterium species — which increase with sugar restriction — produce short-chain fatty acids that support serotonin synthesis and gut-brain communication. Two weeks of dietary change has meaningfully shifted the microbiome producing this neurochemistry.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "The adaptation you're feeling isn't the calm before something hard. It's the calm that comes after something hard. You're on the other side of the valley.",
+                science: "The neurological and physiological difficulty of sugar elimination peaks in the first 1–2 weeks, driven by acute withdrawal, dopamine system dysregulation, and active microbiome transition. After this window, the biological systems stabilize into a lower-resistance state — not temporarily, but structurally. The ease you may be experiencing is not complacency. It is resolution.",
                 tier: .fourteenTo30Days
             ),
         ],
