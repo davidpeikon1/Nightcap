@@ -703,7 +703,18 @@ class FastingStore: ObservableObject {
                 return "Less than a day in. The first 24 hours are the highest-risk window. The toolkit is there if you need it."
             }
             let dayLabel = days == 1 ? "1 day" : "\(days) days"
-            return "Zero resets this week. \(dayLabel) and counting. That's not common. Keep building on it."
+            switch days {
+            case 1...6:
+                return "Zero resets this week. \(dayLabel) in. The acute withdrawal window is behind you — cravings from here are habit, not physiology."
+            case 7...13:
+                return "Zero resets this week. \(dayLabel) and counting. One week is enough to measurably weaken the dopamine response to sugar. You're past the hardest part."
+            case 14...29:
+                return "Zero resets this week. \(dayLabel) in. Two weeks of unbroken signal changes what the brain expects. Cravings are still possible — they're just not in charge anymore."
+            case 30...89:
+                return "Zero resets this week. \(dayLabel) and counting. A month or more rewires the default. The craving still shows up sometimes — but it's a visitor now, not a resident."
+            default:
+                return "Zero resets this week. \(dayLabel) in. At this length, the old pattern has lost its structural grip. You're not avoiding sugar — you just don't eat it."
+            }
         }
 
         let eveningResets = recentResets.filter {
@@ -740,7 +751,14 @@ class FastingStore: ObservableObject {
             return "Habit and time-of-day cravings drove most of your logs this week. The brain fires the craving because it expects the reward at this time, in this place — independent of actual hunger."
         }
 
-        return "\(resets) reset\(resets == 1 ? "" : "s") this week. Each one is information, not failure."
+        switch resets {
+        case 1:
+            return "One reset this week. The craving won once — that's data, not a verdict. Review what you logged and you'll usually find the cue."
+        case 2...3:
+            return "\(resets) resets this week. A pattern usually surfaces within a few weeks of consistent logging. Keep noting the triggers — the data compounds."
+        default:
+            return "\(resets) resets this week. Frequent resets often share a common thread — time of day, environment, emotional state. The logs will reveal it."
+        }
     }
 }
 
