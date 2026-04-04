@@ -226,7 +226,12 @@ private func nextMilestone(for elapsed: TimeInterval) -> String {
     }()
     let rh = Int(remaining) / 3600
     let rm = (Int(remaining) % 3600) / 60
-    if rh >= 24 { return "\(rh / 24) day\(rh / 24 == 1 ? "" : "s") and \(rh % 24) hour\(rh % 24 == 1 ? "" : "s")" }
+    if rh >= 24 {
+        let d = rh / 24; let remH = rh % 24
+        return remH > 0
+            ? "\(d) day\(d == 1 ? "" : "s") and \(remH) hour\(remH == 1 ? "" : "s")"
+            : "\(d) day\(d == 1 ? "" : "s")"
+    }
     if rh > 0   { return "\(rh) hour\(rh == 1 ? "" : "s") and \(rm) minute\(rm == 1 ? "" : "s")" }
     return "\(rm) minute\(rm == 1 ? "" : "s")"
 }
