@@ -402,6 +402,16 @@ struct QuoteLibrary {
                 science: "Chronic exposure to intensely sweet foods causes sweet receptor downregulation and also raises the detection threshold for other taste qualities — the brain's resources for processing flavor are dominated by the high-salience sugar signal. As sweet receptor sensitivity recovers, other taste modalities strengthen. People in this window consistently report discovering complexity in foods they've eaten for years.",
                 tier: .sevenTo14Days
             ),
+            ReframeQuote(
+                text: "Working memory and focus run on stable glucose. Two weeks without the spikes means two weeks of working with your brain instead of against it. The clarity you may feel is real — it's not placebo.",
+                science: "Postprandial hyperglycemia — blood glucose spikes following high-sugar meals — directly impairs working memory and executive function on cognitive assessment tasks. Research using continuous glucose monitoring shows that individuals with flatter glucose curves score measurably higher on attention and working memory tasks. After two weeks of reduced glycemic variability, cognitive performance improves in ways that closely parallel improvements in blood glucose stability.",
+                tier: .sevenTo14Days
+            ),
+            ReframeQuote(
+                text: "When the craving shows up now, it's quieter — and you're better at waiting it out. Both are true simultaneously. The biological change and the behavioral change are reinforcing each other.",
+                science: "Neurobiological research on habit modification identifies a positive feedback loop between neural change and behavioral change. Each unreinforced craving exposure weakens the conditioned response through extinction learning while simultaneously strengthening the prefrontal circuitry for behavioral inhibition. At two weeks, both processes are meaningfully underway — reduced craving intensity makes non-response easier, and repeated non-response further reduces craving intensity. The two changes compound each other.",
+                tier: .sevenTo14Days
+            ),
         ],
 
         .fourteenTo30Days: [
@@ -637,7 +647,7 @@ struct QuoteLibrary {
         case 28:    return "28 days. Dopamine receptor density has had meaningful time to recover."
         case 29, 30: return "A month of clean fuel. Systemic inflammation markers are measurably lower for most people."
         case 31...34: return "Over a month. Inflammatory biomarkers like CRP have had real time to shift."
-        case 35:    return "Five weeks. Dopamine receptor recovery is roughly halfway through its 28-day arc."
+        case 35:    return "Five weeks. Past the 28-day mark — dopamine receptor recovery has had meaningful time to run its course."
         case 36...41: return "Past five weeks. The compound effects are building in systems that aren't yet visible."
         case 42:    return "Six weeks. Sleep architecture is deeply stabilized when nocturnal glucose is stable."
         case 43, 44: return "Approaching 45 days. Insulin sensitivity improvements have been compounding for weeks."
