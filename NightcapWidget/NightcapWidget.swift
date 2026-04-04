@@ -65,18 +65,18 @@ struct WidgetFastData {
 
     func nextMilestone(at date: Date) -> String {
         let h = elapsed(at: date) / 3600
-        if h >= 8_760 { return "All milestones complete" }
+        if h >= 8_760 { return "day \(Int(elapsed(at: date)) / 86400)" }
         let remaining: TimeInterval = {
             switch h {
-            case ..<1:         return 3_600      - elapsed(at: date)
-            case 1..<24:       return 86_400     - elapsed(at: date)
-            case 24..<72:      return 259_200    - elapsed(at: date)
-            case 72..<168:     return 604_800    - elapsed(at: date)
-            case 168..<336:    return 1_209_600  - elapsed(at: date)
-            case 336..<720:    return 2_592_000  - elapsed(at: date)
-            case 720..<2_400:  return 8_640_000  - elapsed(at: date)
+            case ..<1:          return 3_600      - elapsed(at: date)
+            case 1..<24:        return 86_400     - elapsed(at: date)
+            case 24..<72:       return 259_200    - elapsed(at: date)
+            case 72..<168:      return 604_800    - elapsed(at: date)
+            case 168..<336:     return 1_209_600  - elapsed(at: date)
+            case 336..<720:     return 2_592_000  - elapsed(at: date)
+            case 720..<2_400:   return 8_640_000  - elapsed(at: date)
             case 2_400..<4_320: return 15_552_000 - elapsed(at: date)
-            default:           return 31_536_000 - elapsed(at: date)
+            default:            return 31_536_000 - elapsed(at: date)
             }
         }()
         let rh = Int(remaining) / 3600
@@ -84,6 +84,10 @@ struct WidgetFastData {
         if rh >= 24 { return "\(rh/24)d \(rh%24)h" }
         if rh > 0   { return "\(rh)h \(rm)m" }
         return "\(rm)m"
+    }
+
+    func nextMilestoneLabel(at date: Date) -> String {
+        elapsed(at: date) / 3600 >= 8_760 ? "DAYS FREE" : "NEXT MILESTONE"
     }
 }
 
@@ -302,7 +306,7 @@ struct MediumWidgetView: View {
                 Spacer()
 
                 VStack(alignment: .trailing, spacing: 2) {
-                    Text("NEXT")
+                    Text(entry.data.elapsed(at: entry.date) / 3600 >= 8_760 ? "DAY" : "NEXT")
                         .font(.system(size: 8, weight: .medium))
                         .tracking(1.5)
                         .foregroundStyle(Color.ncTextTert)
@@ -414,6 +418,12 @@ struct LargeWidgetView: View {
             Spacer(minLength: 16)
 
             // Daily quote (from app) or phase body science fallback
+            Text("TODAY'S REFRAME")
+                .font(.system(size: 9, weight: .medium))
+                .tracking(1.8)
+                .foregroundStyle(Color.ncTextTert)
+                .padding(.bottom, 6)
+
             Text(entry.data.currentQuote ?? phaseBodyScience(for: entry.data.phase(at: entry.date)))
                 .font(.system(size: 13, weight: .light))
                 .foregroundStyle(Color.ncTextSecond)
@@ -425,7 +435,7 @@ struct LargeWidgetView: View {
             // Next milestone + streak footer
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("NEXT MILESTONE")
+                    Text(entry.data.nextMilestoneLabel(at: entry.date))
                         .font(.system(size: 8, weight: .medium))
                         .tracking(1.5)
                         .foregroundStyle(Color.ncTextTert)
@@ -459,17 +469,17 @@ struct LargeWidgetView: View {
     private func phaseBodyScience(for phase: String) -> String {
         switch phase {
         case "Starting Out":
-            return "Your blood sugar is beginning to stabilize. The craving you feel is your brain expecting its usual dopamine hit — not your body needing fuel."
+            return "The craving you feel right now is cortisol and dopamine expecting their routine hit. It's noise from old wiring — not a signal your body actually needs sugar."
         case "First Day":
-            return "Your liver is burning through glycogen reserves. Any fatigue you feel is the metabolic shift starting."
+            return "Your liver is burning through glycogen reserves. That flat, slightly tired feeling is the metabolic handoff — your body switching fuel sources. It passes."
         case "Withdrawal":
-            return "Headaches and irritability now are your brain recalibrating reward pathways. Serotonin is shifting back to your gut."
+            return "Headaches and irritability now are withdrawal — your brain recalibrating reward pathways tuned to processed sugar. This is the hard part. It ends."
         case "Breakthrough":
-            return "The compulsive edge of cravings drops sharply at 72 hours. Your taste receptors are beginning to reset."
+            return "72 hours is a threshold. The compulsive edge — the kind that makes you negotiate with yourself — drops measurably here. Your taste receptors are starting to recalibrate."
         case "Rewiring":
-            return "Your gut microbiome has measurably shifted. Bacteria that amplify cravings are dying off."
+            return "Your gut microbiome has shifted enough that the bacteria amplifying cravings are being starved out. The biology is changing from the inside out."
         default: // Freedom
-            return "At two weeks, fMRI studies show reduced reward-center activation in response to sugar images. You have literally rewired."
+            return "fMRI studies at this stage show measurably reduced reward-center activation in response to sugar cues. The rewiring isn't metaphor — it happened."
         }
     }
 }
