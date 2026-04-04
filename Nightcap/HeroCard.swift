@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 /// The primary card on the home screen.
 /// Leads with the daily reframe quote (the "why"), then flows directly into
@@ -47,6 +48,7 @@ struct HeroCard: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             Button {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 withAnimation(.spring(duration: 0.3)) { scienceExpanded.toggle() }
             } label: {
                 HStack(spacing: 6) {
@@ -145,6 +147,7 @@ struct HeroCard: View {
                 .padding(.top, 16)
 
             Button {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 showResetModal = true
             } label: {
                 Text("Log a reset")
@@ -172,6 +175,7 @@ struct HeroCard: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 showEditStart = true
             } label: {
                 Text("Start tracking")

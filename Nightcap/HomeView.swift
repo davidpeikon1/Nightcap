@@ -9,6 +9,7 @@ struct HomeView: View {
 
     @State private var showSettings      = false
     @State private var showQuickReset    = false
+    @State private var showHistory       = false
     @State private var showPhaseDetail: FastingPhase? = nil
 
     var body: some View {
@@ -82,6 +83,9 @@ struct HomeView: View {
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
+        .sheet(isPresented: $showHistory) {
+            FastHistoryView()
+        }
         .sheet(isPresented: $showQuickReset) {
             ResetModal()
                 .presentationDetents([.medium])
@@ -113,7 +117,8 @@ struct HomeView: View {
 
             HStack(spacing: 12) {
                 if store.streakDays > 0 {
-                    streakBadge
+                    Button { showHistory = true } label: { streakBadge }
+                        .buttonStyle(.plain)
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 }
                 Button {

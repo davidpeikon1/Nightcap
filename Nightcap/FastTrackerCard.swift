@@ -298,17 +298,18 @@ struct ResetModal: View {
 
     private var resetConfirmationView: some View {
         VStack(spacing: 16) {
-            Image(systemName: "arrow.counterclockwise")
-                .font(.system(size: 32, weight: .light))
-                .foregroundStyle(Color("NCTextSecondary"))
+            Image(systemName: "checkmark.circle")
+                .font(.system(size: 36, weight: .light))
+                .foregroundStyle(Color("NCSuccess"))
 
-            Text("Fast restarted.")
-                .font(.system(size: 20, weight: .light))
+            Text("Reset logged.")
+                .font(.system(size: 22, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
 
-            Text("Every reset is data.")
+            Text("Every reset is data. The clock starts now.")
                 .font(.system(size: 14))
                 .foregroundStyle(Color("NCTextSecondary"))
+                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .transition(.opacity)

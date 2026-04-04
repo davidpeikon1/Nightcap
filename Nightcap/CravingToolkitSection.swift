@@ -127,6 +127,7 @@ struct CravingToolkitSection: View {
     private func tabChip(_ tab: ToolTab) -> some View {
         let isActive = activeTool == tab
         return Button {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             withAnimation(.spring(duration: 0.25)) { activeTool = tab }
         } label: {
             Text(tab.rawValue)
@@ -207,6 +208,7 @@ struct CountdownTool: View {
                 }
 
                 Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     if state.isRunning { state.stop() } else { state.start() }
                 } label: {
                     Text(state.isRunning ? "Pause" : (state.secondsLeft < 20 * 60 ? "Resume" : "Start the 20 minutes"))
@@ -260,11 +262,25 @@ struct ReframeCardTool: View {
                             withAnimation { dragOffset = 0 }
                         }
                 )
+                .onAppear {
+                    // Gentle nudge after 1.2s to hint the card is swipeable
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        withAnimation(.easeInOut(duration: 0.35)) { dragOffset = -22 }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            withAnimation(.spring(duration: 0.4)) { dragOffset = 0 }
+                        }
+                    }
+                }
 
-            Text("Swipe left for another")
-                .font(.system(size: 11))
-                .tracking(1)
-                .foregroundStyle(Color("NCTextTertiary"))
+            HStack(spacing: 4) {
+                Text("Swipe left for another")
+                    .font(.system(size: 11))
+                    .tracking(1)
+                    .foregroundStyle(Color("NCTextTertiary"))
+                Image(systemName: "arrow.left")
+                    .font(.system(size: 9, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
 
             Button {
                 nextCard()
@@ -285,6 +301,7 @@ struct ReframeCardTool: View {
     }
 
     private func nextCard() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         let result = QuoteLibrary.randomCravingCard(excluding: currentIndex)
         withAnimation(.spring(duration: 0.25)) {
             currentIndex = result.index
@@ -464,6 +481,7 @@ struct LogCravingTool: View {
     private func triggerChip(_ trigger: CravingTrigger) -> some View {
         let isSelected = selectedTrigger == trigger
         return Button {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
             withAnimation(.spring(duration: 0.25)) {
                 selectedTrigger = trigger
                 store.logCraving(trigger)
