@@ -240,6 +240,53 @@ class NotificationManager {
         )
     }
 
+    // MARK: - Personalized peak-craving notification
+
+    /// Schedules a daily notification at the user's statistically peak craving hour.
+    /// Only fires if the peak is in the afternoon/evening window (2pm–11pm) and is
+    /// at least 2 hours away from the existing morning and evening slots to avoid spam.
+    /// Called when craving data reaches a meaningful threshold (5+ logs).
+    func schedulePersonalizedNotification(peakHour: Int) {
+        guard (14...23).contains(peakHour) else { return }
+        // Don't double-up within 2 hours of the existing scheduled slots.
+        guard abs(peakHour - morningHour) > 2, abs(peakHour - eveningHour) > 2 else { return }
+
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else { return }
+
+            // Remove stale personalized notifications.
+            let toRemove = (0..<14).map { "nightcap.personalized.d\($0)" }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: toRemove)
+
+            let cal = Calendar.current
+            let today = cal.startOfDay(for: Date())
+            let epoch = cal.startOfDay(for: Date(timeIntervalSince1970: 0))
+            let daysSinceEpoch = cal.dateComponents([.day], from: epoch, to: today).day ?? 0
+
+            for offset in 0..<14 {
+                let absoluteDay = daysSinceEpoch + offset
+                guard let fireDate = cal.date(byAdding: .day, value: offset, to: today) else { continue }
+                self.scheduleDayNotification(
+                    at: fireDate,
+                    hour: peakHour,
+                    title: "This is your window.",
+                    body: self.personalizedBodies[absoluteDay % self.personalizedBodies.count],
+                    identifier: "nightcap.personalized.d\(offset)"
+                )
+            }
+        }
+    }
+
+    private let personalizedBodies: [String] = [
+        "Your data shows this is when the craving usually shows up. You know the pattern. You know what to do.",
+        "This is the window where your streak is most at risk. Hold it.",
+        "The pull is predictable. Which means the defense can be too.",
+        "Your craving history peaks around now. The 20-minute timer exists for exactly this moment.",
+        "Pattern recognized. What happens in the next 20 minutes is the whole game.",
+        "The data says this is your window. The craving is a schedule. You can work with a schedule.",
+        "Your logs put this as the high-risk hour. You already know how to get through it.",
+    ]
+
     private func formattedDuration(_ seconds: TimeInterval) -> String {
         let h = Int(seconds) / 3600
         let d = h / 24

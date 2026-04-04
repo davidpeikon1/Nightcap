@@ -36,6 +36,11 @@ struct NightcapApp: App {
                 let quote = QuoteLibrary.dailyQuote(for: fastingStore.elapsedSeconds)
                 UserDefaults(suiteName: "group.com.nightcap.app")?
                     .set(quote.text, forKey: "currentQuoteText")
+                // Refresh personalized notification window (reschedules the 14-day
+                // block so the correct days stay covered as time advances).
+                if fastingStore.cravingLogs.count >= 5 {
+                    fastingStore.schedulePersonalizedCravingNotification()
+                }
             }
         }
     }

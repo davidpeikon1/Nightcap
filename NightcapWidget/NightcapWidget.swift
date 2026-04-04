@@ -7,14 +7,32 @@ struct WidgetFastData {
     let lastSugarDate: Date?
     let currentQuote: String?
     let streakDays: Int
+    let bestFastDuration: TimeInterval
 
     static func load() -> WidgetFastData {
         let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
         return WidgetFastData(
             lastSugarDate: defaults.object(forKey: "lastSugarDate") as? Date,
             currentQuote: defaults.string(forKey: "currentQuoteText"),
-            streakDays: defaults.integer(forKey: "streakDays")
+            streakDays: defaults.integer(forKey: "streakDays"),
+            bestFastDuration: defaults.double(forKey: "bestFastDuration")
         )
+    }
+
+    /// Seconds until the user beats their personal best, or nil when already past it
+    /// or when the target is more than 2 hours away.
+    func distanceToPB(at date: Date) -> TimeInterval? {
+        guard bestFastDuration > 3_600 else { return nil }
+        let shortfall = bestFastDuration - elapsed(at: date)
+        guard shortfall > 0, shortfall <= 7_200 else { return nil }
+        return shortfall
+    }
+
+    func pbLabel(for shortfall: TimeInterval) -> String {
+        let h = Int(shortfall) / 3600
+        let m = max(1, (Int(shortfall) % 3600) / 60)
+        if h > 0 { return "\(h)h \(m)m to PB" }
+        return "\(m)m to PB"
     }
 
     func elapsed(at date: Date) -> TimeInterval {
@@ -102,7 +120,7 @@ struct FastingEntry: TimelineEntry {
 
 struct FastingProvider: TimelineProvider {
     func placeholder(in context: Context) -> FastingEntry {
-        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800), currentQuote: nil, streakDays: 2))
+        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800), currentQuote: nil, streakDays: 2, bestFastDuration: 0))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (FastingEntry) -> Void) {
@@ -194,9 +212,10 @@ struct SmallWidgetView: View {
                 .minimumScaleFactor(0.6)
                 .lineLimit(1)
 
-            Text("sugar free")
+            let pbShortfall = entry.data.distanceToPB(at: entry.date)
+            Text(pbShortfall.map { entry.data.pbLabel(for: $0) } ?? "sugar free")
                 .font(.system(size: 11, weight: .light))
-                .foregroundStyle(Color.ncTextSecond)
+                .foregroundStyle(pbShortfall != nil ? Color.ncWarning : Color.ncTextSecond)
 
             Spacer(minLength: 8)
 
@@ -326,6 +345,13 @@ struct MediumWidgetView: View {
                             .foregroundStyle(Color.ncWarning)
                     }
                 }
+
+                if let shortfall = entry.data.distanceToPB(at: entry.date) {
+                    Text(entry.data.pbLabel(for: shortfall))
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundStyle(Color.ncWarning)
+                        .multilineTextAlignment(.trailing)
+                }
             }
             .frame(width: 80)
         }
@@ -373,10 +399,21 @@ struct LargeWidgetView: View {
                     .tracking(2)
                     .foregroundStyle(Color.ncTextTert)
                 Spacer()
-                Text(entry.data.phase(at: entry.date).uppercased())
-                    .font(.system(size: 8, weight: .semibold))
-                    .tracking(1.5)
-                    .foregroundStyle(Color.ncSuccess)
+                if let shortfall = entry.data.distanceToPB(at: entry.date) {
+                    Text(entry.data.pbLabel(for: shortfall).uppercased())
+                        .font(.system(size: 7, weight: .semibold))
+                        .tracking(1)
+                        .foregroundStyle(Color.ncWarning)
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 2)
+                        .background(Color.ncWarning.opacity(0.15))
+                        .cornerRadius(3)
+                } else {
+                    Text(entry.data.phase(at: entry.date).uppercased())
+                        .font(.system(size: 8, weight: .semibold))
+                        .tracking(1.5)
+                        .foregroundStyle(Color.ncSuccess)
+                }
             }
 
             Spacer(minLength: 12)

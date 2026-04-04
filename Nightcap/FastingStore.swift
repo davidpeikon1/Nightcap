@@ -396,6 +396,9 @@ class FastingStore: ObservableObject {
         resetEvents.insert(event, at: 0)
         if resetEvents.count > 200 { resetEvents = Array(resetEvents.prefix(200)) }
         saveDecodable(resetEvents, forKey: Keys.resetEvents)
+        // Persist best-ever fast duration so the widget can show approaching-PB state.
+        let newBestFast = resetEvents.map(\.fastDuration).max() ?? 0
+        defaults.set(newBestFast, forKey: "bestFastDuration")
 
         streakDays = 0
         defaults.set(0, forKey: Keys.streakDays)
@@ -435,6 +438,7 @@ class FastingStore: ObservableObject {
         [Keys.lastSugarDate, Keys.streakDays, Keys.bestStreakDays, Keys.lastStreakCheck,
          Keys.earnedBadges, Keys.cravingLogs, Keys.resetEvents, Keys.lastKnownPhase
         ].forEach { defaults.removeObject(forKey: $0) }
+        defaults.removeObject(forKey: "bestFastDuration")
         // Cancel all pending milestone and PB notifications.
         let ids = BadgeID.allCases.flatMap {
             ["nightcap.milestone.\($0.rawValue)", "nightcap.milestone.future.\($0.rawValue)"]
@@ -463,6 +467,19 @@ class FastingStore: ObservableObject {
         cravingLogs.insert(log, at: 0)
         if cravingLogs.count > 500 { cravingLogs = Array(cravingLogs.prefix(500)) }
         saveDecodable(cravingLogs, forKey: Keys.cravingLogs)
+        // Once enough data exists, update the personalized peak-time notification.
+        if cravingLogs.count >= 5 { schedulePersonalizedCravingNotification() }
+    }
+
+    /// Finds the hour with the most craving logs and schedules a targeted
+    /// daily notification there. Exposed so NightcapApp can refresh on foreground.
+    func schedulePersonalizedCravingNotification() {
+        let cal = Calendar.current
+        let hourCounts = Dictionary(
+            grouping: cravingLogs, by: { cal.component(.hour, from: $0.date) }
+        ).mapValues(\.count)
+        guard let peakHour = hourCounts.max(by: { $0.value < $1.value })?.key else { return }
+        NotificationManager.shared.schedulePersonalizedNotification(peakHour: peakHour)
     }
 
     func deleteCravingLog(id: UUID) {
