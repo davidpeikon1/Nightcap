@@ -454,29 +454,41 @@ struct QuoteLibrary {
     // MARK: Craving-moment cards (for the toolkit)
 
     static let cravingCards: [String] = [
+        // Neurochemical — what this moment actually is
         "What you're feeling is a measurable neurochemical event. It will metabolize.",
         "This exact feeling has a 20-minute half-life. It cannot sustain itself.",
         "The food you're craving was designed in a lab to make you feel exactly this. That's not hunger.",
         "Your prefrontal cortex is temporarily losing to your limbic system. It wins when you wait.",
-        "In 3 hours you'll be grateful you didn't.",
-        "This feeling is a wave. It has a peak. You're probably near it.",
         "You're not fighting the food. You're outlasting a hormone.",
         "The 20-minute rule: if you still want it in 20 minutes, it's hunger. If it passed, it was chemistry.",
         "Every craving you outlast weakens the neural path that produced it.",
         "The craving is loudest in the final minutes before it breaks. That's what loud means right now.",
-        // Behavioral
+        "Dopamine is chasing the anticipation, not the food itself. Notice what happens to the wanting the moment you eat it.",
+        "This is a neural pathway demanding to be used. You don't have to use it.",
+        "The urgency you feel is the craving at peak amplitude. It will be quieter in 10 minutes.",
+        "Cravings are not commands. They're requests from a pattern that's used to getting what it wants.",
+        // Behavioral — something to do right now
         "Drink a full glass of cold water right now. Thirst and hunger use the same signal.",
         "Step outside for 60 seconds. Cravings are partly spatial — change the room, change the signal.",
         "Eat something with fat or protein. A small piece of cheese. A handful of nuts. Fat satisfies; sugar restarts the cycle.",
         "Change rooms. The craving is partly a conditioned response to the cue in front of you.",
+        "Set a 5-minute timer. Do one thing that requires your hands. The craving doesn't survive divided attention.",
+        "Call or text someone. Social connection activates the same reward circuits sugar does — without the crash.",
         // Time-reframe
         "Name a specific time 20 minutes from now. That's when this ends.",
         "Your track record for outlasting cravings is 100%. This one is no different.",
+        "In 3 hours you'll be grateful you didn't.",
+        "This feeling is a wave. It has a peak. You're probably near it.",
         // Cognitive
         "The company that made that food paid researchers to make this moment feel urgent. It isn't.",
         "The craving tells you nothing about what your body needs. It tells you everything about what it's been trained to expect.",
-        "Dopamine is chasing the anticipation, not the food itself. Notice what happens to the wanting the moment you eat it.",
-        "This is a neural pathway demanding to be used. You don't have to use it.",
+        "Hunger asks for calories. Cravings ask for a specific product. The distinction is important.",
+        "The only decision you need to make right now is the next 20 minutes. Nothing further is required.",
+        "The craving will pass whether you act on it or not. You know this. Let that be enough.",
+        "What you're protecting right now isn't just a streak. It's the version of yourself you're in the middle of becoming.",
+        // Identity
+        "Every time you don't, you're teaching your brain who you are.",
+        "The person who decides this and the person who lives it are the same person. You're both of them right now.",
     ]
 
     // MARK: Selection
