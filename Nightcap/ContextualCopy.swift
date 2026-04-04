@@ -69,7 +69,7 @@ struct ContextualCopy {
         ],
 
         .threeToSevenDays: [
-            "After 72 hours, dopamine receptor sensitivity begins to recover.",
+            "Past 72 hours, dopamine receptor sensitivity begins recovering. The system is already different than it was on day one.",
             "Around day 4, most people have their first genuine 'I don't actually want it' moment.",
             "By the end of this week, most cravings are habit, not hunger.",
             "The compulsive edge fades around day 3. If it's still showing up, it's dimmer than it was.",

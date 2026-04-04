@@ -379,12 +379,12 @@ struct WhyReminderTool: View {
 
     private var statement: String {
         switch appState.userGoal {
-        case .sleepBetter:   return "I'm doing this because I want to wake up rested."
-        case .moreEnergy:    return "I'm doing this because I want real energy — not borrowed energy."
-        case .breakCravings: return "I'm doing this because the craving cycle ends here."
-        case .loseWeight:    return "I'm doing this because fat storage is driven by insulin, and insulin is driven by sugar. This is the lever."
-        case .curious:       return "I'm doing this to find out what my baseline actually feels like."
-        case nil:            return "I'm doing this because something needs to change."
+        case .sleepBetter:   return "I'm doing this because the 3am waking, the foggy mornings, the tired afternoons — those are blood sugar. I'm removing the cause."
+        case .moreEnergy:    return "I'm doing this because I want real energy — not borrowed energy with a crash at the other end."
+        case .breakCravings: return "I'm doing this because the craving cycle ends somewhere. I'm ending it here."
+        case .loseWeight:    return "I'm doing this because fat storage is driven by insulin, and insulin is driven by sugar. This is the lever that moves everything else."
+        case .curious:       return "I'm doing this to find out what my body actually feels like without this in it. Most people never find out."
+        case nil:            return "I'm doing this because something needs to change — and this is the lever that moves everything else."
         }
     }
 
