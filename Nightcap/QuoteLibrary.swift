@@ -135,6 +135,26 @@ struct QuoteLibrary {
                 science: "Habitual daily intake creates cue-response associations reinforced by circadian hormonal patterns. Passing the daily window without reinforcing the behavior begins disrupting these associations from day one. The disruption compounds with each passing day.",
                 tier: .twoToSixHours
             ),
+            ReframeQuote(
+                text: "The craving will look for its usual window. When the familiar time arrives, it may feel like hunger. That's a conditioned response — not a metabolic signal. Two completely different things.",
+                science: "Habitual eating patterns create anticipatory metabolic responses: ghrelin rises before expected meal times, insulin secretion begins before food is even consumed, and appetite signals intensify at conditioned times — all independent of actual caloric need. Recognizing the clock trigger as conditioned rather than metabolic is the cognitive reframe that changes the response.",
+                tier: .twoToSixHours
+            ),
+            ReframeQuote(
+                text: "The afternoon energy dip most people experience isn't circadian — it's glycemic. Without the post-meal spike and correction, you're finding out what your actual energy curve looks like.",
+                science: "The post-lunch dip, long attributed to circadian rhythms, is now understood to be largely driven by postprandial glucose fluctuation. High-glycemic meals produce a blood sugar spike followed by a correction that coincides with the afternoon trough. Without the spike, the dip is significantly attenuated. The baseline you feel now is closer to your biological norm.",
+                tier: .twoToSixHours
+            ),
+            ReframeQuote(
+                text: "Your liver is doing cleanup right now — processing the fructose backlog from your last meal rather than accumulating new load. That process, done chronically, is what drives visceral fat. It's pausing.",
+                science: "Hepatic de novo lipogenesis — the liver's conversion of excess fructose to triglycerides — is a primary mechanism linking sugar consumption to visceral fat accumulation and non-alcoholic fatty liver disease. Without new fructose input, this process pauses. The liver begins clearing existing load rather than generating new. This is a measurable event.",
+                tier: .twoToSixHours
+            ),
+            ReframeQuote(
+                text: "The company that made what you're craving employs food scientists whose job is to ensure you want it again tomorrow. You're not fighting food — you're opting out of a system.",
+                science: "The food industry employs flavor chemists, behavioral researchers, and addiction scientists to maximize repeat consumption. Concepts like 'sensory-specific satiety' — the mechanism that makes you want one food after another — are deliberately engineered into product formulations. Your craving is a designed response. Knowing this changes the framing from personal failure to systemic pressure.",
+                tier: .twoToSixHours
+            ),
         ],
 
         .sixTo24Hours: [
@@ -163,6 +183,26 @@ struct QuoteLibrary {
                 science: "Sugar cravings follow a circadian pattern that peaks in the late morning and early evening — correlated with cortisol and ghrelin cycles. After clearing the first evening window, the physiological pressure drops. The rest of the night is biologically quieter.",
                 tier: .sixTo24Hours
             ),
+            ReframeQuote(
+                text: "Insulin has been falling since your last sugar meal. Every hour it stays lower, fat storage slows, inflammation drops, and energy stabilizes. The downstream effects have started.",
+                science: "Fasting insulin is a primary driver of visceral fat storage, systemic inflammation via NF-κB signaling, and the post-meal blood glucose volatility that produces fatigue. After 6–24 hours without processed sugar, fasting insulin begins declining toward baseline. The downstream effects — reduced lipogenesis, lower inflammatory signaling, improved glycemic stability — follow within hours.",
+                tier: .sixTo24Hours
+            ),
+            ReframeQuote(
+                text: "Your gut microbiome has been shifting since your last meal. Firmicutes bacteria — the ones that amplify cravings — need sugar to survive. Hours in, their population is already declining.",
+                science: "The gut microbiome responds rapidly to dietary substrate changes. Firmicutes bacteria, which thrive on simple sugars and produce signaling molecules via the gut-brain axis that drive continued sugar cravings, begin declining within hours of sugar restriction. Bacteroidetes and other beneficial strains expand into the vacated niche. The directional shift begins within 24 hours.",
+                tier: .sixTo24Hours
+            ),
+            ReframeQuote(
+                text: "Every hour you hold today builds the baseline your next craving gets measured against. The biology you're creating right now is the ground you'll be standing on tomorrow.",
+                science: "Each successive hour of reduced sugar intake compounds: insulin sensitivity improves with each low-glucose cycle, dopamine receptor sensitivity recovers with each unreinforced craving, and conditioned cue responses weaken with each extinction trial. The first 24 hours create the physiological foundation all subsequent progress builds on.",
+                tier: .sixTo24Hours
+            ),
+            ReframeQuote(
+                text: "Fewer than 5% of people who decide to reduce sugar make it past the first full day without consuming it. The gap between intention and the first day is where most attempts end.",
+                science: "Research on dietary behavior change identifies the first 24 hours as the highest-risk period for reversion to baseline. Motivational salience decays rapidly after the decision moment, while physiological and environmental cues driving the old behavior remain constant. Completing the first day is a statistically significant threshold — not an arbitrary milestone.",
+                tier: .sixTo24Hours
+            ),
         ],
 
         .oneToThreeDays: [
@@ -189,6 +229,16 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "By day 2–3, the dopamine pull is still strong — but it's measurably weaker than day 1. The direction matters as much as the destination.",
                 science: "Dopamine D2 receptor rebound begins within 24–72 hours of removing the overstimulating substance. The restoration isn't complete — but the trajectory toward baseline has started. In recovery research, the direction of change is a meaningful clinical indicator independent of how far the trajectory has traveled.",
+                tier: .oneToThreeDays
+            ),
+            ReframeQuote(
+                text: "The physiological craving is largely resolved by now. What remains is conditioned response — trained by repetition, not driven by biology. Those respond to different tools than willpower.",
+                science: "By 2–3 days, acute physiological dependence on processed sugar has largely resolved. Residual cravings are primarily conditioned responses — classical conditioning in which environmental and temporal cues trigger a craving independently of metabolic need. Conditioned responses extinguish through repeated unreinforced exposure to the cue, not through force of will.",
+                tier: .oneToThreeDays
+            ),
+            ReframeQuote(
+                text: "The decision you made is compounding quietly. Every hour it's not a decision you're making again is an hour it's becoming something other than a decision.",
+                science: "Behavioral automaticity — the transition from deliberate, effortful action to automatic default behavior — forms with repetition. Neuroimaging research shows that behavior is proceduralized as it shifts from prefrontal cortex (effortful, deliberate) to basal ganglia (automatic, habitual) processing. Each day of consistent behavior accelerates the transfer.",
                 tier: .oneToThreeDays
             ),
         ],
