@@ -93,6 +93,13 @@ struct ContextualCopy {
             "The cognitive clarity at this stage is not placebo. Stable glucose is better fuel for the brain.",
             "Two weeks of reduced insulin means two weeks of reduced visceral fat accumulation.",
             "The improvements at this stage compound quietly. You may already be noticing things you can't quite name.",
+            "Slow-wave sleep has had real time to consolidate. The deep rest you may be getting now is a biological outcome, not coincidence.",
+            "Your taste receptors are nearly two weeks into recalibrating. The natural world is getting louder.",
+            "The inflammation that was running quietly in the background has had two weeks to fall. That's not metaphor — it's CRP.",
+            "Habit cravings weaken through exposure without reward. You've been doing that for two weeks. The reflex is fading.",
+            "The hardest mile was the first one. You are now in territory most people have never mapped.",
+            "Fasting insulin at this mark looks different than it did two weeks ago. Every downstream system follows it.",
+            "Identity and behavior are converging. The person who does this and the person you are becoming the same person.",
         ],
 
         .thirtyPlusDays: [
