@@ -224,6 +224,7 @@ struct CountdownTool: View {
                 }
                 .padding(.vertical, 16)
             } else {
+                let priorCompletions = UserDefaults.standard.integer(forKey: "countdown.completions")
                 VStack(spacing: 8) {
                     Text("Cravings peak and pass in under 20 minutes.")
                         .font(.system(size: 14))
@@ -231,11 +232,19 @@ struct CountdownTool: View {
                         .lineSpacing(3)
                         .multilineTextAlignment(.center)
 
-                    Text("Resistance isn't the goal. Outlasting it is.")
-                        .font(.system(size: 14, weight: .light))
-                        .foregroundStyle(Color("NCTextSecondary"))
-                        .lineSpacing(3)
-                        .multilineTextAlignment(.center)
+                    if priorCompletions > 0 {
+                        Text("You've waited out \(priorCompletions) craving\(priorCompletions == 1 ? "" : "s") this way before.")
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(Color("NCSuccess").opacity(0.75))
+                            .multilineTextAlignment(.center)
+                            .transition(.opacity)
+                    } else {
+                        Text("Resistance isn't the goal. Outlasting it is.")
+                            .font(.system(size: 14, weight: .light))
+                            .foregroundStyle(Color("NCTextSecondary"))
+                            .lineSpacing(3)
+                            .multilineTextAlignment(.center)
+                    }
                 }
 
                 ZStack {
@@ -559,7 +568,8 @@ struct LogCravingTool: View {
                         .multilineTextAlignment(.center)
                         .padding(.top, 4)
 
-                    // For triggers where breathing directly helps, offer a one-tap path.
+                    // Trigger-specific tool shortcut — routes to the most effective tool
+                    // for each trigger type based on the underlying mechanism.
                     if trigger == .stress || trigger == .boredom {
                         Button {
                             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -567,6 +577,34 @@ struct LogCravingTool: View {
                         } label: {
                             HStack(spacing: 5) {
                                 Text("Try box breathing now")
+                                    .font(.system(size: 12))
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 10, weight: .light))
+                            }
+                            .foregroundStyle(Color("NCSuccess"))
+                        }
+                        .padding(.top, 6)
+                    } else if trigger == .habit || trigger == .fatigue {
+                        Button {
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                            withAnimation(.spring(duration: 0.25)) { activeTool = .countdown }
+                        } label: {
+                            HStack(spacing: 5) {
+                                Text("Start the 20 minutes")
+                                    .font(.system(size: 12))
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 10, weight: .light))
+                            }
+                            .foregroundStyle(Color("NCSuccess"))
+                        }
+                        .padding(.top, 6)
+                    } else if trigger == .social {
+                        Button {
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                            withAnimation(.spring(duration: 0.25)) { activeTool = .reframe }
+                        } label: {
+                            HStack(spacing: 5) {
+                                Text("Try a quick reframe")
                                     .font(.system(size: 12))
                                 Image(systemName: "arrow.right")
                                     .font(.system(size: 10, weight: .light))
