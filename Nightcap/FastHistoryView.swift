@@ -36,7 +36,7 @@ struct FastHistoryView: View {
                     .padding(.top, 8)
                 }
             }
-            .navigationTitle("Fast History")
+            .navigationTitle("History")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -254,6 +254,7 @@ struct FastHistoryView: View {
                     Label("Edit note", systemImage: "pencil")
                 }
                 Button(role: .destructive) {
+                    UINotificationFeedbackGenerator().notificationOccurred(.warning)
                     withAnimation {
                         store.deleteResetEvent(id: event.id)
                     }
@@ -358,10 +359,10 @@ struct FastHistoryView: View {
             Image(systemName: "clock.arrow.circlepath")
                 .font(.system(size: 36, weight: .thin))
                 .foregroundStyle(Color("NCTextTertiary"))
-            Text("No history yet.")
+            Text("Nothing to show yet.")
                 .font(.system(size: 17, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
-            Text("Your past fasts will appear here.")
+            Text("Each completed fast will be recorded here.")
                 .font(.system(size: 14))
                 .foregroundStyle(Color("NCTextSecondary"))
         }
@@ -647,12 +648,12 @@ struct EditNoteSheet: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("What triggered it?")
-                        .font(.system(size: 12, weight: .medium))
-                        .tracking(1)
+                    Text("NOTE")
+                        .font(.system(size: 11, weight: .medium))
+                        .tracking(1.5)
                         .foregroundStyle(Color("NCTextTertiary"))
 
-                    TextField("e.g. chocolate after dinner", text: $note)
+                    TextField("e.g. birthday cake, work stress, travelling", text: $note)
                         .font(.system(size: 15))
                         .foregroundStyle(Color("NCTextPrimary"))
                         .padding(14)

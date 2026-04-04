@@ -96,7 +96,7 @@ struct PhaseDetailSheet: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(p.rawValue)
-                        .font(.system(size: 14, weight: isCurrent ? .semibold : .regular))
+                        .font(.system(size: 14, weight: isCurrent ? .medium : .regular))
                         .foregroundStyle(isCurrent ? phaseColor : Color("NCTextPrimary"))
                     if isCurrent {
                         Text("you are here")
@@ -250,9 +250,9 @@ struct PhaseDetailSheet: View {
     private var tips: [String] {
         switch phase {
         case .justStarted: return [
-            "Drink water immediately. Hunger and craving feel physiologically similar. Water distinguishes them.",
-            "Wait exactly 20 minutes before acting on any craving. Set a timer. They almost always pass.",
-            "Don't fight it — observe it. Name it: 'This is a craving. It will pass.'",
+            "Water helps — hunger and craving feel physiologically identical. Water resolves one of them.",
+            "The 20-minute rule: set a timer. Cravings almost always pass before it goes off.",
+            "Observing a craving rather than fighting it reduces its intensity. Try naming it: 'This is a craving. It will pass.'",
         ]
         case .firstDay: return [
             "Stay out of the kitchen unless you're cooking a full meal. Environmental triggers are documented and real.",
@@ -273,7 +273,7 @@ struct PhaseDetailSheet: View {
         case .rewiring: return [
             "This is the week to change your kitchen. Remove trigger foods from visible, accessible locations.",
             "Start building a replacement ritual for the time of day you typically had sugar.",
-            "Tell someone what you're doing. Social accountability at the one-week mark dramatically increases completion rates.",
+            "Social accountability at the one-week mark dramatically increases completion rates. Telling someone makes it concrete.",
         ]
         case .freedom: return [
             "When you encounter processed sugar at a social event, you don't need to announce it or explain it. You just don't eat it.",

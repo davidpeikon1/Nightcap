@@ -135,7 +135,7 @@ struct ProgressSection: View {
     // MARK: - All badges earned
 
     private var allBadgesEarnedRow: some View {
-        let days = max(100, Int(store.elapsedSeconds / 86400))
+        let days = Int(store.elapsedSeconds / 86400)
         return HStack(spacing: 12) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 16, weight: .light))
@@ -305,6 +305,7 @@ struct BadgeDetailView: View {
                 Spacer()
 
                 Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     dismiss()
                 } label: {
                     Text(badge.dismissText)
@@ -497,7 +498,7 @@ struct LockedBadgeSheet: View {
                         .font(.system(size: 15, design: .monospaced))
                         .foregroundStyle(Color("NCTextTertiary"))
                     if store.isTracking {
-                        Text("You're \(store.formattedElapsed) in.")
+                        Text("\(store.formattedElapsed) in.")
                             .font(.system(size: 12, weight: .light))
                             .foregroundStyle(Color("NCTextTertiary").opacity(0.7))
                             .padding(.top, 2)

@@ -8,41 +8,53 @@ struct BodyScienceCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Header row
-            Button {
-                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                withAnimation(.spring(duration: 0.3)) { isExpanded.toggle() }
-            } label: {
-                HStack(spacing: 10) {
-                    Image(systemName: "flask")
-                        .font(.system(size: 13, weight: .light))
-                        .foregroundStyle(Color("NCSuccess"))
+            // Header row — three separate hit targets to avoid nested-button ambiguity
+            HStack(spacing: 0) {
+                Button {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    withAnimation(.spring(duration: 0.3)) { isExpanded.toggle() }
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: "flask")
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(Color("NCSuccess"))
 
-                    Text("YOUR BODY NOW")
-                        .font(.system(size: 11, weight: .medium))
-                        .tracking(2)
-                        .foregroundStyle(Color("NCTextSecondary"))
+                        Text("YOUR BODY NOW")
+                            .font(.system(size: 11, weight: .medium))
+                            .tracking(2)
+                            .foregroundStyle(Color("NCTextSecondary"))
 
-                    Spacer()
-
-                    Button {
-                        showPhaseDetail = true
-                    } label: {
-                        HStack(spacing: 4) {
-                            Text(store.fastingPhase.rawValue.uppercased())
-                                .font(.system(size: 10, weight: .medium))
-                                .tracking(1.5)
-                                .foregroundStyle(Color("NCSuccess"))
-                            Image(systemName: "info.circle")
-                                .font(.system(size: 10, weight: .light))
-                                .foregroundStyle(Color("NCSuccess").opacity(0.7))
-                        }
+                        Spacer()
                     }
+                }
+                .buttonStyle(.plain)
 
+                Button {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    showPhaseDetail = true
+                } label: {
+                    HStack(spacing: 4) {
+                        Text(store.fastingPhase.rawValue.uppercased())
+                            .font(.system(size: 10, weight: .medium))
+                            .tracking(1.5)
+                            .foregroundStyle(Color("NCSuccess"))
+                        Image(systemName: "info.circle")
+                            .font(.system(size: 10, weight: .light))
+                            .foregroundStyle(Color("NCSuccess").opacity(0.7))
+                    }
+                }
+                .buttonStyle(.plain)
+
+                Button {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    withAnimation(.spring(duration: 0.3)) { isExpanded.toggle() }
+                } label: {
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                         .font(.system(size: 10, weight: .light))
                         .foregroundStyle(Color("NCTextTertiary"))
+                        .padding(.leading, 12)
                 }
+                .buttonStyle(.plain)
             }
 
             if isExpanded {
