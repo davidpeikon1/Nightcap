@@ -281,8 +281,16 @@ body {
 
 .nc-hero__gradient {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 45%, rgba(200, 188, 170, 0.45) 0%, transparent 70%);
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 50% 40% at 55% 40%, rgba(200, 188, 170, 0.4) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 35% at 30% 60%, rgba(195, 185, 172, 0.25) 0%, transparent 55%);
+  animation: nc-ambientShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes nc-ambientShift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(2%, -1%) scale(1.03); }
 }
 
 .nc-hero__stars {
