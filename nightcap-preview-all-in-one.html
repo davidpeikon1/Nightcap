@@ -2929,91 +2929,8 @@ body::after {
 
   if (!form) return;
 
-  // ---------- Returning Visitor ----------
-  (function checkReturningVisitor() {
-    try {
-      var saved = localStorage.getItem('nightcap_last_results');
-      if (!saved) return;
-      var data = JSON.parse(saved);
-      if (!data || !data.payload || !data.timestamp) return;
-
-      // Only show if results are less than 30 days old
-      var age = Date.now() - new Date(data.timestamp).getTime();
-      if (age > 30 * 24 * 60 * 60 * 1000) return;
-
-      // Add a "See your results again" banner to the hero
-      var hero = document.getElementById('hero');
-      if (!hero) return;
-
-      var banner = document.createElement('div');
-      banner.className = 'nc-return-banner';
-      banner.innerHTML = '<p>Welcome back! You consumed <strong>' + data.payload.quiz_data.estimated_daily_sugar + 'g</strong> of processed sugar per day.</p>' +
-        '<button class="nc-btn nc-btn--primary nc-btn--sm" id="return-results-btn">See My Results Again</button>';
-      hero.querySelector('.nc-hero__content').appendChild(banner);
-
-      document.getElementById('return-results-btn').addEventListener('click', function () {
-        // Hide everything, show results
-        ['hero', 'why', 'how-it-works', 'ingredients', 'social-proof', 'faq'].forEach(function (id) {
-          var el = document.getElementById(id);
-          if (el) el.style.display = 'none';
-        });
-        window.__nightcapQuizData = data.payload.quiz_data;
-        showResults(data.payload, data.serverData || { position: generatePosition() });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    } catch (e) {}
-  })();
-
-  // ---------- Countdown Timer ----------
-  function initCountdown() {
-    var container = document.getElementById('launch-countdown');
-    if (!container) return;
-
-    function update() {
-      var now = new Date();
-      var diff = CONFIG.launchDate - now;
-      if (diff <= 0) {
-        container.innerHTML = '<div class="nc-countdown__block"><span class="nc-countdown__number">Live!</span></div>';
-        return;
-      }
-
-      var days = Math.floor(diff / 86400000);
-      var hours = Math.floor((diff % 86400000) / 3600000);
-      var minutes = Math.floor((diff % 3600000) / 60000);
-      var seconds = Math.floor((diff % 60000) / 1000);
-
-      var blocks = container.querySelectorAll('.nc-countdown__number');
-      if (blocks.length === 4) {
-        blocks[0].textContent = days;
-        blocks[1].textContent = String(hours).padStart(2, '0');
-        blocks[2].textContent = String(minutes).padStart(2, '0');
-        blocks[3].textContent = String(seconds).padStart(2, '0');
-      }
-    }
-
-    update();
-    setInterval(update, 1000);
-  }
-  initCountdown();
-
-  // ---------- Phone Auto-Format ----------
-  var phoneInput = document.getElementById('signup-phone');
-  if (phoneInput) {
-    phoneInput.addEventListener('input', function (e) {
-      var val = e.target.value.replace(/\D/g, '');
-      if (val.length === 0) {
-        e.target.value = '';
-      } else if (val.length <= 3) {
-        e.target.value = '(' + val;
-      } else if (val.length <= 6) {
-        e.target.value = '(' + val.slice(0, 3) + ') ' + val.slice(3);
-      } else {
-        e.target.value = '(' + val.slice(0, 3) + ') ' + val.slice(3, 6) + '-' + val.slice(6, 10);
-      }
-    });
-  }
-
   // ---------- Live Validation ----------
+// ---------- Live Validation ----------
   var nameInput = document.getElementById('signup-name');
   var emailInput = document.getElementById('signup-email');
 
@@ -3047,26 +2964,9 @@ body::after {
     });
   }
 
-  if (phoneInput) {
-    phoneInput.addEventListener('blur', function () {
-      var val = phoneInput.value.trim();
-      clearFieldError('signup-phone');
-      if (val.length > 0 && !validatePhone(val)) {
-        showError('signup-phone', 'Please enter a valid 10-digit phone number');
-      } else if (val.length > 0 && validatePhone(val)) {
-        phoneInput.classList.add('valid');
-      }
-    });
-  }
-
   // ---------- Form Validation ----------
   function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function validatePhone(phone) {
-    var digits = phone.replace(/\D/g, '');
-    return digits.length >= 10 && digits.length <= 15;
   }
 
   function showError(fieldId, message) {
@@ -3108,9 +3008,11 @@ body::after {
 
     var name = document.getElementById('signup-name').value.trim();
     var email = document.getElementById('signup-email').value.trim();
-    var phone = document.getElementById('signup-phone').value.trim();
-    var smsConsent = document.getElementById('sms-consent').checked;
-    var emailConsent = document.getElementById('email-consent').checked;
+    var phoneEl = document.getElementById('signup-phone');
+    var phone = phoneEl ? phoneEl.value.trim() : '';
+    var smsConsentEl = document.getElementById('sms-consent');
+    var smsConsent = smsConsentEl ? smsConsentEl.checked : false;
+    var emailConsent = true;
 
     var valid = true;
 
@@ -3124,11 +3026,6 @@ body::after {
       valid = false;
     } else if (!validateEmail(email)) {
       showError('signup-email', 'Please enter a valid email address');
-      valid = false;
-    }
-
-    if (phone && !validatePhone(phone)) {
-      showError('signup-phone', 'Please enter a valid phone number');
       valid = false;
     }
 
@@ -3247,16 +3144,6 @@ body::after {
     } catch (e) {}
   }
 
-  // ---------- Generate Referral Code ----------
-  function generateReferralCode(email) {
-    var hash = 0;
-    for (var i = 0; i < email.length; i++) {
-      hash = ((hash << 5) - hash) + email.charCodeAt(i);
-      hash |= 0;
-    }
-    return 'NC' + Math.abs(hash).toString(36).toUpperCase().slice(0, 6);
-  }
-
   function generatePosition() {
     return Math.floor(Math.random() * 500) + 2800;
   }
@@ -3279,16 +3166,6 @@ body::after {
     resultsSection.classList.add('active');
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Fire confetti!
-    setTimeout(fireConfetti, 400);
-
-    // Animate ring with delay
-    setTimeout(function () { animateRing(dailySugar); }, 600);
-
-    // Animate comparison chart
-    setTimeout(function () { animateComparisonChart(dailySugar); }, 1200);
-
     // Sugar equivalents
     populateEquivalents(dailySugar);
 
@@ -3296,11 +3173,6 @@ body::after {
     personalizeNextSteps(quizData);
 
     // Populate share card
-    populateShareCard(quizData);
-
-    // Animate source breakdown
-    setTimeout(function () { animateSourceBreakdown(quizData); }, 1400);
-
     // Animated counter for sugar grams
     animateCounter('results-sugar-grams', 0, dailySugar, 1500);
 
@@ -3334,42 +3206,8 @@ body::after {
       subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. This is what the food system does when you're not watching. Now you're watching.";
     }
 
-    // Insight
-    var insightText = document.getElementById('results-insight-text');
-    if (insightText) insightText.textContent = getPersonalizedInsight(quizData);
-
-    // Position
-    var position = serverData.position || generatePosition();
-    var positionEl = document.getElementById('results-position');
-    if (positionEl) positionEl.textContent = position.toLocaleString();
-
-    // SMS note
-    var smsNote = document.getElementById('results-sms-note');
-    if (smsNote) {
-      if (payload.sms_consent && payload.phone) {
-        smsNote.textContent = "We just texted " + maskPhone(payload.phone) + " with a link to start tracking.";
-      } else {
-        smsNote.textContent = 'Check your email for your link to the Nightcap app.';
-      }
-    }
-
-    // ---------- Referral System ----------
-    var refCode = generateReferralCode(payload.email);
-    var refUrl = CONFIG.baseUrl + '?ref=' + refCode;
-
-    var refInput = document.getElementById('referral-url');
-    if (refInput) refInput.value = refUrl;
-
-    var refCopyBtn = document.getElementById('referral-copy-btn');
-    if (refCopyBtn) {
-      refCopyBtn.addEventListener('click', function () {
-        copyToClipboard(refUrl);
-        refCopyBtn.textContent = 'Copied!';
-        showToast('Referral link copied!', 'success');
-        setTimeout(function () { refCopyBtn.textContent = 'Copy'; }, 2000);
-        track('referral_copied');
-      });
-    }
+    // Share URL
+    var refUrl = CONFIG.baseUrl;
 
     // Social share buttons for referral
     var yearlyLbs = quizData.estimated_yearly_sugar_lbs || 0;
@@ -3398,24 +3236,6 @@ body::after {
         var body = "Hey,\n\nI just took this 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day — that's " + yearlyLbs + " lbs per year.\n\nApparently Americans went from 1 lb of sugar per year 200 years ago to 152 lbs today. Most of it is hidden in everyday foods.\n\nTake the quiz and see your number: " + refUrl;
         window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
         track('referral_shared', { platform: 'email' });
-      });
-    }
-
-    // Quiz share button (Web Share API)
-    var shareBtn = document.getElementById('share-quiz-btn');
-    if (shareBtn) {
-      shareBtn.addEventListener('click', function () {
-        if (navigator.share) {
-          navigator.share({
-            title: 'Nightcap Sugar Quiz',
-            text: 'I just found out I consume ' + dailySugar + 'g of sugar per day from drinks. Take the quiz!',
-            url: refUrl,
-          });
-        } else {
-          copyToClipboard(refUrl);
-          shareBtn.textContent = 'Link Copied!';
-          setTimeout(function () { shareBtn.textContent = 'Share the Quiz'; }, 2000);
-        }
       });
     }
 
@@ -3469,71 +3289,6 @@ body::after {
     }
 
     setTimeout(function () { requestAnimationFrame(tick); }, 1000);
-  }
-
-  // ---------- Ring Animation ----------
-  function animateRing(grams) {
-    var ring = document.getElementById('results-ring');
-    if (!ring) return;
-
-    var svg = ring.closest('svg');
-    if (svg && !svg.querySelector('#ring-gradient')) {
-      var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-      var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
-      gradient.setAttribute('id', 'ring-gradient');
-      gradient.innerHTML = '<stop offset="0%" stop-color="#2A2520"/><stop offset="100%" stop-color="#5C554C"/>';
-      defs.appendChild(gradient);
-      svg.insertBefore(defs, svg.firstChild);
-    }
-
-    var circumference = 339.292;
-    var percent = Math.min(grams / 200, 1);
-    var offset = circumference * (1 - percent);
-
-    ring.style.strokeDashoffset = offset;
-  }
-
-  // ---------- Share Card ----------
-  function populateShareCard(quizData) {
-    var el = document.getElementById('share-card-sugar');
-    if (el) el.textContent = (quizData.estimated_daily_sugar || 0) + 'g';
-
-    var weeklyEl = document.getElementById('share-card-weekly');
-    if (weeklyEl) weeklyEl.textContent = (quizData.estimated_weekly_sugar || 0) + 'g';
-
-    var yearlyEl = document.getElementById('share-card-yearly');
-    if (yearlyEl) yearlyEl.textContent = (quizData.estimated_yearly_sugar_lbs || 0) + ' lbs';
-
-    // Save button — uses html2canvas if available, else prompts screenshot
-    var saveBtn = document.getElementById('save-share-card');
-    if (saveBtn) {
-      saveBtn.addEventListener('click', function () {
-        var cardInner = document.getElementById('share-card-inner');
-        if (!cardInner) return;
-
-        // Try html2canvas (if loaded externally)
-        if (window.html2canvas) {
-          window.html2canvas(cardInner, {
-            backgroundColor: '#0a0a12',
-            scale: 2,
-          }).then(function (canvas) {
-            var link = document.createElement('a');
-            link.download = 'nightcap-sugar-results.png';
-            link.href = canvas.toDataURL();
-            link.click();
-            track('share_card_saved', { method: 'html2canvas' });
-          });
-        } else {
-          // Fallback: prompt user to screenshot
-          cardInner.style.outline = '2px solid rgba(124, 58, 237, 0.5)';
-          showToast('Long-press or screenshot this card to save!', 'success');
-          setTimeout(function () {
-            cardInner.style.outline = 'none';
-          }, 3000);
-          track('share_card_saved', { method: 'screenshot_prompt' });
-        }
-      });
-    }
   }
 
   // ---------- Sugar Equivalents ----------
@@ -3597,151 +3352,6 @@ body::after {
     }
   }
 
-  // ---------- Source Breakdown Animation ----------
-  function animateSourceBreakdown(quizData) {
-    var breakfast = quizData.sugar_from_breakfast || 0;
-    var drinks = quizData.sugar_from_drinks || 0;
-    var processed = quizData.sugar_from_processed || 0;
-    var maxSource = Math.max(breakfast, drinks, processed, 1);
-
-    function setBar(barId, valId, grams) {
-      var bar = document.getElementById(barId);
-      var val = document.getElementById(valId);
-      if (bar) bar.style.width = Math.max((grams / maxSource) * 100, 8) + '%';
-      if (val) val.textContent = grams + 'g';
-    }
-
-    setBar('source-bar-breakfast', 'source-val-breakfast', breakfast);
-    setBar('source-bar-drinks', 'source-val-drinks', drinks);
-    setBar('source-bar-processed', 'source-val-processed', processed);
-  }
-
-  // ---------- Comparison Chart Animation ----------
-  function animateComparisonChart(userGrams) {
-    var maxGrams = 250; // scale max
-    var avgGrams = 190; // average American daily processed sugar (152 lbs/year / 365 * 453g)
-
-    var youBar = document.getElementById('compare-bar-you');
-    var avgBar = document.querySelector('.nc-compare__bar--avg');
-    var ncBar = document.querySelector('.nc-compare__bar--nc');
-    var youValue = document.getElementById('compare-value-you');
-
-    if (!youBar) return;
-
-    // Set value text
-    if (youValue) youValue.textContent = userGrams + 'g';
-
-    // Animate bars
-    var youPercent = Math.min((userGrams / maxGrams) * 100, 100);
-    var avgPercent = Math.min((avgGrams / maxGrams) * 100, 100);
-    var ncPercent = Math.min((25 / maxGrams) * 100, 100); // 25g recommended
-
-    youBar.style.width = Math.max(youPercent, 3) + '%';
-    if (avgBar) avgBar.style.width = avgPercent + '%';
-    if (ncBar) ncBar.style.width = ncPercent + '%';
-  }
-
-  // ---------- Confetti ----------
-  function fireConfetti() {
-    var canvas = document.getElementById('confetti-canvas');
-    if (!canvas) {
-      canvas = document.createElement('canvas');
-      canvas.id = 'confetti-canvas';
-      canvas.className = 'nc-confetti-canvas';
-      document.body.appendChild(canvas);
-    }
-
-    var ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    var particles = [];
-    var colors = ['#2A2520', '#5C554C', '#8A8278', '#C8B89A', '#A89878', '#3D362E'];
-
-    for (var i = 0; i < 150; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height * -1,
-        w: Math.random() * 8 + 4,
-        h: Math.random() * 4 + 2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        vx: (Math.random() - 0.5) * 4,
-        vy: Math.random() * 3 + 2,
-        rotation: Math.random() * 360,
-        rotationSpeed: (Math.random() - 0.5) * 10,
-        opacity: 1,
-      });
-    }
-
-    var frame = 0;
-    var maxFrames = 180;
-
-    function animate() {
-      frame++;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(function (p) {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.05;
-        p.rotation += p.rotationSpeed;
-        if (frame > maxFrames * 0.6) {
-          p.opacity -= 0.02;
-        }
-
-        if (p.opacity <= 0) return;
-
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate((p.rotation * Math.PI) / 180);
-        ctx.globalAlpha = Math.max(0, p.opacity);
-        ctx.fillStyle = p.color;
-        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-        ctx.restore();
-      });
-
-      if (frame < maxFrames) {
-        requestAnimationFrame(animate);
-      } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        canvas.remove();
-      }
-    }
-
-    requestAnimationFrame(animate);
-  }
-
-  // ---------- Personalized Insights ----------
-  function getPersonalizedInsight(quizData) {
-    var parts = [];
-    var daily = quizData.estimated_daily_sugar || 0;
-
-    // Context on their number
-    if (daily > 100) {
-      parts.push("At " + daily + "g per day, you're consuming more processed sugar than 88% of health experts recommend as a maximum. This level is associated with increased risk of metabolic dysfunction, insulin resistance, and chronic inflammation.");
-    } else if (daily > 50) {
-      parts.push("200 years ago, your entire year's sugar intake would have been less than what you now consume in a week. That's not a willpower problem — it's an environment problem. And it's fixable.");
-    }
-
-    // Motivation-based insight
-    var motivationInsights = {
-      prevent_disease: "You're making the right move. 88% of Americans are already metabolically unhealthy, and processed sugar is the #1 driver. Acting now — before symptoms appear — is the most powerful thing you can do for your long-term health.",
-      energy: "Blood sugar spikes from processed sugar cause the crashes, brain fog, and afternoon slumps most people accept as normal. Reducing your intake to under 25g/day can stabilize your energy within the first week.",
-      weight: "Processed sugar drives fat storage through insulin spikes. Cutting " + daily + "g per day eliminates " + quizData.estimated_yearly_sugar_lbs + " lbs of sugar per year — that's a massive metabolic shift without counting a single calorie.",
-      family: "Kids today consume more sugar by age 8 than adults did in an entire lifetime 200 years ago. By changing your own habits, you're changing what your family sees as normal. That's the most powerful intervention there is.",
-      curiosity: "Now you know your number. Most people are surprised — and that surprise is the beginning of change. The Nightcap app helps you track and reduce from here.",
-    };
-
-    parts.push(motivationInsights[quizData.motivation] || "Awareness is the first step. Now that you know your number, you can start making changes that compound over time.");
-
-    // Label awareness
-    if (quizData.checks_labels === 'never' || quizData.checks_labels === 'rarely') {
-      parts.push("Sugar goes by 60+ names on labels — dextrose, maltose, HFCS, \"evaporated cane juice.\" The Nightcap app helps you spot them all.");
-    }
-
-    return parts.join(' ');
-  }
-
   // ---------- Toast System ----------
   function showToast(message, type) {
     var container = document.getElementById('toast-container');
@@ -3762,12 +3372,6 @@ body::after {
       toast.classList.add('exiting');
       setTimeout(function () { toast.remove(); }, 300);
     }, 4000);
-  }
-
-  // ---------- Helpers ----------
-  function maskPhone(phone) {
-    var digits = String(phone).replace(/\D/g, '');
-    return '***-***-' + digits.slice(-4);
   }
 
   function copyToClipboard(text) {
