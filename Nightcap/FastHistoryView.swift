@@ -304,8 +304,23 @@ struct FastHistoryView: View {
             }
 
             let days = last28Days()
+            let gridColumns = Array(repeating: GridItem(.flexible(), spacing: 4), count: 7)
+            let weekdayLetters = days.prefix(7).map { date -> String in
+                let wd = Calendar.current.component(.weekday, from: date) // 1=Sun...7=Sat
+                return ["S","M","T","W","T","F","S"][wd - 1]
+            }
+
+            LazyVGrid(columns: gridColumns, spacing: 2) {
+                ForEach(Array(weekdayLetters.enumerated()), id: \.offset) { _, letter in
+                    Text(letter)
+                        .font(.system(size: 9, weight: .regular))
+                        .foregroundStyle(Color("NCTextTertiary").opacity(0.7))
+                        .frame(maxWidth: .infinity)
+                }
+            }
+
             LazyVGrid(
-                columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 7),
+                columns: gridColumns,
                 spacing: 4
             ) {
                 ForEach(days, id: \.self) { date in
@@ -372,12 +387,13 @@ struct FastHistoryView: View {
             Image(systemName: "clock.arrow.circlepath")
                 .font(.system(size: 36, weight: .thin))
                 .foregroundStyle(Color("NCTextTertiary"))
-            Text("Nothing to show yet.")
+            Text("No resets yet.")
                 .font(.system(size: 17, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
-            Text("Your reset history will appear here.")
+            Text("Every fast you log will build a picture of your patterns here.")
                 .font(.system(size: 14))
                 .foregroundStyle(Color("NCTextSecondary"))
+                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 60)
@@ -437,6 +453,35 @@ struct FastHistoryView: View {
 
     // MARK: - Craving Insights Card
 
+    /// One-sentence synthesis of the dominant craving pattern. Nil when data is insufficient.
+    private var cravingInsightLine: String? {
+        let logs = store.cravingLogs
+        guard logs.count >= 3 else { return nil }
+
+        let total = logs.count
+        let triggerCounts = CravingTrigger.allCases.map { t in (t, logs.filter { $0.trigger == t }.count) }
+        if let (dominant, count) = triggerCounts.max(by: { $0.1 < $1.1 }),
+           count >= 2, count * 2 >= total {
+            let pct = Int(Double(count) / Double(total) * 100)
+            switch dominant {
+            case .stress:   return "Stress is driving \(pct)% of your cravings. The urge passes in 15–20 minutes whether you act on it or not."
+            case .boredom:  return "Boredom is your dominant trigger (\(pct)%). The pull disappears when you redirect attention — it doesn't require willpower."
+            case .habit:    return "\(pct)% of your cravings are conditioned habit responses, not physiological need. Conditioned responses can be unconditioned."
+            case .social:   return "Social situations are your highest-risk context (\(pct)%). Anticipating them in advance is most of the defense."
+            case .fatigue:  return "Low energy is triggering \(pct)% of your cravings. Blood sugar stability improves significantly around week 2."
+            case .hunger:   return "Genuine hunger is driving \(pct)% of your logged cravings. Protein and fat both satisfy without the dopamine spike."
+            }
+        }
+
+        let cal = Calendar.current
+        let eveningCount = logs.filter { (18...23).contains(cal.component(.hour, from: $0.date)) }.count
+        if eveningCount >= 2, eveningCount * 2 > total {
+            return "Most of your cravings hit in the evening. That window is where the pattern lives."
+        }
+
+        return nil
+    }
+
     private var cravingInsightsCard: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
@@ -448,6 +493,18 @@ struct FastHistoryView: View {
                 Text("\(store.cravingLogs.count) total")
                     .font(.system(size: 11, design: .monospaced))
                     .foregroundStyle(Color("NCTextTertiary"))
+            }
+
+            if let insight = cravingInsightLine {
+                Text(insight)
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 12)
+                    .background(Color("NCBackground"))
+                    .cornerRadius(10)
             }
 
             // Trigger breakdown bars — sorted by count descending so the most relevant triggers surface first.
