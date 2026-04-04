@@ -157,7 +157,7 @@ body {
 
 .nc-logo__lines {
   width: 100%;
-  height: 6px;
+  height: 4px;
   position: relative;
 }
 
@@ -322,12 +322,12 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 720px;
-  animation: nc-heroEntrance 1.2s ease-out;
+  max-width: 760px;
+  animation: nc-heroEntrance 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes nc-heroEntrance {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -437,7 +437,7 @@ body {
 }
 
 .nc-quiz__container {
-  max-width: 640px;
+  max-width: 560px;
   width: 100%;
 }
 
@@ -537,10 +537,10 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 18px 24px;
+  padding: 16px 22px;
   background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
+  border: 1px solid rgba(28, 25, 23, 0.06);
+  border-radius: 12px;
   cursor: pointer;
   transition: all var(--nc-transition);
   text-align: left;
@@ -704,12 +704,12 @@ body {
 
 .nc-input {
   width: 100%;
-  padding: 15px 18px;
+  padding: 16px 20px;
   background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  border-radius: 12px;
   font-family: var(--nc-font);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--nc-text);
   transition: all var(--nc-transition);
   outline: none;
@@ -1081,8 +1081,8 @@ body {
 
 /* ---------- Footer ---------- */
 .nc-footer {
-  padding: 80px 32px 60px;
-  border-top: 1px solid var(--nc-border);
+  padding: 100px 40px 80px;
+  border-top: 1px solid rgba(28, 25, 23, 0.06);
   text-align: center;
 }
 
@@ -1375,9 +1375,9 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
-  background: var(--nc-border);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
+  background: rgba(28, 25, 23, 0.06);
+  border: 1px solid rgba(28, 25, 23, 0.06);
+  border-radius: var(--nc-radius-lg);
   overflow: hidden;
 }
 
@@ -1431,13 +1431,13 @@ body {
 }
 
 .nc-proof__card {
-  padding: 32px;
+  padding: 36px;
   background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
+  border: 1px solid rgba(28, 25, 23, 0.05);
+  border-radius: var(--nc-radius-lg);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   box-shadow: var(--nc-shadow-sm);
   position: relative;
   transition: transform var(--nc-transition), box-shadow var(--nc-transition);
@@ -2062,7 +2062,7 @@ body {
       </div>
 
       <h1 class="nc-hero__title" id="hero-title">
-        Quitting Sugar Is Hard.<br>
+        Quitting Sugar<br>Is Hard.<br>
         <span class="nc-hero__title-line--accent">Help Is Coming.</span>
       </h1>
       <p class="nc-hero__subtitle">
