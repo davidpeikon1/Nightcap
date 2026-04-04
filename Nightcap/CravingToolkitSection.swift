@@ -68,7 +68,7 @@ struct CravingToolkitSection: View {
                 }
             } label: {
                 HStack {
-                    Text("Craving toolkit")
+                    Text("Feeling a craving?")
                         .font(.system(size: 15, weight: .regular))
                         .foregroundStyle(Color("NCTextSecondary"))
 

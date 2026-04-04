@@ -203,10 +203,11 @@ struct ProgressSection: View {
             return "unlocks \(df.string(from: unlockDate))"
         }()
 
+        let isCloseIn = progress >= 0.75
         return HStack(spacing: 12) {
             Image(systemName: badge.symbol)
                 .font(.system(size: 14, weight: .light))
-                .foregroundStyle(Color("NCTextTertiary"))
+                .foregroundStyle(isCloseIn ? Color("NCSuccess").opacity(0.7) : Color("NCTextTertiary"))
                 .frame(width: 20)
 
             VStack(alignment: .leading, spacing: 6) {
@@ -222,9 +223,9 @@ struct ProgressSection: View {
                         }
                     }
                     Spacer()
-                    Text(remaining < 120 ? "almost there" : "\(remainingText) away")
+                    Text(remaining < 120 ? "almost there" : (isCloseIn ? "closing in · \(remainingText)" : "\(remainingText) away"))
                         .font(.system(size: 11, design: .monospaced))
-                        .foregroundStyle(Color("NCTextTertiary"))
+                        .foregroundStyle(isCloseIn ? Color("NCSuccess") : Color("NCTextTertiary"))
                 }
 
                 GeometryReader { geo in
@@ -233,7 +234,7 @@ struct ProgressSection: View {
                             .fill(Color("NCTextTertiary").opacity(0.2))
                             .frame(height: 4)
                         Capsule()
-                            .fill(Color("NCSuccess").opacity(0.6))
+                            .fill(isCloseIn ? Color("NCSuccess") : Color("NCSuccess").opacity(0.6))
                             .frame(width: geo.size.width * progress, height: 4)
                             .animation(.spring(duration: 0.8), value: progress)
                     }
@@ -419,6 +420,12 @@ struct MilestoneSheet: View {
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
                     .padding(.horizontal, 32)
+
+                // Licensing effect — counter "I've earned a break" thinking at milestone moments
+                Text("The streak is still running.")
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
+                    .multilineTextAlignment(.center)
 
                 Spacer()
 

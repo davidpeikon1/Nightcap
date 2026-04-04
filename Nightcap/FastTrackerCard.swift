@@ -8,6 +8,10 @@ struct ResetModal: View {
     @Environment(\.dismiss) var dismiss
     @State private var note: String = ""
     @State private var didConfirm = false
+    // Captures elapsed + badges before the reset fires so the near-miss
+    // calculation has the pre-reset state available in confirmationView.
+    @State private var preResetElapsed: TimeInterval = 0
+    @State private var preResetBadges: Set<BadgeID> = []
 
     var body: some View {
         ZStack {
@@ -21,6 +25,17 @@ struct ResetModal: View {
         }
         .animation(.easeInOut(duration: 0.28), value: didConfirm)
         .onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) }
+    }
+
+    /// Loss-aversion title — surfaces what's being given up before confirming.
+    private var resetTitle: String {
+        let days = Int(store.elapsedSeconds / 86400)
+        let h    = Int(store.elapsedSeconds / 3600)
+        if days >= 7 { return "You're about to reset \(days) days." }
+        if days >= 2 { return "You're \(days) days in." }
+        if days == 1 { return "You're 1 day in." }
+        if h >= 1    { return "You're \(h) hour\(h == 1 ? "" : "s") in." }
+        return "Starting fresh."
     }
 
     /// Context-aware body copy based on how long the current fast ran.
@@ -43,7 +58,7 @@ struct ResetModal: View {
     private var resetFormView: some View {
         VStack(alignment: .leading, spacing: 28) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Starting fresh.")
+                Text(resetTitle)
                     .font(.system(size: 24, weight: .light))
                     .foregroundStyle(Color("NCTextPrimary"))
 
@@ -110,6 +125,8 @@ struct ResetModal: View {
 
             VStack(spacing: 12) {
                 Button {
+                    preResetElapsed = store.elapsedSeconds
+                    preResetBadges  = store.earnedBadges
                     store.logSugar(note: note.isEmpty ? nil : note)
                     withAnimation { didConfirm = true }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
@@ -138,6 +155,22 @@ struct ResetModal: View {
         .padding(24)
     }
 
+    /// Near-miss: shown when the user was ≥60% toward the next badge.
+    /// Uses pre-reset state so the calculation survives the elapsed reset.
+    private var nearMissText: String? {
+        guard preResetElapsed > 0 else { return nil }
+        guard let nextBadge = BadgeID.allCases.first(where: { !preResetBadges.contains($0) }) else { return nil }
+        let shortfall = nextBadge.threshold - preResetElapsed
+        let pct = preResetElapsed / nextBadge.threshold
+        guard pct >= 0.6, shortfall > 60 else { return nil }
+        let totalH = Int(shortfall / 3600)
+        let d = totalH / 24; let h = totalH % 24
+        if d > 0 { return "\(d)d\(h > 0 ? " \(h)h" : "") short of \(nextBadge.label)." }
+        if totalH > 0 { return "\(totalH)h short of \(nextBadge.label)." }
+        let m = max(1, Int(shortfall / 60))
+        return "\(m)m short of \(nextBadge.label)."
+    }
+
     private var resetConfirmationView: some View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.circle")
@@ -148,12 +181,22 @@ struct ResetModal: View {
                 .font(.system(size: 22, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
 
-            Text("Every reset is data. The clock starts now.")
+            // Near-miss effect — plants the seed for the next attempt
+            if let miss = nearMissText {
+                Text(miss)
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCWarning").opacity(0.85))
+                    .multilineTextAlignment(.center)
+            }
+
+            // Spotlight effect — reduce shame, normalize the experience
+            Text("Every reset is data. No one is tracking but you.")
                 .font(.system(size: 14))
                 .foregroundStyle(Color("NCTextSecondary"))
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(24)
         .transition(.opacity)
     }
 }

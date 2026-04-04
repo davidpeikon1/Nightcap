@@ -153,6 +153,9 @@ class NotificationManager {
         "The work is quieter now. That's what progress looks like after the hard part is over.",
         "You committed to this when you set the clock. This morning is that commitment holding.",
         "Most people who make it this far don't remember deciding every morning. It stopped being a decision — it became who they are.",
+        // Curiosity gap — hints at biological change without revealing the detail
+        "What changed in your body overnight is worth knowing.",
+        "Your blood chemistry shifted while you slept. Open to find out how.",
     ]
 
     /// Fourteen evening messages — distributed across weekdays so the message
@@ -182,6 +185,9 @@ class NotificationManager {
         "Every night you close clean, the biology of tomorrow starts stronger.",
         "More resets happen in the next 90 minutes than any other time of day. You're in the window. Hold it.",
         "The people who change this are the ones who close tonight. You're one of them.",
+        // Curiosity gap — hints at biological stakes without spelling them out
+        "What's at stake in the next two hours is specific and biological.",
+        "The biology of tomorrow is being written right now.",
     ]
 
     // MARK: - Milestone notifications

@@ -27,7 +27,9 @@ struct WeeklyInsightCard: View {
     }
 
     private func cardView(_ insight: WeeklyInsight) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
+        let weekAgo = Date().addingTimeInterval(-7 * 86400)
+        let cravingsHeld = store.cravingLogs.filter { $0.date > weekAgo }.count
+        return VStack(alignment: .leading, spacing: 16) {
             // Header
             Text("THIS WEEK")
                 .font(.system(size: 11, weight: .medium))
@@ -38,6 +40,9 @@ struct WeeklyInsightCard: View {
             VStack(spacing: 10) {
                 statRow("Longest fast", value: insight.longestFastFormatted)
                 statRow("Resets this week", value: "\(insight.resetCount)")
+                if cravingsHeld > 0 {
+                    statRow("Cravings held", value: "\(cravingsHeld)")
+                }
                 if store.streakDays > 0 {
                     statRow("Current streak", value: "\(store.streakDays)d")
                 }

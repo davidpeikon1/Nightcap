@@ -609,6 +609,11 @@ struct QuoteLibrary {
         "You have a narrow lead over the reflex right now. That lead is all you need.",
         // Commitment — anchor to the prior decision
         "You already made this decision when you started the clock. You're not making it again right now — you're just honoring it.",
+        // Framing effect — past success as forward evidence
+        "Every craving you've ever outlasted is evidence your body can do this.",
+        "You've been here before and made it through. That track record is real data — and it's yours.",
+        // Identity alignment
+        "The craving thinks you'll follow the old pattern. That's not who you are right now.",
     ]
 
     // MARK: Selection
