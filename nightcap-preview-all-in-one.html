@@ -15,7 +15,7 @@
   <meta name="twitter:title" content="Nightcap — How Much Processed Sugar Are You Really Consuming?">
   <meta name="twitter:description" content="Take the 60-second quiz. See your number.">
 
-  <meta name="theme-color" content="#E8DFCF">
+  <meta name="theme-color" content="#F0EBE3">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,18 +34,18 @@
 }
 
 :root {
-  --nc-bg: #E8DFCF;
-  --nc-bg-card: #F2EBE0;
-  --nc-bg-card-hover: #F7F2EA;
-  --nc-surface: #EDE5D8;
-  --nc-primary: #2A2520;
-  --nc-primary-light: #3D362E;
-  --nc-primary-dark: #1A1612;
-  --nc-accent: #2A2520;
-  --nc-accent-dark: #1A1612;
-  --nc-text: #0F0D0A;
-  --nc-text-muted: #4A4540;
-  --nc-text-dim: #6E6860;
+  --nc-bg: #F0EBE3;
+  --nc-bg-card: #F7F4EF;
+  --nc-bg-card-hover: #FDFBF8;
+  --nc-surface: #F4F0EA;
+  --nc-primary: #1C1917;
+  --nc-primary-light: #2E2A26;
+  --nc-primary-dark: #0C0A08;
+  --nc-accent: #1C1917;
+  --nc-accent-dark: #0C0A08;
+  --nc-text: #1C1917;
+  --nc-text-muted: #57534E;
+  --nc-text-dim: #78716C;
   --nc-error: #B84040;
   --nc-warning: #2A2520;
   --nc-success: #3D362E;
@@ -77,18 +77,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle noise texture overlay */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px;
-}
 
 /* ---------- Skip Link (A11y) ---------- */
 .nc-skip-link {
@@ -146,17 +134,17 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  margin: 0 auto 2rem;
+  gap: 5px;
+  margin: 0 auto 3rem;
   width: fit-content;
 }
 
 .nc-logo__text {
   font-family: var(--nc-font-display);
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--nc-text);
-  letter-spacing: 0.18em;
+  letter-spacing: 0.3em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -173,8 +161,9 @@ body::after {
   position: absolute;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 1px;
   background: var(--nc-text);
+  opacity: 0.15;
 }
 
 .nc-logo__lines::before {
@@ -204,13 +193,14 @@ body::after {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 16px 36px;
+  padding: 14px 32px;
   border: none;
-  border-radius: var(--nc-radius);
+  border-radius: 8px;
   font-family: var(--nc-font);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all var(--nc-transition);
   text-decoration: none;
@@ -220,16 +210,14 @@ body::after {
 
 .nc-btn--primary {
   background: var(--nc-primary);
-  color: #F2EBE0;
-  box-shadow: var(--nc-shadow-md);
-  font-size: 0.95rem;
-  padding: 18px 40px;
+  color: var(--nc-bg);
+  box-shadow: none;
+  padding: 16px 44px;
 }
 
 .nc-btn--primary:hover:not(:disabled) {
   transform: translateY(-1px);
-  background: var(--nc-primary-dark);
-  box-shadow: var(--nc-shadow-lg);
+  background: var(--nc-primary-light);
 }
 
 .nc-btn--primary:active:not(:disabled) {
@@ -295,10 +283,11 @@ body::after {
 .nc-hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 32px;
+  padding: 120px 40px;
   overflow: hidden;
 }
 
@@ -309,12 +298,7 @@ body::after {
 }
 
 .nc-hero__gradient {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(42, 37, 32, 0.03) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(42, 37, 32, 0.02) 0%, transparent 60%),
-    linear-gradient(180deg, var(--nc-bg) 0%, #DED5C5 100%);
+  display: none;
 }
 
 .nc-hero__stars {
@@ -341,11 +325,11 @@ body::after {
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.75rem, 7vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.75rem;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
 }
 
 .nc-hero__title-line {
@@ -353,18 +337,17 @@ body::after {
 }
 
 .nc-hero__title-line--accent {
-  color: var(--nc-text);
-  opacity: 0.6;
+  color: var(--nc-text-muted);
+  font-weight: 500;
 }
 
 .nc-hero__subtitle {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  opacity: 0.75;
-  max-width: 480px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.85;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--nc-text-muted);
+  max-width: 440px;
+  margin: 0 auto 3rem;
+  line-height: 1.75;
 }
 
 .nc-hero__cta-group {
@@ -471,7 +454,7 @@ body::after {
   height: 6px;
   border-radius: 50%;
   background: var(--nc-text);
-  opacity: 0.15;
+  opacity: 0.2;
   transition: all var(--nc-transition);
 }
 
@@ -1141,7 +1124,7 @@ body::after {
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.4;
+  opacity: 0.55;
   margin-top: 2rem;
 }
 
@@ -1180,10 +1163,10 @@ body::after {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 40px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.4;
+  opacity: 0.15;
 }
 
 .nc-benefits,
@@ -1199,7 +1182,7 @@ body::after {
 
 .nc-why__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -1350,7 +1333,7 @@ body::after {
 
 /* ---------- Benefits Grid ---------- */
 .nc-benefits {
-  padding: 120px 32px;
+  padding: 140px 40px;
   text-align: center;
   position: relative;
 }
@@ -1361,10 +1344,10 @@ body::after {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 40px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.4;
+  opacity: 0.15;
 }
 
 .nc-benefits__container {
@@ -1374,7 +1357,7 @@ body::after {
 
 .nc-benefits__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   margin-bottom: 3.5rem;
@@ -1422,7 +1405,7 @@ body::after {
 
 /* ---------- Social Proof ---------- */
 .nc-proof {
-  padding: 120px 32px;
+  padding: 140px 40px;
   text-align: center;
 }
 
@@ -1457,17 +1440,7 @@ body::after {
   box-shadow: var(--nc-shadow-md);
 }
 
-.nc-proof__card::before {
-  content: '\201C';
-  position: absolute;
-  top: 20px;
-  left: 24px;
-  font-family: var(--nc-font-display);
-  font-size: 4rem;
-  color: var(--nc-primary);
-  opacity: 0.15;
-  line-height: 1;
-  pointer-events: none;
+.nc-proof__card::before { display: none; }
 }
 
 .nc-proof__quote {
@@ -1505,10 +1478,10 @@ body::after {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 40px;
   height: 1px;
   background: var(--nc-primary);
-  opacity: 0.4;
+  opacity: 0.15;
 }
 
 .nc-bottom-cta__container {
@@ -1531,7 +1504,7 @@ body::after {
 
 /* ---------- FAQ ---------- */
 .nc-faq {
-  padding: 120px 32px;
+  padding: 140px 40px;
 }
 
 .nc-faq__container {
