@@ -414,6 +414,23 @@ body {
   color: var(--nc-text-muted);
 }
 
+/* ---------- Scroll Hint ---------- */
+.nc-scroll-hint {
+  margin-top: 2rem;
+  text-align: center;
+  animation: nc-scrollBounce 2s ease-in-out infinite;
+}
+
+.nc-scroll-hint__arrow {
+  font-size: 1.25rem;
+  color: var(--nc-text-dim);
+}
+
+@keyframes nc-scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(8px); opacity: 0.8; }
+}
+
 /* ---------- Return Banner ---------- */
 .nc-return-banner {
   margin-top: 2rem;
