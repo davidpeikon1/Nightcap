@@ -85,9 +85,10 @@ class NotificationManager {
         let epoch = cal.startOfDay(for: Date(timeIntervalSince1970: 0))
         let daysSinceEpoch = cal.dateComponents([.day], from: epoch, to: today).day ?? 0
 
+        let goal = goalForNotifications()
+
         for offset in 0..<14 {
             let absoluteDay = daysSinceEpoch + offset
-            let bodyIndex = absoluteDay % morningBodies.count
 
             guard let fireDate = cal.date(byAdding: .day, value: offset, to: today) else { continue }
 
@@ -95,7 +96,7 @@ class NotificationManager {
                 at: fireDate,
                 hour: morningHour,
                 title: "Good morning.",
-                body: morningBodies[bodyIndex],
+                body: morningBody(for: goal, absoluteDay: absoluteDay),
                 identifier: "nightcap.morning.d\(offset)"
             )
             scheduleDayNotification(
@@ -106,6 +107,74 @@ class NotificationManager {
                 identifier: "nightcap.evening.d\(offset)"
             )
         }
+    }
+
+    /// Reads the user's stored goal so notifications can be personalised
+    /// without requiring a parameter to be threaded through every call site.
+    private func goalForNotifications() -> UserGoal? {
+        guard let raw = UserDefaults.standard.string(forKey: "userGoal") else { return nil }
+        return UserGoal(rawValue: raw)
+    }
+
+    /// Returns a morning body line, using the goal-specific pool when available
+    /// and falling back to the generic pool when no goal is set.
+    private func morningBody(for goal: UserGoal?, absoluteDay: Int) -> String {
+        let pool: [String]
+        switch goal {
+        case .sleepBetter:
+            pool = [
+                "Another night without a glucose spike means another night your cortisol didn't fire at 3am.",
+                "The sleep improvements you're working toward are building in the background. Stable blood sugar is the mechanism.",
+                "Last night's sleep ran differently. Stable blood glucose removes the 3am cortisol response.",
+                "Two weeks without glycemic disruption changes sleep architecture measurably. You're building toward that.",
+                "Deep sleep — the restorative kind — improves when nocturnal glucose is stable. That's what you're working on.",
+                "The 2–4am waking that glucose spikes cause is becoming less likely every morning.",
+                "Your sleep debt is shifting. Blood sugar stability is the lever you pulled.",
+            ]
+        case .moreEnergy:
+            pool = [
+                "The afternoon crash you're used to is borrowed energy. What you're building now is a real baseline.",
+                "Mitochondrial adaptation to fat oxidation continues today. The stable energy you may be feeling is this process.",
+                "The fatigue you've normalized isn't your baseline — it's your baseline plus sugar debt. This morning is different.",
+                "Real energy doesn't have a crash at the other end. You're in the process of finding out what that feels like.",
+                "Your cells are adapting. The flat period most people experience is the transition, not the destination.",
+                "The post-lunch crash is borrowed energy correcting itself. You're removing the borrow.",
+                "What you feel this morning is closer to your actual biological baseline than what you felt a week ago.",
+            ]
+        case .breakCravings:
+            pool = [
+                "The craving that might show up today is a reflex looking for its cue. You know how to handle it.",
+                "Every day you hold, the neural pathway for the old habit weakens through disuse. Today weakens it more.",
+                "The dopamine loop that drove the old pattern is losing its grip. That process is running right now.",
+                "This morning's craving, if it shows up, is habit memory — not need. The distinction is everything.",
+                "The compulsive edge of the craving fades by day 3. Whatever you feel now is the echo.",
+                "You're interrupting a conditioned response. That's exactly what extinction training looks like.",
+                "The craving cycle you started this to end is ending. Each morning is evidence.",
+            ]
+        case .loseWeight:
+            pool = [
+                "Fasting insulin is lower this morning than it was when you started. Every downstream system follows.",
+                "Visceral fat responds faster to insulin reduction than to any other dietary change. The mechanism is running.",
+                "This morning's insulin baseline is contributing to fat mobilization. That's the lever you pulled.",
+                "Lower fasting insulin means less fat storage signaling overnight. That's a different morning.",
+                "The fat-storage mechanism runs through insulin. Every morning clean is a morning it's lower.",
+                "Two weeks of reduced insulin produces measurable changes in visceral fat. You're building toward that.",
+                "Cortisol and insulin are both lower this morning. Both drive fat storage. Both are falling.",
+            ]
+        case .curious:
+            pool = [
+                "Another day of data. Your body is telling you something you haven't heard before.",
+                "Most people never run this experiment long enough to see what you're seeing. The data is yours.",
+                "Your n=1 trial continues. What's your baseline this morning?",
+                "The question 'what does my body actually feel like?' is one of the most interesting ones you can ask.",
+                "Most people have never tracked what their actual baseline is. You're in a rare category.",
+                "Each day adds to a dataset most people never collect. What are you noticing?",
+                "The experiment is still running. The data is still coming in.",
+            ]
+        case nil:
+            return morningBodies[absoluteDay % morningBodies.count]
+        }
+        return pool[absoluteDay % pool.count]
     }
 
     private func scheduleDayNotification(at date: Date, hour: Int, title: String, body: String, identifier: String) {

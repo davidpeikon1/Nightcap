@@ -44,6 +44,13 @@ struct PhaseDetailSheet: View {
                 Text(phase.tagline)
                     .font(.system(size: 15, weight: .light))
                     .foregroundStyle(Color("NCTextSecondary"))
+                Spacer()
+                // When viewing the current phase, show how long the user has been in it.
+                if phase == store.fastingPhase, let timeInPhase = timeInPhaseText {
+                    Text(timeInPhase)
+                        .font(.system(size: 11, design: .monospaced))
+                        .foregroundStyle(phaseColor.opacity(0.7))
+                }
             }
 
             Text(phase.bodyScience)
@@ -52,6 +59,21 @@ struct PhaseDetailSheet: View {
                 .lineSpacing(7)
                 .fixedSize(horizontal: false, vertical: true)
         }
+    }
+
+    /// How long the user has been in the current phase.
+    /// Returns nil for phases other than the current one, or when not tracking.
+    private var timeInPhaseText: String? {
+        guard let start = store.lastSugarDate else { return nil }
+        let entryDate = start.addingTimeInterval(phase.previousThreshold)
+        let seconds = max(0, Date().timeIntervalSince(entryDate))
+        let h = Int(seconds) / 3600
+        let d = h / 24
+        let m = (Int(seconds) % 3600) / 60
+        if d >= 7  { return "\(d)d in this phase" }
+        if d >= 1  { let rh = h % 24; return rh > 0 ? "\(d)d \(rh)h in this phase" : "\(d)d in this phase" }
+        if h >= 1  { return m > 0 ? "\(h)h \(m)m in this phase" : "\(h)h in this phase" }
+        return "\(m)m in this phase"
     }
 
     // MARK: - Phase Timeline
