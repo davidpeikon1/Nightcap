@@ -22,11 +22,9 @@ struct ProgressSection: View {
                     .tracking(2)
                     .foregroundStyle(Color("NCTextSecondary"))
                 Spacer()
-                if !store.earnedBadges.isEmpty {
-                    Text("\(store.earnedBadges.count)/\(BadgeID.allCases.count)")
-                        .font(.system(size: 11, design: .monospaced))
-                        .foregroundStyle(Color("NCTextTertiary"))
-                }
+                Text("\(store.earnedBadges.count)/\(BadgeID.allCases.count)")
+                    .font(.system(size: 11, design: .monospaced))
+                    .foregroundStyle(Color("NCTextTertiary"))
                 Button {
                     showHistory = true
                 } label: {

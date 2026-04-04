@@ -138,7 +138,10 @@ struct HeroCard: View {
                             .opacity(0.6)
                     }
                     .foregroundStyle(Color("NCTextTertiary"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 10)
+                    .padding(.bottom, 4)
+                    .contentShape(Rectangle())
                 }
             }
 

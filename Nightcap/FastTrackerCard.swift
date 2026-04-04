@@ -230,7 +230,7 @@ struct ResetModal: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("What was it?")
+                Text("What triggered it?")
                     .font(.system(size: 12, weight: .medium))
                     .tracking(1)
                     .foregroundStyle(Color("NCTextTertiary"))
@@ -286,7 +286,7 @@ struct ResetModal: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text("I didn't actually have sugar")
+                    Text("Cancel")
                         .font(.system(size: 14))
                         .foregroundStyle(Color("NCTextSecondary"))
                         .padding(.vertical, 8)
