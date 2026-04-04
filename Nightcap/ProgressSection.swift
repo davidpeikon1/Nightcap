@@ -248,12 +248,9 @@ struct ProgressSection: View {
                 }
                 .frame(height: 4)
 
-                // Science teaser — first sentence of the badge's scienceFact so
-                // the upcoming milestone feels meaningful, not just a timer.
-                let teaser = badge.scienceFact
-                    .components(separatedBy: ".")
-                    .first
-                    .map { $0.trimmingCharacters(in: .whitespaces) + "." } ?? ""
+                // Lookahead teaser — the anticipatory label that frames why
+                // this milestone matters before it's reached.
+                let teaser = badge.lookaheadText
                 if !teaser.isEmpty {
                     Text(teaser)
                         .font(.system(size: 11, weight: .light))
