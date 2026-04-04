@@ -24,6 +24,35 @@ enum UserGoal: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// First-person commitment label used as the GoalSheet CTA button.
+    /// Phrased as a declaration so tapping it feels like a commitment, not a menu item.
+    var commitmentLabel: String {
+        switch self {
+        case .sleepBetter:   return "I'm doing this for my sleep."
+        case .moreEnergy:    return "I'm doing this for real energy."
+        case .breakCravings: return "I'm ending the craving cycle."
+        case .loseWeight:    return "I'm pulling the right lever."
+        case .curious:       return "I want to find out."
+        }
+    }
+
+    /// Short reminder shown in the ResetModal — ties the user's declared reason
+    /// to the biological consequence of resetting. Non-judgmental; informational.
+    var resetMomentReminder: String {
+        switch self {
+        case .sleepBetter:
+            return "You started this for better sleep. The 3am waking is blood sugar. Resetting tonight restarts that cycle."
+        case .moreEnergy:
+            return "You started this for real energy. Resetting resets the borrowed-energy cycle, too."
+        case .breakCravings:
+            return "You started this to end the craving cycle. This is the cycle asking to continue."
+        case .loseWeight:
+            return "You started this to lower your insulin. Resetting reactivates the fat-storage mechanism."
+        case .curious:
+            return "You started this to find out what your body feels like without sugar. The experiment is still running."
+        }
+    }
+
     /// Rotates through 3 affirmations by day-of-year so "My Why" feels fresh
     /// across multiple visits without requiring any stored state.
     var affirmation: String {

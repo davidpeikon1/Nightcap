@@ -4,6 +4,7 @@ import SwiftUI
 
 struct ResetModal: View {
     @EnvironmentObject var store: FastingStore
+    @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) var dismiss
     @State private var note: String = ""
     @State private var didConfirm = false
@@ -84,6 +85,24 @@ struct ResetModal: View {
                     .padding(.top, 2)
                     .transition(.opacity)
                     .animation(.easeInOut(duration: 0.2), value: note.count > 80)
+                }
+            }
+
+            // Commitment reminder — surfaces the user's stated reason at the
+            // moment they're about to reset (Cialdini: commitment & consistency).
+            // Rendered only when a goal is set; kept in tertiary color so it
+            // informs without guilting.
+            if let goal = appState.userGoal {
+                HStack(alignment: .top, spacing: 12) {
+                    Rectangle()
+                        .fill(Color("NCTextTertiary").opacity(0.5))
+                        .frame(width: 2)
+                        .cornerRadius(1)
+                    Text(goal.resetMomentReminder)
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
 

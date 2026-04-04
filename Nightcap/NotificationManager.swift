@@ -151,6 +151,8 @@ class NotificationManager {
         "Sleep last night ran on stable blood glucose. That's a different kind of recovery.",
         "Your taste receptors this morning are more sensitive than they were when you started.",
         "The work is quieter now. That's what progress looks like after the hard part is over.",
+        "You committed to this when you set the clock. This morning is that commitment holding.",
+        "Most people who make it this far don't remember deciding every morning. It stopped being a decision — it became who they are.",
     ]
 
     /// Fourteen evening messages — distributed across weekdays so the message
@@ -178,6 +180,8 @@ class NotificationManager {
         "Hold the evening and the morning takes care of itself.",
         "The hard part of today is the next 90 minutes. After that, the biology quiets down.",
         "Every night you close clean, the biology of tomorrow starts stronger.",
+        "More resets happen in the next 90 minutes than any other time of day. You're in the window. Hold it.",
+        "The people who change this are the ones who close tonight. You're one of them.",
     ]
 
     // MARK: - Milestone notifications

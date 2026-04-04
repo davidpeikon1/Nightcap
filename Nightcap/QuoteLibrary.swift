@@ -600,6 +600,15 @@ struct QuoteLibrary {
         // Situational
         "If you're in the kitchen: leave the room. The craving is partly a conditioned response to being in that space.",
         "Tomorrow morning you'll either be glad you held or wish you had. You know which one you want to be.",
+        // Social proof — others' behavior normalizes waiting
+        "Everyone who has successfully broken this habit sat in exactly this moment and waited. That's not inspiration — that's the whole method.",
+        "The people who make it past this point don't have more willpower. They just outlasted this exact feeling one more time than the people who didn't.",
+        "Most resets happen in the evening, alone, in the kitchen. Knowing the pattern is most of the defense.",
+        // Scarcity — the craving window is finite and closing
+        "The next 20 minutes are the only window that exists right now. Nothing before or after it counts.",
+        "You have a narrow lead over the reflex right now. That lead is all you need.",
+        // Commitment — anchor to the prior decision
+        "You already made this decision when you started the clock. You're not making it again right now — you're just honoring it.",
     ]
 
     // MARK: Selection

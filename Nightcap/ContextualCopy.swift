@@ -26,6 +26,9 @@ struct ContextualCopy {
             "The craving is loudest right before it breaks. This might be that moment.",
             "You don't have to win. You just have to wait.",
             "The clock is running. That's the only thing that matters right now.",
+            "This window closes in under 20 minutes. It's the only one that needs closing right now.",
+            "There are two outcomes from the next 20 minutes. You already know which one you want.",
+            "The craving has a ceiling. You're underneath it. Once you're through it, it's done.",
         ],
 
         .thirtyMinToTwoHours: [

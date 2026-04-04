@@ -262,7 +262,7 @@ struct GoalSheet: View {
                             if let g = selected { appState.setGoal(g) }
                             appState.advance(to: .notifications)
                         } label: {
-                            Text("Continue")
+                            Text(selected?.commitmentLabel ?? "Continue")
                                 .font(.system(size: 17, weight: .medium))
                                 .foregroundStyle(Color("NCBackground"))
                                 .frame(maxWidth: .infinity)
