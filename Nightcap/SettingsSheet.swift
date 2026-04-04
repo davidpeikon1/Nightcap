@@ -324,7 +324,7 @@ struct SettingsSheet: View {
             for event in store.resetEvents {
                 let h = Int(event.fastDuration) / 3600
                 let d = h / 24
-                let duration = d > 0 ? "\(d)d \(h % 24)h fast" : "\(h)h fast"
+                let duration = d > 0 ? (h % 24 > 0 ? "\(d)d \(h % 24)h fast" : "\(d)d fast") : "\(h)h fast"
                 var line = "\(df2.string(from: event.date)): \(duration)"
                 if let note = event.note, !note.isEmpty { line += "  (\(note))" }
                 lines.append(line)
