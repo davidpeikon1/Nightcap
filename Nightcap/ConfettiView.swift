@@ -17,16 +17,16 @@ struct ConfettiParticle: Identifiable {
     let colorIndex: Int
 
     static func make(count: Int = 80) -> [ConfettiParticle] {
-        (0..<count).map { i in
+        (0..<count).map { _ in
             ConfettiParticle(
                 startX:      CGFloat.random(in: 0.05...0.95),
                 driftX:      CGFloat.random(in: -0.22...0.22),
-                delay:       Double.random(in: 0...0.65),
-                duration:    Double.random(in: 1.1...2.3),
+                delay:       Double.random(in: 0...0.8),
+                duration:    Double.random(in: 2.2...3.8),
                 width:       CGFloat.random(in: 7...14),
                 height:      CGFloat.random(in: 4...9),
                 endRotation: Double.random(in: 120...480),
-                colorIndex:  i % 6
+                colorIndex:  Int.random(in: 0..<6)
             )
         }
     }

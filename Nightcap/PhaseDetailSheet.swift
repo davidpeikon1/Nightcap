@@ -204,9 +204,9 @@ struct PhaseDetailSheet: View {
         switch phase {
         case .justStarted:  return Color("NCTextTertiary")
         case .firstDay:     return Color("NCWarning")
-        case .withdrawal:   return Color(red: 0.9, green: 0.3, blue: 0.3)
-        case .breakthrough: return Color(red: 0.85, green: 0.65, blue: 0.1)
-        case .rewiring:     return Color(red: 0.2, green: 0.7, blue: 0.65)
+        case .withdrawal:   return .red.opacity(0.75)
+        case .breakthrough: return .orange
+        case .rewiring:     return .teal
         case .freedom:      return Color("NCSuccess")
         }
     }

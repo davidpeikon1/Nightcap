@@ -74,7 +74,7 @@ struct SettingsSheet: View {
                         Button {
                             showResetOnboarding = true
                         } label: {
-                            Text("Re-run onboarding")
+                            Text("Replay app intro")
                                 .font(.system(size: 15))
                                 .foregroundStyle(Color("NCTextSecondary"))
                         }

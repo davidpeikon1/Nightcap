@@ -64,7 +64,7 @@ struct WeeklyInsightCard: View {
                 let week = cal.component(.weekOfYear, from: Date())
                 UserDefaults.standard.set(year * 100 + week, forKey: Self.dismissKey)
             } label: {
-                Text("Dismiss")
+                Text("Got it")
                     .font(.system(size: 13))
                     .foregroundStyle(Color("NCTextTertiary"))
                     .padding(.top, 4)
