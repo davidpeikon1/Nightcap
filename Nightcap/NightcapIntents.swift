@@ -79,7 +79,7 @@ struct GetNextMilestoneIntent: AppIntent {
         if milestone == "All milestones complete" {
             return .result(
                 value: milestone,
-                dialog: IntentDialog("You've earned every Nightcap milestone. A hundred days. That's not a streak — that's a different relationship with food.")
+                dialog: IntentDialog("You've earned every Nightcap milestone. A year without processed sugar. That's not a streak — that's a different relationship with food.")
             )
         }
         return .result(
@@ -138,17 +138,19 @@ private func phaseLabel(for elapsed: TimeInterval) -> String {
 
 private func nextMilestone(for elapsed: TimeInterval) -> String {
     let h = elapsed / 3600
-    // All 7 badge thresholds: 1h, 1d, 3d, 1w, 2w, 1mo, 100d
-    if h >= 2400 { return "All milestones complete" }
+    // All 9 badge thresholds: 1h, 1d, 3d, 1w, 2w, 1mo, 100d, 6mo, 1yr
+    if h >= 8_760 { return "All milestones complete" }
     let remaining: TimeInterval = {
         switch h {
-        case ..<1:       return 3_600     - elapsed   // 1 hour
-        case 1..<24:     return 86_400    - elapsed   // First Day
-        case 24..<72:    return 259_200   - elapsed   // 3 Days
-        case 72..<168:   return 604_800   - elapsed   // 1 Week
-        case 168..<336:  return 1_209_600 - elapsed   // 2 Weeks
-        case 336..<720:  return 2_592_000 - elapsed   // 1 Month
-        default:         return 8_640_000 - elapsed   // 100 Days
+        case ..<1:        return 3_600      - elapsed   // 1 hour
+        case 1..<24:      return 86_400     - elapsed   // First Day
+        case 24..<72:     return 259_200    - elapsed   // 3 Days
+        case 72..<168:    return 604_800    - elapsed   // 1 Week
+        case 168..<336:   return 1_209_600  - elapsed   // 2 Weeks
+        case 336..<720:   return 2_592_000  - elapsed   // 1 Month
+        case 720..<2400:  return 8_640_000  - elapsed   // 100 Days
+        case 2400..<4320: return 15_552_000 - elapsed   // 6 Months
+        default:          return 31_536_000 - elapsed   // 1 Year
         }
     }()
     let rh = Int(remaining) / 3600

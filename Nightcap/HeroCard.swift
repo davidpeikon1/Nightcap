@@ -134,6 +134,19 @@ struct HeroCard: View {
                     .transition(.opacity)
             }
 
+            // Day-specific biological fact — anchors the user to where they specifically are.
+            // Only shows from day 2 onward; day 1 is already well-served by the zero-to-thirty
+            // and first-day tier content.
+            if dayCount >= 2, let fact = QuoteLibrary.dayContextFact(for: dayCount) {
+                Text(fact)
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, store.elapsedSeconds < 1_800 && !store.resetEvents.isEmpty ? 4 : 6)
+                    .transition(.opacity)
+            }
+
             if let startDate = store.lastSugarDate {
                 Button {
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -172,6 +185,7 @@ struct HeroCard: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top, 12)
                     .padding(.bottom, 4)
+                    .contentShape(Rectangle())
             }
         }
     }

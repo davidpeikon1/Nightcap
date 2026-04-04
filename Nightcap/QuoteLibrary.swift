@@ -285,6 +285,51 @@ struct QuoteLibrary {
         return bucket[dayIndex % bucket.count]
     }
 
+    // MARK: Day-specific context facts
+
+    /// Returns a single-sentence biological fact anchored to the user's specific day count.
+    /// Shown in HeroCard for days 2+ as a third content signal distinct from the quote and
+    /// contextual copy. Returns nil when no specific fact is defined for that day.
+    static func dayContextFact(for day: Int) -> String? {
+        switch day {
+        case 1:     return "Hour 1–24: insulin is falling and your liver is clearing the last load."
+        case 2:     return "The dopamine pull is still strong at day 2. It drops significantly by day 4."
+        case 3:     return "72 hours. Dopamine receptor recovery begins here."
+        case 4:     return "Day 4 is when most people report their first genuine 'I don't want it' moment."
+        case 5:     return "Gut bacteria composition shifts are measurable by now."
+        case 6:     return "Cravings at this stage are mostly conditioned reflex. The biology has largely resolved."
+        case 7:     return "One week. Your gut microbiome has measurably shifted — Firmicutes down, Bacteroidetes up."
+        case 8:     return "Dopamine receptor recovery is underway. The process takes about 28 days total."
+        case 9:     return "The brain is beginning to find more reward in ordinary things."
+        case 10:    return "Taste receptor recovery is halfway through its 14-day cycle."
+        case 11:    return "The conditioned craving response is weakening through repeated non-reinforcement."
+        case 12:    return "Fasting insulin is measurably lower today than it was on day 1."
+        case 13:    return "Almost two weeks. The threshold where long-term maintenance becomes statistically likely."
+        case 14:    return "Two weeks. fMRI studies show reduced reward-center response to sugar images at this mark."
+        case 15:    return "Insulin sensitivity has shifted. The metabolic profile is different from day 1."
+        case 16:    return "AGE (advanced glycation end-product) formation has significantly slowed."
+        case 17:    return "Sleep architecture improvements driven by stable blood glucose are consolidating now."
+        case 18:    return "Visceral fat mobilization is underway — it responds faster than subcutaneous fat."
+        case 19:    return "The conditioned craving response continues to extinguish with each passing day."
+        case 20:    return "Three weeks. The identity shift is beginning — behavior is aligning with self-concept."
+        case 21:    return "Three weeks. Research identifies this as when effortful resistance transitions to preference."
+        case 22, 23: return "Approaching the 28-day mark for dopamine receptor recovery."
+        case 24, 25: return "Four weeks is the threshold for measurable D2 receptor density recovery."
+        case 26, 27: return "The brain's reward circuitry has been adapting for nearly a month."
+        case 28:    return "28 days. Dopamine receptor density has had meaningful time to recover."
+        case 29, 30: return "A month of clean fuel. Systemic inflammation markers are measurably lower for most people."
+        case 31...59: return "Over a month. Inflammatory biomarkers like CRP have had time to shift."
+        case 60...99: return "Two months of stable blood glucose. The compound effects are significant."
+        case 100:   return "100 days. The neural pathway for the old habit has weakened through disuse."
+        case 101...179: return "Past 100 days. The new pattern is the default now."
+        case 180:   return "Six months. Cardiovascular risk markers have had meaningful time to shift."
+        case 181...364: return "Past six months. The biological changes are substantial and durable."
+        case 365:   return "A year. Taste receptor sensitivity, dopamine recovery, insulin sensitivity — all transformed."
+        case let d where d > 365: return "Past a year. This is not a streak. It's biology."
+        default:    return nil
+        }
+    }
+
     static func randomCravingCard(excluding index: Int? = nil) -> (text: String, index: Int) {
         var idx = Int.random(in: 0..<cravingCards.count)
         if let excluded = index, cravingCards.count > 1 {

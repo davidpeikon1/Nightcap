@@ -24,13 +24,40 @@ enum UserGoal: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// Rotates through 3 affirmations by day-of-year so "My Why" feels fresh
+    /// across multiple visits without requiring any stored state.
     var affirmation: String {
+        let dayIndex = (Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1) - 1
+        return affirmations[dayIndex % affirmations.count]
+    }
+
+    private var affirmations: [String] {
         switch self {
-        case .sleepBetter:   return "Sugar spikes your cortisol, keeping you wired at night. Breaking the cycle is the most underrated lever for sleep."
-        case .moreEnergy:    return "The post-lunch crash isn't tiredness — it's blood sugar correction. Remove the spike, remove the crash."
-        case .breakCravings: return "Cravings aren't a character flaw. They're a dopamine loop. Loops can be rewritten."
-        case .loseWeight:    return "Processed sugar drives insulin, and insulin drives fat storage. This is the lever."
-        case .curious:       return "Most people have never tracked what their body actually feels like without processed sugar. Baseline data is rare — and often surprising."
+        case .sleepBetter: return [
+            "Sugar spikes your cortisol, keeping you wired at night. Breaking the cycle is the most underrated lever for sleep.",
+            "Blood sugar crashes at 2–4am trigger a cortisol response that wakes you. Eliminate the spike, eliminate the crash.",
+            "Deep sleep — the restorative kind — is disrupted by glycemic variability. Stable blood sugar is the foundation of real rest.",
+        ]
+        case .moreEnergy: return [
+            "The post-lunch crash isn't tiredness — it's blood sugar correction. Remove the spike, remove the crash.",
+            "Real energy doesn't have a crash at the other end. Stable blood glucose is qualitatively different from borrowed energy.",
+            "The fatigue you've normalized is partly chemical. It's not your baseline — it's your baseline plus sugar debt.",
+        ]
+        case .breakCravings: return [
+            "Cravings aren't a character flaw. They're a dopamine loop. Loops can be rewritten.",
+            "The craving has a 20-minute half-life. Every time you outlast it, the neural path that produced it weakens.",
+            "You're not fighting willpower against desire. You're interrupting a conditioned response. Those respond to extinction, not force.",
+        ]
+        case .loseWeight: return [
+            "Processed sugar drives insulin, and insulin drives fat storage. This is the lever.",
+            "Visceral fat — the metabolically active kind — responds faster to insulin reduction than any other dietary change.",
+            "When insulin falls, fat mobilizes. The mechanism isn't mysterious — you're working with it, not against it.",
+        ]
+        case .curious: return [
+            "Most people have never tracked what their body actually feels like without processed sugar. Baseline data is rare — and often surprising.",
+            "The question 'what is my actual baseline?' is one of the most interesting experiments you can run on yourself.",
+            "You're running an n=1 trial on your own biology. The data is already coming in.",
+        ]
         }
     }
 }
