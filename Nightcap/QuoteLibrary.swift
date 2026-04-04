@@ -276,6 +276,16 @@ struct QuoteLibrary {
                 science: "Behavioral automaticity — the transition from deliberate, effortful action to automatic default behavior — forms with repetition. Neuroimaging research shows that behavior is proceduralized as it shifts from prefrontal cortex (effortful, deliberate) to basal ganglia (automatic, habitual) processing. Each day of consistent behavior accelerates the transfer.",
                 tier: .oneToThreeDays
             ),
+            ReframeQuote(
+                text: "The irritability and fog of the first few days are a real withdrawal profile. Not metaphor. The same documented pattern as withdrawal from other dopaminergic substances, at lower intensity. It peaks around day 2. Most people are through it by day 3.",
+                science: "Processed sugar activates opioid and dopaminergic reward pathways. Reducing intake after chronic use produces a documented withdrawal syndrome: irritability, cognitive fog, low-grade anxiety, and intensified cravings. These symptoms correlate with neurological recalibration of dopamine and serotonin signaling, peak within 24–72 hours, and resolve spontaneously in most cases without any intervention other than time.",
+                tier: .oneToThreeDays
+            ),
+            ReframeQuote(
+                text: "The first 2–3 nights may be disrupted. Your brain is recalibrating without the glucose cycle it expected to manage. Night 3–4 is usually when sleep improves sharply — deeper, without the 2am cortisol spike.",
+                science: "Acute sugar reduction affects sleep architecture in two phases. In the first 2–3 days, the brain recalibrates its nocturnal glucose management systems, producing some disruption. After this recalibration, slow-wave sleep increases and the 2–4am cortisol spike — which fires to stabilize crashing blood glucose — stops occurring. Most people experience measurably improved sleep beginning on night 3 or 4 of sustained sugar restriction.",
+                tier: .oneToThreeDays
+            ),
         ],
 
         .threeToSevenDays: [
@@ -312,6 +322,21 @@ struct QuoteLibrary {
             ReframeQuote(
                 text: "Your sleep this week is running on different chemistry. Without the blood glucose swing at 2am, your cortisol won't spike to compensate. That's a structural change in how your body runs the night.",
                 science: "Nocturnal blood glucose instability — driven by high-sugar meals, particularly in the evening — triggers cortisol release at 2–4am as the body attempts to stabilize falling glucose. This cortisol spike fragments slow-wave sleep and causes the characteristic 3am waking pattern common in high-sugar consumers. After 3–5 days of sugar reduction, nocturnal glucose is significantly more stable, and this cortisol event often stops occurring.",
+                tier: .threeToSevenDays
+            ),
+            ReframeQuote(
+                text: "The afternoon energy dip that most people accept as normal is nearly gone by now. It was glycemic — not circadian. Without the spike and crash, your actual energy curve is appearing for the first time.",
+                science: "Postprandial hyperglycemia followed by reactive hypoglycemia drives the characteristic afternoon energy trough in high-sugar consumers. Research comparing glycemic patterns in low- and high-sugar diets shows that the afternoon dip correlates directly with glycemic variability, not with circadian rhythm. After 5–7 days of sugar restriction, the dip attenuates substantially or disappears, revealing a flatter, more sustainable energy baseline.",
+                tier: .threeToSevenDays
+            ),
+            ReframeQuote(
+                text: "By now the craving probably arrives at a predictable time. That predictability is the beginning of power over it — you can't interrupt a pattern you can't see. You can see it now.",
+                science: "Habit research identifies cue awareness — the ability to predict when a behavioral urge will occur before it fully activates — as a primary mechanism for successful habit modification. Studies show that individuals who can accurately anticipate their cravings by time, place, or emotional state have significantly higher rates of successful redirection than those who encounter them as surprises. Pattern recognition precedes pattern interruption.",
+                tier: .threeToSevenDays
+            ),
+            ReframeQuote(
+                text: "There's almost nothing biological driving the craving at this point. D2 recovery is underway. Insulin is normalized. The microbiome has shifted. What persists is conditioned. Conditioned things extinguish.",
+                science: "By days 5–7, the acute physiological components of sugar dependence — ghrelin elevation, dopamine dysregulation, and insulin volatility — have largely resolved. What remains is conditioned craving: stimulus-response associations formed through repeated reinforcement. Conditioned responses extinguish through extinction learning, which occurs with repeated unreinforced exposure to the conditioned stimulus. Each day you encounter the cue and don't act, the response weakens measurably.",
                 tier: .threeToSevenDays
             ),
         ],

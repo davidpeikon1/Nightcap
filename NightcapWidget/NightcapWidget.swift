@@ -479,7 +479,7 @@ struct LargeWidgetView: View {
         case "Rewiring":
             return "Your gut microbiome has shifted enough that the bacteria amplifying cravings are being starved out. The biology is changing from the inside out."
         default: // Freedom
-            return "fMRI studies at this stage show measurably reduced reward-center activation in response to sugar cues. The rewiring isn't metaphor — it happened."
+            return "At two weeks, fMRI studies show measurably reduced reward-center activation in response to sugar cues. Gut, sleep, taste, dopamine — all measurably changed. The rewiring happened."
         }
     }
 }
