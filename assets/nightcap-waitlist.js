@@ -284,15 +284,16 @@
     var motivation = payload.quiz_data.motivation;
 
     var msgs = {
-      cut_sugar: "You're consuming ~" + sugar + "g of sugar daily from drinks alone. Nightcap has 0g.",
-      sleep_better: 'Better sleep starts with what you drink. Nightcap is made with ingredients that actually help you wind down.',
-      healthier_habits: "Small swaps = big results. Replacing sugary drinks with Nightcap saves you ~" + (sugar * 365) + "g of sugar per year.",
-      relaxation: 'Your evening ritual matters. Nightcap helps you unwind without the sugar crash.',
+      prevent_disease: "You're consuming ~" + sugar + "g of processed sugar daily. That's " + Math.round(sugar * 365 / 453.592) + " lbs/year. The time to act is before it becomes a problem.",
+      energy: "At " + sugar + "g/day, processed sugar is likely behind your energy crashes. Track and reduce with the Nightcap app.",
+      weight: sugar + "g of processed sugar per day adds up to " + Math.round(sugar * 365 / 453.592) + " lbs/year. Track it. Reduce it. The app makes it easy.",
+      family: "You consume ~" + sugar + "g of processed sugar daily. See what your family is consuming too — share the quiz.",
+      curiosity: "Your number: " + sugar + "g of processed sugar per day. Now track it and start reducing.",
     };
 
     return 'Hey ' + name + '! ' +
-      (msgs[motivation] || 'Thanks for taking the Nightcap sugar quiz!') +
-      ' Download the Nightcap app: ' + CONFIG.appDownloadUrl;
+      (msgs[motivation] || 'You consume ~' + sugar + 'g of processed sugar daily. See your full report:') +
+      ' Start tracking: ' + CONFIG.appDownloadUrl;
   }
 
   // ---------- Local Fallback ----------
@@ -359,18 +360,18 @@
     var title = document.getElementById('results-title');
     var subtitle = document.getElementById('results-subtitle');
 
-    if (dailySugar === 0) {
-      title.textContent = payload.first_name + ", you're doing amazing!";
-      subtitle.textContent = "Your drink choices are already low-sugar. Nightcap will make your evenings even better with functional ingredients for relaxation and sleep.";
-    } else if (dailySugar <= 30) {
-      title.textContent = payload.first_name + ", not bad — but there's room to improve";
-      subtitle.textContent = "You're consuming about " + dailySugar + "g of sugar from drinks daily. That adds up to " + yearlySugarLbs + " lbs per year. Nightcap can help you get to zero.";
-    } else if (dailySugar <= 80) {
-      title.textContent = payload.first_name + ", your sugar intake might surprise you";
-      subtitle.textContent = "At " + dailySugar + "g per day from drinks alone, you're consuming " + yearlySugarLbs + " lbs of sugar per year — just from beverages. Time for a swap.";
+    if (dailySugar <= 25) {
+      title.textContent = payload.first_name + ", you're ahead of the curve";
+      subtitle.textContent = "At " + dailySugar + "g per day, you're well below the national average of 190g. You're already doing what most Americans haven't figured out yet. Keep going.";
+    } else if (dailySugar <= 75) {
+      title.textContent = payload.first_name + ", there's room to improve";
+      subtitle.textContent = "You're consuming about " + dailySugar + "g of processed sugar daily — that's " + yearlySugarLbs + " lbs per year. Better than average, but still above the recommended 25g. The Nightcap app can help you close the gap.";
+    } else if (dailySugar <= 150) {
+      title.textContent = payload.first_name + ", this number might surprise you";
+      subtitle.textContent = "At " + dailySugar + "g per day, you're consuming " + yearlySugarLbs + " lbs of processed sugar per year. That's " + Math.round(dailySugar / 25) + "x the recommended daily limit. The good news? Now you know — and that's the first step.";
     } else {
-      title.textContent = payload.first_name + ", let's talk about that sugar intake";
-      subtitle.textContent = "You're getting roughly " + dailySugar + "g of sugar per day from drinks — that's " + yearlySugarLbs + " lbs per year. The good news? Nightcap is an easy swap with 0g sugar.";
+      title.textContent = payload.first_name + ", let's talk about your number";
+      subtitle.textContent = "You're consuming roughly " + dailySugar + "g of processed sugar per day — " + yearlySugarLbs + " lbs per year. That's close to the national average that's driving the metabolic health crisis. But awareness is where change starts.";
     }
 
     // Insight
@@ -386,9 +387,9 @@
     var smsNote = document.getElementById('results-sms-note');
     if (smsNote) {
       if (payload.sms_consent && payload.phone) {
-        smsNote.textContent = "We just texted " + maskPhone(payload.phone) + " with your personalized download link!";
+        smsNote.textContent = "We just texted " + maskPhone(payload.phone) + " with a link to start tracking.";
       } else {
-        smsNote.textContent = 'Check your email for your personalized download link!';
+        smsNote.textContent = 'Check your email for your link to the Nightcap app.';
       }
     }
 
@@ -576,8 +577,8 @@
 
   // ---------- Comparison Chart Animation ----------
   function animateComparisonChart(userGrams) {
-    var maxGrams = 120; // scale max
-    var avgGrams = 77; // average American daily sugar from drinks
+    var maxGrams = 250; // scale max
+    var avgGrams = 190; // average American daily processed sugar (152 lbs/year / 365 * 453g)
 
     var youBar = document.getElementById('compare-bar-you');
     var avgBar = document.querySelector('.nc-compare__bar--avg');
@@ -592,7 +593,7 @@
     // Animate bars
     var youPercent = Math.min((userGrams / maxGrams) * 100, 100);
     var avgPercent = Math.min((avgGrams / maxGrams) * 100, 100);
-    var ncPercent = 3; // Minimal bar for 0g (visual indicator)
+    var ncPercent = Math.min((25 / maxGrams) * 100, 100); // 25g recommended
 
     youBar.style.width = Math.max(youPercent, 3) + '%';
     if (avgBar) avgBar.style.width = avgPercent + '%';
@@ -672,22 +673,29 @@
   // ---------- Personalized Insights ----------
   function getPersonalizedInsight(quizData) {
     var parts = [];
+    var daily = quizData.estimated_daily_sugar || 0;
 
-    if (quizData.sleep_quality === 'terrible' || quizData.sleep_quality === 'poor') {
-      parts.push("Research shows that high sugar intake — especially in the evening — disrupts sleep quality and REM cycles.");
+    // Context on their number
+    if (daily > 100) {
+      parts.push("At " + daily + "g per day, you're consuming more processed sugar than 88% of health experts recommend as a maximum. This level is associated with increased risk of metabolic dysfunction, insulin resistance, and chronic inflammation.");
+    } else if (daily > 50) {
+      parts.push("200 years ago, your entire year's sugar intake would have been less than what you now consume in a week. That's not a willpower problem — it's an environment problem. And it's fixable.");
     }
 
+    // Motivation-based insight
     var motivationInsights = {
-      cut_sugar: "Switching your evening drink to Nightcap alone could eliminate " + (quizData.estimated_daily_sugar || 0) + "g of sugar from your daily intake.",
-      sleep_better: "Nightcap contains magnesium, L-theanine, and chamomile — clinically-studied ingredients that promote deep, restful sleep.",
-      healthier_habits: "Building one small habit — like swapping your evening drink — creates a ripple effect across your health.",
-      relaxation: "Unlike alcohol or sugary drinks that spike and crash, Nightcap uses adaptogens to promote calm without the downsides.",
+      prevent_disease: "You're making the right move. 88% of Americans are already metabolically unhealthy, and processed sugar is the #1 driver. Acting now — before symptoms appear — is the most powerful thing you can do for your long-term health.",
+      energy: "Blood sugar spikes from processed sugar cause the crashes, brain fog, and afternoon slumps most people accept as normal. Reducing your intake to under 25g/day can stabilize your energy within the first week.",
+      weight: "Processed sugar drives fat storage through insulin spikes. Cutting " + daily + "g per day eliminates " + quizData.estimated_yearly_sugar_lbs + " lbs of sugar per year — that's a massive metabolic shift without counting a single calorie.",
+      family: "Kids today consume more sugar by age 8 than adults did in an entire lifetime 200 years ago. By changing your own habits, you're changing what your family sees as normal. That's the most powerful intervention there is.",
+      curiosity: "Now you know your number. Most people are surprised — and that surprise is the beginning of change. The Nightcap app helps you track and reduce from here.",
     };
 
-    parts.push(motivationInsights[quizData.motivation] || "Nightcap was designed to be the healthiest, tastiest evening drink you'll ever try.");
+    parts.push(motivationInsights[quizData.motivation] || "Awareness is the first step. Now that you know your number, you can start making changes that compound over time.");
 
-    if (quizData.checks_sugar === 'never' || quizData.checks_sugar === 'rarely') {
-      parts.push("Most people don't realize that a single \"healthy\" juice can have more sugar than a candy bar.");
+    // Label awareness
+    if (quizData.checks_labels === 'never' || quizData.checks_labels === 'rarely') {
+      parts.push("Sugar goes by 60+ names on labels — dextrose, maltose, HFCS, \"evaporated cane juice.\" The Nightcap app helps you spot them all.");
     }
 
     return parts.join(' ');

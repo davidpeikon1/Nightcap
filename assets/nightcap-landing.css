@@ -100,11 +100,12 @@ body {
 
 /* ---------- Logo ---------- */
 .nc-logo {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
+  width: fit-content;
 }
 
 .nc-logo__text {

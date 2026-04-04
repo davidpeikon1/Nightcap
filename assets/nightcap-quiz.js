@@ -11,22 +11,29 @@
   var quizData = {};
   var isTransitioning = false;
 
-  // Sugar gram estimates per drink choice
-  var SUGAR_MAP = {
-    soda: 39,
-    juice: 28,
-    wine_beer: 9,
-    tea_coffee: 12,
-    water: 0,
-    energy_sports: 34,
+  // Sugar gram estimates per breakfast type
+  var BREAKFAST_MAP = {
+    cereal_toast: 28,
+    yogurt_smoothie: 24,
+    coffee_pastry: 52,
+    eggs_protein: 3,
+    skip: 0,
   };
 
-  // Multiplier by daily drink count
-  var FREQUENCY_MAP = {
+  // Sugar from sweetened drinks per day
+  var DRINKS_MAP = {
     '0': 0,
-    '1': 1,
-    '2-3': 2.5,
-    '4+': 4.5,
+    '1': 32,
+    '2-3': 75,
+    '4+': 130,
+  };
+
+  // Hidden sugar from processed/packaged foods
+  var PROCESSED_MAP = {
+    rarely: 8,
+    some: 22,
+    most: 40,
+    almost_all: 65,
   };
 
   // DOM refs
@@ -275,13 +282,16 @@
 
   // ---------- Sugar Calculation ----------
   function calculateSugarEstimate() {
-    var baseSugar = SUGAR_MAP[quizData.evening_drink] || 20;
-    var multiplier = FREQUENCY_MAP[quizData.daily_sugary_drinks] || 1;
+    var breakfast = BREAKFAST_MAP[quizData.breakfast] || 15;
+    var drinks = DRINKS_MAP[quizData.daily_sweet_drinks] || 20;
+    var processed = PROCESSED_MAP[quizData.processed_foods] || 20;
 
-    quizData.estimated_daily_sugar = Math.round(baseSugar * multiplier);
-    quizData.estimated_weekly_sugar = Math.round(baseSugar * multiplier * 7);
+    var dailyTotal = breakfast + drinks + processed;
+
+    quizData.estimated_daily_sugar = Math.round(dailyTotal);
+    quizData.estimated_weekly_sugar = Math.round(dailyTotal * 7);
     quizData.estimated_yearly_sugar_lbs = parseFloat(
-      ((baseSugar * multiplier * 365) / 453.592).toFixed(1)
+      ((dailyTotal * 365) / 453.592).toFixed(1)
     );
   }
 

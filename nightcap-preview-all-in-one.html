@@ -132,11 +132,12 @@ body {
 
 /* ---------- Logo ---------- */
 .nc-logo {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
+  width: fit-content;
 }
 
 .nc-logo__text {
@@ -2354,48 +2355,22 @@ body {
         <div class="nc-logo__lines"></div>
       </div>
 
-      <div class="nc-badge" aria-label="Coming Soon">Coming Soon</div>
       <h1 class="nc-hero__title" id="hero-title">
-        <span class="nc-hero__title-line">Wind Down</span>
-        <span class="nc-hero__title-line nc-hero__title-line--accent"
-              data-ab-test="hero_headline"
-              data-ab-a="Without the Sugar Crash"
-              data-ab-b="How Much Sugar Are You Really Drinking?">Without the Sugar Crash</span>
+        <span class="nc-hero__title-line">How Much Processed Sugar</span>
+        <span class="nc-hero__title-line nc-hero__title-line--accent">Are You Really Consuming?</span>
       </h1>
       <p class="nc-hero__subtitle">
-        Nightcap is a new kind of evening beverage — crafted to help you relax,
-        recover, and sleep better. Zero sugar. Real ingredients. No compromises.
+        200 years ago, Americans consumed 1 pound of sugar per year.
+        Today it's 152 pounds. Most people have no idea how much they're actually eating.
+        Find out in 60 seconds.
       </p>
-
-      <!-- Countdown Timer -->
-      <div class="nc-countdown" id="launch-countdown" aria-label="Countdown to launch">
-        <div class="nc-countdown__block">
-          <span class="nc-countdown__number" aria-label="Days">--</span>
-          <span class="nc-countdown__label">Days</span>
-        </div>
-        <span class="nc-countdown__separator" aria-hidden="true">:</span>
-        <div class="nc-countdown__block">
-          <span class="nc-countdown__number" aria-label="Hours">--</span>
-          <span class="nc-countdown__label">Hours</span>
-        </div>
-        <span class="nc-countdown__separator" aria-hidden="true">:</span>
-        <div class="nc-countdown__block">
-          <span class="nc-countdown__number" aria-label="Minutes">--</span>
-          <span class="nc-countdown__label">Min</span>
-        </div>
-        <span class="nc-countdown__separator" aria-hidden="true">:</span>
-        <div class="nc-countdown__block">
-          <span class="nc-countdown__number" aria-label="Seconds">--</span>
-          <span class="nc-countdown__label">Sec</span>
-        </div>
-      </div>
 
       <div class="nc-hero__cta-group">
         <button class="nc-btn nc-btn--primary nc-btn--pulse" id="start-quiz-btn" aria-label="Start the Sugar Quiz">
           Take the Sugar Quiz
           <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
         </button>
-        <p class="nc-hero__cta-note">60 seconds. Zero judgement. Real data.</p>
+        <p class="nc-hero__cta-note">60 seconds. No sign-up required. See your real number.</p>
       </div>
       <div class="nc-hero__social-proof">
         <div class="nc-hero__avatars" aria-hidden="true">
@@ -2405,7 +2380,7 @@ body {
           <div class="nc-avatar">+</div>
         </div>
         <span class="nc-hero__waitlist-count">
-          <strong id="waitlist-count">2,847</strong> people on the waitlist
+          <strong id="waitlist-count">2,847</strong> people have taken the quiz
         </span>
       </div>
     </div>
@@ -2415,21 +2390,21 @@ body {
   <section class="nc-why nc-reveal" id="why" aria-labelledby="why-title">
     <div class="nc-why__container">
       <div class="nc-badge">The Problem</div>
-      <h2 class="nc-why__title" id="why-title">The average American drinks <span class="nc-why__highlight">77 lbs</span> of sugar per year</h2>
-      <p class="nc-why__subtitle">Most of it comes from beverages. Evening drinks are the worst offenders — soda, juice, alcohol, sweetened coffee. They wreck your sleep, spike your blood sugar, and leave you feeling worse the next day.</p>
+      <h2 class="nc-why__title" id="why-title">From <span class="nc-why__highlight">1 pound</span> to <span class="nc-why__highlight">152 pounds</span> per year</h2>
+      <p class="nc-why__subtitle">200 years ago, the average American consumed about 1 pound of sugar per year. Today, it's 152 pounds. Processed sugar is in everything — cereal, bread, sauces, yogurt, drinks — and it's driving metabolic dysfunction before most people even realize there's a problem.</p>
 
       <div class="nc-why__stats">
         <div class="nc-why__stat">
-          <span class="nc-why__stat-number">39g</span>
-          <span class="nc-why__stat-label">Sugar in one can of soda</span>
-        </div>
-        <div class="nc-why__stat">
-          <span class="nc-why__stat-number">2x</span>
-          <span class="nc-why__stat-label">More sugar than the daily recommended limit</span>
+          <span class="nc-why__stat-number">152 lbs</span>
+          <span class="nc-why__stat-label">Processed sugar consumed per American per year</span>
         </div>
         <div class="nc-why__stat">
           <span class="nc-why__stat-number">73%</span>
-          <span class="nc-why__stat-label">Of people underestimate their sugar intake</span>
+          <span class="nc-why__stat-label">Of packaged foods contain added sugar</span>
+        </div>
+        <div class="nc-why__stat">
+          <span class="nc-why__stat-number">88%</span>
+          <span class="nc-why__stat-label">Of Americans are metabolically unhealthy</span>
         </div>
       </div>
 
@@ -2443,63 +2418,63 @@ body {
   <!-- ===== HOW IT WORKS ===== -->
   <section class="nc-how nc-reveal" id="how-it-works" aria-labelledby="how-title">
     <div class="nc-how__container">
-      <h2 class="nc-how__title" id="how-title">How It Works</h2>
+      <h2 class="nc-how__title" id="how-title">Three Steps to Taking Control</h2>
       <div class="nc-how__steps">
         <div class="nc-how__step">
           <div class="nc-how__step-number">1</div>
           <div class="nc-how__step-icon" aria-hidden="true">&#129504;</div>
-          <h3 class="nc-how__step-title">Take the Quiz</h3>
-          <p class="nc-how__step-desc">60 seconds. Find out how much sugar you're really consuming from drinks.</p>
+          <h3 class="nc-how__step-title">See Your Number</h3>
+          <p class="nc-how__step-desc">Take the 60-second quiz. Most people are shocked by how much processed sugar they actually consume.</p>
         </div>
         <div class="nc-how__connector" aria-hidden="true"></div>
         <div class="nc-how__step">
           <div class="nc-how__step-number">2</div>
-          <div class="nc-how__step-icon" aria-hidden="true">&#128233;</div>
-          <h3 class="nc-how__step-title">Join the Waitlist</h3>
-          <p class="nc-how__step-desc">Get your personalized sugar report and early access to Nightcap.</p>
+          <div class="nc-how__step-icon" aria-hidden="true">&#128202;</div>
+          <h3 class="nc-how__step-title">Track &amp; Reduce</h3>
+          <p class="nc-how__step-desc">Use the Nightcap app to track your daily sugar intake, spot hidden sources, and build new habits.</p>
         </div>
         <div class="nc-how__connector" aria-hidden="true"></div>
         <div class="nc-how__step">
           <div class="nc-how__step-number">3</div>
-          <div class="nc-how__step-icon" aria-hidden="true">&#127769;</div>
-          <h3 class="nc-how__step-title">Make the Switch</h3>
-          <p class="nc-how__step-desc">Replace sugary evening drinks with Nightcap. Sleep better. Feel better.</p>
+          <div class="nc-how__step-icon" aria-hidden="true">&#127775;</div>
+          <h3 class="nc-how__step-title">Eliminate the Habit</h3>
+          <p class="nc-how__step-desc">Replace processed sugar at its source — through better products, better routines, and better choices.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== INGREDIENTS ===== -->
+  <!-- ===== WHY IT MATTERS ===== -->
   <section class="nc-ingredients nc-reveal" id="ingredients" aria-labelledby="ingredients-title">
     <div class="nc-ingredients__container">
-      <div class="nc-badge">What's Inside</div>
-      <h2 class="nc-ingredients__title" id="ingredients-title">Ingredients That Actually Do Something</h2>
-      <p class="nc-ingredients__subtitle">No filler. No artificial anything. Every ingredient is here for a reason.</p>
+      <div class="nc-badge">Why It Matters</div>
+      <h2 class="nc-ingredients__title" id="ingredients-title">The Problem Isn't Willpower. It's Awareness.</h2>
+      <p class="nc-ingredients__subtitle">Processed sugar is hidden in 73% of packaged foods. You can't fix what you can't see.</p>
 
       <div class="nc-ingredients__grid">
         <div class="nc-ingredients__card nc-reveal nc-reveal--delay-1">
-          <div class="nc-ingredients__card-icon" aria-hidden="true">&#129497;</div>
-          <h3 class="nc-ingredients__card-title">Magnesium Glycinate</h3>
-          <p class="nc-ingredients__card-desc">Relaxes muscles and calms the nervous system. 80% of people are deficient.</p>
-          <span class="nc-ingredients__card-tag">Relaxation</span>
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#128065;</div>
+          <h3 class="nc-ingredients__card-title">Hidden in Plain Sight</h3>
+          <p class="nc-ingredients__card-desc">Sugar goes by 60+ names on labels — dextrose, maltose, HFCS, "evaporated cane juice." Most people consume it without knowing.</p>
+          <span class="nc-ingredients__card-tag">Awareness</span>
         </div>
         <div class="nc-ingredients__card nc-reveal nc-reveal--delay-2">
-          <div class="nc-ingredients__card-icon" aria-hidden="true">&#127861;</div>
-          <h3 class="nc-ingredients__card-title">L-Theanine</h3>
-          <p class="nc-ingredients__card-desc">Found in green tea. Promotes alpha brain waves — alert calm without drowsiness.</p>
-          <span class="nc-ingredients__card-tag">Focus &amp; Calm</span>
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#9888;&#65039;</div>
+          <h3 class="nc-ingredients__card-title">Before It Becomes a Problem</h3>
+          <p class="nc-ingredients__card-desc">88% of Americans are metabolically unhealthy. The time to act is before pre-diabetes, not after. Prevention starts with what you eat today.</p>
+          <span class="nc-ingredients__card-tag">Prevention</span>
         </div>
         <div class="nc-ingredients__card nc-reveal nc-reveal--delay-3">
-          <div class="nc-ingredients__card-icon" aria-hidden="true">&#127804;</div>
-          <h3 class="nc-ingredients__card-title">Chamomile Extract</h3>
-          <p class="nc-ingredients__card-desc">Clinically shown to reduce anxiety and improve sleep quality by 30%.</p>
-          <span class="nc-ingredients__card-tag">Sleep</span>
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#128200;</div>
+          <h3 class="nc-ingredients__card-title">Small Changes, Massive Impact</h3>
+          <p class="nc-ingredients__card-desc">Cutting 50g of processed sugar per day — about one soda's worth — reduces your annual intake by 40 pounds. That's the kind of change that reverses trends.</p>
+          <span class="nc-ingredients__card-tag">Impact</span>
         </div>
         <div class="nc-ingredients__card nc-reveal nc-reveal--delay-4">
-          <div class="nc-ingredients__card-icon" aria-hidden="true">&#127807;</div>
-          <h3 class="nc-ingredients__card-title">Ashwagandha KSM-66</h3>
-          <p class="nc-ingredients__card-desc">Gold-standard adaptogen. Reduces cortisol by up to 30% in clinical trials.</p>
-          <span class="nc-ingredients__card-tag">Stress Relief</span>
+          <div class="nc-ingredients__card-icon" aria-hidden="true">&#127775;</div>
+          <h3 class="nc-ingredients__card-title">A Movement, Not a Fad</h3>
+          <p class="nc-ingredients__card-desc">Nightcap exists to help America eliminate processed sugar — through awareness, tools, and better alternatives. The quiz is step one.</p>
+          <span class="nc-ingredients__card-tag">Mission</span>
         </div>
       </div>
     </div>
@@ -2508,51 +2483,40 @@ body {
   <!-- ===== SOCIAL PROOF ===== -->
   <section class="nc-proof nc-reveal" id="social-proof" aria-labelledby="proof-title">
     <div class="nc-proof__container">
-      <h2 class="nc-proof__title" id="proof-title">Early Testers Are Already Obsessed</h2>
+      <h2 class="nc-proof__title" id="proof-title">What People Say After Taking the Quiz</h2>
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
           <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="nc-proof__quote">"I used to have wine every night to unwind. Nightcap replaced that completely. I sleep deeper and wake up feeling amazing."</p>
+          <p class="nc-proof__quote">"I thought I was eating healthy. Turns out my 'healthy' granola, oat milk, and kombucha add up to 68g of sugar a day. This quiz was a wake-up call."</p>
           <div class="nc-proof__author">
             <div class="nc-proof__avatar">S</div>
             <div>
               <span class="nc-proof__name">Sarah M.</span>
-              <span class="nc-proof__detail">Beta Tester &middot; NYC</span>
+              <span class="nc-proof__detail">Quiz Taker &middot; NYC</span>
             </div>
           </div>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-2">
           <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="nc-proof__quote">"As someone who tracks macros, this is a game changer. Zero sugar, actually works, and tastes like something I'd order at a bar."</p>
+          <p class="nc-proof__quote">"Seeing my yearly number — 47 lbs of processed sugar — hit different. I started reading labels the next day. That awareness alone changed my habits."</p>
           <div class="nc-proof__author">
             <div class="nc-proof__avatar">D</div>
             <div>
               <span class="nc-proof__name">David K.</span>
-              <span class="nc-proof__detail">Beta Tester &middot; Austin</span>
+              <span class="nc-proof__detail">Quiz Taker &middot; Austin</span>
             </div>
           </div>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-3">
           <div class="nc-proof__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="nc-proof__quote">"My Oura ring data doesn't lie — deep sleep went up 22% the first week I switched to Nightcap. Nothing else changed."</p>
+          <p class="nc-proof__quote">"I sent this to my whole family. My dad had no idea his 'heart-healthy' orange juice was giving him 30g of sugar every morning. He stopped that week."</p>
           <div class="nc-proof__author">
             <div class="nc-proof__avatar">M</div>
             <div>
               <span class="nc-proof__name">Michelle T.</span>
-              <span class="nc-proof__detail">Beta Tester &middot; LA</span>
+              <span class="nc-proof__detail">Quiz Taker &middot; LA</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Press / Credibility Bar -->
-      <div class="nc-proof__press">
-        <span class="nc-proof__press-label">Featured in</span>
-        <div class="nc-proof__press-logos">
-          <span class="nc-proof__press-logo">Well+Good</span>
-          <span class="nc-proof__press-logo">mindbodygreen</span>
-          <span class="nc-proof__press-logo">Shape</span>
-          <span class="nc-proof__press-logo">Men's Health</span>
         </div>
       </div>
     </div>
@@ -2564,39 +2528,39 @@ body {
       <h2 class="nc-faq__title" id="faq-title">Questions? We've Got Answers.</h2>
       <div class="nc-faq__list">
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">What exactly is Nightcap?</summary>
+          <summary class="nc-faq__question">What is Nightcap?</summary>
           <div class="nc-faq__answer">
-            <p>Nightcap is a functional evening beverage with zero sugar, designed to replace the drinks that are quietly wrecking your sleep and health. Think of it as the opposite of an energy drink — made with magnesium, L-theanine, chamomile, and adaptogens to help you wind down naturally.</p>
+            <p>Nightcap is on a mission to help America eliminate processed sugar. We're building tools — starting with this quiz and our tracking app — to help people see, understand, and reduce the processed sugar in their diet before it becomes a health problem.</p>
           </div>
         </details>
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">When does it launch?</summary>
+          <summary class="nc-faq__question">Why does processed sugar matter?</summary>
           <div class="nc-faq__answer">
-            <p>We're targeting Summer 2026. Waitlist members get first access, and the higher you are on the list, the earlier you'll be able to order. Take the quiz and refer friends to move up.</p>
+            <p>Americans now consume 152 pounds of sugar per person per year — up from about 1 pound just 200 years ago. This explosion of processed sugar is linked to metabolic dysfunction, type 2 diabetes, heart disease, and chronic inflammation. 88% of Americans are already metabolically unhealthy. The time to act is before you're diagnosed, not after.</p>
           </div>
         </details>
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">How is this different from sleepy-time tea?</summary>
+          <summary class="nc-faq__question">How accurate is the quiz?</summary>
           <div class="nc-faq__answer">
-            <p>We use clinically-dosed, bioavailable forms of each ingredient (like magnesium glycinate, not oxide). Most teas use trace amounts of herbs that don't actually move the needle. Nightcap is formulated to produce real, measurable results — and it tastes like something you'd order at a cocktail bar, not a health food store.</p>
+            <p>The quiz gives you a science-based estimate of your daily processed sugar intake based on your eating and drinking habits. It's not a medical test — it's a wake-up call. Most people who take it discover they're consuming 2-4x more processed sugar than they thought.</p>
           </div>
         </details>
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">What does it taste like?</summary>
+          <summary class="nc-faq__question">What does the Nightcap app do?</summary>
           <div class="nc-faq__answer">
-            <p>We've spent over a year on flavor. Expect something refreshing, lightly botanical, with a hint of citrus — naturally sweetened with monk fruit and allulose. Beta testers consistently say it's the best-tasting functional beverage they've ever had.</p>
+            <p>The app helps you track your daily processed sugar intake, identify hidden sources in your diet, set reduction goals, and build new habits. Think of the quiz as your starting point and the app as your daily tool to actually make the change.</p>
           </div>
         </details>
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">Is there caffeine?</summary>
+          <summary class="nc-faq__question">Is this just about drinks?</summary>
           <div class="nc-faq__answer">
-            <p>Zero caffeine. Nightcap is designed for evening consumption. L-theanine (one of our key ingredients) actually promotes relaxation without causing drowsiness — it's the calming compound found in green tea, isolated without the caffeine.</p>
+            <p>No. Processed sugar is everywhere — cereal, bread, sauces, yogurt, protein bars, "healthy" snacks. Drinks are one piece, but our mission covers all sources of processed sugar in your diet. We're starting with awareness (quiz), then daily tracking (app), and eventually better alternatives to help you replace the habit at its source.</p>
           </div>
         </details>
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">What does joining the waitlist get me?</summary>
+          <summary class="nc-faq__question">What do I get when I sign up?</summary>
           <div class="nc-faq__answer">
-            <p>Early access before anyone else, exclusive launch pricing (up to 40% off), your personalized sugar report, and access to the Nightcap app for tracking your evening habits. Referring friends bumps you higher on the list.</p>
+            <p>Your personalized sugar report showing your estimated daily, weekly, and yearly intake. Early access to the Nightcap app when it launches. And you'll be part of a growing community of people who are taking control of their sugar intake before it becomes a problem.</p>
           </div>
         </details>
       </div>
@@ -2620,9 +2584,9 @@ body {
       </div>
       <h2 class="nc-calculating__title" id="calculating-text">Analyzing your sugar intake...</h2>
       <div class="nc-calculating__steps">
-        <p class="nc-calculating__step" data-calc-step="1">Calculating daily sugar from drinks...</p>
-        <p class="nc-calculating__step" data-calc-step="2">Estimating yearly impact...</p>
-        <p class="nc-calculating__step" data-calc-step="3">Building your personalized report...</p>
+        <p class="nc-calculating__step" data-calc-step="1">Calculating daily processed sugar intake...</p>
+        <p class="nc-calculating__step" data-calc-step="2">Comparing to the 152 lb national average...</p>
+        <p class="nc-calculating__step" data-calc-step="3">Building your personalized sugar report...</p>
       </div>
     </div>
   </section>
@@ -2643,147 +2607,111 @@ body {
       <span class="nc-quiz__progress-text" id="quiz-progress-text" aria-live="polite">Question 1 of 5</span>
 
       <form id="sugar-quiz-form" class="nc-quiz__form" novalidate>
-        <!-- Q1: Evening Drink -->
+        <!-- Q1: Breakfast -->
         <div class="nc-quiz__step active" data-step="1">
-          <div class="nc-quiz__step-icon" aria-hidden="true">&#127769;</div>
-          <h3 class="nc-quiz__question">What's your go-to evening drink?</h3>
-          <p class="nc-quiz__helper" id="q1-helper">Pick the one you reach for most nights</p>
-          <div class="nc-quiz__options" data-field="evening_drink" role="radiogroup" aria-labelledby="q1-helper">
-            <button type="button" class="nc-quiz__option" data-value="soda" role="radio" aria-checked="false">
+          <div class="nc-quiz__step-icon" aria-hidden="true">&#9728;&#65039;</div>
+          <h3 class="nc-quiz__question">What does your typical breakfast look like?</h3>
+          <p class="nc-quiz__helper" id="q1-helper">Pick the closest match</p>
+          <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
+            <button type="button" class="nc-quiz__option" data-value="cereal_toast" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#129380;</span>
-              <span class="nc-quiz__option-label">Soda or soft drink</span>
-              <span class="nc-quiz__option-sugar">~39g sugar</span>
+              <span class="nc-quiz__option-label">Cereal, granola, or toast with jam</span>
+              <span class="nc-quiz__option-sugar">~20-35g sugar</span>
             </button>
-            <button type="button" class="nc-quiz__option" data-value="juice" role="radio" aria-checked="false">
+            <button type="button" class="nc-quiz__option" data-value="yogurt_smoothie" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#129483;</span>
-              <span class="nc-quiz__option-label">Juice or smoothie</span>
-              <span class="nc-quiz__option-sugar">~28g sugar</span>
+              <span class="nc-quiz__option-label">Yogurt, smoothie, or oatmeal with fruit</span>
+              <span class="nc-quiz__option-sugar">~18-30g sugar</span>
             </button>
-            <button type="button" class="nc-quiz__option" data-value="wine_beer" role="radio" aria-checked="false">
+            <button type="button" class="nc-quiz__option" data-value="coffee_pastry" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#127863;</span>
-              <span class="nc-quiz__option-label">Wine or beer</span>
-              <span class="nc-quiz__option-sugar">~4-14g sugar</span>
+              <span class="nc-quiz__option-label">Coffee shop drink + pastry or muffin</span>
+              <span class="nc-quiz__option-sugar">~40-65g sugar</span>
             </button>
-            <button type="button" class="nc-quiz__option" data-value="tea_coffee" role="radio" aria-checked="false">
+            <button type="button" class="nc-quiz__option" data-value="eggs_protein" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#9749;</span>
-              <span class="nc-quiz__option-label">Tea or coffee (sweetened)</span>
-              <span class="nc-quiz__option-sugar">~12g sugar</span>
+              <span class="nc-quiz__option-label">Eggs, meat, or whole foods (no packaged)</span>
+              <span class="nc-quiz__option-sugar">~0-5g sugar</span>
             </button>
-            <button type="button" class="nc-quiz__option" data-value="water" role="radio" aria-checked="false">
+            <button type="button" class="nc-quiz__option" data-value="skip" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#128167;</span>
-              <span class="nc-quiz__option-label">Water or sparkling water</span>
+              <span class="nc-quiz__option-label">I skip breakfast</span>
               <span class="nc-quiz__option-sugar">0g sugar</span>
-            </button>
-            <button type="button" class="nc-quiz__option" data-value="energy_sports" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#9889;</span>
-              <span class="nc-quiz__option-label">Energy or sports drink</span>
-              <span class="nc-quiz__option-sugar">~34g sugar</span>
             </button>
           </div>
         </div>
 
-        <!-- Q2: Frequency -->
+        <!-- Q2: Drinks -->
         <div class="nc-quiz__step" data-step="2">
-          <div class="nc-quiz__step-icon" aria-hidden="true">&#128202;</div>
-          <h3 class="nc-quiz__question">How many sugary drinks do you have per day?</h3>
-          <p class="nc-quiz__helper" id="q2-helper">Include everything — coffee, soda, juice, cocktails</p>
-          <div class="nc-quiz__options" data-field="daily_sugary_drinks" role="radiogroup" aria-labelledby="q2-helper">
+          <div class="nc-quiz__step-icon" aria-hidden="true">&#129380;</div>
+          <h3 class="nc-quiz__question">How many sweetened drinks do you have per day?</h3>
+          <p class="nc-quiz__helper" id="q2-helper">Include soda, juice, coffee drinks, sports drinks, sweet tea, alcohol mixers</p>
+          <div class="nc-quiz__options" data-field="daily_sweet_drinks" role="radiogroup" aria-labelledby="q2-helper">
             <button type="button" class="nc-quiz__option" data-value="0" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-label">None — I'm pretty clean</span>
+              <span class="nc-quiz__option-label">None — I mostly drink water</span>
+              <span class="nc-quiz__option-sugar">0g sugar</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="1" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
               <span class="nc-quiz__option-label">1 per day</span>
+              <span class="nc-quiz__option-sugar">~25-40g sugar</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="2-3" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
               <span class="nc-quiz__option-label">2&#8211;3 per day</span>
+              <span class="nc-quiz__option-sugar">~50-100g sugar</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="4+" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
               <span class="nc-quiz__option-label">4 or more per day</span>
+              <span class="nc-quiz__option-sugar">~100-160g sugar</span>
             </button>
           </div>
         </div>
 
-        <!-- Q3: Sleep Quality -->
+        <!-- Q3: Packaged/Processed Foods -->
         <div class="nc-quiz__step" data-step="3">
-          <div class="nc-quiz__step-icon" aria-hidden="true">&#128564;</div>
-          <h3 class="nc-quiz__question">How would you rate your sleep quality?</h3>
-          <p class="nc-quiz__helper" id="q3-helper">Think about how you've been sleeping this past week</p>
-          <div class="nc-quiz__options" data-field="sleep_quality" role="radiogroup" aria-labelledby="q3-helper">
-            <button type="button" class="nc-quiz__option" data-value="great" role="radio" aria-checked="false">
+          <div class="nc-quiz__step-icon" aria-hidden="true">&#127858;</div>
+          <h3 class="nc-quiz__question">How often do you eat packaged or processed foods?</h3>
+          <p class="nc-quiz__helper" id="q3-helper">Sauces, snack bars, bread, frozen meals, condiments, dressings — anything with a label</p>
+          <div class="nc-quiz__options" data-field="processed_foods" role="radiogroup" aria-labelledby="q3-helper">
+            <button type="button" class="nc-quiz__option" data-value="rarely" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#127775;</span>
-              <span class="nc-quiz__option-label">Great — I sleep like a baby</span>
+              <span class="nc-quiz__option-label">Rarely — I cook most things from scratch</span>
+              <span class="nc-quiz__option-sugar">~5-10g hidden sugar</span>
             </button>
-            <button type="button" class="nc-quiz__option" data-value="okay" role="radio" aria-checked="false">
+            <button type="button" class="nc-quiz__option" data-value="some" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#128528;</span>
-              <span class="nc-quiz__option-label">Okay — could be better</span>
+              <span class="nc-quiz__option-label">Some — a few packaged items per day</span>
+              <span class="nc-quiz__option-sugar">~15-30g hidden sugar</span>
             </button>
-            <button type="button" class="nc-quiz__option" data-value="poor" role="radio" aria-checked="false">
+            <button type="button" class="nc-quiz__option" data-value="most" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#128553;</span>
-              <span class="nc-quiz__option-label">Poor — I toss and turn</span>
+              <span class="nc-quiz__option-label">Most meals involve something packaged</span>
+              <span class="nc-quiz__option-sugar">~30-50g hidden sugar</span>
             </button>
-            <button type="button" class="nc-quiz__option" data-value="terrible" role="radio" aria-checked="false">
+            <button type="button" class="nc-quiz__option" data-value="almost_all" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#128128;</span>
-              <span class="nc-quiz__option-label">Terrible — what is sleep?</span>
+              <span class="nc-quiz__option-label">Almost everything — convenience is king</span>
+              <span class="nc-quiz__option-sugar">~50-80g hidden sugar</span>
             </button>
           </div>
         </div>
 
-        <!-- Q4: Motivation -->
+        <!-- Q4: Label Awareness -->
         <div class="nc-quiz__step" data-step="4">
-          <div class="nc-quiz__step-icon" aria-hidden="true">&#127919;</div>
-          <h3 class="nc-quiz__question">What matters most to you right now?</h3>
-          <p class="nc-quiz__helper" id="q4-helper">Pick your #1 priority</p>
-          <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q4-helper">
-            <button type="button" class="nc-quiz__option" data-value="cut_sugar" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#128683;</span>
-              <span class="nc-quiz__option-label">Cutting back on sugar</span>
-            </button>
-            <button type="button" class="nc-quiz__option" data-value="sleep_better" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#128716;&#65039;</span>
-              <span class="nc-quiz__option-label">Sleeping better</span>
-            </button>
-            <button type="button" class="nc-quiz__option" data-value="healthier_habits" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#128170;</span>
-              <span class="nc-quiz__option-label">Building healthier habits</span>
-            </button>
-            <button type="button" class="nc-quiz__option" data-value="relaxation" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-icon" aria-hidden="true">&#129495;</span>
-              <span class="nc-quiz__option-label">Finding a better way to unwind</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Q5: Sugar Awareness -->
-        <div class="nc-quiz__step" data-step="5">
-          <div class="nc-quiz__step-icon" aria-hidden="true">&#129504;</div>
-          <h3 class="nc-quiz__question">Do you check sugar content before buying a drink?</h3>
-          <p class="nc-quiz__helper" id="q5-helper">Be honest — no judgement here</p>
-          <div class="nc-quiz__options" data-field="checks_sugar" role="radiogroup" aria-labelledby="q5-helper">
+          <div class="nc-quiz__step-icon" aria-hidden="true">&#128270;</div>
+          <h3 class="nc-quiz__question">Do you check for added sugar on nutrition labels?</h3>
+          <p class="nc-quiz__helper" id="q4-helper">Be honest — no judgement</p>
+          <div class="nc-quiz__options" data-field="checks_labels" role="radiogroup" aria-labelledby="q4-helper">
             <button type="button" class="nc-quiz__option" data-value="always" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
               <span class="nc-quiz__option-label">Always — I read every label</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="sometimes" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-label">Sometimes — depends on my mood</span>
+              <span class="nc-quiz__option-label">Sometimes — depends on the product</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="rarely" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
@@ -2791,7 +2719,36 @@ body {
             </button>
             <button type="button" class="nc-quiz__option" data-value="never" role="radio" aria-checked="false">
               <span class="nc-quiz__option-radio" aria-hidden="true"></span>
-              <span class="nc-quiz__option-label">Never — wait, I should?</span>
+              <span class="nc-quiz__option-label">Never — I don't think about it</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q5: Motivation -->
+        <div class="nc-quiz__step" data-step="5">
+          <div class="nc-quiz__step-icon" aria-hidden="true">&#127919;</div>
+          <h3 class="nc-quiz__question">Why do you want to reduce processed sugar?</h3>
+          <p class="nc-quiz__helper" id="q5-helper">Pick your #1 reason</p>
+          <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q5-helper">
+            <button type="button" class="nc-quiz__option" data-value="prevent_disease" role="radio" aria-checked="false">
+              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+              <span class="nc-quiz__option-label">Prevent health problems before they start</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="energy" role="radio" aria-checked="false">
+              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+              <span class="nc-quiz__option-label">More stable energy throughout the day</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="weight" role="radio" aria-checked="false">
+              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+              <span class="nc-quiz__option-label">Lose weight or maintain a healthy weight</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="family" role="radio" aria-checked="false">
+              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+              <span class="nc-quiz__option-label">Set a better example for my family</span>
+            </button>
+            <button type="button" class="nc-quiz__option" data-value="curiosity" role="radio" aria-checked="false">
+              <span class="nc-quiz__option-radio" aria-hidden="true"></span>
+              <span class="nc-quiz__option-label">I'm just curious how much I consume</span>
             </button>
           </div>
         </div>
@@ -2808,10 +2765,10 @@ body {
     <div class="nc-signup__container">
       <div class="nc-signup__header">
         <div class="nc-signup__icon" aria-hidden="true">&#127881;</div>
-        <h2 class="nc-signup__title" id="signup-title">Your Results Are Ready!</h2>
+        <h2 class="nc-signup__title" id="signup-title">Your Results Are Ready</h2>
         <p class="nc-signup__subtitle">
-          Enter your info below to see your personalized sugar report
-          and get early access to Nightcap.
+          Enter your info to see your personalized sugar report
+          and get access to tools that help you reduce processed sugar.
         </p>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
@@ -2895,7 +2852,7 @@ body {
         <div class="nc-results__breakdown">
           <div class="nc-results__stat">
             <span class="nc-results__stat-number" id="results-daily-sugar">0g</span>
-            <span class="nc-results__stat-label">Daily sugar from drinks</span>
+            <span class="nc-results__stat-label">Daily processed sugar</span>
           </div>
           <div class="nc-results__stat">
             <span class="nc-results__stat-number" id="results-weekly-sugar">0g</span>
@@ -2920,23 +2877,23 @@ body {
               </div>
             </div>
             <div class="nc-compare__row">
-              <span class="nc-compare__label">Average American</span>
+              <span class="nc-compare__label">Avg. American</span>
               <div class="nc-compare__bar-track">
                 <div class="nc-compare__bar nc-compare__bar--avg" style="width: 0%">
-                  <span class="nc-compare__bar-value">77g</span>
+                  <span class="nc-compare__bar-value">190g</span>
                 </div>
               </div>
             </div>
             <div class="nc-compare__row">
-              <span class="nc-compare__label">Nightcap Drinker</span>
+              <span class="nc-compare__label">Recommended</span>
               <div class="nc-compare__bar-track">
                 <div class="nc-compare__bar nc-compare__bar--nc" style="width: 0%">
-                  <span class="nc-compare__bar-value">0g</span>
+                  <span class="nc-compare__bar-value">&lt;25g</span>
                 </div>
               </div>
             </div>
           </div>
-          <p class="nc-compare__footnote">Daily sugar from beverages (grams)</p>
+          <p class="nc-compare__footnote">Daily processed sugar intake (grams)</p>
         </div>
 
         <!-- Insight -->
@@ -2979,28 +2936,28 @@ body {
 
       <!-- Nightcap CTA -->
       <div class="nc-results__cta-card">
-        <h3 class="nc-results__cta-title">Nightcap: Your Better Evening Ritual</h3>
+        <h3 class="nc-results__cta-title">Ready to Take Control?</h3>
         <ul class="nc-results__benefits">
-          <li>&#10003; 0g sugar — naturally sweetened</li>
-          <li>&#10003; Functional ingredients for relaxation &amp; sleep</li>
-          <li>&#10003; Replaces sugary evening drinks</li>
-          <li>&#10003; Tastes incredible — not like "health food"</li>
+          <li>&#10003; Track your daily processed sugar intake</li>
+          <li>&#10003; Spot hidden sugar sources in your diet</li>
+          <li>&#10003; Set reduction goals and build new habits</li>
+          <li>&#10003; Join a community eliminating processed sugar</li>
         </ul>
         <div class="nc-results__cta-actions">
           <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
             &#128242; Get the Nightcap App
           </button>
           <p class="nc-results__cta-note" id="results-sms-note">
-            We'll also text you a personalized download link!
+            We'll text you a link to start tracking.
           </p>
         </div>
       </div>
 
       <!-- Referral System -->
       <div class="nc-results__referral">
-        <h3 class="nc-results__referral-title">Move Up the Waitlist</h3>
+        <h3 class="nc-results__referral-title">Help Someone Else See Their Number</h3>
         <p class="nc-results__referral-subtitle">
-          Share your unique link. Each friend who signs up bumps you 10 spots.
+          Share the quiz. The first step to change is awareness — and you can give that to someone you care about.
         </p>
         <div class="nc-referral-link">
           <input type="text" class="nc-referral-link__input" id="referral-url" readonly aria-label="Your referral link">
@@ -3021,7 +2978,7 @@ body {
 
       <!-- Share -->
       <div class="nc-results__share">
-        <p class="nc-results__share-label">Think a friend needs to see their sugar intake?</p>
+        <p class="nc-results__share-label">Know someone who needs to see their number?</p>
         <div class="nc-results__share-buttons">
           <button class="nc-btn nc-btn--outline nc-btn--sm" id="share-quiz-btn">Share the Quiz</button>
         </div>
@@ -3029,8 +2986,8 @@ body {
 
       <!-- Position -->
       <div class="nc-results__position">
-        <p>You're <strong>#<span id="results-position">2,848</span></strong> on the waitlist</p>
-        <p class="nc-results__position-note">Refer friends to move up!</p>
+        <p><strong><span id="results-position">2,848</span></strong> people are working to eliminate processed sugar</p>
+        <p class="nc-results__position-note">You're one of them now.</p>
       </div>
     </div>
   </section>
@@ -3179,22 +3136,29 @@ body {
   var quizData = {};
   var isTransitioning = false;
 
-  // Sugar gram estimates per drink choice
-  var SUGAR_MAP = {
-    soda: 39,
-    juice: 28,
-    wine_beer: 9,
-    tea_coffee: 12,
-    water: 0,
-    energy_sports: 34,
+  // Sugar gram estimates per breakfast type
+  var BREAKFAST_MAP = {
+    cereal_toast: 28,
+    yogurt_smoothie: 24,
+    coffee_pastry: 52,
+    eggs_protein: 3,
+    skip: 0,
   };
 
-  // Multiplier by daily drink count
-  var FREQUENCY_MAP = {
+  // Sugar from sweetened drinks per day
+  var DRINKS_MAP = {
     '0': 0,
-    '1': 1,
-    '2-3': 2.5,
-    '4+': 4.5,
+    '1': 32,
+    '2-3': 75,
+    '4+': 130,
+  };
+
+  // Hidden sugar from processed/packaged foods
+  var PROCESSED_MAP = {
+    rarely: 8,
+    some: 22,
+    most: 40,
+    almost_all: 65,
   };
 
   // DOM refs
@@ -3443,13 +3407,16 @@ body {
 
   // ---------- Sugar Calculation ----------
   function calculateSugarEstimate() {
-    var baseSugar = SUGAR_MAP[quizData.evening_drink] || 20;
-    var multiplier = FREQUENCY_MAP[quizData.daily_sugary_drinks] || 1;
+    var breakfast = BREAKFAST_MAP[quizData.breakfast] || 15;
+    var drinks = DRINKS_MAP[quizData.daily_sweet_drinks] || 20;
+    var processed = PROCESSED_MAP[quizData.processed_foods] || 20;
 
-    quizData.estimated_daily_sugar = Math.round(baseSugar * multiplier);
-    quizData.estimated_weekly_sugar = Math.round(baseSugar * multiplier * 7);
+    var dailyTotal = breakfast + drinks + processed;
+
+    quizData.estimated_daily_sugar = Math.round(dailyTotal);
+    quizData.estimated_weekly_sugar = Math.round(dailyTotal * 7);
     quizData.estimated_yearly_sugar_lbs = parseFloat(
-      ((baseSugar * multiplier * 365) / 453.592).toFixed(1)
+      ((dailyTotal * 365) / 453.592).toFixed(1)
     );
   }
 
@@ -3800,15 +3767,16 @@ body {
     var motivation = payload.quiz_data.motivation;
 
     var msgs = {
-      cut_sugar: "You're consuming ~" + sugar + "g of sugar daily from drinks alone. Nightcap has 0g.",
-      sleep_better: 'Better sleep starts with what you drink. Nightcap is made with ingredients that actually help you wind down.',
-      healthier_habits: "Small swaps = big results. Replacing sugary drinks with Nightcap saves you ~" + (sugar * 365) + "g of sugar per year.",
-      relaxation: 'Your evening ritual matters. Nightcap helps you unwind without the sugar crash.',
+      prevent_disease: "You're consuming ~" + sugar + "g of processed sugar daily. That's " + Math.round(sugar * 365 / 453.592) + " lbs/year. The time to act is before it becomes a problem.",
+      energy: "At " + sugar + "g/day, processed sugar is likely behind your energy crashes. Track and reduce with the Nightcap app.",
+      weight: sugar + "g of processed sugar per day adds up to " + Math.round(sugar * 365 / 453.592) + " lbs/year. Track it. Reduce it. The app makes it easy.",
+      family: "You consume ~" + sugar + "g of processed sugar daily. See what your family is consuming too — share the quiz.",
+      curiosity: "Your number: " + sugar + "g of processed sugar per day. Now track it and start reducing.",
     };
 
     return 'Hey ' + name + '! ' +
-      (msgs[motivation] || 'Thanks for taking the Nightcap sugar quiz!') +
-      ' Download the Nightcap app: ' + CONFIG.appDownloadUrl;
+      (msgs[motivation] || 'You consume ~' + sugar + 'g of processed sugar daily. See your full report:') +
+      ' Start tracking: ' + CONFIG.appDownloadUrl;
   }
 
   // ---------- Local Fallback ----------
@@ -3875,18 +3843,18 @@ body {
     var title = document.getElementById('results-title');
     var subtitle = document.getElementById('results-subtitle');
 
-    if (dailySugar === 0) {
-      title.textContent = payload.first_name + ", you're doing amazing!";
-      subtitle.textContent = "Your drink choices are already low-sugar. Nightcap will make your evenings even better with functional ingredients for relaxation and sleep.";
-    } else if (dailySugar <= 30) {
-      title.textContent = payload.first_name + ", not bad — but there's room to improve";
-      subtitle.textContent = "You're consuming about " + dailySugar + "g of sugar from drinks daily. That adds up to " + yearlySugarLbs + " lbs per year. Nightcap can help you get to zero.";
-    } else if (dailySugar <= 80) {
-      title.textContent = payload.first_name + ", your sugar intake might surprise you";
-      subtitle.textContent = "At " + dailySugar + "g per day from drinks alone, you're consuming " + yearlySugarLbs + " lbs of sugar per year — just from beverages. Time for a swap.";
+    if (dailySugar <= 25) {
+      title.textContent = payload.first_name + ", you're ahead of the curve";
+      subtitle.textContent = "At " + dailySugar + "g per day, you're well below the national average of 190g. You're already doing what most Americans haven't figured out yet. Keep going.";
+    } else if (dailySugar <= 75) {
+      title.textContent = payload.first_name + ", there's room to improve";
+      subtitle.textContent = "You're consuming about " + dailySugar + "g of processed sugar daily — that's " + yearlySugarLbs + " lbs per year. Better than average, but still above the recommended 25g. The Nightcap app can help you close the gap.";
+    } else if (dailySugar <= 150) {
+      title.textContent = payload.first_name + ", this number might surprise you";
+      subtitle.textContent = "At " + dailySugar + "g per day, you're consuming " + yearlySugarLbs + " lbs of processed sugar per year. That's " + Math.round(dailySugar / 25) + "x the recommended daily limit. The good news? Now you know — and that's the first step.";
     } else {
-      title.textContent = payload.first_name + ", let's talk about that sugar intake";
-      subtitle.textContent = "You're getting roughly " + dailySugar + "g of sugar per day from drinks — that's " + yearlySugarLbs + " lbs per year. The good news? Nightcap is an easy swap with 0g sugar.";
+      title.textContent = payload.first_name + ", let's talk about your number";
+      subtitle.textContent = "You're consuming roughly " + dailySugar + "g of processed sugar per day — " + yearlySugarLbs + " lbs per year. That's close to the national average that's driving the metabolic health crisis. But awareness is where change starts.";
     }
 
     // Insight
@@ -3902,9 +3870,9 @@ body {
     var smsNote = document.getElementById('results-sms-note');
     if (smsNote) {
       if (payload.sms_consent && payload.phone) {
-        smsNote.textContent = "We just texted " + maskPhone(payload.phone) + " with your personalized download link!";
+        smsNote.textContent = "We just texted " + maskPhone(payload.phone) + " with a link to start tracking.";
       } else {
-        smsNote.textContent = 'Check your email for your personalized download link!';
+        smsNote.textContent = 'Check your email for your link to the Nightcap app.';
       }
     }
 
@@ -4092,8 +4060,8 @@ body {
 
   // ---------- Comparison Chart Animation ----------
   function animateComparisonChart(userGrams) {
-    var maxGrams = 120; // scale max
-    var avgGrams = 77; // average American daily sugar from drinks
+    var maxGrams = 250; // scale max
+    var avgGrams = 190; // average American daily processed sugar (152 lbs/year / 365 * 453g)
 
     var youBar = document.getElementById('compare-bar-you');
     var avgBar = document.querySelector('.nc-compare__bar--avg');
@@ -4108,7 +4076,7 @@ body {
     // Animate bars
     var youPercent = Math.min((userGrams / maxGrams) * 100, 100);
     var avgPercent = Math.min((avgGrams / maxGrams) * 100, 100);
-    var ncPercent = 3; // Minimal bar for 0g (visual indicator)
+    var ncPercent = Math.min((25 / maxGrams) * 100, 100); // 25g recommended
 
     youBar.style.width = Math.max(youPercent, 3) + '%';
     if (avgBar) avgBar.style.width = avgPercent + '%';
@@ -4188,22 +4156,29 @@ body {
   // ---------- Personalized Insights ----------
   function getPersonalizedInsight(quizData) {
     var parts = [];
+    var daily = quizData.estimated_daily_sugar || 0;
 
-    if (quizData.sleep_quality === 'terrible' || quizData.sleep_quality === 'poor') {
-      parts.push("Research shows that high sugar intake — especially in the evening — disrupts sleep quality and REM cycles.");
+    // Context on their number
+    if (daily > 100) {
+      parts.push("At " + daily + "g per day, you're consuming more processed sugar than 88% of health experts recommend as a maximum. This level is associated with increased risk of metabolic dysfunction, insulin resistance, and chronic inflammation.");
+    } else if (daily > 50) {
+      parts.push("200 years ago, your entire year's sugar intake would have been less than what you now consume in a week. That's not a willpower problem — it's an environment problem. And it's fixable.");
     }
 
+    // Motivation-based insight
     var motivationInsights = {
-      cut_sugar: "Switching your evening drink to Nightcap alone could eliminate " + (quizData.estimated_daily_sugar || 0) + "g of sugar from your daily intake.",
-      sleep_better: "Nightcap contains magnesium, L-theanine, and chamomile — clinically-studied ingredients that promote deep, restful sleep.",
-      healthier_habits: "Building one small habit — like swapping your evening drink — creates a ripple effect across your health.",
-      relaxation: "Unlike alcohol or sugary drinks that spike and crash, Nightcap uses adaptogens to promote calm without the downsides.",
+      prevent_disease: "You're making the right move. 88% of Americans are already metabolically unhealthy, and processed sugar is the #1 driver. Acting now — before symptoms appear — is the most powerful thing you can do for your long-term health.",
+      energy: "Blood sugar spikes from processed sugar cause the crashes, brain fog, and afternoon slumps most people accept as normal. Reducing your intake to under 25g/day can stabilize your energy within the first week.",
+      weight: "Processed sugar drives fat storage through insulin spikes. Cutting " + daily + "g per day eliminates " + quizData.estimated_yearly_sugar_lbs + " lbs of sugar per year — that's a massive metabolic shift without counting a single calorie.",
+      family: "Kids today consume more sugar by age 8 than adults did in an entire lifetime 200 years ago. By changing your own habits, you're changing what your family sees as normal. That's the most powerful intervention there is.",
+      curiosity: "Now you know your number. Most people are surprised — and that surprise is the beginning of change. The Nightcap app helps you track and reduce from here.",
     };
 
-    parts.push(motivationInsights[quizData.motivation] || "Nightcap was designed to be the healthiest, tastiest evening drink you'll ever try.");
+    parts.push(motivationInsights[quizData.motivation] || "Awareness is the first step. Now that you know your number, you can start making changes that compound over time.");
 
-    if (quizData.checks_sugar === 'never' || quizData.checks_sugar === 'rarely') {
-      parts.push("Most people don't realize that a single \"healthy\" juice can have more sugar than a candy bar.");
+    // Label awareness
+    if (quizData.checks_labels === 'never' || quizData.checks_labels === 'rarely') {
+      parts.push("Sugar goes by 60+ names on labels — dextrose, maltose, HFCS, \"evaporated cane juice.\" The Nightcap app helps you spot them all.");
     }
 
     return parts.join(' ');
