@@ -96,7 +96,17 @@ struct BodyScienceCard: View {
     }
 
     private var phaseStrip: some View {
-        HStack(spacing: 0) {
+        let completedPhases = FastingPhase.allCases
+            .filter { $0.previousThreshold < store.fastingPhase.previousThreshold }
+            .map(\.rawValue)
+        let a11yLabel: String = {
+            if completedPhases.isEmpty {
+                return "Phase journey: currently in \(store.fastingPhase.rawValue)."
+            }
+            return "Phase journey: \(completedPhases.joined(separator: ", ")) completed. Currently in \(store.fastingPhase.rawValue)."
+        }()
+
+        return HStack(spacing: 0) {
             ForEach(FastingPhase.allCases, id: \.self) { phase in
                 let isActive = (phase == store.fastingPhase)
                 let isPast   = phase.previousThreshold < store.fastingPhase.previousThreshold
@@ -123,6 +133,8 @@ struct BodyScienceCard: View {
                 .frame(maxWidth: .infinity)
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(a11yLabel)
     }
 }
 

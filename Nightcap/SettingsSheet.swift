@@ -188,10 +188,14 @@ struct SettingsSheet: View {
                         if on {
                             NotificationManager.shared.scheduleDailyNotifications()
                         } else {
-                            // Only remove daily check-ins, not proactive milestone notifications.
-                            UNUserNotificationCenter.current().removePendingNotificationRequests(
-                                withIdentifiers: ["nightcap.morning", "nightcap.evening"]
-                            )
+                            // Only remove daily check-ins (both legacy and weekday-specific),
+                            // not proactive milestone notifications.
+                            var ids = ["nightcap.morning", "nightcap.evening"]
+                            for wd in 1...7 {
+                                ids.append("nightcap.morning.wd\(wd)")
+                                ids.append("nightcap.evening.wd\(wd)")
+                            }
+                            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
                         }
                     }
             case .denied:
@@ -345,8 +349,10 @@ struct SettingsSheet: View {
                         DispatchQueue.main.async {
                             // Only check for the daily identifiers — milestone notifications
                             // exist separately and shouldn't drive this toggle.
-                            let dailyIDs: Set<String> = ["nightcap.morning", "nightcap.evening"]
-                            notificationsOn = reqs.contains { dailyIDs.contains($0.identifier) }
+                            notificationsOn = reqs.contains {
+                                $0.identifier.hasPrefix("nightcap.morning") ||
+                                $0.identifier.hasPrefix("nightcap.evening")
+                            }
                             notifStatusLoaded = true
                         }
                     }

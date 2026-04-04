@@ -15,6 +15,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
     case twoWeeks     = "two_weeks"
     case oneMonth     = "one_month"
     case hundredDays  = "hundred_days"
+    case sixMonths    = "six_months"
+    case oneYear      = "one_year"
 
     var threshold: TimeInterval {
         switch self {
@@ -25,6 +27,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return 86_400 * 14
         case .oneMonth:    return 86_400 * 30
         case .hundredDays: return 86_400 * 100
+        case .sixMonths:   return 86_400 * 180
+        case .oneYear:     return 86_400 * 365
         }
     }
 
@@ -37,6 +41,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return "2 Weeks"
         case .oneMonth:    return "1 Month"
         case .hundredDays: return "100 Days"
+        case .sixMonths:   return "6 Months"
+        case .oneYear:     return "1 Year"
         }
     }
 
@@ -49,6 +55,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return "calendar"
         case .oneMonth:    return "moon.stars"
         case .hundredDays: return "seal"
+        case .sixMonths:   return "flame"
+        case .oneYear:     return "crown"
         }
     }
 
@@ -68,6 +76,10 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
             return "D2 receptor density — suppressed by chronic dopamine spikes — has had meaningful time to recover. The baseline you feel now is closer to your actual biology."
         case .hundredDays:
             return "100 days. The neural pathway for the old habit has weakened through disuse. The new pattern has strengthened through repetition. This is identity now."
+        case .sixMonths:
+            return "Six months of reduced fasting insulin has measurably lowered your cardiovascular risk profile. The inflammatory markers that chronic sugar elevates have had meaningful time to fall."
+        case .oneYear:
+            return "A year. Taste receptor sensitivity is fully recovered. Visceral fat accumulation from chronic sugar has been interrupted for 12 months. The brain's reward system is running on its actual baseline. This is not a diet. This is biology."
         }
     }
 
@@ -83,12 +95,16 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return "Two weeks. You've crossed the threshold most people never reach."
         case .oneMonth:    return "A month. Something real has changed — inside and out."
         case .hundredDays: return "100 days.\nYou're not trying to quit sugar anymore.\nYou don't eat it."
+        case .sixMonths:
+            return "Six months.\nThe compound interest of this has been accumulating quietly.\nYour body is different than it was in January."
+        case .oneYear:
+            return "A year without processed sugar.\nThis isn't a streak anymore.\nIt's just who you are."
         }
     }
 
     var useConfetti: Bool {
         switch self {
-        case .oneWeek, .oneMonth, .hundredDays: return true
+        case .oneWeek, .oneMonth, .hundredDays, .sixMonths, .oneYear: return true
         default: return false
         }
     }
@@ -103,6 +119,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return 7_200      // 2 hours before
         case .oneMonth:    return 7_200      // 2 hours before
         case .hundredDays: return 86_400     // 1 day before
+        case .sixMonths:   return 86_400     // 1 day before
+        case .oneYear:     return 86_400     // 1 day before
         }
     }
 
@@ -116,6 +134,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return "2 hours from 2 weeks. You'll have crossed a threshold most people never reach."
         case .oneMonth:    return "2 hours to 1 Month. Something real has already changed."
         case .hundredDays: return "24 hours from 100 days. This is almost identity now."
+        case .sixMonths:   return "24 hours from 6 months. The compound interest of this is real."
+        case .oneYear:     return "24 hours from 1 year. This isn't a streak anymore."
         }
     }
 
@@ -129,6 +149,8 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .twoWeeks:    return "Keep going."
         case .oneMonth:    return "Keep going."
         case .hundredDays: return "This is your life now."
+        case .sixMonths:   return "This is your life now."
+        case .oneYear:     return "This is who you are."
         }
     }
 
@@ -147,6 +169,8 @@ enum CravingTrigger: String, CaseIterable, Codable, Identifiable {
     case stress   = "Stress"
     case habit    = "Habit / time of day"
     case social   = "Social situation"
+    case fatigue  = "Tired / low energy"
+    case hunger   = "Genuine hunger"
 
     var id: String { rawValue }
 
@@ -156,6 +180,8 @@ enum CravingTrigger: String, CaseIterable, Codable, Identifiable {
         case .stress:  return "Stress triggers cortisol, which drives glucose cravings as a quick energy fix. Deep breathing lowers cortisol within 2 minutes."
         case .habit:   return "Habit cravings are conditioned responses — the brain fires the craving because it expects the reward at this time, in this place."
         case .social:  return "Social eating cues are among the strongest — the brain associates group contexts with shared food rewards. A non-sugar alternative in hand disrupts the cue."
+        case .fatigue: return "Low energy and sugar cravings often share the same root: cortisol dysregulation and poor sleep. Protein, fat, and water work. Sugar spikes and then crashes harder."
+        case .hunger:  return "Genuine hunger is a signal worth respecting. Fat and protein satisfy it durably. Sugar spikes insulin, which drops blood glucose, which makes you hungrier within the hour."
         }
     }
 }

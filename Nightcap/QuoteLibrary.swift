@@ -190,6 +190,21 @@ struct QuoteLibrary {
                 science: "Glycation — the binding of sugar molecules to collagen and elastin — reverses slowly but measurably after sustained sugar reduction. At two weeks, AGE (advanced glycation end-product) formation has significantly slowed. Sleep architecture improvements, driven by stable nocturnal blood glucose, are often fully consolidated by week 2–3.",
                 tier: .fourteenTo30Days
             ),
+            ReframeQuote(
+                text: "Cognition runs on stable fuel. By now you've had two weeks without the blood sugar spikes that impair working memory and focus. That clarity you may be noticing is real.",
+                science: "Postprandial hyperglycemia — blood sugar spikes after high-sugar meals — is directly associated with reduced performance on working memory and executive function tests. Studies using continuous glucose monitoring show that individuals with flatter glucose curves perform measurably better on cognitive tasks. Two weeks of reduced glycemic variability produces observable cognitive differences.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "Visceral fat — the metabolically active fat around organs — responds faster to dietary change than subcutaneous fat. By now, the process has been underway for weeks.",
+                science: "Visceral adipose tissue is highly sensitive to insulin levels. When fasting insulin falls — as it does with sustained sugar reduction — visceral fat mobilizes preferentially. Research shows measurable reductions in visceral fat within 2–4 weeks of significant sugar restriction, even without changes in total caloric intake.",
+                tier: .fourteenTo30Days
+            ),
+            ReframeQuote(
+                text: "The research on longevity consistently points to one metabolic marker above others: fasting insulin. Two weeks of sugar reduction has moved yours in the right direction.",
+                science: "Chronically elevated insulin — driven primarily by refined carbohydrate and sugar consumption — is independently associated with accelerated cellular aging, increased cancer risk, and cardiovascular disease. Fasting insulin responds rapidly to dietary change: significant improvements are typically measurable within 2–3 weeks of sugar reduction.",
+                tier: .fourteenTo30Days
+            ),
         ],
 
         .thirtyPlusDays: [
@@ -213,6 +228,21 @@ struct QuoteLibrary {
                 science: "Identity-based preference change — the point at which behavior aligns with self-concept rather than willpower — is the most durable form of habit maintenance. When the question becomes 'this isn't for me' rather than 'I'm trying not to', relapse probability drops significantly. Research suggests this shift occurs, on average, somewhere between weeks 3 and 6.",
                 tier: .thirtyPlusDays
             ),
+            ReframeQuote(
+                text: "Food tastes different now. Not because your taste buds are telling you stories — because the receptor sensitivity that was suppressed by chronic sugar exposure has recovered.",
+                science: "Chronic high-sugar intake downregulates sweet taste receptors in the mouth, requiring progressively higher concentrations to register the same sweetness. After 30 days, receptor sensitivity recovers significantly — making naturally sweet foods like fruit taste as sweet as processed food once did. This is a genuine perceptual shift, not a placebo.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "The compound interest of consistency is invisible until it isn't. Thirty days of quiet work has changed your gut, your insulin response, your taste, your sleep, your brain. It's in the ledger.",
+                science: "Each of the biological changes driven by sugar elimination — microbiome shifts, insulin sensitivity, dopamine receptor recovery, taste receptor normalization, sleep architecture improvements — compounds on the others. They reinforce each other, and they accumulate. At 30 days, the sum of these changes is significantly larger than any individual component.",
+                tier: .thirtyPlusDays
+            ),
+            ReframeQuote(
+                text: "Systemic inflammation — the slow background process linked to nearly every chronic disease — requires sustained dietary change to reverse. You've given it a month.",
+                science: "C-reactive protein (CRP), interleukin-6 (IL-6), and other inflammatory biomarkers are directly elevated by chronic sugar and refined carbohydrate intake. Sustained reduction produces measurable decreases in these markers, typically becoming statistically significant at 4–6 weeks. Inflammation is silent but expensive. You've been paying down the debt for a month.",
+                tier: .thirtyPlusDays
+            ),
         ],
     ]
 
@@ -224,11 +254,24 @@ struct QuoteLibrary {
         "The food you're craving was designed in a lab to make you feel exactly this. That's not hunger.",
         "Your prefrontal cortex is temporarily losing to your limbic system. It wins when you wait.",
         "In 3 hours you'll be grateful you didn't.",
-        "The craving is loudest right before it disappears.",
         "This feeling is a wave. It has a peak. You're probably near it.",
         "You're not fighting the food. You're outlasting a hormone.",
         "The 20-minute rule: if you still want it in 20 minutes, it's hunger. If it passed, it was chemistry.",
         "Every craving you outlast weakens the neural path that produced it.",
+        "The craving is loudest in the final minutes before it breaks. That's what loud means right now.",
+        // Behavioral
+        "Drink a full glass of cold water right now. Thirst and hunger use the same signal.",
+        "Step outside for 60 seconds. Cravings are partly spatial — change the room, change the signal.",
+        "Eat something with fat or protein. A small piece of cheese. A handful of nuts. Fat satisfies; sugar restarts the cycle.",
+        "Change rooms. The craving is partly a conditioned response to the cue in front of you.",
+        // Time-reframe
+        "Name a specific time 20 minutes from now. That's when this ends.",
+        "Your track record for outlasting cravings is 100%. This one is no different.",
+        // Cognitive
+        "The company that made that food paid researchers to make this moment feel urgent. It isn't.",
+        "The craving tells you nothing about what your body needs. It tells you everything about what it's been trained to expect.",
+        "Dopamine is chasing the anticipation, not the food itself. Notice what happens to the wanting the moment you eat it.",
+        "This is a neural pathway demanding to be used. You don't have to use it.",
     ]
 
     // MARK: Selection

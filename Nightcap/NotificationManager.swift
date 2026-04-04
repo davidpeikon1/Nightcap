@@ -60,52 +60,79 @@ class NotificationManager {
 
     // MARK: - Scheduling
 
+    /// Schedule 7 morning + 7 evening notifications — one for each day of the week —
+    /// so the message body varies daily. Re-call on each app foreground to keep the
+    /// upcoming week fresh. Safe to call redundantly; old requests are replaced.
     func scheduleDailyNotifications() {
-        // Only remove and re-add daily notifications (not milestones).
-        UNUserNotificationCenter.current().removePendingNotificationRequests(
-            withIdentifiers: ["nightcap.morning", "nightcap.evening"]
-        )
-        scheduleEvening()
-        scheduleMorning()
+        // Remove legacy single-repeating identifiers and all day-specific ones.
+        var toRemove = ["nightcap.morning", "nightcap.evening"]
+        for weekday in 1...7 {
+            toRemove.append("nightcap.morning.wd\(weekday)")
+            toRemove.append("nightcap.evening.wd\(weekday)")
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: toRemove)
+
+        for weekday in 1...7 {
+            scheduleWeekdayNotification(
+                weekday: weekday,
+                hour: morningHour,
+                title: "Good morning.",
+                bodies: morningBodies,
+                identifier: "nightcap.morning.wd\(weekday)"
+            )
+            scheduleWeekdayNotification(
+                weekday: weekday,
+                hour: eveningHour,
+                title: "Evening check-in.",
+                bodies: eveningBodies,
+                identifier: "nightcap.evening.wd\(weekday)"
+            )
+        }
     }
 
-    private func scheduleEvening() {
+    private func scheduleWeekdayNotification(
+        weekday: Int, hour: Int, title: String, bodies: [String], identifier: String
+    ) {
         let content = UNMutableNotificationContent()
-        content.title = "Evening check-in."
-        content.body  = "This is the highest-risk hour for sugar."
+        content.title = title
+        content.body  = bodies[(weekday - 1) % bodies.count]
         content.sound = .default
 
         var components = DateComponents()
-        components.hour   = eveningHour
-        components.minute = 0
+        components.weekday = weekday
+        components.hour    = hour
+        components.minute  = 0
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        let request = UNNotificationRequest(
-            identifier: "nightcap.evening",
-            content: content,
-            trigger: trigger
-        )
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
     }
 
-    private func scheduleMorning() {
-        let content = UNMutableNotificationContent()
-        content.title = "Good morning."
-        content.body  = "A new reframe is ready for today."
-        content.sound = .default
+    // MARK: - Notification body pools
 
-        var components = DateComponents()
-        components.hour   = morningHour
-        components.minute = 0
+    /// Seven morning messages — one fires per day-of-week (Sunday–Saturday).
+    /// Forward-looking: begins the day with curiosity and context.
+    private let morningBodies: [String] = [
+        "A new reframe is ready for today.",
+        "Every day without processed sugar, your brain gets a little more of itself back.",
+        "The clock is still running. That's the only thing that matters this morning.",
+        "Most people won't make it this far. You have.",
+        "The way you handle this morning is a vote for who you're becoming.",
+        "Your baseline this morning is cleaner than it was a week ago.",
+        "Progress that compounds quietly is still progress.",
+    ]
 
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        let request = UNNotificationRequest(
-            identifier: "nightcap.morning",
-            content: content,
-            trigger: trigger
-        )
-        UNUserNotificationCenter.current().add(request)
-    }
+    /// Seven evening messages — one fires per day-of-week (Sunday–Saturday).
+    /// Present-tense shielding: acknowledges the moment without alarm.
+    private let eveningBodies: [String] = [
+        "This is the highest-risk hour for sugar.",
+        "The evening pull is mostly habit. It will pass without you.",
+        "The craving window is 20 minutes. You've outlasted it before.",
+        "Check in with yourself. You've made it to another evening.",
+        "Evenings are where most people reset. Not you.",
+        "This is the hardest part of the day. You know what to do.",
+        "One more evening. That's all you have to do right now.",
+    ]
 
     // MARK: - Milestone notifications
 

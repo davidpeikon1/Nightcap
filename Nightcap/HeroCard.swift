@@ -122,6 +122,18 @@ struct HeroCard: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 14)
 
+            // Show the previous fast's duration for the first 30 minutes after a reset.
+            // Reframes the reset as data rather than leaving that moment in silence.
+            if store.elapsedSeconds < 1_800, let lastReset = store.resetEvents.first {
+                Text("Previous fast: \(formatFastDuration(lastReset.fastDuration)). That's data, not failure.")
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 6)
+                    .transition(.opacity)
+            }
+
             if let startDate = store.lastSugarDate {
                 Button {
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -240,6 +252,16 @@ struct HeroCard: View {
         if h > 0 { return "\(h) hour\(h == 1 ? "" : "s"), \(m) minute\(m == 1 ? "" : "s")" }
         if m > 0 { return "\(m) minute\(m == 1 ? "" : "s"), \(s) second\(s == 1 ? "" : "s")" }
         return "\(s) second\(s == 1 ? "" : "s")"
+    }
+
+    private func formatFastDuration(_ seconds: TimeInterval) -> String {
+        let totalMinutes = Int(seconds) / 60
+        let hours = totalMinutes / 60
+        let days  = hours / 24
+        if days > 0 { return days == 1 ? "1 day" : "\(days) days" }
+        if hours > 0 { return hours == 1 ? "1 hour" : "\(hours) hours" }
+        if totalMinutes > 0 { return totalMinutes == 1 ? "1 minute" : "\(totalMinutes) minutes" }
+        return "< 1 minute"
     }
 
     private func monoText(_ text: String, size: CGFloat) -> Text {

@@ -71,6 +71,7 @@ struct WeeklyInsightCard: View {
                     .foregroundStyle(Color("NCTextTertiary"))
                     .padding(.top, 4)
             }
+            .accessibilityHint("Dismisses this card for the rest of the week")
         }
         .padding(20)
         .background(Color("NCSurface"))

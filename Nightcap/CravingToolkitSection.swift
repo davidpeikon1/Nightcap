@@ -142,6 +142,8 @@ struct CravingToolkitSection: View {
                 .background(isActive ? Color("NCAccent") : Color("NCBackground"))
                 .cornerRadius(8)
         }
+        .accessibilityAddTraits(isActive ? [.isSelected] : [])
+        .accessibilityHint("Shows the \(tab.rawValue) tool")
     }
 }
 
@@ -149,6 +151,9 @@ struct CravingToolkitSection: View {
 
 struct CountdownTool: View {
     @ObservedObject var state: CountdownState
+    @State private var inlineCardText: String = ""
+    @State private var inlineCardIndex: Int = 0
+    @State private var showInlineCard: Bool = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -166,6 +171,7 @@ struct CountdownTool: View {
                     Button {
                         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                         state.reset()
+                        withAnimation { showInlineCard = false }
                     } label: {
                         Text("Start another 20 minutes")
                             .font(.system(size: 13))
@@ -211,10 +217,24 @@ struct CountdownTool: View {
                         .font(.system(size: 48, weight: .light).monospacedDigit())
                         .foregroundStyle(state.isRunning ? Color("NCTextPrimary") : Color("NCTextTertiary"))
                 }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Countdown timer, \(formattedTime) remaining, \(state.isRunning ? "running" : "paused")")
 
                 Button {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    if state.isRunning { state.stop() } else { state.start() }
+                    if state.isRunning {
+                        state.stop()
+                    } else {
+                        state.start()
+                        // Surface a craving card 2 seconds after the timer starts
+                        // so the user has something to read during the wait.
+                        let result = QuoteLibrary.randomCravingCard(excluding: nil)
+                        inlineCardText = result.text
+                        inlineCardIndex = result.index
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation(.easeInOut(duration: 0.3)) { showInlineCard = true }
+                        }
+                    }
                 } label: {
                     Text(state.isRunning ? "Pause" : (state.secondsLeft < 20 * 60 ? "Resume" : "Start the 20 minutes"))
                         .font(.system(size: 15, weight: .medium))
@@ -231,6 +251,40 @@ struct CountdownTool: View {
                             .font(.system(size: 13))
                             .foregroundStyle(Color("NCTextSecondary"))
                     }
+                }
+
+                // Inline craving card — surfaces automatically when countdown starts
+                if showInlineCard {
+                    VStack(spacing: 8) {
+                        Rectangle()
+                            .fill(Color("NCTextTertiary").opacity(0.2))
+                            .frame(height: 1)
+
+                        Text(inlineCardText)
+                            .font(.system(size: 14, weight: .light))
+                            .foregroundStyle(Color("NCTextSecondary"))
+                            .lineSpacing(4)
+                            .multilineTextAlignment(.center)
+
+                        Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            let result = QuoteLibrary.randomCravingCard(excluding: inlineCardIndex)
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                inlineCardText = result.text
+                                inlineCardIndex = result.index
+                            }
+                        } label: {
+                            HStack(spacing: 4) {
+                                Text("another")
+                                    .font(.system(size: 11))
+                                    .tracking(0.5)
+                                Image(systemName: "arrow.left")
+                                    .font(.system(size: 9, weight: .light))
+                            }
+                            .foregroundStyle(Color("NCTextTertiary"))
+                        }
+                    }
+                    .transition(.opacity)
                 }
             }
         }
