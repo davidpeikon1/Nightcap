@@ -6,12 +6,14 @@ import SwiftUI
 struct WidgetFastData {
     let lastSugarDate: Date?
     let currentQuote: String?
+    let streakDays: Int
 
     static func load() -> WidgetFastData {
         let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
         return WidgetFastData(
             lastSugarDate: defaults.object(forKey: "lastSugarDate") as? Date,
-            currentQuote: defaults.string(forKey: "currentQuoteText")
+            currentQuote: defaults.string(forKey: "currentQuoteText"),
+            streakDays: defaults.integer(forKey: "streakDays")
         )
     }
 
@@ -96,7 +98,7 @@ struct FastingEntry: TimelineEntry {
 
 struct FastingProvider: TimelineProvider {
     func placeholder(in context: Context) -> FastingEntry {
-        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800), currentQuote: nil))
+        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800), currentQuote: nil, streakDays: 2))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (FastingEntry) -> Void) {
@@ -290,7 +292,7 @@ struct MediumWidgetView: View {
 
             Spacer(minLength: 20)
 
-            // Right — phase + milestone
+            // Right — phase + milestone + streak
             VStack(alignment: .trailing, spacing: 6) {
                 Text(entry.data.phase(at: entry.date).uppercased())
                     .font(.system(size: 8, weight: .semibold))
@@ -308,6 +310,17 @@ struct MediumWidgetView: View {
                         .font(.system(size: 13, weight: .light).monospacedDigit())
                         .foregroundStyle(Color.ncTextSecond)
                         .multilineTextAlignment(.trailing)
+                }
+
+                if entry.data.streakDays > 0 {
+                    HStack(spacing: 3) {
+                        Text("\(entry.data.streakDays)d")
+                            .font(.system(size: 11, weight: .light).monospacedDigit())
+                            .foregroundStyle(Color.ncWarning)
+                        Image(systemName: "flame")
+                            .font(.system(size: 9, weight: .light))
+                            .foregroundStyle(Color.ncWarning)
+                    }
                 }
             }
             .frame(width: 80)
@@ -409,7 +422,7 @@ struct LargeWidgetView: View {
 
             Spacer(minLength: 16)
 
-            // Next milestone footer
+            // Next milestone + streak footer
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("NEXT MILESTONE")
@@ -421,6 +434,22 @@ struct LargeWidgetView: View {
                         .foregroundStyle(Color.ncTextPrimary)
                 }
                 Spacer()
+                if entry.data.streakDays > 0 {
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text("STREAK")
+                            .font(.system(size: 8, weight: .medium))
+                            .tracking(1.5)
+                            .foregroundStyle(Color.ncTextTert)
+                        HStack(spacing: 4) {
+                            Text("\(entry.data.streakDays)d")
+                                .font(.system(size: 14, weight: .light).monospacedDigit())
+                                .foregroundStyle(Color.ncWarning)
+                            Image(systemName: "flame")
+                                .font(.system(size: 11, weight: .light))
+                                .foregroundStyle(Color.ncWarning)
+                        }
+                    }
+                }
             }
         }
         .padding(18)
