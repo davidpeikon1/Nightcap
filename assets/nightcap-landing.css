@@ -10,18 +10,18 @@
 }
 
 :root {
-  --nc-bg: #161616;
-  --nc-bg-card: #1e1e1e;
-  --nc-bg-card-hover: #262626;
-  --nc-surface: #1a1a1a;
+  --nc-bg: #111111;
+  --nc-bg-card: #1a1a1a;
+  --nc-bg-card-hover: #222222;
+  --nc-surface: #161616;
   --nc-primary: #C8B89A;
   --nc-primary-light: #D8CCB4;
   --nc-primary-dark: #A89878;
   --nc-accent: #C8B89A;
   --nc-accent-dark: #A89878;
-  --nc-text: #EDE8DF;
-  --nc-text-muted: #8C8478;
-  --nc-text-dim: #5C564E;
+  --nc-text: #F2EDE5;
+  --nc-text-muted: #A69E92;
+  --nc-text-dim: #78716A;
   --nc-error: #C45B54;
   --nc-warning: #C8B89A;
   --nc-success: #A89878;
@@ -30,7 +30,7 @@
   --nc-radius: 10px;
   --nc-radius-lg: 18px;
   --nc-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --nc-font-display: 'Playfair Display', Georgia, serif;
+  --nc-font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --nc-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --nc-shadow-sm: 0 2px 8px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1);
   --nc-shadow-md: 0 8px 30px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.15);
@@ -344,11 +344,12 @@ body::after {
 }
 
 .nc-hero__subtitle {
-  font-size: 1.15rem;
-  color: var(--nc-text-muted);
+  font-size: 1.1rem;
+  color: var(--nc-text);
+  opacity: 0.75;
   max-width: 500px;
   margin: 0 auto 2.5rem;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
 .nc-hero__cta-group {
@@ -1448,8 +1449,9 @@ body::after {
 
 .nc-why__subtitle {
   font-size: 1.05rem;
-  color: var(--nc-text-muted);
-  line-height: 1.7;
+  color: var(--nc-text);
+  opacity: 0.7;
+  line-height: 1.75;
   margin-bottom: 2.5rem;
 }
 
@@ -1480,8 +1482,9 @@ body::after {
 
 .nc-why__stat-label {
   font-size: 0.8rem;
-  color: var(--nc-text-muted);
-  line-height: 1.4;
+  color: var(--nc-text);
+  opacity: 0.6;
+  line-height: 1.5;
 }
 
 /* ---------- How It Works ---------- */
@@ -1534,8 +1537,9 @@ body::after {
 
 .nc-how__step-desc {
   font-size: 0.875rem;
-  color: var(--nc-text-muted);
-  line-height: 1.5;
+  color: var(--nc-text);
+  opacity: 0.6;
+  line-height: 1.6;
 }
 
 .nc-how__connector {
@@ -1675,7 +1679,7 @@ body::after {
 }
 
 .nc-proof__quote {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--nc-text);
   line-height: 1.7;
   font-style: italic;
@@ -1838,8 +1842,9 @@ body::after {
 
 .nc-faq__answer p {
   font-size: 0.9rem;
-  color: var(--nc-text-muted);
-  line-height: 1.7;
+  color: var(--nc-text);
+  opacity: 0.7;
+  line-height: 1.75;
   margin: 0;
 }
 
