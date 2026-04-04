@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var showQuickReset    = false
     @State private var showHistory       = false
     @State private var showPhaseDetail: FastingPhase? = nil
+    @State private var flamePulse: CGFloat = 1.0
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -145,6 +146,16 @@ struct HomeView: View {
             Image(systemName: "flame")
                 .font(.system(size: 13, weight: .light))
                 .foregroundStyle(Color("NCWarning"))
+                .scaleEffect(flamePulse)
+                .onAppear {
+                    withAnimation(
+                        .easeInOut(duration: 1.4)
+                        .repeatForever(autoreverses: true)
+                        .delay(0.5)
+                    ) {
+                        flamePulse = 1.18
+                    }
+                }
             Text("\(store.streakDays) day\(store.streakDays == 1 ? "" : "s")")
                 .font(.system(size: 13, weight: .medium))
                 .foregroundStyle(Color("NCTextPrimary"))

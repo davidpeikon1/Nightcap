@@ -9,6 +9,7 @@ struct ProgressSection: View {
     @State private var selectedBadge: BadgeID? = nil
     @State private var selectedLockedBadge: BadgeID? = nil
     @State private var showHistory = false
+    @State private var progressFilled = false
 
     private var orderedBadges: [BadgeID] {
         BadgeID.allCases
@@ -123,7 +124,8 @@ struct ProgressSection: View {
 
                     RoundedRectangle(cornerRadius: 3)
                         .fill(Color("NCSuccess"))
-                        .frame(width: geo.size.width * store.phaseProgress, height: 6)
+                        .frame(width: geo.size.width * (progressFilled ? store.phaseProgress : 0), height: 6)
+                        .animation(.spring(duration: 1.2, bounce: 0.05), value: progressFilled)
                         .animation(.spring(duration: 0.8), value: store.phaseProgress)
                 }
             }
@@ -136,6 +138,11 @@ struct ProgressSection: View {
         .padding(16)
         .background(Color("NCSurface"))
         .cornerRadius(12)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                progressFilled = true
+            }
+        }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(isFreedom
             ? "Freedom phase. Day \(dayCount)."
@@ -375,6 +382,7 @@ struct MilestoneSheet: View {
     @Environment(\.requestReview) private var requestReview
     @State private var shareImage: UIImage? = nil
     @State private var showShareSheet = false
+    @State private var iconScaled = false
 
     private var shareText: String {
         "\(badge.label) sugar-free. \(store.formattedElapsed) and counting.\n\n\(badge.celebrationText)\n\n— tracked with Nightcap"
@@ -402,6 +410,8 @@ struct MilestoneSheet: View {
                         .font(.system(size: 32, weight: .light))
                         .foregroundStyle(Color("NCSuccess"))
                 }
+                .scaleEffect(iconScaled ? 1.0 : 0.2)
+                .animation(.spring(duration: 0.7, bounce: 0.45), value: iconScaled)
 
                 Text(badge.label + ".")
                     .font(.system(size: 34, weight: .light))
@@ -482,7 +492,20 @@ struct MilestoneSheet: View {
                 .presentationDetents([.medium, .large])
         }
         .onAppear {
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            // Spring entrance for badge icon
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                iconScaled = true
+            }
+            // Multi-step haptic: medium → heavy → success notification
+            let medium = UIImpactFeedbackGenerator(style: .medium)
+            let heavy  = UIImpactFeedbackGenerator(style: .heavy)
+            medium.impactOccurred()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.12) {
+                heavy.impactOccurred()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+            }
             // Request a review at the 1-week and 1-month milestones.
             // Apple allows 3 prompts per year; each badge is earned at most once.
             if badge == .oneWeek || badge == .oneMonth {

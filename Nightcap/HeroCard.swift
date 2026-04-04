@@ -10,6 +10,19 @@ struct HeroCard: View {
     @State private var showResetModal  = false
     @State private var showEditStart   = false
 
+    /// Subtle phase-based tint layered over the card surface.
+    /// Communicates biological progress through colour without stating it.
+    private var phaseAmbientColor: Color {
+        switch store.fastingPhase {
+        case .justStarted:  return .clear
+        case .firstDay:     return Color("NCWarning").opacity(0.04)
+        case .withdrawal:   return Color.red.opacity(0.04)
+        case .breakthrough: return Color.orange.opacity(0.035)
+        case .rewiring:     return Color.teal.opacity(0.04)
+        case .freedom:      return Color("NCSuccess").opacity(0.05)
+        }
+    }
+
     private var quote: ReframeQuote {
         QuoteLibrary.dailyQuote(for: store.elapsedSeconds)
     }
@@ -87,7 +100,13 @@ struct HeroCard: View {
             }
         }
         .padding(20)
-        .background(Color("NCSurface"))
+        .background(
+            ZStack {
+                Color("NCSurface")
+                phaseAmbientColor
+                    .animation(.easeInOut(duration: 2.5), value: store.fastingPhase)
+            }
+        )
         .cornerRadius(16)
         .animation(.spring(duration: 0.3), value: scienceExpanded)
         .animation(.spring(duration: 0.3), value: store.isTracking)
@@ -149,25 +168,9 @@ struct HeroCard: View {
                 Spacer()
 
                 if isPersonalBest {
-                    Text("PERSONAL BEST")
-                        .font(.system(size: 9, weight: .semibold))
-                        .tracking(1)
-                        .foregroundStyle(Color("NCSuccess"))
-                        .padding(.horizontal, 7)
-                        .padding(.vertical, 3)
-                        .background(Color("NCSuccess").opacity(0.12))
-                        .cornerRadius(4)
-                        .transition(.scale(scale: 0.8).combined(with: .opacity))
+                    PersonalBestBadge(label: "PERSONAL BEST", tint: Color("NCSuccess"))
                 } else if let shortfall = distanceToPB {
-                    Text(pbApproachLabel(shortfall))
-                        .font(.system(size: 9, weight: .semibold))
-                        .tracking(1)
-                        .foregroundStyle(Color("NCWarning"))
-                        .padding(.horizontal, 7)
-                        .padding(.vertical, 3)
-                        .background(Color("NCWarning").opacity(0.12))
-                        .cornerRadius(4)
-                        .transition(.scale(scale: 0.8).combined(with: .opacity))
+                    PersonalBestBadge(label: pbApproachLabel(shortfall), tint: Color("NCWarning"))
                 }
             }
             .padding(.bottom, 14)
@@ -335,6 +338,8 @@ struct HeroCard: View {
             }
         }
         .accessibilityLabel(timerA11yLabel)
+        // numericText transition needs an animation context to interpolate.
+        .animation(.snappy(duration: 0.25), value: store.elapsedSeconds)
     }
 
     private var timerA11yLabel: String {
@@ -371,10 +376,11 @@ struct HeroCard: View {
         return "< 1 minute"
     }
 
-    private func monoText(_ text: String, size: CGFloat) -> Text {
+    private func monoText(_ text: String, size: CGFloat) -> some View {
         Text(text)
             .font(.system(size: size, weight: .light).monospacedDigit())
             .foregroundStyle(Color("NCTextPrimary"))
+            .contentTransition(.numericText())
     }
 
     private func unitBlock(value: Int, unit: String) -> some View {
@@ -382,10 +388,41 @@ struct HeroCard: View {
             Text("\(value)")
                 .font(.system(size: 52, weight: .light).monospacedDigit())
                 .foregroundStyle(Color("NCTextPrimary"))
+                .contentTransition(.numericText())
             Text(unit)
                 .font(.system(size: 18, weight: .light))
                 .foregroundStyle(Color("NCTextSecondary"))
                 .padding(.bottom, 5)
         }
+    }
+}
+
+// MARK: - Personal Best Badge
+
+/// Extracted so it can own @State for its background pulse animation.
+/// Used for both the PB-achieved (green) and PB-approaching (amber) states.
+struct PersonalBestBadge: View {
+    let label: String
+    let tint: Color
+    @State private var bgOpacity: Double = 0.12
+
+    var body: some View {
+        Text(label)
+            .font(.system(size: 9, weight: .semibold))
+            .tracking(1)
+            .foregroundStyle(tint)
+            .padding(.horizontal, 7)
+            .padding(.vertical, 3)
+            .background(tint.opacity(bgOpacity))
+            .cornerRadius(4)
+            .transition(.scale(scale: 0.8).combined(with: .opacity))
+            .onAppear {
+                withAnimation(
+                    .easeInOut(duration: 1.8)
+                    .repeatForever(autoreverses: true)
+                ) {
+                    bgOpacity = 0.26
+                }
+            }
     }
 }
