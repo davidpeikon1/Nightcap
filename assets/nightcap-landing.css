@@ -1389,7 +1389,7 @@ body::after {
 
 /* Section dividers */
 .nc-why::before,
-.nc-how::before,
+.nc-benefits::before,
 .nc-proof::before,
 .nc-faq::before {
   content: '';
@@ -1403,7 +1403,7 @@ body::after {
   opacity: 0.25;
 }
 
-.nc-how,
+.nc-benefits,
 .nc-proof,
 .nc-faq {
   position: relative;
@@ -1482,18 +1482,59 @@ body::after {
   line-height: 1.5;
 }
 
-/* ---------- How It Works ---------- */
-.nc-how {
-  padding: 120px 32px;
+/* ---------- Pull Quote ---------- */
+.nc-pullquote {
+  padding: 80px 32px;
   text-align: center;
 }
 
-.nc-how__container {
-  max-width: 800px;
+.nc-pullquote__container {
+  max-width: 680px;
   margin: 0 auto;
 }
 
-.nc-how__title {
+.nc-pullquote__text {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--nc-text);
+  opacity: 0.5;
+}
+
+.nc-pullquote__text em {
+  font-style: normal;
+  color: var(--nc-text);
+  opacity: 1;
+  font-weight: 700;
+}
+
+/* ---------- Benefits Grid ---------- */
+.nc-benefits {
+  padding: 120px 32px;
+  text-align: center;
+  position: relative;
+}
+
+.nc-benefits::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--nc-primary);
+  opacity: 0.25;
+}
+
+.nc-benefits__container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.nc-benefits__title {
   font-family: var(--nc-font-display);
   font-size: clamp(2rem, 4.5vw, 2.75rem);
   font-weight: 600;
@@ -1501,51 +1542,41 @@ body::after {
   margin-bottom: 3.5rem;
 }
 
-.nc-how__steps {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0;
+.nc-benefits__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--nc-border);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
+  overflow: hidden;
 }
 
-.nc-how__step {
-  flex: 1;
-  max-width: 220px;
-  padding: 0 16px;
+.nc-benefits__item {
+  padding: 40px 32px;
+  background: var(--nc-bg-card);
+  text-align: left;
+  transition: background var(--nc-transition);
 }
 
-.nc-how__step-number {
-  font-size: 2rem;
-  margin: 0 auto 14px;
-  line-height: 1;
+.nc-benefits__item:hover {
+  background: var(--nc-bg-card-hover);
 }
 
-.nc-how__step-icon {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
-}
-
-.nc-how__step-title {
-  font-size: 1.05rem;
+.nc-benefits__item-title {
+  font-family: var(--nc-font-display);
+  font-size: 1.2rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   margin-bottom: 8px;
 }
 
-.nc-how__step-desc {
-  font-size: 0.85rem;
+.nc-benefits__item-desc {
+  font-size: 0.88rem;
   font-weight: 500;
   color: var(--nc-text);
   opacity: 0.5;
   line-height: 1.65;
-}
-
-.nc-how__connector {
-  width: 32px;
-  height: 1px;
-  background: var(--nc-primary);
-  margin-top: 24px;
-  flex-shrink: 0;
-  opacity: 0.2;
 }
 
 /* ---------- Ingredients ---------- */
@@ -1687,33 +1718,13 @@ body::after {
   padding-top: 8px;
 }
 
-.nc-proof__author {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(42, 37, 32, 0.04);
-}
-
-.nc-proof__avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--nc-primary), var(--nc-accent));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--nc-bg);
-  flex-shrink: 0;
-}
-
-.nc-proof__name {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--nc-text);
+.nc-proof__attribution {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--nc-border);
 }
 
 .nc-proof__detail {
@@ -2467,23 +2478,7 @@ body::after {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
-  .nc-how__steps {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .nc-how__connector {
-    width: 2px;
-    height: 24px;
-    margin: 0;
-  }
-
-  .nc-how__step {
-    max-width: 280px;
-  }
-
-  .nc-ingredients__grid {
+  .nc-benefits__grid {
     grid-template-columns: 1fr;
   }
 
