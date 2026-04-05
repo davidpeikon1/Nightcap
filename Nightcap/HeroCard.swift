@@ -350,13 +350,13 @@ struct HeroCard: View {
             case .hoursMinutes(let h, let m):
                 HStack(alignment: .lastTextBaseline, spacing: 16) {
                     unitBlock(value: h, unit: "h")
-                    unitBlock(value: m, unit: "m")
+                    if m > 0 { unitBlock(value: m, unit: "m") }
                 }
             case .daysHoursMinutes(let d, let h, let m):
                 HStack(alignment: .lastTextBaseline, spacing: 16) {
                     unitBlock(value: d, unit: "d")
                     if h > 0 { unitBlock(value: h, unit: "h") }
-                    unitBlock(value: m, unit: "m")
+                    if m > 0 { unitBlock(value: m, unit: "m") }
                 }
             case .days(let d):
                 HStack(alignment: .lastTextBaseline, spacing: 6) {
