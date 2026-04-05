@@ -219,7 +219,7 @@ struct PhaseUnlockToast: View {
         switch phase {
         case .justStarted:  return "The craving window opens. It closes in under 20 minutes."
         case .firstDay:     return "Your insulin is falling. The liver has begun clearing fructose."
-        case .withdrawal:   return "Dopamine receptor sensitivity starts recovering. The hard part is here."
+        case .withdrawal:   return "The biology is recalibrating without its usual trigger. This is the hardest 48 hours."
         case .breakthrough: return "The acute biological pull is resolving. What remains is conditioned reflex."
         case .rewiring:     return "Your gut microbiome has measurably shifted. Craving-amplifying bacteria are declining."
         case .freedom:      return "Two weeks. fMRI studies show reduced reward-center response to sugar images at this mark."
