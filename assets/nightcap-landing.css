@@ -1396,6 +1396,21 @@ body {
 
 /* ---------- Ingredients ---------- */
 
+/* ---------- Transition Line ---------- */
+.nc-transition {
+  padding: 60px 32px;
+  text-align: center;
+}
+
+.nc-transition__text {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--nc-text);
+  opacity: 0.4;
+}
+
 /* ---------- Social Proof ---------- */
 .nc-proof {
   padding: 140px 40px;
@@ -1460,7 +1475,7 @@ body {
 
 /* ---------- Bottom CTA ---------- */
 .nc-bottom-cta {
-  padding: 80px 32px;
+  padding: 120px 32px;
   text-align: center;
   position: relative;
 }
