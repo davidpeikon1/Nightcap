@@ -296,7 +296,7 @@ struct SettingsSheet: View {
         if totalSecs > 0 {
             let td = Int(totalSecs) / 86400
             let th = (Int(totalSecs) % 86400) / 3600
-            let totalStr = td > 0 ? (th > 0 ? "\(td)d \(th)h" : "\(td)d") : "\(th)h"
+            let totalStr = td > 0 ? (th > 0 ? "\(td)d \(th)h" : "\(td)d") : (th > 0 ? "\(th)h" : "< 1h")
             lines.append("ALL-TIME STATS")
             lines.append("Total clean time: \(totalStr)")
             lines.append("Total fasts: \(store.resetEvents.count + (store.isTracking ? 1 : 0))")
@@ -324,7 +324,7 @@ struct SettingsSheet: View {
             for event in store.resetEvents {
                 let h = Int(event.fastDuration) / 3600
                 let d = h / 24
-                let duration = d > 0 ? (h % 24 > 0 ? "\(d)d \(h % 24)h fast" : "\(d)d fast") : "\(h)h fast"
+                let duration = d > 0 ? (h % 24 > 0 ? "\(d)d \(h % 24)h fast" : "\(d)d fast") : (h > 0 ? "\(h)h fast" : "< 1h fast")
                 var line = "\(df2.string(from: event.date)): \(duration)"
                 if let note = event.note, !note.isEmpty { line += "  (\(note))" }
                 lines.append(line)
@@ -354,7 +354,7 @@ struct SettingsSheet: View {
                 let avgD = avgH / 24
                 let avgStr = avgD > 0
                     ? (avgH % 24 > 0 ? "\(avgD)d \(avgH % 24)h" : "\(avgD)d")
-                    : "\(avgH)h"
+                    : (avgH > 0 ? "\(avgH)h" : "< 1h")
                 lines.append("Average fast length: \(avgStr)")
             }
             lines.append("Total resets logged: \(store.resetEvents.count)")
