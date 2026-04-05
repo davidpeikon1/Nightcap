@@ -694,7 +694,7 @@ class FastingStore: ObservableObject {
             return rh > 0 ? "\(d)d \(rh)h away" : "\(d)d away"
         }
         if h > 0 { return m > 0 ? "\(h)h \(m)m away" : "\(h)h away" }
-        return "\(m)m away"
+        return m > 0 ? "\(m)m away" : "< 1m away"
     }
 
     // MARK: History helpers
@@ -884,6 +884,6 @@ struct WeeklyInsight {
         let m = (total % 3600) / 60
         if d > 0 { return h > 0 ? "\(d)d \(h)h" : "\(d)d" }
         if h > 0 { return m > 0 ? "\(h)h \(m)m" : "\(h)h" }
-        return "\(m)m"
+        return m > 0 ? "\(m)m" : "< 1m"
     }
 }
