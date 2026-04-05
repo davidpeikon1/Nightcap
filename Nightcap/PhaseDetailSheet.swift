@@ -245,7 +245,7 @@ struct PhaseDetailSheet: View {
             "Insulin begins falling toward baseline as glucose intake drops.",
         ]
         case .withdrawal: return [
-            "Dopamine D2 receptor sensitivity starts recovering from chronic downregulation caused by sugar overstimulation.",
+            "Chronic dopamine spikes had suppressed D2 receptor density. Without the overstimulation, the upregulation process initiates — but the perceptible benefit doesn't arrive until the breakthrough phase.",
             "Serotonin production, 90% of which occurs in the gut, is disrupted as the microbiome shifts composition rapidly.",
             "Headaches and brain fog are caused by reactive hypoglycemia as the brain recalibrates its baseline energy expectations.",
         ]
