@@ -73,6 +73,7 @@ struct PhaseDetailSheet: View {
         if d >= 7  { return "\(d)d in this phase" }
         if d >= 1  { let rh = h % 24; return rh > 0 ? "\(d)d \(rh)h in this phase" : "\(d)d in this phase" }
         if h >= 1  { return m > 0 ? "\(h)h \(m)m in this phase" : "\(h)h in this phase" }
+        guard m > 0 else { return nil }
         return "\(m)m in this phase"
     }
 
