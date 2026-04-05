@@ -412,8 +412,9 @@ body {
 /* ---------- Quiz ---------- */
 .nc-quiz {
   display: none;
-  padding: 40px 24px 80px;
+  padding: 60px 32px 100px;
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: center;
   justify-content: center;
 }
@@ -1323,12 +1324,12 @@ body {
 
 .nc-pullquote__big {
   font-family: var(--nc-font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--nc-text);
-  margin: 0.75rem 0 0;
-  line-height: 1.1;
+  margin: 1rem 0 0;
+  line-height: 1.05;
 }
 
 .nc-pullquote__big em {
@@ -1339,7 +1340,7 @@ body {
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--nc-text-dim);
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 /* ---------- Benefits Grid ---------- */
