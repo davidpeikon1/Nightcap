@@ -234,8 +234,9 @@ struct FastHistoryView: View {
     }
 
     /// True when the current fast is strictly longer than all previous fasts.
+    /// Requires at least one prior reset — the first-ever fast has nothing to compare against.
     private var isPersonalBest: Bool {
-        guard store.isTracking else { return false }
+        guard store.isTracking, !store.resetEvents.isEmpty else { return false }
         let previousBest = store.resetEvents.map(\.fastDuration).max() ?? 0
         return store.elapsedSeconds > previousBest
     }
