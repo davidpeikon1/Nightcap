@@ -1826,9 +1826,6 @@ body {
 
 /* ---------- Sugar Equivalents ---------- */
 
-@media (max-width: 480px) {
-
-}
 
 /* ---------- Next Steps ---------- */
 .nc-next-steps {
@@ -1951,6 +1948,10 @@ body {
 
   .nc-pullquote {
     padding: 60px 24px;
+  }
+
+  .nc-pullquote__big {
+    font-size: 2.25rem;
   }
 
   .nc-why,
