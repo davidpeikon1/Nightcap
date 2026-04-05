@@ -909,43 +909,6 @@ body {
   max-width: 480px;
   margin: 0 auto;
 }
-
-/* Breakdown Stats */
-.nc-results__breakdown {
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  margin: 2rem 0;
-}
-
-.nc-results__stat {
-  text-align: center;
-}
-
-.nc-results__stat--sep {
-  color: var(--nc-text-dim);
-  font-size: 1.5rem;
-  align-self: center;
-}
-
-.nc-results__stat-number {
-  display: block;
-  font-family: var(--nc-font-display);
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--nc-text);
-  margin-bottom: 2px;
-}
-
-.nc-results__stat-label {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  opacity: 0.65;
-  line-height: 1.4;
-}
-
 /* Insight */
 .nc-results__insight {
   background: rgba(42, 37, 32, 0.08);

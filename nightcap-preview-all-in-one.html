@@ -933,43 +933,6 @@ body {
   max-width: 480px;
   margin: 0 auto;
 }
-
-/* Breakdown Stats */
-.nc-results__breakdown {
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  margin: 2rem 0;
-}
-
-.nc-results__stat {
-  text-align: center;
-}
-
-.nc-results__stat--sep {
-  color: var(--nc-text-dim);
-  font-size: 1.5rem;
-  align-self: center;
-}
-
-.nc-results__stat-number {
-  display: block;
-  font-family: var(--nc-font-display);
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--nc-text);
-  margin-bottom: 2px;
-}
-
-.nc-results__stat-label {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  opacity: 0.65;
-  line-height: 1.4;
-}
-
 /* Insight */
 .nc-results__insight {
   background: rgba(42, 37, 32, 0.08);
@@ -2387,7 +2350,7 @@ body {
     <div class="nc-signup__container">
       <div class="nc-signup__teaser" id="signup-teaser">
         <p class="nc-signup__teaser-label">Your number</p>
-        <p class="nc-signup__teaser-number" id="signup-teaser-number">—</p>
+        <p class="nc-signup__teaser-number" id="signup-teaser-number"></p>
         <p class="nc-signup__teaser-sub">per day</p>
       </div>
       <div class="nc-signup__header">
@@ -2427,26 +2390,13 @@ body {
           <span id="results-sugar-grams">0</span><span class="nc-results__big-number-unit">g</span>
         </div>
         <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(AHA limit: 25g)</span></p>
+
         <h2 class="nc-results__title" id="results-title"></h2>
         <p class="nc-results__subtitle" id="results-subtitle"></p>
-        <p class="nc-results__reframe" id="results-reframe"></p>
 
-        <!-- Context -->
         <p class="nc-results__equivalent" id="results-equivalent"></p>
 
-        <!-- Stats -->
-        <div class="nc-results__breakdown">
-          <div class="nc-results__stat">
-            <span class="nc-results__stat-number" id="results-weekly-sugar">0g</span>
-            <span class="nc-results__stat-label">per week</span>
-          </div>
-          <div class="nc-results__stat nc-results__stat--sep">&middot;</div>
-          <div class="nc-results__stat">
-            <span class="nc-results__stat-number" id="results-yearly-sugar">0 lbs</span>
-            <span class="nc-results__stat-label">per year</span>
-          </div>
-        </div>
-
+        <p class="nc-results__reframe" id="results-reframe"></p>
       </div>
 
       <!-- Next Steps -->
@@ -3320,18 +3270,9 @@ body {
     // Personalized next steps
     personalizeNextSteps(quizData);
 
-    // Populate share card
-    // Animated counter for sugar grams
     animateCounter('results-sugar-grams', 0, dailySugar, 1500);
 
-    // Set stat numbers with counter animations
-    var weeklySugar = quizData.estimated_weekly_sugar || 0;
     var yearlySugarLbs = quizData.estimated_yearly_sugar_lbs || 0;
-
-    animateCounterText('results-weekly-sugar', weeklySugar, 'g');
-
-    var yearlyEl = document.getElementById('results-yearly-sugar');
-    if (yearlyEl) yearlyEl.textContent = yearlySugarLbs + ' lbs';
 
     // Personalized title & subtitle
     var title = document.getElementById('results-title');

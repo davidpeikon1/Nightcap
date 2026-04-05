@@ -268,18 +268,9 @@
     // Personalized next steps
     personalizeNextSteps(quizData);
 
-    // Populate share card
-    // Animated counter for sugar grams
     animateCounter('results-sugar-grams', 0, dailySugar, 1500);
 
-    // Set stat numbers with counter animations
-    var weeklySugar = quizData.estimated_weekly_sugar || 0;
     var yearlySugarLbs = quizData.estimated_yearly_sugar_lbs || 0;
-
-    animateCounterText('results-weekly-sugar', weeklySugar, 'g');
-
-    var yearlyEl = document.getElementById('results-yearly-sugar');
-    if (yearlyEl) yearlyEl.textContent = yearlySugarLbs + ' lbs';
 
     // Personalized title & subtitle
     var title = document.getElementById('results-title');
