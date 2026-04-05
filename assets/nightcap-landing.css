@@ -486,6 +486,33 @@ body {
   to { opacity: 0; transform: translateX(-30px); }
 }
 
+.nc-quiz__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1.5rem;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  color: var(--nc-text-dim);
+  font-family: var(--nc-font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--nc-transition);
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.nc-quiz__back.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nc-quiz__back:hover {
+  color: var(--nc-text);
+}
+
 .nc-quiz__almost {
   font-size: 0.72rem;
   font-weight: 600;
@@ -1638,9 +1665,10 @@ body {
 
 .nc-exit-popup__title {
   font-family: var(--nc-font-display);
-  font-size: 1.35rem;
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
 }
 
 .nc-exit-popup__desc {
@@ -1654,7 +1682,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--nc-border);
 }
 
 .nc-exit-popup__note {
@@ -1905,7 +1935,12 @@ body {
   color: var(--nc-text-muted);
 }
 
-.nc-sticky-cta__text strong {
+.nc-sticky-cta__logo {
+  font-family: var(--nc-font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--nc-text);
 }
 

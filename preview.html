@@ -462,22 +462,23 @@
   <div class="nc-exit-popup" id="exit-popup" role="dialog" aria-labelledby="exit-popup-title" aria-modal="true">
     <div class="nc-exit-popup__overlay" id="exit-popup-overlay"></div>
     <div class="nc-exit-popup__card">
-      <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close popup">&times;</button>
-      <h3 class="nc-exit-popup__title" id="exit-popup-title">Before you go</h3>
-      <p class="nc-exit-popup__desc">Get your sugar estimate and early access to our tools.</p>
+      <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close">&times;</button>
+      <h3 class="nc-exit-popup__title" id="exit-popup-title">It takes 60 seconds.</h3>
+      <p class="nc-exit-popup__desc">Find out how much processed sugar you're really consuming. No signup required.</p>
+      <button class="nc-btn nc-btn--primary nc-btn--full" id="exit-popup-quiz">Take the Quiz</button>
       <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
+        <p class="nc-exit-popup__note">Or just leave your email</p>
         <input type="email" class="nc-input" id="exit-popup-email" placeholder="Email" required aria-label="Email">
-        <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Send My Estimate</button>
+        <button type="submit" class="nc-btn nc-btn--outline nc-btn--full">Get Updates</button>
       </form>
-      <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button></p>
     </div>
   </div>
 
   <!-- Sticky CTA (appears on scroll past hero) -->
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="nc-sticky-cta__inner">
-      <span class="nc-sticky-cta__text"><strong style="font-family: var(--nc-font-display); letter-spacing: 0.12em; text-transform: uppercase;">NIGHTCAP</strong></span>
-      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the First Step &#8594;</button>
+      <span class="nc-sticky-cta__text"><span class="nc-sticky-cta__logo">NIGHTCAP</span></span>
+      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
     </div>
   </div>
 

@@ -542,8 +542,8 @@
       popup.classList.add('active');
       track('exit_intent_shown');
       // Trap focus
-      var emailInput = document.getElementById('exit-popup-email');
-      if (emailInput) setTimeout(function () { emailInput.focus(); }, 300);
+      var quizBtn = document.getElementById('exit-popup-quiz');
+      if (quizBtn) setTimeout(function () { quizBtn.focus(); }, 300);
     }
 
     function hidePopup() {

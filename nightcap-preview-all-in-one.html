@@ -510,6 +510,33 @@ body {
   to { opacity: 0; transform: translateX(-30px); }
 }
 
+.nc-quiz__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1.5rem;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  color: var(--nc-text-dim);
+  font-family: var(--nc-font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--nc-transition);
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.nc-quiz__back.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nc-quiz__back:hover {
+  color: var(--nc-text);
+}
+
 .nc-quiz__almost {
   font-size: 0.72rem;
   font-weight: 600;
@@ -1662,9 +1689,10 @@ body {
 
 .nc-exit-popup__title {
   font-family: var(--nc-font-display);
-  font-size: 1.35rem;
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
 }
 
 .nc-exit-popup__desc {
@@ -1678,7 +1706,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--nc-border);
 }
 
 .nc-exit-popup__note {
@@ -1929,7 +1959,12 @@ body {
   color: var(--nc-text-muted);
 }
 
-.nc-sticky-cta__text strong {
+.nc-sticky-cta__logo {
+  font-family: var(--nc-font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--nc-text);
 }
 
@@ -2470,22 +2505,23 @@ body {
   <div class="nc-exit-popup" id="exit-popup" role="dialog" aria-labelledby="exit-popup-title" aria-modal="true">
     <div class="nc-exit-popup__overlay" id="exit-popup-overlay"></div>
     <div class="nc-exit-popup__card">
-      <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close popup">&times;</button>
-      <h3 class="nc-exit-popup__title" id="exit-popup-title">Before you go</h3>
-      <p class="nc-exit-popup__desc">Get your sugar estimate and early access to our tools.</p>
+      <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close">&times;</button>
+      <h3 class="nc-exit-popup__title" id="exit-popup-title">It takes 60 seconds.</h3>
+      <p class="nc-exit-popup__desc">Find out how much processed sugar you're really consuming. No signup required.</p>
+      <button class="nc-btn nc-btn--primary nc-btn--full" id="exit-popup-quiz">Take the Quiz</button>
       <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
+        <p class="nc-exit-popup__note">Or just leave your email</p>
         <input type="email" class="nc-input" id="exit-popup-email" placeholder="Email" required aria-label="Email">
-        <button type="submit" class="nc-btn nc-btn--primary nc-btn--full">Send My Estimate</button>
+        <button type="submit" class="nc-btn nc-btn--outline nc-btn--full">Get Updates</button>
       </form>
-      <p class="nc-exit-popup__note">Or <button class="nc-exit-popup__quiz-link" id="exit-popup-quiz">take the 60-second quiz</button></p>
     </div>
   </div>
 
   <!-- Sticky CTA (appears on scroll past hero) -->
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="nc-sticky-cta__inner">
-      <span class="nc-sticky-cta__text"><strong style="font-family: var(--nc-font-display); letter-spacing: 0.12em; text-transform: uppercase;">NIGHTCAP</strong></span>
-      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the First Step &#8594;</button>
+      <span class="nc-sticky-cta__text"><span class="nc-sticky-cta__logo">NIGHTCAP</span></span>
+      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
     </div>
   </div>
 
@@ -3553,8 +3589,8 @@ body {
       popup.classList.add('active');
       track('exit_intent_shown');
       // Trap focus
-      var emailInput = document.getElementById('exit-popup-email');
-      if (emailInput) setTimeout(function () { emailInput.focus(); }, 300);
+      var quizBtn = document.getElementById('exit-popup-quiz');
+      if (quizBtn) setTimeout(function () { quizBtn.focus(); }, 300);
     }
 
     function hidePopup() {
