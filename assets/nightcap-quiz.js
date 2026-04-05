@@ -63,9 +63,10 @@
   captureUTM();
 
   // ---------- Start Quiz ----------
+  // Hero CTA goes straight to quiz (no friction)
   if (startBtn) {
     startBtn.addEventListener('click', function () {
-      showPrecommit();
+      startQuizFromAnywhere();
     });
   }
 

@@ -420,6 +420,7 @@ body {
 
 .nc-quiz.active {
   display: flex;
+  animation: nc-fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nc-quiz__container {
@@ -468,6 +469,7 @@ body {
 
 .nc-quiz__step.active {
   display: block;
+  animation: nc-fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes nc-fadeInUp {
@@ -611,7 +613,7 @@ body {
 
 .nc-signup.active {
   display: flex;
-  animation: nc-fadeInUp 0.5s ease-out;
+  animation: nc-fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nc-signup__container {
@@ -871,7 +873,7 @@ body {
 
 .nc-results.active {
   display: block;
-  animation: nc-fadeInUp 0.5s ease-out;
+  animation: nc-fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nc-results__container {
