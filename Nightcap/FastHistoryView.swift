@@ -499,7 +499,7 @@ struct FastHistoryView: View {
         let d = h / 24
         let rem = h % 24
         if d > 0 { return rem > 0 ? "\(d)d \(rem)h" : "\(d)d" }
-        return "\(h)h"
+        return h > 0 ? "\(h)h" : "< 1h"
     }
 
     private func formatDuration(_ seconds: TimeInterval) -> String {
