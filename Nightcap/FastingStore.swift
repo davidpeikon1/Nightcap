@@ -165,7 +165,7 @@ enum BadgeID: String, CaseIterable, Codable, Identifiable {
         case .threeDays:   return "The compulsive edge drops sharply at 72 hours."
         case .oneWeek:     return "At one week, your gut and your brain are measurably different."
         case .twoWeeks:    return "Two weeks is the threshold most people never reach."
-        case .oneMonth:    return "A month marks the beginning of real dopamine receptor recovery."
+        case .oneMonth:    return "A month is the threshold for measurable D2 receptor density recovery."
         case .hundredDays: return "100 days is where this stops being a streak and becomes identity."
         case .sixMonths:   return "Six months of compound interest about to come due."
         case .oneYear:     return "One year without processed sugar. Almost there."

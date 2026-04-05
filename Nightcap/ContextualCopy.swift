@@ -136,7 +136,7 @@ struct ContextualCopy {
         ],
 
         .thirtyPlusDays: [
-            "A month. Dopamine receptor sensitivity has had time to begin recovering. The system is different than it was.",
+            "A month. Dopamine receptor density has had meaningful time to recover. The system is different than it was.",
             "You're not trying to quit sugar anymore. You don't eat it.",
             "The neural pathway for the old habit has weakened through disuse. It doesn't disappear — it just loses priority.",
             "This is identity now, not discipline. The hardest work happened weeks ago.",
