@@ -379,8 +379,8 @@ struct HeroCard: View {
         let h = (total % 86400) / 3600
         let m = (total % 3600) / 60
         let s = total % 60
-        if d > 0 { return "\(d) day\(d == 1 ? "" : "s"), \(h) hour\(h == 1 ? "" : "s")" }
-        if h > 0 { return "\(h) hour\(h == 1 ? "" : "s"), \(m) minute\(m == 1 ? "" : "s")" }
+        if d > 0 { return h > 0 ? "\(d) day\(d == 1 ? "" : "s"), \(h) hour\(h == 1 ? "" : "s")" : "\(d) day\(d == 1 ? "" : "s")" }
+        if h > 0 { return m > 0 ? "\(h) hour\(h == 1 ? "" : "s"), \(m) minute\(m == 1 ? "" : "s")" : "\(h) hour\(h == 1 ? "" : "s")" }
         if m > 0 { return "\(m) minute\(m == 1 ? "" : "s"), \(s) second\(s == 1 ? "" : "s")" }
         return "\(s) second\(s == 1 ? "" : "s")"
     }
