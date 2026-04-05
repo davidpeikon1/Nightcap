@@ -547,8 +547,10 @@ struct CircularWidgetView: View {
         let total = Int(entry.data.elapsed(at: entry.date))
         let d = total / 86400
         let h = (total % 86400) / 3600
+        let m = (total % 3600) / 60
         if d > 0 { return "\(d)d" }
-        return "\(h)h"
+        if h > 0 { return "\(h)h" }
+        return m > 0 ? "\(m)m" : "< 1m"
     }
 }
 
