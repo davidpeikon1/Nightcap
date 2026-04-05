@@ -165,7 +165,7 @@ private func formatElapsed(_ s: TimeInterval) -> String {
             ? "\(h) hour\(h == 1 ? "" : "s") and \(m) minute\(m == 1 ? "" : "s")"
             : "\(h) hour\(h == 1 ? "" : "s")"
     }
-    return "\(m) minute\(m == 1 ? "" : "s")"
+    return m > 0 ? "\(m) minute\(m == 1 ? "" : "s")" : "less than a minute"
 }
 
 private func phaseLabel(for elapsed: TimeInterval) -> String {
@@ -200,7 +200,7 @@ private func milestoneTeaser(for elapsed: TimeInterval) -> String {
     case 24..<72:     return "The compulsive edge drops sharply at 72 hours."
     case 72..<168:    return "At one week, your gut and brain are measurably different."
     case 168..<336:   return "Two weeks is the threshold most people never reach."
-    case 336..<720:   return "A month marks the beginning of real dopamine receptor recovery."
+    case 336..<720:   return "A month is the threshold for measurable D2 receptor density recovery."
     case 720..<2400:  return "100 days is where this stops being a streak and becomes identity."
     case 2400..<4320: return "Six months of compound interest about to come due."
     default:          return "One year without processed sugar. Almost there."
@@ -233,5 +233,5 @@ private func nextMilestone(for elapsed: TimeInterval) -> String {
             : "\(d) day\(d == 1 ? "" : "s")"
     }
     if rh > 0   { return rm > 0 ? "\(rh) hour\(rh == 1 ? "" : "s") and \(rm) minute\(rm == 1 ? "" : "s")" : "\(rh) hour\(rh == 1 ? "" : "s")" }
-    return "\(rm) minute\(rm == 1 ? "" : "s")"
+    return rm > 0 ? "\(rm) minute\(rm == 1 ? "" : "s")" : "less than a minute"
 }
