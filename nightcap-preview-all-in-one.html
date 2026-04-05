@@ -685,8 +685,19 @@ body {
 }
 
 /* Form Elements */
+.nc-signup__form .nc-form-group:first-child,
+.nc-signup__form .nc-form-group:nth-child(2) {
+  display: inline-block;
+  width: calc(50% - 6px);
+  vertical-align: top;
+}
+
+.nc-signup__form .nc-form-group:first-child {
+  margin-right: 8px;
+}
+
 .nc-form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .nc-form-group--checkbox {
@@ -861,7 +872,7 @@ body {
 }
 
 .nc-results__container {
-  max-width: 600px;
+  max-width: 520px;
   margin: 0 auto;
 }
 
@@ -1060,7 +1071,7 @@ body {
 }
 
 .nc-footer__container {
-  max-width: 600px;
+  max-width: 520px;
   margin: 0 auto;
 }
 
@@ -1412,9 +1423,8 @@ body {
 .nc-proof__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   text-align: left;
-  margin-bottom: 3rem;
 }
 
 .nc-proof__card {
@@ -1960,19 +1970,17 @@ body {
     padding: 28px 24px;
   }
 
+  .nc-signup__form .nc-form-group:first-child,
+  .nc-signup__form .nc-form-group:nth-child(2) {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+
   .nc-results__big-number {
     font-size: 4.5rem;
   }
 
-  .nc-results__breakdown {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .nc-results__stat--sep {
-    display: none;
-  }
 
   .nc-signup__teaser-number {
     font-size: 3rem;
