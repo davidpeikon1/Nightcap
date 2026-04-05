@@ -58,8 +58,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
-
-
 /* ---------- Skip Link (A11y) ---------- */
 .nc-skip-link {
   position: absolute;
@@ -323,8 +321,6 @@ body {
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
 }
-
-
 .nc-hero__title-line {
   display: block;
 }
@@ -428,16 +424,6 @@ body {
   max-width: 560px;
   width: 100%;
 }
-
-/* Progress bar */
-
-.nc-quiz__progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--nc-primary), var(--nc-accent));
-  border-radius: 100px;
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .nc-quiz__dots {
   display: flex;
   justify-content: center;
@@ -992,27 +978,22 @@ body {
 }
 
 .nc-referral-socials__btn {
-  padding: 8px 16px;
-  border-radius: 100px;
-  border: 1px solid var(--nc-border);
-  background: transparent;
-  color: var(--nc-text-muted);
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  background: var(--nc-bg-card);
+  color: var(--nc-text);
   font-family: var(--nc-font);
   font-size: 0.8rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all var(--nc-transition);
 }
 
 .nc-referral-socials__btn:hover {
-  border-color: var(--nc-primary-light);
-  color: var(--nc-text);
-  background: rgba(42, 37, 32, 0.08);
-}
-
-/* Share */
-.nc-results__share {
-  text-align: center;
-  margin-bottom: 2rem;
+  background: var(--nc-bg-card-hover);
+  border-color: rgba(28, 25, 23, 0.15);
+  transform: translateY(-1px);
 }
 
 /* Position */
@@ -1627,7 +1608,7 @@ body {
 .nc-exit-popup__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(42, 37, 32, 0.4);
+  background: rgba(28, 25, 23, 0.35);
   backdrop-filter: blur(8px);
 }
 
@@ -1995,8 +1976,6 @@ body {
   .nc-results__big-number {
     font-size: 4.5rem;
   }
-
-
   .nc-signup__teaser-number {
     font-size: 3rem;
   }

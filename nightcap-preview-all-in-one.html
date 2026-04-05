@@ -82,8 +82,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
-
-
 /* ---------- Skip Link (A11y) ---------- */
 .nc-skip-link {
   position: absolute;
@@ -347,8 +345,6 @@ body {
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
 }
-
-
 .nc-hero__title-line {
   display: block;
 }
@@ -452,16 +448,6 @@ body {
   max-width: 560px;
   width: 100%;
 }
-
-/* Progress bar */
-
-.nc-quiz__progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--nc-primary), var(--nc-accent));
-  border-radius: 100px;
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .nc-quiz__dots {
   display: flex;
   justify-content: center;
@@ -1016,27 +1002,22 @@ body {
 }
 
 .nc-referral-socials__btn {
-  padding: 8px 16px;
-  border-radius: 100px;
-  border: 1px solid var(--nc-border);
-  background: transparent;
-  color: var(--nc-text-muted);
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  background: var(--nc-bg-card);
+  color: var(--nc-text);
   font-family: var(--nc-font);
   font-size: 0.8rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all var(--nc-transition);
 }
 
 .nc-referral-socials__btn:hover {
-  border-color: var(--nc-primary-light);
-  color: var(--nc-text);
-  background: rgba(42, 37, 32, 0.08);
-}
-
-/* Share */
-.nc-results__share {
-  text-align: center;
-  margin-bottom: 2rem;
+  background: var(--nc-bg-card-hover);
+  border-color: rgba(28, 25, 23, 0.15);
+  transform: translateY(-1px);
 }
 
 /* Position */
@@ -1651,7 +1632,7 @@ body {
 .nc-exit-popup__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(42, 37, 32, 0.4);
+  background: rgba(28, 25, 23, 0.35);
   backdrop-filter: blur(8px);
 }
 
@@ -2019,8 +2000,6 @@ body {
   .nc-results__big-number {
     font-size: 4.5rem;
   }
-
-
   .nc-signup__teaser-number {
     font-size: 3rem;
   }
@@ -2531,86 +2510,6 @@ body {
   <!-- Toast Container -->
   <div id="toast-container" class="nc-toast-container" aria-live="polite"></div>
 
-  <script>
-/**
- * Nightcap Lightweight A/B Testing
- *
- * Usage:
- *   <element data-ab-test="hero_headline"
- *            data-ab-a="Wind Down Without the Sugar Crash"
- *            data-ab-b="How Much Sugar Are You Really Drinking?">
- *
- * Assigns visitor to variant A or B (50/50), persists in localStorage.
- * Fires analytics event with variant assignment.
- */
-(function () {
-  'use strict';
-
-  var STORAGE_KEY = 'nc_ab_variants';
-
-  function getVariants() {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    } catch (e) {
-      return {};
-    }
-  }
-
-  function saveVariants(variants) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(variants));
-    } catch (e) {}
-  }
-
-  function assignVariant(testName) {
-    var variants = getVariants();
-    if (variants[testName]) return variants[testName];
-
-    var variant = Math.random() < 0.5 ? 'a' : 'b';
-    variants[testName] = variant;
-    saveVariants(variants);
-
-    // Track assignment
-    if (window.__nightcapTrack) {
-      window.__nightcapTrack('ab_assigned', { test: testName, variant: variant });
-    }
-
-    return variant;
-  }
-
-  function runTests() {
-    var elements = document.querySelectorAll('[data-ab-test]');
-    elements.forEach(function (el) {
-      var testName = el.dataset.abTest;
-      var variant = assignVariant(testName);
-      var content = variant === 'a' ? el.dataset.abA : el.dataset.abB;
-      if (content) {
-        el.textContent = content;
-      }
-      el.dataset.abVariant = variant;
-    });
-  }
-
-  // Run on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', runTests);
-  } else {
-    runTests();
-  }
-
-  // Expose for manual use
-  window.__nightcapAB = {
-    getVariant: function (testName) {
-      return assignVariant(testName);
-    },
-    getAll: getVariants,
-    reset: function () {
-      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-    },
-  };
-})();
-
-</script>
   <script>
 /**
  * Nightcap Sugar Usage Quiz v2
