@@ -101,7 +101,7 @@ struct WidgetFastData {
         let rm = (Int(remaining) % 3600) / 60
         if rh >= 24 { let d = rh / 24; let remH = rh % 24; return remH > 0 ? "\(d)d \(remH)h" : "\(d)d" }
         if rh > 0   { return rm > 0 ? "\(rh)h \(rm)m" : "\(rh)h" }
-        return "\(rm)m"
+        return rm > 0 ? "\(rm)m" : "< 1m"
     }
 
     func nextMilestoneLabel(at date: Date) -> String {
