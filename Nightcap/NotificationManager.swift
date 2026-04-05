@@ -61,10 +61,10 @@ class NotificationManager {
     // MARK: - Scheduling
 
     /// Schedule 14 morning + 14 evening notifications — one per day for the next
-    /// 14 days. Messages are drawn from 21-entry pools using an absolute day index
-    /// so every message cycles before repeating (~3 weeks). Re-call on each app
-    /// foreground to keep the window fresh. Safe to call redundantly; old requests
-    /// are removed and replaced each time.
+    /// 14 days. Messages are drawn from goal-specific (14-entry) or generic (25-entry)
+    /// pools using an absolute day index so the cycle doesn't reset on each reschedule.
+    /// Re-call on each app foreground to keep the window fresh. Safe to call redundantly;
+    /// old requests are removed and replaced each time.
     func scheduleDailyNotifications() {
         // Remove legacy identifiers (repeating weekday-based and any prior day-based).
         var toRemove = ["nightcap.morning", "nightcap.evening"]
