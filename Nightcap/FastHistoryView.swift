@@ -886,7 +886,7 @@ struct EditNoteSheet: View {
             return "\(d)d \(rh)h \(m)m"
         }
         if h > 0 { return m > 0 ? "\(h)h \(m)m" : "\(h)h" }
-        return "\(m)m"
+        return m > 0 ? "\(m)m" : "< 1m"
     }
 
     private var dateLabel: String {
