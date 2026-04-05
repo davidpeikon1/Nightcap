@@ -42,8 +42,6 @@
   var signupSection = document.getElementById('waitlist-signup');
   var startBtn = document.getElementById('start-quiz-btn');
   var backBtn = document.getElementById('quiz-back-btn');
-  var progressBar = document.getElementById('quiz-progress-bar');
-  var progressText = document.getElementById('quiz-progress-text');
 
   if (!quizSection) return;
 
@@ -276,14 +274,6 @@
   }
 
   function updateProgress() {
-    var percent = (currentStep / TOTAL_STEPS) * 100;
-    progressBar.style.width = percent + '%';
-    if (progressText) progressText.textContent = 'Question ' + currentStep + ' of ' + TOTAL_STEPS;
-
-    // ARIA
-    progressBar.setAttribute('aria-valuenow', currentStep);
-    progressBar.setAttribute('aria-valuetext', 'Question ' + currentStep + ' of ' + TOTAL_STEPS);
-
     // Step dots
     var dots = quizSection.querySelectorAll('.nc-quiz__dot');
     dots.forEach(function (dot, i) {
@@ -301,9 +291,6 @@
     calculateSugarEstimate();
     window.__nightcapQuizData = quizData;
 
-    // Complete progress
-    progressBar.style.width = '100%';
-    progressBar.setAttribute('aria-valuenow', TOTAL_STEPS);
 
     trackEvent('quiz_completed', {
       estimated_daily_sugar: quizData.estimated_daily_sugar,

@@ -178,12 +178,9 @@
         return res.json();
       })
       .then(function (data) {
-        if (payload.sms_consent && payload.phone) {
-          triggerSMS(payload);
-        }
         showResults(payload, data);
-        showToast('Welcome to the Nightcap waitlist!', 'success');
-        track('waitlist_signup', { method: payload.phone ? 'email+sms' : 'email' });
+        showToast('You\'re in.', 'success');
+        track('waitlist_signup');
       })
       .catch(function () {
         storeLocally(payload);
@@ -195,40 +192,6 @@
         if (btnLoading) btnLoading.style.display = 'none';
         if (submitBtn) submitBtn.disabled = false;
       });
-  }
-
-  // ---------- SMS Trigger ----------
-  function triggerSMS(payload) {
-    var smsPayload = {
-      phone: payload.phone,
-      first_name: payload.first_name,
-      message: buildPersonalizedSMS(payload),
-      app_download_url: CONFIG.appDownloadUrl,
-    };
-
-    fetch(CONFIG.smsEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(smsPayload),
-    }).catch(function () {});
-  }
-
-  function buildPersonalizedSMS(payload) {
-    var name = payload.first_name;
-    var sugar = payload.quiz_data.estimated_daily_sugar || 0;
-    var motivation = payload.quiz_data.motivation;
-
-    var msgs = {
-      prevent_disease: "You're consuming ~" + sugar + "g of processed sugar daily. That's " + Math.round(sugar * 365 / 453.592) + " lbs/year. The time to act is before it becomes a problem.",
-      energy: "At " + sugar + "g/day, processed sugar is likely behind your energy crashes. Track and reduce with the Nightcap app.",
-      weight: sugar + "g of processed sugar per day adds up to " + Math.round(sugar * 365 / 453.592) + " lbs/year. Track it. Reduce it. The app makes it easy.",
-      family: "You consume ~" + sugar + "g of processed sugar daily. See what your family is consuming too — share the quiz.",
-      curiosity: "Your number: " + sugar + "g of processed sugar per day. Now track it and start reducing.",
-    };
-
-    return 'Hey ' + name + '! ' +
-      (msgs[motivation] || 'You consume ~' + sugar + 'g of processed sugar daily. See your full report:') +
-      ' Start tracking: ' + CONFIG.appDownloadUrl;
   }
 
   // ---------- Local Fallback ----------
@@ -368,23 +331,6 @@
     }, 800);
   }
 
-  function animateCounterText(elementId, value, suffix) {
-    var el = document.getElementById(elementId);
-    if (!el) return;
-    var startTime = null;
-    var duration = 1200;
-
-    function tick(timestamp) {
-      if (!startTime) startTime = timestamp;
-      var progress = Math.min((timestamp - startTime) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(value * eased) + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-
-    setTimeout(function () { requestAnimationFrame(tick); }, 1000);
-  }
-
   // ---------- Sugar Equivalents ----------
   function populateEquivalents(dailySugar) {
     var el = document.getElementById('results-equivalent');
@@ -466,21 +412,6 @@
       toast.classList.add('exiting');
       setTimeout(function () { toast.remove(); }, 300);
     }, 4000);
-  }
-
-  function copyToClipboard(text) {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text);
-    } else {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-    }
   }
 
   function track(name, data) {
@@ -597,7 +528,7 @@
         });
 
         hidePopup();
-        showToast("You're on the list! Check your email.", 'success');
+        showToast("You're in. We'll be in touch.", 'success');
         track('exit_intent_signup', { email: email });
       });
     }
