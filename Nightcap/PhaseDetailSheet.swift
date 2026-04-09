@@ -128,7 +128,7 @@ struct PhaseDetailSheet: View {
                             .padding(.horizontal, 7)
                             .padding(.vertical, 2)
                             .background(phaseColor.opacity(0.12))
-                            .cornerRadius(4)
+                            .clipShape(Capsule())
                         if let entryDate = phaseEntryDate(for: p) {
                             Text(relativeDate(entryDate))
                                 .font(.system(size: 10, design: .monospaced))

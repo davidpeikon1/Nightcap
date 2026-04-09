@@ -57,6 +57,16 @@ struct BodyScienceCard: View {
                 .buttonStyle(.plain)
             }
 
+            // When collapsed, show the one-sentence tagline so users
+            // know what's inside before they decide to tap.
+            if !isExpanded {
+                Text(store.fastingPhase.tagline)
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+                    .padding(.top, 8)
+                    .transition(.opacity)
+            }
+
             if isExpanded {
                 VStack(alignment: .leading, spacing: 14) {
                     Rectangle()

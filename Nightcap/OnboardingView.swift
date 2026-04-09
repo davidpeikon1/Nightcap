@@ -661,7 +661,7 @@ struct FirstMilestoneScreen: View {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 withAnimation { appState.advance(to: .complete) }
             } label: {
-                Text("Start the clock")
+                Text("Let's go")
                     .font(.system(size: 17, weight: .medium))
                     .foregroundStyle(Color("NCBackground"))
                     .frame(maxWidth: .infinity)

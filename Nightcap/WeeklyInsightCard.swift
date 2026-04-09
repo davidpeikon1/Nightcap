@@ -92,9 +92,12 @@ struct WeeklyInsightCard: View {
                 UserDefaults.standard.set(year * 100 + week, forKey: Self.dismissKey)
             } label: {
                 Text("Got it")
-                    .font(.system(size: 13))
-                    .foregroundStyle(Color("NCTextTertiary"))
-                    .padding(.top, 4)
+                    .font(.system(size: 14, weight: .regular))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 11)
+                    .background(Color("NCBackground"))
+                    .cornerRadius(10)
             }
             .accessibilityHint("Dismisses this card for the rest of the week")
         }
