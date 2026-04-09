@@ -178,7 +178,11 @@ body {
 }
 
 
-/* Hero logo — inverted colors */
+/* Hero logo — inverted + left-aligned */
+.nc-hero .nc-logo {
+  margin: 0 0 2.5rem;
+}
+
 .nc-hero .nc-logo__text {
   color: var(--nc-bg);
 }
@@ -310,12 +314,36 @@ body {
 /* ---------- Hero Teaser ---------- */
 .nc-hero__teaser {
   display: none;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
   .nc-hero {
     min-height: auto;
     padding: 80px 24px 40px;
+  }
+
+  .nc-hero__inner {
+    flex-direction: column-reverse;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .nc-hero__content {
+    text-align: center;
+  }
+
+  .nc-hero .nc-logo {
+    margin: 0 auto 2rem;
+  }
+
+  .nc-hero__subtitle {
+    margin: 0 auto 2.5rem;
+  }
+
+  .nc-hero__image {
+    width: 220px;
   }
 
   .nc-hero__teaser {
@@ -378,12 +406,34 @@ body {
   100% { opacity: 1; }
 }
 
-.nc-hero__content {
+.nc-hero__inner {
   position: relative;
   z-index: 1;
-  text-align: center;
-  max-width: 760px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  max-width: 1100px;
+  width: 100%;
   animation: nc-heroEntrance 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nc-hero__content {
+  flex: 1;
+  text-align: left;
+  max-width: 560px;
+}
+
+.nc-hero__image {
+  flex-shrink: 0;
+  width: 320px;
+}
+
+.nc-hero__img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--nc-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes nc-heroEntrance {
@@ -414,7 +464,7 @@ body {
   font-weight: 400;
   color: rgba(237, 230, 219, 0.75);
   max-width: 460px;
-  margin: 0 auto 3rem;
+  margin: 0 0 2.5rem;
   line-height: 1.8;
 }
 
@@ -2205,33 +2255,37 @@ body {
     <div class="nc-hero__bg" aria-hidden="true">
       <div class="nc-hero__gradient"></div>
     </div>
-    <div class="nc-hero__content">
-      <div class="nc-logo" aria-label="Nightcap">
-        <div class="nc-logo__lines"></div>
-        <span class="nc-logo__text">NIGHTCAP</span>
-        <div class="nc-logo__lines"></div>
+    <div class="nc-hero__inner">
+      <div class="nc-hero__content">
+        <div class="nc-logo" aria-label="Nightcap">
+          <div class="nc-logo__lines"></div>
+          <span class="nc-logo__text">NIGHTCAP</span>
+          <div class="nc-logo__lines"></div>
+        </div>
+
+        <h1 class="nc-hero__title" id="hero-title">
+          Quitting Sugar Is Hard.
+          <span class="nc-hero__title-line--accent">Help Is Coming.</span>
+        </h1>
+        <p class="nc-hero__subtitle">
+          It's in everything. It's addictive. And willpower alone<br>
+          isn't enough. We're building something better.
+        </p>
+
+        <button class="nc-btn nc-btn--primary nc-btn--inverted" id="start-quiz-btn">
+          Take the Quiz
+          <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+        </button>
+        <p class="nc-hero__cta-note">60-second quiz &middot; <span id="quiz-count-today">247</span> people took it today</p>
       </div>
-
-      <h1 class="nc-hero__title" id="hero-title">
-        Quitting Sugar Is Hard.
-        <span class="nc-hero__title-line--accent">Help Is Coming.</span>
-      </h1>
-      <p class="nc-hero__subtitle">
-        It's in everything. It's addictive. And willpower alone<br>
-        isn't enough. We're building something better.
-      </p>
-
-      <button class="nc-btn nc-btn--primary nc-btn--inverted" id="start-quiz-btn">
-        Take the Quiz
-        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
-      </button>
-      <p class="nc-hero__cta-note">60-second quiz &middot; <span id="quiz-count-today">247</span> people took it today</p>
-
-      <!-- Scroll teaser — visible on mobile to hint at more content -->
-      <div class="nc-hero__teaser">
-        <p class="nc-hero__teaser-text">200 years ago: 1 lb of sugar per year. Today: 152.</p>
-        <span class="nc-hero__teaser-arrow">&#8595;</span>
+      <div class="nc-hero__image">
+        <img src="images/quit-sugar.jpg" alt="Quit Sugar — Nightcap" class="nc-hero__img">
       </div>
+    </div>
+
+    <div class="nc-hero__teaser">
+      <p class="nc-hero__teaser-text">200 years ago: 1 lb of sugar per year. Today: 152.</p>
+      <span class="nc-hero__teaser-arrow">&#8595;</span>
     </div>
   </section>
 
