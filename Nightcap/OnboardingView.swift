@@ -516,6 +516,7 @@ struct SugarEstimationStep: View {
 
 struct NotificationPermissionScreen: View {
     @EnvironmentObject var appState: AppState
+    @Environment(\.scenePhase) private var scenePhase
     @State private var isRequesting = false
     @State private var alreadyDenied = false
 
@@ -597,6 +598,16 @@ struct NotificationPermissionScreen: View {
                     appState.advance(to: .firstMilestone)
                 } else if status == .denied {
                     alreadyDenied = true
+                }
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            // Re-check when returning from the Settings app so the screen
+            // automatically advances if the user just enabled notifications.
+            guard phase == .active else { return }
+            NotificationManager.shared.checkAuthorizationStatus { status in
+                if status == .authorized {
+                    appState.advance(to: .firstMilestone)
                 }
             }
         }
