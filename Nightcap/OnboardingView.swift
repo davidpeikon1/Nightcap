@@ -609,11 +609,17 @@ struct FirstMilestoneScreen: View {
     @EnvironmentObject var appState: AppState
     @State private var visibleRows: Int = 0
 
-    private let rows: [(symbol: String, text: String)] = [
-        ("clock",  "Your timer is already running"),
-        ("book",   "A new reframe drops every morning"),
-        ("bell",   "Reminders fire at your highest-risk moments"),
-    ]
+    private var rows: [(symbol: String, text: String)] {
+        var base: [(symbol: String, text: String)] = [
+            ("clock",  "Your timer is already running"),
+            ("book",   "A new reframe drops every morning"),
+            ("bell",   "Reminders fire at your highest-risk moments"),
+        ]
+        if let g = appState.dailySugarGrams {
+            base.append(("chart.bar", "Your number (\(g)g/day) shapes the biology you see"))
+        }
+        return base
+    }
 
     var body: some View {
         VStack(spacing: 0) {

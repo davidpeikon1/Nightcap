@@ -16,7 +16,6 @@
 		AA000001000000000000007A /* OnboardingView.swift in Sources */    = {isa = PBXBuildFile; fileRef = AA000001000000000000007B; };
 		AA000001000000000000008A /* HomeView.swift in Sources */          = {isa = PBXBuildFile; fileRef = AA000001000000000000008B; };
 		AA000001000000000000009A /* FastTrackerCard.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA000001000000000000009B; };
-		AA00000100000000000000AA /* DailyReframeCard.swift in Sources */  = {isa = PBXBuildFile; fileRef = AA00000100000000000000AB; };
 		AA00000100000000000000BA /* CravingToolkitSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BB; };
 		AA00000100000000000000CA /* ProgressSection.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA00000100000000000000CB; };
 		AA00000100000000000000DA /* WeeklyInsightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000DB; };
@@ -75,7 +74,6 @@
 		AA000001000000000000007B /* OnboardingView.swift */    = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA000001000000000000008B /* HomeView.swift */          = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AA000001000000000000009B /* FastTrackerCard.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTrackerCard.swift; sourceTree = "<group>"; };
-		AA00000100000000000000AB /* DailyReframeCard.swift */  = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReframeCard.swift; sourceTree = "<group>"; };
 		AA00000100000000000000BB /* CravingToolkitSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingToolkitSection.swift; sourceTree = "<group>"; };
 		AA00000100000000000000CB /* ProgressSection.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSection.swift; sourceTree = "<group>"; };
 		AA00000100000000000000DB /* WeeklyInsightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyInsightCard.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				AA000001000000000000007B /* OnboardingView.swift */,
 				AA000001000000000000008B /* HomeView.swift */,
 				AA000001000000000000009B /* FastTrackerCard.swift */,
-				AA00000100000000000000AB /* DailyReframeCard.swift */,
 				AA00000100000000000000BB /* CravingToolkitSection.swift */,
 				AA00000100000000000000CB /* ProgressSection.swift */,
 				AA00000100000000000000DB /* WeeklyInsightCard.swift */,
@@ -298,7 +295,6 @@
 				AA000001000000000000007A /* OnboardingView.swift in Sources */,
 				AA000001000000000000008A /* HomeView.swift in Sources */,
 				AA000001000000000000009A /* FastTrackerCard.swift in Sources */,
-				AA00000100000000000000AA /* DailyReframeCard.swift in Sources */,
 				AA00000100000000000000BA /* CravingToolkitSection.swift in Sources */,
 				AA00000100000000000000CA /* ProgressSection.swift in Sources */,
 				AA00000100000000000000DA /* WeeklyInsightCard.swift in Sources */,
