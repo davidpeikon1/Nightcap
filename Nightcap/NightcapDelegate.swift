@@ -6,6 +6,7 @@ import UserNotifications
 extension Notification.Name {
     static let nightcapOpenResetModal     = Notification.Name("nightcap.openResetModal")
     static let nightcapOpenCravingToolkit = Notification.Name("nightcap.openCravingToolkit")
+    static let nightcapOpenCravingCrisis  = Notification.Name("nightcap.openCravingCrisis")
     static let nightcapOpenHistory        = Notification.Name("nightcap.openHistory")
 }
 
@@ -66,7 +67,8 @@ class NightcapDelegate: NSObject, UIApplicationDelegate {
         case "com.nightcap.app.logReset":
             NotificationCenter.default.post(name: .nightcapOpenResetModal, object: nil)
         case "com.nightcap.app.craving":
-            NotificationCenter.default.post(name: .nightcapOpenCravingToolkit, object: nil)
+            // Route to crisis sheet — immediate, focused crisis tool vs full in-page toolkit
+            NotificationCenter.default.post(name: .nightcapOpenCravingCrisis, object: nil)
         default:
             break
         }
@@ -108,8 +110,9 @@ extension NightcapDelegate: UNUserNotificationCenterDelegate {
         // Identifiers follow "nightcap.evening.dN" (day-offset) or legacy "nightcap.evening.wdN";
         // hasPrefix covers both. Delay so SwiftUI views are mounted before receiving the notification.
         if id.hasPrefix("nightcap.evening") || id.hasPrefix("nightcap.personalized") {
+            // Open crisis sheet from tapped notification — user tapped during a craving moment
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                NotificationCenter.default.post(name: .nightcapOpenCravingToolkit, object: nil)
+                NotificationCenter.default.post(name: .nightcapOpenCravingCrisis, object: nil)
             }
         }
         // Milestone and streak notifications → open history view so users see their progress.

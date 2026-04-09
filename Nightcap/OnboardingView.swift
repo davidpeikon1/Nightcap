@@ -235,62 +235,32 @@ struct Triangle: Shape {
     }
 }
 
-// MARK: - Screen 4: Goal Setting Sheet
+// MARK: - Screen 4: Goal Setting Sheet (2 steps: goal → sugar estimate)
 
 struct GoalSheet: View {
     @EnvironmentObject var appState: AppState
     @State private var selected: UserGoal? = nil
+    @State private var step = 0   // 0 = goal, 1 = sugar estimation
 
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("NCBackground").ignoresSafeArea()
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 32) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("What would you most\nlike to change?")
-                                .font(.system(size: 26, weight: .light))
-                                .foregroundStyle(Color("NCTextPrimary"))
-                                .lineSpacing(4)
-                            Text("Processed sugar drives different mechanisms for different outcomes. Your goal shapes the science you see.")
-                                .font(.system(size: 14, weight: .light))
-                                .foregroundStyle(Color("NCTextSecondary"))
-                                .lineSpacing(3)
-                        }
 
-                        VStack(spacing: 10) {
-                            ForEach(UserGoal.allCases) { goal in
-                                goalPill(goal)
-                            }
-                        }
-
-                        if let g = selected {
-                            Text(g.affirmation)
-                                .font(.system(size: 14, weight: .light))
-                                .foregroundStyle(Color("NCTextSecondary"))
-                                .lineSpacing(4)
-                                .padding(16)
-                                .background(Color("NCSurface"))
-                                .cornerRadius(12)
-                                .transition(.opacity.combined(with: .move(edge: .bottom)))
-                        }
-
-                        Button {
-                            if let g = selected { appState.setGoal(g) }
-                            appState.advance(to: .notifications)
-                        } label: {
-                            Text(selected?.commitmentLabel ?? "Continue")
-                                .font(.system(size: 17, weight: .medium))
-                                .foregroundStyle(Color("NCBackground"))
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 18)
-                                .background(selected == nil ? Color("NCTextTertiary") : Color("NCAccent"))
-                                .cornerRadius(12)
-                        }
-                        .disabled(selected == nil)
-                        .animation(.easeInOut(duration: 0.2), value: selected)
+                if step == 0 {
+                    goalStep
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .leading),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
+                } else {
+                    SugarEstimationStep {
+                        appState.advance(to: .notifications)
                     }
-                    .padding(24)
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .trailing),
+                        removal: .move(edge: .trailing).combined(with: .opacity)
+                    ))
                 }
             }
             .navigationTitle("")
@@ -298,7 +268,66 @@ struct GoalSheet: View {
         }
         .presentationDetents([.large])
         .presentationDragIndicator(.visible)
+        .animation(.spring(duration: 0.35), value: step)
         .animation(.spring(duration: 0.3), value: selected)
+    }
+
+    // MARK: - Step 0: Goal selection
+
+    private var goalStep: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 32) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("What would you most\nlike to change?")
+                        .font(.system(size: 26, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                        .lineSpacing(4)
+                    Text("Processed sugar drives different mechanisms for different outcomes. Your goal shapes the science you see.")
+                        .font(.system(size: 14, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .lineSpacing(3)
+                }
+
+                VStack(spacing: 10) {
+                    ForEach(UserGoal.allCases) { goal in
+                        goalPill(goal)
+                    }
+                }
+
+                if let g = selected {
+                    Text(g.affirmation)
+                        .font(.system(size: 14, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .lineSpacing(4)
+                        .padding(16)
+                        .background(Color("NCSurface"))
+                        .cornerRadius(12)
+                        .transition(.opacity.combined(with: .move(edge: .bottom)))
+                }
+
+                Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    if let g = selected { appState.setGoal(g) }
+                    // Skip sugar step if already set (e.g. from deep link)
+                    if appState.dailySugarGrams != nil {
+                        appState.advance(to: .notifications)
+                    } else {
+                        withAnimation(.spring(duration: 0.35)) { step = 1 }
+                    }
+                } label: {
+                    Text(selected?.commitmentLabel ?? "Continue")
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(Color("NCBackground"))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(selected == nil ? Color("NCTextTertiary") : Color("NCAccent"))
+                        .cornerRadius(12)
+                }
+                .disabled(selected == nil)
+                .animation(.easeInOut(duration: 0.2), value: selected)
+            }
+            .padding(24)
+        }
     }
 
     private func goalPill(_ goal: UserGoal) -> some View {
@@ -323,6 +352,163 @@ struct GoalSheet: View {
             .background(isSelected ? Color("NCAccent") : Color("NCSurface"))
             .cornerRadius(12)
         }
+    }
+}
+
+// MARK: - Sugar Estimation Step
+
+/// Lightweight bucket-picker used during onboarding to capture the user's
+/// daily added-sugar estimate. Not a full quiz — four broad ranges + a skip.
+/// The midpoint of the selected range becomes the stored estimate.
+struct SugarEstimationStep: View {
+    @EnvironmentObject var appState: AppState
+    var onComplete: () -> Void
+
+    @State private var selected: SugarBucket? = nil
+
+    enum SugarBucket: CaseIterable {
+        case low, moderate, high, veryHigh
+
+        var label: String {
+            switch self {
+            case .low:      return "Under 25g"
+            case .moderate: return "25–50g"
+            case .high:     return "50–100g"
+            case .veryHigh: return "Over 100g"
+            }
+        }
+
+        var sublabel: String {
+            switch self {
+            case .low:
+                return "Minimal sweets, mostly whole foods"
+            case .moderate:
+                return "Some daily sweets, flavored drinks, or sauces"
+            case .high:
+                return "Regular sweets, sodas, or processed snacks"
+            case .veryHigh:
+                return "Daily sweets, multiple sodas, or desserts with most meals"
+            }
+        }
+
+        /// Midpoint grams stored as the user's estimate.
+        var grams: Int {
+            switch self {
+            case .low:      return 15
+            case .moderate: return 35
+            case .high:     return 70
+            case .veryHigh: return 130
+            }
+        }
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 32) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("How much added sugar\ndo you have per day?")
+                        .font(.system(size: 26, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                        .lineSpacing(4)
+                    Text("A rough estimate is enough. This shapes the biological context you see as you go.")
+                        .font(.system(size: 14, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .lineSpacing(3)
+                }
+
+                VStack(spacing: 10) {
+                    ForEach(SugarBucket.allCases, id: \.label) { bucket in
+                        bucketPill(bucket)
+                    }
+                }
+
+                if let b = selected {
+                    tierPreview(for: b)
+                        .transition(.opacity.combined(with: .move(edge: .bottom)))
+                }
+
+                VStack(spacing: 12) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        if let b = selected {
+                            appState.quizSugarGrams  = b.grams
+                            appState.dailySugarGrams = b.grams
+                        }
+                        onComplete()
+                    } label: {
+                        Text("Set my number")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color("NCBackground"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(selected == nil ? Color("NCTextTertiary") : Color("NCAccent"))
+                            .cornerRadius(12)
+                    }
+                    .disabled(selected == nil)
+                    .animation(.easeInOut(duration: 0.2), value: selected)
+
+                    Button {
+                        onComplete()
+                    } label: {
+                        Text("Skip for now")
+                            .font(.system(size: 15))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                            .padding(.vertical, 8)
+                    }
+                }
+            }
+            .padding(24)
+        }
+        .animation(.spring(duration: 0.3), value: selected)
+    }
+
+    private func bucketPill(_ bucket: SugarBucket) -> some View {
+        let isSelected = selected == bucket
+        return Button {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            withAnimation(.spring(duration: 0.25)) { selected = bucket }
+        } label: {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(bucket.label)
+                        .font(.system(size: 15, weight: isSelected ? .medium : .regular))
+                        .foregroundStyle(isSelected ? Color("NCBackground") : Color("NCTextPrimary"))
+                    Text(bucket.sublabel)
+                        .font(.system(size: 12, weight: .light))
+                        .foregroundStyle(isSelected ? Color("NCBackground").opacity(0.75) : Color("NCTextTertiary"))
+                }
+                Spacer()
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(Color("NCBackground"))
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 14)
+            .background(isSelected ? Color("NCAccent") : Color("NCSurface"))
+            .cornerRadius(12)
+        }
+    }
+
+    private func tierPreview(for bucket: SugarBucket) -> some View {
+        let tier = SugarTier(grams: bucket.grams)
+        return VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Circle().fill(tier.color).frame(width: 6, height: 6)
+                Text(tier.label)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(tier.color)
+            }
+            Text(tier.biologicalNote)
+                .font(.system(size: 13, weight: .light))
+                .foregroundStyle(Color("NCTextSecondary"))
+                .lineSpacing(4)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(14)
+        .background(Color("NCSurface"))
+        .cornerRadius(12)
     }
 }
 

@@ -147,6 +147,10 @@ struct HomeView: View {
             guard !coachmarkMode, store.isTracking else { return }
             showQuickReset = true
         }
+        .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenCravingCrisis)) { _ in
+            guard !coachmarkMode else { return }
+            showCravingCrisis = true
+        }
         .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenHistory)) { _ in
             guard !coachmarkMode else { return }
             showHistory = true

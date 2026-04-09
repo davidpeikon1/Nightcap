@@ -59,5 +59,28 @@ struct RootView: View {
             }
         }
         .animation(.easeInOut(duration: 0.35), value: appState.isOnboardingComplete)
+        // Deep link: nightcap://quiz?sugar=75
+        // Register the "nightcap" URL scheme under Info → URL Types in Xcode project settings.
+        .onOpenURL { url in
+            applyDeepLink(url)
+        }
+    }
+
+    /// Parses incoming deep links and applies any parameters to AppState.
+    /// URL scheme: nightcap://quiz?sugar=<grams>
+    private func applyDeepLink(_ url: URL) {
+        guard url.scheme == "nightcap",
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let items = components.queryItems else { return }
+        if let sugarItem = items.first(where: { $0.name == "sugar" }),
+           let sugarStr = sugarItem.value,
+           let grams = Int(sugarStr),
+           grams > 0 {
+            // Preserve the quiz estimate; only update dailySugarGrams if not yet overridden
+            if appState.quizSugarGrams == nil {
+                appState.quizSugarGrams = grams
+            }
+            appState.dailySugarGrams = grams
+        }
     }
 }

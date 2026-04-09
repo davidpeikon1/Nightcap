@@ -16,6 +16,7 @@ struct SettingsSheet: View {
     @State private var exportText: String = ""
     @State private var morningTime: Date = NotificationManager.shared.morningHour.asTime
     @State private var eveningTime: Date = NotificationManager.shared.eveningHour.asTime
+    @State private var showNumberEdit = false
 
     var body: some View {
         NavigationStack {
@@ -30,6 +31,15 @@ struct SettingsSheet: View {
                         }
                     } header: {
                         sectionHeader("Your goal")
+                    }
+                    .listRowBackground(Color("NCSurface"))
+                    .listRowSeparatorTint(Color("NCTextTertiary").opacity(0.3))
+
+                    // MARK: Your number
+                    Section {
+                        numberRow
+                    } header: {
+                        sectionHeader("Your number")
                     }
                     .listRowBackground(Color("NCSurface"))
                     .listRowSeparatorTint(Color("NCTextTertiary").opacity(0.3))
@@ -136,6 +146,11 @@ struct SettingsSheet: View {
             ShareSheet(items: [exportText])
                 .presentationDetents([.medium, .large])
         }
+        .sheet(isPresented: $showNumberEdit) {
+            NumberEditSheet()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
     }
 
     // MARK: - Row builders
@@ -161,6 +176,39 @@ struct SettingsSheet: View {
                 }
             }
         }
+    }
+
+    private var numberRow: some View {
+        Button {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            showNumberEdit = true
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    if let g = appState.dailySugarGrams {
+                        let tier = SugarTier(grams: g)
+                        Text("\(g)g added sugar / day")
+                            .font(.system(size: 15))
+                            .foregroundStyle(Color("NCTextPrimary"))
+                        Text(tier.label)
+                            .font(.system(size: 12))
+                            .foregroundStyle(tier.color)
+                    } else {
+                        Text("Not set")
+                            .font(.system(size: 15))
+                            .foregroundStyle(Color("NCTextPrimary"))
+                        Text("Tap to set your daily estimate")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                    }
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+            }
+        }
+        .foregroundStyle(Color("NCTextPrimary"))
     }
 
     private var notificationRow: some View {
