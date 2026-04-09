@@ -57,14 +57,31 @@ struct BodyScienceCard: View {
                 .buttonStyle(.plain)
             }
 
-            // When collapsed, show the one-sentence tagline so users
-            // know what's inside before they decide to tap.
+            // When collapsed: surface the approaching-phase callout if within 4h —
+            // this is the highest-value data in the app and shouldn't require expanding.
+            // Fall back to the phase tagline when no callout is active.
             if !isExpanded {
-                Text(store.fastingPhase.tagline)
-                    .font(.system(size: 12, weight: .light))
-                    .foregroundStyle(Color("NCTextTertiary"))
-                    .padding(.top, 8)
-                    .transition(.opacity)
+                Group {
+                    if let callout = nextPhaseCallout {
+                        HStack(alignment: .top, spacing: 6) {
+                            Image(systemName: "arrow.up.circle")
+                                .font(.system(size: 10, weight: .light))
+                                .foregroundStyle(Color("NCSuccess").opacity(0.75))
+                                .padding(.top, 1)
+                            Text(callout)
+                                .font(.system(size: 12, weight: .light))
+                                .foregroundStyle(Color("NCSuccess").opacity(0.75))
+                                .lineSpacing(3)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    } else {
+                        Text(store.fastingPhase.tagline)
+                            .font(.system(size: 12, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                    }
+                }
+                .padding(.top, 8)
+                .transition(.opacity)
             }
 
             if isExpanded {

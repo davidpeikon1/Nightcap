@@ -508,7 +508,7 @@ struct GoalPickerSheet: View {
                 Text("What's your reason?")
                     .font(.system(size: 22, weight: .light))
                     .foregroundStyle(Color("NCTextPrimary"))
-                    .padding(.top, 8)
+                    .padding(.top, 16)
 
                 VStack(spacing: 10) {
                     ForEach(UserGoal.allCases) { goal in
@@ -1000,7 +1000,7 @@ struct IfThenPlanTool: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .background(Color("NCAccent"))
-                        .cornerRadius(10)
+                        .cornerRadius(12)
                 }
 
                 Button {

@@ -78,11 +78,14 @@ struct NumberEditSheet: View {
             .padding(.top, 6)
             .animation(.spring(duration: 0.2), value: tier.label)
 
-            // Slider
+            // Slider — haptic tick on each 5g step so the snapping feels precise.
             Slider(value: $sliderValue, in: 0...200, step: 5)
                 .tint(tier.color)
                 .padding(.horizontal, 24)
                 .padding(.top, 20)
+                .onChange(of: grams) { _, _ in
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                }
 
             HStack {
                 Text("0g")
