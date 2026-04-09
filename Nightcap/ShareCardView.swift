@@ -5,6 +5,7 @@ import SwiftUI
 struct ShareCardView: View {
     let badge: BadgeID
     let elapsedSeconds: TimeInterval
+    var reductionGrams: Int? = nil   // grams reduced vs. original quiz estimate
 
     var body: some View {
         VStack(spacing: 0) {
@@ -50,6 +51,15 @@ struct ShareCardView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 28)
 
+                // Reduction callout — makes the card meaningful to viewers,
+                // not just "X days" but evidence of a real dietary change.
+                if let r = reductionGrams, r > 0 {
+                    Text("Down \(r)g / day from where I started.")
+                        .font(.system(size: 12, weight: .light))
+                        .foregroundStyle(Color("NCSuccess").opacity(0.75))
+                        .multilineTextAlignment(.center)
+                }
+
                 // Footer
                 Text("nightcap · sugar-free tracker")
                     .font(.system(size: 10, weight: .light))
@@ -79,9 +89,9 @@ struct ShareCardView: View {
 // MARK: - Share helper
 
 @MainActor
-func makeShareImage(badge: BadgeID, elapsedSeconds: TimeInterval) -> UIImage? {
+func makeShareImage(badge: BadgeID, elapsedSeconds: TimeInterval, reductionGrams: Int? = nil) -> UIImage? {
     let renderer = ImageRenderer(
-        content: ShareCardView(badge: badge, elapsedSeconds: elapsedSeconds)
+        content: ShareCardView(badge: badge, elapsedSeconds: elapsedSeconds, reductionGrams: reductionGrams)
             .preferredColorScheme(.light)
     )
     renderer.scale = UIScreen.main.scale

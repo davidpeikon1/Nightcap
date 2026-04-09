@@ -310,7 +310,22 @@ struct BadgeView: View {
 
 struct BadgeDetailView: View {
     let badge: BadgeID
+    @EnvironmentObject var store: FastingStore
+    @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) var dismiss
+    @State private var shareImage: UIImage? = nil
+    @State private var showShareSheet = false
+
+    private var shareText: String {
+        "\(badge.label) sugar-free. \(store.formattedElapsed) and counting.\n\n\(badge.celebrationText)\n\n— tracked with Nightcap"
+    }
+
+    private var reductionGrams: Int? {
+        guard let quiz = appState.quizSugarGrams,
+              let current = appState.dailySugarGrams,
+              current < quiz else { return nil }
+        return quiz - current
+    }
 
     var body: some View {
         ZStack {
@@ -351,21 +366,53 @@ struct BadgeDetailView: View {
 
                 Spacer()
 
-                Button {
-                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                    dismiss()
-                } label: {
-                    Text(badge.dismissText)
-                        .font(.system(size: 17, weight: .medium))
-                        .foregroundStyle(Color("NCBackground"))
+                VStack(spacing: 12) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        Task { @MainActor in
+                            let img = makeShareImage(
+                                badge: badge,
+                                elapsedSeconds: store.elapsedSeconds,
+                                reductionGrams: reductionGrams
+                            )
+                            shareImage = img
+                            showShareSheet = true
+                        }
+                    } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "square.and.arrow.up")
+                                .font(.system(size: 14, weight: .light))
+                            Text("Share your progress")
+                                .font(.system(size: 15, weight: .regular))
+                        }
+                        .foregroundStyle(Color("NCTextSecondary"))
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 18)
-                        .background(Color("NCAccent"))
+                        .padding(.vertical, 14)
+                        .background(Color("NCSurface"))
                         .cornerRadius(12)
+                    }
+
+                    Button {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        dismiss()
+                    } label: {
+                        Text(badge.dismissText)
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color("NCBackground"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 18)
+                            .background(Color("NCAccent"))
+                            .cornerRadius(12)
+                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 32)
             }
+        }
+        .sheet(isPresented: $showShareSheet) {
+            let items: [Any] = shareImage.map { [$0] } ?? [shareText]
+            ShareSheet(items: items)
+                .presentationDetents([.medium, .large])
         }
     }
 }
@@ -384,6 +431,14 @@ struct MilestoneSheet: View {
 
     private var shareText: String {
         "\(badge.label) sugar-free. \(store.formattedElapsed) and counting.\n\n\(badge.celebrationText)\n\n— tracked with Nightcap"
+    }
+
+    /// Grams reduced vs. original quiz estimate — shown on share card when meaningful.
+    private var reductionGrams: Int? {
+        guard let quiz = appState.quizSugarGrams,
+              let current = appState.dailySugarGrams,
+              current < quiz else { return nil }
+        return quiz - current
     }
 
     var body: some View {
@@ -460,7 +515,8 @@ struct MilestoneSheet: View {
                         Task { @MainActor in
                             let img = makeShareImage(
                                 badge: badge,
-                                elapsedSeconds: store.elapsedSeconds
+                                elapsedSeconds: store.elapsedSeconds,
+                                reductionGrams: reductionGrams
                             )
                             // Prefer the rendered image; fall back to plain text if
                             // ImageRenderer fails (e.g. in the simulator without a display).
