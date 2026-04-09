@@ -26,17 +26,20 @@ struct HomeView: View {
                         topBar
                             .padding(.top, 56)
 
-                        // 1. Your sugar number — the core biological context
-                        YourNumberCard()
+                        // 1. Daily reframe — the "why", leads every session
+                        ReframeCard()
 
-                        // 2. Daily reframe — the "why", timer subordinated/collapsed below
-                        HeroCard()
-
-                        // 3. Craving toolkit — crisis outlet, immediately reachable
+                        // 2. Craving toolkit — crisis outlet, immediately reachable
                         CravingToolkitSection()
                             .id("cravingToolkit")
 
-                        // Supporting context (secondary, scroll to discover)
+                        // 3. Timer — the core tracking module
+                        TrackingCard()
+
+                        // 4. Your sugar number — biological context for the number
+                        YourNumberCard()
+
+                        // 5. Weekly summary (secondary, scroll to discover)
                         WeeklyInsightCard()
 
                         // Body science (collapsed by default, tap to expand)

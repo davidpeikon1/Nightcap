@@ -1,18 +1,17 @@
 import SwiftUI
 import UIKit
 
-/// The primary card on the home screen.
-/// Leads with the daily reframe quote (the "why"), then flows directly into
-/// the timer and action (the "how"). Both are visible without scrolling.
-struct HeroCard: View {
-    @EnvironmentObject var store: FastingStore
-    @AppStorage("timerSectionExpanded") private var timerExpanded = false
-    @State private var scienceExpanded = false
-    @State private var showResetModal  = false
-    @State private var showEditStart   = false
+// MARK: - Reframe Card
+//
+// Today's daily quote and the biology behind it. Stands alone at the top of
+// the home screen so the "why" is the first thing the user sees each session.
 
-    /// Subtle phase-based tint layered over the card surface.
-    /// Communicates biological progress through colour without stating it.
+struct ReframeCard: View {
+    @EnvironmentObject var store: FastingStore
+    @State private var scienceExpanded = false
+
+    /// Subtle phase-based tint that communicates biological progress through
+    /// colour without stating it explicitly.
     private var phaseAmbientColor: Color {
         switch store.fastingPhase {
         case .justStarted:  return .clear
@@ -34,8 +33,6 @@ struct HeroCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-
-            // ── Quote ──────────────────────────────────────────────────────
             HStack {
                 Text("TODAY'S REFRAME")
                     .font(.system(size: 11, weight: .medium))
@@ -85,48 +82,6 @@ struct HeroCard: View {
                     .padding(.top, 10)
                     .transition(.opacity.combined(with: .move(edge: .top)))
             }
-
-            // ── Divider between quote and timer ────────────────────────────
-            Button {
-                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                withAnimation(.spring(duration: 0.35)) { timerExpanded.toggle() }
-            } label: {
-                HStack {
-                    Rectangle()
-                        .fill(Color("NCTextTertiary").opacity(0.4))
-                        .frame(height: 1)
-
-                    if !timerExpanded, store.isTracking {
-                        Text(compactTimerLine)
-                            .font(.system(size: 12, weight: .light, design: .monospaced))
-                            .foregroundStyle(Color("NCTextTertiary"))
-                            .lineLimit(1)
-                            .layoutPriority(1)
-                    }
-
-                    if !timerExpanded, !store.isTracking {
-                        Text("Not tracking")
-                            .font(.system(size: 12, weight: .light))
-                            .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
-                            .layoutPriority(1)
-                    }
-
-                    Image(systemName: timerExpanded ? "chevron.up" : "chevron.down")
-                        .font(.system(size: 10, weight: .regular))
-                        .foregroundStyle(Color("NCTextTertiary").opacity(0.8))
-                }
-            }
-            .padding(.top, 20)
-            .padding(.bottom, timerExpanded ? 20 : 4)
-
-            // ── Timer / action ─────────────────────────────────────────────
-            if timerExpanded {
-                if store.isTracking {
-                    trackingSection
-                } else {
-                    notTrackingSection
-                }
-            }
         }
         .padding(20)
         .background(
@@ -138,41 +93,24 @@ struct HeroCard: View {
         )
         .cornerRadius(16)
         .animation(.spring(duration: 0.3), value: scienceExpanded)
-        .animation(.spring(duration: 0.35), value: timerExpanded)
-        .animation(.spring(duration: 0.3), value: store.isTracking)
-        .sheet(isPresented: $showResetModal) {
-            ResetModal()
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-        }
-        .sheet(isPresented: $showEditStart) {
-            EditStartTimeSheet()
-                .presentationDetents([.large])
-                .presentationDragIndicator(.visible)
-        }
+    }
+}
+
+// MARK: - Tracking Card
+//
+// The timer and fast-management actions. Sits below the craving toolkit so
+// the crisis tool is always within one scroll of the top.
+
+struct TrackingCard: View {
+    @EnvironmentObject var store: FastingStore
+    @State private var showResetModal = false
+    @State private var showEditStart  = false
+
+    private var dayCount: Int {
+        max(1, Int(store.elapsedSeconds / 86400) + 1)
     }
 
-    // MARK: - Compact timer one-liner (shown when timer section is collapsed)
-
-    private var compactTimerLine: String {
-        let total = Int(store.elapsedSeconds)
-        let d = total / 86400
-        let h = (total % 86400) / 3600
-        let m = (total % 3600) / 60
-        var timeStr: String
-        if d > 0 {
-            timeStr = h > 0 ? "\(d)d \(h)h" : "\(d)d"
-        } else if h > 0 {
-            timeStr = m > 0 ? "\(h)h \(m)m" : "\(h)h"
-        } else {
-            timeStr = m > 0 ? "\(m)m" : "< 1m"
-        }
-        return "\(timeStr) · \(store.fastingPhase.rawValue)"
-    }
-
-    // MARK: - Tracking state
-
-    /// True only when the current fast is already the user's all-time longest.
+    /// True only when the current fast is the user's all-time longest.
     /// Requires at least one completed previous fast so the comparison is meaningful.
     private var isPersonalBest: Bool {
         guard store.isTracking, !store.resetEvents.isEmpty else { return false }
@@ -181,7 +119,7 @@ struct HeroCard: View {
     }
 
     /// Seconds remaining until the user beats their personal best.
-    /// Returns nil when already past it, when there's no prior fast, or when more than 2 h away.
+    /// Returns nil when already past it, no prior fast exists, or more than 2 h away.
     private var distanceToPB: TimeInterval? {
         guard store.isTracking, !store.resetEvents.isEmpty else { return nil }
         let best = store.resetEvents.map(\.fastDuration).max() ?? 0
@@ -198,8 +136,6 @@ struct HeroCard: View {
     }
 
     /// Quiet milestone label for first-ever fasts (no previous resets).
-    /// Shown only when the user has never reset before — distinct from badge milestones,
-    /// which are transient pop-ups. This is a persistent in-card acknowledgment.
     private var firstTimeMilestoneLabel: String? {
         guard store.resetEvents.isEmpty, store.isTracking else { return nil }
         let days  = Int(store.elapsedSeconds / 86400)
@@ -212,13 +148,39 @@ struct HeroCard: View {
         return nil
     }
 
-    /// True when the user has a streak worth protecting and the current hour
-    /// falls in the highest-risk evening window (6pm–11pm).
+    /// True when the user has a streak worth protecting and the hour is in the
+    /// highest-risk evening window (6 pm–11 pm).
     private var shouldShowStreakWarning: Bool {
         guard store.streakDays >= 3, store.isTracking else { return false }
         let hour = Calendar.current.component(.hour, from: Date())
         return (18...23).contains(hour)
     }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if store.isTracking {
+                trackingSection
+            } else {
+                notTrackingSection
+            }
+        }
+        .padding(20)
+        .background(Color("NCSurface"))
+        .cornerRadius(16)
+        .animation(.spring(duration: 0.3), value: store.isTracking)
+        .sheet(isPresented: $showResetModal) {
+            ResetModal()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showEditStart) {
+            EditStartTimeSheet()
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+        }
+    }
+
+    // MARK: - Tracking state
 
     private var trackingSection: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -248,8 +210,7 @@ struct HeroCard: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 14)
 
-            // First-ever fast milestone — quiet, persistent acknowledgment that
-            // a genuine "first" is happening. Distinct from badge pop-ups.
+            // First-ever fast milestone — persistent in-card acknowledgment.
             if let milestone = firstTimeMilestoneLabel {
                 Text(milestone)
                     .font(.system(size: 13, weight: .medium))
@@ -258,8 +219,7 @@ struct HeroCard: View {
                     .transition(.opacity)
             }
 
-            // Streak protection — Loss Aversion: surfacing what's at stake when
-            // the user is in the window where most streaks end.
+            // Streak protection — surfaces what's at stake in the highest-risk window.
             if shouldShowStreakWarning {
                 Text("Your \(store.streakDays)-day streak is in the window where most resets happen. Tonight is the one that counts.")
                     .font(.system(size: 13, weight: .light))
@@ -271,8 +231,6 @@ struct HeroCard: View {
             }
 
             // Post-reset recovery arc — shown for the first 30 minutes after a reset.
-            // "Back on the clock." for the first 2 minutes, then the previous fast
-            // duration + a recovery reframe for the rest of the 30-minute window.
             if store.elapsedSeconds < 1_800, let lastReset = store.resetEvents.first {
                 VStack(alignment: .leading, spacing: 4) {
                     if store.elapsedSeconds < 120 {
@@ -291,9 +249,7 @@ struct HeroCard: View {
                 .transition(.opacity)
             }
 
-            // Day-specific biological fact — anchors the user to where they specifically are.
-            // Only shows from day 2 onward; day 1 is already well-served by the zero-to-thirty
-            // and first-day tier content.
+            // Day-specific biological fact — only from day 2 onward.
             if dayCount >= 2, let fact = QuoteLibrary.dayContextFact(for: dayCount) {
                 Text(fact)
                     .font(.system(size: 13, weight: .light))
@@ -417,7 +373,6 @@ struct HeroCard: View {
             }
         }
         .accessibilityLabel(timerA11yLabel)
-        // numericText transition needs an animation context to interpolate.
         .animation(.snappy(duration: 0.25), value: store.elapsedSeconds)
     }
 
@@ -433,7 +388,6 @@ struct HeroCard: View {
         return "\(s) second\(s == 1 ? "" : "s")"
     }
 
-    /// Context-aware suffix for the "Previous fast: X" post-reset message.
     private func previousFastSuffix(_ seconds: TimeInterval) -> String {
         let h = seconds / 3600
         if h >= 720 { return "Over a month. Those biological changes don't reverse on a reset. The work is still in your system." }
