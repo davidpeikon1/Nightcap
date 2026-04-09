@@ -223,7 +223,7 @@ struct HomeView: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
         .background(Color("NCSurface"))
-        .cornerRadius(8)
+        .clipShape(Capsule())
     }
 }
 

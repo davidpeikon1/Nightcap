@@ -23,16 +23,11 @@ struct CravingCrisisSheet: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Drag handle
-            Capsule()
-                .fill(Color("NCTextTertiary").opacity(0.35))
-                .frame(width: 36, height: 4)
-                .padding(.top, 14)
-                .padding(.bottom, 20)
-
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 20) {
+        // System drag indicator is shown via .presentationDragIndicator(.visible)
+        // in HomeView — no custom capsule needed here.
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 20) {
+                EmptyView().frame(height: 4) // minimal top breathing room
 
                     // Header
                     VStack(alignment: .leading, spacing: 6) {
@@ -57,7 +52,6 @@ struct CravingCrisisSheet: View {
                     Spacer(minLength: 40)
                 }
             }
-        }
         .background(Color("NCBackground").ignoresSafeArea())
         .onDisappear { countdown.stop() }
     }

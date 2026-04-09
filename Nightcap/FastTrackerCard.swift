@@ -88,125 +88,130 @@ struct ResetModal: View {
     }
 
     private var resetFormView: some View {
-        VStack(alignment: .leading, spacing: 28) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(resetTitle)
-                    .font(.system(size: 24, weight: .light))
-                    .foregroundStyle(Color("NCTextPrimary"))
+        // ScrollView so all contextual items are reachable regardless of count.
+        // Buttons are pinned via safeAreaInset so the CTA is always visible.
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 28) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(resetTitle)
+                        .font(.system(size: 24, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
 
-                Text(resetSubtitle)
-                    .font(.system(size: 15))
-                    .foregroundStyle(Color("NCTextSecondary"))
-                    .lineSpacing(4)
-            }
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("NOTE")
-                    .font(.system(size: 11, weight: .medium))
-                    .tracking(1.5)
-                    .foregroundStyle(Color("NCTextTertiary"))
-
-                TextField("e.g. birthday cake, work stress, social pressure", text: $note)
-                    .font(.system(size: 15))
-                    .foregroundStyle(Color("NCTextPrimary"))
-                    .padding(14)
-                    .background(Color("NCSurface"))
-                    .cornerRadius(10)
-                    .submitLabel(.done)
-                    .onSubmit {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
-                    .onChange(of: note) { _, v in
-                        if v.count > 120 { note = String(v.prefix(120)) }
-                    }
-
-                if note.count > 80 {
-                    HStack {
-                        Spacer()
-                        Text("\(note.count) / 120")
-                            .font(.system(size: 11))
-                            .foregroundStyle(
-                                note.count > 110 ? Color("NCWarning") : Color("NCTextTertiary")
-                            )
-                    }
-                    .padding(.top, 2)
-                    .transition(.opacity)
-                    .animation(.easeInOut(duration: 0.2), value: note.count > 80)
+                    Text(resetSubtitle)
+                        .font(.system(size: 15))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .lineSpacing(4)
                 }
-            }
 
-            // Timing pattern — shows if this reset fits a recurring time-of-day or
-            // weekday pattern. Informs rather than shames; tertiary color matches tone.
-            if let pattern = timingPatternNote {
-                HStack(alignment: .top, spacing: 12) {
-                    Rectangle()
-                        .fill(Color("NCWarning").opacity(0.4))
-                        .frame(width: 2)
-                        .cornerRadius(1)
-                    Text(pattern)
-                        .font(.system(size: 13, weight: .light))
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("NOTE")
+                        .font(.system(size: 11, weight: .medium))
+                        .tracking(1.5)
                         .foregroundStyle(Color("NCTextTertiary"))
-                        .lineSpacing(4)
-                        .fixedSize(horizontal: false, vertical: true)
+
+                    TextField("e.g. birthday cake, work stress, social pressure", text: $note)
+                        .font(.system(size: 15))
+                        .foregroundStyle(Color("NCTextPrimary"))
+                        .padding(14)
+                        .background(Color("NCSurface"))
+                        .cornerRadius(10)
+                        .submitLabel(.done)
+                        .onSubmit {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
+                        .onChange(of: note) { _, v in
+                            if v.count > 120 { note = String(v.prefix(120)) }
+                        }
+
+                    if note.count > 80 {
+                        HStack {
+                            Spacer()
+                            Text("\(note.count) / 120")
+                                .font(.system(size: 11))
+                                .foregroundStyle(
+                                    note.count > 110 ? Color("NCWarning") : Color("NCTextTertiary")
+                                )
+                        }
+                        .padding(.top, 2)
+                        .transition(.opacity)
+                        .animation(.easeInOut(duration: 0.2), value: note.count > 80)
+                    }
+                }
+
+                // Timing pattern — shows if this reset fits a recurring time-of-day or
+                // weekday pattern. Informs rather than shames; tertiary color matches tone.
+                if let pattern = timingPatternNote {
+                    HStack(alignment: .top, spacing: 12) {
+                        Rectangle()
+                            .fill(Color("NCWarning").opacity(0.4))
+                            .frame(width: 2)
+                            .cornerRadius(1)
+                        Text(pattern)
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                // Badge proximity warning — shown when the user is 60%+ toward
+                // the next badge. Shown in green to frame it as opportunity, not shame.
+                // This is the highest-leverage loss-aversion moment: seeing "3h from 1 Week"
+                // before confirming is the last meaningful pause before the reset.
+                if let proximity = formBadgeProximityText {
+                    HStack(alignment: .top, spacing: 12) {
+                        Rectangle()
+                            .fill(Color("NCSuccess").opacity(0.5))
+                            .frame(width: 2)
+                            .cornerRadius(1)
+                        Text(proximity)
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(Color("NCSuccess").opacity(0.8))
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                // Commitment reminder — surfaces the user's stated reason at the
+                // moment they're about to reset (Cialdini: commitment & consistency).
+                // Rendered only when a goal is set; kept in tertiary color so it
+                // informs without guilting.
+                if let goal = appState.userGoal {
+                    HStack(alignment: .top, spacing: 12) {
+                        Rectangle()
+                            .fill(Color("NCTextTertiary").opacity(0.5))
+                            .frame(width: 2)
+                            .cornerRadius(1)
+                        Text(goal.resetMomentReminder)
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                // Sugar avoided — concrete biological progress already in the body.
+                // "That doesn't reset" reframes a reset from total loss to partial win.
+                if let g = appState.dailySugarGrams, g > 0, store.elapsedSeconds >= 3600 {
+                    let days = max(1, Int(store.elapsedSeconds / 86400))
+                    let avoided = days * g
+                    HStack(alignment: .top, spacing: 12) {
+                        Rectangle()
+                            .fill(Color("NCSuccess").opacity(0.4))
+                            .frame(width: 2)
+                            .cornerRadius(1)
+                        Text("This fast already kept ~\(avoided)g of added sugar out of your body. That doesn't reset.")
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(Color("NCSuccess").opacity(0.75))
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
             }
-
-            // Badge proximity warning — shown when the user is 60%+ toward
-            // the next badge. Shown in green to frame it as opportunity, not shame.
-            // This is the highest-leverage loss-aversion moment: seeing "3h from 1 Week"
-            // before confirming is the last meaningful pause before the reset.
-            if let proximity = formBadgeProximityText {
-                HStack(alignment: .top, spacing: 12) {
-                    Rectangle()
-                        .fill(Color("NCSuccess").opacity(0.5))
-                        .frame(width: 2)
-                        .cornerRadius(1)
-                    Text(proximity)
-                        .font(.system(size: 13, weight: .light))
-                        .foregroundStyle(Color("NCSuccess").opacity(0.8))
-                        .lineSpacing(4)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-
-            // Commitment reminder — surfaces the user's stated reason at the
-            // moment they're about to reset (Cialdini: commitment & consistency).
-            // Rendered only when a goal is set; kept in tertiary color so it
-            // informs without guilting.
-            if let goal = appState.userGoal {
-                HStack(alignment: .top, spacing: 12) {
-                    Rectangle()
-                        .fill(Color("NCTextTertiary").opacity(0.5))
-                        .frame(width: 2)
-                        .cornerRadius(1)
-                    Text(goal.resetMomentReminder)
-                        .font(.system(size: 13, weight: .light))
-                        .foregroundStyle(Color("NCTextTertiary"))
-                        .lineSpacing(4)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-
-            // Sugar avoided — concrete biological progress already in the body.
-            // "That doesn't reset" reframes a reset from total loss to partial win.
-            if let g = appState.dailySugarGrams, g > 0, store.elapsedSeconds >= 3600 {
-                let days = max(1, Int(store.elapsedSeconds / 86400))
-                let avoided = days * g
-                HStack(alignment: .top, spacing: 12) {
-                    Rectangle()
-                        .fill(Color("NCSuccess").opacity(0.4))
-                        .frame(width: 2)
-                        .cornerRadius(1)
-                    Text("This fast already kept ~\(avoided)g of added sugar out of your body. That doesn't reset.")
-                        .font(.system(size: 13, weight: .light))
-                        .foregroundStyle(Color("NCSuccess").opacity(0.75))
-                        .lineSpacing(4)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-
-            Spacer()
-
+            .padding(24)
+            .padding(.bottom, 8)
+        }
+        .safeAreaInset(edge: .bottom) {
             VStack(spacing: 12) {
                 Button {
                     preResetElapsed = store.elapsedSeconds
@@ -235,8 +240,11 @@ struct ResetModal: View {
                         .padding(.vertical, 8)
                 }
             }
+            .padding(.horizontal, 24)
+            .padding(.top, 12)
+            .padding(.bottom, 32)
+            .background(Color("NCBackground"))
         }
-        .padding(24)
     }
 
     /// Pre-confirmation badge proximity — shown in the form before the user confirms.

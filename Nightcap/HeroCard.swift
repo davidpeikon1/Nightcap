@@ -140,7 +140,7 @@ struct HeroCard: View {
         }
         .sheet(isPresented: $showEditStart) {
             EditStartTimeSheet()
-                .presentationDetents([.medium])
+                .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
     }
