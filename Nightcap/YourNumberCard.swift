@@ -181,8 +181,9 @@ struct YourNumberCard: View {
             // Target benchmark — gives the number a clear direction
             targetBenchmark(grams: grams, tier: tier)
 
-            // Sugar avoided — concrete, positive momentum stat
-            if store.elapsedSeconds > 0 {
+            // Sugar avoided — only shown after a meaningful stretch so the
+            // number isn't inflated for someone 10 minutes into their fast.
+            if store.elapsedSeconds >= 6 * 3600 {
                 avoidedStat(grams: grams)
             }
 

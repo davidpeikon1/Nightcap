@@ -103,16 +103,50 @@ struct ResetModal: View {
                         .lineSpacing(4)
                 }
 
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("NOTE")
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("WHAT TRIGGERED IT?")
                         .font(.system(size: 11, weight: .medium))
                         .tracking(1.5)
                         .foregroundStyle(Color("NCTextTertiary"))
 
-                    TextField("e.g. birthday cake, work stress, social pressure", text: $note)
-                        .font(.system(size: 15))
+                    // One-tap reason chips — same taxonomy as craving logs.
+                    // Tap to toggle; free-text field below for anything else.
+                    let chips = ["Stress", "Boredom", "Social", "Habit", "Hunger", "Tired"]
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(chips, id: \.self) { chip in
+                                let active = note.lowercased().contains(chip.lowercased())
+                                Button {
+                                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                                    withAnimation(.spring(duration: 0.2)) {
+                                        if active {
+                                            note = note
+                                                .replacingOccurrences(of: ", \(chip)", with: "", options: .caseInsensitive)
+                                                .replacingOccurrences(of: "\(chip), ", with: "", options: .caseInsensitive)
+                                                .replacingOccurrences(of: chip, with: "", options: .caseInsensitive)
+                                                .trimmingCharacters(in: .whitespacesAndNewlines)
+                                        } else {
+                                            note = note.isEmpty ? chip : "\(note), \(chip)"
+                                        }
+                                    }
+                                } label: {
+                                    Text(chip)
+                                        .font(.system(size: 13, weight: active ? .medium : .regular))
+                                        .foregroundStyle(active ? Color("NCBackground") : Color("NCTextSecondary"))
+                                        .padding(.horizontal, 14)
+                                        .padding(.vertical, 8)
+                                        .background(active ? Color("NCAccent") : Color("NCSurface"))
+                                        .clipShape(Capsule())
+                                }
+                                .animation(.spring(duration: 0.2), value: active)
+                            }
+                        }
+                    }
+
+                    TextField("Or add your own note…", text: $note)
+                        .font(.system(size: 14))
                         .foregroundStyle(Color("NCTextPrimary"))
-                        .padding(14)
+                        .padding(12)
                         .background(Color("NCSurface"))
                         .cornerRadius(10)
                         .submitLabel(.done)

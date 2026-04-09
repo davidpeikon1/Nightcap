@@ -56,9 +56,9 @@ struct HeroCard: View {
                 .padding(.bottom, 18)
 
             Text(quote.text)
-                .font(.system(size: 17, weight: .light))
+                .font(.system(size: 19, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
-                .lineSpacing(6)
+                .lineSpacing(9)
                 .fixedSize(horizontal: false, vertical: true)
 
             Button {
