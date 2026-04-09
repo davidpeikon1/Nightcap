@@ -43,14 +43,9 @@ html {
 
 body {
   font-family: var(--nc-font);
-  font-weight: 400;
+  font-weight: 450;
   background: var(--nc-bg);
-  background-image:
-    radial-gradient(ellipse 90% 60% at 50% -5%, rgba(210, 195, 178, 0.7) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 0% 30%, rgba(200, 190, 175, 0.35) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 35% at 100% 50%, rgba(205, 195, 182, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(195, 190, 182, 0.4) 0%, transparent 50%);
-  background-attachment: fixed;
+
   color: var(--nc-text);
   line-height: 1.65;
   letter-spacing: -0.005em;
@@ -287,13 +282,6 @@ body {
   color: var(--nc-bg);
 }
 
-/* ---------- Hero Teaser ---------- */
-.nc-hero__teaser {
-  display: none;
-  position: relative;
-  z-index: 1;
-}
-
 @media (max-width: 768px) {
   .nc-hero {
     min-height: auto;
@@ -325,10 +313,6 @@ body {
     color: var(--nc-text);
     animation: nc-scrollBounce 2.5s ease-in-out infinite;
   }
-
-  @keyframes nc-scrollBounce {
-    0%, 100% { transform: translateY(0); opacity: 0.4; }
-    50% { transform: translateY(4px); opacity: 0.7; }
   }
 }
 
@@ -454,10 +438,6 @@ body {
 /* Social Proof */
 
 /* ---------- Scroll Hint ---------- */
-
-@keyframes nc-scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.3; }
-  50% { transform: translateY(6px); opacity: 0.75; }
 }
 
 /* ---------- Return Banner ---------- */
@@ -1511,19 +1491,7 @@ body {
   margin-bottom: 2.5rem;
   color: var(--nc-bg);
 }
-/* ---------- Transition Line ---------- */
-.nc-transition {
-  padding: 60px 32px;
-  text-align: center;
-}
 
-.nc-transition__text {
-  font-family: var(--nc-font-display);
-  font-size: clamp(1.25rem, 3vw, 1.65rem);
-  font-weight: 500;
-  font-style: italic;
-  color: var(--nc-text);
-}
 
 /* ---------- Social Proof ---------- */
 .nc-proof {
@@ -1586,42 +1554,7 @@ body {
 
 /* Press Bar */
 
-/* ---------- Bottom CTA ---------- */
-.nc-bottom-cta {
-  padding: 120px 32px;
-  text-align: center;
-  position: relative;
-}
 
-.nc-bottom-cta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 1px;
-  background: var(--nc-primary);
-  opacity: 0.15;
-}
-
-.nc-bottom-cta__container {
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.nc-bottom-cta__text {
-  font-family: var(--nc-font-display);
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  margin-bottom: 2rem;
-}
-
-.nc-bottom-cta__btn {
-  margin: 0 auto;
-}
 
 /* ---------- FAQ ---------- */
 .nc-faq {
@@ -1712,6 +1645,13 @@ body {
 }
 
 /* ---------- Exit Intent Popup ---------- */
+
+.nc-faq__cta {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--nc-border);
+}
 .nc-exit-popup {
   display: none;
   position: fixed;
