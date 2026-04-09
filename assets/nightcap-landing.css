@@ -2166,3 +2166,27 @@ body {
   margin-bottom: 0.75rem;
   font-style: italic;
 }
+
+/* ---------- CRO: Signup Value List ---------- */
+.nc-signup__value-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  text-align: left;
+}
+
+.nc-signup__value-list li {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  padding: 6px 0 6px 1.25rem;
+  position: relative;
+}
+
+.nc-signup__value-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--nc-text);
+  font-weight: 700;
+}

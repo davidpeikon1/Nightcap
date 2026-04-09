@@ -2191,6 +2191,30 @@ body {
   font-style: italic;
 }
 
+/* ---------- CRO: Signup Value List ---------- */
+.nc-signup__value-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  text-align: left;
+}
+
+.nc-signup__value-list li {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  padding: 6px 0 6px 1.25rem;
+  position: relative;
+}
+
+.nc-signup__value-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--nc-text);
+  font-weight: 700;
+}
+
 </style>
 
   <script type="application/ld+json">
@@ -2548,8 +2572,13 @@ body {
         <p class="nc-signup__teaser-sub">per day</p>
       </div>
       <div class="nc-signup__header">
-        <h2 class="nc-signup__title">See your full report</h2>
-        <p class="nc-signup__subtitle">Plus early access to the Nightcap app and first look at new anti-sugar products in development.</p>
+        <h2 class="nc-signup__title">Your report includes:</h2>
+        <ul class="nc-signup__value-list">
+          <li>Your daily processed sugar number</li>
+          <li>What it's doing to your body right now</li>
+          <li>A personalized plan to start reducing</li>
+          <li>Early access to the Nightcap app</li>
+        </ul>
       </div>
       <div class="nc-signup__trust">
         <span>&#128274; 100% private</span>
@@ -2572,7 +2601,7 @@ body {
           <span class="nc-input-error" id="email-error" aria-live="polite"></span>
         </div>
         <button type="submit" class="nc-btn nc-btn--primary nc-btn--full" id="signup-submit-btn">
-          <span class="nc-btn__text">See My Results</span>
+          <span class="nc-btn__text">Get My Personalized Report</span>
           <span class="nc-btn__loading" style="display: none;" role="status">
             <span class="nc-spinner" aria-hidden="true"></span>
           </span>
