@@ -168,20 +168,20 @@ struct HomeWithCoachmark: View {
 
             if appState.onboardingStep == .timerCoachmark {
                 CoachmarkBubble(
-                    text: "Every day, a new insight about what processed sugar is actually doing — and what life looks like without it.",
+                    text: "Your daily sugar number. This is what you're working to bring down. Update it any time — the app adjusts everything around it.",
                     arrowUp: true
                 )
-                .padding(.top, 200)
+                .padding(.top, 190)
                 .padding(.horizontal, 24)
                 .onTapGesture { handleTap() }
                 .transition(.scale(scale: 0.9).combined(with: .opacity))
 
             } else if appState.onboardingStep == .quoteCoachmark {
                 CoachmarkBubble(
-                    text: "The timer started the moment you answered. This is your clock.",
+                    text: "A new reframe every day — what sugar actually does biologically. Below it: tools for the moment a craving hits.",
                     arrowUp: true
                 )
-                .padding(.top, 375)
+                .padding(.top, 390)
                 .padding(.horizontal, 24)
                 .onTapGesture { appState.advance(to: .goalSetting) }
                 .transition(.scale(scale: 0.9).combined(with: .opacity))
