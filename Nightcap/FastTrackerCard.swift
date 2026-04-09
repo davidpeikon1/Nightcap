@@ -187,6 +187,24 @@ struct ResetModal: View {
                 }
             }
 
+            // Sugar avoided — concrete biological progress already in the body.
+            // "That doesn't reset" reframes a reset from total loss to partial win.
+            if let g = appState.dailySugarGrams, g > 0, store.elapsedSeconds >= 3600 {
+                let days = max(1, Int(store.elapsedSeconds / 86400))
+                let avoided = days * g
+                HStack(alignment: .top, spacing: 12) {
+                    Rectangle()
+                        .fill(Color("NCSuccess").opacity(0.4))
+                        .frame(width: 2)
+                        .cornerRadius(1)
+                    Text("This fast already kept ~\(avoided)g of added sugar out of your body. That doesn't reset.")
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color("NCSuccess").opacity(0.75))
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
             Spacer()
 
             VStack(spacing: 12) {
