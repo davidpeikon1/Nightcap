@@ -383,7 +383,7 @@
   // ---------- Secondary Quiz Buttons ----------
   // "Find Out Your Number" button in Why section
   // All secondary CTAs go through pre-commitment
-  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn'].forEach(function (id) {
+  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn', 'benefits-quiz-btn', 'mid-quiz-btn'].forEach(function (id) {
     var btn = document.getElementById(id);
     if (btn) btn.addEventListener('click', showPrecommit);
   });

@@ -1462,6 +1462,77 @@ body {
 
 /* ---------- Ingredients ---------- */
 
+
+/* Dark variant */
+.nc-benefits--dark {
+  background: var(--nc-primary);
+  color: var(--nc-bg);
+  padding: 140px 40px;
+}
+
+.nc-benefits--dark::before {
+  display: none;
+}
+
+.nc-benefits--dark .nc-benefits__title {
+  color: var(--nc-bg);
+}
+
+.nc-benefits--dark .nc-benefits__grid {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.nc-benefits--dark .nc-benefits__item {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nc-benefits--dark .nc-benefits__item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nc-benefits--dark .nc-benefits__item-title {
+  color: var(--nc-bg);
+}
+
+.nc-benefits--dark .nc-benefits__item-desc {
+  color: rgba(237, 230, 219, 0.65);
+  opacity: 1;
+}
+
+.nc-benefits__cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.nc-btn--inverted {
+  background: var(--nc-bg);
+  color: var(--nc-primary);
+}
+
+.nc-btn--inverted:hover {
+  background: var(--nc-bg-card);
+}
+
+/* ---------- Mid-page CTA ---------- */
+.nc-midcta {
+  padding: 80px 32px;
+  text-align: center;
+}
+
+.nc-midcta__container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.nc-midcta__text {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
 /* ---------- Transition Line ---------- */
 .nc-transition {
   padding: 60px 32px;
@@ -2545,7 +2616,7 @@ body {
       </div>
       <div class="nc-signup__header">
         <h2 class="nc-signup__title">See your full report</h2>
-        <p class="nc-signup__subtitle">What it means, how it compares, and what to do about it.</p>
+        <p class="nc-signup__subtitle">Plus: early access to the Nightcap app and first look at new products we're building to help you quit processed sugar for good.</p>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
         <div class="nc-form-group">
@@ -3083,7 +3154,7 @@ body {
   // ---------- Secondary Quiz Buttons ----------
   // "Find Out Your Number" button in Why section
   // All secondary CTAs go through pre-commitment
-  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn'].forEach(function (id) {
+  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn', 'benefits-quiz-btn', 'mid-quiz-btn'].forEach(function (id) {
     var btn = document.getElementById(id);
     if (btn) btn.addEventListener('click', showPrecommit);
   });
