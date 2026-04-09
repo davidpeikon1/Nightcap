@@ -83,6 +83,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
+
+/* Global grain texture via SVG filter */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.028;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
 /* ---------- Skip Link (A11y) ---------- */
 .nc-skip-link {
   position: absolute;
@@ -276,10 +288,36 @@ body {
   justify-content: center;
   padding: 160px 40px 120px;
   overflow: hidden;
-  background: #1C1B18;
-  background-image:
-    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  background: #141311;
   color: #F5F3EE;
+}
+
+/* Gradient orbs — visible atmospheric depth */
+.nc-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 500px at 30% 20%, rgba(180, 140, 90, 0.12) 0%, transparent 60%),
+    radial-gradient(circle 600px at 70% 60%, rgba(120, 100, 80, 0.08) 0%, transparent 60%),
+    radial-gradient(circle 400px at 50% 40%, rgba(200, 180, 150, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative ring */
+.nc-hero::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(500px, 80vw);
+  height: min(500px, 80vw);
+  border-radius: 50%;
+  border: 1px solid rgba(245, 243, 238, 0.06);
+  pointer-events: none;
+  z-index: 0;
 }
 
 @media (max-width: 768px) {
@@ -313,6 +351,11 @@ body {
   letter-spacing: -0.03em;
   color: #F5F3EE;
   margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.nc-hero__dot {
+  color: rgba(200, 160, 100, 0.6);
 }
 
 .nc-hero__title-line { display: block; }
@@ -1022,7 +1065,9 @@ body {
   padding: 120px 40px;
   text-align: center;
   position: relative;
-  background: #EFECE6;
+  background:
+    radial-gradient(circle 500px at 80% 30%, rgba(220, 200, 160, 0.15) 0%, transparent 60%),
+    #EFECE6;
 }
 
 .nc-benefits__container {
@@ -1095,10 +1140,20 @@ body {
 .nc-midcta {
   padding: 120px 32px;
   text-align: center;
-  background: #1C1B18;
-  background-image:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 60%);
+  background: #141311;
+  position: relative;
+  overflow: hidden;
   color: #F5F3EE;
+}
+
+.nc-midcta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 400px at 60% 40%, rgba(180, 140, 90, 0.08) 0%, transparent 60%),
+    radial-gradient(circle 300px at 30% 70%, rgba(120, 100, 80, 0.06) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .nc-midcta__container {
@@ -1130,6 +1185,17 @@ body {
   text-align: center;
   position: relative;
   background: #F8F7F4;
+}
+
+.nc-proof::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.15), transparent);
 }
 
 .nc-proof__container {
@@ -1192,6 +1258,17 @@ body {
   padding: 120px 40px;
   position: relative;
   background: #F8F7F4;
+}
+
+.nc-faq::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.15), transparent);
 }
 
 .nc-faq::before {
@@ -1920,9 +1997,17 @@ body {
   text-align: center;
   overflow: hidden;
   position: relative;
+  background: #EBE8E1;
+}
+
+.nc-statement::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, #E5E1D8 0%, transparent 70%),
-    #EBE8E1;
+    radial-gradient(circle 400px at 25% 30%, rgba(200, 170, 120, 0.15) 0%, transparent 60%),
+    radial-gradient(circle 350px at 75% 60%, rgba(180, 160, 130, 0.1) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .nc-statement__number {
@@ -1990,6 +2075,19 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   text-align: center;
+  position: relative;
+}
+
+/* Connecting line between step numbers */
+.nc-steps__grid::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: calc(16.66% + 18px);
+  right: calc(16.66% + 18px);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.12), rgba(0,0,0,0.08));
+  z-index: 0;
 }
 
 .nc-steps__item {
@@ -1997,6 +2095,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  position: relative;
+  z-index: 1;
 }
 
 .nc-steps__number {
@@ -2006,10 +2106,11 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--nc-primary);
-  color: #F7F6F3;
-  font-family: var(--nc-font);
-  font-size: 0.78rem;
+  background: #F8F7F4;
+  border: 1px solid rgba(0,0,0,0.12);
+  color: var(--nc-text);
+  font-family: var(--nc-font-display);
+  font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -2037,6 +2138,10 @@ body {
   .nc-steps__grid {
     grid-template-columns: 1fr;
     gap: 36px;
+  }
+
+  .nc-steps__grid::before {
+    display: none;
   }
 
   .nc-steps__item-desc {
@@ -2082,7 +2187,7 @@ body {
       </div>
 
       <h1 class="nc-hero__title" id="hero-title">
-        Find out how much<br>sugar you're really eating.
+        Find out how much<br>sugar you're really eating<span class="nc-hero__dot">.</span>
       </h1>
       <p class="nc-hero__subtitle">
         A personalized 60-second quiz. Your daily intake, revealed.
