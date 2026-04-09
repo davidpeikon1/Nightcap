@@ -15,7 +15,7 @@
   <meta name="twitter:title" content="Nightcap — Quitting Sugar Is Hard. Help Is Coming.">
   <meta name="twitter:description" content="60-second quiz. See your real number.">
 
-  <meta name="theme-color" content="#F0EBE3">
+  <meta name="theme-color" content="#EDE6DB">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,18 +34,18 @@
 }
 
 :root {
-  --nc-bg: #F0EBE3;
-  --nc-bg-card: #F7F4EF;
-  --nc-bg-card-hover: #FDFBF8;
-  --nc-surface: #F4F0EA;
-  --nc-primary: #1C1917;
-  --nc-primary-light: #2E2A26;
-  --nc-primary-dark: #0C0A08;
-  --nc-accent: #1C1917;
-  --nc-accent-dark: #0C0A08;
-  --nc-text: #1C1917;
-  --nc-text-muted: #57534E;
-  --nc-text-dim: #78716C;
+  --nc-bg: #EDE6DB;
+  --nc-bg-card: #F5F1EA;
+  --nc-bg-card-hover: #FAF8F4;
+  --nc-surface: #F0ECE4;
+  --nc-primary: #111111;
+  --nc-primary-light: #222222;
+  --nc-primary-dark: #000000;
+  --nc-accent: #111111;
+  --nc-accent-dark: #000000;
+  --nc-text: #111111;
+  --nc-text-muted: #3D3935;
+  --nc-text-dim: #5C5650;
   --nc-error: #B84040;
   --nc-warning: #1C1917;
   --nc-success: #3D362E;
@@ -216,7 +216,8 @@ body {
   background: var(--nc-primary);
   color: var(--nc-bg);
   box-shadow: none;
-  padding: 16px 44px;
+  padding: 18px 48px;
+  font-size: 0.9rem;
 }
 
 .nc-btn--primary:hover:not(:disabled) {
@@ -230,7 +231,7 @@ body {
 }
 
 .nc-btn--primary:disabled {
-  opacity: 0.55;
+  opacity: 0.7;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -364,7 +365,7 @@ body {
 }
 
 @keyframes nc-twinkle {
-  0% { opacity: 0.65; }
+  0% { opacity: 0.8; }
   100% { opacity: 1; }
 }
 
@@ -383,9 +384,9 @@ body {
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(3rem, 8vw, 5.5rem);
-  font-weight: 600;
-  line-height: 1.08;
+  font-size: clamp(3rem, 9vw, 6rem);
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
 }
@@ -396,14 +397,13 @@ body {
 .nc-hero__title-line--accent {
   display: block;
   color: var(--nc-text-muted);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .nc-hero__subtitle {
-  font-size: 1.1rem;
-  font-weight: 450;
+  font-size: 1.15rem;
+  font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.7;
   max-width: 460px;
   margin: 0 auto 3rem;
   line-height: 1.8;
@@ -415,9 +415,9 @@ body {
 
 .nc-hero__cta-note {
   margin-top: 1rem;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  color: var(--nc-text-dim);
+  color: var(--nc-text-muted);
 }
 
 /* Countdown */
@@ -465,7 +465,7 @@ body {
 
 @keyframes nc-scrollBounce {
   0%, 100% { transform: translateY(0); opacity: 0.3; }
-  50% { transform: translateY(6px); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 0.75; }
 }
 
 /* ---------- Return Banner ---------- */
@@ -509,7 +509,7 @@ body {
 }
 
 .nc-quiz__dot.active {
-  opacity: 0.6;
+  opacity: 0.75;
 }
 
 .nc-quiz__dot.completed {
@@ -639,7 +639,7 @@ body {
 
 .nc-quiz__option.selected .nc-quiz__option-sugar {
   color: var(--nc-bg);
-  opacity: 0.6;
+  opacity: 0.75;
 }
 
 .nc-quiz__option-label {
@@ -738,7 +738,7 @@ body {
 
 .nc-signup__subtitle {
   color: var(--nc-text);
-  opacity: 0.55;
+  opacity: 0.7;
   font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.7;
@@ -799,7 +799,7 @@ body {
 
 .nc-input::placeholder {
   color: var(--nc-text-muted);
-  opacity: 0.65;
+  opacity: 0.8;
 }
 
 .nc-input:focus {
@@ -893,7 +893,7 @@ body {
   display: block;
   font-size: 0.75rem;
   color: var(--nc-text-muted);
-  opacity: 0.6;
+  opacity: 0.75;
   margin-top: 2px;
 }
 
@@ -969,7 +969,7 @@ body {
 .nc-results__big-number-unit {
   font-size: 0.4em;
   font-weight: 500;
-  opacity: 0.65;
+  opacity: 0.8;
   vertical-align: baseline;
 }
 
@@ -997,7 +997,7 @@ body {
 
 .nc-results__subtitle {
   color: var(--nc-text);
-  opacity: 0.6;
+  opacity: 0.75;
   font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.75;
@@ -1138,7 +1138,7 @@ body {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.55;
+  opacity: 0.7;
   margin-bottom: 2rem;
 }
 
@@ -1171,7 +1171,7 @@ body {
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.55;
+  opacity: 0.7;
   margin-top: 2rem;
 }
 
@@ -1229,7 +1229,7 @@ body {
 
 .nc-why__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -1254,10 +1254,9 @@ body {
 }
 
 .nc-why__subtitle {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 500;
-  color: var(--nc-text);
-  opacity: 0.75;
+  color: var(--nc-text-muted);
   line-height: 1.8;
   margin-bottom: 3rem;
 }
@@ -1291,7 +1290,7 @@ body {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.65;
+  opacity: 0.8;
   line-height: 1.5;
 }
 
@@ -1361,7 +1360,7 @@ body {
   line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--nc-text);
-  opacity: 0.55;
+  opacity: 0.7;
   margin: 0;
 }
 
@@ -1418,7 +1417,7 @@ body {
 
 .nc-benefits__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   margin-bottom: 3.5rem;
@@ -1458,7 +1457,7 @@ body {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.65;
+  opacity: 0.8;
   line-height: 1.65;
 }
 
@@ -1662,7 +1661,7 @@ body {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.6;
+  opacity: 0.75;
   line-height: 1.8;
   margin: 0;
 }
@@ -1847,7 +1846,7 @@ body {
 
 .nc-calculating__step.done {
   color: var(--nc-text-muted);
-  opacity: 0.6;
+  opacity: 0.75;
 }
 
 .nc-calculating__step.done::before {
@@ -1861,7 +1860,7 @@ body {
   font-weight: 500;
   font-style: italic;
   color: var(--nc-text);
-  opacity: 0.6;
+  opacity: 0.75;
   margin: 1.5rem 0 0;
 }
 
@@ -1872,7 +1871,7 @@ body {
   font-style: italic;
   text-align: center;
   color: var(--nc-text);
-  opacity: 0.6;
+  opacity: 0.75;
   margin: 2rem 0 2.5rem;
   line-height: 1.6;
 }
@@ -1903,7 +1902,7 @@ body {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.55;
+  opacity: 0.7;
   margin-bottom: 1.25rem;
 }
 
@@ -1946,7 +1945,7 @@ body {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.65;
+  opacity: 0.8;
   line-height: 1.6;
 }
 
@@ -1973,7 +1972,7 @@ body {
   left: 0;
   right: 0;
   z-index: 9000;
-  background: rgba(240, 235, 227, 0.92);
+  background: rgba(237, 230, 219, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--nc-border);
@@ -2022,7 +2021,7 @@ body {
 
 @media (max-width: 480px) {
   .nc-hero__title {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
   }
 
   .nc-pullquote {
@@ -2030,7 +2029,7 @@ body {
   }
 
   .nc-pullquote__big {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
   }
 
   .nc-why,
