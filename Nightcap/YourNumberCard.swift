@@ -153,6 +153,9 @@ struct YourNumberCard: View {
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
 
+            // Target benchmark — gives the number a direction to move in
+            targetBenchmark(grams: grams, tier: tier)
+
             // Sugar avoided stat — only meaningful when a fast is active
             if store.elapsedSeconds > 0 {
                 avoidedStat(grams: grams)
@@ -184,6 +187,28 @@ struct YourNumberCard: View {
             }
         }
         .animation(.spring(duration: 0.3), value: grams)
+    }
+
+    private func targetBenchmark(grams: Int, tier: SugarTier) -> some View {
+        let target = 25
+        let diff = grams - target
+        return Group {
+            if diff <= 0 {
+                HStack(spacing: 5) {
+                    Image(systemName: "checkmark.circle")
+                        .font(.system(size: 11, weight: .light))
+                        .foregroundStyle(Color("NCSuccess"))
+                    Text("Within the AHA recommended limit of 25g / day.")
+                        .font(.system(size: 12, weight: .light))
+                        .foregroundStyle(Color("NCSuccess").opacity(0.85))
+                }
+            } else {
+                Text("\(diff)g above the AHA-recommended 25g / day. The goal: bring this number down.")
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
+                    .lineSpacing(3)
+            }
+        }
     }
 
     private func avoidedStat(grams: Int) -> some View {

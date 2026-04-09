@@ -71,16 +71,24 @@ struct CravingToolkitSection: View {
                     if isExpanded && activeTool == nil { activeTool = .countdown }
                 }
             } label: {
-                HStack {
-                    Text("Feeling a craving?")
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundStyle(Color("NCTextSecondary"))
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text("Feeling a craving?")
+                            .font(.system(size: 15, weight: .regular))
+                            .foregroundStyle(Color("NCTextSecondary"))
 
-                    Spacer()
+                        Spacer()
 
-                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                        .font(.system(size: 12, weight: .light))
-                        .foregroundStyle(Color("NCTextSecondary"))
+                        Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                            .font(.system(size: 12, weight: .light))
+                            .foregroundStyle(Color("NCTextSecondary"))
+                    }
+
+                    if !isExpanded {
+                        Text("20-min countdown  ·  breathing  ·  reframe cards  ·  more")
+                            .font(.system(size: 11, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                    }
                 }
                 .padding(20)
                 .background(Color("NCSurface"))

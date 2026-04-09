@@ -13,7 +13,7 @@ struct CravingCrisisSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     @StateObject private var countdown = CountdownState()
-    @State private var showTimer = false
+    @State private var showTimer = true
     @State private var cardText: String
     @State private var cardIndex: Int
 
