@@ -2182,6 +2182,15 @@ body {
   margin-top: 1rem;
 }
 
+/* ---------- CRO: Quiz Momentum ---------- */
+.nc-quiz__momentum {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--nc-text-dim);
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
 </style>
 
   <script type="application/ld+json">
@@ -2401,10 +2410,10 @@ body {
       </div>
 
       <form id="sugar-quiz-form" class="nc-quiz__form" novalidate>
-        <!-- Q1: Breakfast -->
+        <!-- STAGE 1: Self-label — they identify as someone with a sugar problem -->
         <div class="nc-quiz__step active" data-step="1">
           <h3 class="nc-quiz__question">What does your morning look like?</h3>
-          <p class="nc-quiz__helper" id="q1-helper">Just pick the closest one</p>
+          <p class="nc-quiz__helper" id="q1-helper">Most people are shocked by what they find here</p>
           <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
             <button type="button" class="nc-quiz__option" data-value="cereal_toast" role="radio" aria-checked="false">
               <span class="nc-quiz__option-label">Cereal, granola, or toast with jam</span>
@@ -2419,7 +2428,7 @@ body {
               <span class="nc-quiz__option-sugar">40-65g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="eggs_protein" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Eggs, meat, or whole foods (no packaged)</span>
+              <span class="nc-quiz__option-label">Eggs, meat, or whole foods</span>
               <span class="nc-quiz__option-sugar">0-5g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="skip" role="radio" aria-checked="false">
@@ -2429,10 +2438,11 @@ body {
           </div>
         </div>
 
-        <!-- Q2: Drinks -->
+        <!-- STAGE 2: Pain deepen — drinks add to the total, the number grows -->
         <div class="nc-quiz__step" data-step="2">
+          <p class="nc-quiz__momentum">Your sugar is adding up. Let's keep going.</p>
           <h3 class="nc-quiz__question">Sweetened drinks per day?</h3>
-          <p class="nc-quiz__helper" id="q2-helper">Soda, juice, coffee drinks, sweet tea — all of it</p>
+          <p class="nc-quiz__helper" id="q2-helper">Soda, juice, coffee drinks, sweet tea</p>
           <div class="nc-quiz__options" data-field="daily_sweet_drinks" role="radiogroup" aria-labelledby="q2-helper">
             <button type="button" class="nc-quiz__option" data-value="0" role="radio" aria-checked="false">
               <span class="nc-quiz__option-label">None — I mostly drink water</span>
@@ -2453,13 +2463,14 @@ body {
           </div>
         </div>
 
-        <!-- Q3: Packaged/Processed Foods -->
+        <!-- STAGE 3: Cost expand — hidden sugar makes it worse than they thought -->
         <div class="nc-quiz__step" data-step="3">
+          <p class="nc-quiz__momentum">This is where most of it hides.</p>
           <h3 class="nc-quiz__question">How much comes from a package?</h3>
-          <p class="nc-quiz__helper" id="q3-helper">Sauces, bars, bread, frozen meals — anything with a label</p>
+          <p class="nc-quiz__helper" id="q3-helper">Sauces, bars, bread, frozen meals</p>
           <div class="nc-quiz__options" data-field="processed_foods" role="radiogroup" aria-labelledby="q3-helper">
             <button type="button" class="nc-quiz__option" data-value="rarely" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Rarely — I cook most things from scratch</span>
+              <span class="nc-quiz__option-label">Rarely — I cook from scratch</span>
               <span class="nc-quiz__option-sugar">5-10g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="some" role="radio" aria-checked="false">
@@ -2471,38 +2482,37 @@ body {
               <span class="nc-quiz__option-sugar">30-50g</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="almost_all" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Almost everything — convenience is king</span>
+              <span class="nc-quiz__option-label">Almost everything</span>
               <span class="nc-quiz__option-sugar">50-80g</span>
             </button>
           </div>
         </div>
 
-        <!-- Q4: Label Awareness -->
+        <!-- STAGE 4: Hope reframe — they can see it, they can change it -->
         <div class="nc-quiz__step" data-step="4">
           <p class="nc-quiz__almost">Almost there</p>
           <h3 class="nc-quiz__question">Do you read sugar labels?</h3>
-          <p class="nc-quiz__helper" id="q4-helper">No judgment</p>
+          <p class="nc-quiz__helper" id="q4-helper">This tells us how to help you</p>
           <div class="nc-quiz__options" data-field="checks_labels" role="radiogroup" aria-labelledby="q4-helper">
             <button type="button" class="nc-quiz__option" data-value="always" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Always — I read every label</span>
+              <span class="nc-quiz__option-label">Always</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="sometimes" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Sometimes — depends on the product</span>
+              <span class="nc-quiz__option-label">Sometimes</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="rarely" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Rarely — I just grab what looks good</span>
+              <span class="nc-quiz__option-label">Rarely</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="never" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Never — I don't think about it</span>
+              <span class="nc-quiz__option-label">Never</span>
             </button>
           </div>
         </div>
 
-        <!-- Q5: Motivation -->
+        <!-- STAGE 5: Diagnosis — self-qualify for the app -->
         <div class="nc-quiz__step" data-step="5">
-          <p class="nc-quiz__almost">Last question</p>
+          <p class="nc-quiz__almost">Last one — this personalizes your report</p>
           <h3 class="nc-quiz__question">Why do you want to cut back?</h3>
-          <p class="nc-quiz__helper" id="q5-helper">Your #1 reason</p>
           <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q5-helper">
             <button type="button" class="nc-quiz__option" data-value="prevent_disease" role="radio" aria-checked="false">
               <span class="nc-quiz__option-label">Prevent health problems</span>
@@ -2514,7 +2524,7 @@ body {
               <span class="nc-quiz__option-label">Weight management</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="family" role="radio" aria-checked="false">
-              <span class="nc-quiz__option-label">Set a better example for my family</span>
+              <span class="nc-quiz__option-label">Better example for my family</span>
             </button>
             <button type="button" class="nc-quiz__option" data-value="curiosity" role="radio" aria-checked="false">
               <span class="nc-quiz__option-label">Just curious</span>

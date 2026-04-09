@@ -2157,3 +2157,12 @@ body {
   color: var(--nc-text-dim);
   margin-top: 1rem;
 }
+
+/* ---------- CRO: Quiz Momentum ---------- */
+.nc-quiz__momentum {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--nc-text-dim);
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
