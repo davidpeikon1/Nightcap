@@ -1152,7 +1152,7 @@ body {
 
 /* ---------- Why Section ---------- */
 .nc-why {
-  padding: 60px 32px 120px;
+  padding: 40px 32px 100px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1185,14 +1185,7 @@ body {
   margin: 0 auto;
 }
 
-.nc-why__title {
-  font-family: var(--nc-font-display);
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.25rem;
-}
+
 
 .nc-why__highlight {
   color: var(--nc-warning);
@@ -2109,33 +2102,9 @@ body {
   }
 }
 
-/* ---------- CRO: Trust Bar ---------- */
-.nc-hero__trust {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: rgba(237, 230, 219, 0.45);
-  flex-wrap: wrap;
-}
 
-@media (max-width: 480px) {
-  .nc-hero__trust {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-}
 
-/* ---------- CRO: Pullquote Stat ---------- */
-.nc-pullquote__stat {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--nc-text-muted);
-  margin-top: 1.5rem;
-}
+
 
 /* ---------- CRO: Signup Trust ---------- */
 .nc-signup__trust {
