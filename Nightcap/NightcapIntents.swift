@@ -11,7 +11,7 @@ struct NightcapShortcuts: AppShortcutsProvider {
                 "How long have I been sugar free in \(.applicationName)",
                 "Check my fast in \(.applicationName)",
                 "What phase am I in on \(.applicationName)",
-                "How's my Nightcap fast going",
+                "How's my \(.applicationName) fast going",
             ],
             shortTitle: "Get Sugar-Free Time",
             systemImageName: "timer"

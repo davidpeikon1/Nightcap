@@ -464,9 +464,10 @@ struct WhyReminderTool: View {
                     .multilineTextAlignment(.center)
             }
 
-            // Sugar avoided — grounds the motivational statement in concrete impact
+            // Sugar avoided — grounds the motivational statement in concrete impact.
+            // Gate at 6h so the number reflects a meaningful amount of elapsed time.
             if let g = appState.dailySugarGrams,
-               g > 0, store.elapsedSeconds > 0 {
+               g > 0, store.elapsedSeconds >= 6 * 3600 {
                 let days = max(1, Int(store.elapsedSeconds / 86400))
                 let avoided = days * g
                 Text("So far: ~\(avoided)g of added sugar not in your body.")
@@ -680,7 +681,7 @@ struct LogCravingTool: View {
                 .padding(.vertical, 12)
                 .frame(maxWidth: .infinity)
                 .background(isSelected ? Color("NCAccent") : Color("NCBackground"))
-                .cornerRadius(8)
+                .clipShape(Capsule())
         }
     }
 }

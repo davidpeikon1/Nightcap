@@ -252,7 +252,8 @@ struct ResetModal: View {
                     preResetBadges  = store.earnedBadges
                     store.logSugar(note: note.isEmpty ? nil : note)
                     withAnimation { didConfirm = true }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                    // 2.5s gives the near-miss line time to be read before dismissal.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         dismiss()
                     }
                 } label: {

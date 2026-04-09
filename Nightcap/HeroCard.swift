@@ -486,7 +486,7 @@ struct PersonalBestBadge: View {
             .padding(.horizontal, 7)
             .padding(.vertical, 3)
             .background(tint.opacity(bgOpacity))
-            .cornerRadius(4)
+            .clipShape(Capsule())
             .transition(.scale(scale: 0.8).combined(with: .opacity))
             .onAppear {
                 withAnimation(
