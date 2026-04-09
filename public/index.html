@@ -101,26 +101,6 @@ body {
   top: 16px;
 }
 
-/* ---------- Utility ---------- */
-.nc-badge {
-  display: inline-block;
-  padding: 6px 16px;
-  background: transparent;
-  border: 1px solid rgba(42, 37, 32, 0.15);
-  border-radius: 100px;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--nc-text-muted);
-  margin-bottom: 2.5rem;
-  animation: nc-fadeInDown 0.6s ease-out;
-}
-
-@keyframes nc-fadeInDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
 /* ---------- Section Label ---------- */
 .nc-section-label {
@@ -371,7 +351,7 @@ body {
 }
 
 .nc-hero__subtitle {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 400;
   color: var(--nc-text-muted);
   max-width: 420px;
@@ -379,55 +359,40 @@ body {
   line-height: 1.7;
 }
 
-.nc-hero__cta-group {
-  margin-bottom: 2rem;
+.nc-hero__cta-wrap {
+  margin-bottom: 3rem;
 }
 
 .nc-hero__cta-note {
-  margin-top: 1.25rem;
-  font-size: 0.78rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--nc-text-dim);
-  letter-spacing: 0.02em;
 }
 
-/* Countdown */
-.nc-countdown {
+.nc-hero__trust-bar {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 2.5rem;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: 1px solid var(--nc-border);
 }
 
-.nc-countdown__block {
-  text-align: center;
-  min-width: 64px;
-}
-
-.nc-countdown__number {
-  display: block;
-  font-family: var(--nc-font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--nc-text);
-  line-height: 1.2;
-}
-
-.nc-countdown__label {
-  font-size: 0.7rem;
-  color: var(--nc-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.nc-countdown__separator {
-  font-size: 1.5rem;
+.nc-hero__trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--nc-text-dim);
-  align-self: flex-start;
-  margin-top: 4px;
 }
 
-/* Social Proof */
+.nc-hero__trust-item svg {
+  color: var(--nc-accent);
+  flex-shrink: 0;
+}
+
 
 /* ---------- Scroll Hint ---------- */
 .nc-hero__scroll-hint {
@@ -679,18 +644,6 @@ body {
   margin-bottom: 2rem;
 }
 
-.nc-signup__icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  animation: nc-bounce 1s ease-in-out;
-}
-
-@keyframes nc-bounce {
-  0%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-15px); }
-  60% { transform: translateY(-5px); }
-}
-
 /* Signup teaser */
 .nc-signup__teaser {
   text-align: center;
@@ -734,13 +687,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.nc-signup__subtitle {
-  color: var(--nc-text);
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.7;
-}
-
 /* Form Elements */
 .nc-signup__form .nc-form-group:first-child,
 .nc-signup__form .nc-form-group:nth-child(2) {
@@ -759,25 +705,6 @@ body {
 
 .nc-form-group--checkbox {
   margin-bottom: 1rem;
-}
-
-.nc-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  margin-bottom: 6px;
-}
-
-.nc-label__badge {
-  font-size: 0.7rem;
-  padding: 2px 8px;
-  background: rgba(42, 37, 32, 0.15);
-  color: var(--nc-accent);
-  border-radius: 100px;
-  font-weight: 600;
 }
 
 .nc-input {
@@ -827,68 +754,6 @@ body {
   margin-top: 4px;
   min-height: 1.2em;
   transition: opacity var(--nc-transition);
-}
-
-/* Checkbox */
-.nc-checkbox {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  color: var(--nc-text-muted);
-  line-height: 1.5;
-}
-
-.nc-checkbox input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.nc-checkbox__mark {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--nc-border);
-  border-radius: 4px;
-  margin-top: 2px;
-  transition: all var(--nc-transition);
-  position: relative;
-}
-
-.nc-checkbox input:focus-visible + .nc-checkbox__mark {
-  outline: 2px solid var(--nc-primary-light);
-  outline-offset: 2px;
-}
-
-.nc-checkbox input:checked + .nc-checkbox__mark {
-  background: var(--nc-accent);
-  border-color: var(--nc-accent);
-}
-
-.nc-checkbox input:checked + .nc-checkbox__mark::after {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 6px;
-  width: 5px;
-  height: 9px;
-  border: solid #FFFFFF;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.nc-checkbox__text {
-  flex: 1;
-}
-
-.nc-checkbox__legal {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--nc-text-muted);
-  margin-top: 2px;
 }
 
 .nc-signup__privacy {
@@ -994,30 +859,6 @@ body {
   max-width: 480px;
   margin: 0 auto;
 }
-/* Insight */
-.nc-results__insight {
-  background: rgba(42, 37, 32, 0.08);
-  border: 1px solid rgba(42, 37, 32, 0.2);
-  border-radius: var(--nc-radius);
-  padding: 20px 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  text-align: left;
-  margin-top: 2rem;
-}
-
-.nc-results__insight-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.nc-results__insight p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--nc-text);
-}
-
 /* CTA Card */
 
 .nc-results__cta-note {
@@ -1189,37 +1030,6 @@ body {
 
 
 
-.nc-why__stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 2.5rem;
-}
-
-.nc-why__stat {
-  padding: 32px 20px;
-  background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
-  border-radius: var(--nc-radius);
-  box-shadow: var(--nc-shadow-sm);
-}
-
-.nc-why__stat-number {
-  display: block;
-  font-family: var(--nc-font-display);
-  font-size: 2.75rem;
-  font-weight: 700;
-  color: var(--nc-primary);
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
-}
-
-.nc-why__stat-label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  line-height: 1.5;
-}
 
 /* ---------- Pre-commitment ---------- */
 .nc-precommit {
@@ -1406,14 +1216,30 @@ body {
   margin: 0 auto;
 }
 
+.nc-midcta__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--nc-accent);
+  margin-bottom: 1rem;
+}
+
 .nc-midcta__text {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.25rem, 3.5vw, 1.65rem);
-  font-weight: 600;
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-weight: 700;
   letter-spacing: -0.015em;
-  line-height: 1.5;
-  margin-bottom: 2.5rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
   color: var(--nc-text);
+}
+
+.nc-midcta__note {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--nc-text-dim);
 }
 
 /* ---------- Social Proof ---------- */
@@ -1677,21 +1503,6 @@ body {
 .nc-exit-popup__note {
   font-size: 0.8rem;
   color: var(--nc-text-dim);
-}
-
-.nc-exit-popup__quiz-link {
-  background: none;
-  border: none;
-  color: var(--nc-primary-light);
-  font-family: var(--nc-font);
-  font-size: 0.8rem;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 0;
-}
-
-.nc-exit-popup__quiz-link:hover {
-  color: var(--nc-accent);
 }
 
 /* ---------- Calculating Transition ---------- */
@@ -2002,6 +1813,15 @@ body {
     height: 24px;
   }
 
+  .nc-hero__trust-bar {
+    gap: 16px;
+    padding-top: 1.5rem;
+  }
+
+  .nc-hero__trust-item {
+    font-size: 0.7rem;
+  }
+
   .nc-hero__scroll-hint {
     bottom: 16px;
   }
@@ -2269,10 +2089,18 @@ body {
 }
 
 .nc-statement__context {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--nc-text-muted);
+  margin-top: 0.75rem;
+}
+
+.nc-statement__source {
+  font-size: 0.68rem;
   font-weight: 500;
   color: var(--nc-text-dim);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 480px) {
@@ -2408,12 +2236,28 @@ body {
         Take a personalized 60-second quiz to uncover your daily sugar intake — and get a clear plan to reduce it.
       </p>
 
-      <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
-        Start the Quiz
-        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
-      </button>
-      <p class="nc-hero__cta-note">Free &middot; Takes 60 seconds &middot; No account needed</p>
+      <div class="nc-hero__cta-wrap">
+        <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
+          Start the Quiz
+          <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+        </button>
+        <p class="nc-hero__cta-note">Free &middot; Takes 60 seconds &middot; No account needed</p>
+      </div>
 
+      <div class="nc-hero__trust-bar">
+        <span class="nc-hero__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Science-backed
+        </span>
+        <span class="nc-hero__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          100% private
+        </span>
+        <span class="nc-hero__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          2,847 quizzes taken
+        </span>
+      </div>
     </div>
     <div class="nc-hero__scroll-hint" aria-hidden="true">
       <div class="nc-hero__scroll-line"></div>
@@ -2434,9 +2278,10 @@ body {
 
   <section class="nc-statement nc-reveal" id="pullquote">
     <p class="nc-section-label">The problem</p>
-    <div class="nc-statement__number">152</div>
+    <div class="nc-statement__number" data-count-to="152">0</div>
     <p class="nc-statement__unit">pounds of processed sugar per year.</p>
     <p class="nc-statement__context">The average American. Up from 1 pound, 200 years ago.</p>
+    <p class="nc-statement__source">Source: USDA Economic Research Service</p>
   </section>
 
   <!-- ===== HOW IT WORKS ===== -->
@@ -2528,11 +2373,13 @@ body {
   <!-- ===== MID-PAGE CTA ===== -->
   <section class="nc-midcta nc-reveal" id="midcta">
     <div class="nc-midcta__container">
-      <p class="nc-midcta__text">The quiz takes 60 seconds. The insight lasts a lifetime.</p>
+      <p class="nc-midcta__eyebrow">60-second quiz</p>
+      <p class="nc-midcta__text">Most people are surprised by their number. Are you?</p>
       <button class="nc-btn nc-btn--primary" id="mid-quiz-btn">
         Start the Quiz
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
+      <p class="nc-midcta__note">Personalized report included</p>
     </div>
   </section>
 
