@@ -98,7 +98,7 @@ struct ProgressSection: View {
 
     private var phaseProgressView: some View {
         let isFreedom = store.fastingPhase == .freedom
-        let dayCount  = max(14, Int(store.elapsedSeconds / 86400))
+        let dayCount  = Int(store.elapsedSeconds / 86400) + 1
         let rightLabel = isFreedom
             ? "day \(dayCount)"
             : store.timeToNextMilestone
