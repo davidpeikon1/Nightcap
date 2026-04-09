@@ -8,6 +8,7 @@ struct WidgetFastData {
     let currentQuote: String?
     let streakDays: Int
     let bestFastDuration: TimeInterval
+    let dailySugarGrams: Int?
 
     static func load() -> WidgetFastData {
         let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
@@ -15,8 +16,16 @@ struct WidgetFastData {
             lastSugarDate: defaults.object(forKey: "lastSugarDate") as? Date,
             currentQuote: defaults.string(forKey: "currentQuoteText"),
             streakDays: defaults.integer(forKey: "streakDays"),
-            bestFastDuration: defaults.double(forKey: "bestFastDuration")
+            bestFastDuration: defaults.double(forKey: "bestFastDuration"),
+            dailySugarGrams: defaults.object(forKey: "dailySugarGrams") as? Int
         )
+    }
+
+    /// Grams of added sugar avoided since the fast started, or nil when no number is set.
+    func sugarAvoided(at date: Date) -> Int? {
+        guard let g = dailySugarGrams, g > 0 else { return nil }
+        let days = max(1, Int(elapsed(at: date) / 86400))
+        return days * g
     }
 
     /// Seconds until the user beats their personal best, or nil when already past it
@@ -120,7 +129,7 @@ struct FastingEntry: TimelineEntry {
 
 struct FastingProvider: TimelineProvider {
     func placeholder(in context: Context) -> FastingEntry {
-        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800), currentQuote: nil, streakDays: 2, bestFastDuration: 0))
+        FastingEntry(date: Date(), data: WidgetFastData(lastSugarDate: Date().addingTimeInterval(-172800), currentQuote: nil, streakDays: 2, bestFastDuration: 0, dailySugarGrams: nil))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (FastingEntry) -> Void) {
@@ -352,6 +361,14 @@ struct MediumWidgetView: View {
                         .foregroundStyle(Color.ncWarning)
                         .multilineTextAlignment(.trailing)
                 }
+
+                if let avoided = entry.data.sugarAvoided(at: entry.date) {
+                    Text("~\(avoided)g\navoided")
+                        .font(.system(size: 9, weight: .light))
+                        .foregroundStyle(Color.ncSuccess)
+                        .multilineTextAlignment(.trailing)
+                        .lineSpacing(1)
+                }
             }
             .frame(width: 80)
         }
@@ -425,9 +442,16 @@ struct LargeWidgetView: View {
                 .minimumScaleFactor(0.5)
                 .lineLimit(1)
 
-            Text("sugar free")
-                .font(.system(size: 14, weight: .light))
-                .foregroundStyle(Color.ncTextSecond)
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Text("sugar free")
+                    .font(.system(size: 14, weight: .light))
+                    .foregroundStyle(Color.ncTextSecond)
+                if let avoided = entry.data.sugarAvoided(at: entry.date) {
+                    Text("· ~\(avoided)g not processed")
+                        .font(.system(size: 11, weight: .light))
+                        .foregroundStyle(Color.ncSuccess)
+                }
+            }
 
             Spacer(minLength: 16)
 

@@ -375,6 +375,7 @@ struct BadgeDetailView: View {
 struct MilestoneSheet: View {
     let badge: BadgeID
     @EnvironmentObject var store: FastingStore
+    @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) var dismiss
     @Environment(\.requestReview) private var requestReview
     @State private var shareImage: UIImage? = nil
@@ -427,6 +428,21 @@ struct MilestoneSheet: View {
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
                     .padding(.horizontal, 32)
+
+                // Sugar avoided — shown for one-week+ milestones when number is set.
+                if badge.threshold >= 604_800,
+                   let g = appState.dailySugarGrams, g > 0 {
+                    let days = max(1, Int(store.elapsedSeconds / 86400))
+                    let avoided = days * g
+                    let kg = Double(avoided) / 1000
+                    let formatted = avoided >= 1_000
+                        ? String(format: "~%.1fkg", kg)
+                        : "~\(avoided)g"
+                    Text("\(formatted) of added sugar not processed.")
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color("NCSuccess").opacity(0.8))
+                        .multilineTextAlignment(.center)
+                }
 
                 // Licensing effect — counter "I've earned a break" thinking at milestone moments.
                 // Badge-specific so it doesn't feel generic on repeat milestone views.
