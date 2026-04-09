@@ -65,7 +65,8 @@ struct GetFastingStatusIntent: AppIntent {
         // Add sugar-avoided context when the user has set their daily estimate.
         let sugarLine: String = {
             guard let g = defaults.object(forKey: "dailySugarGrams") as? Int, g > 0 else { return "" }
-            let days = max(1, Int(elapsed / 86400))
+            let days = Int(elapsed / 86400)
+            guard days >= 1 else { return "" }
             let avoided = days * g
             return " At \(g)g per day, that's about \(avoided)g of added sugar not processed."
         }()

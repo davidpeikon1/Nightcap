@@ -191,10 +191,10 @@ struct HeroCard: View {
     }
 
     private func pbApproachLabel(_ shortfall: TimeInterval) -> String {
-        let h = Int(shortfall) / 3600
-        let m = max(1, (Int(shortfall) % 3600) / 60)
-        if h > 0 { return "\(h)H \(m)M TO PB" }
-        return "\(m)M TO PB"
+        let h    = Int(shortfall) / 3600
+        let rawM = (Int(shortfall) % 3600) / 60
+        if h > 0 { return rawM > 0 ? "\(h)H \(rawM)M TO PB" : "\(h)H TO PB" }
+        return "\(max(1, rawM))M TO PB"
     }
 
     /// Quiet milestone label for first-ever fasts (no previous resets).
