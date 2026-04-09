@@ -137,6 +137,8 @@ struct HomeView: View {
         }
         .sheet(isPresented: $showHistory) {
             FastHistoryView()
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $showQuickReset) {
             ResetModal()

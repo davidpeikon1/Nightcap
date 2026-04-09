@@ -281,7 +281,7 @@ struct YourNumberCard: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                     .background(Color("NCAccent"))
-                    .cornerRadius(10)
+                    .cornerRadius(12)
             }
             .padding(.top, 4)
         }
