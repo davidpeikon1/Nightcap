@@ -331,7 +331,7 @@ struct ResetModal: View {
         let d = totalH / 24; let h = totalH % 24
         if d > 0 { return "\(d)d\(h > 0 ? " \(h)h" : "") short of \(nextBadge.label)." }
         if totalH > 0 { return "\(totalH)h short of \(nextBadge.label)." }
-        let m = max(1, Int(shortfall / 60))
+        let m = Int(shortfall / 60)
         return "\(m)m short of \(nextBadge.label)."
     }
 
