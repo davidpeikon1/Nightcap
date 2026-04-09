@@ -4,6 +4,7 @@ import UIKit
 
 struct FastHistoryView: View {
     @EnvironmentObject var store: FastingStore
+    @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) var dismiss
     @State private var showAllCravings = false
     @State private var editingReset: ResetEvent? = nil
@@ -163,6 +164,17 @@ struct FastHistoryView: View {
             HStack(spacing: 12) {
                 statCard(value: "\(store.resetEvents.count)", label: "Resets")
                 statCard(value: totalText,                    label: "Time fasted")
+            }
+            if let g = appState.dailySugarGrams, store.totalSugarFreeTime > 0 {
+                let totalDays = max(1, Int(store.totalSugarFreeTime / 86400))
+                let avoided = totalDays * g
+                let kg = Double(avoided) / 1000
+                HStack(spacing: 12) {
+                    statCard(
+                        value: avoided >= 1_000 ? String(format: "%.1fkg", kg) : "\(avoided)g",
+                        label: "Added sugar avoided"
+                    )
+                }
             }
         }
     }

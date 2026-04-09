@@ -62,9 +62,16 @@ struct GetFastingStatusIntent: AppIntent {
         let defaults = UserDefaults(suiteName: "group.com.nightcap.app") ?? .standard
         let streak = defaults.integer(forKey: "streakDays")
         let streakLine = streak > 0 ? " \(streak) clean day\(streak == 1 ? "" : "s") in a row." : ""
+        // Add sugar-avoided context when the user has set their daily estimate.
+        let sugarLine: String = {
+            guard let g = defaults.object(forKey: "dailySugarGrams") as? Int, g > 0 else { return "" }
+            let days = max(1, Int(elapsed / 86400))
+            let avoided = days * g
+            return " At \(g)g per day, that's about \(avoided)g of added sugar not processed."
+        }()
         return .result(
             value: time,
-            dialog: IntentDialog("Sugar free for \(time). You're in the \(phase) phase. \(tagline)\(streakLine)")
+            dialog: IntentDialog("Sugar free for \(time). You're in the \(phase) phase. \(tagline)\(streakLine)\(sugarLine)")
         )
     }
 }

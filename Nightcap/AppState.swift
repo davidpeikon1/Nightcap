@@ -142,6 +142,8 @@ class AppState: ObservableObject {
             guard let g = dailySugarGrams else { return }
             defaults.set(g, forKey: "dailySugarGrams")
             defaults.set(Date(), forKey: "dailySugarGramsUpdated")
+            // Mirror to App Group so widget and Siri intents can read it.
+            appGroupDefaults?.set(g, forKey: "dailySugarGrams")
         }
     }
 
@@ -151,6 +153,7 @@ class AppState: ObservableObject {
         didSet {
             guard let g = quizSugarGrams else { return }
             defaults.set(g, forKey: "quizSugarGrams")
+            appGroupDefaults?.set(g, forKey: "quizSugarGrams")
         }
     }
 
@@ -160,6 +163,7 @@ class AppState: ObservableObject {
     }
 
     private let defaults = UserDefaults.standard
+    private let appGroupDefaults = UserDefaults(suiteName: "group.com.nightcap.app")
 
     init() {
         let raw = defaults.integer(forKey: "onboardingStep")
