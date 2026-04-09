@@ -291,8 +291,52 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 40px;
+  padding: 120px 40px 60px;
   overflow: hidden;
+}
+
+/* ---------- Hero Teaser ---------- */
+.nc-hero__teaser {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nc-hero {
+    min-height: auto;
+    padding: 80px 24px 40px;
+  }
+
+  .nc-hero__teaser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(28, 25, 23, 0.06);
+  }
+
+  .nc-hero__teaser-text {
+    font-family: var(--nc-font-display);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--nc-text);
+    opacity: 0.45;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .nc-hero__teaser-arrow {
+    font-size: 0.9rem;
+    color: var(--nc-text);
+    opacity: 0.3;
+    animation: nc-scrollBounce 2.5s ease-in-out infinite;
+  }
+
+  @keyframes nc-scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.2; }
+    50% { transform: translateY(4px); opacity: 0.4; }
+  }
 }
 
 .nc-hero__bg {
@@ -1977,10 +2021,6 @@ body {
 }
 
 @media (max-width: 480px) {
-  .nc-hero {
-    padding: 60px 20px;
-  }
-
   .nc-hero__title {
     font-size: 2.25rem;
   }
@@ -2105,6 +2145,12 @@ body {
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
       <p class="nc-hero__cta-note">60-second quiz &middot; <span id="quiz-count-today">247</span> people took it today</p>
+
+      <!-- Scroll teaser — visible on mobile to hint at more content -->
+      <div class="nc-hero__teaser">
+        <p class="nc-hero__teaser-text">200 years ago: 1 lb of sugar per year. Today: 152.</p>
+        <span class="nc-hero__teaser-arrow">&#8595;</span>
+      </div>
     </div>
   </section>
 
