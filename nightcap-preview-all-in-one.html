@@ -1855,6 +1855,88 @@ body {
 }
 
 /* ---------- Results Equivalent Line ---------- */
+
+/* ---------- Results Biology Section ---------- */
+.nc-results__section-title {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.nc-results__biology {
+  margin: 3rem 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--nc-border);
+}
+
+.nc-results__bio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.nc-results__bio-item {
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--nc-text-muted);
+  padding-left: 1rem;
+  border-left: 2px solid var(--nc-border);
+}
+
+.nc-results__mechanic {
+  margin: 2rem 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--nc-border);
+}
+
+.nc-results__mechanic-intro {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  margin-bottom: 2rem;
+}
+
+.nc-results__phases {
+  display: flex;
+  flex-direction: column;
+}
+
+.nc-results__phase {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--nc-border);
+  align-items: baseline;
+}
+
+.nc-results__phase:first-child {
+  border-top: 1px solid var(--nc-border);
+}
+
+.nc-results__phase-name {
+  font-family: var(--nc-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.nc-results__phase-desc {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  line-height: 1.6;
+}
+
+.nc-results__cta-intro {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  margin-bottom: 1.5rem;
+}
 .nc-results__reframe {
   font-size: 0.9rem;
   font-weight: 500;
@@ -2476,52 +2558,75 @@ body {
   <!-- ===== RESULTS ===== -->
   <section class="nc-results" id="quiz-results" aria-labelledby="results-title">
     <div class="nc-results__container">
+
+      <!-- THE NUMBER, REFRAMED -->
       <div class="nc-results__report">
         <p class="nc-results__your-label">Your number</p>
         <div class="nc-results__big-number">
           <span id="results-sugar-grams">0</span><span class="nc-results__big-number-unit">g</span>
         </div>
-        <p class="nc-results__big-label">of processed sugar per day <span class="nc-results__contrast">(AHA limit: 25g)</span></p>
-
+        <p class="nc-results__big-label">of processed sugar per day</p>
         <h2 class="nc-results__title" id="results-title"></h2>
         <p class="nc-results__subtitle" id="results-subtitle"></p>
-
-        <p class="nc-results__equivalent" id="results-equivalent"></p>
-
-        <p class="nc-results__reframe" id="results-reframe"></p>
       </div>
 
-      <!-- Next Steps -->
-      <div class="nc-next-steps" id="results-next-steps">
-        <h3 class="nc-next-steps__title">Your first three moves</h3>
-        <div class="nc-next-steps__list">
-          <div class="nc-next-steps__item">
-            <h4 class="nc-next-steps__heading" id="next-step-1-title">Start reading labels</h4>
-            <p class="nc-next-steps__desc" id="next-step-1-desc">Check the "Added Sugars" line on everything you buy this week.</p>
+      <!-- WHAT THAT NUMBER IS DOING -->
+      <div class="nc-results__biology">
+        <h3 class="nc-results__section-title">What that number is doing inside you right now</h3>
+        <div class="nc-results__bio-list">
+          <p class="nc-results__bio-item" id="bio-dopamine">Your D2 dopamine receptors are downregulated — the same adaptation seen in substance dependence. That's why stopping feels impossible and starting feels urgent.</p>
+          <p class="nc-results__bio-item" id="bio-insulin">Your insulin is cycling <span id="bio-insulin-cycles">—</span> times per day above baseline. Each cycle drives fat storage, crashes your energy, and triggers another craving within 90 minutes.</p>
+          <p class="nc-results__bio-item" id="bio-sleep">Nocturnal glucose crashes are fragmenting your sleep architecture. The 3am waking, the unrefreshed mornings — that's your blood sugar, not your stress.</p>
+          <p class="nc-results__bio-item" id="bio-cravings">At this intake, you're experiencing approximately <span id="bio-craving-cycles">—</span> acute craving cycles per day. Each one peaks and falls within 20 minutes — whether you act on it or not.</p>
+        </div>
+      </div>
+
+      <!-- THE MECHANIC -->
+      <div class="nc-results__mechanic">
+        <h3 class="nc-results__section-title">The only variable that matters</h3>
+        <p class="nc-results__mechanic-intro">How long it's been since the last hit. That's what the clock tracks.</p>
+        <div class="nc-results__phases">
+          <div class="nc-results__phase">
+            <span class="nc-results__phase-name">0–20 min</span>
+            <span class="nc-results__phase-desc">The craving window opens. It closes in under 20 minutes.</span>
           </div>
-          <div class="nc-next-steps__item">
-            <h4 class="nc-next-steps__heading" id="next-step-2-title">Track for 7 days</h4>
-            <p class="nc-next-steps__desc" id="next-step-2-desc">Use the Nightcap app to log your daily sugar. Seeing the numbers changes behavior.</p>
+          <div class="nc-results__phase">
+            <span class="nc-results__phase-name">24 hours</span>
+            <span class="nc-results__phase-desc">Insulin drops to baseline. The liver begins clearing fructose.</span>
           </div>
-          <div class="nc-next-steps__item">
-            <h4 class="nc-next-steps__heading" id="next-step-3-title">Make one swap</h4>
-            <p class="nc-next-steps__desc" id="next-step-3-desc">Pick your biggest source. Replace it. One swap per week transforms your intake.</p>
+          <div class="nc-results__phase">
+            <span class="nc-results__phase-name">72 hours</span>
+            <span class="nc-results__phase-desc">D2 receptor recovery begins. The hardest 48 hours are behind you.</span>
+          </div>
+          <div class="nc-results__phase">
+            <span class="nc-results__phase-name">1 week</span>
+            <span class="nc-results__phase-desc">Gut microbiome shifts. Craving-amplifying bacteria are declining.</span>
+          </div>
+          <div class="nc-results__phase">
+            <span class="nc-results__phase-name">2 weeks</span>
+            <span class="nc-results__phase-desc">fMRI studies show reduced reward-center response to sugar images.</span>
+          </div>
+          <div class="nc-results__phase">
+            <span class="nc-results__phase-name">28 days</span>
+            <span class="nc-results__phase-desc">Meaningful D2 receptor density recovery. This is not a diet. This is biology.</span>
           </div>
         </div>
-        <p class="nc-next-steps__note">Fair warning: once you start looking, you'll see sugar everywhere. That's the point.</p>
       </div>
 
-      <!-- CTA -->
+      <!-- THE DOWNLOAD -->
       <div class="nc-results__cta-section">
+        <h3 class="nc-results__section-title">Start the clock</h3>
+        <p class="nc-results__cta-intro">The app tracks one thing: time since your last processed sugar. The biology does the rest.</p>
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
-          Get Early Access
+          Start the Clock
           <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
         </button>
-        <p class="nc-results__cta-note">iOS app launching soon &middot; First 5,000 spots &middot; <span id="spots-remaining">2,153</span> remaining</p>
+        <p class="nc-results__cta-note">iOS &middot; Free &middot; No account required</p>
       </div>
 
+      <!-- SHARE -->
       <div class="nc-results__share-section">
-        <p class="nc-results__share-prompt">You're one of the people who chose to look.<br>Most don't. Share this with someone who's ready.</p>
+        <p class="nc-results__share-prompt">Someone you know is feeling the same thing right now and doesn't know why.</p>
         <div class="nc-referral-socials">
           <button class="nc-referral-socials__btn" id="share-sms">Text It</button>
           <button class="nc-referral-socials__btn" id="share-email">Email It</button>
@@ -3244,26 +3349,21 @@ body {
     // ANCHORING: Always contrast their number against the 25g limit
     var multiple = Math.round(dailySugar / 25);
 
-    // SPOTLIGHT EFFECT: No shame. FRESH START: This is day one. STORYTELLING: They're the hero.
+    // Biological reframe — no shame, just mechanism
     if (dailySugar <= 25) {
-      title.textContent = payload.first_name + ", you're already there";
-      subtitle.textContent = "Under 25g. Most people never get here. You did it without even knowing the number.";
-    } else if (dailySugar <= 75) {
-      title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = "Not because you eat badly. Because " + dailySugar + "g per day hides in foods that don't even taste sweet. Now that you can see it, you can change it. Today is day one.";
-    } else if (dailySugar <= 150) {
-      title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. Nobody showed you the math until now. This is the moment it changes.";
+      title.textContent = "Under 25g. Your biology is working for you.";
+      subtitle.textContent = "Most people never get here. You did.";
     } else {
-      title.textContent = payload.first_name + ", " + multiple + "x the limit";
-      subtitle.textContent = dailySugar + "g per day. " + yearlySugarLbs + " lbs per year. You're not the problem — the food system is. And now you have the one thing it didn't want you to have: the number.";
+      title.textContent = dailySugar + "g per day. That's not a choice.";
+      subtitle.textContent = "That's what chronic dopamine overstimulation looks like from the outside. Processed sugar activates the same reward pathways as addictive substances. The craving you feel is real — and it's biological, not personal.";
     }
 
-    // PEAK-END RULE: A genuine warm moment after the data shock
-    var reframe = document.getElementById('results-reframe');
-    if (reframe && dailySugar > 25) {
-      reframe.textContent = "Knowing your number is the hardest part. Everything after this gets easier.";
-    }
+    // Populate biology section with their specific numbers
+    var insulinCycles = document.getElementById('bio-insulin-cycles');
+    if (insulinCycles) insulinCycles.textContent = Math.round(dailySugar / 25);
+
+    var cravingCycles = document.getElementById('bio-craving-cycles');
+    if (cravingCycles) cravingCycles.textContent = Math.round(dailySugar / 20);
 
     // Share URL
     var refUrl = CONFIG.baseUrl;

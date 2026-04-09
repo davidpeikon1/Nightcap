@@ -1831,6 +1831,88 @@ body {
 }
 
 /* ---------- Results Equivalent Line ---------- */
+
+/* ---------- Results Biology Section ---------- */
+.nc-results__section-title {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.nc-results__biology {
+  margin: 3rem 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--nc-border);
+}
+
+.nc-results__bio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.nc-results__bio-item {
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--nc-text-muted);
+  padding-left: 1rem;
+  border-left: 2px solid var(--nc-border);
+}
+
+.nc-results__mechanic {
+  margin: 2rem 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--nc-border);
+}
+
+.nc-results__mechanic-intro {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  margin-bottom: 2rem;
+}
+
+.nc-results__phases {
+  display: flex;
+  flex-direction: column;
+}
+
+.nc-results__phase {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--nc-border);
+  align-items: baseline;
+}
+
+.nc-results__phase:first-child {
+  border-top: 1px solid var(--nc-border);
+}
+
+.nc-results__phase-name {
+  font-family: var(--nc-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.nc-results__phase-desc {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  line-height: 1.6;
+}
+
+.nc-results__cta-intro {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  margin-bottom: 1.5rem;
+}
 .nc-results__reframe {
   font-size: 0.9rem;
   font-weight: 500;
