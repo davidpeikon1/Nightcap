@@ -13,6 +13,7 @@ struct HomeView: View {
     @State private var showHistory       = false
     @State private var showPhaseDetail: FastingPhase? = nil
     @State private var showCravingCrisis = false
+    @State private var showNumberEdit    = false
     @State private var flamePulse: CGFloat = 1.0
 
     var body: some View {
@@ -123,6 +124,11 @@ struct HomeView: View {
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
+        .sheet(isPresented: $showNumberEdit) {
+            NumberEditSheet()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
         .sheet(isPresented: $showSettings) {
             SettingsSheet()
                 .presentationDetents([.large])
@@ -154,6 +160,10 @@ struct HomeView: View {
         .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenHistory)) { _ in
             guard !coachmarkMode else { return }
             showHistory = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .nightcapOpenNumberEdit)) { _ in
+            guard !coachmarkMode else { return }
+            showNumberEdit = true
         }
     }
 

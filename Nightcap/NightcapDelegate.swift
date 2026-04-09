@@ -8,6 +8,7 @@ extension Notification.Name {
     static let nightcapOpenCravingToolkit = Notification.Name("nightcap.openCravingToolkit")
     static let nightcapOpenCravingCrisis  = Notification.Name("nightcap.openCravingCrisis")
     static let nightcapOpenHistory        = Notification.Name("nightcap.openHistory")
+    static let nightcapOpenNumberEdit     = Notification.Name("nightcap.openNumberEdit")
 }
 
 // MARK: - UIApplicationDelegate
@@ -120,6 +121,12 @@ extension NightcapDelegate: UNUserNotificationCenterDelegate {
                 id.hasPrefix("nightcap.pb") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 NotificationCenter.default.post(name: .nightcapOpenHistory, object: nil)
+            }
+        }
+        // 30-day number update notification → open number edit sheet.
+        else if id == "nightcap.numberUpdate" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationCenter.default.post(name: .nightcapOpenNumberEdit, object: nil)
             }
         }
         completionHandler()
