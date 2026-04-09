@@ -118,7 +118,24 @@ class NotificationManager {
 
     /// Returns a morning body line, using the goal-specific pool when available
     /// and falling back to the generic pool when no goal is set.
+    /// Returns a daily sugar grams value stored in UserDefaults, used to
+    /// personalize notification copy without threading AppState through the manager.
+    private var dailySugarGrams: Int? {
+        defaults.object(forKey: "dailySugarGrams") as? Int
+    }
+
     private func morningBody(for goal: UserGoal?, absoluteDay: Int) -> String {
+        // Every 7th morning, inject a number-aware line when a high estimate is set.
+        if absoluteDay % 7 == 0, let g = dailySugarGrams, g >= 50 {
+            let numberLines: [String] = [
+                "At \(g)g of added sugar per day, your insulin has been elevated chronically. Every day clean, it falls.",
+                "You came in at \(g)g per day. That's \(g * 365 / 1_000)kg of sugar per year your pancreas no longer has to manage.",
+                "Your baseline was \(g)g per day. Your body is running a different equation this morning.",
+                "Before you started: \(g)g daily. This morning: zero. That's the gap your biology is working with.",
+            ]
+            return numberLines[absoluteDay % numberLines.count]
+        }
+
         let pool: [String]
         switch goal {
         case .sleepBetter:
@@ -342,6 +359,43 @@ class NotificationManager {
         UNUserNotificationCenter.current().removePendingNotificationRequests(
             withIdentifiers: ["nightcap.pb.approach", "nightcap.pb.achieved"]
         )
+    }
+
+    // MARK: - Number Update Reminder
+
+    /// Schedules a single morning notification at the 30-day mark asking the
+    /// user to update their sugar estimate. The number update is the primary
+    /// retention hook for returning users at this milestone.
+    /// Safe to call redundantly — removes any prior request before adding.
+    func scheduleNumberUpdateReminder(from lastSugarDate: Date) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: ["nightcap.numberUpdate"]
+        )
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else { return }
+            guard let fireDate = Calendar.current.date(
+                byAdding: .day, value: 31, to: lastSugarDate
+            ) else { return }
+            let interval = fireDate.timeIntervalSinceNow
+            guard interval > 5 else { return }
+
+            let g = self.defaults.object(forKey: "dailySugarGrams") as? Int
+            let body: String
+            if let grams = g {
+                body = "30 days in. You started at \(grams)g per day. Is that number still accurate? Updating it takes 10 seconds."
+            } else {
+                body = "30 days in. How much added sugar are you having now? Setting your number unlocks personalized biology."
+            }
+            let content = UNMutableNotificationContent()
+            content.title = "Your number."
+            content.body  = body
+            content.sound = .default
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+            let request = UNNotificationRequest(
+                identifier: "nightcap.numberUpdate", content: content, trigger: trigger
+            )
+            UNUserNotificationCenter.current().add(request)
+        }
     }
 
     // MARK: - Personalized peak-craving notification

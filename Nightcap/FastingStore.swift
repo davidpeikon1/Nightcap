@@ -438,6 +438,8 @@ class FastingStore: ObservableObject {
         // Schedule personal-best notifications (includes the fast just logged).
         let pbTarget = resetEvents.map(\.fastDuration).max() ?? 0
         NotificationManager.shared.schedulePersonalBestNotifications(from: date, previousBest: pbTarget)
+        // Schedule 30-day number update reminder.
+        NotificationManager.shared.scheduleNumberUpdateReminder(from: date)
     }
 
     func resetAllData() {
@@ -651,6 +653,8 @@ class FastingStore: ObservableObject {
         if pbTarget > 0 {
             NotificationManager.shared.schedulePersonalBestNotifications(from: date, previousBest: pbTarget)
         }
+        // Schedule 30-day number update reminder.
+        NotificationManager.shared.scheduleNumberUpdateReminder(from: date)
     }
 
     var fastingPhase: FastingPhase {

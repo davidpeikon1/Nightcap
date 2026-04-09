@@ -50,6 +50,13 @@ struct WeeklyInsightCard: View {
                 if let trigger = insight.topTrigger {
                     statRow("Top craving trigger", value: trigger.rawValue)
                 }
+                // Sugar avoided this week — only shown when number is set and
+                // the user has been tracking for at least 7 days.
+                if let g = appState.dailySugarGrams,
+                   store.elapsedSeconds >= 7 * 86400 {
+                    let avoided = 7 * g
+                    statRow("Added sugar avoided", value: "~\(avoided)g")
+                }
             }
 
             Rectangle()

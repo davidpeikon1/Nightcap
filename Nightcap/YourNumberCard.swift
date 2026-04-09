@@ -7,10 +7,10 @@ enum SugarTier {
 
     init(grams: Int) {
         switch grams {
-        case ..<25:  self = .low
+        case ..<25:   self = .low
         case 25..<50: self = .moderate
         case 50..<100: self = .high
-        default:      self = .veryHigh
+        default:       self = .veryHigh
         }
     }
 
@@ -50,7 +50,9 @@ enum SugarTier {
 
 struct YourNumberCard: View {
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var store: FastingStore
     @State private var showEdit = false
+    @State private var updatePulse: Double = 1.0
 
     private var grams: Int? { appState.dailySugarGrams }
     private var quiz: Int?  { appState.quizSugarGrams }
@@ -58,6 +60,12 @@ struct YourNumberCard: View {
     private var tier: SugarTier? {
         guard let g = grams else { return nil }
         return SugarTier(grams: g)
+    }
+
+    /// True when the number hasn't been updated in > 30 days.
+    private var isStale: Bool {
+        guard let updated = appState.dailySugarGramsUpdated else { return false }
+        return Date().timeIntervalSince(updated) > 30 * 86400
     }
 
     var body: some View {
@@ -74,9 +82,23 @@ struct YourNumberCard: View {
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     showEdit = true
                 } label: {
-                    Text(grams == nil ? "Set it" : "Update")
-                        .font(.system(size: 12, weight: .regular))
-                        .foregroundStyle(Color("NCSuccess"))
+                    HStack(spacing: 4) {
+                        if isStale {
+                            Circle()
+                                .fill(Color("NCWarning"))
+                                .frame(width: 5, height: 5)
+                                .scaleEffect(updatePulse)
+                                .onAppear {
+                                    withAnimation(
+                                        .easeInOut(duration: 1.2)
+                                        .repeatForever(autoreverses: true)
+                                    ) { updatePulse = 1.5 }
+                                }
+                        }
+                        Text(grams == nil ? "Set it" : "Update")
+                            .font(.system(size: 12, weight: .regular))
+                            .foregroundStyle(isStale ? Color("NCWarning") : Color("NCSuccess"))
+                    }
                 }
             }
 
@@ -113,7 +135,6 @@ struct YourNumberCard: View {
                     .font(.system(size: 14, weight: .light))
                     .foregroundStyle(Color("NCTextSecondary"))
                     .padding(.bottom, 4)
-
                 Spacer()
             }
 
@@ -132,19 +153,57 @@ struct YourNumberCard: View {
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
 
+            // Sugar avoided stat — only meaningful when a fast is active
+            if store.elapsedSeconds > 0 {
+                avoidedStat(grams: grams)
+            }
+
+            // Delta vs quiz estimate
             if let q = quiz, q != grams {
                 let delta = q - grams
                 Text(delta > 0
-                     ? "Down \(delta)g from your original estimate. That's \(delta * 365 / 1000)kg less fructose per year entering your liver."
+                     ? "Down \(delta)g from your original estimate. That's \(delta * 365 / 1_000)kg less fructose per year entering your liver."
                      : "Up \(abs(delta))g from your original estimate.")
                     .font(.system(size: 12, weight: .light))
                     .foregroundStyle(Color("NCTextTertiary"))
                     .lineSpacing(3)
                     .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 2)
+            }
+
+            // Stale update prompt
+            if isStale {
+                HStack(spacing: 6) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.system(size: 10, weight: .light))
+                        .foregroundStyle(Color("NCWarning"))
+                    Text("It's been a while. Has your number changed?")
+                        .font(.system(size: 12, weight: .light))
+                        .foregroundStyle(Color("NCWarning").opacity(0.85))
+                }
+                .padding(.top, 2)
             }
         }
         .animation(.spring(duration: 0.3), value: grams)
+    }
+
+    private func avoidedStat(grams: Int) -> some View {
+        let days = max(1, Int(store.elapsedSeconds / 86400))
+        let totalGrams = days * grams
+        let teaspoons = totalGrams / 4
+        let label: String = {
+            if days == 1 {
+                return "Today: ~\(totalGrams)g of added sugar not processed — about \(teaspoons) teaspoons."
+            } else {
+                return "\(days) days in: ~\(totalGrams)g of added sugar not processed — about \(teaspoons) teaspoons."
+            }
+        }()
+        return Text(label)
+            .font(.system(size: 13, weight: .light))
+            .foregroundStyle(Color("NCSuccess").opacity(0.85))
+            .lineSpacing(4)
+            .fixedSize(horizontal: false, vertical: true)
+            .contentTransition(.numericText())
+            .animation(.snappy(duration: 0.25), value: days)
     }
 
     private var emptyState: some View {
