@@ -425,6 +425,7 @@ struct ReframeCardTool: View {
 
 struct WhyReminderTool: View {
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var store: FastingStore
     @State private var showGoalPicker = false
 
     private var statement: String {
@@ -452,6 +453,17 @@ struct WhyReminderTool: View {
                     .font(.system(size: 13))
                     .foregroundStyle(Color("NCTextSecondary"))
                     .lineSpacing(4)
+                    .multilineTextAlignment(.center)
+            }
+
+            // Sugar avoided — grounds the motivational statement in concrete impact
+            if let g = appState.dailySugarGrams,
+               g > 0, store.elapsedSeconds > 0 {
+                let days = max(1, Int(store.elapsedSeconds / 86400))
+                let avoided = days * g
+                Text("So far: ~\(avoided)g of added sugar not in your body.")
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCSuccess").opacity(0.85))
                     .multilineTextAlignment(.center)
             }
 
