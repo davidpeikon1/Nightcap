@@ -467,8 +467,8 @@ struct WhyReminderTool: View {
             // Sugar avoided — grounds the motivational statement in concrete impact.
             // Gate at 6h so the number reflects a meaningful amount of elapsed time.
             if let g = appState.dailySugarGrams,
-               g > 0, store.elapsedSeconds >= 6 * 3600 {
-                let days = max(1, Int(store.elapsedSeconds / 86400))
+               g > 0, store.elapsedSeconds >= 86400 {
+                let days = Int(store.elapsedSeconds / 86400)
                 let avoided = days * g
                 Text("So far: ~\(avoided)g of added sugar not in your body.")
                     .font(.system(size: 13, weight: .light))
