@@ -2191,6 +2191,85 @@ body {
   }
 }
 
+/* ---------- Steps (How it works) ---------- */
+.nc-steps {
+  padding: 100px 40px;
+  text-align: center;
+  background: var(--nc-bg-warm);
+}
+
+.nc-steps__container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.nc-steps__title {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+}
+
+.nc-steps__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.nc-steps__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.nc-steps__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--nc-accent);
+  color: #FFFFFF;
+  font-family: var(--nc-font);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.nc-steps__item-title {
+  font-family: var(--nc-font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.nc-steps__item-desc {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--nc-text-muted);
+  line-height: 1.6;
+  max-width: 220px;
+}
+
+@media (max-width: 600px) {
+  .nc-steps {
+    padding: 80px 20px;
+  }
+
+  .nc-steps__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .nc-steps__item-desc {
+    max-width: 280px;
+  }
+}
+
 /* ---------- Proof Header ---------- */
 .nc-proof__header {
   font-family: var(--nc-font-display);

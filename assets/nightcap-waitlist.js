@@ -234,16 +234,18 @@
     var title = document.getElementById('results-title');
     var subtitle = document.getElementById('results-subtitle');
 
-    // ANCHORING: Always contrast their number against the 25g limit
+    // Personalized messaging based on intake level
     var multiple = Math.round(dailySugar / 25);
 
-    // Biological reframe — no shame, just mechanism
     if (dailySugar <= 25) {
-      title.textContent = "Under 25g. Your biology is working for you.";
-      subtitle.textContent = "Most people never get here. You did.";
+      title.textContent = "You're under 25g. That's excellent.";
+      subtitle.textContent = "You're already below the recommended daily limit. Nightcap can help you stay here.";
+    } else if (dailySugar <= 50) {
+      title.textContent = "You're at " + dailySugar + "g per day.";
+      subtitle.textContent = "That's about " + multiple + "x the recommended limit of 25g. Small changes can make a big difference — and we'll show you exactly where to start.";
     } else {
-      title.textContent = dailySugar + "g per day. That's not a choice.";
-      subtitle.textContent = "That's what chronic dopamine overstimulation looks like from the outside. Processed sugar activates the same reward pathways as addictive substances. The craving you feel is real — and it's biological, not personal.";
+      title.textContent = "You're at " + dailySugar + "g per day.";
+      subtitle.textContent = "That's " + multiple + "x the recommended limit. You're not alone — most Americans are in a similar range. The good news: your body responds quickly once you start reducing.";
     }
 
     // Populate biology section with their specific numbers
@@ -261,7 +263,7 @@
     var twitterShare = document.getElementById('share-twitter');
     if (twitterShare) {
       twitterShare.addEventListener('click', function () {
-        var text = 'I just found out my number. ' + dailySugar + 'g of processed sugar. Per day.\n\nWhat\'s yours?';
+        var text = 'I just took a 60-second sugar quiz and found out I\'m eating ' + dailySugar + 'g of processed sugar a day. Interesting — try it:';
         window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(refUrl), '_blank', 'width=550,height=420');
         track('referral_shared', { platform: 'twitter' });
       });
@@ -270,7 +272,7 @@
     var smsShare = document.getElementById('share-sms');
     if (smsShare) {
       smsShare.addEventListener('click', function () {
-        var text = 'I just found out I consume ' + dailySugar + 'g of processed sugar per day. I had no idea. You should see your number — takes 60 seconds: ' + refUrl;
+        var text = 'I took a quick quiz and found out I eat ' + dailySugar + 'g of processed sugar a day. Pretty eye-opening. Takes 60 seconds: ' + refUrl;
         window.open('sms:?body=' + encodeURIComponent(text));
         track('referral_shared', { platform: 'sms' });
       });
@@ -279,8 +281,8 @@
     var emailShare = document.getElementById('share-email');
     if (emailShare) {
       emailShare.addEventListener('click', function () {
-        var subject = 'Do you know your number?';
-        var body = "I just took a 60-second quiz and found out I consume " + dailySugar + "g of processed sugar per day. Had no idea.\n\nYou should see yours: " + refUrl;
+        var subject = 'Quick sugar quiz — worth 60 seconds';
+        var body = "I just took a quick quiz and found out I'm eating about " + dailySugar + "g of processed sugar a day. Pretty interesting.\n\nTry it yourself: " + refUrl;
         window.open('mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
         track('referral_shared', { platform: 'email' });
       });

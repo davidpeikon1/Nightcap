@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Nightcap — Leave Processed Sugar Behind</title>
-  <meta name="description" content="Quitting sugar is hard. We're building the tools to help. Take the 60-second quiz and see how much you're really consuming.">
+  <title>Nightcap — Find Out How Much Sugar You're Really Eating</title>
+  <meta name="description" content="Take a free 60-second quiz to uncover your daily sugar intake. Get a personalized report and a clear plan to reduce it.">
 
-  <meta property="og:title" content="Nightcap — Quitting Sugar Is Hard. Help Is Coming.">
-  <meta property="og:description" content="Take the 60-second quiz. See how much processed sugar you're really consuming.">
+  <meta property="og:title" content="Nightcap — How Much Sugar Are You Really Eating?">
+  <meta property="og:description" content="Take a free 60-second quiz. Get your personalized sugar report.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nightcap">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nightcap — Quitting Sugar Is Hard. Help Is Coming.">
-  <meta name="twitter:description" content="60-second quiz. See your real number.">
+  <meta name="twitter:title" content="Nightcap — How Much Sugar Are You Really Eating?">
+  <meta name="twitter:description" content="Free 60-second quiz. Personalized sugar report.">
 
   <meta name="theme-color" content="#FAFAF7">
 
@@ -82,7 +82,31 @@
   <section class="nc-statement nc-reveal" id="pullquote">
     <div class="nc-statement__number">152</div>
     <p class="nc-statement__unit">pounds of processed sugar per year.</p>
-    <p class="nc-statement__context">Up from 1 pound, 200 years ago</p>
+    <p class="nc-statement__context">The average American. Up from 1 pound, 200 years ago.</p>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="nc-steps nc-reveal" id="steps">
+    <div class="nc-steps__container">
+      <h2 class="nc-steps__title">How it works</h2>
+      <div class="nc-steps__grid">
+        <div class="nc-steps__item nc-reveal nc-reveal--delay-1">
+          <span class="nc-steps__number">1</span>
+          <h3 class="nc-steps__item-title">Take the quiz</h3>
+          <p class="nc-steps__item-desc">Answer 5 quick questions about your eating habits. Takes under 60 seconds.</p>
+        </div>
+        <div class="nc-steps__item nc-reveal nc-reveal--delay-2">
+          <span class="nc-steps__number">2</span>
+          <h3 class="nc-steps__item-title">Get your report</h3>
+          <p class="nc-steps__item-desc">See your estimated daily sugar intake and what it means for your health.</p>
+        </div>
+        <div class="nc-steps__item nc-reveal nc-reveal--delay-3">
+          <span class="nc-steps__number">3</span>
+          <h3 class="nc-steps__item-title">Start reducing</h3>
+          <p class="nc-steps__item-desc">Get a personalized plan and early access to the Nightcap app to track your progress.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ===== WHAT CHANGES ===== -->
@@ -194,8 +218,8 @@
         <svg viewBox="0 0 80 80" class="nc-calculating__svg">
           <defs>
             <linearGradient id="calc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#1C1917"/>
-              <stop offset="100%" stop-color="#57534E"/>
+              <stop offset="0%" stop-color="#2E6B3A"/>
+              <stop offset="100%" stop-color="#3A7D47"/>
             </linearGradient>
           </defs>
           <circle cx="40" cy="40" r="34" class="nc-calculating__track"/>
@@ -227,7 +251,7 @@
         <!-- STAGE 1: Self-label — they identify as someone with a sugar problem -->
         <div class="nc-quiz__step active" data-step="1">
           <h3 class="nc-quiz__question">What does your morning look like?</h3>
-          <p class="nc-quiz__helper" id="q1-helper">Most people are shocked by what they find here</p>
+          <p class="nc-quiz__helper" id="q1-helper">Pick the closest match — no perfect answers needed</p>
           <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
             <button type="button" class="nc-quiz__option" data-value="cereal_toast" role="radio" aria-checked="false">
               <span class="nc-quiz__option-label">Cereal, granola, or toast with jam</span>
@@ -254,7 +278,7 @@
 
         <!-- STAGE 2: Pain deepen — drinks add to the total, the number grows -->
         <div class="nc-quiz__step" data-step="2">
-          <p class="nc-quiz__momentum">Your sugar is adding up. Let's keep going.</p>
+          <p class="nc-quiz__momentum">Great — let's keep building your profile.</p>
           <h3 class="nc-quiz__question">Sweetened drinks per day?</h3>
           <p class="nc-quiz__helper" id="q2-helper">Soda, juice, coffee drinks, sweet tea</p>
           <div class="nc-quiz__options" data-field="daily_sweet_drinks" role="radiogroup" aria-labelledby="q2-helper">
@@ -279,7 +303,7 @@
 
         <!-- STAGE 3: Cost expand — hidden sugar makes it worse than they thought -->
         <div class="nc-quiz__step" data-step="3">
-          <p class="nc-quiz__momentum">This is where most of it hides.</p>
+          <p class="nc-quiz__momentum">Almost there — this is really helpful info.</p>
           <h3 class="nc-quiz__question">How much comes from a package?</h3>
           <p class="nc-quiz__helper" id="q3-helper">Sauces, bars, bread, frozen meals</p>
           <div class="nc-quiz__options" data-field="processed_foods" role="radiogroup" aria-labelledby="q3-helper">
@@ -416,64 +440,63 @@
         <p class="nc-results__subtitle" id="results-subtitle"></p>
       </div>
 
-      <!-- WHAT THAT NUMBER IS DOING -->
+      <!-- WHAT THAT NUMBER MEANS -->
       <div class="nc-results__biology">
-        <h3 class="nc-results__section-title">What that number is doing inside you right now</h3>
+        <h3 class="nc-results__section-title">What this means for your body</h3>
         <div class="nc-results__bio-list">
-          <p class="nc-results__bio-item" id="bio-dopamine">Your D2 dopamine receptors are downregulated — the same adaptation seen in substance dependence. That's why stopping feels impossible and starting feels urgent.</p>
-          <p class="nc-results__bio-item" id="bio-insulin">Your insulin is cycling <span id="bio-insulin-cycles">—</span> times per day above baseline. Each cycle drives fat storage, crashes your energy, and triggers another craving within 90 minutes.</p>
-          <p class="nc-results__bio-item" id="bio-sleep">Nocturnal glucose crashes are fragmenting your sleep architecture. The 3am waking, the unrefreshed mornings — that's your blood sugar, not your stress.</p>
-          <p class="nc-results__bio-item" id="bio-cravings">At this intake, you're experiencing approximately <span id="bio-craving-cycles">—</span> acute craving cycles per day. Each one peaks and falls within 20 minutes — whether you act on it or not.</p>
+          <p class="nc-results__bio-item" id="bio-dopamine">At this level, your brain's reward system adapts to expect sugar regularly. That's why cravings feel so strong — it's biology, not willpower. The good news: it's reversible.</p>
+          <p class="nc-results__bio-item" id="bio-insulin">Your insulin is spiking roughly <span id="bio-insulin-cycles">—</span> times per day above baseline. Each spike affects energy, mood, and metabolism. Reducing sugar helps stabilize these cycles.</p>
+          <p class="nc-results__bio-item" id="bio-sleep">Blood sugar fluctuations can disrupt sleep quality — contributing to restless nights and groggy mornings. Lowering intake often improves sleep within the first week.</p>
+          <p class="nc-results__bio-item" id="bio-cravings">You're likely experiencing around <span id="bio-craving-cycles">—</span> craving cycles per day. Each one peaks and passes in about 20 minutes. Knowing this makes them easier to ride out.</p>
         </div>
       </div>
 
       <!-- THE MECHANIC -->
       <div class="nc-results__mechanic">
-        <h3 class="nc-results__section-title">The only variable that matters</h3>
-        <p class="nc-results__mechanic-intro">How long it's been since the last hit. That's what the clock tracks.</p>
+        <h3 class="nc-results__section-title">Your recovery timeline</h3>
+        <p class="nc-results__mechanic-intro">Here's what happens in your body when you start reducing processed sugar.</p>
         <div class="nc-results__phases">
           <div class="nc-results__phase">
-            <span class="nc-results__phase-name">0–20 min</span>
-            <span class="nc-results__phase-desc">The craving window opens. It closes in under 20 minutes.</span>
+            <span class="nc-results__phase-name">20 min</span>
+            <span class="nc-results__phase-desc">Each craving peaks and passes in under 20 minutes. You can wait it out.</span>
           </div>
           <div class="nc-results__phase">
             <span class="nc-results__phase-name">24 hours</span>
-            <span class="nc-results__phase-desc">Insulin drops to baseline. The liver begins clearing fructose.</span>
+            <span class="nc-results__phase-desc">Insulin returns to baseline. Your liver begins clearing stored fructose.</span>
           </div>
           <div class="nc-results__phase">
             <span class="nc-results__phase-name">72 hours</span>
-            <span class="nc-results__phase-desc">D2 receptor recovery begins. The hardest 48 hours are behind you.</span>
+            <span class="nc-results__phase-desc">Brain receptors begin recovering. The hardest part is behind you.</span>
           </div>
           <div class="nc-results__phase">
             <span class="nc-results__phase-name">1 week</span>
-            <span class="nc-results__phase-desc">Gut microbiome shifts. Craving-amplifying bacteria are declining.</span>
+            <span class="nc-results__phase-desc">Your gut microbiome starts shifting. Cravings noticeably decrease.</span>
           </div>
           <div class="nc-results__phase">
             <span class="nc-results__phase-name">2 weeks</span>
-            <span class="nc-results__phase-desc">fMRI studies show reduced reward-center response to sugar images.</span>
+            <span class="nc-results__phase-desc">Your brain's response to sugar weakens. Many people report clearer thinking here.</span>
           </div>
           <div class="nc-results__phase">
             <span class="nc-results__phase-name">28 days</span>
-            <span class="nc-results__phase-desc">Meaningful D2 receptor density recovery. This is not a diet. This is biology.</span>
+            <span class="nc-results__phase-desc">Meaningful neurological recovery. Your new baseline. This isn't a diet — it's biology.</span>
           </div>
         </div>
       </div>
 
       <!-- THE DOWNLOAD -->
       <div class="nc-results__cta-section">
-        <h3 class="nc-results__section-title">Start the clock</h3>
-        <p class="nc-results__cta-intro">The app tracks one thing: time since your last processed sugar. The biology does the rest.</p>
+        <h3 class="nc-results__section-title">Ready to start?</h3>
+        <p class="nc-results__cta-intro">The Nightcap app tracks your progress and guides you through each phase of reducing sugar.</p>
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
-          Start the Clock
+          Get the App
           <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
         </button>
         <p class="nc-results__cta-note">iOS &middot; Free &middot; No account required</p>
-        <p class="nc-results__cta-reinforcement">Your first craving window closes in 20 minutes. The clock starts now.</p>
       </div>
 
       <!-- SHARE -->
       <div class="nc-results__share-section">
-        <p class="nc-results__share-prompt">Someone you know is feeling the same thing right now and doesn't know why.</p>
+        <p class="nc-results__share-prompt">Know someone who'd find this useful? Share the quiz.</p>
         <div class="nc-referral-socials">
           <button class="nc-referral-socials__btn" id="share-sms">Text It</button>
           <button class="nc-referral-socials__btn" id="share-email">Email It</button>
