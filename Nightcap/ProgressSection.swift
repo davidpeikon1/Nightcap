@@ -487,7 +487,7 @@ struct MilestoneSheet: View {
                 // Sugar avoided — shown for one-week+ milestones when number is set.
                 if badge.threshold >= 604_800,
                    let g = appState.dailySugarGrams, g > 0 {
-                    let days = max(1, Int(store.elapsedSeconds / 86400))
+                    let days = Int(store.elapsedSeconds / 86400)
                     let avoided = days * g
                     let kg = Double(avoided) / 1000
                     let formatted = avoided >= 1_000

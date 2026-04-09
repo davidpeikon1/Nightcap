@@ -142,9 +142,12 @@ struct BodyScienceCard: View {
         let phases = FastingPhase.allCases
         guard let idx = phases.firstIndex(of: phase), idx + 1 < phases.count else { return nil }
         let next = phases[idx + 1]
-        let h = Int(remaining) / 3600
-        let m = max(1, (Int(remaining) % 3600) / 60)
-        let label = h > 0 ? "\(h)h \(m)m" : "\(m)m"
+        let h    = Int(remaining) / 3600
+        let rawM = (Int(remaining) % 3600) / 60
+        let label: String = {
+            if h > 0 { return rawM > 0 ? "\(h)h \(rawM)m" : "\(h)h" }
+            return "\(max(1, rawM))m"
+        }()
         let teaser: String = {
             switch next {
             case .firstDay:     return "Your first 24 hours is close."
