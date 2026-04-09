@@ -104,6 +104,13 @@ struct HeroCard: View {
                             .layoutPriority(1)
                     }
 
+                    if !timerExpanded, !store.isTracking {
+                        Text("Not tracking")
+                            .font(.system(size: 12, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
+                            .layoutPriority(1)
+                    }
+
                     Image(systemName: timerExpanded ? "chevron.up" : "chevron.down")
                         .font(.system(size: 10, weight: .regular))
                         .foregroundStyle(Color("NCTextTertiary").opacity(0.8))

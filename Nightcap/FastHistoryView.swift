@@ -165,8 +165,8 @@ struct FastHistoryView: View {
                 statCard(value: "\(store.resetEvents.count)", label: "Resets")
                 statCard(value: totalText,                    label: "Time fasted")
             }
-            if let g = appState.dailySugarGrams, store.totalSugarFreeTime > 0 {
-                let totalDays = max(1, Int(store.totalSugarFreeTime / 86400))
+            if let g = appState.dailySugarGrams, store.totalSugarFreeTime >= 86400 {
+                let totalDays = Int(store.totalSugarFreeTime / 86400)
                 let avoided = totalDays * g
                 let kg = Double(avoided) / 1000
                 HStack(spacing: 12) {
@@ -271,7 +271,7 @@ struct FastHistoryView: View {
                             .padding(.horizontal, 5)
                             .padding(.vertical, 2)
                             .background(Color("NCSuccess").opacity(0.12))
-                            .cornerRadius(4)
+                            .clipShape(Capsule())
                     }
                 }
                 Text(store.formattedElapsed + " · " + store.fastingPhase.rawValue)
