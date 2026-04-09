@@ -49,16 +49,22 @@ class NightcapDelegate: NSObject, UIApplicationDelegate {
     private func registerShortcutItems(for application: UIApplication) {
         application.shortcutItems = [
             UIApplicationShortcutItem(
-                type: "com.nightcap.app.logReset",
-                localizedTitle: "Log a Reset",
-                localizedSubtitle: "Log it as data",
-                icon: UIApplicationShortcutIcon(systemImageName: "arrow.counterclockwise")
-            ),
-            UIApplicationShortcutItem(
                 type: "com.nightcap.app.craving",
                 localizedTitle: "Having a Craving?",
                 localizedSubtitle: "Open the craving toolkit",
                 icon: UIApplicationShortcutIcon(systemImageName: "bolt")
+            ),
+            UIApplicationShortcutItem(
+                type: "com.nightcap.app.numberEdit",
+                localizedTitle: "My Sugar Number",
+                localizedSubtitle: "View or update your daily estimate",
+                icon: UIApplicationShortcutIcon(systemImageName: "number.circle")
+            ),
+            UIApplicationShortcutItem(
+                type: "com.nightcap.app.logReset",
+                localizedTitle: "Log a Reset",
+                localizedSubtitle: "Log it as data",
+                icon: UIApplicationShortcutIcon(systemImageName: "arrow.counterclockwise")
             ),
         ]
     }
@@ -70,6 +76,8 @@ class NightcapDelegate: NSObject, UIApplicationDelegate {
         case "com.nightcap.app.craving":
             // Route to crisis sheet — immediate, focused crisis tool vs full in-page toolkit
             NotificationCenter.default.post(name: .nightcapOpenCravingCrisis, object: nil)
+        case "com.nightcap.app.numberEdit":
+            NotificationCenter.default.post(name: .nightcapOpenNumberEdit, object: nil)
         default:
             break
         }

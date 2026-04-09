@@ -141,11 +141,13 @@ struct NumberEditSheet: View {
                         .cornerRadius(12)
                 }
 
-                Text("Not sure? Take the sugar quiz at drinknightcap.co")
-                    .font(.system(size: 12, weight: .light))
-                    .foregroundStyle(Color("NCTextTertiary"))
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
+                if let url = URL(string: "https://drinknightcap.co") {
+                    Link("Not sure? Take the sugar quiz →", destination: url)
+                        .font(.system(size: 12, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary"))
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
+                }
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 32)

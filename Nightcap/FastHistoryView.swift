@@ -301,6 +301,12 @@ struct FastHistoryView: View {
                     Text(formatDuration(event.fastDuration))
                         .font(.system(size: 14))
                         .foregroundStyle(Color("NCTextPrimary"))
+                    let phase = phaseReached(for: event.fastDuration)
+                    if phase != .justStarted {
+                        Text(phase.rawValue)
+                            .font(.system(size: 11))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                    }
                     if let note = event.note, !note.isEmpty {
                         Text(note)
                             .font(.system(size: 12))
@@ -512,6 +518,11 @@ struct FastHistoryView: View {
         let rem = h % 24
         if d > 0 { return rem > 0 ? "\(d)d \(rem)h" : "\(d)d" }
         return h > 0 ? "\(h)h" : "< 1h"
+    }
+
+    /// Returns the highest fasting phase the user reached during a completed fast.
+    private func phaseReached(for duration: TimeInterval) -> FastingPhase {
+        FastingPhase.allCases.reversed().first { $0.previousThreshold <= duration } ?? .justStarted
     }
 
     private func formatDuration(_ seconds: TimeInterval) -> String {
