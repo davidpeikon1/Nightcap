@@ -1246,50 +1246,7 @@ body {
   color: var(--nc-text-muted);
 }
 
-/* ---------- Pull Quote ---------- */
-.nc-pullquote {
-  padding: 140px 32px;
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
-}
 
-.nc-pullquote__text {
-  font-family: var(--nc-font-display);
-  font-size: clamp(1.35rem, 3vw, 1.85rem);
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-  color: var(--nc-text);
-  margin: 0;
-}
-
-.nc-pullquote__text em {
-  font-style: normal;
-  opacity: 1;
-  font-weight: 700;
-}
-
-.nc-pullquote__big {
-  font-family: var(--nc-font-display);
-  font-size: clamp(3.5rem, 10vw, 7rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--nc-text);
-  margin: 1rem 0 0;
-  line-height: 1;
-}
-
-.nc-pullquote__big em {
-  font-style: normal;
-}
-
-.nc-pullquote__source {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--nc-text-dim);
-  margin-top: 1.5rem;
-}
 
 /* ---------- Benefits Grid ---------- */
 .nc-benefits {
@@ -2230,14 +2187,59 @@ body {
   font-weight: 700;
 }
 
-/* ---------- Pullquote Kicker ---------- */
-.nc-pullquote__kicker {
-  font-size: 1rem;
+
+
+/* ---------- Statement (the iconic moment) ---------- */
+.nc-statement {
+  padding: 120px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.nc-statement__number {
+  font-family: var(--nc-font-display);
+  font-size: clamp(8rem, 25vw, 16rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  color: var(--nc-text);
+  margin-bottom: 1rem;
+}
+
+.nc-statement__unit {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
   font-weight: 500;
   color: var(--nc-text-muted);
-  margin-top: 2rem;
-  line-height: 1.7;
-  max-width: 480px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.nc-statement__context {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--nc-text-dim);
+  margin-top: 1rem;
+}
+
+@media (max-width: 480px) {
+  .nc-statement {
+    padding: 80px 20px;
+  }
+  
+  .nc-statement__number {
+    font-size: clamp(5rem, 20vw, 8rem);
+  }
+}
+
+/* ---------- Proof Header ---------- */
+.nc-proof__header {
+  font-family: var(--nc-font-display);
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
 </style>
@@ -2299,11 +2301,10 @@ body {
     </div>
   </section>
 
-  <section class="nc-pullquote nc-reveal" id="pullquote">
-    <p class="nc-pullquote__text">200 years ago, Americans consumed <em>1 pound</em> of sugar per year.</p>
-    <p class="nc-pullquote__big">Today it's <em>152.</em></p>
-    <p class="nc-pullquote__kicker">The cravings. The crash. The fog. It's not you — it's the system.</p>
-    <p class="nc-pullquote__source">Dr. Casey Means, <em>Good Energy</em></p>
+  <section class="nc-statement nc-reveal" id="pullquote">
+    <div class="nc-statement__number">152</div>
+    <p class="nc-statement__unit">pounds of sugar per person, per year.</p>
+    <p class="nc-statement__context">Up from 1 pound, 200 years ago.</p>
   </section>
 
   <!-- ===== WHAT CHANGES (DARK SECTION) ===== -->
@@ -2341,6 +2342,7 @@ body {
   <!-- ===== SOCIAL PROOF ===== -->
   <section class="nc-proof nc-reveal" id="social-proof">
     <div class="nc-proof__container">
+      <p class="nc-proof__header">People are waking up to their numbers.</p>
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
           <p class="nc-proof__quote">"Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was all hiding."</p>
