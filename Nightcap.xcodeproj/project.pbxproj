@@ -30,6 +30,10 @@
 		AA000001000000000000015A /* NightcapIntents.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA000001000000000000015B; };
 		AA000001000000000000016A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000016B; };
 		AA000001000000000000017A /* NightcapDelegate.swift in Sources */  = {isa = PBXBuildFile; fileRef = AA000001000000000000017B; };
+		AA000001000000000000019A /* HeroCard.swift in Sources */          = {isa = PBXBuildFile; fileRef = AA000001000000000000019B; };
+		AA00000100000000000001AA /* CravingCrisisSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000001AB; };
+		AA00000100000000000001BA /* YourNumberCard.swift in Sources */    = {isa = PBXBuildFile; fileRef = AA00000100000000000001BB; };
+		AA00000100000000000001CA /* NumberEditSheet.swift in Sources */   = {isa = PBXBuildFile; fileRef = AA00000100000000000001CB; };
 		WA000001000000000000005A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = WA000001000000000000005B; };
 		WA000001000000000000001A /* NightcapWidget.swift in Sources */    = {isa = PBXBuildFile; fileRef = WA000001000000000000001B; };
 		WA000001000000000000002A /* Assets.xcassets in Resources */       = {isa = PBXBuildFile; fileRef = WA000001000000000000002B; };
@@ -87,6 +91,11 @@
 		AA000001000000000000015B /* NightcapIntents.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapIntents.swift; sourceTree = "<group>"; };
 		AA000001000000000000016B /* PrivacyInfo.xcprivacy */   = {isa = PBXFileReference; lastKnownFileType = "text.xml"; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AA000001000000000000017B /* NightcapDelegate.swift */   = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightcapDelegate.swift; sourceTree = "<group>"; };
+		AA000001000000000000018B /* Info.plist */               = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA000001000000000000019B /* HeroCard.swift */           = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCard.swift; sourceTree = "<group>"; };
+		AA00000100000000000001AB /* CravingCrisisSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingCrisisSheet.swift; sourceTree = "<group>"; };
+		AA00000100000000000001BB /* YourNumberCard.swift */     = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourNumberCard.swift; sourceTree = "<group>"; };
+		AA00000100000000000001CB /* NumberEditSheet.swift */    = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberEditSheet.swift; sourceTree = "<group>"; };
 		WA000001000000000000005B /* PrivacyInfo.xcprivacy */   = {isa = PBXFileReference; lastKnownFileType = "text.xml"; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BB000001000000000000001B /* Assets.xcassets */         = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB000001000000000000002B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -148,6 +157,11 @@
 				AA000001000000000000015B /* NightcapIntents.swift */,
 				AA000001000000000000016B /* PrivacyInfo.xcprivacy */,
 				AA000001000000000000017B /* NightcapDelegate.swift */,
+				AA000001000000000000018B /* Info.plist */,
+				AA000001000000000000019B /* HeroCard.swift */,
+				AA00000100000000000001AB /* CravingCrisisSheet.swift */,
+				AA00000100000000000001BB /* YourNumberCard.swift */,
+				AA00000100000000000001CB /* NumberEditSheet.swift */,
 				AA000001000000000000014B /* Nightcap.entitlements */,
 				BB000001000000000000001B /* Assets.xcassets */,
 				EE000001000000000000004A /* Preview Content */,
@@ -306,6 +320,10 @@
 				AA000001000000000000013A /* PhaseDetailSheet.swift in Sources */,
 				AA000001000000000000015A /* NightcapIntents.swift in Sources */,
 				AA000001000000000000017A /* NightcapDelegate.swift in Sources */,
+				AA000001000000000000019A /* HeroCard.swift in Sources */,
+				AA00000100000000000001AA /* CravingCrisisSheet.swift in Sources */,
+				AA00000100000000000001BA /* YourNumberCard.swift in Sources */,
+				AA00000100000000000001CA /* NumberEditSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,13 +420,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nightcap/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Nightcap sends check-ins at the moments when cravings are most common.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Nightcap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,13 +445,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nightcap/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Nightcap sends check-ins at the moments when cravings are most common.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Nightcap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
