@@ -495,7 +495,11 @@ body {
 
 .nc-quiz__step.active {
   display: block;
-  animation: nc-fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: nc-fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nc-quiz__step.active .nc-quiz__options {
+  animation: nc-fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 
 @keyframes nc-fadeInUp {
@@ -606,6 +610,13 @@ body {
   background: var(--nc-primary);
   border-color: var(--nc-primary);
   color: var(--nc-bg);
+  animation: nc-optionSelect 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes nc-optionSelect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
 }
 
 .nc-quiz__option.selected .nc-quiz__option-sugar {
