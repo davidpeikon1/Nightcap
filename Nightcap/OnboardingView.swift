@@ -157,37 +157,41 @@ struct HomeWithCoachmark: View {
     @EnvironmentObject var appState: AppState
 
     var body: some View {
-        ZStack(alignment: .top) {
-            HomeView(coachmarkMode: true)
+        GeometryReader { geo in
+            ZStack(alignment: .top) {
+                HomeView(coachmarkMode: true)
 
-            // Scrim
-            Color("NCTextPrimary")
-                .opacity(0.45)
-                .ignoresSafeArea()
-                .onTapGesture { handleTap() }
+                // Scrim
+                Color("NCTextPrimary")
+                    .opacity(0.45)
+                    .ignoresSafeArea()
+                    .onTapGesture { handleTap() }
 
-            if appState.onboardingStep == .timerCoachmark {
-                CoachmarkBubble(
-                    text: "Your daily sugar number. This is what you're working to bring down. Update it any time — the app adjusts everything around it.",
-                    arrowUp: true
-                )
-                .padding(.top, 190)
-                .padding(.horizontal, 24)
-                .onTapGesture { handleTap() }
-                .transition(.scale(scale: 0.9).combined(with: .opacity))
+                // Coachmarks positioned proportionally so they align correctly
+                // across device sizes (iPhone SE through Pro Max).
+                if appState.onboardingStep == .timerCoachmark {
+                    CoachmarkBubble(
+                        text: "Your daily sugar number. This is what you're working to bring down. Update it any time — the app adjusts everything around it.",
+                        arrowUp: true
+                    )
+                    .padding(.top, geo.size.height * 0.25)
+                    .padding(.horizontal, 24)
+                    .onTapGesture { handleTap() }
+                    .transition(.scale(scale: 0.9).combined(with: .opacity))
 
-            } else if appState.onboardingStep == .quoteCoachmark {
-                CoachmarkBubble(
-                    text: "A new reframe every day — what sugar actually does biologically. Below it: tools for the moment a craving hits.",
-                    arrowUp: true
-                )
-                .padding(.top, 390)
-                .padding(.horizontal, 24)
-                .onTapGesture { appState.advance(to: .goalSetting) }
-                .transition(.scale(scale: 0.9).combined(with: .opacity))
+                } else if appState.onboardingStep == .quoteCoachmark {
+                    CoachmarkBubble(
+                        text: "A new reframe every day — what sugar actually does biologically. Below it: tools for the moment a craving hits.",
+                        arrowUp: true
+                    )
+                    .padding(.top, geo.size.height * 0.51)
+                    .padding(.horizontal, 24)
+                    .onTapGesture { appState.advance(to: .goalSetting) }
+                    .transition(.scale(scale: 0.9).combined(with: .opacity))
+                }
             }
+            .animation(.spring(duration: 0.3), value: appState.onboardingStep)
         }
-        .animation(.spring(duration: 0.3), value: appState.onboardingStep)
     }
 
     private func handleTap() {
@@ -619,13 +623,16 @@ struct NotificationPermissionScreen: View {
 struct FirstMilestoneScreen: View {
     @EnvironmentObject var appState: AppState
     @State private var visibleRows: Int = 0
+    @State private var notificationsGranted = false
 
     private var rows: [(symbol: String, text: String)] {
         var base: [(symbol: String, text: String)] = [
-            ("clock",  "Your timer is already running"),
-            ("book",   "A new reframe drops every morning"),
-            ("bell",   "Reminders fire at your highest-risk moments"),
+            ("clock", "Your timer is already running"),
+            ("book",  "A new reframe drops every morning"),
         ]
+        if notificationsGranted {
+            base.append(("bell", "Reminders fire at your highest-risk moments"))
+        }
         if let g = appState.dailySugarGrams {
             base.append(("chart.bar", "Your number (\(g)g/day) shapes the biology you see"))
         }
@@ -686,10 +693,14 @@ struct FirstMilestoneScreen: View {
             .animation(.easeOut(duration: 0.4).delay(0.55), value: visibleRows)
         }
         .onAppear {
-            // Stagger the rows in
-            for i in 1...rows.count {
-                DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
-                    withAnimation { visibleRows = i }
+            // Check notification status first so the bell row is conditionally
+            // included before the stagger starts — avoids a count mismatch.
+            NotificationManager.shared.checkAuthorizationStatus { status in
+                notificationsGranted = (status == .authorized)
+                for i in 1...rows.count {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
+                        withAnimation { visibleRows = i }
+                    }
                 }
             }
         }

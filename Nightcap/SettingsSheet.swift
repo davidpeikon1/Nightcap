@@ -289,7 +289,15 @@ struct SettingsSheet: View {
                 .disabled(!enabled)
                 .opacity(enabled ? 1 : 0.4)
                 .onChange(of: selection.wrappedValue) { _, date in
-                    onChange(Calendar.current.component(.hour, from: date))
+                    let hour = Calendar.current.component(.hour, from: date)
+                    onChange(hour)
+                    // Snap the displayed time to the whole hour so the subtitle
+                    // and picker both reflect the actual notification fire time.
+                    if let snapped = Calendar.current.date(
+                        bySettingHour: hour, minute: 0, second: 0, of: date
+                    ) {
+                        selection.wrappedValue = snapped
+                    }
                 }
         }
     }

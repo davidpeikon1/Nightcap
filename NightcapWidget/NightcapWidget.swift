@@ -336,7 +336,7 @@ struct MediumWidgetView: View {
                 Spacer()
 
                 VStack(alignment: .trailing, spacing: 2) {
-                    Text(entry.data.elapsed(at: entry.date) / 3600 >= 8_760 ? "DAYS FREE" : "NEXT")
+                    Text(entry.data.nextMilestoneLabel(at: entry.date))
                         .font(.system(size: 8, weight: .medium))
                         .tracking(1.5)
                         .foregroundStyle(Color.ncTextTert)

@@ -132,7 +132,7 @@ struct GetStreakIntent: AppIntent {
                 dialog: IntentDialog("No active streak yet. Start the clock in Nightcap whenever you're ready.")
             )
         }
-        let isPersonalBest = streak >= best && best > 0
+        let isPersonalBest = streak > best && best > 0
         let pbLine = isPersonalBest ? " That's a personal best." : (best > 0 ? " Your best is \(best) day\(best == 1 ? "" : "s")." : "")
         return .result(
             value: "\(streak) day\(streak == 1 ? "" : "s")",
