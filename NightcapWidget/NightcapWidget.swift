@@ -40,10 +40,10 @@ struct WidgetFastData {
     }
 
     func pbLabel(for shortfall: TimeInterval) -> String {
-        let h = Int(shortfall) / 3600
-        let m = max(1, (Int(shortfall) % 3600) / 60)
-        if h > 0 { return "\(h)h \(m)m to PB" }
-        return "\(m)m to PB"
+        let h    = Int(shortfall) / 3600
+        let rawM = (Int(shortfall) % 3600) / 60
+        if h > 0 { return rawM > 0 ? "\(h)h \(rawM)m to PB" : "\(h)h to PB" }
+        return "\(max(1, rawM))m to PB"
     }
 
     func elapsed(at date: Date) -> TimeInterval {
@@ -94,7 +94,7 @@ struct WidgetFastData {
 
     func nextMilestone(at date: Date) -> String {
         let h = elapsed(at: date) / 3600
-        if h >= 8_760 { return "day \(Int(elapsed(at: date)) / 86400)" }
+        if h >= 8_760 { return "\(Int(elapsed(at: date)) / 86400 + 1)" }
         let remaining: TimeInterval = {
             switch h {
             case ..<1:          return 3_600      - elapsed(at: date)
@@ -426,7 +426,7 @@ struct LargeWidgetView: View {
                         .padding(.horizontal, 5)
                         .padding(.vertical, 2)
                         .background(Color.ncWarning.opacity(0.15))
-                        .cornerRadius(3)
+                        .clipShape(Capsule())
                 } else {
                     Text(entry.data.phase(at: entry.date).uppercased())
                         .font(.system(size: 8, weight: .semibold))
