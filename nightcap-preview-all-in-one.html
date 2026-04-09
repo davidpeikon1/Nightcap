@@ -288,18 +288,17 @@ body {
   color: var(--nc-text);
 }
 
-/* Atmospheric glow behind hero content */
+/* Atmospheric warmth behind hero */
 .nc-hero::before {
   content: '';
   position: absolute;
-  top: -10%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 140%;
-  height: 100%;
+  width: 160%;
+  height: 110%;
   background:
-    radial-gradient(ellipse 50% 40% at 50% 30%, rgba(29, 92, 46, 0.04) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 50% at 50% 50%, rgba(240, 237, 231, 0.6) 0%, transparent 70%);
+    radial-gradient(ellipse 40% 35% at 50% 40%, rgba(235, 230, 220, 0.5) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -341,72 +340,17 @@ body {
 .nc-hero__title-line--accent { display: none; }
 
 .nc-hero__subtitle {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 400;
-  color: var(--nc-text-muted);
-  max-width: 400px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.75;
-}
-
-.nc-hero__cta-wrap {
-  margin-bottom: 3.5rem;
-}
-
-.nc-hero__cta-note {
-  margin-top: 0.75rem;
-  font-size: 0.72rem;
-  font-weight: 500;
   color: var(--nc-text-dim);
-  letter-spacing: 0.01em;
-}
-
-.nc-hero__trust-bar {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  padding-top: 2.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.nc-hero__trust-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--nc-text-dim);
-  letter-spacing: 0.01em;
-}
-
-.nc-hero__trust-item svg {
-  color: var(--nc-accent);
-  flex-shrink: 0;
-  opacity: 0.7;
+  max-width: 360px;
+  margin: 0 auto 3rem;
+  line-height: 1.65;
 }
 
 
-/* ---------- Scroll Hint ---------- */
-.nc-hero__scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-.nc-hero__scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.2), rgba(26, 26, 26, 0));
-  animation: nc-scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes nc-scrollPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(1); }
-  50% { opacity: 0.8; transform: scaleY(1.3); transform-origin: top; }
-}
+/* Scroll Hint (hidden) */
+.nc-hero__scroll-hint { display: none; }
 
 /* ---------- Return Banner ---------- */
 
@@ -1086,14 +1030,11 @@ body {
   padding: 120px 40px;
   text-align: center;
   position: relative;
-}
-
-.nc-benefits::before {
-  display: none;
+  background: transparent;
 }
 
 .nc-benefits__container {
-  max-width: 720px;
+  max-width: 680px;
   margin: 0 auto;
 }
 
@@ -1101,80 +1042,48 @@ body {
   font-family: var(--nc-font-display);
   font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 3rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 3.5rem;
+  line-height: 1.15;
 }
 
 .nc-benefits__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: var(--nc-radius);
+  overflow: hidden;
 }
 
 .nc-benefits__item {
-  padding: 32px 28px;
+  padding: 36px 28px;
   background: var(--nc-bg-card);
-  border: none;
-  border-radius: var(--nc-radius);
   text-align: left;
-  transition: all var(--nc-transition);
-  box-shadow: var(--nc-shadow-sm);
+  transition: background var(--nc-transition);
 }
 
 .nc-benefits__item:hover {
-  box-shadow: var(--nc-shadow-md);
-  transform: translateY(-1px);
-}
-
-.nc-benefits__icon {
-  width: 24px;
-  height: 24px;
-  color: var(--nc-text);
-  opacity: 0.35;
-  margin-bottom: 14px;
-  flex-shrink: 0;
+  background: var(--nc-bg-card-hover);
 }
 
 .nc-benefits__item-title {
   font-family: var(--nc-font-display);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
 }
 
 .nc-benefits__item-desc {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 400;
   color: var(--nc-text-muted);
   line-height: 1.65;
 }
 
-/* Benefits — warm background variant */
-.nc-benefits--dark {
-  background: transparent;
-  color: var(--nc-text);
-  padding: 120px 40px;
-}
-
-.nc-benefits--dark::before { display: none; }
-.nc-benefits--dark .nc-benefits__title { color: var(--nc-text); }
-.nc-benefits--dark .nc-benefits__grid { gap: 12px; }
-
-.nc-benefits--dark .nc-benefits__item {
-  background: var(--nc-bg-card);
-  border: none;
-  border-radius: var(--nc-radius);
-  box-shadow: var(--nc-shadow-sm);
-}
-
-.nc-benefits--dark .nc-benefits__item:hover {
-  box-shadow: var(--nc-shadow-md);
-  transform: translateY(-1px);
-}
-
-.nc-benefits--dark .nc-benefits__item-title { color: var(--nc-text); }
-.nc-benefits--dark .nc-benefits__item-desc { color: var(--nc-text-muted); }
+/* Benefits variant override (legacy class) */
+.nc-benefits--dark { background: transparent; }
 
 .nc-benefits__cta {
   text-align: center;
@@ -1203,35 +1112,19 @@ body {
   margin: 0 auto;
 }
 
-.nc-midcta__eyebrow {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--nc-accent);
-  margin-bottom: 1rem;
-}
-
 .nc-midcta__text {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-weight: 700;
-  letter-spacing: -0.015em;
-  line-height: 1.4;
-  margin-bottom: 2rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 2.5rem;
   color: var(--nc-text);
-}
-
-.nc-midcta__note {
-  margin-top: 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--nc-text-dim);
 }
 
 /* ---------- Social Proof ---------- */
 .nc-proof {
-  padding: 120px 40px;
+  padding: 100px 40px;
   text-align: center;
   position: relative;
   background: transparent;
@@ -1249,38 +1142,33 @@ body {
 .nc-proof__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 40px;
   text-align: left;
 }
 
 .nc-proof__card {
-  padding: 28px 24px 24px;
-  background: var(--nc-bg-card);
+  padding: 0;
+  background: transparent;
   border: none;
-  border-radius: var(--nc-radius);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   position: relative;
-  transition: all var(--nc-transition);
-  box-shadow: var(--nc-shadow-sm);
+  text-align: left;
 }
 
-.nc-proof__card::before { display: none; }
-
-.nc-proof__card:hover {
-  box-shadow: var(--nc-shadow-md);
-  transform: translateY(-2px);
-}
-
-.nc-proof__stars {
-  font-size: 0.8rem;
-  color: #D4A843;
-  letter-spacing: 2px;
+.nc-proof__card::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--nc-text);
+  opacity: 0.2;
+  margin-bottom: 4px;
 }
 
 .nc-proof__quote {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: var(--nc-text);
   line-height: 1.65;
@@ -1289,12 +1177,11 @@ body {
 }
 
 .nc-proof__attribution {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 500;
   color: var(--nc-text-dim);
   margin: 0;
-  padding-top: 14px;
-  border-top: 1px solid var(--nc-border);
+  letter-spacing: 0.03em;
 }
 
 
@@ -1794,24 +1681,6 @@ body {
     width: 100%;
   }
 
-  .nc-benefits__icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .nc-hero__trust-bar {
-    gap: 16px;
-    padding-top: 1.5rem;
-  }
-
-  .nc-hero__trust-item {
-    font-size: 0.7rem;
-  }
-
-  .nc-hero__scroll-hint {
-    bottom: 16px;
-  }
-
   /* Sections */
   .nc-benefits--dark {
     padding: 80px 20px;
@@ -1831,25 +1700,17 @@ body {
     font-size: clamp(1.65rem, 5.5vw, 2rem);
   }
 
+  .nc-benefits__title br {
+    display: none;
+  }
+
   .nc-benefits__item {
     padding: 24px 20px;
   }
 
-  .nc-benefits__item-title {
-    font-size: 1.1rem;
-  }
-
-  .nc-benefits__item-desc {
-    font-size: 0.85rem;
-  }
-
-  /* Proof cards */
-  .nc-proof__card {
-    padding: 24px 20px;
-  }
-
-  .nc-proof__quote {
-    font-size: 0.88rem;
+  /* Proof */
+  .nc-proof__grid {
+    gap: 32px;
   }
 
   /* Mid-CTA */
@@ -2049,29 +1910,27 @@ body {
 
 /* ---------- Statement (the iconic moment) ---------- */
 .nc-statement {
-  padding: 120px 32px;
+  padding: 140px 32px 120px;
   text-align: center;
   overflow: hidden;
   position: relative;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(235, 232, 226, 0.8) 0%, transparent 70%),
-    var(--nc-bg-warm);
+  background: transparent;
 }
 
 .nc-statement__number {
   font-family: var(--nc-font-display);
-  font-size: clamp(7rem, 25vw, 14rem);
+  font-size: clamp(8rem, 28vw, 16rem);
   font-weight: 700;
   letter-spacing: -0.05em;
-  line-height: 0.85;
+  line-height: 0.8;
   color: var(--nc-text);
-  margin-bottom: 1.25rem;
-  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
 }
 
 .nc-statement__unit {
   font-family: var(--nc-font-display);
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-size: clamp(0.95rem, 2.2vw, 1.2rem);
   font-weight: 500;
   color: var(--nc-text-muted);
   margin: 0;
@@ -2079,20 +1938,13 @@ body {
 }
 
 .nc-statement__context {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 400;
   color: var(--nc-text-dim);
-  margin-top: 0.75rem;
-}
-
-.nc-statement__source {
-  font-size: 0.62rem;
-  font-weight: 500;
-  color: var(--nc-text-dim);
-  margin-top: 2rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.6;
+  margin-top: 0.5rem;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 480px) {
@@ -2225,34 +2077,13 @@ body {
         Find out how much<br>sugar you're really eating.
       </h1>
       <p class="nc-hero__subtitle">
-        Take a personalized 60-second quiz to uncover your daily sugar intake — and get a clear plan to reduce it.
+        A personalized 60-second quiz. Your daily intake, revealed.
       </p>
 
-      <div class="nc-hero__cta-wrap">
-        <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
-          Start the Quiz
-          <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
-        </button>
-        <p class="nc-hero__cta-note">Free &middot; Takes 60 seconds &middot; No account needed</p>
-      </div>
-
-      <div class="nc-hero__trust-bar">
-        <span class="nc-hero__trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Science-backed
-        </span>
-        <span class="nc-hero__trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          100% private
-        </span>
-        <span class="nc-hero__trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          2,847 quizzes taken
-        </span>
-      </div>
-    </div>
-    <div class="nc-hero__scroll-hint" aria-hidden="true">
-      <div class="nc-hero__scroll-line"></div>
+      <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
+        Start the Quiz
+        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+      </button>
     </div>
   </section>
 
@@ -2269,11 +2100,9 @@ body {
   </section>
 
   <section class="nc-statement nc-reveal" id="pullquote">
-    <p class="nc-section-label">The problem</p>
     <div class="nc-statement__number" data-count-to="152">0</div>
     <p class="nc-statement__unit">pounds of processed sugar per year.</p>
-    <p class="nc-statement__context">The average American. Up from 1 pound, 200 years ago.</p>
-    <p class="nc-statement__source">Source: USDA Economic Research Service</p>
+    <p class="nc-statement__context">The average American consumes this much annually. Up from 1 pound, 200 years ago.</p>
   </section>
 
   <!-- ===== HOW IT WORKS ===== -->
@@ -2301,37 +2130,26 @@ body {
   </section>
 
   <!-- ===== WHAT CHANGES ===== -->
-  <section class="nc-benefits nc-benefits--dark nc-reveal" id="how-it-works">
+  <section class="nc-benefits nc-reveal" id="how-it-works">
     <div class="nc-benefits__container">
-      <p class="nc-section-label">Benefits</p>
-      <h2 class="nc-benefits__title">What changes when you cut back</h2>
+      <h2 class="nc-benefits__title">What changes when<br>you cut back</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
-          <svg class="nc-benefits__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           <h3 class="nc-benefits__item-title">Steady energy</h3>
           <p class="nc-benefits__item-desc">No more afternoon crashes. Balanced blood sugar means sustained focus all day.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-2">
-          <svg class="nc-benefits__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <h3 class="nc-benefits__item-title">Better sleep</h3>
-          <p class="nc-benefits__item-desc">Reduced sugar means fewer nighttime glucose spikes disrupting your rest.</p>
+          <p class="nc-benefits__item-desc">Fewer nighttime glucose spikes disrupting your rest. Most people notice it within a week.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-3">
-          <svg class="nc-benefits__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
           <h3 class="nc-benefits__item-title">Clearer thinking</h3>
           <p class="nc-benefits__item-desc">Less brain fog, more clarity. Your mind works better on stable fuel.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-4">
-          <svg class="nc-benefits__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           <h3 class="nc-benefits__item-title">Fewer cravings</h3>
-          <p class="nc-benefits__item-desc">Break the cycle. Within weeks, your body stops asking for sugar it doesn't need.</p>
+          <p class="nc-benefits__item-desc">Within weeks, your body stops asking for sugar it doesn't need.</p>
         </div>
-      </div>
-      <div class="nc-benefits__cta">
-        <button class="nc-btn nc-btn--primary" id="benefits-quiz-btn">
-          Start the Quiz
-          <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
-        </button>
       </div>
     </div>
   </section>
@@ -2340,23 +2158,18 @@ body {
   <!-- ===== SOCIAL PROOF ===== -->
   <section class="nc-proof nc-reveal" id="social-proof">
     <div class="nc-proof__container">
-      <p class="nc-section-label">Testimonials</p>
-      <p class="nc-proof__header">Real people. Real results.</p>
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
-          <div class="nc-proof__stars" aria-label="5 stars">★★★★★</div>
           <p class="nc-proof__quote">"Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was hiding."</p>
-          <p class="nc-proof__attribution">Sarah M. &middot; 94g → 22g/day</p>
+          <p class="nc-proof__attribution">Sarah M.</p>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-2">
-          <div class="nc-proof__stars" aria-label="5 stars">★★★★★</div>
           <p class="nc-proof__quote">"The 3pm crash, the brain fog — I thought it was just aging. Three weeks off processed sugar, all gone."</p>
-          <p class="nc-proof__attribution">David K. &middot; 112g → 18g/day</p>
+          <p class="nc-proof__attribution">David K.</p>
         </div>
         <div class="nc-proof__card nc-reveal nc-reveal--delay-3">
-          <div class="nc-proof__stars" aria-label="5 stars">★★★★★</div>
           <p class="nc-proof__quote">"My husband thought he was fine because he doesn't eat candy. His bread, sauces, and protein bars? 72g a day."</p>
-          <p class="nc-proof__attribution">Michelle T. &middot; 72g → 31g/day</p>
+          <p class="nc-proof__attribution">Michelle T.</p>
         </div>
       </div>
     </div>
@@ -2365,20 +2178,17 @@ body {
   <!-- ===== MID-PAGE CTA ===== -->
   <section class="nc-midcta nc-reveal" id="midcta">
     <div class="nc-midcta__container">
-      <p class="nc-midcta__eyebrow">60-second quiz</p>
-      <p class="nc-midcta__text">Most people are surprised by their number. Are you?</p>
+      <p class="nc-midcta__text">Most people are surprised<br>by their number.</p>
       <button class="nc-btn nc-btn--primary" id="mid-quiz-btn">
         Start the Quiz
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-midcta__note">Personalized report included</p>
     </div>
   </section>
 
   <!-- ===== FAQ ===== -->
   <section class="nc-faq nc-reveal" id="faq">
     <div class="nc-faq__container">
-      <p class="nc-section-label" style="text-align: center; margin-bottom: 2rem;">FAQ</p>
       <div class="nc-faq__list">
         <details class="nc-faq__item">
           <summary class="nc-faq__question">What is Nightcap?</summary>
