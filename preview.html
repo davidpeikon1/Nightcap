@@ -41,45 +41,25 @@
 
   <!-- ===== HERO ===== -->
   <section class="nc-hero" id="hero" aria-labelledby="hero-title">
-    <!-- Hero illustration — layered botanical composition -->
-    <svg class="nc-hero__illus" viewBox="0 0 800 800" fill="none" aria-hidden="true">
+    <!-- Abstract organic forms -->
+    <svg class="nc-hero__illus" viewBox="0 0 1000 1000" fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id="h-g1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#C8A060" stop-opacity="0.14"/>
-          <stop offset="100%" stop-color="#8B7355" stop-opacity="0.04"/>
-        </linearGradient>
-        <linearGradient id="h-g2" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#D4B87A" stop-opacity="0.08"/>
-          <stop offset="100%" stop-color="#A08860" stop-opacity="0.02"/>
-        </linearGradient>
+        <radialGradient id="hb1" cx="40%" cy="40%" r="50%">
+          <stop offset="0%" stop-color="#C4A265" stop-opacity="0.09"/>
+          <stop offset="100%" stop-color="#8B7045" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="hb2" cx="60%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#B89860" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#7A6540" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="hb3" cx="50%" cy="60%" r="50%">
+          <stop offset="0%" stop-color="#D4B87A" stop-opacity="0.04"/>
+          <stop offset="100%" stop-color="#9A8050" stop-opacity="0"/>
+        </radialGradient>
       </defs>
-      <!-- Outer form — large flowing leaf -->
-      <path d="M400 80 C340 120 200 200 160 340 C130 440 160 520 220 560 C280 600 360 580 400 520 C440 580 520 600 580 560 C640 520 670 440 640 340 C600 200 460 120 400 80Z" stroke="url(#h-g1)" stroke-width="1" fill="none"/>
-      <!-- Inner form — smaller leaf shape -->
-      <path d="M400 140 C360 170 260 240 230 340 C210 410 230 470 270 500 C310 530 370 510 400 470 C430 510 490 530 530 500 C570 470 590 410 570 340 C540 240 440 170 400 140Z" stroke="url(#h-g2)" stroke-width="0.75" fill="none"/>
-      <!-- Central vein -->
-      <path d="M400 100 C398 180 395 300 393 420 C391 500 394 560 400 600" stroke="rgba(200,170,120,0.1)" stroke-width="0.75"/>
-      <!-- Left veins — flowing curves -->
-      <path d="M399 180 C370 200 320 240 290 300" stroke="rgba(200,170,120,0.07)" stroke-width="0.5"/>
-      <path d="M398 240 C365 265 310 310 280 380" stroke="rgba(200,170,120,0.06)" stroke-width="0.5"/>
-      <path d="M397 310 C372 330 330 370 310 430" stroke="rgba(200,170,120,0.05)" stroke-width="0.5"/>
-      <path d="M396 380 C378 400 350 440 340 490" stroke="rgba(200,170,120,0.04)" stroke-width="0.5"/>
-      <!-- Right veins — flowing curves -->
-      <path d="M401 180 C430 200 480 240 510 300" stroke="rgba(200,170,120,0.07)" stroke-width="0.5"/>
-      <path d="M402 240 C435 265 490 310 520 380" stroke="rgba(200,170,120,0.06)" stroke-width="0.5"/>
-      <path d="M403 310 C428 330 470 370 490 430" stroke="rgba(200,170,120,0.05)" stroke-width="0.5"/>
-      <path d="M404 380 C422 400 450 440 460 490" stroke="rgba(200,170,120,0.04)" stroke-width="0.5"/>
-      <!-- Ambient circles — scattered organic dots -->
-      <circle cx="180" cy="280" r="60" fill="rgba(200,170,120,0.02)"/>
-      <circle cx="580" cy="350" r="80" fill="rgba(200,170,120,0.015)"/>
-      <circle cx="400" cy="500" r="100" fill="rgba(200,170,120,0.01)"/>
-      <!-- Detail — tiny organic marks -->
-      <circle cx="300" cy="300" r="1.5" fill="rgba(200,170,120,0.08)"/>
-      <circle cx="500" cy="320" r="1.5" fill="rgba(200,170,120,0.08)"/>
-      <circle cx="350" cy="420" r="1" fill="rgba(200,170,120,0.06)"/>
-      <circle cx="450" cy="400" r="1" fill="rgba(200,170,120,0.06)"/>
-      <circle cx="320" cy="240" r="1" fill="rgba(200,170,120,0.05)"/>
-      <circle cx="480" cy="260" r="1" fill="rgba(200,170,120,0.05)"/>
+      <path d="M350 200 C250 230 180 320 200 440 C220 560 320 620 430 600 C540 580 590 490 570 380 C550 270 450 170 350 200Z" fill="url(#hb1)"/>
+      <path d="M550 300 C480 280 400 330 390 430 C380 530 430 610 530 630 C630 650 720 600 740 500 C760 400 680 320 550 300Z" fill="url(#hb2)"/>
+      <path d="M420 400 C360 420 310 490 330 580 C350 670 430 720 520 700 C610 680 660 600 640 510 C620 420 500 370 420 400Z" fill="url(#hb3)"/>
     </svg>
     <div class="nc-hero__content">
       <div class="nc-logo" aria-label="Nightcap">
@@ -115,38 +95,19 @@
   </section>
 
   <section class="nc-statement nc-reveal" id="pullquote">
-    <svg class="nc-statement__illus" viewBox="0 0 600 300" fill="none" aria-hidden="true">
-      <!-- Dissolution field — dense center, sparse edges -->
-      <!-- Core cluster -->
-      <circle cx="300" cy="150" r="4" fill="rgba(0,0,0,0.05)"/>
-      <circle cx="290" cy="145" r="3.5" fill="rgba(0,0,0,0.045)"/>
-      <circle cx="312" cy="152" r="3" fill="rgba(0,0,0,0.04)"/>
-      <circle cx="295" cy="158" r="3.5" fill="rgba(0,0,0,0.04)"/>
-      <circle cx="307" cy="140" r="2.5" fill="rgba(0,0,0,0.04)"/>
-      <circle cx="280" cy="150" r="3" fill="rgba(0,0,0,0.035)"/>
-      <circle cx="320" cy="148" r="2.5" fill="rgba(0,0,0,0.035)"/>
-      <circle cx="303" cy="165" r="2" fill="rgba(0,0,0,0.03)"/>
-      <circle cx="288" cy="135" r="2" fill="rgba(0,0,0,0.03)"/>
-      <!-- Mid ring -->
-      <circle cx="260" cy="140" r="2.5" fill="rgba(0,0,0,0.025)"/>
-      <circle cx="340" cy="155" r="2.5" fill="rgba(0,0,0,0.025)"/>
-      <circle cx="275" cy="170" r="2" fill="rgba(0,0,0,0.02)"/>
-      <circle cx="330" cy="130" r="2" fill="rgba(0,0,0,0.02)"/>
-      <circle cx="315" cy="175" r="1.5" fill="rgba(0,0,0,0.02)"/>
-      <circle cx="270" cy="125" r="1.5" fill="rgba(0,0,0,0.02)"/>
-      <circle cx="350" cy="145" r="2" fill="rgba(0,0,0,0.018)"/>
-      <circle cx="250" cy="158" r="2" fill="rgba(0,0,0,0.018)"/>
-      <!-- Outer scatter -->
-      <circle cx="230" cy="135" r="1.5" fill="rgba(0,0,0,0.015)"/>
-      <circle cx="370" cy="160" r="1.5" fill="rgba(0,0,0,0.015)"/>
-      <circle cx="240" cy="175" r="1" fill="rgba(0,0,0,0.012)"/>
-      <circle cx="360" cy="125" r="1" fill="rgba(0,0,0,0.012)"/>
-      <circle cx="210" cy="155" r="1" fill="rgba(0,0,0,0.01)"/>
-      <circle cx="390" cy="145" r="1" fill="rgba(0,0,0,0.01)"/>
-      <circle cx="220" cy="120" r="0.8" fill="rgba(0,0,0,0.008)"/>
-      <circle cx="380" cy="170" r="0.8" fill="rgba(0,0,0,0.008)"/>
-      <circle cx="195" cy="140" r="0.8" fill="rgba(0,0,0,0.006)"/>
-      <circle cx="405" cy="155" r="0.8" fill="rgba(0,0,0,0.006)"/>
+    <svg class="nc-statement__illus" viewBox="0 0 800 400" fill="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="sb1" cx="35%" cy="50%" r="40%">
+          <stop offset="0%" stop-color="#C8B090" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#A09070" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="sb2" cx="65%" cy="45%" r="35%">
+          <stop offset="0%" stop-color="#BEA480" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#8A7858" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <path d="M200 150 C160 180 140 240 170 300 C200 360 280 380 340 340 C400 300 400 220 360 170 C320 120 240 110 200 150Z" fill="url(#sb1)"/>
+      <path d="M450 120 C400 140 370 200 400 270 C430 340 510 370 570 330 C630 290 640 210 600 150 C560 90 500 90 450 120Z" fill="url(#sb2)"/>
     </svg>
     <div class="nc-statement__number" data-count-to="152">0</div>
     <p class="nc-statement__unit">pounds of processed sugar per year.</p>
@@ -200,54 +161,31 @@
 
   <!-- ===== WHAT CHANGES ===== -->
   <section class="nc-benefits nc-reveal" id="how-it-works">
+    <svg class="nc-benefits__bg-shape" viewBox="0 0 800 600" fill="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="bb1" cx="30%" cy="40%" r="50%">
+          <stop offset="0%" stop-color="#D8C8A8" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#B0A080" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <path d="M100 250 C60 180 120 80 250 60 C380 40 480 130 520 230 C560 330 500 450 370 480 C240 510 140 420 100 320Z" fill="url(#bb1)"/>
+    </svg>
     <div class="nc-benefits__container">
       <h2 class="nc-benefits__title">What changes when<br>you cut back</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
-          <svg class="nc-benefits__illus" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-            <defs><linearGradient id="b1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#C8A060" stop-opacity="0.25"/><stop offset="100%" stop-color="#A08050" stop-opacity="0.05"/></linearGradient></defs>
-            <!-- Rising arc — energy -->
-            <path d="M15 55 C20 45 28 30 40 25 C52 20 65 28 70 22" stroke="url(#b1)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M15 60 C22 50 30 38 42 33 C54 28 64 34 70 30" stroke="rgba(180,150,100,0.1)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
-            <circle cx="40" cy="25" r="8" fill="rgba(200,170,120,0.06)"/>
-            <circle cx="70" cy="22" r="3" fill="rgba(200,170,120,0.12)"/>
-          </svg>
           <h3 class="nc-benefits__item-title">Steady energy</h3>
           <p class="nc-benefits__item-desc">No more afternoon crashes. Balanced blood sugar means sustained focus all day.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-2">
-          <svg class="nc-benefits__illus" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-            <defs><linearGradient id="b2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#C8A060" stop-opacity="0.2"/><stop offset="100%" stop-color="#A08050" stop-opacity="0.06"/></linearGradient></defs>
-            <!-- Crescent arc — sleep -->
-            <path d="M50 15 C30 18 18 32 18 48 C18 58 24 65 35 65 C25 50 30 30 50 15Z" stroke="url(#b2)" stroke-width="1" fill="rgba(200,170,120,0.025)"/>
-            <circle cx="52" cy="28" r="1.2" fill="rgba(200,170,120,0.15)"/>
-            <circle cx="58" cy="38" r="0.8" fill="rgba(200,170,120,0.1)"/>
-            <circle cx="46" cy="22" r="0.6" fill="rgba(200,170,120,0.08)"/>
-          </svg>
           <h3 class="nc-benefits__item-title">Better sleep</h3>
           <p class="nc-benefits__item-desc">Fewer nighttime glucose spikes disrupting your rest. Most people notice it within a week.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-3">
-          <svg class="nc-benefits__illus" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-            <defs><linearGradient id="b3" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="0%" stop-color="#C8A060" stop-opacity="0.2"/><stop offset="100%" stop-color="#A08050" stop-opacity="0.04"/></linearGradient></defs>
-            <!-- Flowing wave — clarity/focus -->
-            <path d="M10 40 C20 30 30 28 40 32 C50 36 55 44 65 38 C70 35 72 30 75 28" stroke="url(#b3)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M10 48 C22 40 32 38 42 42 C52 46 56 50 66 46" stroke="rgba(180,150,100,0.08)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
-            <circle cx="40" cy="32" r="10" fill="rgba(200,170,120,0.03)"/>
-            <circle cx="65" cy="38" r="2" fill="rgba(200,170,120,0.08)"/>
-          </svg>
           <h3 class="nc-benefits__item-title">Clearer thinking</h3>
           <p class="nc-benefits__item-desc">Less brain fog, more clarity. Your mind works better on stable fuel.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-4">
-          <svg class="nc-benefits__illus" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-            <defs><linearGradient id="b4" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#C8A060" stop-opacity="0.2"/><stop offset="100%" stop-color="#A08050" stop-opacity="0.06"/></linearGradient></defs>
-            <!-- Descending curve — diminishing cravings -->
-            <path d="M15 25 C25 28 32 40 38 48 C44 56 55 58 70 55" stroke="url(#b4)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M15 20 C28 22 34 35 40 42 C46 49 56 52 70 50" stroke="rgba(180,150,100,0.07)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
-            <circle cx="15" cy="25" r="3" fill="rgba(200,170,120,0.1)"/>
-            <circle cx="70" cy="55" r="1.5" fill="rgba(200,170,120,0.06)"/>
-          </svg>
           <h3 class="nc-benefits__item-title">Fewer cravings</h3>
           <p class="nc-benefits__item-desc">Within weeks, your body stops asking for sugar it doesn't need.</p>
         </div>
@@ -278,30 +216,19 @@
 
   <!-- ===== MID-PAGE CTA ===== -->
   <section class="nc-midcta nc-reveal" id="midcta">
-    <svg class="nc-midcta__illus" viewBox="0 0 400 300" fill="none" aria-hidden="true">
+    <svg class="nc-midcta__illus" viewBox="0 0 600 400" fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id="mc-g" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#C8A060" stop-opacity="0.1"/>
-          <stop offset="100%" stop-color="#8B7355" stop-opacity="0.02"/>
-        </linearGradient>
+        <radialGradient id="mb1" cx="45%" cy="45%" r="45%">
+          <stop offset="0%" stop-color="#C4A265" stop-opacity="0.07"/>
+          <stop offset="100%" stop-color="#8B7045" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="mb2" cx="55%" cy="55%" r="40%">
+          <stop offset="0%" stop-color="#B89860" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#7A6540" stop-opacity="0"/>
+        </radialGradient>
       </defs>
-      <!-- Abstract crystalline form dissolving rightward -->
-      <path d="M140 120 L170 100 L200 115 L195 150 L165 155 Z" stroke="rgba(200,170,120,0.12)" stroke-width="0.75" fill="rgba(200,170,120,0.02)"/>
-      <path d="M165 105 L195 90 L220 108 L215 140 L185 142 Z" stroke="rgba(200,170,120,0.08)" stroke-width="0.5" fill="none"/>
-      <path d="M155 140 L180 135 L200 155 L190 175 L160 170 Z" stroke="rgba(200,170,120,0.06)" stroke-width="0.5" fill="none"/>
-      <!-- Dissolution particles — flowing right and fading -->
-      <circle cx="230" cy="110" r="3" fill="rgba(200,170,120,0.06)"/>
-      <circle cx="245" cy="125" r="2.5" fill="rgba(200,170,120,0.05)"/>
-      <circle cx="255" cy="105" r="2" fill="rgba(200,170,120,0.04)"/>
-      <circle cx="265" cy="135" r="2" fill="rgba(200,170,120,0.035)"/>
-      <circle cx="280" cy="115" r="1.5" fill="rgba(200,170,120,0.03)"/>
-      <circle cx="290" cy="140" r="1.5" fill="rgba(200,170,120,0.025)"/>
-      <circle cx="305" cy="120" r="1" fill="rgba(200,170,120,0.02)"/>
-      <circle cx="315" cy="130" r="1" fill="rgba(200,170,120,0.015)"/>
-      <circle cx="240" cy="150" r="1.5" fill="rgba(200,170,120,0.03)"/>
-      <circle cx="260" cy="160" r="1" fill="rgba(200,170,120,0.02)"/>
-      <!-- Ambient glow -->
-      <circle cx="200" cy="130" r="50" fill="rgba(200,170,120,0.015)"/>
+      <path d="M180 140 C140 170 110 240 140 320 C170 400 260 430 340 390 C420 350 440 260 400 180 C360 100 230 100 180 140Z" fill="url(#mb1)"/>
+      <path d="M320 120 C270 140 240 200 270 280 C300 360 380 390 440 350 C500 310 510 230 480 160 C450 90 370 80 320 120Z" fill="url(#mb2)"/>
     </svg>
     <div class="nc-midcta__container">
       <p class="nc-midcta__text">Most people are surprised<br>by their number.</p>

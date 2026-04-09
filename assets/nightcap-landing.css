@@ -296,15 +296,15 @@ body::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(750px, 100vw);
+  width: min(900px, 120vw);
   height: auto;
   z-index: 0;
-  animation: nc-floatBotanical 20s ease-in-out infinite alternate;
+  animation: nc-floatOrganic 25s ease-in-out infinite alternate;
 }
 
-@keyframes nc-floatBotanical {
+@keyframes nc-floatOrganic {
   0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-  100% { transform: translate(-50%, -50%) rotate(2deg) scale(1.03); }
+  100% { transform: translate(-50%, -50%) rotate(3deg) scale(1.05); }
 }
 
 .nc-hero__content {
@@ -1050,7 +1050,20 @@ body::after {
     #EFECE6;
 }
 
+.nc-benefits__bg-shape {
+  position: absolute;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .nc-benefits__container {
+  position: relative;
+  z-index: 1;
   max-width: 680px;
   margin: 0 auto;
 }
@@ -1082,17 +1095,6 @@ body::after {
 
 .nc-benefits__item:hover {
   background: var(--nc-bg-card-hover);
-}
-
-.nc-benefits__illus {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 16px;
-  transition: transform 0.6s var(--nc-spring);
-}
-
-.nc-benefits__item:hover .nc-benefits__illus {
-  transform: scale(1.08);
 }
 
 .nc-benefits__item-title {
@@ -1153,7 +1155,7 @@ body::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(400px, 80vw);
+  width: min(600px, 100vw);
   height: auto;
   z-index: 0;
 }
@@ -2025,7 +2027,7 @@ body::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(600px, 90vw);
+  width: min(800px, 110vw);
   height: auto;
   z-index: 0;
 }
