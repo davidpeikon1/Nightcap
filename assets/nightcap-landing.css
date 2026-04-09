@@ -1124,48 +1124,7 @@ body {
 .nc-reveal--delay-3 { transition-delay: 0.3s; }
 .nc-reveal--delay-4 { transition-delay: 0.4s; }
 
-/* ---------- Why Section ---------- */
-.nc-why {
-  padding: 40px 32px 100px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
 
-/* Section dividers */
-.nc-why::before,
-.nc-benefits::before,
-.nc-proof::before,
-.nc-faq::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 1px;
-  background: var(--nc-primary);
-  opacity: 0.15;
-}
-
-.nc-benefits,
-.nc-proof,
-.nc-faq {
-  position: relative;
-}
-
-.nc-why__container {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.nc-why__subtitle {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--nc-text-muted);
-  line-height: 1.8;
-  margin-bottom: 3rem;
-}
 
 .nc-why__stats {
   display: grid;
@@ -2102,4 +2061,14 @@ body {
   left: 0;
   color: var(--nc-text);
   font-weight: 700;
+}
+
+/* ---------- Pullquote Kicker ---------- */
+.nc-pullquote__kicker {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--nc-text-muted);
+  margin-top: 2rem;
+  line-height: 1.7;
+  max-width: 480px;
 }

@@ -99,7 +99,7 @@
   function showPrecommit() {
     if (!precommit) { startQuizFromAnywhere(); return; }
 
-    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'social-proof', 'faq'];
+    var sections = ['hero', 'pullquote', 'how-it-works', 'social-proof', 'faq'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -122,7 +122,7 @@
   }
 
   function startQuizFromAnywhere() {
-    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'social-proof', 'midcta', 'faq', 'precommit'];
+    var sections = ['hero', 'pullquote', 'how-it-works', 'social-proof', 'midcta', 'faq', 'precommit'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
