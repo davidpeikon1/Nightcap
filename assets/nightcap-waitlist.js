@@ -9,9 +9,8 @@
   // ---------- Config ----------
   var CONFIG = {
     waitlistEndpoint: '/apps/nightcap-waitlist/subscribe',
-    smsEndpoint: '/apps/nightcap-waitlist/sms',
-    appDownloadUrl: 'https://nightcap.app/download',
-    launchDate: new Date('2026-07-15T09:00:00-04:00'),
+    appStoreUrl: null, // Set this when the app is live on the App Store
+    testflightUrl: null, // Set this for beta invites
     baseUrl: window.location.origin + window.location.pathname,
   };
 
@@ -301,7 +300,13 @@
     if (downloadBtn) {
       downloadBtn.addEventListener('click', function () {
         track('app_download_clicked');
-        window.open(CONFIG.appDownloadUrl, '_blank');
+        if (CONFIG.appStoreUrl) {
+          window.open(CONFIG.appStoreUrl, '_blank');
+        } else if (CONFIG.testflightUrl) {
+          window.open(CONFIG.testflightUrl, '_blank');
+        } else {
+          showToast("You're on the list. We'll notify you when the app launches.", 'success');
+        }
       });
     }
   }
