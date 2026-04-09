@@ -26,13 +26,17 @@ struct HomeView: View {
                         topBar
                             .padding(.top, 56)
 
-                        // Hero card: quote first, timer below — both visible on open
-                        HeroCard()
-
-                        // User's sugar number — biological context for why they're here
+                        // 1. Your sugar number — the core biological context
                         YourNumberCard()
 
-                        // Weekly insight (only when there's enough data)
+                        // 2. Daily reframe — the "why", timer subordinated/collapsed below
+                        HeroCard()
+
+                        // 3. Craving toolkit — crisis outlet, immediately reachable
+                        CravingToolkitSection()
+                            .id("cravingToolkit")
+
+                        // Supporting context (secondary, scroll to discover)
                         WeeklyInsightCard()
 
                         // Body science (collapsed by default, tap to expand)
@@ -40,10 +44,6 @@ struct HomeView: View {
 
                         // Progress + badges
                         ProgressSection()
-
-                        // Feature 3 — Craving toolkit
-                        CravingToolkitSection()
-                            .id("cravingToolkit")
 
                         Spacer(minLength: 60)
                     }

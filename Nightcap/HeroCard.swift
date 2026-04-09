@@ -6,7 +6,7 @@ import UIKit
 /// the timer and action (the "how"). Both are visible without scrolling.
 struct HeroCard: View {
     @EnvironmentObject var store: FastingStore
-    @AppStorage("timerSectionExpanded") private var timerExpanded = true
+    @AppStorage("timerSectionExpanded") private var timerExpanded = false
     @State private var scienceExpanded = false
     @State private var showResetModal  = false
     @State private var showEditStart   = false
