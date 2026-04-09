@@ -172,7 +172,6 @@ body {
   bottom: 0;
 }
 
-
 /* Hero logo — inverted + left-aligned */
 .nc-hero .nc-logo {
   margin: 0 auto 2.5rem;
@@ -312,31 +311,6 @@ body {
     padding: 80px 24px 40px;
   }
 
-
-  .nc-hero__teaser {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(237, 230, 219, 0.15);
-  }
-
-  .nc-hero__teaser-text {
-    font-family: var(--nc-font-display);
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: rgba(237, 230, 219, 0.6);
-    text-align: center;
-    line-height: 1.5;
-  }
-
-  .nc-hero__teaser-arrow {
-    font-size: 0.9rem;
-    color: var(--nc-text);
-    animation: nc-scrollBounce 2.5s ease-in-out infinite;
-  }
   }
 }
 
@@ -1209,25 +1183,6 @@ body {
   margin: 0 auto;
 }
 
-
-
-.nc-why__highlight {
-  color: var(--nc-warning);
-  position: relative;
-}
-
-.nc-why__highlight::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--nc-warning);
-  opacity: 0.3;
-  border-radius: 2px;
-}
-
 .nc-why__subtitle {
   font-size: 1.05rem;
   font-weight: 500;
@@ -1509,7 +1464,6 @@ body {
   color: var(--nc-bg);
 }
 
-
 /* ---------- Social Proof ---------- */
 .nc-proof {
   padding: 140px 40px;
@@ -1568,9 +1522,6 @@ body {
   padding-top: 14px;
   border-top: 1px solid var(--nc-border);
 }
-
-/* Press Bar */
-
 
 
 /* ---------- FAQ ---------- */
@@ -2047,10 +1998,6 @@ body {
   .nc-benefits,
   .nc-proof,
   .nc-faq,
-  .nc-bottom-cta {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
 
   .nc-benefits__item {
     padding: 28px 24px;
@@ -2126,10 +2073,6 @@ body {
   }
 }
 
-
-
-
-
 /* ---------- CRO: Signup Trust ---------- */
 .nc-signup__trust {
   display: flex;
@@ -2164,8 +2107,9 @@ body {
 .nc-signup__value-list {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin: 1rem auto 0;
   text-align: left;
+  display: inline-block;
 }
 
 .nc-signup__value-list li {
@@ -2800,7 +2744,7 @@ body {
   function showPrecommit() {
     if (!precommit) { startQuizFromAnywhere(); return; }
 
-    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq'];
+    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'social-proof', 'faq'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -2823,7 +2767,7 @@ body {
   }
 
   function startQuizFromAnywhere() {
-    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'social-proof', 'midcta', 'faq', 'bottom-cta', 'precommit'];
+    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'social-proof', 'midcta', 'faq', 'precommit'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
