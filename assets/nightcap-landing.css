@@ -1491,8 +1491,10 @@ body {
 
 /* ---------- Mid-page CTA ---------- */
 .nc-midcta {
-  padding: 80px 32px;
+  padding: 100px 32px;
   text-align: center;
+  background: var(--nc-primary);
+  color: var(--nc-bg);
 }
 
 .nc-midcta__container {
@@ -1502,11 +1504,12 @@ body {
 
 .nc-midcta__text {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.4;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  color: var(--nc-bg);
 }
 /* ---------- Transition Line ---------- */
 .nc-transition {
