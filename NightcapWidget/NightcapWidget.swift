@@ -21,10 +21,12 @@ struct WidgetFastData {
         )
     }
 
-    /// Grams of added sugar avoided since the fast started, or nil when no number is set.
+    /// Grams of added sugar avoided since the fast started, or nil when no number is set
+    /// or when less than 1 full day has elapsed (avoids inflated sub-day counts).
     func sugarAvoided(at date: Date) -> Int? {
         guard let g = dailySugarGrams, g > 0 else { return nil }
-        let days = max(1, Int(elapsed(at: date) / 86400))
+        let days = Int(elapsed(at: date) / 86400)
+        guard days >= 1 else { return nil }
         return days * g
     }
 
