@@ -327,6 +327,17 @@ struct SettingsSheet: View {
         if let goal = appState.userGoal {
             lines.append("Goal: \(goal.rawValue)")
         }
+        if let g = appState.dailySugarGrams {
+            lines.append("Daily sugar estimate: \(g)g / day")
+            if let quiz = appState.quizSugarGrams, quiz != g {
+                let delta = quiz - g
+                if delta > 0 {
+                    lines.append("Original estimate: \(quiz)g / day (reduced by \(delta)g)")
+                } else {
+                    lines.append("Original estimate: \(quiz)g / day")
+                }
+            }
+        }
         lines.append("")
 
         // Current fast

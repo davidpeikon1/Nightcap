@@ -5,6 +5,7 @@ struct NumberEditSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var sliderValue: Double
+    @State private var savedReduction: Int? = nil   // set when user saves a lower number
 
     init() {
         // Default to current value or 50g if unset
@@ -16,6 +17,21 @@ struct NumberEditSheet: View {
     private var tier: SugarTier { SugarTier(grams: grams) }
 
     var body: some View {
+        ZStack {
+            editView
+
+            if let reduction = savedReduction {
+                successView(reduction: reduction)
+                    .transition(.opacity)
+                    .zIndex(10)
+            }
+        }
+        .animation(.easeInOut(duration: 0.3), value: savedReduction)
+    }
+
+    // MARK: - Edit View
+
+    private var editView: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Header
             HStack {
@@ -100,11 +116,21 @@ struct NumberEditSheet: View {
             VStack(spacing: 12) {
                 Button {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    let previous = appState.dailySugarGrams
                     if appState.quizSugarGrams == nil {
                         appState.quizSugarGrams = grams
                     }
                     appState.dailySugarGrams = grams
-                    dismiss()
+                    // Celebrate a reduction — this is the core retention moment
+                    if let prev = previous, grams < prev {
+                        UINotificationFeedbackGenerator().notificationOccurred(.success)
+                        withAnimation { savedReduction = prev - grams }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                            dismiss()
+                        }
+                    } else {
+                        dismiss()
+                    }
                 } label: {
                     Text("Save")
                         .font(.system(size: 15, weight: .medium))
@@ -120,6 +146,53 @@ struct NumberEditSheet: View {
                     .foregroundStyle(Color("NCTextTertiary"))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
+            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, 32)
+        }
+        .background(Color("NCBackground").ignoresSafeArea())
+    }
+
+    // MARK: - Success View (shown when user reduces their number)
+
+    private func successView(reduction: Int) -> some View {
+        let kgPerYear = Double(reduction) * 365.0 / 1000.0
+        return VStack(spacing: 0) {
+            Spacer()
+
+            VStack(spacing: 16) {
+                Image(systemName: "arrow.down.circle")
+                    .font(.system(size: 44, weight: .light))
+                    .foregroundStyle(Color("NCSuccess"))
+
+                VStack(spacing: 8) {
+                    Text("\(reduction)g less per day")
+                        .font(.system(size: 28, weight: .light))
+                        .foregroundStyle(Color("NCTextPrimary"))
+
+                    Text(String(format: "That's %.1fkg of added sugar less entering your liver each year.", kgPerYear))
+                        .font(.system(size: 14, weight: .light))
+                        .foregroundStyle(Color("NCTextSecondary"))
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 16)
+                }
+            }
+            .padding(.horizontal, 32)
+
+            Spacer()
+
+            Button {
+                dismiss()
+            } label: {
+                Text("Done")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Color("NCBackground"))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color("NCAccent"))
+                    .cornerRadius(12)
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 32)
