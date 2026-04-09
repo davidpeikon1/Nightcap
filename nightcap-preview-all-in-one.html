@@ -15,13 +15,12 @@
   <meta name="twitter:title" content="Nightcap — Quitting Sugar Is Hard. Help Is Coming.">
   <meta name="twitter:description" content="60-second quiz. See your real number.">
 
-  <meta name="theme-color" content="#EDE6DB">
+  <meta name="theme-color" content="#E8E0D0">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23111' width='100' height='100' rx='12'/><text x='50' y='72' text-anchor='middle' fill='%23EDE6DB' font-family='Georgia' font-size='64' font-weight='900'>N</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23111' width='100' height='100' rx='12'/><text x='50' y='72' text-anchor='middle' fill='%23EDE6DB' font-family='Georgia' font-size='64' font-weight='900'>N</text></svg>">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
 /* ==========================================================================
@@ -36,13 +35,13 @@
 }
 
 :root {
-  --nc-bg: #EDE6DB;
-  --nc-bg-card: #F5F1EA;
-  --nc-bg-card-hover: #FAF8F4;
+  --nc-bg: #E8E0D0;
+  --nc-bg-card: #EFE9DD;
+  --nc-bg-card-hover: #F5F0E7;
   --nc-surface: #F0ECE4;
-  --nc-primary: #111111;
-  --nc-primary-light: #222222;
-  --nc-primary-dark: #000000;
+  --nc-primary: #1A1714;
+  --nc-primary-light: #2A2622;
+  --nc-primary-dark: #0D0B09;
   --nc-accent: #111111;
   --nc-accent-dark: #000000;
   --nc-text: #000000;
@@ -53,13 +52,13 @@
   --nc-success: #3D362E;
   --nc-border: rgba(42, 37, 32, 0.1);
   --nc-glow: rgba(42, 37, 32, 0.08);
-  --nc-radius: 10px;
-  --nc-radius-lg: 18px;
+  --nc-radius: 12px;
+  --nc-radius-lg: 20px;
   --nc-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --nc-font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --nc-font-display: 'Playfair Display', Georgia, serif;
   --nc-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --nc-shadow-sm: 0 1px 4px rgba(42,37,32,0.06), 0 1px 2px rgba(42,37,32,0.04);
-  --nc-shadow-md: 0 4px 16px rgba(42,37,32,0.08), 0 1px 4px rgba(42,37,32,0.05);
+  --nc-shadow-sm: 0 2px 8px rgba(42,37,32,0.07), 0 1px 3px rgba(42,37,32,0.05);
+  --nc-shadow-md: 0 8px 24px rgba(42,37,32,0.1), 0 2px 6px rgba(42,37,32,0.06);
   --nc-shadow-lg: 0 12px 40px rgba(42,37,32,0.12), 0 4px 12px rgba(42,37,32,0.06);
 }
 
@@ -307,6 +306,10 @@ body {
   padding: 120px 40px 60px;
   overflow: hidden;
   background: var(--nc-primary);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232, 224, 208, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 0% 0%, rgba(232, 224, 208, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 100% 100%, rgba(232, 224, 208, 0.03) 0%, transparent 50%);
   color: var(--nc-bg);
 }
 
@@ -1283,10 +1286,10 @@ body {
 .nc-benefits__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(28, 25, 23, 0.06);
-  border: 1px solid rgba(28, 25, 23, 0.06);
-  border-radius: var(--nc-radius-lg);
+  gap: 16px;
+  background: none;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -1322,6 +1325,8 @@ body {
 /* Dark variant */
 .nc-benefits--dark {
   background: var(--nc-primary);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232, 224, 208, 0.04) 0%, transparent 60%);
   color: var(--nc-bg);
   padding: 140px 40px;
 }
@@ -1340,7 +1345,8 @@ body {
 }
 
 .nc-benefits--dark .nc-benefits__item {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--nc-radius-lg);
 }
 
 .nc-benefits--dark .nc-benefits__item:hover {
@@ -1375,6 +1381,8 @@ body {
   padding: 100px 32px;
   text-align: center;
   background: var(--nc-primary);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232, 224, 208, 0.04) 0%, transparent 60%);
   color: var(--nc-bg);
 }
 
@@ -1414,12 +1422,12 @@ body {
 .nc-proof__card {
   padding: 36px;
   background: var(--nc-bg-card);
-  border: 1px solid rgba(28, 25, 23, 0.05);
+  border: none;
   border-radius: var(--nc-radius-lg);
   display: flex;
   flex-direction: column;
   gap: 18px;
-  box-shadow: var(--nc-shadow-sm);
+  box-shadow: var(--nc-shadow-md);
   position: relative;
   transition: transform var(--nc-transition), box-shadow var(--nc-transition);
 }
@@ -2191,9 +2199,10 @@ body {
 
 /* ---------- Statement (the iconic moment) ---------- */
 .nc-statement {
-  padding: 120px 32px;
+  padding: 140px 32px;
   text-align: center;
   overflow: hidden;
+  background: linear-gradient(180deg, var(--nc-bg) 0%, #DED6C6 50%, var(--nc-bg) 100%);
 }
 
 .nc-statement__number {
