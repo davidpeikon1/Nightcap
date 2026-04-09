@@ -105,8 +105,8 @@ struct HeroCard: View {
                     }
 
                     Image(systemName: timerExpanded ? "chevron.up" : "chevron.down")
-                        .font(.system(size: 9, weight: .light))
-                        .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
+                        .font(.system(size: 10, weight: .regular))
+                        .foregroundStyle(Color("NCTextTertiary").opacity(0.8))
                 }
             }
             .padding(.top, 20)

@@ -7,8 +7,8 @@ enum SugarTier {
 
     init(grams: Int) {
         switch grams {
-        case ..<25:   self = .low
-        case 25..<50: self = .moderate
+        case ..<25:    self = .low
+        case 25..<50:  self = .moderate
         case 50..<100: self = .high
         default:       self = .veryHigh
         }
@@ -53,6 +53,7 @@ struct YourNumberCard: View {
     @EnvironmentObject var store: FastingStore
     @State private var showEdit = false
     @State private var updatePulse: Double = 1.0
+    @State private var biologyExpanded = false
 
     private var grams: Int? { appState.dailySugarGrams }
     private var quiz: Int?  { appState.quizSugarGrams }
@@ -70,7 +71,8 @@ struct YourNumberCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .firstTextBaseline) {
+            // Header
+            HStack(alignment: .center) {
                 Text("YOUR NUMBER")
                     .font(.system(size: 11, weight: .medium))
                     .tracking(2)
@@ -103,7 +105,7 @@ struct YourNumberCard: View {
             }
 
             Rectangle()
-                .fill(Color("NCTextTertiary").opacity(0.4))
+                .fill(Color("NCTextTertiary").opacity(0.35))
                 .frame(height: 1)
                 .padding(.top, 12)
                 .padding(.bottom, 16)
@@ -117,6 +119,7 @@ struct YourNumberCard: View {
         .padding(20)
         .background(Color("NCSurface"))
         .cornerRadius(16)
+        .animation(.spring(duration: 0.3), value: biologyExpanded)
         .sheet(isPresented: $showEdit) {
             NumberEditSheet()
                 .presentationDetents([.medium])
@@ -126,37 +129,59 @@ struct YourNumberCard: View {
 
     private func numberDisplay(grams: Int, tier: SugarTier) -> some View {
         VStack(alignment: .leading, spacing: 12) {
+            // Hero number
             HStack(alignment: .lastTextBaseline, spacing: 4) {
                 Text("\(grams)")
-                    .font(.system(size: 48, weight: .light).monospacedDigit())
+                    .font(.system(size: 52, weight: .light).monospacedDigit())
                     .foregroundStyle(Color("NCTextPrimary"))
                     .contentTransition(.numericText())
-                Text("g added sugar / day")
-                    .font(.system(size: 14, weight: .light))
+                Text("g / day")
+                    .font(.system(size: 15, weight: .light))
                     .foregroundStyle(Color("NCTextSecondary"))
-                    .padding(.bottom, 4)
+                    .padding(.bottom, 5)
                 Spacer()
             }
 
-            HStack(spacing: 6) {
-                Circle()
-                    .fill(tier.color)
-                    .frame(width: 6, height: 6)
-                Text(tier.label)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(tier.color)
+            // Tier chip + "The biology" expand toggle on same row
+            HStack(spacing: 0) {
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(tier.color)
+                        .frame(width: 6, height: 6)
+                    Text(tier.label)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(tier.color)
+                }
+                Spacer()
+                Button {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    withAnimation(.spring(duration: 0.3)) { biologyExpanded.toggle() }
+                } label: {
+                    HStack(spacing: 4) {
+                        Text("The biology")
+                            .font(.system(size: 12, weight: .regular))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                        Image(systemName: biologyExpanded ? "chevron.up" : "chevron.right")
+                            .font(.system(size: 10, weight: .light))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                    }
+                }
             }
 
-            Text(tier.biologicalNote)
-                .font(.system(size: 13, weight: .light))
-                .foregroundStyle(Color("NCTextSecondary"))
-                .lineSpacing(4)
-                .fixedSize(horizontal: false, vertical: true)
+            // Bio note — expandable, hidden by default to reduce card density
+            if biologyExpanded {
+                Text(tier.biologicalNote)
+                    .font(.system(size: 13, weight: .light))
+                    .foregroundStyle(Color("NCTextSecondary"))
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+            }
 
-            // Target benchmark — gives the number a direction to move in
+            // Target benchmark — gives the number a clear direction
             targetBenchmark(grams: grams, tier: tier)
 
-            // Sugar avoided stat — only meaningful when a fast is active
+            // Sugar avoided — concrete, positive momentum stat
             if store.elapsedSeconds > 0 {
                 avoidedStat(grams: grams)
             }

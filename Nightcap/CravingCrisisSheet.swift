@@ -4,8 +4,8 @@ import Combine
 // MARK: - Craving Crisis Sheet
 //
 // Crisis-mode tool. Opens from the floating "I'm craving" button on HomeView.
-// Leads with a random reframe card to interrupt the craving response, then
-// offers the 20-minute timer and a quick-log action.
+// Leads with a random reframe to interrupt the craving response, then gives
+// immediate access to the 20-minute timer and a quick-log action.
 
 struct CravingCrisisSheet: View {
     @EnvironmentObject var store: FastingStore
@@ -13,7 +13,6 @@ struct CravingCrisisSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     @StateObject private var countdown = CountdownState()
-    @State private var showTimer = true
     @State private var cardText: String
     @State private var cardIndex: Int
 
@@ -27,13 +26,13 @@ struct CravingCrisisSheet: View {
         VStack(spacing: 0) {
             // Drag handle
             Capsule()
-                .fill(Color("NCTextTertiary").opacity(0.4))
+                .fill(Color("NCTextTertiary").opacity(0.35))
                 .frame(width: 36, height: 4)
                 .padding(.top, 14)
                 .padding(.bottom, 20)
 
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 20) {
 
                     // Header
                     VStack(alignment: .leading, spacing: 6) {
@@ -49,7 +48,7 @@ struct CravingCrisisSheet: View {
                     // Reframe card
                     reframeCard
 
-                    // 20-minute timer
+                    // 20-minute timer — always visible, no toggle
                     timerSection
 
                     // Quick log
@@ -104,46 +103,32 @@ struct CravingCrisisSheet: View {
         .padding(.horizontal, 24)
     }
 
-    // MARK: - Timer Section
+    // MARK: - Timer Section (always visible — no toggle)
 
     private var timerSection: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Button {
-                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                withAnimation(.spring(duration: 0.3)) { showTimer.toggle() }
-            } label: {
-                HStack {
-                    Text("20-MINUTE TIMER")
-                        .font(.system(size: 11, weight: .medium))
-                        .tracking(2)
-                        .foregroundStyle(Color("NCTextSecondary"))
-                    Spacer()
-                    Image(systemName: showTimer ? "chevron.up" : "chevron.down")
-                        .font(.system(size: 10, weight: .light))
-                        .foregroundStyle(Color("NCTextTertiary"))
-                }
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text("20 MINUTES")
+                    .font(.system(size: 11, weight: .medium))
+                    .tracking(2)
+                    .foregroundStyle(Color("NCTextSecondary"))
+                Spacer()
+                Text("cravings always pass")
+                    .font(.system(size: 11, weight: .light))
+                    .foregroundStyle(Color("NCTextTertiary"))
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
 
-            if showTimer {
-                VStack(spacing: 16) {
-                    if countdown.completed {
-                        completedState
-                    } else {
-                        countdownDisplay
-                        timerControls
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 20)
-                .transition(.opacity.combined(with: .move(edge: .top)))
+            if countdown.completed {
+                completedState
+            } else {
+                countdownDisplay
+                timerControls
             }
         }
+        .padding(20)
         .background(Color("NCSurface"))
         .cornerRadius(16)
         .padding(.horizontal, 24)
-        .animation(.spring(duration: 0.3), value: showTimer)
         .animation(.spring(duration: 0.3), value: countdown.completed)
     }
 
@@ -282,7 +267,6 @@ struct CravingCrisisSheet: View {
                 ) {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     if !countdown.isRunning && !countdown.completed {
-                        withAnimation(.spring(duration: 0.3)) { showTimer = true }
                         countdown.start()
                     }
                 }

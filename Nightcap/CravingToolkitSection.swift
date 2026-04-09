@@ -179,7 +179,7 @@ struct CravingToolkitSection: View {
                 .padding(.horizontal, 14)
                 .padding(.vertical, 7)
                 .background(isActive ? Color("NCAccent") : Color("NCBackground"))
-                .cornerRadius(8)
+                .clipShape(Capsule())
         }
         .accessibilityAddTraits(isActive ? [.isSelected] : [])
         .accessibilityHint("Shows the \(tab.rawValue) tool")

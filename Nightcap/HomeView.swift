@@ -81,7 +81,8 @@ struct HomeView: View {
                         .background(
                             Capsule()
                                 .fill(Color("NCSurface"))
-                                .shadow(color: Color("NCTextPrimary").opacity(0.1), radius: 12, y: 4)
+                                .shadow(color: Color("NCTextPrimary").opacity(0.14), radius: 18, y: 6)
+                                .shadow(color: Color("NCTextPrimary").opacity(0.05), radius: 4, y: 2)
                         )
                     }
                     .buttonStyle(.plain)
