@@ -19,9 +19,9 @@
   --nc-primary-dark: #000000;
   --nc-accent: #111111;
   --nc-accent-dark: #000000;
-  --nc-text: #111111;
-  --nc-text-muted: #3D3935;
-  --nc-text-dim: #5C5650;
+  --nc-text: #000000;
+  --nc-text-muted: #2E2B28;
+  --nc-text-dim: #4A4540;
   --nc-error: #B84040;
   --nc-warning: #1C1917;
   --nc-success: #3D362E;
@@ -301,14 +301,14 @@ body {
     gap: 8px;
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(237, 230, 219, 0.1);
+    border-top: 1px solid rgba(237, 230, 219, 0.15);
   }
 
   .nc-hero__teaser-text {
     font-family: var(--nc-font-display);
     font-size: 0.85rem;
     font-weight: 500;
-    color: rgba(237, 230, 219, 0.4);
+    color: rgba(237, 230, 219, 0.6);
     text-align: center;
     line-height: 1.5;
   }
@@ -316,13 +316,12 @@ body {
   .nc-hero__teaser-arrow {
     font-size: 0.9rem;
     color: var(--nc-text);
-    opacity: 0.3;
     animation: nc-scrollBounce 2.5s ease-in-out infinite;
   }
 
   @keyframes nc-scrollBounce {
-    0%, 100% { transform: translateY(0); opacity: 0.2; }
-    50% { transform: translateY(4px); opacity: 0.4; }
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(4px); opacity: 0.7; }
   }
 }
 
@@ -382,14 +381,14 @@ body {
 
 .nc-hero__title-line--accent {
   display: block;
-  color: rgba(237, 230, 219, 0.5);
+  color: rgba(237, 230, 219, 0.8);
   font-weight: 600;
 }
 
 .nc-hero__subtitle {
   font-size: 1.1rem;
   font-weight: 400;
-  color: rgba(237, 230, 219, 0.6);
+  color: rgba(237, 230, 219, 0.75);
   max-width: 460px;
   margin: 0 auto 3rem;
   line-height: 1.8;
@@ -403,7 +402,7 @@ body {
   margin-top: 1rem;
   font-size: 0.82rem;
   font-weight: 500;
-  color: rgba(237, 230, 219, 0.4);
+  color: rgba(237, 230, 219, 0.6);
 }
 
 /* Countdown */
@@ -625,7 +624,6 @@ body {
 
 .nc-quiz__option.selected .nc-quiz__option-sugar {
   color: var(--nc-bg);
-  opacity: 0.75;
 }
 
 .nc-quiz__option-label {
@@ -724,7 +722,6 @@ body {
 
 .nc-signup__subtitle {
   color: var(--nc-text);
-  opacity: 0.7;
   font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.7;
@@ -785,7 +782,6 @@ body {
 
 .nc-input::placeholder {
   color: var(--nc-text-muted);
-  opacity: 0.8;
 }
 
 .nc-input:focus {
@@ -879,7 +875,6 @@ body {
   display: block;
   font-size: 0.75rem;
   color: var(--nc-text-muted);
-  opacity: 0.75;
   margin-top: 2px;
 }
 
@@ -955,7 +950,6 @@ body {
 .nc-results__big-number-unit {
   font-size: 0.4em;
   font-weight: 500;
-  opacity: 0.8;
   vertical-align: baseline;
 }
 
@@ -978,7 +972,6 @@ body {
 
 .nc-results__subtitle {
   color: var(--nc-text);
-  opacity: 0.75;
   font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.75;
@@ -1102,7 +1095,7 @@ body {
 /* ---------- Footer ---------- */
 .nc-footer {
   padding: 100px 40px 80px;
-  border-top: 1px solid rgba(237, 230, 219, 0.1);
+  border-top: 1px solid rgba(237, 230, 219, 0.15);
   text-align: center;
 }
 
@@ -1119,7 +1112,6 @@ body {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.7;
   margin-bottom: 2rem;
 }
 
@@ -1134,7 +1126,6 @@ body {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.5;
   text-decoration: none;
   transition: opacity var(--nc-transition);
 }
@@ -1152,7 +1143,6 @@ body {
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.7;
   margin-top: 2rem;
 }
 
@@ -1271,7 +1261,6 @@ body {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.8;
   line-height: 1.5;
 }
 
@@ -1341,7 +1330,6 @@ body {
   line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--nc-text);
-  opacity: 0.7;
   margin: 0;
 }
 
@@ -1438,7 +1426,6 @@ body {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.8;
   line-height: 1.65;
 }
 
@@ -1477,7 +1464,7 @@ body {
 }
 
 .nc-benefits--dark .nc-benefits__item-desc {
-  color: rgba(237, 230, 219, 0.65);
+  color: rgba(237, 230, 219, 0.8);
   opacity: 1;
 }
 
@@ -1526,7 +1513,6 @@ body {
   font-weight: 500;
   font-style: italic;
   color: var(--nc-text);
-  opacity: 0.4;
 }
 
 /* ---------- Social Proof ---------- */
@@ -1573,7 +1559,6 @@ body {
   font-size: 1.05rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.8;
   line-height: 1.6;
   font-style: italic;
   flex: 1;
@@ -1712,7 +1697,6 @@ body {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.75;
   line-height: 1.8;
   margin: 0;
 }
@@ -1897,7 +1881,6 @@ body {
 
 .nc-calculating__step.done {
   color: var(--nc-text-muted);
-  opacity: 0.75;
 }
 
 .nc-calculating__step.done::before {
@@ -2015,7 +1998,6 @@ body {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--nc-text);
-  opacity: 0.7;
   margin-bottom: 1.25rem;
 }
 
