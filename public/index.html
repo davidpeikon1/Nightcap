@@ -15,7 +15,7 @@
   <meta name="twitter:title" content="Nightcap — Quitting Sugar Is Hard. Help Is Coming.">
   <meta name="twitter:description" content="60-second quiz. See your real number.">
 
-  <meta name="theme-color" content="#E8E0D0">
+  <meta name="theme-color" content="#FAFAF7">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23111' width='100' height='100' rx='12'/><text x='50' y='72' text-anchor='middle' fill='%23EDE6DB' font-family='Georgia' font-size='64' font-weight='900'>N</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,32 +35,34 @@
 }
 
 :root {
-  --nc-bg: #E8E0D0;
-  --nc-bg-card: #EFE9DD;
-  --nc-bg-card-hover: #F5F0E7;
-  --nc-surface: #F0ECE4;
-  --nc-primary: #1A1714;
-  --nc-primary-light: #2A2622;
-  --nc-primary-dark: #0D0B09;
-  --nc-accent: #111111;
-  --nc-accent-dark: #000000;
-  --nc-text: #000000;
-  --nc-text-muted: #2E2B28;
-  --nc-text-dim: #4A4540;
-  --nc-error: #B84040;
-  --nc-warning: #1C1917;
-  --nc-success: #3D362E;
-  --nc-border: rgba(42, 37, 32, 0.1);
-  --nc-glow: rgba(42, 37, 32, 0.08);
-  --nc-radius: 12px;
-  --nc-radius-lg: 20px;
+  /* Bright, airy wellness palette */
+  --nc-bg: #FAFAF7;
+  --nc-bg-warm: #F5F3EE;
+  --nc-bg-card: #FFFFFF;
+  --nc-bg-card-hover: #F9F8F5;
+  --nc-surface: #F0EDE7;
+  --nc-primary: #1A1A1A;
+  --nc-primary-light: #333333;
+  --nc-primary-dark: #0A0A0A;
+  --nc-accent: #2E6B3A;
+  --nc-accent-hover: #3A7D47;
+  --nc-accent-light: #E8F2EA;
+  --nc-text: #1A1A1A;
+  --nc-text-muted: #555555;
+  --nc-text-dim: #888888;
+  --nc-error: #C44B4B;
+  --nc-success: #2E6B3A;
+  --nc-border: rgba(0, 0, 0, 0.08);
+  --nc-border-strong: rgba(0, 0, 0, 0.12);
+  --nc-radius: 10px;
+  --nc-radius-lg: 16px;
   --nc-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --nc-font-display: 'Playfair Display', Georgia, serif;
   --nc-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --nc-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --nc-shadow-sm: 0 2px 8px rgba(42,37,32,0.07), 0 1px 3px rgba(42,37,32,0.05);
-  --nc-shadow-md: 0 8px 24px rgba(42,37,32,0.1), 0 2px 6px rgba(42,37,32,0.06);
-  --nc-shadow-lg: 0 16px 48px rgba(42,37,32,0.14), 0 4px 12px rgba(42,37,32,0.06);
+  --nc-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --nc-shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+  --nc-shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  --nc-shadow-lg: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
 }
 
 html {
@@ -72,12 +74,11 @@ html {
 
 body {
   font-family: var(--nc-font);
-  font-weight: 450;
+  font-weight: 400;
   background: var(--nc-bg);
-
   color: var(--nc-text);
-  line-height: 1.65;
-  letter-spacing: -0.005em;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -138,24 +139,24 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  margin: 0 auto 3rem;
+  gap: 4px;
+  margin: 0 auto 2.5rem;
   width: fit-content;
 }
 
 .nc-logo__text {
   font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 900;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 700;
   color: var(--nc-text);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.2em;
   line-height: 1;
   text-transform: uppercase;
 }
 
 .nc-logo__lines {
   width: 100%;
-  height: 7px;
+  height: 5px;
   position: relative;
 }
 
@@ -165,7 +166,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 1px;
   background: var(--nc-text);
 }
 
@@ -177,18 +178,18 @@ body {
   bottom: 0;
 }
 
-/* Hero logo — inverted + centered */
+/* Hero logo */
 .nc-hero .nc-logo {
-  margin: 0 auto 3.5rem;
+  margin: 0 auto 4rem;
 }
 
 .nc-hero .nc-logo__text {
-  color: var(--nc-bg);
+  color: var(--nc-text);
 }
 
 .nc-hero .nc-logo__lines::before,
 .nc-hero .nc-logo__lines::after {
-  background: var(--nc-bg);
+  background: var(--nc-text);
 }
 .nc-logo--sm .nc-logo__text {
   font-size: 1rem;
@@ -208,66 +209,75 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   padding: 14px 32px;
   border: none;
-  border-radius: 8px;
+  border-radius: 100px;
   font-family: var(--nc-font);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all var(--nc-transition);
   text-decoration: none;
   position: relative;
-  overflow: hidden;
 }
 
 .nc-btn--primary {
-  background: var(--nc-primary);
-  color: var(--nc-bg);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  padding: 18px 52px;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
+  background: var(--nc-accent);
+  color: #FFFFFF;
+  padding: 18px 48px;
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  box-shadow: 0 2px 8px rgba(46, 107, 58, 0.2);
 }
 
 .nc-btn--primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  background: var(--nc-primary-light);
-  box-shadow: var(--nc-shadow-md);
+  background: var(--nc-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(46, 107, 58, 0.25);
 }
 
 .nc-btn--primary:active:not(:disabled) {
-  transform: translateY(0) scale(0.98);
-  box-shadow: var(--nc-shadow-sm);
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(46, 107, 58, 0.15);
 }
 
 .nc-btn--primary:disabled {
-  opacity: 0.7;
+  opacity: 0.5;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
 .nc-btn--primary:focus-visible {
-  outline: 2px solid var(--nc-primary-light);
+  outline: 2px solid var(--nc-accent);
   outline-offset: 3px;
+}
+
+.nc-btn--secondary {
+  background: transparent;
+  color: var(--nc-accent);
+  border: 1.5px solid var(--nc-accent);
+  padding: 16px 40px;
+}
+
+.nc-btn--secondary:hover {
+  background: var(--nc-accent-light);
 }
 
 .nc-btn--outline {
   background: transparent;
   color: var(--nc-primary);
-  border: 1px solid rgba(42, 37, 32, 0.2);
+  border: 1px solid var(--nc-border-strong);
 }
 
 .nc-btn--outline:hover {
-  background: rgba(42, 37, 32, 0.05);
+  background: var(--nc-bg-warm);
   border-color: var(--nc-primary);
 }
 
 .nc-btn--outline:focus-visible {
-  outline: 2px solid var(--nc-primary-light);
+  outline: 2px solid var(--nc-accent);
   outline-offset: 3px;
 }
 
@@ -276,26 +286,17 @@ body {
 }
 
 .nc-btn--sm {
-  padding: 10px 20px;
-  font-size: 0.875rem;
+  padding: 10px 24px;
+  font-size: 0.8rem;
 }
 
 .nc-btn__arrow {
   transition: transform var(--nc-transition);
+  font-size: 1.1em;
 }
 
 .nc-btn:hover .nc-btn__arrow {
-  transform: translateX(4px);
-}
-
-/* Pulse animation on primary CTA */
-.nc-btn--pulse {
-  animation: nc-pulse 2.5s ease-in-out infinite;
-}
-
-@keyframes nc-pulse {
-  0%, 100% { box-shadow: var(--nc-shadow-sm); }
-  50% { box-shadow: var(--nc-shadow-md), 0 0 40px rgba(42, 37, 32, 0.1); }
+  transform: translateX(3px);
 }
 
 /* ---------- Hero ---------- */
@@ -306,118 +307,77 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 40px 80px;
+  padding: 140px 40px 100px;
   overflow: hidden;
-  background: var(--nc-primary);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% 40%, rgba(232, 224, 208, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(232, 224, 208, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 40% at 90% 20%, rgba(232, 224, 208, 0.03) 0%, transparent 50%);
-  color: var(--nc-bg);
-}
-
-/* Subtle noise grain overlay for depth */
-.nc-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 0;
-  mix-blend-mode: overlay;
+  background: var(--nc-bg);
+  color: var(--nc-text);
 }
 
 @media (max-width: 768px) {
   .nc-hero {
     min-height: auto;
-    padding: 80px 24px 40px;
+    padding: 100px 24px 60px;
   }
-
 }
 
 .nc-hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.nc-hero__gradient {
-  position: absolute;
-  inset: -20%;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(237, 230, 219, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 30% 70%, rgba(237, 230, 219, 0.05) 0%, transparent 50%);
-  animation: nc-ambientShift 20s ease-in-out infinite alternate;
-}
-
-@keyframes nc-ambientShift {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(2%, -1%) scale(1.03); }
-}
-
-.nc-hero__stars {
   display: none;
 }
 
-@keyframes nc-twinkle {
-  0% { opacity: 0.8; }
-  100% { opacity: 1; }
+.nc-hero__gradient {
+  display: none;
 }
 
 .nc-hero__content {
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 740px;
-  animation: nc-heroEntrance 1.2s var(--nc-spring);
+  max-width: 620px;
+  animation: nc-heroEntrance 1s var(--nc-spring);
 }
 
 @keyframes nc-heroEntrance {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.75rem, 8vw, 5rem);
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.025em;
-  margin-bottom: 2rem;
+  color: var(--nc-text);
+  margin-bottom: 1.5rem;
 }
+
 .nc-hero__title-line {
   display: block;
 }
 
 .nc-hero__title-line--accent {
-  display: block;
-  color: rgba(237, 230, 219, 0.65);
-  font-weight: 500;
-  font-size: 0.6em;
-  margin-top: 0.25em;
+  display: none;
 }
 
 .nc-hero__subtitle {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 400;
-  color: rgba(237, 230, 219, 0.7);
-  max-width: 440px;
-  margin: 0 auto 3rem;
-  line-height: 1.85;
-  letter-spacing: 0.005em;
+  color: var(--nc-text-muted);
+  max-width: 420px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
 }
 
 .nc-hero__cta-group {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .nc-hero__cta-note {
-  margin-top: 1rem;
-  font-size: 0.82rem;
+  margin-top: 1.25rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  color: rgba(237, 230, 219, 0.6);
+  color: var(--nc-text-dim);
+  letter-spacing: 0.02em;
 }
 
 /* Countdown */
@@ -438,10 +398,7 @@ body {
   font-family: var(--nc-font-display);
   font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--nc-primary-light), var(--nc-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--nc-text);
   line-height: 1.2;
 }
 
@@ -473,7 +430,7 @@ body {
 .nc-hero__scroll-line {
   width: 1px;
   height: 40px;
-  background: linear-gradient(to bottom, rgba(232, 224, 208, 0.4), rgba(232, 224, 208, 0));
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.2), rgba(26, 26, 26, 0));
   animation: nc-scrollPulse 2s ease-in-out infinite;
 }
 
@@ -512,20 +469,20 @@ body {
 }
 
 .nc-quiz__dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: var(--nc-text);
-  opacity: 0.2;
+  background: var(--nc-border-strong);
   transition: all var(--nc-transition);
 }
 
 .nc-quiz__dot.active {
-  opacity: 0.75;
+  background: var(--nc-accent);
 }
 
 .nc-quiz__dot.completed {
-  opacity: 0.5;
+  background: var(--nc-accent);
+  opacity: 0.4;
 }
 
 /* Steps */
@@ -623,10 +580,10 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 17px 24px;
+  padding: 16px 22px;
   background: var(--nc-bg-card);
-  border: 1px solid rgba(28, 25, 23, 0.06);
-  border-radius: 10px;
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
   cursor: pointer;
   transition: all var(--nc-transition);
   text-align: left;
@@ -635,12 +592,10 @@ body {
   font-weight: 500;
   color: var(--nc-text);
   width: 100%;
-  box-shadow: 0 1px 3px rgba(42,37,32,0.04);
 }
 
 .nc-quiz__option:hover {
-  background: var(--nc-bg-card-hover);
-  border-color: rgba(42, 37, 32, 0.15);
+  border-color: var(--nc-border-strong);
   box-shadow: var(--nc-shadow-sm);
 }
 
@@ -650,9 +605,9 @@ body {
 }
 
 .nc-quiz__option.selected {
-  background: var(--nc-primary);
-  border-color: var(--nc-primary);
-  color: var(--nc-bg);
+  background: var(--nc-accent);
+  border-color: var(--nc-accent);
+  color: #FFFFFF;
   animation: nc-optionSelect 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -663,7 +618,7 @@ body {
 }
 
 .nc-quiz__option.selected .nc-quiz__option-sugar {
-  color: var(--nc-bg);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .nc-quiz__option-label {
@@ -736,11 +691,11 @@ body {
 
 .nc-signup__teaser-number {
   font-family: var(--nc-font-display);
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
-  color: var(--nc-text);
+  color: var(--nc-accent);
   margin: 0;
   animation: nc-numberLand 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
@@ -808,25 +763,24 @@ body {
 
 .nc-input {
   width: 100%;
-  padding: 16px 20px;
+  padding: 14px 18px;
   background: var(--nc-bg-card);
-  border: 1px solid rgba(28, 25, 23, 0.08);
-  border-radius: 12px;
+  border: 1px solid var(--nc-border-strong);
+  border-radius: var(--nc-radius);
   font-family: var(--nc-font);
   font-size: 0.92rem;
   color: var(--nc-text);
   transition: all var(--nc-transition);
   outline: none;
-  box-shadow: var(--nc-shadow-sm);
 }
 
 .nc-input::placeholder {
-  color: var(--nc-text-muted);
+  color: var(--nc-text-dim);
 }
 
 .nc-input:focus {
-  border-color: var(--nc-primary);
-  box-shadow: 0 0 0 3px rgba(42, 37, 32, 0.08);
+  border-color: var(--nc-accent);
+  box-shadow: 0 0 0 3px rgba(46, 107, 58, 0.1);
 }
 
 .nc-input.error {
@@ -973,12 +927,12 @@ body {
 
 .nc-results__big-number {
   font-family: var(--nc-font-display);
-  font-size: clamp(5rem, 15vw, 8rem);
+  font-size: clamp(4.5rem, 14vw, 7rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--nc-text);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   animation: nc-numberLand 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
@@ -1100,7 +1054,7 @@ body {
   background: var(--nc-bg-card);
   border: 1px solid var(--nc-border);
   border-radius: var(--nc-radius);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--nc-shadow-lg);
   font-size: 0.9rem;
   color: var(--nc-text);
   pointer-events: auto;
@@ -1109,11 +1063,11 @@ body {
 }
 
 .nc-toast--success {
-  border-color: rgba(42, 37, 32, 0.2);
+  border-color: var(--nc-accent);
 }
 
 .nc-toast--success .nc-toast__icon {
-  color: var(--nc-success);
+  color: var(--nc-accent);
 }
 
 .nc-toast.exiting {
@@ -1134,9 +1088,10 @@ body {
 
 /* ---------- Footer ---------- */
 .nc-footer {
-  padding: 100px 40px 80px;
+  padding: 80px 40px 60px;
   border-top: 1px solid var(--nc-border);
   text-align: center;
+  background: var(--nc-bg);
 }
 
 .nc-footer__container {
@@ -1292,81 +1247,67 @@ body {
 
 /* ---------- Benefits Grid ---------- */
 .nc-benefits {
-  padding: 140px 40px;
+  padding: 120px 40px;
   text-align: center;
   position: relative;
 }
 
 .nc-benefits::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 1px;
-  background: var(--nc-primary);
-  opacity: 0.15;
+  display: none;
 }
 
 .nc-benefits__container {
-  max-width: 740px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
 .nc-benefits__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
-  margin-bottom: 4rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
 }
 
 .nc-benefits__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  background: none;
-  border: none;
-  border-radius: 0;
+  gap: 16px;
 }
 
 .nc-benefits__item {
-  padding: 44px 36px;
+  padding: 36px 28px;
   background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
   text-align: left;
   transition: all var(--nc-transition);
-  position: relative;
 }
 
 .nc-benefits__item:hover {
-  background: var(--nc-bg-card-hover);
+  border-color: var(--nc-border-strong);
+  box-shadow: var(--nc-shadow-sm);
 }
 
 .nc-benefits__item-title {
   font-family: var(--nc-font-display);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .nc-benefits__item-desc {
   font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  line-height: 1.7;
+  font-weight: 400;
+  color: var(--nc-text-muted);
+  line-height: 1.65;
 }
 
-/* ---------- Ingredients ---------- */
-
-/* Dark variant */
+/* Benefits — warm background variant (no dark) */
 .nc-benefits--dark {
-  background: var(--nc-primary);
-  background-image:
-    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(232, 224, 208, 0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(232, 224, 208, 0.02) 0%, transparent 50%);
-  color: var(--nc-bg);
+  background: var(--nc-bg-warm);
+  color: var(--nc-text);
   padding: 140px 40px;
 }
 
@@ -1375,62 +1316,52 @@ body {
 }
 
 .nc-benefits--dark .nc-benefits__title {
-  color: var(--nc-bg);
+  color: var(--nc-text);
 }
 
 .nc-benefits--dark .nc-benefits__grid {
-  background: none;
-  border-color: transparent;
-  gap: 1px;
+  gap: 16px;
 }
 
 .nc-benefits--dark .nc-benefits__item {
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 0;
-  border-left: 1px solid rgba(232, 224, 208, 0.08);
-}
-
-.nc-benefits--dark .nc-benefits__item:nth-child(odd) {
-  border-left: none;
+  background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius);
 }
 
 .nc-benefits--dark .nc-benefits__item:hover {
-  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--nc-border-strong);
+  box-shadow: var(--nc-shadow-sm);
 }
 
 .nc-benefits--dark .nc-benefits__item-title {
-  color: var(--nc-bg);
+  color: var(--nc-text);
 }
 
 .nc-benefits--dark .nc-benefits__item-desc {
-  color: rgba(237, 230, 219, 0.75);
-  opacity: 1;
+  color: var(--nc-text-muted);
 }
 
 .nc-benefits__cta {
   text-align: center;
-  margin-top: 3.5rem;
+  margin-top: 3rem;
 }
 
 .nc-btn--inverted {
-  background: var(--nc-bg);
-  color: var(--nc-primary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: var(--nc-accent);
+  color: #FFFFFF;
 }
 
 .nc-btn--inverted:hover {
-  background: #F2ECE0;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  background: var(--nc-accent-hover);
 }
 
 /* ---------- Mid-page CTA ---------- */
 .nc-midcta {
-  padding: 120px 32px;
+  padding: 100px 32px;
   text-align: center;
-  background: var(--nc-primary);
-  background-image:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232, 224, 208, 0.05) 0%, transparent 60%);
-  color: var(--nc-bg);
+  background: var(--nc-bg-warm);
+  color: var(--nc-text);
 }
 
 .nc-midcta__container {
@@ -1445,30 +1376,23 @@ body {
   letter-spacing: -0.015em;
   line-height: 1.5;
   margin-bottom: 2.5rem;
-  color: rgba(237, 230, 219, 0.9);
+  color: var(--nc-text);
 }
 
 /* ---------- Social Proof ---------- */
 .nc-proof {
-  padding: 140px 40px;
+  padding: 120px 40px;
   text-align: center;
   position: relative;
+  background: var(--nc-bg);
 }
 
 .nc-proof::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 1px;
-  background: var(--nc-primary);
-  opacity: 0.12;
+  display: none;
 }
 
 .nc-proof__container {
-  max-width: 920px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -1480,79 +1404,58 @@ body {
 }
 
 .nc-proof__card {
-  padding: 40px 32px 32px;
+  padding: 32px 28px 28px;
   background: var(--nc-bg-card);
-  border: none;
+  border: 1px solid var(--nc-border);
   border-radius: var(--nc-radius);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  box-shadow: var(--nc-shadow-sm);
+  gap: 16px;
   position: relative;
-  transition: transform var(--nc-transition), box-shadow var(--nc-transition);
+  transition: all var(--nc-transition);
 }
 
 .nc-proof__card::before {
-  content: '\201C';
-  display: block;
-  font-family: var(--nc-font-display);
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--nc-text);
-  opacity: 0.12;
-  position: absolute;
-  top: 20px;
-  left: 28px;
+  display: none;
 }
 
 .nc-proof__card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--nc-shadow-md);
+  border-color: var(--nc-border-strong);
+  box-shadow: var(--nc-shadow-sm);
 }
 
 .nc-proof__quote {
-  font-family: var(--nc-font-display);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.92rem;
+  font-weight: 400;
   color: var(--nc-text);
   line-height: 1.65;
   font-style: italic;
   flex: 1;
-  padding-top: 12px;
 }
 
 .nc-proof__attribution {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--nc-text-dim);
   margin: 0;
-  padding-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid var(--nc-border);
-  letter-spacing: 0.02em;
 }
 
 
 /* ---------- FAQ ---------- */
 .nc-faq {
-  padding: 140px 40px;
+  padding: 120px 40px;
   position: relative;
+  background: var(--nc-bg-warm);
 }
 
 .nc-faq::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 1px;
-  background: var(--nc-primary);
-  opacity: 0.12;
+  display: none;
 }
 
 .nc-faq__container {
-  max-width: 640px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -1665,7 +1568,7 @@ body {
 .nc-exit-popup__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(28, 25, 23, 0.35);
+  background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
 }
 
@@ -1780,13 +1683,13 @@ body {
 
 .nc-calculating__track {
   fill: none;
-  stroke: rgba(42, 37, 32, 0.06);
+  stroke: var(--nc-border);
   stroke-width: 4;
 }
 
 .nc-calculating__spinner {
   fill: none;
-  stroke: url(#calc-gradient);
+  stroke: var(--nc-accent);
   stroke-width: 4;
   stroke-linecap: round;
   stroke-dasharray: 180;
@@ -1815,12 +1718,12 @@ body {
 }
 
 .nc-calculating__step.active {
-  color: var(--nc-accent);
+  color: var(--nc-text);
   opacity: 1;
 }
 
 .nc-calculating__step.done {
-  color: var(--nc-text-muted);
+  color: var(--nc-text-dim);
 }
 
 .nc-calculating__step.done::before {
@@ -1852,12 +1755,12 @@ body {
 }
 
 .nc-results__bio-item {
-  font-size: 0.92rem;
-  font-weight: 500;
-  line-height: 1.75;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.7;
   color: var(--nc-text-muted);
   padding-left: 1.25rem;
-  border-left: 2px solid rgba(42, 37, 32, 0.15);
+  border-left: 2px solid var(--nc-accent);
 }
 
 .nc-results__mechanic {
@@ -1956,10 +1859,10 @@ body {
   left: 0;
   right: 0;
   z-index: 9000;
-  background: rgba(232, 224, 208, 0.92);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border-top: 1px solid rgba(42, 37, 32, 0.06);
+  background: rgba(250, 250, 247, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--nc-border);
   padding: 14px 32px;
   transition: bottom 0.5s var(--nc-spring);
 }
@@ -2006,7 +1909,7 @@ body {
 @media (max-width: 480px) {
   /* Hero — iPhone viewport */
   .nc-hero {
-    padding: 80px 24px 56px;
+    padding: 80px 24px 48px;
     padding-top: max(80px, env(safe-area-inset-top, 0px));
   }
 
@@ -2015,12 +1918,8 @@ body {
   }
 
   .nc-hero__subtitle {
-    font-size: 0.92rem;
-    line-height: 1.75;
-  }
-
-  .nc-hero__subtitle br {
-    display: none;
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 
   .nc-hero__cta-note {
@@ -2028,34 +1927,16 @@ body {
   }
 
   .nc-btn--primary {
-    padding: 16px 36px;
-    font-size: 0.8rem;
+    padding: 16px 32px;
+    font-size: 0.82rem;
     width: 100%;
-    letter-spacing: 0.06em;
   }
 
   .nc-hero__scroll-hint {
-    bottom: 20px;
+    bottom: 16px;
   }
 
-  /* Pullquote */
-  .nc-pullquote {
-    padding: 60px 20px;
-  }
-
-  .nc-pullquote__text {
-    font-size: clamp(1rem, 3.5vw, 1.25rem);
-  }
-
-  .nc-pullquote__big {
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
-  }
-
-  .nc-pullquote__kicker {
-    font-size: 0.88rem;
-  }
-
-  /* Dark benefits */
+  /* Sections */
   .nc-benefits--dark {
     padding: 80px 20px;
   }
@@ -2063,12 +1944,15 @@ body {
   .nc-benefits,
   .nc-proof,
   .nc-faq {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 80px 20px;
+  }
+
+  .nc-benefits__grid {
+    grid-template-columns: 1fr;
   }
 
   .nc-benefits__title {
-    font-size: clamp(1.75rem, 6vw, 2.25rem);
+    font-size: clamp(1.65rem, 5.5vw, 2rem);
   }
 
   .nc-benefits__item {
@@ -2076,11 +1960,11 @@ body {
   }
 
   .nc-benefits__item-title {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   .nc-benefits__item-desc {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
   }
 
   /* Proof cards */
@@ -2089,12 +1973,12 @@ body {
   }
 
   .nc-proof__quote {
-    font-size: 0.92rem;
+    font-size: 0.88rem;
   }
 
   /* Mid-CTA */
   .nc-midcta {
-    padding: 80px 20px;
+    padding: 60px 20px;
   }
 
   .nc-midcta__text {
@@ -2104,11 +1988,11 @@ body {
   /* FAQ */
   .nc-faq__question {
     padding: 16px 0;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
   }
 
   .nc-faq__answer p {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
   }
 
   /* Quiz — thumb-friendly targets */
@@ -2122,7 +2006,7 @@ body {
 
   .nc-quiz__option {
     padding: 14px 16px;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     min-height: 48px;
   }
 
@@ -2132,7 +2016,7 @@ body {
 
   /* Signup */
   .nc-signup__teaser-number {
-    font-size: 3rem;
+    font-size: 2.75rem;
   }
 
   .nc-signup__title {
@@ -2281,7 +2165,7 @@ body {
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--nc-text);
+  color: var(--nc-accent);
   font-weight: 700;
 }
 
@@ -2289,49 +2173,46 @@ body {
 
 /* ---------- Statement (the iconic moment) ---------- */
 .nc-statement {
-  padding: 160px 32px;
+  padding: 120px 32px;
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(180deg, var(--nc-bg) 0%, #DDD5C4 40%, #DDD5C4 60%, var(--nc-bg) 100%);
+  background: var(--nc-bg);
   position: relative;
 }
 
 .nc-statement__number {
   font-family: var(--nc-font-display);
-  font-size: clamp(8rem, 28vw, 18rem);
+  font-size: clamp(6rem, 22vw, 12rem);
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 0.82;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
   color: var(--nc-text);
-  margin-bottom: 1.5rem;
-  text-shadow: 0 2px 60px rgba(26, 23, 20, 0.08);
+  margin-bottom: 1rem;
 }
 
 .nc-statement__unit {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
   font-weight: 500;
   color: var(--nc-text-muted);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .nc-statement__context {
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--nc-text-dim);
-  margin-top: 1.25rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  margin-top: 1rem;
 }
 
 @media (max-width: 480px) {
   .nc-statement {
-    padding: 100px 20px;
+    padding: 80px 20px;
   }
 
   .nc-statement__number {
-    font-size: clamp(5rem, 22vw, 9rem);
+    font-size: clamp(4.5rem, 18vw, 7rem);
   }
 }
 
@@ -2365,9 +2246,6 @@ body {
 
   <!-- ===== HERO ===== -->
   <section class="nc-hero" id="hero" aria-labelledby="hero-title">
-    <div class="nc-hero__bg" aria-hidden="true">
-      <div class="nc-hero__gradient"></div>
-    </div>
     <div class="nc-hero__content">
       <div class="nc-logo" aria-label="Nightcap">
         <div class="nc-logo__lines"></div>
@@ -2376,19 +2254,17 @@ body {
       </div>
 
       <h1 class="nc-hero__title" id="hero-title">
-        How much sugar are<br>you really eating?
-        <span class="nc-hero__title-line--accent">Take the 60-second quiz. Get your number.</span>
+        Find out how much<br>sugar you're really eating.
       </h1>
       <p class="nc-hero__subtitle">
-        The average American consumes 152 lbs of processed sugar a year.<br>
-        Most of it is hidden. Find out where yours is hiding.
+        Take a personalized 60-second quiz to uncover your daily sugar intake — and get a clear plan to reduce it.
       </p>
 
-      <button class="nc-btn nc-btn--primary nc-btn--inverted" id="start-quiz-btn">
-        Find Out in 60 Seconds
+      <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
+        Start the Quiz
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
-      <p class="nc-hero__cta-note">Free &middot; Private &middot; 2,847 people have seen their number</p>
+      <p class="nc-hero__cta-note">Free &middot; Takes 60 seconds &middot; No account needed</p>
 
     </div>
     <div class="nc-hero__scroll-hint" aria-hidden="true">
@@ -2400,9 +2276,9 @@ body {
 
   <section class="nc-precommit" id="precommit">
     <div class="nc-precommit__container">
-      <p class="nc-precommit__question">Ready to see how much processed sugar you're actually consuming?</p>
+      <p class="nc-precommit__question">Ready to discover your sugar number?</p>
       <div class="nc-precommit__actions">
-        <button class="nc-btn nc-btn--primary" id="precommit-yes">Yes, Show Me</button>
+        <button class="nc-btn nc-btn--primary" id="precommit-yes">Yes, Let's Go</button>
         <button class="nc-precommit__no" id="precommit-no">No, I'd rather not know</button>
       </div>
     </div>
@@ -2414,31 +2290,31 @@ body {
     <p class="nc-statement__context">Up from 1 pound, 200 years ago</p>
   </section>
 
-  <!-- ===== WHAT CHANGES (DARK SECTION) ===== -->
+  <!-- ===== WHAT CHANGES ===== -->
   <section class="nc-benefits nc-benefits--dark nc-reveal" id="how-it-works">
     <div class="nc-benefits__container">
-      <h2 class="nc-benefits__title">What Sugar Is Taking From You</h2>
+      <h2 class="nc-benefits__title">What changes when you cut back</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
-          <h3 class="nc-benefits__item-title">Your Energy</h3>
-          <p class="nc-benefits__item-desc">That 2pm wall? Not aging. Sugar.</p>
+          <h3 class="nc-benefits__item-title">Steady energy</h3>
+          <p class="nc-benefits__item-desc">No more afternoon crashes. Balanced blood sugar means sustained focus all day.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-2">
-          <h3 class="nc-benefits__item-title">Your Sleep</h3>
-          <p class="nc-benefits__item-desc">You're not sleeping poorly. You're eating poorly — before bed.</p>
+          <h3 class="nc-benefits__item-title">Better sleep</h3>
+          <p class="nc-benefits__item-desc">Reduced sugar means fewer nighttime glucose spikes disrupting your rest.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-3">
-          <h3 class="nc-benefits__item-title">Your Focus</h3>
-          <p class="nc-benefits__item-desc">The fog isn't stress. It's your blood sugar on a roller coaster.</p>
+          <h3 class="nc-benefits__item-title">Clearer thinking</h3>
+          <p class="nc-benefits__item-desc">Less brain fog, more clarity. Your mind works better on stable fuel.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-4">
-          <h3 class="nc-benefits__item-title">Your Metabolism</h3>
-          <p class="nc-benefits__item-desc">Your body isn't broken. It's responding to 152 lbs of sugar a year.</p>
+          <h3 class="nc-benefits__item-title">Fewer cravings</h3>
+          <p class="nc-benefits__item-desc">Break the cycle. Within weeks, your body stops asking for sugar it doesn't need.</p>
         </div>
       </div>
       <div class="nc-benefits__cta">
-        <button class="nc-btn nc-btn--primary nc-btn--inverted" id="benefits-quiz-btn">
-          Take the Quiz
+        <button class="nc-btn nc-btn--primary" id="benefits-quiz-btn">
+          Start the Quiz
           <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
         </button>
       </div>
@@ -2449,7 +2325,7 @@ body {
   <!-- ===== SOCIAL PROOF ===== -->
   <section class="nc-proof nc-reveal" id="social-proof">
     <div class="nc-proof__container">
-      <p class="nc-proof__header">People are waking up to their numbers.</p>
+      <p class="nc-proof__header">Real people. Real results.</p>
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
           <p class="nc-proof__quote">"Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was all hiding."</p>
@@ -2470,9 +2346,9 @@ body {
   <!-- ===== MID-PAGE CTA ===== -->
   <section class="nc-midcta nc-reveal" id="midcta">
     <div class="nc-midcta__container">
-      <p class="nc-midcta__text">Most people consume 3-6x the recommended limit and don't know it.</p>
-      <button class="nc-btn nc-btn--primary nc-btn--inverted" id="mid-quiz-btn">
-        Take the Quiz
+      <p class="nc-midcta__text">The quiz takes 60 seconds. The insight lasts a lifetime.</p>
+      <button class="nc-btn nc-btn--primary" id="mid-quiz-btn">
+        Start the Quiz
         <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
       </button>
     </div>
@@ -2483,33 +2359,33 @@ body {
     <div class="nc-faq__container">
       <div class="nc-faq__list">
         <details class="nc-faq__item">
-          <summary class="nc-faq__question">I've tried quitting sugar before. Why is this different?</summary>
-          <div class="nc-faq__answer">
-            <p>Willpower alone doesn't work. Nightcap gives you awareness (the quiz), daily tracking (the app), and eventually products that replace the craving at its source.</p>
-          </div>
-        </details>
-        <details class="nc-faq__item">
           <summary class="nc-faq__question">What is Nightcap?</summary>
           <div class="nc-faq__answer">
-            <p>A system to help you leave processed sugar behind. Awareness (quiz), daily tracking (app), and eventually products that replace cravings at their source. Not a diet. Not a fad.</p>
+            <p>Nightcap helps you understand and reduce your processed sugar intake through personalized insights, daily tracking, and science-backed guidance.</p>
           </div>
         </details>
         <details class="nc-faq__item">
           <summary class="nc-faq__question">What happens after the quiz?</summary>
           <div class="nc-faq__answer">
-            <p>Your personalized sugar report — daily, weekly, and yearly intake. A specific action plan. Early access to the Nightcap app.</p>
+            <p>You'll get a personalized sugar report with your estimated daily intake, what it means for your health, and a clear plan to start reducing.</p>
+          </div>
+        </details>
+        <details class="nc-faq__item">
+          <summary class="nc-faq__question">How is this different from a diet?</summary>
+          <div class="nc-faq__answer">
+            <p>We don't restrict calories or food groups. Nightcap focuses specifically on processed sugar — helping you see where it's hiding and supporting you as you cut back.</p>
           </div>
         </details>
         <details class="nc-faq__item">
           <summary class="nc-faq__question">Is my data private?</summary>
           <div class="nc-faq__answer">
-            <p>Yes. Never sold or shared. Unsubscribe anytime.</p>
+            <p>Yes. Your information is never sold or shared. Unsubscribe anytime.</p>
           </div>
         </details>
       </div>
       <div class="nc-faq__cta">
         <button class="nc-btn nc-btn--primary" id="bottom-quiz-btn">
-          Take the Quiz
+          Start the Quiz
           <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
         </button>
       </div>
@@ -2691,10 +2567,10 @@ body {
         <p class="nc-signup__teaser-sub">per day</p>
       </div>
       <div class="nc-signup__header">
-        <h2 class="nc-signup__title">Your report includes:</h2>
+        <h2 class="nc-signup__title">Your personalized report includes:</h2>
         <ul class="nc-signup__value-list">
-          <li>Your daily processed sugar number</li>
-          <li>What it's doing to your body right now</li>
+          <li>Your estimated daily sugar intake</li>
+          <li>How it compares to the recommended limit</li>
           <li>A personalized plan to start reducing</li>
           <li>Early access to the Nightcap app</li>
         </ul>
@@ -2820,7 +2696,7 @@ body {
         <span class="nc-logo__text">NIGHTCAP</span>
         <div class="nc-logo__lines"></div>
       </div>
-      <p class="nc-footer__tagline">The first step is knowing your number.</p>
+      <p class="nc-footer__tagline">Personalized sugar insights, backed by science.</p>
       <div class="nc-footer__links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
@@ -2835,9 +2711,9 @@ body {
     <div class="nc-exit-popup__overlay" id="exit-popup-overlay"></div>
     <div class="nc-exit-popup__card">
       <button class="nc-exit-popup__close" id="exit-popup-close" aria-label="Close">&times;</button>
-      <h3 class="nc-exit-popup__title" id="exit-popup-title">It takes 60 seconds.</h3>
-      <p class="nc-exit-popup__desc">Find out how much processed sugar you're really consuming. No signup required.</p>
-      <button class="nc-btn nc-btn--primary nc-btn--full" id="exit-popup-quiz">Get My Number</button>
+      <h3 class="nc-exit-popup__title" id="exit-popup-title">Before you go —</h3>
+      <p class="nc-exit-popup__desc">Find out your daily sugar intake in 60 seconds. No signup required.</p>
+      <button class="nc-btn nc-btn--primary nc-btn--full" id="exit-popup-quiz">Start the Quiz</button>
       <form id="exit-popup-form" class="nc-exit-popup__form" novalidate>
         <p class="nc-exit-popup__note">Or just leave your email</p>
         <input type="email" class="nc-input" id="exit-popup-email" placeholder="Email" required aria-label="Email">
@@ -2850,7 +2726,7 @@ body {
   <div class="nc-sticky-cta" id="sticky-cta" aria-hidden="true">
     <div class="nc-sticky-cta__inner">
       <span class="nc-sticky-cta__text"><span class="nc-sticky-cta__logo">NIGHTCAP</span></span>
-      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Take the Quiz &#8594;</button>
+      <button class="nc-btn nc-btn--primary nc-btn--sm" id="sticky-quiz-btn">Start the Quiz &#8594;</button>
     </div>
   </div>
 
