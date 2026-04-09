@@ -313,7 +313,6 @@ body {
     padding: 80px 24px 40px;
   }
 
-  }
 }
 
 .nc-hero__bg {
@@ -631,7 +630,7 @@ body {
 /* ---------- Signup ---------- */
 .nc-signup {
   display: none;
-  padding: 60px 24px 80px;
+  padding: 80px 32px 100px;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
@@ -890,7 +889,7 @@ body {
 /* ---------- Results ---------- */
 .nc-results {
   display: none;
-  padding: 60px 24px 80px;
+  padding: 80px 32px 100px;
   min-height: 100vh;
 }
 
@@ -1944,7 +1943,7 @@ body {
 
 @media (max-width: 480px) {
   .nc-hero__title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 7vw, 2.75rem);
   }
 
   .nc-pullquote {
@@ -1955,10 +1954,12 @@ body {
     font-size: 2.5rem;
   }
 
-  .nc-why,
   .nc-benefits,
   .nc-proof,
-  .nc-faq,
+  .nc-faq {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 
   .nc-benefits__item {
     padding: 28px 24px;
