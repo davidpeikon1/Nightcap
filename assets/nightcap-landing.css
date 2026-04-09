@@ -249,12 +249,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 160px 40px 100px;
+  padding: 160px 40px 120px;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, #EFEBE3 0%, transparent 65%),
-    linear-gradient(180deg, #F5F3EE 0%, #F8F7F4 100%);
-  color: var(--nc-text);
+  background: #1C1B18;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  color: #F5F3EE;
 }
 
 @media (max-width: 768px) {
@@ -286,7 +286,7 @@ body {
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.03em;
-  color: var(--nc-text);
+  color: #F5F3EE;
   margin-bottom: 1.5rem;
 }
 
@@ -296,10 +296,23 @@ body {
 .nc-hero__subtitle {
   font-size: 1rem;
   font-weight: 400;
-  color: var(--nc-text-dim);
+  color: rgba(245, 243, 238, 0.55);
   max-width: 360px;
   margin: 0 auto 3rem;
   line-height: 1.65;
+}
+
+/* Hero logo inverted */
+.nc-hero .nc-logo__text { color: #F5F3EE; }
+.nc-hero .nc-logo__lines { background: #F5F3EE; opacity: 0.15; }
+
+/* Hero CTA inverted */
+.nc-hero .nc-btn--primary {
+  background: #F5F3EE;
+  color: #1C1B18;
+}
+.nc-hero .nc-btn--primary:hover:not(:disabled) {
+  background: #FFFFFF;
 }
 
 
@@ -854,9 +867,9 @@ body {
 /* ---------- Footer ---------- */
 .nc-footer {
   padding: 80px 40px 60px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: none;
   text-align: center;
-  background: #F2F0EB;
+  background: #EFECE6;
 }
 
 .nc-footer__container {
@@ -984,7 +997,7 @@ body {
   padding: 120px 40px;
   text-align: center;
   position: relative;
-  background: #F2F0EB;
+  background: #EFECE6;
 }
 
 .nc-benefits__container {
@@ -1055,10 +1068,12 @@ body {
 
 /* ---------- Mid-page CTA ---------- */
 .nc-midcta {
-  padding: 100px 32px;
+  padding: 120px 32px;
   text-align: center;
-  background: #EDEAE4;
-  color: var(--nc-text);
+  background: #1C1B18;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 60%);
+  color: #F5F3EE;
 }
 
 .nc-midcta__container {
@@ -1073,7 +1088,15 @@ body {
   letter-spacing: -0.03em;
   line-height: 1.2;
   margin-bottom: 2.5rem;
-  color: var(--nc-text);
+  color: #F5F3EE;
+}
+
+.nc-midcta .nc-btn--primary {
+  background: #F5F3EE;
+  color: #1C1B18;
+}
+.nc-midcta .nc-btn--primary:hover:not(:disabled) {
+  background: #FFFFFF;
 }
 
 /* ---------- Social Proof ---------- */
@@ -1558,7 +1581,7 @@ body {
   left: 0;
   right: 0;
   z-index: 9000;
-  background: rgba(247, 246, 243, 0.92);
+  background: rgba(248, 247, 244, 0.92);
   backdrop-filter: blur(20px) saturate(1.2);
   -webkit-backdrop-filter: blur(20px) saturate(1.2);
   border-top: 1px solid rgba(0, 0, 0, 0.04);
@@ -1669,11 +1692,15 @@ body {
 
   /* Mid-CTA */
   .nc-midcta {
-    padding: 60px 20px;
+    padding: 80px 20px;
   }
 
   .nc-midcta__text {
-    font-size: clamp(1.1rem, 4vw, 1.35rem);
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+  }
+
+  .nc-midcta__text br {
+    display: none;
   }
 
   /* FAQ */
@@ -1869,8 +1896,8 @@ body {
   overflow: hidden;
   position: relative;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 50%, #E8E4DB 0%, transparent 70%),
-    #EDEAE4;
+    radial-gradient(ellipse 60% 50% at 50% 50%, #E5E1D8 0%, transparent 70%),
+    #EBE8E1;
 }
 
 .nc-statement__number {
