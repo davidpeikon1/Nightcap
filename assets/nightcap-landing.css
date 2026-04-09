@@ -280,21 +280,6 @@ body::after {
   z-index: 0;
 }
 
-/* Decorative ring */
-.nc-hero::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(500px, 80vw);
-  height: min(500px, 80vw);
-  border-radius: 50%;
-  border: 1px solid rgba(245, 243, 238, 0.06);
-  pointer-events: none;
-  z-index: 0;
-}
-
 @media (max-width: 768px) {
   .nc-hero {
     min-height: auto;
@@ -304,6 +289,18 @@ body::after {
 
 .nc-hero__bg { display: none; }
 .nc-hero__gradient { display: none; }
+
+/* Hero botanical illustration */
+.nc-hero__illus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: auto;
+  z-index: 0;
+  opacity: 1;
+}
 
 .nc-hero__content {
   position: relative;
@@ -1079,6 +1076,12 @@ body::after {
   background: var(--nc-bg-card-hover);
 }
 
+.nc-benefits__illus {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+}
+
 .nc-benefits__item-title {
   font-family: var(--nc-font-display);
   font-size: 1.15rem;
@@ -1131,9 +1134,22 @@ body::after {
   pointer-events: none;
 }
 
+/* Mid-CTA sugar cube illustration */
+.nc-midcta__illus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  z-index: 0;
+}
+
 .nc-midcta__container {
   max-width: 520px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .nc-midcta__text {
@@ -1985,7 +2001,19 @@ body::after {
   pointer-events: none;
 }
 
+.nc-statement__illus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  z-index: 0;
+}
+
 .nc-statement__number {
+  position: relative;
+  z-index: 1;
   font-family: var(--nc-font-display);
   font-size: clamp(8rem, 28vw, 16rem);
   font-weight: 700;
@@ -1997,6 +2025,8 @@ body::after {
 }
 
 .nc-statement__unit {
+  position: relative;
+  z-index: 1;
   font-family: var(--nc-font-display);
   font-size: clamp(0.95rem, 2.2vw, 1.2rem);
   font-weight: 500;
@@ -2006,6 +2036,8 @@ body::after {
 }
 
 .nc-statement__context {
+  position: relative;
+  z-index: 1;
   font-size: 0.78rem;
   font-weight: 400;
   color: var(--nc-text-dim);
@@ -2053,42 +2085,27 @@ body::after {
   position: relative;
 }
 
-/* Connecting line between step numbers */
-.nc-steps__grid::before {
-  content: '';
-  position: absolute;
-  top: 18px;
-  left: calc(16.66% + 18px);
-  right: calc(16.66% + 18px);
-  height: 1px;
-  background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.12), rgba(0,0,0,0.08));
-  z-index: 0;
-}
-
 .nc-steps__item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  position: relative;
-  z-index: 1;
+  gap: 8px;
 }
 
-.nc-steps__number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #F8F7F4;
-  border: 1px solid rgba(0,0,0,0.12);
+/* Step icons */
+.nc-steps__icon {
+  width: 48px;
+  height: 48px;
   color: var(--nc-text);
-  font-family: var(--nc-font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
+  opacity: 0.4;
   margin-bottom: 8px;
 }
+
+.nc-steps__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 
 .nc-steps__item-title {
   font-family: var(--nc-font-display);

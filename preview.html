@@ -41,6 +41,16 @@
 
   <!-- ===== HERO ===== -->
   <section class="nc-hero" id="hero" aria-labelledby="hero-title">
+    <!-- Botanical illustration — large leaf -->
+    <svg class="nc-hero__illus" viewBox="0 0 600 700" fill="none" aria-hidden="true">
+      <path d="M300 50c-80 60-200 180-220 350 0 0 40-60 120-80s140 20 200-40c60-60 20-160-20-200S340 30 300 50z" stroke="rgba(200,170,120,0.12)" stroke-width="1" fill="none"/>
+      <path d="M300 80c-60 50-160 160-170 300 0 0 30-50 100-65s110 15 160-30c50-45 15-130-15-165S335 60 300 80z" stroke="rgba(200,170,120,0.08)" stroke-width="1" fill="none"/>
+      <path d="M300 50 C300 200 280 400 280 600" stroke="rgba(200,170,120,0.1)" stroke-width="1"/>
+      <path d="M300 150 C250 170 200 220 180 280" stroke="rgba(200,170,120,0.07)" stroke-width="1"/>
+      <path d="M300 200 C350 220 400 270 420 340" stroke="rgba(200,170,120,0.07)" stroke-width="1"/>
+      <path d="M300 280 C260 300 220 340 210 400" stroke="rgba(200,170,120,0.06)" stroke-width="1"/>
+      <path d="M300 340 C340 355 380 390 390 440" stroke="rgba(200,170,120,0.06)" stroke-width="1"/>
+    </svg>
     <div class="nc-hero__content">
       <div class="nc-logo" aria-label="Nightcap">
         <div class="nc-logo__lines"></div>
@@ -75,6 +85,22 @@
   </section>
 
   <section class="nc-statement nc-reveal" id="pullquote">
+    <svg class="nc-statement__illus" viewBox="0 0 400 200" fill="none" aria-hidden="true">
+      <!-- Sugar cube pile -->
+      <rect x="150" y="100" width="30" height="30" rx="3" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+      <rect x="175" y="90" width="30" height="30" rx="3" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+      <rect x="200" y="100" width="30" height="30" rx="3" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+      <rect x="163" y="72" width="30" height="30" rx="3" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+      <rect x="190" y="68" width="30" height="30" rx="3" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+      <rect x="176" y="48" width="30" height="30" rx="3" stroke="rgba(0,0,0,0.03)" stroke-width="1"/>
+      <!-- Scattered particles -->
+      <circle cx="130" cy="125" r="2.5" fill="rgba(0,0,0,0.04)"/>
+      <circle cx="245" cy="118" r="2" fill="rgba(0,0,0,0.03)"/>
+      <circle cx="140" cy="115" r="1.5" fill="rgba(0,0,0,0.03)"/>
+      <circle cx="252" cy="130" r="3" fill="rgba(0,0,0,0.03)"/>
+      <circle cx="120" cy="135" r="1" fill="rgba(0,0,0,0.02)"/>
+      <circle cx="260" cy="110" r="1.5" fill="rgba(0,0,0,0.02)"/>
+    </svg>
     <div class="nc-statement__number" data-count-to="152">0</div>
     <p class="nc-statement__unit">pounds of processed sugar per year.</p>
     <p class="nc-statement__context">The average American consumes this much annually. Up from 1 pound, 200 years ago.</p>
@@ -86,17 +112,38 @@
       <h2 class="nc-steps__title">How it works</h2>
       <div class="nc-steps__grid">
         <div class="nc-steps__item nc-reveal nc-reveal--delay-1">
-          <span class="nc-steps__number">1</span>
+          <div class="nc-steps__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="10" y="6" width="20" height="28" rx="3"/>
+              <path d="M16 14h8M16 19h8M16 24h5"/>
+              <circle cx="30" cy="32" r="10" fill="#F8F7F4" stroke="currentColor"/>
+              <path d="M27 32h6M30 29v6"/>
+            </svg>
+          </div>
           <h3 class="nc-steps__item-title">Take the quiz</h3>
           <p class="nc-steps__item-desc">Answer 5 quick questions about your eating habits. Takes under 60 seconds.</p>
         </div>
         <div class="nc-steps__item nc-reveal nc-reveal--delay-2">
-          <span class="nc-steps__number">2</span>
+          <div class="nc-steps__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="8" width="32" height="32" rx="4"/>
+              <path d="M16 32V24M24 32V18M32 32V22"/>
+              <circle cx="16" cy="21" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="24" cy="15" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="32" cy="19" r="2" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
           <h3 class="nc-steps__item-title">Get your report</h3>
           <p class="nc-steps__item-desc">See your estimated daily sugar intake and what it means for your health.</p>
         </div>
         <div class="nc-steps__item nc-reveal nc-reveal--delay-3">
-          <span class="nc-steps__number">3</span>
+          <div class="nc-steps__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 16c6 0 10 8 16 8s10-8 16-8"/>
+              <path d="M8 26c6 0 10 4 16 4s10-4 16-4" opacity="0.4"/>
+              <path d="M24 34v6M20 38l4 4 4-4"/>
+            </svg>
+          </div>
           <h3 class="nc-steps__item-title">Start reducing</h3>
           <p class="nc-steps__item-desc">Get a personalized plan and early access to the Nightcap app to track your progress.</p>
         </div>
@@ -110,18 +157,46 @@
       <h2 class="nc-benefits__title">What changes when<br>you cut back</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
+          <svg class="nc-benefits__illus" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <circle cx="32" cy="32" r="20" stroke="rgba(180,140,80,0.2)" stroke-width="1"/>
+            <path d="M32 16v8M32 40v8M16 32h8M40 32h8" stroke="rgba(180,140,80,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M22 22l5 5M37 37l5 5M22 42l5-5M37 27l5-5" stroke="rgba(180,140,80,0.15)" stroke-width="1" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="4" fill="rgba(180,140,80,0.2)"/>
+          </svg>
           <h3 class="nc-benefits__item-title">Steady energy</h3>
           <p class="nc-benefits__item-desc">No more afternoon crashes. Balanced blood sugar means sustained focus all day.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-2">
+          <svg class="nc-benefits__illus" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M42 30A14 14 0 1 1 26 16" stroke="rgba(180,140,80,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="42" cy="16" r="8" stroke="rgba(180,140,80,0.15)" stroke-width="1"/>
+            <circle cx="22" cy="40" r="2" fill="rgba(180,140,80,0.15)"/>
+            <circle cx="30" cy="46" r="1.5" fill="rgba(180,140,80,0.1)"/>
+            <circle cx="16" cy="36" r="1" fill="rgba(180,140,80,0.1)"/>
+          </svg>
           <h3 class="nc-benefits__item-title">Better sleep</h3>
           <p class="nc-benefits__item-desc">Fewer nighttime glucose spikes disrupting your rest. Most people notice it within a week.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-3">
+          <svg class="nc-benefits__illus" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <ellipse cx="32" cy="34" rx="18" ry="14" stroke="rgba(180,140,80,0.2)" stroke-width="1"/>
+            <ellipse cx="32" cy="34" rx="12" ry="9" stroke="rgba(180,140,80,0.12)" stroke-width="1"/>
+            <path d="M26 28c2-4 8-4 12 0" stroke="rgba(180,140,80,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="32" y1="18" x2="32" y2="24" stroke="rgba(180,140,80,0.15)" stroke-width="1"/>
+            <line x1="18" y1="28" x2="22" y2="30" stroke="rgba(180,140,80,0.1)" stroke-width="1"/>
+            <line x1="46" y1="28" x2="42" y2="30" stroke="rgba(180,140,80,0.1)" stroke-width="1"/>
+          </svg>
           <h3 class="nc-benefits__item-title">Clearer thinking</h3>
           <p class="nc-benefits__item-desc">Less brain fog, more clarity. Your mind works better on stable fuel.</p>
         </div>
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-4">
+          <svg class="nc-benefits__illus" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M20 32h8" stroke="rgba(180,140,80,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M36 32h8" stroke="rgba(180,140,80,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="28" cy="32" r="5" stroke="rgba(180,140,80,0.2)" stroke-width="1" stroke-dasharray="2 2"/>
+            <circle cx="36" cy="32" r="5" stroke="rgba(180,140,80,0.2)" stroke-width="1" stroke-dasharray="2 2"/>
+            <path d="M30 27l4-4M34 27l-4-4" stroke="rgba(180,140,80,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
           <h3 class="nc-benefits__item-title">Fewer cravings</h3>
           <p class="nc-benefits__item-desc">Within weeks, your body stops asking for sugar it doesn't need.</p>
         </div>
@@ -152,6 +227,17 @@
 
   <!-- ===== MID-PAGE CTA ===== -->
   <section class="nc-midcta nc-reveal" id="midcta">
+    <svg class="nc-midcta__illus" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <rect x="60" y="60" width="50" height="50" rx="4" stroke="rgba(200,170,120,0.15)" stroke-width="1" transform="rotate(-10 85 85)"/>
+      <rect x="75" y="70" width="50" height="50" rx="4" stroke="rgba(200,170,120,0.1)" stroke-width="1" transform="rotate(-5 100 95)"/>
+      <circle cx="140" cy="55" r="3" fill="rgba(200,170,120,0.12)"/>
+      <circle cx="150" cy="70" r="2" fill="rgba(200,170,120,0.08)"/>
+      <circle cx="135" cy="75" r="1.5" fill="rgba(200,170,120,0.06)"/>
+      <circle cx="145" cy="45" r="2" fill="rgba(200,170,120,0.06)"/>
+      <circle cx="55" cy="130" r="2.5" fill="rgba(200,170,120,0.08)"/>
+      <circle cx="45" cy="140" r="1.5" fill="rgba(200,170,120,0.05)"/>
+      <circle cx="65" cy="145" r="2" fill="rgba(200,170,120,0.06)"/>
+    </svg>
     <div class="nc-midcta__container">
       <p class="nc-midcta__text">Most people are surprised<br>by their number.</p>
       <button class="nc-btn nc-btn--primary" id="mid-quiz-btn">
