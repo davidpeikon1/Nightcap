@@ -122,7 +122,7 @@
   }
 
   function startQuizFromAnywhere() {
-    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'ingredients', 'social-proof', 'bottom-cta', 'faq', 'precommit'];
+    var sections = ['hero', 'pullquote', 'why', 'how-it-works', 'transition', 'social-proof', 'midcta', 'faq', 'bottom-cta', 'precommit'];
     sections.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';

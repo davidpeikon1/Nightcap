@@ -955,11 +955,6 @@ body {
   margin-bottom: 2rem;
 }
 
-.nc-results__contrast {
-  color: var(--nc-text-dim);
-  font-size: 0.78rem;
-}
-
 /* Ring */
 
 .nc-results__title {
@@ -1437,7 +1432,6 @@ body {
 }
 
 /* ---------- Ingredients ---------- */
-
 
 /* Dark variant */
 .nc-benefits--dark {
@@ -1983,26 +1977,6 @@ body {
   color: var(--nc-text-muted);
   margin-bottom: 1.5rem;
 }
-.nc-results__reframe {
-  font-size: 0.9rem;
-  font-weight: 500;
-  font-style: italic;
-  color: var(--nc-text);
-  opacity: 0.75;
-  margin: 1.5rem 0 0;
-}
-
-.nc-results__equivalent {
-  font-family: var(--nc-font-display);
-  font-size: 1.1rem;
-  font-weight: 500;
-  font-style: italic;
-  text-align: center;
-  color: var(--nc-text);
-  opacity: 0.75;
-  margin: 2rem 0 2.5rem;
-  line-height: 1.6;
-}
 
 /* ---------- Results CTA ---------- */
 .nc-results__cta-section {
@@ -2035,57 +2009,6 @@ body {
 }
 
 /* ---------- Sugar Equivalents ---------- */
-
-
-/* ---------- Next Steps ---------- */
-.nc-next-steps {
-  margin: 2.5rem 0;
-  padding: 2rem 0;
-  border-top: 1px solid var(--nc-border);
-}
-
-.nc-next-steps__title {
-  font-family: var(--nc-font-display);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin-bottom: 1.5rem;
-}
-
-.nc-next-steps__list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.nc-next-steps__item {
-  padding-left: 1rem;
-  border-left: 2px solid var(--nc-border);
-}
-
-.nc-next-steps__heading {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 3px;
-}
-
-.nc-next-steps__desc {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  opacity: 0.8;
-  line-height: 1.6;
-}
-
-.nc-next-steps__note {
-  font-size: 0.78rem;
-  font-weight: 500;
-  font-style: italic;
-  color: var(--nc-text-dim);
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--nc-border);
-}
 
 /* ---------- Source Breakdown ---------- */
 
@@ -2183,6 +2106,20 @@ body {
   .nc-results__big-number {
     font-size: 4.5rem;
   }
+
+  .nc-results__phase {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .nc-results__phase-name {
+    min-width: auto;
+  }
+
+  .nc-benefits--dark {
+    padding: 100px 24px;
+  }
+
   .nc-signup__teaser-number {
     font-size: 3rem;
   }
