@@ -6,6 +6,7 @@ import UIKit
 /// the timer and action (the "how"). Both are visible without scrolling.
 struct HeroCard: View {
     @EnvironmentObject var store: FastingStore
+    @AppStorage("timerSectionExpanded") private var timerExpanded = true
     @State private var scienceExpanded = false
     @State private var showResetModal  = false
     @State private var showEditStart   = false
@@ -86,17 +87,38 @@ struct HeroCard: View {
             }
 
             // ── Divider between quote and timer ────────────────────────────
-            Rectangle()
-                .fill(Color("NCTextTertiary").opacity(0.4))
-                .frame(height: 1)
-                .padding(.top, 20)
-                .padding(.bottom, 20)
+            Button {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                withAnimation(.spring(duration: 0.35)) { timerExpanded.toggle() }
+            } label: {
+                HStack {
+                    Rectangle()
+                        .fill(Color("NCTextTertiary").opacity(0.4))
+                        .frame(height: 1)
+
+                    if !timerExpanded, store.isTracking {
+                        Text(compactTimerLine)
+                            .font(.system(size: 12, weight: .light, design: .monospaced))
+                            .foregroundStyle(Color("NCTextTertiary"))
+                            .lineLimit(1)
+                            .layoutPriority(1)
+                    }
+
+                    Image(systemName: timerExpanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 9, weight: .light))
+                        .foregroundStyle(Color("NCTextTertiary").opacity(0.6))
+                }
+            }
+            .padding(.top, 20)
+            .padding(.bottom, timerExpanded ? 20 : 4)
 
             // ── Timer / action ─────────────────────────────────────────────
-            if store.isTracking {
-                trackingSection
-            } else {
-                notTrackingSection
+            if timerExpanded {
+                if store.isTracking {
+                    trackingSection
+                } else {
+                    notTrackingSection
+                }
             }
         }
         .padding(20)
@@ -109,6 +131,7 @@ struct HeroCard: View {
         )
         .cornerRadius(16)
         .animation(.spring(duration: 0.3), value: scienceExpanded)
+        .animation(.spring(duration: 0.35), value: timerExpanded)
         .animation(.spring(duration: 0.3), value: store.isTracking)
         .sheet(isPresented: $showResetModal) {
             ResetModal()
@@ -120,6 +143,24 @@ struct HeroCard: View {
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
+    }
+
+    // MARK: - Compact timer one-liner (shown when timer section is collapsed)
+
+    private var compactTimerLine: String {
+        let total = Int(store.elapsedSeconds)
+        let d = total / 86400
+        let h = (total % 86400) / 3600
+        let m = (total % 3600) / 60
+        var timeStr: String
+        if d > 0 {
+            timeStr = h > 0 ? "\(d)d \(h)h" : "\(d)d"
+        } else if h > 0 {
+            timeStr = m > 0 ? "\(h)h \(m)m" : "\(h)h"
+        } else {
+            timeStr = m > 0 ? "\(m)m" : "< 1m"
+        }
+        return "\(timeStr) · \(store.fastingPhase.rawValue)"
     }
 
     // MARK: - Tracking state

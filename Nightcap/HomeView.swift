@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var showQuickReset    = false
     @State private var showHistory       = false
     @State private var showPhaseDetail: FastingPhase? = nil
+    @State private var showCravingCrisis = false
     @State private var flamePulse: CGFloat = 1.0
 
     var body: some View {
@@ -26,6 +27,9 @@ struct HomeView: View {
 
                         // Hero card: quote first, timer below — both visible on open
                         HeroCard()
+
+                        // User's sugar number — biological context for why they're here
+                        YourNumberCard()
 
                         // Weekly insight (only when there's enough data)
                         WeeklyInsightCard()
@@ -55,6 +59,38 @@ struct HomeView: View {
                 }
             }
 
+            // Floating crisis button — always accessible for craving moments
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        showCravingCrisis = true
+                    } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "bolt")
+                                .font(.system(size: 13, weight: .light))
+                            Text("I'm craving")
+                                .font(.system(size: 14, weight: .regular))
+                        }
+                        .foregroundStyle(Color("NCTextPrimary"))
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 12)
+                        .background(
+                            Capsule()
+                                .fill(Color("NCSurface"))
+                                .shadow(color: Color("NCTextPrimary").opacity(0.1), radius: 12, y: 4)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .allowsHitTesting(!coachmarkMode)
+                    .padding(.trailing, 24)
+                    .padding(.bottom, 36)
+                }
+            }
+            .zIndex(5)
+
             // Phase-unlock toast — floats above scroll content, tappable for details
             if let phase = store.phaseJustUnlocked {
                 Button {
@@ -80,6 +116,11 @@ struct HomeView: View {
         )) { badge in
             MilestoneSheet(badge: badge)
                 .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showCravingCrisis) {
+            CravingCrisisSheet()
+                .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $showSettings) {

@@ -135,6 +135,30 @@ class AppState: ObservableObject {
     @Published var onboardingStep: OnboardingStep
     @Published var userGoal: UserGoal?
 
+    /// The user's estimated daily added-sugar intake in grams.
+    /// Seeded from the quiz on first install; updatable at any time.
+    @Published var dailySugarGrams: Int? {
+        didSet {
+            guard let g = dailySugarGrams else { return }
+            defaults.set(g, forKey: "dailySugarGrams")
+            defaults.set(Date(), forKey: "dailySugarGramsUpdated")
+        }
+    }
+
+    /// The original estimate from the quiz — preserved so we can show
+    /// delta when the user self-reports a lower number over time.
+    @Published var quizSugarGrams: Int? {
+        didSet {
+            guard let g = quizSugarGrams else { return }
+            defaults.set(g, forKey: "quizSugarGrams")
+        }
+    }
+
+    /// The date the user last updated their number (quiz or manual).
+    var dailySugarGramsUpdated: Date? {
+        defaults.object(forKey: "dailySugarGramsUpdated") as? Date
+    }
+
     private let defaults = UserDefaults.standard
 
     init() {
@@ -143,6 +167,8 @@ class AppState: ObservableObject {
         if let g = defaults.string(forKey: "userGoal") {
             self.userGoal = UserGoal(rawValue: g)
         }
+        self.dailySugarGrams = defaults.object(forKey: "dailySugarGrams") as? Int
+        self.quizSugarGrams  = defaults.object(forKey: "quizSugarGrams") as? Int
     }
 
     func advance(to step: OnboardingStep) {
