@@ -641,9 +641,17 @@ body {
   width: 100%;
 }
 
+.nc-signup__card {
+  background: var(--nc-bg-card);
+  border: 1px solid var(--nc-border);
+  border-radius: var(--nc-radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--nc-shadow-md);
+}
+
 .nc-signup__header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .nc-signup__icon {
@@ -667,12 +675,12 @@ body {
 }
 
 .nc-signup__teaser-label {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--nc-text-dim);
-  margin-bottom: 0.25rem;
+  letter-spacing: 0.16em;
+  color: var(--nc-accent);
+  margin-bottom: 0.5rem;
 }
 
 .nc-signup__teaser-number {
@@ -831,8 +839,8 @@ body {
 }
 
 .nc-checkbox input:checked + .nc-checkbox__mark {
-  background: var(--nc-primary);
-  border-color: var(--nc-primary);
+  background: var(--nc-accent);
+  border-color: var(--nc-accent);
 }
 
 .nc-checkbox input:checked + .nc-checkbox__mark::after {
@@ -842,7 +850,7 @@ body {
   left: 6px;
   width: 5px;
   height: 9px;
-  border: solid var(--nc-bg);
+  border: solid #FFFFFF;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -870,8 +878,8 @@ body {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(242, 235, 224, 0.4);
-  border-top-color: var(--nc-bg);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
   border-radius: 50%;
   animation: nc-spin 0.6s linear infinite;
 }
@@ -1391,13 +1399,13 @@ body {
   background: var(--nc-bg);
 }
 
-.nc-proof::before {
-  display: none;
-}
-
 .nc-proof__container {
   max-width: 900px;
   margin: 0 auto;
+}
+
+.nc-proof::before {
+  display: none;
 }
 
 .nc-proof__grid {
@@ -1457,7 +1465,7 @@ body {
 .nc-faq {
   padding: 120px 40px;
   position: relative;
-  background: var(--nc-bg-warm);
+  background: var(--nc-bg);
 }
 
 .nc-faq::before {
@@ -1950,6 +1958,10 @@ body {
     line-height: 1.65;
   }
 
+  .nc-hero__title br {
+    display: none;
+  }
+
   .nc-hero__cta-note {
     font-size: 0.72rem;
   }
@@ -1958,6 +1970,11 @@ body {
     padding: 16px 32px;
     font-size: 0.82rem;
     width: 100%;
+  }
+
+  .nc-benefits__icon {
+    width: 24px;
+    height: 24px;
   }
 
   .nc-hero__scroll-hint {
@@ -2056,6 +2073,10 @@ body {
     display: block;
     width: 100%;
     margin-right: 0;
+  }
+
+  .nc-signup__card {
+    padding: 2rem 1.5rem;
   }
 
   .nc-signup__value-list li {
@@ -2196,10 +2217,10 @@ body {
 
 /* ---------- Statement (the iconic moment) ---------- */
 .nc-statement {
-  padding: 120px 32px;
+  padding: 100px 32px;
   text-align: center;
   overflow: hidden;
-  background: var(--nc-bg);
+  background: var(--nc-bg-warm);
   position: relative;
 }
 
@@ -2243,7 +2264,7 @@ body {
 .nc-steps {
   padding: 100px 40px;
   text-align: center;
-  background: var(--nc-bg-warm);
+  background: var(--nc-bg);
 }
 
 .nc-steps__container {
