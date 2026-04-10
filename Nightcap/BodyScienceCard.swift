@@ -143,6 +143,7 @@ struct BodyScienceCard: View {
     /// Returns a short callout when the next phase is within 4 hours.
     /// Nil in Freedom phase (no next phase) and when more than 4 h away.
     private var nextPhaseCallout: String? {
+        guard store.isTracking else { return nil }
         let phase = store.fastingPhase
         guard phase != .freedom else { return nil }
         let remaining = phase.nextThreshold - store.elapsedSeconds
