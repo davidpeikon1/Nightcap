@@ -128,64 +128,6 @@ body::after {
   border: 0;
 }
 
-/* ---------- Logo ---------- */
-.nc-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  margin: 0 auto 2.5rem;
-  width: fit-content;
-}
-
-.nc-logo__text {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-  font-weight: 700;
-  color: #C8B078;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  text-transform: uppercase;
-  padding: 4px 0;
-}
-
-.nc-logo__lines {
-  width: 100%;
-  height: 6px;
-  position: relative;
-}
-
-.nc-logo__lines::before,
-.nc-logo__lines::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1.5px;
-  background: #C8B078;
-  display: block;
-}
-
-.nc-logo__lines::before {
-  top: 0;
-}
-
-.nc-logo__lines::after {
-  bottom: 0;
-}
-
-/* Hero logo */
-.nc-hero .nc-logo {
-  margin: 0 auto 3.5rem;
-}
-.nc-logo--sm .nc-logo__text {
-  font-size: 0.9rem;
-}
-
-.nc-logo--sm .nc-logo__lines {
-  height: 5px;
-}
-
 .nc-logo--sm .nc-logo__lines::before,
 .nc-logo--sm .nc-logo__lines::after {
   height: 1px;
@@ -238,17 +180,6 @@ body::after {
 .nc-btn--primary:focus-visible {
   outline: 2px solid var(--nc-primary);
   outline-offset: 3px;
-}
-
-.nc-btn--secondary {
-  background: transparent;
-  color: var(--nc-accent);
-  border: 1.5px solid var(--nc-accent);
-  padding: 16px 40px;
-}
-
-.nc-btn--secondary:hover {
-  background: var(--nc-accent-light);
 }
 
 .nc-btn--outline {
@@ -311,9 +242,6 @@ body::after {
   }
 }
 
-.nc-hero__bg { display: none; }
-.nc-hero__gradient { display: none; }
-
 /* Hero botanical illustration */
 .nc-hero__illus {
   position: absolute;
@@ -354,9 +282,6 @@ body::after {
   margin-bottom: 1.5rem;
   position: relative;
 }
-
-.nc-hero__title-line { display: block; }
-.nc-hero__title-line--accent { display: none; }
 
 .nc-hero__subtitle {
   font-size: 1.1rem;
@@ -403,9 +328,6 @@ body::after {
   box-shadow: 0 0 80px rgba(255, 255, 255, 0.15);
 }
 
-
-/* Scroll Hint (hidden) */
-.nc-hero__scroll-hint { display: none; }
 
 /* ---------- Return Banner ---------- */
 
@@ -687,33 +609,19 @@ body::after {
 }
 
 /* Form Elements */
-.nc-signup__form .nc-form-group:first-child,
-.nc-signup__form .nc-form-group:nth-child(2) {
-  display: inline-block;
-  width: calc(50% - 6px);
-  vertical-align: top;
-}
-
-.nc-signup__form .nc-form-group:first-child {
-  margin-right: 8px;
-}
-
 .nc-form-group {
-  margin-bottom: 1rem;
-}
-
-.nc-form-group--checkbox {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .nc-input {
   width: 100%;
-  padding: 14px 16px;
-  background: var(--nc-bg-warm);
-  border: 1px solid transparent;
+  padding: 16px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0;
   font-family: var(--nc-font);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: var(--nc-text);
   transition: all var(--nc-transition);
   outline: none;
@@ -721,22 +629,22 @@ body::after {
 
 .nc-input::placeholder {
   color: var(--nc-text-dim);
+  font-weight: 400;
 }
 
 .nc-input:focus {
-  border-color: var(--nc-primary);
-  background: var(--nc-bg-card);
-  box-shadow: 0 0 0 3px rgba(20, 20, 20, 0.06);
+  border-bottom-color: var(--nc-primary);
+  background: transparent;
+  box-shadow: none;
 }
 
 .nc-input.error {
-  border-color: var(--nc-error);
-  box-shadow: 0 0 0 3px rgba(184, 64, 64, 0.1);
+  border-bottom-color: var(--nc-error);
   animation: nc-shake 0.4s ease-out;
 }
 
 .nc-input.valid {
-  border-color: var(--nc-success);
+  border-bottom-color: var(--nc-success);
 }
 
 @keyframes nc-shake {
@@ -754,13 +662,6 @@ body::after {
   margin-top: 4px;
   min-height: 1.2em;
   transition: opacity var(--nc-transition);
-}
-
-.nc-signup__privacy {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--nc-text-muted);
-  margin-top: 1rem;
 }
 
 /* Spinner */
@@ -781,7 +682,7 @@ body::after {
 /* ---------- Results ---------- */
 .nc-results {
   display: none;
-  padding: 80px 32px 100px;
+  padding: 100px 32px 120px;
   min-height: 100vh;
 }
 
@@ -830,32 +731,37 @@ body::after {
 
 .nc-results__big-number-unit {
   font-size: 0.4em;
-  font-weight: 500;
+  font-weight: 400;
   vertical-align: baseline;
+  color: var(--nc-text-muted);
+  margin-left: 0.1em;
 }
 
 .nc-results__big-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--nc-text-muted);
-  margin-bottom: 2rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--nc-text-dim);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 /* Ring */
 
 .nc-results__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+  font-size: clamp(1.5rem, 3.5vw, 1.85rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
 }
 
 .nc-results__subtitle {
-  color: var(--nc-text);
+  color: var(--nc-text-muted);
   font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.75;
+  font-weight: 400;
+  line-height: 1.7;
   max-width: 480px;
   margin: 0 auto;
 }
@@ -1176,22 +1082,6 @@ body::after {
 }
 
 /* Benefits variant override (legacy class) */
-.nc-benefits--dark { background: transparent; }
-
-.nc-benefits__cta {
-  text-align: center;
-  margin-top: 3rem;
-}
-
-.nc-btn--inverted {
-  background: var(--nc-primary);
-  color: #F7F6F3;
-}
-
-.nc-btn--inverted:hover {
-  background: var(--nc-primary-light);
-}
-
 /* ---------- Mid-page CTA ---------- */
 .nc-midcta {
   padding: 140px 32px;
@@ -1601,10 +1491,11 @@ body::after {
 /* ---------- Results Biology Section ---------- */
 .nc-results__section-title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-bottom: 1.25rem;
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
 }
 
 .nc-results__biology {
@@ -1620,12 +1511,12 @@ body::after {
 }
 
 .nc-results__bio-item {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 400;
   line-height: 1.7;
   color: var(--nc-text-muted);
-  padding-left: 1.25rem;
-  border-left: 2px solid rgba(20, 20, 20, 0.12);
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(20, 20, 20, 0.15);
 }
 
 .nc-results__mechanic {
@@ -1809,10 +1700,6 @@ body::after {
     display: none;
   }
 
-  .nc-hero__cta-note {
-    font-size: 0.72rem;
-  }
-
   .nc-btn--primary {
     padding: 18px 32px;
     font-size: 0.8rem;
@@ -1900,13 +1787,6 @@ body::after {
 
   .nc-signup__title {
     font-size: 1.5rem;
-  }
-
-  .nc-signup__form .nc-form-group:first-child,
-  .nc-signup__form .nc-form-group:nth-child(2) {
-    display: block;
-    width: 100%;
-    margin-right: 0;
   }
 
   .nc-signup__card {
@@ -2007,23 +1887,7 @@ body::after {
 }
 
 /* ---------- CRO: CTA Reinforcement ---------- */
-.nc-results__cta-reinforcement {
-  font-size: 0.8rem;
-  font-weight: 500;
-  font-style: italic;
-  color: var(--nc-text-dim);
-  margin-top: 1rem;
-}
-
 /* ---------- CRO: Quiz Momentum ---------- */
-.nc-quiz__momentum {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--nc-text-dim);
-  margin-bottom: 0.75rem;
-  font-style: italic;
-}
-
 /* ---------- CRO: Signup Value List ---------- */
 .nc-signup__value-list {
   list-style: none;
@@ -2218,15 +2082,6 @@ body::after {
 }
 
 /* ---------- Proof Header ---------- */
-.nc-proof__header {
-  font-family: var(--nc-font-display);
-  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-align: center;
-  margin-bottom: 3.5rem;
-  color: var(--nc-text);
-}
 
 </style>
 
