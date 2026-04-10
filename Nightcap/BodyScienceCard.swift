@@ -1,6 +1,22 @@
 import SwiftUI
 import UIKit
 
+// MARK: - Phase color (shared across BodyScienceCard, PhaseDetailSheet, and ProgressSection)
+// Colors reflect emotional difficulty: gray (starting) → amber → red (hardest) → orange → teal → green (freedom)
+
+extension FastingPhase {
+    var color: Color {
+        switch self {
+        case .justStarted:  return Color("NCTextTertiary")
+        case .firstDay:     return Color("NCWarning")
+        case .withdrawal:   return .red.opacity(0.8)
+        case .breakthrough: return .orange
+        case .rewiring:     return .teal
+        case .freedom:      return Color("NCSuccess")
+        }
+    }
+}
+
 struct BodyScienceCard: View {
     @EnvironmentObject var store: FastingStore
     @State private var isExpanded = false
@@ -17,7 +33,7 @@ struct BodyScienceCard: View {
                     HStack(spacing: 10) {
                         Image(systemName: "flask")
                             .font(.system(size: 13, weight: .light))
-                            .foregroundStyle(Color("NCSuccess"))
+                            .foregroundStyle(store.fastingPhase.color)
 
                         Text("YOUR BODY NOW")
                             .font(.system(size: 11, weight: .medium))
@@ -37,10 +53,10 @@ struct BodyScienceCard: View {
                         Text(store.fastingPhase.rawValue.uppercased())
                             .font(.system(size: 10, weight: .medium))
                             .tracking(1.5)
-                            .foregroundStyle(Color("NCSuccess"))
+                            .foregroundStyle(store.fastingPhase.color)
                         Image(systemName: "info.circle")
                             .font(.system(size: 10, weight: .light))
-                            .foregroundStyle(Color("NCSuccess").opacity(0.7))
+                            .foregroundStyle(store.fastingPhase.color.opacity(0.7))
                     }
                 }
                 .buttonStyle(.plain)
@@ -172,8 +188,8 @@ struct BodyScienceCard: View {
                 VStack(spacing: 5) {
                     Rectangle()
                         .fill(
-                            isPast  ? Color("NCSuccess").opacity(0.7) :
-                            isActive ? Color("NCSuccess") :
+                            isPast  ? Color("NCSuccess").opacity(0.6) :
+                            isActive ? store.fastingPhase.color :
                             Color("NCTextTertiary").opacity(0.25)
                         )
                         .frame(height: isActive ? 4 : 2)
@@ -183,7 +199,7 @@ struct BodyScienceCard: View {
                     if isActive {
                         Text(phase.rawValue)
                             .font(.system(size: 9, weight: .medium))
-                            .foregroundStyle(Color("NCSuccess"))
+                            .foregroundStyle(store.fastingPhase.color)
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
                     }

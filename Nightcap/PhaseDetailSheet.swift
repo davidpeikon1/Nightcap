@@ -223,16 +223,7 @@ struct PhaseDetailSheet: View {
 
     // MARK: - Data
 
-    private var phaseColor: Color {
-        switch phase {
-        case .justStarted:  return Color("NCTextTertiary")
-        case .firstDay:     return Color("NCWarning")
-        case .withdrawal:   return .red.opacity(0.75)
-        case .breakthrough: return .orange
-        case .rewiring:     return .teal
-        case .freedom:      return Color("NCSuccess")
-        }
-    }
+    private var phaseColor: Color { phase.color }
 
     private var bioPoints: [String] {
         switch phase {
