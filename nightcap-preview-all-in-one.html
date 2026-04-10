@@ -148,10 +148,10 @@ body::after {
 
 .nc-logo__text {
   font-family: var(--nc-font);
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 500;
   color: var(--nc-text);
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -264,14 +264,6 @@ body::after {
   font-size: 0.8rem;
 }
 
-.nc-btn__arrow {
-  transition: transform var(--nc-transition);
-  font-size: 1.1em;
-}
-
-.nc-btn:hover .nc-btn__arrow {
-  transform: translateX(3px);
-}
 
 /* ---------- Hero ---------- */
 .nc-hero {
@@ -424,20 +416,21 @@ body::after {
 }
 
 .nc-quiz__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--nc-border-strong);
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+  background: var(--nc-text);
+  opacity: 0.12;
   transition: all var(--nc-transition);
 }
 
 .nc-quiz__dot.active {
-  background: var(--nc-primary);
+  opacity: 0.6;
+  width: 24px;
 }
 
 .nc-quiz__dot.completed {
-  background: var(--nc-primary);
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 /* Steps */
@@ -1116,10 +1109,22 @@ body::after {
 }
 
 .nc-benefits__item {
-  padding: 36px 28px;
+  padding: 40px 28px 36px;
   background: var(--nc-bg-card);
   text-align: left;
   transition: background var(--nc-transition);
+  position: relative;
+}
+
+.nc-benefits__item::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  width: 20px;
+  height: 1px;
+  background: var(--nc-text);
+  opacity: 0.15;
 }
 
 .nc-benefits__item:hover {
@@ -1130,15 +1135,16 @@ body::after {
   font-family: var(--nc-font-display);
   font-size: 1.15rem;
   font-weight: 400;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+  margin-top: 16px;
+  margin-bottom: 10px;
 }
 
 .nc-benefits__item-desc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 400;
   color: var(--nc-text-muted);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 /* Benefits variant override (legacy class) */
@@ -1198,11 +1204,11 @@ body::after {
 
 .nc-midcta__text {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
   font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  margin-bottom: 2.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 3rem;
   color: #F5F3EE;
 }
 
@@ -2264,10 +2270,9 @@ body::after {
 
       <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
         Start the Quiz
-        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+
       </button>
 
-      <p class="nc-hero__counter">2,847 people have taken the quiz</p>
     </div>
   </section>
 
@@ -2365,7 +2370,6 @@ body::after {
   <!-- ===== SOCIAL PROOF ===== -->
   <section class="nc-proof nc-reveal" id="social-proof">
     <div class="nc-proof__container">
-      <p class="nc-proof__header">What people are saying</p>
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
           <p class="nc-proof__quote">"Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was hiding."</p>
@@ -2403,7 +2407,7 @@ body::after {
       <p class="nc-midcta__text">What's your number?</p>
       <button class="nc-btn nc-btn--primary" id="mid-quiz-btn">
         Start the Quiz
-        <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+
       </button>
     </div>
   </section>
@@ -2441,7 +2445,7 @@ body::after {
       <div class="nc-faq__cta">
         <button class="nc-btn nc-btn--primary" id="bottom-quiz-btn">
           Start the Quiz
-          <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+  
         </button>
       </div>
     </div>
@@ -2487,7 +2491,7 @@ body::after {
         <!-- STAGE 1: Self-label — they identify as someone with a sugar problem -->
         <div class="nc-quiz__step active" data-step="1">
           <h3 class="nc-quiz__question">What does your morning look like?</h3>
-          <p class="nc-quiz__helper" id="q1-helper">Pick the closest match — no perfect answers needed</p>
+          <p class="nc-quiz__helper" id="q1-helper">Select the closest match.</p>
           <div class="nc-quiz__options" data-field="breakfast" role="radiogroup" aria-labelledby="q1-helper">
             <button type="button" class="nc-quiz__option" data-value="cereal_toast" role="radio" aria-checked="false">
               <span class="nc-quiz__option-label">Cereal, granola, or toast with jam</span>
@@ -2514,7 +2518,6 @@ body::after {
 
         <!-- STAGE 2: Pain deepen — drinks add to the total, the number grows -->
         <div class="nc-quiz__step" data-step="2">
-          <p class="nc-quiz__momentum">Great — let's keep building your profile.</p>
           <h3 class="nc-quiz__question">Sweetened drinks per day?</h3>
           <p class="nc-quiz__helper" id="q2-helper">Soda, juice, coffee drinks, sweet tea</p>
           <div class="nc-quiz__options" data-field="daily_sweet_drinks" role="radiogroup" aria-labelledby="q2-helper">
@@ -2539,7 +2542,6 @@ body::after {
 
         <!-- STAGE 3: Cost expand — hidden sugar makes it worse than they thought -->
         <div class="nc-quiz__step" data-step="3">
-          <p class="nc-quiz__momentum">Almost there — this is really helpful info.</p>
           <h3 class="nc-quiz__question">How much comes from a package?</h3>
           <p class="nc-quiz__helper" id="q3-helper">Sauces, bars, bread, frozen meals</p>
           <div class="nc-quiz__options" data-field="processed_foods" role="radiogroup" aria-labelledby="q3-helper">
@@ -2564,7 +2566,7 @@ body::after {
 
         <!-- STAGE 4: Hope reframe — they can see it, they can change it -->
         <div class="nc-quiz__step" data-step="4">
-          <p class="nc-quiz__almost">Almost there</p>
+          <p class="nc-quiz__almost">Question 4 of 5</p>
           <h3 class="nc-quiz__question">Do you read sugar labels?</h3>
           <p class="nc-quiz__helper" id="q4-helper">This tells us how to help you</p>
           <div class="nc-quiz__options" data-field="checks_labels" role="radiogroup" aria-labelledby="q4-helper">
@@ -2585,7 +2587,7 @@ body::after {
 
         <!-- STAGE 5: Diagnosis — self-qualify for the app -->
         <div class="nc-quiz__step" data-step="5">
-          <p class="nc-quiz__almost">Last one — this personalizes your report</p>
+          <p class="nc-quiz__almost">Question 5 of 5</p>
           <h3 class="nc-quiz__question">Why do you want to cut back?</h3>
           <div class="nc-quiz__options" data-field="motivation" role="radiogroup" aria-labelledby="q5-helper">
             <button type="button" class="nc-quiz__option" data-value="prevent_disease" role="radio" aria-checked="false">
@@ -2632,11 +2634,11 @@ body::after {
         </ul>
       </div>
       <div class="nc-signup__trust">
-        <span>&#128274; 100% private</span>
+        <span>Private &amp; secure</span>
         <span>&middot;</span>
         <span>Takes 10 seconds</span>
         <span>&middot;</span>
-        <span>2,847 people signed up</span>
+        <span>Unsubscribe anytime</span>
       </div>
       <form id="waitlist-form" class="nc-signup__form" novalidate>
         <div class="nc-form-group">
@@ -2652,12 +2654,11 @@ body::after {
           <span class="nc-input-error" id="email-error" aria-live="polite"></span>
         </div>
         <button type="submit" class="nc-btn nc-btn--primary nc-btn--full" id="signup-submit-btn">
-          <span class="nc-btn__text">Get My Personalized Report</span>
+          <span class="nc-btn__text">Get My Report</span>
           <span class="nc-btn__loading" style="display: none;" role="status">
             <span class="nc-spinner" aria-hidden="true"></span>
           </span>
         </button>
-        <p class="nc-signup__privacy">We only send things worth reading. Unsubscribe anytime.</p>
       </form>
       </div>
     </div>
@@ -2727,7 +2728,7 @@ body::after {
         <p class="nc-results__cta-intro">The Nightcap app tracks your progress and guides you through each phase of reducing sugar.</p>
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
           Get the App
-          <span class="nc-btn__arrow" aria-hidden="true">&#8594;</span>
+  
         </button>
         <p class="nc-results__cta-note">iOS &middot; Free &middot; No account required</p>
       </div>
@@ -2761,7 +2762,7 @@ body::after {
         <span class="nc-logo__text">NIGHTCAP</span>
         <div class="nc-logo__lines"></div>
       </div>
-      <p class="nc-footer__tagline">Personalized sugar insights, backed by science.</p>
+      <p class="nc-footer__tagline">Helping America leave processed sugar behind.</p>
       <div class="nc-footer__links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>

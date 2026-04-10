@@ -123,10 +123,10 @@ body::after {
 
 .nc-logo__text {
   font-family: var(--nc-font);
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 500;
   color: var(--nc-text);
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -239,14 +239,6 @@ body::after {
   font-size: 0.8rem;
 }
 
-.nc-btn__arrow {
-  transition: transform var(--nc-transition);
-  font-size: 1.1em;
-}
-
-.nc-btn:hover .nc-btn__arrow {
-  transform: translateX(3px);
-}
 
 /* ---------- Hero ---------- */
 .nc-hero {
@@ -399,20 +391,21 @@ body::after {
 }
 
 .nc-quiz__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--nc-border-strong);
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+  background: var(--nc-text);
+  opacity: 0.12;
   transition: all var(--nc-transition);
 }
 
 .nc-quiz__dot.active {
-  background: var(--nc-primary);
+  opacity: 0.6;
+  width: 24px;
 }
 
 .nc-quiz__dot.completed {
-  background: var(--nc-primary);
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 /* Steps */
@@ -1091,10 +1084,22 @@ body::after {
 }
 
 .nc-benefits__item {
-  padding: 36px 28px;
+  padding: 40px 28px 36px;
   background: var(--nc-bg-card);
   text-align: left;
   transition: background var(--nc-transition);
+  position: relative;
+}
+
+.nc-benefits__item::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  width: 20px;
+  height: 1px;
+  background: var(--nc-text);
+  opacity: 0.15;
 }
 
 .nc-benefits__item:hover {
@@ -1105,15 +1110,16 @@ body::after {
   font-family: var(--nc-font-display);
   font-size: 1.15rem;
   font-weight: 400;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+  margin-top: 16px;
+  margin-bottom: 10px;
 }
 
 .nc-benefits__item-desc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 400;
   color: var(--nc-text-muted);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 /* Benefits variant override (legacy class) */
@@ -1173,11 +1179,11 @@ body::after {
 
 .nc-midcta__text {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
   font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  margin-bottom: 2.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 3rem;
   color: #F5F3EE;
 }
 
