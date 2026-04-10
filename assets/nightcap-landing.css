@@ -31,8 +31,8 @@
   --nc-border-strong: rgba(0, 0, 0, 0.1);
   --nc-radius: 8px;
   --nc-radius-lg: 14px;
-  --nc-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --nc-font-display: 'Fraunces', Georgia, serif;
+  --nc-font: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+  --nc-font-display: 'Libre Baskerville', Georgia, serif;
   --nc-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --nc-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --nc-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
@@ -53,19 +53,12 @@ body {
   background: #F8F7F4;
   color: var(--nc-text);
   line-height: 1.6;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Fraunces variable font — display optical size, slight softness */
-[class*="__title"],
-[class*="__number"],
-[class*="__question"],
-h1, h2, h3 {
-  font-variation-settings: "opsz" 120, "SOFT" 30;
-}
 
 /* Global grain texture via SVG filter */
 body::after {
@@ -338,12 +331,12 @@ body::after {
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.75rem, 7vw, 4.75rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
   color: #F5F3EE;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
@@ -527,7 +520,7 @@ body::after {
 .nc-quiz__question {
   font-family: var(--nc-font-display);
   font-size: clamp(1.6rem, 4vw, 2.25rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
   line-height: 1.2;
@@ -661,7 +654,7 @@ body::after {
 .nc-signup__teaser-number {
   font-family: var(--nc-font-display);
   font-size: 3.5rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--nc-text);
@@ -679,7 +672,7 @@ body::after {
 .nc-signup__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
 }
@@ -813,7 +806,7 @@ body::after {
 .nc-results__big-number {
   font-family: var(--nc-font-display);
   font-size: clamp(4.5rem, 14vw, 7rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--nc-text);
@@ -844,7 +837,7 @@ body::after {
 .nc-results__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.4rem, 3.5vw, 1.75rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
 }
@@ -976,7 +969,7 @@ body::after {
 .nc-footer__tagline {
   font-family: var(--nc-font-display);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 700;
   font-style: italic;
   color: var(--nc-text-muted);
   margin-bottom: 2.5rem;
@@ -1056,7 +1049,7 @@ body::after {
 .nc-precommit__question {
   font-family: var(--nc-font-display);
   font-size: clamp(1.75rem, 5vw, 2.75rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.2;
   margin-bottom: 3rem;
@@ -1119,7 +1112,7 @@ body::after {
 .nc-benefits__title {
   font-family: var(--nc-font-display);
   font-size: clamp(2rem, 5vw, 2.75rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.03em;
   margin-bottom: 3.5rem;
   line-height: 1.15;
@@ -1159,7 +1152,7 @@ body::after {
 .nc-benefits__item-title {
   font-family: var(--nc-font-display);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.01em;
   margin-top: 16px;
   margin-bottom: 10px;
@@ -1230,7 +1223,7 @@ body::after {
 .nc-midcta__text {
   font-family: var(--nc-font-display);
   font-size: clamp(2.25rem, 6vw, 3.5rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 3rem;
@@ -1306,7 +1299,7 @@ body::after {
 .nc-proof__quote {
   font-family: var(--nc-font-display);
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--nc-text);
   line-height: 1.65;
   font-style: italic;
@@ -1334,7 +1327,7 @@ body::after {
 .nc-faq__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 3.5vw, 2rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   text-align: center;
   margin-bottom: 3rem;
@@ -1496,7 +1489,7 @@ body::after {
 .nc-exit-popup__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 4vw, 1.85rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
 }
@@ -1570,7 +1563,7 @@ body::after {
 .nc-calculating__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
 }
@@ -1608,7 +1601,7 @@ body::after {
 .nc-results__section-title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.35rem, 3.5vw, 1.75rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 1.25rem;
 }
@@ -2093,7 +2086,7 @@ body::after {
   z-index: 1;
   font-family: var(--nc-font-display);
   font-size: clamp(8rem, 28vw, 16rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 0.8;
   color: var(--nc-text);
@@ -2106,7 +2099,7 @@ body::after {
   z-index: 1;
   font-family: var(--nc-font-display);
   font-size: clamp(0.95rem, 2.2vw, 1.2rem);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--nc-text-muted);
   margin: 0;
   line-height: 1.5;
@@ -2149,7 +2142,7 @@ body::after {
 .nc-steps__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 3rem;
 }
@@ -2173,7 +2166,7 @@ body::after {
 .nc-steps__num {
   font-family: var(--nc-font-display);
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--nc-text);
   opacity: 0.15;
   line-height: 1;
@@ -2184,7 +2177,7 @@ body::after {
 .nc-steps__item-title {
   font-family: var(--nc-font-display);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
@@ -2219,7 +2212,7 @@ body::after {
 .nc-proof__header {
   font-family: var(--nc-font-display);
   font-size: clamp(1.35rem, 3.5vw, 1.75rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   text-align: center;
   margin-bottom: 3.5rem;
