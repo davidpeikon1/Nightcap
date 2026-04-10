@@ -363,10 +363,23 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-/* Hero logo — gold on dark */
-.nc-hero .nc-logo__text { color: #C8B078; }
-.nc-hero .nc-logo__lines::before,
-.nc-hero .nc-logo__lines::after { background: #C8B078; }
+/* Hero logo image */
+.nc-hero__logo-img {
+  display: block;
+  width: clamp(160px, 22vw, 220px);
+  height: auto;
+  margin: 0 auto 3.5rem;
+  opacity: 0.95;
+}
+
+/* Footer logo image */
+.nc-footer__logo-img {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  opacity: 0.7;
+}
 
 /* Hero CTA inverted */
 .nc-hero .nc-btn--primary {

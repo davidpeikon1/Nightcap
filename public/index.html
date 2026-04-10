@@ -388,10 +388,23 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-/* Hero logo — gold on dark */
-.nc-hero .nc-logo__text { color: #C8B078; }
-.nc-hero .nc-logo__lines::before,
-.nc-hero .nc-logo__lines::after { background: #C8B078; }
+/* Hero logo image */
+.nc-hero__logo-img {
+  display: block;
+  width: clamp(160px, 22vw, 220px);
+  height: auto;
+  margin: 0 auto 3.5rem;
+  opacity: 0.95;
+}
+
+/* Footer logo image */
+.nc-footer__logo-img {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  opacity: 0.7;
+}
 
 /* Hero CTA inverted */
 .nc-hero .nc-btn--primary {
@@ -2264,11 +2277,7 @@ body::after {
       <path d="M420 400 C360 420 310 490 330 580 C350 670 430 720 520 700 C610 680 660 600 640 510 C620 420 500 370 420 400Z" fill="url(#hb3)"/>
     </svg>
     <div class="nc-hero__content">
-      <div class="nc-logo" aria-label="Nightcap">
-        <div class="nc-logo__lines"></div>
-        <span class="nc-logo__text">NIGHTCAP</span>
-        <div class="nc-logo__lines"></div>
-      </div>
+      <img src="images/tan-text-logo.png" alt="Nightcap" class="nc-hero__logo-img">
 
       <h1 class="nc-hero__title" id="hero-title">
         Find out how much sugar<br>you're really eating<span class="nc-hero__dot">.</span>
@@ -2762,11 +2771,7 @@ body::after {
   <!-- ===== FOOTER ===== -->
   <footer class="nc-footer">
     <div class="nc-footer__container">
-      <div class="nc-logo nc-logo--sm">
-        <div class="nc-logo__lines"></div>
-        <span class="nc-logo__text">NIGHTCAP</span>
-        <div class="nc-logo__lines"></div>
-      </div>
+      <img src="images/black-logo.png" alt="Nightcap" class="nc-footer__logo-img">
       <p class="nc-footer__tagline">Helping America leave processed sugar behind.</p>
       <div class="nc-footer__links">
         <a href="#">Privacy</a>
