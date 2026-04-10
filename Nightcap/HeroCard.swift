@@ -265,16 +265,17 @@ struct TrackingCard: View {
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     showEditStart = true
                 } label: {
-                    HStack(spacing: 4) {
-                        Text("Started")
+                    HStack(spacing: 0) {
+                        Text("Started ")
                             .font(.system(size: 12))
                         Text(startDate, style: .relative)
                             .font(.system(size: 12))
-                        Text("ago")
+                        Text(" ago")
                             .font(.system(size: 12))
                         Image(systemName: "pencil")
                             .font(.system(size: 9, weight: .light))
                             .opacity(0.6)
+                            .padding(.leading, 4)
                     }
                     .foregroundStyle(Color("NCTextTertiary"))
                     .frame(maxWidth: .infinity, alignment: .leading)

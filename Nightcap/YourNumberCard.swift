@@ -142,21 +142,21 @@ struct YourNumberCard: View {
                 Spacer()
             }
 
-            // Tier chip + "The biology" expand toggle on same row
-            HStack(spacing: 0) {
-                HStack(spacing: 6) {
-                    Circle()
-                        .fill(tier.color)
-                        .frame(width: 6, height: 6)
-                    Text(tier.label)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(tier.color)
-                }
-                Spacer()
-                Button {
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    withAnimation(.spring(duration: 0.3)) { biologyExpanded.toggle() }
-                } label: {
+            // Tier chip + "The biology" expand toggle — full row is tappable
+            Button {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                withAnimation(.spring(duration: 0.3)) { biologyExpanded.toggle() }
+            } label: {
+                HStack(spacing: 0) {
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(tier.color)
+                            .frame(width: 6, height: 6)
+                        Text(tier.label)
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundStyle(tier.color)
+                    }
+                    Spacer()
                     HStack(spacing: 4) {
                         Text("The biology")
                             .font(.system(size: 12, weight: .regular))
@@ -167,6 +167,7 @@ struct YourNumberCard: View {
                     }
                 }
             }
+            .buttonStyle(.plain)
 
             // Bio note — expandable, hidden by default to reduce card density
             if biologyExpanded {
