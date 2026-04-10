@@ -967,15 +967,16 @@ body::after {
 }
 
 .nc-footer__links a {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  color: var(--nc-text);
+  color: var(--nc-text-dim);
   text-decoration: none;
-  transition: opacity var(--nc-transition);
+  letter-spacing: 0.04em;
+  transition: color var(--nc-transition);
 }
 
 .nc-footer__links a:hover {
-  opacity: 0.7;
+  color: var(--nc-text);
 }
 
 .nc-footer__links a:focus-visible {
@@ -984,9 +985,9 @@ body::after {
 }
 
 .nc-footer__legal {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--nc-text);
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--nc-text-dim);
   margin-top: 2rem;
 }
 
@@ -1272,10 +1273,10 @@ body::after {
 .nc-proof__card::before {
   content: '';
   display: block;
-  width: 20px;
+  width: 28px;
   height: 1px;
   background: var(--nc-text);
-  opacity: 0.2;
+  opacity: 0.15;
   margin-bottom: 4px;
 }
 
@@ -1307,21 +1308,6 @@ body::after {
     #F8F7F4;
 }
 
-.nc-faq::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 48px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.15), transparent);
-}
-
-.nc-faq::before {
-  display: none;
-}
-
 .nc-faq__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 3.5vw, 2rem);
@@ -1346,7 +1332,6 @@ body::after {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--nc-border);
-  border-left: 2px solid transparent;
   border-radius: 0;
   overflow: hidden;
   transition: all var(--nc-transition);
@@ -1357,13 +1342,12 @@ body::after {
 }
 
 .nc-faq__item[open] {
-  border-left-color: var(--nc-primary);
-  padding-left: 16px;
+  padding-bottom: 4px;
 }
 
 .nc-faq__question {
-  padding: 20px 0;
-  font-size: 0.95rem;
+  padding: 22px 0;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--nc-text);
   cursor: pointer;
@@ -1379,17 +1363,19 @@ body::after {
 }
 
 .nc-faq__question::after {
-  content: '+';
-  font-size: 1.25rem;
-  font-weight: 300;
-  color: var(--nc-primary-light);
-  transition: transform var(--nc-transition);
+  content: '';
+  width: 12px;
+  height: 1px;
+  background: var(--nc-text);
+  opacity: 0.3;
   flex-shrink: 0;
-  margin-left: 16px;
+  margin-left: 24px;
+  transition: transform var(--nc-transition), opacity var(--nc-transition);
 }
 
 .nc-faq__item[open] .nc-faq__question::after {
-  transform: rotate(45deg);
+  transform: rotate(90deg);
+  opacity: 0.5;
 }
 
 .nc-faq__question:hover {
@@ -1408,9 +1394,9 @@ body::after {
 
 .nc-faq__answer p {
   font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  line-height: 1.8;
+  font-weight: 400;
+  color: var(--nc-text-muted);
+  line-height: 1.75;
   margin: 0;
 }
 
@@ -1766,10 +1752,10 @@ body::after {
 }
 
 .nc-sticky-cta__logo {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-weight: 900;
-  font-size: 0.8rem;
-  letter-spacing: 0.03em;
+  font-family: var(--nc-font);
+  font-weight: 500;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--nc-text);
 }
@@ -2271,7 +2257,6 @@ body::after {
 
       <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
         Start the Quiz
-
       </button>
 
     </div>
@@ -2317,17 +2302,17 @@ body::after {
         <div class="nc-steps__item nc-reveal nc-reveal--delay-1">
           <span class="nc-steps__num">01</span>
           <h3 class="nc-steps__item-title">Take the quiz</h3>
-          <p class="nc-steps__item-desc">Five quick questions about your eating habits. Under 60 seconds.</p>
+          <p class="nc-steps__item-desc">Five questions about your daily habits.</p>
         </div>
         <div class="nc-steps__item nc-reveal nc-reveal--delay-2">
           <span class="nc-steps__num">02</span>
           <h3 class="nc-steps__item-title">Get your report</h3>
-          <p class="nc-steps__item-desc">Your estimated daily sugar intake and what it means for your health.</p>
+          <p class="nc-steps__item-desc">Your intake and what it means for you.</p>
         </div>
         <div class="nc-steps__item nc-reveal nc-reveal--delay-3">
           <span class="nc-steps__num">03</span>
           <h3 class="nc-steps__item-title">Start reducing</h3>
-          <p class="nc-steps__item-desc">A personalized plan and early access to the Nightcap app.</p>
+          <p class="nc-steps__item-desc">A clear plan and early access to the app.</p>
         </div>
       </div>
     </div>
@@ -2408,7 +2393,6 @@ body::after {
       <p class="nc-midcta__text">What's your number?</p>
       <button class="nc-btn nc-btn--primary" id="mid-quiz-btn">
         Start the Quiz
-
       </button>
     </div>
   </section>
@@ -2446,8 +2430,7 @@ body::after {
       <div class="nc-faq__cta">
         <button class="nc-btn nc-btn--primary" id="bottom-quiz-btn">
           Start the Quiz
-  
-        </button>
+      </button>
       </div>
     </div>
   </section>
@@ -2729,8 +2712,7 @@ body::after {
         <p class="nc-results__cta-intro">The Nightcap app tracks your progress and guides you through each phase of reducing sugar.</p>
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
           Get the App
-  
-        </button>
+      </button>
         <p class="nc-results__cta-note">iOS &middot; Free &middot; No account required</p>
       </div>
 
