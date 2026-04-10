@@ -347,10 +347,12 @@ struct CountdownTool: View {
                             .frame(height: 1)
 
                         Text(inlineCardText)
+                            .id(inlineCardIndex)
                             .font(.system(size: 14, weight: .light))
                             .foregroundStyle(Color("NCTextSecondary"))
                             .lineSpacing(4)
                             .multilineTextAlignment(.center)
+                            .transition(.opacity)
 
                         Button {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()

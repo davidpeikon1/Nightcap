@@ -85,11 +85,12 @@ struct CravingCrisisSheet: View {
             }
 
             Text(cardText)
+                .id(cardIndex)
                 .font(.system(size: 16, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
                 .lineSpacing(5)
                 .fixedSize(horizontal: false, vertical: true)
-                .animation(.easeInOut(duration: 0.2), value: cardText)
+                .transition(.opacity)
         }
         .padding(20)
         .background(Color("NCSurface"))
