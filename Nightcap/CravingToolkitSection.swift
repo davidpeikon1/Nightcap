@@ -392,12 +392,14 @@ struct ReframeCardTool: View {
     var body: some View {
         VStack(spacing: 20) {
             Text(cardText)
+                .id(currentIndex)
                 .font(.system(size: 17, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
                 .lineSpacing(6)
                 .multilineTextAlignment(.center)
                 .padding(.vertical, 24)
                 .offset(x: dragOffset)
+                .transition(.opacity)
                 .gesture(
                     DragGesture()
                         .onChanged { dragOffset = min(0, $0.translation.width) }
@@ -432,10 +434,10 @@ struct ReframeCardTool: View {
                 nextCard()
             } label: {
                 HStack(spacing: 6) {
-                    Text("Next")
-                        .font(.system(size: 14))
-                    Image(systemName: "arrow.left")
+                    Image(systemName: "arrow.clockwise")
                         .font(.system(size: 12, weight: .light))
+                    Text("New one")
+                        .font(.system(size: 14))
                 }
                 .foregroundStyle(Color("NCTextSecondary"))
                 .padding(.horizontal, 20)
