@@ -158,7 +158,7 @@ struct BodyScienceCard: View {
         }()
         let teaser: String = {
             switch next {
-            case .firstDay:     return "Your first 24 hours is close."
+            case .firstDay:     return "Your first full day is almost here."
             case .withdrawal:   return "The acute pull is almost behind you."
             case .breakthrough: return "72 hours — the compulsive edge drops here."
             case .rewiring:     return "One week. The gut has measurably shifted."

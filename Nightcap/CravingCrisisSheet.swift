@@ -261,7 +261,10 @@ struct CravingCrisisSheet: View {
                     color: Color("NCWarning")
                 ) {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    if !countdown.isRunning && !countdown.completed {
+                    if countdown.completed {
+                        countdown.reset()
+                        countdown.start()
+                    } else if !countdown.isRunning {
                         countdown.start()
                     }
                 }
