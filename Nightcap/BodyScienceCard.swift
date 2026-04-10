@@ -117,14 +117,6 @@ struct BodyScienceCard: View {
         .background(Color("NCSurface"))
         .cornerRadius(16)
         .animation(.spring(duration: 0.3), value: isExpanded)
-        .onChange(of: store.fastingPhase) { _, newPhase in
-            // Auto-expand when a new phase unlocks so users immediately see
-            // what's happening biologically. Skip .justStarted (reset state).
-            if newPhase != .justStarted {
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                withAnimation(.spring(duration: 0.35)) { isExpanded = true }
-            }
-        }
         .sheet(isPresented: $showPhaseDetail) {
             PhaseDetailSheet(phase: store.fastingPhase)
                 .presentationDetents([.large])

@@ -73,9 +73,35 @@ struct CravingToolkitSection: View {
             } label: {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text("Feeling a craving?")
-                            .font(.system(size: 15, weight: .regular))
-                            .foregroundStyle(Color("NCTextSecondary"))
+                        // When the countdown is active, surface its state in the
+                        // collapsed header so the user can see progress at a glance.
+                        if !isExpanded && countdownState.completed {
+                            HStack(spacing: 7) {
+                                Image(systemName: "checkmark.circle")
+                                    .font(.system(size: 13, weight: .light))
+                                    .foregroundStyle(Color("NCSuccess"))
+                                Text("You outlasted it.")
+                                    .font(.system(size: 15, weight: .regular))
+                                    .foregroundStyle(Color("NCSuccess"))
+                            }
+                        } else if !isExpanded && countdownState.isRunning {
+                            HStack(spacing: 7) {
+                                Image(systemName: "timer")
+                                    .font(.system(size: 13, weight: .light))
+                                    .foregroundStyle(Color("NCSuccess"))
+                                let m = countdownState.secondsLeft / 60
+                                let s = countdownState.secondsLeft % 60
+                                Text(String(format: "%d:%02d remaining", m, s))
+                                    .font(.system(size: 15, weight: .regular).monospacedDigit())
+                                    .foregroundStyle(Color("NCSuccess"))
+                                    .contentTransition(.numericText())
+                            }
+                            .animation(.snappy(duration: 0.25), value: countdownState.secondsLeft)
+                        } else {
+                            Text("Feeling a craving?")
+                                .font(.system(size: 15, weight: .regular))
+                                .foregroundStyle(Color("NCTextSecondary"))
+                        }
 
                         Spacer()
 
@@ -84,7 +110,7 @@ struct CravingToolkitSection: View {
                             .foregroundStyle(Color("NCTextSecondary"))
                     }
 
-                    if !isExpanded {
+                    if !isExpanded && !countdownState.isRunning && !countdownState.completed {
                         Text("20-min countdown  ·  breathing  ·  reframe cards  ·  more")
                             .font(.system(size: 11, weight: .light))
                             .foregroundStyle(Color("NCTextTertiary"))

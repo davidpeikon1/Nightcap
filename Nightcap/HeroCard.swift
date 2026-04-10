@@ -292,7 +292,7 @@ struct TrackingCard: View {
                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 showResetModal = true
             } label: {
-                Text("Log a reset")
+                Text("I had some sugar")
                     .font(.system(size: 14))
                     .foregroundStyle(Color("NCTextSecondary"))
                     .frame(maxWidth: .infinity)
@@ -331,7 +331,7 @@ struct TrackingCard: View {
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(Color("NCBackground"))
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 18)
                     .background(Color("NCAccent"))
                     .cornerRadius(12)
             }
