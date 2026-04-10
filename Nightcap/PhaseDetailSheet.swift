@@ -162,7 +162,7 @@ struct PhaseDetailSheet: View {
                     HStack(alignment: .top, spacing: 12) {
                         Image(systemName: "flask")
                             .font(.system(size: 12, weight: .light))
-                            .foregroundStyle(Color("NCSuccess"))
+                            .foregroundStyle(phaseColor)
                             .padding(.top, 2)
                         Text(point)
                             .font(.system(size: 14, weight: .light))
