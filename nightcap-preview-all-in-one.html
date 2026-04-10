@@ -388,13 +388,16 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-/* Hero logo image */
+/* Hero logo image — clip the 38% transparent padding from the square PNG */
 .nc-hero__logo-img {
   display: block;
   width: clamp(400px, 60vw, 700px);
   height: auto;
-  margin: -2rem auto 0;
+  margin: 0 auto;
   opacity: 0.95;
+  clip-path: inset(36% 0 38% 0);
+  margin-top: calc(clamp(400px, 60vw, 700px) * -0.36);
+  margin-bottom: calc(clamp(400px, 60vw, 700px) * -0.36);
 }
 
 /* Footer logo image */
