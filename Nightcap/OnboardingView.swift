@@ -171,7 +171,7 @@ struct HomeWithCoachmark: View {
                 // across device sizes (iPhone SE through Pro Max).
                 if appState.onboardingStep == .timerCoachmark {
                     CoachmarkBubble(
-                        text: "Your daily sugar number. This is what you're working to bring down. Update it any time — the app adjusts everything around it.",
+                        text: "Today's reframe — the biology behind what processed sugar actually does. A new one every day. Your craving toolkit and timer are below it.",
                         arrowUp: true
                     )
                     .padding(.top, geo.size.height * 0.25)
@@ -181,7 +181,7 @@ struct HomeWithCoachmark: View {
 
                 } else if appState.onboardingStep == .quoteCoachmark {
                     CoachmarkBubble(
-                        text: "A new reframe every day — what sugar actually does biologically. Below it: tools for the moment a craving hits.",
+                        text: "Six tools for the moment a craving hits — use any one. Your sugar-free timer is below.",
                         arrowUp: true
                     )
                     .padding(.top, geo.size.height * 0.51)
