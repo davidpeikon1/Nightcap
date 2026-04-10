@@ -125,7 +125,7 @@ struct ProgressSection: View {
                         .frame(height: 6)
 
                     RoundedRectangle(cornerRadius: 3)
-                        .fill(Color("NCSuccess"))
+                        .fill(store.fastingPhase.color)
                         .frame(width: geo.size.width * (progressFilled ? store.phaseProgress : 0), height: 6)
                         .animation(.spring(duration: 1.2, bounce: 0.05), value: progressFilled)
                         .animation(.spring(duration: 0.8), value: store.phaseProgress)
