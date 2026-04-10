@@ -177,10 +177,10 @@ struct HomeView: View {
 
     private var topBar: some View {
         HStack(alignment: .center) {
-            Text("nightcap")
-                .font(.system(size: 22, weight: .light))
-                .foregroundStyle(Color("NCTextPrimary"))
-                .tracking(-0.5)
+            Image("NightcapLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 22)
 
             Spacer()
 

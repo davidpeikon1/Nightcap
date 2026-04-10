@@ -16,10 +16,10 @@ struct ShareCardView: View {
 
             VStack(spacing: 24) {
                 // Wordmark
-                Text("nightcap")
-                    .font(.system(size: 13, weight: .light))
-                    .tracking(3)
-                    .foregroundStyle(Color("NCTextTertiary"))
+                Image("NightcapLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 16)
                     .padding(.top, 32)
 
                 // Badge
