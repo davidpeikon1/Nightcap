@@ -26,6 +26,8 @@ struct ProgressSection: View {
                 Text("\(store.earnedBadges.count)/\(BadgeID.allCases.count)")
                     .font(.system(size: 11, design: .monospaced))
                     .foregroundStyle(Color("NCTextTertiary"))
+                    .contentTransition(.numericText())
+                    .animation(.snappy(duration: 0.3), value: store.earnedBadges.count)
                 Button {
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     showHistory = true

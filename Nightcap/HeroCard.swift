@@ -284,21 +284,26 @@ struct TrackingCard: View {
                 }
             }
 
-            Divider()
-                .background(Color("NCTextTertiary").opacity(0.5))
+            Rectangle()
+                .fill(Color("NCTextTertiary").opacity(0.3))
+                .frame(height: 1)
                 .padding(.top, 16)
 
             Button {
                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 showResetModal = true
             } label: {
-                Text("I had some sugar")
-                    .font(.system(size: 14))
-                    .foregroundStyle(Color("NCTextSecondary"))
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 12)
-                    .padding(.bottom, 4)
-                    .contentShape(Rectangle())
+                HStack(spacing: 6) {
+                    Image(systemName: "arrow.counterclockwise")
+                        .font(.system(size: 12, weight: .light))
+                    Text("I had some sugar")
+                        .font(.system(size: 14))
+                }
+                .foregroundStyle(Color("NCTextSecondary"))
+                .frame(maxWidth: .infinity)
+                .padding(.top, 12)
+                .padding(.bottom, 4)
+                .contentShape(Rectangle())
             }
         }
     }
@@ -307,7 +312,7 @@ struct TrackingCard: View {
 
     private var notTrackingSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Not tracking.")
+            Text(store.resetEvents.isEmpty ? "Start your clock." : "Clock stopped.")
                 .font(.system(size: 26, weight: .light))
                 .foregroundStyle(Color("NCTextPrimary"))
 

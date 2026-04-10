@@ -139,7 +139,7 @@ struct NumberEditSheet: View {
                         .font(.system(size: 15, weight: .medium))
                         .foregroundStyle(Color("NCBackground"))
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
+                        .padding(.vertical, 18)
                         .background(Color("NCAccent"))
                         .cornerRadius(12)
                 }
@@ -195,7 +195,7 @@ struct NumberEditSheet: View {
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(Color("NCBackground"))
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 18)
                     .background(Color("NCAccent"))
                     .cornerRadius(12)
             }
