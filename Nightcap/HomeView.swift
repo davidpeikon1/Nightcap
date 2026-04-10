@@ -224,6 +224,8 @@ struct HomeView: View {
             Text("\(store.streakDays) day\(store.streakDays == 1 ? "" : "s")")
                 .font(.system(size: 13, weight: .medium))
                 .foregroundStyle(Color("NCTextPrimary"))
+                .contentTransition(.numericText())
+                .animation(.snappy(duration: 0.3), value: store.streakDays)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
