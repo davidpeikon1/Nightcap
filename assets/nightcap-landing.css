@@ -366,7 +366,7 @@ body::after {
 /* Hero logo image */
 .nc-hero__logo-img {
   display: block;
-  width: clamp(220px, 35vw, 360px);
+  width: clamp(260px, 42vw, 500px);
   height: auto;
   margin: 0 auto 3.5rem;
   opacity: 0.95;
