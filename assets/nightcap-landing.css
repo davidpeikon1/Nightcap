@@ -519,11 +519,11 @@ body::after {
 
 .nc-quiz__question {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.6rem, 4vw, 2.25rem);
-  font-weight: 700;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 400;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .nc-quiz__helper {
@@ -653,9 +653,9 @@ body::after {
 
 .nc-signup__teaser-number {
   font-family: var(--nc-font-display);
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   line-height: 1;
   color: var(--nc-text);
   margin: 0;
@@ -671,10 +671,11 @@ body::after {
 
 .nc-signup__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.4rem, 3vw, 1.65rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
 /* Form Elements */
@@ -805,9 +806,9 @@ body::after {
 
 .nc-results__big-number {
   font-family: var(--nc-font-display);
-  font-size: clamp(4.5rem, 14vw, 7rem);
+  font-size: clamp(4rem, 11vw, 6rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   line-height: 1;
   color: var(--nc-text);
   margin-bottom: 0.5rem;
@@ -968,8 +969,8 @@ body::after {
 
 .nc-footer__tagline {
   font-family: var(--nc-font-display);
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 400;
   font-style: italic;
   color: var(--nc-text-muted);
   margin-bottom: 2.5rem;
@@ -1298,10 +1299,10 @@ body::after {
 
 .nc-proof__quote {
   font-family: var(--nc-font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 400;
   color: var(--nc-text);
-  line-height: 1.65;
+  line-height: 1.7;
   font-style: italic;
   flex: 1;
 }
@@ -2085,21 +2086,22 @@ body::after {
   position: relative;
   z-index: 1;
   font-family: var(--nc-font-display);
-  font-size: clamp(8rem, 28vw, 16rem);
+  font-size: clamp(6rem, 20vw, 11rem);
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 0.8;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
   color: var(--nc-text);
   margin-bottom: 1.5rem;
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .nc-statement__unit {
   position: relative;
   z-index: 1;
   font-family: var(--nc-font-display);
-  font-size: clamp(0.95rem, 2.2vw, 1.2rem);
-  font-weight: 700;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 400;
+  font-style: italic;
   color: var(--nc-text-muted);
   margin: 0;
   line-height: 1.5;
@@ -2165,10 +2167,11 @@ body::after {
 /* Step numbers */
 .nc-steps__num {
   font-family: var(--nc-font-display);
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 400;
+  font-style: italic;
   color: var(--nc-text);
-  opacity: 0.15;
+  opacity: 0.25;
   line-height: 1;
   margin-bottom: 12px;
 }
@@ -2176,9 +2179,10 @@ body::after {
 
 .nc-steps__item-title {
   font-family: var(--nc-font-display);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  margin-top: 4px;
 }
 
 .nc-steps__item-desc {
