@@ -115,44 +115,64 @@ body::after {
 /* ---------- Logo ---------- */
 .nc-logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   margin: 0 auto 2.5rem;
   width: fit-content;
 }
 
 .nc-logo__text {
-  font-family: var(--nc-font);
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: var(--nc-text);
-  letter-spacing: 0.3em;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  font-weight: 700;
+  color: #C8B078;
+  letter-spacing: 0.06em;
   line-height: 1;
   text-transform: uppercase;
+  padding: 4px 0;
 }
 
 .nc-logo__lines {
-  width: 24px;
-  height: 1px;
-  background: var(--nc-text);
-  opacity: 0.2;
+  width: 100%;
+  height: 6px;
+  position: relative;
 }
 
 .nc-logo__lines::before,
 .nc-logo__lines::after {
-  display: none;
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: #C8B078;
+  display: block;
+}
+
+.nc-logo__lines::before {
+  top: 0;
+}
+
+.nc-logo__lines::after {
+  bottom: 0;
 }
 
 /* Hero logo */
 .nc-hero .nc-logo {
-  margin: 0 auto 4rem;
+  margin: 0 auto 3.5rem;
 }
 .nc-logo--sm .nc-logo__text {
-  font-size: 0.62rem;
+  font-size: 0.9rem;
 }
 
 .nc-logo--sm .nc-logo__lines {
-  width: 16px;
+  height: 5px;
+}
+
+.nc-logo--sm .nc-logo__lines::before,
+.nc-logo--sm .nc-logo__lines::after {
+  height: 1px;
 }
 
 /* ---------- Buttons ---------- */
@@ -343,9 +363,10 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-/* Hero logo inverted */
-.nc-hero .nc-logo__text { color: #F5F3EE; }
-.nc-hero .nc-logo__lines { background: #F5F3EE; opacity: 0.15; }
+/* Hero logo — gold on dark */
+.nc-hero .nc-logo__text { color: #C8B078; }
+.nc-hero .nc-logo__lines::before,
+.nc-hero .nc-logo__lines::after { background: #C8B078; }
 
 /* Hero CTA inverted */
 .nc-hero .nc-btn--primary {
@@ -1727,11 +1748,12 @@ body::after {
 }
 
 .nc-sticky-cta__logo {
-  font-family: var(--nc-font);
-  font-weight: 500;
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: #C8B078;
   color: var(--nc-text);
 }
 
