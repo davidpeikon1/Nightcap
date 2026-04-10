@@ -78,8 +78,10 @@ struct ProgressSection: View {
                 allBadgesEarnedRow
             }
 
-            // Phase progress bar
-            phaseProgressView
+            // Phase progress bar — only shown when actively tracking
+            if store.isTracking {
+                phaseProgressView
+            }
         }
         .sheet(isPresented: $showHistory) {
             FastHistoryView()
