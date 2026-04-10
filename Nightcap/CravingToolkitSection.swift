@@ -363,11 +363,10 @@ struct CountdownTool: View {
                             }
                         } label: {
                             HStack(spacing: 4) {
-                                Text("another")
-                                    .font(.system(size: 11))
-                                    .tracking(0.5)
-                                Image(systemName: "arrow.left")
+                                Image(systemName: "arrow.clockwise")
                                     .font(.system(size: 9, weight: .light))
+                                Text("New one")
+                                    .font(.system(size: 11))
                             }
                             .foregroundStyle(Color("NCTextTertiary"))
                         }

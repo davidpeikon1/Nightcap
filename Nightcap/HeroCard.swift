@@ -65,10 +65,10 @@ struct ReframeCard: View {
                 HStack(spacing: 6) {
                     Text("The science")
                         .font(.system(size: 13, weight: .regular))
-                        .foregroundStyle(Color("NCSuccess"))
+                        .foregroundStyle(store.fastingPhase.color)
                     Image(systemName: scienceExpanded ? "chevron.up" : "chevron.right")
                         .font(.system(size: 10, weight: .light))
-                        .foregroundStyle(Color("NCSuccess"))
+                        .foregroundStyle(store.fastingPhase.color)
                 }
                 .padding(.top, 16)
             }
