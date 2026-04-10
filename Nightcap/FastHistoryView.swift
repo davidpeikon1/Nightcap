@@ -256,7 +256,7 @@ struct FastHistoryView: View {
     private var currentFastRow: some View {
         HStack(spacing: 14) {
             Circle()
-                .fill(Color("NCSuccess"))
+                .fill(store.fastingPhase.color)
                 .frame(width: 8, height: 8)
 
             VStack(alignment: .leading, spacing: 3) {
@@ -305,7 +305,7 @@ struct FastHistoryView: View {
                     if phase != .justStarted {
                         Text(phase.rawValue)
                             .font(.system(size: 11))
-                            .foregroundStyle(Color("NCTextTertiary"))
+                            .foregroundStyle(phase.color.opacity(0.65))
                     }
                     if let note = event.note, !note.isEmpty {
                         Text(note)

@@ -117,7 +117,7 @@ struct ProgressSection: View {
 
                 Text(rightLabel)
                     .font(.system(size: 12, weight: .regular, design: .monospaced))
-                    .foregroundStyle(isFreedom ? Color("NCSuccess").opacity(0.8) : Color("NCTextTertiary"))
+                    .foregroundStyle(isFreedom ? Color("NCSuccess").opacity(0.8) : store.fastingPhase.color.opacity(0.7))
             }
 
             GeometryReader { geo in

@@ -241,7 +241,7 @@ struct PhaseUnlockToast: View {
         HStack(spacing: 14) {
             Image(systemName: "arrow.up.circle")
                 .font(.system(size: 18, weight: .light))
-                .foregroundStyle(Color("NCSuccess"))
+                .foregroundStyle(phase.color)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text("entering")
@@ -249,7 +249,7 @@ struct PhaseUnlockToast: View {
                     .foregroundStyle(Color("NCTextSecondary"))
                 Text(phase.rawValue)
                     .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(Color("NCTextPrimary"))
+                    .foregroundStyle(phase.color)
                 Text(phaseBioFact)
                     .font(.system(size: 11, weight: .light))
                     .foregroundStyle(Color("NCTextSecondary"))
