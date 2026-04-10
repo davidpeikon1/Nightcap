@@ -84,7 +84,6 @@ body {
   overflow-x: hidden;
 }
 
-
 /* Global grain texture via SVG filter */
 body::after {
   content: '';
@@ -114,8 +113,7 @@ body::after {
   top: 16px;
 }
 
-
-/* ---------- Section Label ---------- */
+/* ---------- Utility ---------- */
 .nc-sr-only {
   position: absolute;
   width: 1px;
@@ -206,7 +204,6 @@ body::after {
   padding: 10px 24px;
   font-size: 0.8rem;
 }
-
 
 /* ---------- Hero ---------- */
 .nc-hero {
@@ -327,10 +324,6 @@ body::after {
   background: #FFFFFF;
   box-shadow: 0 0 80px rgba(255, 255, 255, 0.15);
 }
-
-
-/* ---------- Return Banner ---------- */
-
 
 /* ---------- Quiz ---------- */
 .nc-quiz {
@@ -778,25 +771,26 @@ body::after {
 .nc-referral-socials {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 2rem;
   flex-wrap: wrap;
 }
 
 .nc-referral-socials__btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 20px;
-  border-radius: 0;
+  gap: 8px;
+  padding: 8px 0;
   border: none;
-  background: var(--nc-bg-card);
-  color: var(--nc-text-muted);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  color: var(--nc-text);
   font-family: var(--nc-font);
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all var(--nc-transition);
-  box-shadow: var(--nc-shadow-sm);
 }
 
 .nc-referral-socials__btn svg {
@@ -805,12 +799,12 @@ body::after {
 }
 
 .nc-referral-socials__btn:hover {
-  color: var(--nc-text);
-  box-shadow: var(--nc-shadow-md);
-  transform: translateY(-1px);
+  border-bottom-color: var(--nc-primary);
 }
 
-/* Position */
+.nc-referral-socials__btn:hover svg {
+  opacity: 0.8;
+}
 
 /* ---------- Toast ---------- */
 .nc-toast-container {
@@ -862,14 +856,24 @@ body::after {
   to { opacity: 0; transform: translateX(30px); }
 }
 
-/* ---------- Confetti Canvas ---------- */
-
 /* ---------- Footer ---------- */
 .nc-footer {
-  padding: 80px 40px 60px;
+  padding: 100px 40px 80px;
   border-top: none;
   text-align: center;
   background: #EFECE6;
+  position: relative;
+}
+
+.nc-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .nc-footer__container {
@@ -878,7 +882,7 @@ body::after {
 }
 
 .nc-footer .nc-logo {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .nc-footer__tagline {
@@ -893,16 +897,17 @@ body::after {
 .nc-footer__links {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  margin-bottom: 1.5rem;
+  gap: 32px;
+  margin-bottom: 2rem;
 }
 
 .nc-footer__links a {
-  font-size: 0.72rem;
-  font-weight: 500;
+  font-size: 0.68rem;
+  font-weight: 600;
   color: var(--nc-text-dim);
   text-decoration: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   transition: color var(--nc-transition);
 }
 
@@ -938,9 +943,6 @@ body::after {
 .nc-reveal--delay-2 { transition-delay: 0.24s; }
 .nc-reveal--delay-3 { transition-delay: 0.36s; }
 .nc-reveal--delay-4 { transition-delay: 0.48s; }
-
-
-
 
 /* ---------- Pre-commitment ---------- */
 .nc-precommit {
@@ -992,8 +994,6 @@ body::after {
 .nc-precommit__no:hover {
   color: var(--nc-text-muted);
 }
-
-
 
 /* ---------- Benefits Grid ---------- */
 .nc-benefits {
@@ -1081,7 +1081,6 @@ body::after {
   line-height: 1.65;
 }
 
-/* Benefits variant override (legacy class) */
 /* ---------- Mid-page CTA ---------- */
 .nc-midcta {
   padding: 140px 32px;
@@ -1202,7 +1201,6 @@ body::after {
   text-transform: uppercase;
 }
 
-
 /* ---------- FAQ ---------- */
 .nc-faq {
   padding: 140px 40px 120px;
@@ -1304,8 +1302,6 @@ body::after {
   line-height: 1.75;
   margin: 0;
 }
-
-/* ---------- Exit Intent Popup ---------- */
 
 .nc-faq__cta {
   text-align: center;
@@ -1486,8 +1482,6 @@ body::after {
   color: var(--nc-accent);
 }
 
-/* ---------- Results Equivalent Line ---------- */
-
 /* ---------- Results Biology Section ---------- */
 .nc-results__section-title {
   font-family: var(--nc-font-display);
@@ -1618,14 +1612,6 @@ body::after {
   margin-bottom: 1.25rem;
 }
 
-/* ---------- Sugar Equivalents ---------- */
-
-/* ---------- Source Breakdown ---------- */
-
-/* ---------- Share Card ---------- */
-
-/* ---------- Comparison Chart ---------- */
-
 /* ---------- Sticky CTA ---------- */
 .nc-sticky-cta {
   position: fixed;
@@ -1676,7 +1662,7 @@ body::after {
 
   .nc-proof__grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 48px;
   }
 }
 
@@ -1886,8 +1872,6 @@ body::after {
   text-transform: uppercase;
 }
 
-/* ---------- CRO: CTA Reinforcement ---------- */
-/* ---------- CRO: Quiz Momentum ---------- */
 /* ---------- CRO: Signup Value List ---------- */
 .nc-signup__value-list {
   list-style: none;
@@ -1913,8 +1897,6 @@ body::after {
   font-weight: 600;
   opacity: 0.4;
 }
-
-
 
 /* ---------- Statement (the iconic moment) ---------- */
 .nc-statement {
@@ -2044,7 +2026,6 @@ body::after {
   line-height: 1;
   margin-bottom: 12px;
 }
-
 
 .nc-steps__item-title {
   font-family: var(--nc-font-display);
