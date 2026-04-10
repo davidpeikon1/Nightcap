@@ -20,7 +20,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23141311' width='100' height='100' rx='16'/><text x='50' y='68' text-anchor='middle' fill='%23C8B078' font-family='Georgia' font-size='52' font-weight='700'>N</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..600,0..100&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
 /* ==========================================================================
@@ -57,7 +57,7 @@
   --nc-radius: 8px;
   --nc-radius-lg: 14px;
   --nc-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --nc-font-display: 'DM Serif Display', Georgia, serif;
+  --nc-font-display: 'Fraunces', Georgia, serif;
   --nc-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --nc-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --nc-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
@@ -82,6 +82,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Fraunces variable font — display optical size, slight softness */
+[class*="__title"],
+[class*="__number"],
+[class*="__question"],
+h1, h2, h3 {
+  font-variation-settings: "opsz" 120, "SOFT" 30;
 }
 
 /* Global grain texture via SVG filter */
@@ -355,10 +363,10 @@ body::after {
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.75rem, 7vw, 4.5rem);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.75rem, 7vw, 4.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: #F5F3EE;
   margin-bottom: 1.25rem;
   position: relative;
@@ -388,16 +396,19 @@ body::after {
   letter-spacing: 0.04em;
 }
 
-/* Hero logo image — clip the 38% transparent padding from the square PNG */
+/* Hero logo — background-image on an aspect-ratio div crops the
+   transparent padding perfectly. The PNG is 2048x2048 with content
+   centered at 645x190 pixels, so we use background-size: 317.5% to
+   scale the full image such that the content fills the container. */
 .nc-hero__logo-img {
   display: block;
-  width: clamp(400px, 60vw, 700px);
-  height: auto;
-  margin: 0 auto;
-  opacity: 0.95;
-  clip-path: inset(36% 0 38% 0);
-  margin-top: calc(clamp(400px, 60vw, 700px) * -0.36);
-  margin-bottom: calc(clamp(400px, 60vw, 700px) * -0.36);
+  width: clamp(260px, 36vw, 440px);
+  aspect-ratio: 645 / 190;
+  margin: 0 auto 2.5rem;
+  background-image: url('public/images/dark-text-logo.png');
+  background-size: 317.5% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 /* Footer logo image */
@@ -541,7 +552,7 @@ body::after {
 .nc-quiz__question {
   font-family: var(--nc-font-display);
   font-size: clamp(1.6rem, 4vw, 2.25rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
   line-height: 1.2;
@@ -675,7 +686,7 @@ body::after {
 .nc-signup__teaser-number {
   font-family: var(--nc-font-display);
   font-size: 3.5rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--nc-text);
@@ -693,7 +704,7 @@ body::after {
 .nc-signup__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
 }
@@ -827,7 +838,7 @@ body::after {
 .nc-results__big-number {
   font-family: var(--nc-font-display);
   font-size: clamp(4.5rem, 14vw, 7rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--nc-text);
@@ -858,7 +869,7 @@ body::after {
 .nc-results__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.4rem, 3.5vw, 1.75rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
 }
@@ -990,7 +1001,7 @@ body::after {
 .nc-footer__tagline {
   font-family: var(--nc-font-display);
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   font-style: italic;
   color: var(--nc-text-muted);
   margin-bottom: 2.5rem;
@@ -1070,7 +1081,7 @@ body::after {
 .nc-precommit__question {
   font-family: var(--nc-font-display);
   font-size: clamp(1.75rem, 5vw, 2.75rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1.2;
   margin-bottom: 3rem;
@@ -1133,7 +1144,7 @@ body::after {
 .nc-benefits__title {
   font-family: var(--nc-font-display);
   font-size: clamp(2rem, 5vw, 2.75rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.03em;
   margin-bottom: 3.5rem;
   line-height: 1.15;
@@ -1173,7 +1184,7 @@ body::after {
 .nc-benefits__item-title {
   font-family: var(--nc-font-display);
   font-size: 1.15rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
   margin-top: 16px;
   margin-bottom: 10px;
@@ -1244,7 +1255,7 @@ body::after {
 .nc-midcta__text {
   font-family: var(--nc-font-display);
   font-size: clamp(2.25rem, 6vw, 3.5rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 3rem;
@@ -1320,7 +1331,7 @@ body::after {
 .nc-proof__quote {
   font-family: var(--nc-font-display);
   font-size: 0.95rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--nc-text);
   line-height: 1.65;
   font-style: italic;
@@ -1348,7 +1359,7 @@ body::after {
 .nc-faq__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 3.5vw, 2rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   text-align: center;
   margin-bottom: 3rem;
@@ -1510,7 +1521,7 @@ body::after {
 .nc-exit-popup__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 4vw, 1.85rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
 }
@@ -1584,7 +1595,7 @@ body::after {
 .nc-calculating__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
 }
@@ -1622,7 +1633,7 @@ body::after {
 .nc-results__section-title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.35rem, 3.5vw, 1.75rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 1.25rem;
 }
@@ -2107,7 +2118,7 @@ body::after {
   z-index: 1;
   font-family: var(--nc-font-display);
   font-size: clamp(8rem, 28vw, 16rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.05em;
   line-height: 0.8;
   color: var(--nc-text);
@@ -2120,7 +2131,7 @@ body::after {
   z-index: 1;
   font-family: var(--nc-font-display);
   font-size: clamp(0.95rem, 2.2vw, 1.2rem);
-  font-weight: 400;
+  font-weight: 500;
   color: var(--nc-text-muted);
   margin: 0;
   line-height: 1.5;
@@ -2163,7 +2174,7 @@ body::after {
 .nc-steps__title {
   font-family: var(--nc-font-display);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 3rem;
 }
@@ -2187,7 +2198,7 @@ body::after {
 .nc-steps__num {
   font-family: var(--nc-font-display);
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--nc-text);
   opacity: 0.15;
   line-height: 1;
@@ -2198,7 +2209,7 @@ body::after {
 .nc-steps__item-title {
   font-family: var(--nc-font-display);
   font-size: 1.15rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -2233,7 +2244,7 @@ body::after {
 .nc-proof__header {
   font-family: var(--nc-font-display);
   font-size: clamp(1.35rem, 3.5vw, 1.75rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
   text-align: center;
   margin-bottom: 3.5rem;
@@ -2280,7 +2291,7 @@ body::after {
       <path d="M420 400 C360 420 310 490 330 580 C350 670 430 720 520 700 C610 680 660 600 640 510 C620 420 500 370 420 400Z" fill="url(#hb3)"/>
     </svg>
     <div class="nc-hero__content">
-      <img src="public/images/dark-text-logo.png" alt="Nightcap" class="nc-hero__logo-img">
+      <div class="nc-hero__logo-img" role="img" aria-label="Nightcap"></div>
 
       <h1 class="nc-hero__title" id="hero-title">
         Find out how much sugar<br>you're really eating<span class="nc-hero__dot">.</span>
