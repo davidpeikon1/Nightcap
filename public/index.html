@@ -886,7 +886,7 @@ body::after {
 }
 
 .nc-results__container {
-  max-width: 520px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -2219,10 +2219,12 @@ body::after {
 .nc-calculating {
   display: none;
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: center;
   justify-content: center;
-  padding: 40px 24px;
+  padding: 60px 32px;
   text-align: center;
+  background: #F8F7F4;
 }
 
 .nc-calculating.active {
@@ -2307,15 +2309,25 @@ body::after {
 }
 
 .nc-results__biology {
-  margin: 3rem 0;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.nc-results__biology .nc-results__section-title,
+.nc-results__mechanic .nc-results__section-title,
+.nc-results__cta-section .nc-results__section-title {
+  margin-bottom: 2.5rem;
 }
 
 .nc-results__bio-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  text-align: left;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 .nc-results__bio-item {
@@ -2328,14 +2340,18 @@ body::after {
 }
 
 .nc-results__mechanic {
-  margin: 2rem 0;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
 .nc-results__mechanic-intro {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 400;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
   color: var(--nc-text-muted);
   margin-bottom: 1.5rem;
   line-height: 1.6;
@@ -2345,8 +2361,10 @@ body::after {
   display: flex;
   flex-direction: column;
   border-left: 1px solid rgba(20, 20, 20, 0.12);
-  padding-left: 1.5rem;
-  margin-left: 0.5rem;
+  padding-left: 1.75rem;
+  margin: 2.5rem auto 0;
+  max-width: 520px;
+  text-align: left;
 }
 
 .nc-results__phase {
@@ -2400,9 +2418,19 @@ body::after {
 /* ---------- Results CTA ---------- */
 .nc-results__cta-section {
   text-align: center;
-  margin: 2.5rem 0;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nc-results__cta-section .nc-btn--primary {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.nc-results__cta-intro {
+  max-width: 440px;
+  margin: 0 auto 2rem;
 }
 
 .nc-results__cta-note {
@@ -2415,13 +2443,17 @@ body::after {
 /* ---------- Results Share ---------- */
 .nc-results__share-section {
   text-align: center;
-  padding: 2rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .nc-results__share-prompt {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 400;
+  font-family: var(--nc-font-display);
+  font-style: italic;
+  color: var(--nc-text-muted);
   color: var(--nc-text);
   margin-bottom: 1.25rem;
 }
@@ -3647,18 +3679,20 @@ body::after {
 
       <!-- THE NUMBER, REFRAMED -->
       <div class="nc-results__report">
-        <p class="nc-results__your-label">Your number</p>
+        <p class="nc-eyebrow">Your Personalized Report</p>
+        <p class="nc-results__your-label">Estimated daily intake</p>
         <div class="nc-results__big-number">
           <span id="results-sugar-grams">0</span><span class="nc-results__big-number-unit">g</span>
         </div>
-        <p class="nc-results__big-label">of processed sugar per day</p>
+        <p class="nc-results__big-label">Of processed sugar per day</p>
         <h2 class="nc-results__title" id="results-title"></h2>
         <p class="nc-results__subtitle" id="results-subtitle"></p>
       </div>
 
       <!-- WHAT THAT NUMBER MEANS -->
       <div class="nc-results__biology">
-        <h3 class="nc-results__section-title">What this means for your body</h3>
+        <p class="nc-eyebrow">The Science</p>
+        <h3 class="nc-results__section-title">What this means<br>for your body.</h3>
         <div class="nc-results__bio-list">
           <p class="nc-results__bio-item" id="bio-dopamine">At this level, your brain's reward system adapts to expect sugar regularly. That's why cravings feel so strong — it's biology, not willpower. The good news: it's reversible.</p>
           <p class="nc-results__bio-item" id="bio-insulin">Your insulin is spiking roughly <span id="bio-insulin-cycles">—</span> times per day above baseline. Each spike affects energy, mood, and metabolism. Reducing sugar helps stabilize these cycles.</p>
@@ -3669,8 +3703,9 @@ body::after {
 
       <!-- THE MECHANIC -->
       <div class="nc-results__mechanic">
-        <h3 class="nc-results__section-title">Your recovery timeline</h3>
-        <p class="nc-results__mechanic-intro">Here's what happens in your body when you start reducing processed sugar.</p>
+        <p class="nc-eyebrow">Recovery Timeline</p>
+        <h3 class="nc-results__section-title">What happens<br>when you reduce.</h3>
+        <p class="nc-results__mechanic-intro">Here's what your body does on its own once you start cutting back.</p>
         <div class="nc-results__phases">
           <div class="nc-results__phase">
             <span class="nc-results__phase-name">20 min</span>
@@ -3701,17 +3736,19 @@ body::after {
 
       <!-- THE DOWNLOAD -->
       <div class="nc-results__cta-section">
+        <p class="nc-eyebrow">The App</p>
         <h3 class="nc-results__section-title">Ready to start?</h3>
-        <p class="nc-results__cta-intro">The Nightcap app tracks your progress and guides you through each phase of reducing sugar.</p>
+        <p class="nc-results__cta-intro">Nightcap tracks your progress and guides you through each phase.</p>
         <button class="nc-btn nc-btn--primary nc-btn--full" id="download-app-btn">
           Get the App
-      </button>
+        </button>
         <p class="nc-results__cta-note">iOS &middot; Free &middot; No account required</p>
       </div>
 
       <!-- SHARE -->
       <div class="nc-results__share-section">
-        <p class="nc-results__share-prompt">Know someone who'd find this useful? Share the quiz.</p>
+        <p class="nc-eyebrow">Share</p>
+        <p class="nc-results__share-prompt">Know someone who'd find this useful?</p>
         <div class="nc-referral-socials">
           <button class="nc-referral-socials__btn" id="share-sms">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>

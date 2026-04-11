@@ -861,7 +861,7 @@ body::after {
 }
 
 .nc-results__container {
-  max-width: 520px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -2194,10 +2194,12 @@ body::after {
 .nc-calculating {
   display: none;
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: center;
   justify-content: center;
-  padding: 40px 24px;
+  padding: 60px 32px;
   text-align: center;
+  background: #F8F7F4;
 }
 
 .nc-calculating.active {
@@ -2282,15 +2284,25 @@ body::after {
 }
 
 .nc-results__biology {
-  margin: 3rem 0;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.nc-results__biology .nc-results__section-title,
+.nc-results__mechanic .nc-results__section-title,
+.nc-results__cta-section .nc-results__section-title {
+  margin-bottom: 2.5rem;
 }
 
 .nc-results__bio-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  text-align: left;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 .nc-results__bio-item {
@@ -2303,14 +2315,18 @@ body::after {
 }
 
 .nc-results__mechanic {
-  margin: 2rem 0;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
 .nc-results__mechanic-intro {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 400;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
   color: var(--nc-text-muted);
   margin-bottom: 1.5rem;
   line-height: 1.6;
@@ -2320,8 +2336,10 @@ body::after {
   display: flex;
   flex-direction: column;
   border-left: 1px solid rgba(20, 20, 20, 0.12);
-  padding-left: 1.5rem;
-  margin-left: 0.5rem;
+  padding-left: 1.75rem;
+  margin: 2.5rem auto 0;
+  max-width: 520px;
+  text-align: left;
 }
 
 .nc-results__phase {
@@ -2375,9 +2393,19 @@ body::after {
 /* ---------- Results CTA ---------- */
 .nc-results__cta-section {
   text-align: center;
-  margin: 2.5rem 0;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nc-results__cta-section .nc-btn--primary {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.nc-results__cta-intro {
+  max-width: 440px;
+  margin: 0 auto 2rem;
 }
 
 .nc-results__cta-note {
@@ -2390,13 +2418,17 @@ body::after {
 /* ---------- Results Share ---------- */
 .nc-results__share-section {
   text-align: center;
-  padding: 2rem 0;
-  border-top: 1px solid var(--nc-border);
+  margin: 5rem 0 0;
+  padding: 5rem 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .nc-results__share-prompt {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 400;
+  font-family: var(--nc-font-display);
+  font-style: italic;
+  color: var(--nc-text-muted);
   color: var(--nc-text);
   margin-bottom: 1.25rem;
 }
