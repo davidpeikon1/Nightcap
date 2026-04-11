@@ -89,6 +89,34 @@ body::after {
 }
 
 /* ---------- Utility ---------- */
+/* ---------- Editorial Eyebrow Label ---------- */
+.nc-eyebrow {
+  font-family: var(--nc-font);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nc-text-dim);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.nc-eyebrow::before,
+.nc-eyebrow::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.nc-eyebrow--light {
+  color: rgba(245, 243, 238, 0.55);
+}
+
 .nc-sr-only {
   position: absolute;
   width: 1px;
@@ -246,13 +274,16 @@ body::after {
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.12;
   letter-spacing: -0.025em;
   color: #F5F3EE;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   position: relative;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nc-hero__subtitle {
@@ -976,7 +1007,7 @@ body::after {
 
 /* ---------- Benefits Grid ---------- */
 .nc-benefits {
-  padding: 120px 40px;
+  padding: 140px 40px;
   text-align: center;
   position: relative;
   background:
@@ -1005,11 +1036,11 @@ body::after {
 
 .nc-benefits__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.85rem, 4.5vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
   letter-spacing: -0.025em;
-  margin-bottom: 3.5rem;
-  line-height: 1.2;
+  margin-bottom: 4rem;
+  line-height: 1.15;
 }
 
 .nc-benefits__grid {
@@ -1120,15 +1151,25 @@ body::after {
 
 /* ---------- Social Proof ---------- */
 .nc-proof {
-  padding: 100px 40px;
+  padding: 140px 40px;
   text-align: center;
   position: relative;
   background: #F8F7F4;
 }
 
 .nc-proof__container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+.nc-proof__title {
+  font-family: var(--nc-font-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 4.5rem;
+  text-align: center;
 }
 
 .nc-proof__grid {
@@ -1182,7 +1223,7 @@ body::after {
 
 /* ---------- FAQ ---------- */
 .nc-faq {
-  padding: 140px 40px 120px;
+  padding: 160px 40px 140px;
   position: relative;
   background:
     linear-gradient(180deg, #141311 0%, #3A3832 5%, #8A8578 12%, #F8F7F4 24%),
@@ -1191,12 +1232,12 @@ body::after {
 
 .nc-faq__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.65rem, 3.75vw, 2.1rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   text-align: center;
-  margin-bottom: 3.5rem;
-  line-height: 1.2;
+  margin-bottom: 4rem;
+  line-height: 1.15;
 }
 
 .nc-faq__container {
@@ -1646,6 +1687,19 @@ body::after {
 }
 
 @media (max-width: 480px) {
+  /* Eyebrow mobile tuning */
+  .nc-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.25rem;
+    gap: 10px;
+  }
+
+  .nc-eyebrow::before,
+  .nc-eyebrow::after {
+    width: 24px;
+  }
+
   /* Hero — iPhone viewport */
   .nc-hero {
     padding: 100px 32px 80px;
@@ -1978,7 +2032,7 @@ body::after {
 
 /* ---------- Steps (How it works) ---------- */
 .nc-steps {
-  padding: 100px 40px;
+  padding: 140px 40px;
   text-align: center;
   background: #F8F7F4;
 }
@@ -1990,11 +2044,11 @@ body::after {
 
 .nc-steps__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.65rem, 3.75vw, 2.1rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 3.5rem;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin-bottom: 4.5rem;
+  line-height: 1.15;
 }
 
 .nc-steps__grid {

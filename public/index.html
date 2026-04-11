@@ -114,6 +114,34 @@ body::after {
 }
 
 /* ---------- Utility ---------- */
+/* ---------- Editorial Eyebrow Label ---------- */
+.nc-eyebrow {
+  font-family: var(--nc-font);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nc-text-dim);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.nc-eyebrow::before,
+.nc-eyebrow::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.nc-eyebrow--light {
+  color: rgba(245, 243, 238, 0.55);
+}
+
 .nc-sr-only {
   position: absolute;
   width: 1px;
@@ -271,13 +299,16 @@ body::after {
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.12;
   letter-spacing: -0.025em;
   color: #F5F3EE;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   position: relative;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nc-hero__subtitle {
@@ -1001,7 +1032,7 @@ body::after {
 
 /* ---------- Benefits Grid ---------- */
 .nc-benefits {
-  padding: 120px 40px;
+  padding: 140px 40px;
   text-align: center;
   position: relative;
   background:
@@ -1030,11 +1061,11 @@ body::after {
 
 .nc-benefits__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.85rem, 4.5vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
   letter-spacing: -0.025em;
-  margin-bottom: 3.5rem;
-  line-height: 1.2;
+  margin-bottom: 4rem;
+  line-height: 1.15;
 }
 
 .nc-benefits__grid {
@@ -1145,15 +1176,25 @@ body::after {
 
 /* ---------- Social Proof ---------- */
 .nc-proof {
-  padding: 100px 40px;
+  padding: 140px 40px;
   text-align: center;
   position: relative;
   background: #F8F7F4;
 }
 
 .nc-proof__container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+.nc-proof__title {
+  font-family: var(--nc-font-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 4.5rem;
+  text-align: center;
 }
 
 .nc-proof__grid {
@@ -1207,7 +1248,7 @@ body::after {
 
 /* ---------- FAQ ---------- */
 .nc-faq {
-  padding: 140px 40px 120px;
+  padding: 160px 40px 140px;
   position: relative;
   background:
     linear-gradient(180deg, #141311 0%, #3A3832 5%, #8A8578 12%, #F8F7F4 24%),
@@ -1216,12 +1257,12 @@ body::after {
 
 .nc-faq__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.65rem, 3.75vw, 2.1rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   text-align: center;
-  margin-bottom: 3.5rem;
-  line-height: 1.2;
+  margin-bottom: 4rem;
+  line-height: 1.15;
 }
 
 .nc-faq__container {
@@ -1671,6 +1712,19 @@ body::after {
 }
 
 @media (max-width: 480px) {
+  /* Eyebrow mobile tuning */
+  .nc-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.25rem;
+    gap: 10px;
+  }
+
+  .nc-eyebrow::before,
+  .nc-eyebrow::after {
+    width: 24px;
+  }
+
   /* Hero — iPhone viewport */
   .nc-hero {
     padding: 100px 32px 80px;
@@ -2003,7 +2057,7 @@ body::after {
 
 /* ---------- Steps (How it works) ---------- */
 .nc-steps {
-  padding: 100px 40px;
+  padding: 140px 40px;
   text-align: center;
   background: #F8F7F4;
 }
@@ -2015,11 +2069,11 @@ body::after {
 
 .nc-steps__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.65rem, 3.75vw, 2.1rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 3.5rem;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin-bottom: 4.5rem;
+  line-height: 1.15;
 }
 
 .nc-steps__grid {
@@ -2130,11 +2184,12 @@ body::after {
     <div class="nc-hero__content">
       <div class="nc-hero__logo-img" role="img" aria-label="Nightcap"></div>
 
+      <p class="nc-eyebrow nc-eyebrow--light">The 60-Second Quiz</p>
       <h1 class="nc-hero__title" id="hero-title">
         Find out how much sugar<br>you're really eating.
       </h1>
       <p class="nc-hero__subtitle">
-        The 60-second quiz that reveals your daily intake.
+        Uncover what's hiding in your daily diet — and get a plan to change it.
       </p>
 
       <button class="nc-btn nc-btn--primary" id="start-quiz-btn">
@@ -2179,6 +2234,7 @@ body::after {
   <!-- ===== HOW IT WORKS ===== -->
   <section class="nc-steps nc-reveal" id="steps">
     <div class="nc-steps__container">
+      <p class="nc-eyebrow">The Method</p>
       <h2 class="nc-steps__title">Three steps. One minute.</h2>
       <div class="nc-steps__grid">
         <div class="nc-steps__item nc-reveal nc-reveal--delay-1">
@@ -2212,7 +2268,8 @@ body::after {
       <path d="M100 250 C60 180 120 80 250 60 C380 40 480 130 520 230 C560 330 500 450 370 480 C240 510 140 420 100 320Z" fill="url(#bb1)"/>
     </svg>
     <div class="nc-benefits__container">
-      <h2 class="nc-benefits__title">What changes when<br>you cut back</h2>
+      <p class="nc-eyebrow">The Benefits</p>
+      <h2 class="nc-benefits__title">What changes when<br>you cut back.</h2>
       <div class="nc-benefits__grid">
         <div class="nc-benefits__item nc-reveal nc-reveal--delay-1">
           <h3 class="nc-benefits__item-title">Steady energy</h3>
@@ -2238,6 +2295,8 @@ body::after {
   <!-- ===== SOCIAL PROOF ===== -->
   <section class="nc-proof nc-reveal" id="social-proof">
     <div class="nc-proof__container">
+      <p class="nc-eyebrow">Testimonials</p>
+      <h2 class="nc-proof__title">From people who<br>found their number.</h2>
       <div class="nc-proof__grid">
         <div class="nc-proof__card nc-reveal nc-reveal--delay-1">
           <p class="nc-proof__quote">"Seeing my actual number — 94g a day — changed everything. I wasn't weak. I just didn't know where it was hiding."</p>
@@ -2272,6 +2331,7 @@ body::after {
       <path d="M320 120 C270 140 240 200 270 280 C300 360 380 390 440 350 C500 310 510 230 480 160 C450 90 370 80 320 120Z" fill="url(#mb2)"/>
     </svg>
     <div class="nc-midcta__container">
+      <p class="nc-eyebrow nc-eyebrow--light">Your Number</p>
       <p class="nc-midcta__text">What's your number?</p>
       <button class="nc-btn nc-btn--primary" id="mid-quiz-btn">
         Start the Quiz
@@ -2282,7 +2342,8 @@ body::after {
   <!-- ===== FAQ ===== -->
   <section class="nc-faq nc-reveal" id="faq">
     <div class="nc-faq__container">
-      <h2 class="nc-faq__title">Common questions</h2>
+      <p class="nc-eyebrow">FAQ</p>
+      <h2 class="nc-faq__title">Common questions.</h2>
       <div class="nc-faq__list">
         <details class="nc-faq__item">
           <summary class="nc-faq__question">What is Nightcap?</summary>
