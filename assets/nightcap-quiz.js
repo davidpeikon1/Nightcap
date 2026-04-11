@@ -383,10 +383,25 @@
   // ---------- Secondary Quiz Buttons ----------
   // "Find Out Your Number" button in Why section
   // All secondary CTAs go through pre-commitment
-  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn', 'benefits-quiz-btn', 'mid-quiz-btn'].forEach(function (id) {
+  ['why-quiz-btn', 'sticky-quiz-btn', 'bottom-quiz-btn', 'benefits-quiz-btn', 'mid-quiz-btn', 'nav-quiz-btn'].forEach(function (id) {
     var btn = document.getElementById(id);
     if (btn) btn.addEventListener('click', showPrecommit);
   });
+
+  // ---------- Top Nav scroll state ----------
+  var nav = document.getElementById('nc-nav');
+  if (nav) {
+    var scrollThreshold = 40;
+    var updateNav = function () {
+      if (window.scrollY > scrollThreshold) {
+        nav.classList.add('is-scrolled');
+      } else {
+        nav.classList.remove('is-scrolled');
+      }
+    };
+    updateNav();
+    window.addEventListener('scroll', updateNav, { passive: true });
+  }
 
   // ---------- Sticky CTA on Scroll ----------
   var stickyCta = document.getElementById('sticky-cta');
