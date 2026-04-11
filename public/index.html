@@ -716,10 +716,12 @@ body::after {
 /* ---------- Signup ---------- */
 .nc-signup {
   display: none;
-  padding: 80px 32px 100px;
+  padding: 100px 32px 120px;
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: center;
   justify-content: center;
+  background: #F8F7F4;
 }
 
 .nc-signup.active {
@@ -876,8 +878,10 @@ body::after {
 /* ---------- Results ---------- */
 .nc-results {
   display: none;
-  padding: 100px 32px 120px;
+  padding: 120px 32px 140px;
   min-height: 100vh;
+  min-height: 100dvh;
+  background: #F8F7F4;
 }
 
 .nc-results.active {
@@ -894,7 +898,7 @@ body::after {
   text-align: center;
   margin-bottom: 2.5rem;
   padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--nc-border);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .nc-results__your-label {
@@ -1025,7 +1029,7 @@ body::after {
   gap: 10px;
   padding: 14px 20px;
   background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 0;
   box-shadow: var(--nc-shadow-lg);
   font-size: 0.85rem;
@@ -2048,14 +2052,14 @@ body::after {
 .nc-faq__item {
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--nc-border);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 0;
   overflow: hidden;
   transition: all var(--nc-transition);
 }
 
 .nc-faq__item:first-child {
-  border-top: 1px solid var(--nc-border);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .nc-faq__item[open] {
@@ -2100,8 +2104,9 @@ body::after {
 }
 
 .nc-faq__answer {
-  padding: 0 0 20px;
+  padding: 0 48px 24px 0;
   animation: nc-faqOpen 0.3s ease-out;
+  max-width: 540px;
 }
 
 @keyframes nc-faqOpen {
@@ -2121,7 +2126,7 @@ body::after {
   text-align: center;
   margin-top: 3rem;
   padding-top: 2.5rem;
-  border-top: 1px solid var(--nc-border);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 .nc-exit-popup {
   display: none;
@@ -2152,15 +2157,27 @@ body::after {
 
 .nc-exit-popup__card {
   position: relative;
-  max-width: 400px;
+  max-width: 440px;
   width: 100%;
   background: var(--nc-bg-card);
-  border: 1px solid var(--nc-border);
+  border: none;
   border-radius: 0;
-  padding: 2.5rem;
+  padding: 3.5rem 2.75rem 3rem;
   text-align: center;
-  box-shadow: var(--nc-shadow-lg);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.06);
   animation: nc-popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nc-exit-popup__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 1px;
+  background: var(--nc-text);
+  opacity: 0.2;
 }
 
 @keyframes nc-popIn {
@@ -2170,12 +2187,13 @@ body::after {
 
 .nc-exit-popup__close {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: 16px;
+  right: 20px;
   background: none;
   border: none;
-  color: var(--nc-text-muted);
+  color: var(--nc-text-dim);
   font-size: 1.5rem;
+  line-height: 1;
   cursor: pointer;
   padding: 4px 8px;
   transition: color var(--nc-transition);
@@ -2187,32 +2205,39 @@ body::after {
 
 .nc-exit-popup__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(1.4rem, 3.75vw, 1.75rem);
+  font-size: clamp(1.5rem, 3.75vw, 1.85rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .nc-exit-popup__desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--nc-text-muted);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nc-exit-popup__form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--nc-border);
+  gap: 12px;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .nc-exit-popup__note {
-  font-size: 0.8rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--nc-text-dim);
+  margin-bottom: 4px;
 }
 
 /* ---------- Calculating Transition ---------- */
@@ -2249,7 +2274,7 @@ body::after {
 
 .nc-calculating__track {
   fill: none;
-  stroke: var(--nc-border);
+  stroke: rgba(0, 0, 0, 0.08);
   stroke-width: 4;
 }
 
