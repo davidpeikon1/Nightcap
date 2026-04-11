@@ -235,7 +235,7 @@ body::after {
 @media (max-width: 768px) {
   .nc-hero {
     min-height: auto;
-    padding: 100px 24px 60px;
+    padding: 120px 32px 80px;
   }
 }
 
@@ -1669,17 +1669,31 @@ body::after {
 @media (max-width: 480px) {
   /* Hero — iPhone viewport */
   .nc-hero {
-    padding: 80px 24px 48px;
-    padding-top: max(80px, env(safe-area-inset-top, 0px));
+    padding: 100px 32px 80px;
+    padding-top: max(100px, env(safe-area-inset-top, 0px));
+  }
+
+  .nc-hero__content {
+    max-width: 100%;
+  }
+
+  .nc-hero__logo-img {
+    width: clamp(200px, 56vw, 260px);
+    margin-bottom: 2rem;
   }
 
   .nc-hero__title {
-    font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+    font-size: clamp(2rem, 8.5vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
   }
 
   .nc-hero__subtitle {
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.55;
+    max-width: 320px;
+    margin-bottom: 2.5rem;
   }
 
   .nc-hero__title br {
@@ -1687,20 +1701,21 @@ body::after {
   }
 
   .nc-btn--primary {
-    padding: 18px 32px;
-    font-size: 0.8rem;
-    width: 100%;
+    padding: 20px 40px;
+    font-size: 0.75rem;
+    width: auto;
+    min-width: 220px;
   }
 
   /* Sections */
   .nc-benefits--dark {
-    padding: 80px 20px;
+    padding: 80px 24px;
   }
 
   .nc-benefits,
   .nc-proof,
   .nc-faq {
-    padding: 80px 20px;
+    padding: 80px 24px;
   }
 
   .nc-benefits__grid {
@@ -1726,11 +1741,12 @@ body::after {
 
   /* Mid-CTA */
   .nc-midcta {
-    padding: 80px 20px;
+    padding: 100px 32px;
   }
 
   .nc-midcta__text {
-    font-size: clamp(1.25rem, 5vw, 1.5rem);
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: 2.5rem;
   }
 
   .nc-midcta__text br {
@@ -1969,11 +1985,11 @@ body::after {
 
 @media (max-width: 480px) {
   .nc-statement {
-    padding: 80px 20px;
+    padding: 120px 32px 100px;
   }
 
   .nc-statement__number {
-    font-size: clamp(4.5rem, 18vw, 7rem);
+    font-size: clamp(5rem, 22vw, 7rem);
   }
 }
 
