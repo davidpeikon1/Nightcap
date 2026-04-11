@@ -514,11 +514,12 @@ body::after {
 /* ---------- Quiz ---------- */
 .nc-quiz {
   display: none;
-  padding: 60px 32px 100px;
+  padding: 100px 40px 120px;
   min-height: 100vh;
   min-height: 100dvh;
   align-items: center;
   justify-content: center;
+  background: #F8F7F4;
 }
 
 .nc-quiz.active {
@@ -527,7 +528,7 @@ body::after {
 }
 
 .nc-quiz__container {
-  max-width: 560px;
+  max-width: 620px;
   width: 100%;
 }
 .nc-quiz__dots {
@@ -651,23 +652,24 @@ body::after {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 18px 24px;
-  background: var(--nc-bg-card);
-  border: none;
+  padding: 22px 28px;
+  background: #FFFFFF;
+  border: 1px solid transparent;
   border-radius: 0;
   cursor: pointer;
   transition: all var(--nc-transition);
   text-align: left;
   font-family: var(--nc-font);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 400;
   color: var(--nc-text);
   width: 100%;
-  box-shadow: var(--nc-shadow-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 .nc-quiz__option:hover {
-  box-shadow: var(--nc-shadow-md);
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   transform: translateY(-1px);
 }
 
@@ -1402,12 +1404,12 @@ body::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
 .nc-benefits__item {
-  padding: 44px 32px 40px;
+  padding: 56px 40px 48px;
   background: var(--nc-bg-card);
   text-align: left;
   transition: background var(--nc-transition);
@@ -1417,8 +1419,8 @@ body::after {
 .nc-benefits__item::before {
   content: '';
   position: absolute;
-  top: 32px;
-  left: 32px;
+  top: 40px;
+  left: 40px;
   width: 24px;
   height: 1px;
   background: var(--nc-text);
@@ -1598,6 +1600,142 @@ body::after {
 
   .nc-science__pullquote {
     padding-top: 3rem;
+  }
+}
+
+/* ---------- Methodology ---------- */
+.nc-method {
+  padding: 160px 40px;
+  background: #F8F7F4;
+  position: relative;
+}
+
+.nc-method__container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nc-method__title {
+  font-family: var(--nc-font-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 2rem;
+}
+
+.nc-method__lede {
+  font-family: var(--nc-font);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--nc-text-muted);
+  max-width: 620px;
+  margin: 0 auto 5rem;
+}
+
+.nc-method__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.nc-method__step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 40px;
+  padding: 32px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  align-items: start;
+}
+
+.nc-method__step:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nc-method__index {
+  font-family: var(--nc-font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--nc-text);
+  opacity: 0.35;
+  line-height: 1;
+  padding-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.nc-method__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nc-method__step-title {
+  font-family: var(--nc-font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--nc-text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.nc-method__step-desc {
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--nc-text-muted);
+  margin: 0;
+  max-width: 560px;
+}
+
+@media (max-width: 768px) {
+  .nc-method {
+    padding: 120px 32px;
+  }
+
+  .nc-method__step {
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+  }
+
+  .nc-method__index {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nc-method {
+    padding: 100px 24px;
+  }
+
+  .nc-method__lede {
+    font-size: 0.95rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .nc-method__step {
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    padding: 24px 0;
+  }
+
+  .nc-method__index {
+    font-size: 1.35rem;
+  }
+
+  .nc-method__step-title {
+    font-size: 1.05rem;
+  }
+
+  .nc-method__step-desc {
+    font-size: 0.88rem;
   }
 }
 
@@ -2420,7 +2558,16 @@ body::after {
   }
 
   .nc-benefits__item {
-    padding: 24px 20px;
+    padding: 36px 28px 32px;
+  }
+
+  .nc-benefits__item::before {
+    top: 28px;
+    left: 28px;
+  }
+
+  .nc-benefits__item-title {
+    margin-top: 16px;
   }
 
   /* Proof */
@@ -3147,6 +3294,57 @@ body::after {
           <span class="nc-science__pq-title">Professor of Pediatric Endocrinology, UCSF</span>
         </figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- ===== METHODOLOGY ===== -->
+  <section class="nc-method nc-reveal" id="method">
+    <div class="nc-method__container">
+      <p class="nc-eyebrow">Methodology</p>
+      <h2 class="nc-method__title">How we calculate<br>your number.</h2>
+      <p class="nc-method__lede">
+        Five questions, five data points, one estimate calibrated against
+        USDA nutritional databases and peer-reviewed dietary intake studies.
+        No guesswork — just honest math.
+      </p>
+
+      <ol class="nc-method__steps">
+        <li class="nc-method__step">
+          <span class="nc-method__index">01</span>
+          <div class="nc-method__body">
+            <h3 class="nc-method__step-title">Breakfast profile</h3>
+            <p class="nc-method__step-desc">We map your morning choices against average sugar content from USDA FoodData Central — 375,000+ foods indexed by serving.</p>
+          </div>
+        </li>
+        <li class="nc-method__step">
+          <span class="nc-method__index">02</span>
+          <div class="nc-method__body">
+            <h3 class="nc-method__step-title">Daily beverages</h3>
+            <p class="nc-method__step-desc">Sweetened drinks are the single largest source of added sugar in the American diet. We quantify your liquid intake precisely.</p>
+          </div>
+        </li>
+        <li class="nc-method__step">
+          <span class="nc-method__index">03</span>
+          <div class="nc-method__body">
+            <h3 class="nc-method__step-title">Packaged foods</h3>
+            <p class="nc-method__step-desc">Seventy-four percent of packaged foods contain added sugar. We estimate your exposure based on how much of your diet is processed.</p>
+          </div>
+        </li>
+        <li class="nc-method__step">
+          <span class="nc-method__index">04</span>
+          <div class="nc-method__body">
+            <h3 class="nc-method__step-title">Label awareness</h3>
+            <p class="nc-method__step-desc">Whether you read labels is a strong predictor of hidden sugar exposure. We factor this into the final estimate.</p>
+          </div>
+        </li>
+        <li class="nc-method__step">
+          <span class="nc-method__index">05</span>
+          <div class="nc-method__body">
+            <h3 class="nc-method__step-title">Context calibration</h3>
+            <p class="nc-method__step-desc">Your motivation shapes how we present your report — the number is the same, the framing is yours.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
