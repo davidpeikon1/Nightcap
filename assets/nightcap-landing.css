@@ -425,26 +425,25 @@ body::after {
 
 .nc-hero__title {
   font-family: var(--nc-font-display);
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
   font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
   color: #F5F3EE;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
   position: relative;
-  max-width: 600px;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .nc-hero__subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 400;
-  color: rgba(245, 243, 238, 0.55);
-  max-width: 400px;
-  margin: 0 auto 3rem;
-  line-height: 1.65;
-  letter-spacing: 0.01em;
+  color: rgba(245, 243, 238, 0.6);
+  max-width: 360px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
 }
 
 /* Hero logo — background-image on an aspect-ratio div crops the
@@ -2513,69 +2512,59 @@ body::after {
 }
 
 @media (max-width: 480px) {
-  /* Eyebrow mobile tuning */
-  .nc-eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    margin-bottom: 1.25rem;
-    gap: 10px;
-  }
-
-  .nc-eyebrow::before,
-  .nc-eyebrow::after {
-    width: 24px;
-  }
-
   /* Hero — iPhone viewport */
   .nc-hero {
-    padding: 120px 28px 100px;
-    padding-top: max(120px, env(safe-area-inset-top, 0px));
+    padding: 100px 28px 80px;
+    padding-top: max(100px, env(safe-area-inset-top, 0px));
   }
 
   .nc-hero__content {
     max-width: 100%;
+    padding: 0 4px;
   }
 
   .nc-hero__logo-img {
-    width: clamp(180px, 50vw, 240px);
-    margin-bottom: 2rem;
+    width: clamp(160px, 44vw, 200px);
+    margin-bottom: 1.75rem;
   }
 
   .nc-hero__title {
-    font-size: clamp(1.75rem, 7vw, 2.25rem);
-    line-height: 1.2;
+    font-size: clamp(1.65rem, 6.5vw, 2rem);
+    line-height: 1.22;
     letter-spacing: -0.015em;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
+    max-width: 320px;
   }
 
   .nc-hero__subtitle {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    max-width: 300px;
-    margin-bottom: 2.5rem;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    max-width: 280px;
+    margin-bottom: 2rem;
   }
 
-  .nc-hero__title br {
-    display: none;
+  .nc-eyebrow {
+    font-size: 0.6rem;
+    margin-bottom: 1rem;
   }
 
   .nc-btn--primary {
-    padding: 18px 36px;
+    padding: 16px 40px;
     font-size: 0.72rem;
     width: auto;
-    min-width: 200px;
+    min-width: 0;
   }
 
   /* Sections — generous mobile padding */
   .nc-benefits--dark {
-    padding: 100px 28px;
+    padding: 80px 24px;
   }
 
   .nc-benefits,
   .nc-proof,
   .nc-faq,
   .nc-steps {
-    padding: 100px 28px;
+    padding: 80px 24px;
   }
 
   .nc-benefits__grid {
@@ -2591,16 +2580,21 @@ body::after {
   }
 
   .nc-benefits__item {
-    padding: 36px 28px 32px;
+    padding: 32px 24px 28px;
   }
 
   .nc-benefits__item::before {
-    top: 28px;
-    left: 28px;
+    top: 24px;
+    left: 24px;
   }
 
   .nc-benefits__item-title {
-    margin-top: 16px;
+    margin-top: 14px;
+    font-size: 1.05rem;
+  }
+
+  .nc-benefits__item-desc {
+    font-size: 0.82rem;
   }
 
   /* Proof */
@@ -2610,12 +2604,12 @@ body::after {
 
   /* Mid-CTA */
   .nc-midcta {
-    padding: 100px 28px;
+    padding: 80px 24px;
   }
 
   .nc-midcta__text {
-    font-size: clamp(1.35rem, 5.5vw, 1.75rem);
-    margin-bottom: 2.5rem;
+    font-size: clamp(1.35rem, 5.5vw, 1.6rem);
+    margin-bottom: 2rem;
   }
 
   .nc-midcta__text br {
@@ -2940,11 +2934,15 @@ body::after {
 
 @media (max-width: 480px) {
   .nc-statement {
-    padding: 120px 28px 100px;
+    padding: 80px 24px 60px;
+  }
+
+  .nc-statement__inner {
+    gap: 40px;
   }
 
   .nc-statement__number {
-    font-size: clamp(4.5rem, 20vw, 6.5rem);
+    font-size: clamp(4rem, 18vw, 5.5rem);
   }
 
   .nc-statement__chart {
